@@ -1,0 +1,24 @@
+{
+  "name": "dirt2-results",
+  "version": "1.0.0",
+  "description": "dirt2 results",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "tba"
+  },
+  "keywords": [
+    "dirt2",
+    "dirt",
+    "rally",
+    "results"
+  ],
+  "author": "tkidman",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.19.2"
+  }
+}

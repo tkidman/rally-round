@@ -1,0 +1,37 @@
+{
+  "pageRequested": 1,
+  "pageSize": 100,
+  "pageCount": 1,
+  "entries": [
+    {
+      "rank": 1,
+      "name": "Spookex *-*",
+      "isVIP": false,
+      "isFounder": false,
+      "isPlayer": false,
+      "isDnfEntry": true,
+      "playerDiff": 0,
+      "vehicleName": "Alpine Renault A110 1600 S",
+      "stageTime": "15:00.000",
+      "stageDiff": "--",
+      "totalTime": "04:41:35.987",
+      "totalDiff": "--",
+      "nationality": "eLngLatvian"
+    },
+    {
+      "rank": 2,
+      "name": "ThatGrosejanBoi",
+      "isVIP": false,
+      "isFounder": false,
+      "isPlayer": false,
+      "isDnfEntry": true,
+      "playerDiff": 0,
+      "vehicleName": "Ford Escort Mk II",
+      "stageTime": "15:00.000",
+      "stageDiff": "--",
+      "totalTime": "05:00:00.000",
+      "totalDiff": "+18:24.013",
+      "nationality": "eLngLatvian"
+    }
+  ]
+}

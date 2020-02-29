@@ -1,0 +1,98 @@
+{
+  "championships": [
+    {
+      "id": "65933",
+      "name": "Blueline H-Class Championship",
+      "events": [
+        {
+          "id": "66384",
+          "challengeId": "65933",
+          "name": "ŁĘCZNA COUNTY",
+          "stages": [
+            {
+              "id": "0",
+              "name": "Kopina"
+            },
+            {
+              "id": "1",
+              "name": "Kopina"
+            },
+            {
+              "id": "2",
+              "name": "Kopina"
+            },
+            {
+              "id": "3",
+              "name": "Kopina"
+            },
+            {
+              "id": "4",
+              "name": "Kopina"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "67014",
+      "name": "Blueline H-Class Championship",
+      "events": [
+        {
+          "id": "67465",
+          "challengeId": "67014",
+          "name": "ŁĘCZNA COUNTY",
+          "stages": [
+            {
+              "id": "0",
+              "name": "Zaróbka"
+            },
+            {
+              "id": "1",
+              "name": "Zagórze"
+            },
+            {
+              "id": "2",
+              "name": "Jezioro Rotcze"
+            },
+            {
+              "id": "3",
+              "name": "Marynka"
+            },
+            {
+              "id": "4",
+              "name": "Zagórze"
+            },
+            {
+              "id": "5",
+              "name": "Zaróbka"
+            },
+            {
+              "id": "6",
+              "name": "Zienki"
+            },
+            {
+              "id": "7",
+              "name": "Borysik"
+            },
+            {
+              "id": "8",
+              "name": "Kopina"
+            },
+            {
+              "id": "9",
+              "name": "Jezioro Rotcze"
+            },
+            {
+              "id": "10",
+              "name": "Zienki"
+            },
+            {
+              "id": "11",
+              "name": "Marynka"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
