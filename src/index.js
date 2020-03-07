@@ -1,12 +1,10 @@
 const axios = require("axios");
 const debug = require("debug")("tkidman:dirt2-results");
 const moment = require("moment");
-const { keyBy } = require("lodash");
+const { keyBy, sortBy } = require("lodash");
 
-const { cookie, xsrfh } = require("./hidden/creds");
-const teams = require("./teams");
-const drivers = require("./drivers");
-const points = require("./points");
+const { cookie, xsrfh } = require("../hidden/creds");
+const { teamsById, pointsConfig, driversById } = require("./referenceData");
 
 const fetchChampionships = async () => {
   const response = await axios({
@@ -80,6 +78,33 @@ const updatePoints = (resultsByDriver, orderedResults, points, pointsField) => {
   }
 };
 
+const calculateTeamResults = resultsByDriver => {
+  const teamResults = Object.values(resultsByDriver).reduce(
+    (teamResults, entry) => {
+      const entryTeamId = driversById[entry.name].teamId;
+      if (!teamResults[entryTeamId]) {
+        teamResults[entryTeamId] = {
+          teamId: entryTeamId,
+          totalPoints: 0
+        };
+      }
+      teamResults[entryTeamId].totalPoints +=
+        entry.powerStagePoints + entry.overallPoints;
+      return teamResults;
+    },
+    {}
+  );
+  return teamResults;
+};
+
+const sortTeamResults = teamResultsById => {
+  const teamResults = sortBy(
+    Object.values(teamResultsById),
+    teamResult => teamResult.totalPoints
+  );
+  return teamResults.reverse();
+};
+
 const calculateEventResults = leaderboard => {
   const entries = leaderboard.entries;
   const resultsByDriver = keyBy(entries, entry => entry.name);
@@ -87,16 +112,23 @@ const calculateEventResults = leaderboard => {
   updatePoints(
     resultsByDriver,
     powerStageResults,
-    points.powerStage,
+    pointsConfig.powerStage,
     "powerStagePoints"
   );
-  updatePoints(resultsByDriver, entries, points.overall, "overallPoints");
-  return orderResultsBy(Object.values(resultsByDriver), "totalTime");
+  updatePoints(resultsByDriver, entries, pointsConfig.overall, "overallPoints");
+  const driverResults = orderResultsBy(
+    Object.values(resultsByDriver),
+    "totalTime"
+  );
+  const teamResultsById = calculateTeamResults(resultsByDriver);
+  const teamResults = sortTeamResults(teamResultsById);
+  return { driverResults, teamResults };
 };
 
 module.exports = {
   calculateEventResults,
   fetchChampionships,
   fetchEventResults,
-  fetchRecentResults
+  fetchRecentResults,
+  sortTeamResults
 };

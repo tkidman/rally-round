@@ -1,4 +1,4 @@
-const { calculateEventResults } = require("../index");
+const { calculateEventResults, sortTeamResults } = require("./index");
 const leaderboard = require("./__fixtures__/leaderboard");
 
 describe("calculates event results", () => {
@@ -39,6 +39,41 @@ describe("calculates event results", () => {
         vehicleName: "Ford Escort Mk II"
       }
     ];
-    expect(calculateEventResults(leaderboard)).toEqual(expected);
+    expect(calculateEventResults(leaderboard).driverResults).toEqual(expected);
+  });
+
+  test("returns results for teams", () => {
+    const expected = [
+      {
+        teamId: "Live and Let DNF",
+        totalPoints: 59
+      }
+    ];
+    expect(calculateEventResults(leaderboard).teamResults).toEqual(expected);
+  });
+
+  test("sorts team results by points", () => {
+    const teamResultsById = {
+      team1: {
+        totalPoints: 10
+      },
+      team2: {
+        totalPoints: 5
+      },
+      team3: {
+        totalPoints: 15
+      }
+    };
+    expect(sortTeamResults(teamResultsById)).toEqual([
+      {
+        totalPoints: 15
+      },
+      {
+        totalPoints: 10
+      },
+      {
+        totalPoints: 5
+      }
+    ]);
   });
 });

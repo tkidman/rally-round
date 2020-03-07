@@ -1,11 +1,11 @@
 * Call dirt 2 Leaderboard API (tick)
 * Call dirt 2 Championship API (tick)
-* Drivers
-* Teams
-* Points
-* Calculate driver points
-* Get Driver event results
-* Get Team event results
+* Drivers (tick)
+* Teams (tick)
+* Points (tick)
+* Calculate driver points (tick)
+* Get Driver event results (tick)
+* Get Team event results (tick)
 * Get Driver standings
 * Get Team standings
 * Convert to website format
