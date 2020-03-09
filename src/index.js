@@ -133,6 +133,9 @@ const processEvent = async () => {
   return eventResults;
 };
 
+const processEvents = () => {
+};
+
 module.exports = {
   calculateEventResults,
   sortTeamResults,

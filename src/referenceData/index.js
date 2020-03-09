@@ -60,5 +60,6 @@ const loadDriversFromCSV = () => {
 const driversById = loadDriversFromCSV();
 const teamsById = keyBy(teams, team => team.id);
 const pointsConfig = require("./pointsConfig");
+const { events } = require("./events");
 
-module.exports = { driversById, teamsById, pointsConfig };
+module.exports = { driversById, teamsById, pointsConfig, events };
