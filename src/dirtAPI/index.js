@@ -21,9 +21,9 @@ const fetchRecentResults = async () => {
   debug(JSON.stringify(response.data, null, 2));
 };
 
-const fetchEventResults = async () => {
+const fetchEventResults = async ({ eventId, challengeId }) => {
   const payload = {
-    challengeId: "67014",
+    challengeId,
     selectedEventId: 0,
     stageId: "11",
     page: 1,
@@ -34,7 +34,7 @@ const fetchEventResults = async () => {
     filterByAssists: "Unspecified",
     filterByWheel: "Unspecified",
     nationalityFilter: "None",
-    eventId: "67465"
+    eventId
   };
   const response = await axios({
     method: "POST",
@@ -42,7 +42,8 @@ const fetchEventResults = async () => {
     headers: { Cookie: cookie.trim(), "RaceNet.XSRFH": xsrfh.trim() },
     data: payload
   });
-  debug.log(JSON.stringify(response.data, null, 2));
+  debug(`event results retrieved: ${eventId}`);
+  return response.data;
 };
 
 module.exports = { fetchChampionships, fetchRecentResults, fetchEventResults };

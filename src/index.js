@@ -1,8 +1,10 @@
 const debug = require("debug")("tkidman:dirt2-results");
 const moment = require("moment");
 const { keyBy, sortBy } = require("lodash");
+const fs = require("fs");
 
 const { teamsById, pointsConfig, driversById } = require("./referenceData");
+const { fetchEventResults } = require("./dirtAPI");
 
 const getDuration = durationString => {
   if (durationString.split(":").length === 2) {
@@ -33,15 +35,25 @@ const updatePoints = (resultsByDriver, orderedResults, points, pointsField) => {
 const calculateTeamResults = resultsByDriver => {
   const teamResults = Object.values(resultsByDriver).reduce(
     (teamResults, entry) => {
-      const entryTeamId = driversById[entry.name].teamId;
-      if (!teamResults[entryTeamId]) {
-        teamResults[entryTeamId] = {
-          teamId: entryTeamId,
-          totalPoints: 0
-        };
+      const driver = driversById[entry.name.toUpperCase()];
+      if (driver) {
+        const entryTeamId = driver.teamId;
+        if (entryTeamId) {
+          if (!teamResults[entryTeamId]) {
+            teamResults[entryTeamId] = {
+              teamId: entryTeamId,
+              totalPoints: 0
+            };
+          }
+          if (entry.overallPoints) {
+            teamResults[entryTeamId].totalPoints += entry.overallPoints;
+          }
+        } else {
+          debug(`driver has null team id: ${driver.id}`);
+        }
+      } else {
+        debug(`unable to find driver for driver name: ${entry.name}`);
       }
-      teamResults[entryTeamId].totalPoints +=
-        entry.powerStagePoints + entry.overallPoints;
       return teamResults;
     },
     {}
@@ -78,7 +90,21 @@ const calculateEventResults = leaderboard => {
   return { driverResults, teamResults };
 };
 
+const processEvent = async () => {
+  const leaderboard = await fetchEventResults({
+    challengeId: "67014",
+    eventId: "67465"
+  });
+  const eventResults = calculateEventResults(leaderboard);
+  fs.writeFileSync(
+    "../hidden/out/eventResults.json",
+    JSON.stringify(eventResults, null, 2)
+  );
+  return eventResults;
+};
+
 module.exports = {
   calculateEventResults,
-  sortTeamResults
+  sortTeamResults,
+  processEvent
 };
