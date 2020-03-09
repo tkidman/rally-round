@@ -9,21 +9,30 @@ const teams = require("./teams");
 
 // const driversById = keyBy(drivers, driver => driver.id);
 
-const parseTeam = teamImg => {
+const parseTeam = row => {
+  const teamImg = row.TEAM_IMG;
   const dom = new JSDOM(teamImg);
   const img = dom.window.document.querySelector("img");
   if (img) {
     return img.getAttribute("title");
   } else {
-    debug(`can't find title for img: ${img}`);
+    debug(`can't find title for img: ${img} for driver ${row.DRIVER}`);
   }
   return null;
 };
 
-const parseCountry = countryImg => {
+const parseCountry = row => {
+  const countryImg = row.COUNTRY_IMG;
   const dom = new JSDOM(countryImg);
-  const src = dom.window.document.querySelector("img").getAttribute("src");
-  return src.substr(src.length - 6, 2);
+
+  const img = dom.window.document.querySelector("img");
+  if (img) {
+    const src = img.getAttribute("src");
+    return src.substr(src.length - 6, 2);
+  } else {
+    debug(`can't find country for img: ${img} for driver ${row.DRIVER}`);
+  }
+  return null;
 };
 
 const loadDriversFromCSV = () => {
@@ -33,8 +42,8 @@ const loadDriversFromCSV = () => {
   );
   const rows = Papa.parse(csv, { header: true }).data;
   const driversById = rows.reduce((driversById, row) => {
-    const teamId = parseTeam(row.TEAM_IMG);
-    const country = parseCountry(row.COUNTRY_IMG);
+    const teamId = parseTeam(row);
+    const country = parseCountry(row);
     driversById[row.DRIVER] = {
       id: row.DRIVER,
       name: row.DRIVER,
