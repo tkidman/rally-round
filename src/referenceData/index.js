@@ -37,7 +37,7 @@ const parseCountry = row => {
 
 const loadDriversFromCSV = () => {
   const csv = fs.readFileSync(
-    "../hidden/68-Poland_Overall_Time_28.02.2020.csv-2020-03-01.csv",
+    "./hidden/68-Poland_Overall_Time_28.02.2020.csv-2020-03-01.csv",
     "utf8"
   );
   const rows = Papa.parse(csv, { header: true }).data;

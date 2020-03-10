@@ -1,8 +1,6 @@
 const debug = require("debug")("tkidman:dirt2-results");
 const moment = require("moment");
 const { keyBy, sortBy } = require("lodash");
-const fs = require("fs");
-const Papa = require("papaparse");
 
 const { teamsById, pointsConfig, driversById } = require("./referenceData");
 const { fetchEventResults } = require("./dirtAPI");
@@ -49,7 +47,7 @@ const calculateTeamResults = resultsByDriver => {
         if (entryTeamId) {
           if (!teamResults[entryTeamId]) {
             teamResults[entryTeamId] = {
-              teamId: entryTeamId,
+              name: entryTeamId,
               totalPoints: 0
             };
           }
@@ -91,6 +89,7 @@ const calculateEventResults = leaderboard => {
     Object.values(resultsByDriver),
     "totalTime"
   );
+  driverResults.forEach(entry => (entry.totalPoints = getTotalPoints(entry)));
   const teamResultsById = calculateTeamResults(resultsByDriver);
   const teamResults = sortTeamResults(teamResultsById);
   return { driverResults, teamResults };
@@ -102,42 +101,62 @@ const getTotalPoints = entry => {
   totalPoints += entry.overallPoints ? entry.overallPoints : 0;
   return totalPoints;
 };
-const processEvent = async () => {
-  const leaderboard = await fetchEventResults({
-    challengeId: "67014",
-    eventId: "67465"
+
+const calculateStandings = (results, previousStandings) => {
+  const standings = results.map(entry => {
+    const previousIndex = previousStandings.findIndex(
+      standing => standing.name === entry.name
+    );
+    const previousStanding = previousStandings[previousIndex];
+    const standing = {
+      name: entry.name,
+      previousPosition: previousIndex + 1,
+      points: previousStanding.points + entry.totalPoints
+    };
+    return standing;
   });
-  const eventResults = calculateEventResults(leaderboard);
-  fs.writeFileSync(
-    "../hidden/out/eventResults.json",
-    JSON.stringify(eventResults, null, 2)
-  );
-  const driverRows = eventResults.driverResults.map(result => {
-    const driver = getDriver(result.name);
-    const driverRow = {};
-    driverRow["POS."] = result.rank;
-    driverRow.TEAM_IMG = driver ? driver.teamImg : "";
-    driverRow.COUNTRY_IMG = driver ? driver.countryImg : "";
-    driverRow.CLASS = "TODO";
-    driverRow.DRIVER = result.name;
-    driverRow.VEHICLE = result.vehicleName;
-    driverRow.TOTAL = result.totalTime;
-    driverRow.DIFF = result.totalDiff;
-    driverRow.POWER_STAGE_POINTS = result.powerStagePoints;
-    driverRow.OVERALL_POINTS = result.overallPoints;
-    driverRow.TOTAL_POINTS = getTotalPoints(result);
-    return driverRow;
-  });
-  const driversCSV = Papa.unparse(driverRows);
-  fs.writeFileSync("../hidden/out/driverResults.csv", driversCSV);
-  return eventResults;
+  const sortedStandings = sortBy(standings, standing => 0 - standing.points);
+
+  for (let i = 0; i < sortedStandings.length; i++) {
+    const standing = sortedStandings[i];
+    standing.currentPosition = i + 1;
+    standing.positionChange =
+      standing.currentPosition - standing.previousPosition;
+  }
 };
 
-const processEvents = () => {
+const calculateEventStandings = (event, previousEvent) => {
+  const driverStandings = calculateStandings(
+    event.results.driverResults,
+    previousEvent.standings.driverStandings
+  );
+  const teamStandings = calculateStandings(
+    event.results.teamResults,
+    previousEvent.standings.teamStandings
+  );
+  event.standings = { driverStandings, teamStandings };
+};
+
+const processEvent = async (event, previousEvent) => {
+  const leaderboard = await fetchEventResults({
+    challengeId: event.challengeId,
+    eventId: event.eventId
+  });
+  event.results = calculateEventResults(leaderboard);
+  calculateStandings(event, previousEvent);
+};
+
+const processEvents = async events => {
+  let previousEvent = null;
+  for (const event of events) {
+    await processEvent(event, previousEvent);
+    previousEvent = event;
+  }
 };
 
 module.exports = {
   calculateEventResults,
   sortTeamResults,
-  processEvent
+  processEvent,
+  calculateEventStandings
 };

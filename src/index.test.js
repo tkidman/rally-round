@@ -1,4 +1,8 @@
-const { calculateEventResults, sortTeamResults } = require("./index");
+const {
+  calculateEventResults,
+  sortTeamResults,
+  calculateEventStandings
+} = require("./index");
 const leaderboard = require("./__fixtures__/leaderboard");
 
 describe("calculates event results", () => {
@@ -75,5 +79,58 @@ describe("calculates event results", () => {
         totalPoints: 5
       }
     ]);
+  });
+
+  test("calculates standings", () => {
+    const event = {
+      results: {
+        driverResults: [
+          {
+            name: "satchmo",
+            totalPoints: 10
+          },
+          {
+            name: "zisekoz",
+            totalPoints: 8
+          }
+        ],
+        teamResults: [
+          {
+            name: "Live and Let DNF",
+            totalPoints: 10
+          },
+          {
+            name: "Dammit Sammir!",
+            totalPoints: 8
+          }
+        ]
+      }
+    };
+    const previousEvent = {
+      standings: {
+        driverStandings: [
+          {
+            name: "zisekoz",
+            totalPoints: 15
+          },
+          {
+            name: "satchmo",
+            totalPoints: 10
+          }
+        ],
+        teamStandings: [
+          {
+            name: "Live and Let DNF",
+            totalPoints: 10
+          },
+          {
+            name: "Dammit Sammir!",
+            totalPoints: 8
+          }
+        ]
+      }
+    };
+    calculateEventStandings(event, previousEvent);
+    expect(event.standings).toEqual({});
   });
 });

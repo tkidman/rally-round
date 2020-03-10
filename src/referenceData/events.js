@@ -6,13 +6,13 @@ const events = {
       location: "Monte Carlo"
     },
     {
-      eventId: "67463",
-      challengeId: "67012",
+      eventId: "56657",
+      challengeId: "56242",
       location: "Sweden"
     },
     {
-      eventId: "67463",
-      challengeId: "67012",
+      eventId: "62963",
+      challengeId: "62512",
       location: "Greece"
     },
     {
