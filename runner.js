@@ -1,3 +1,3 @@
-const { processAllLeagues } = require("./src");
+const { processAllClasses } = require("./src");
 
-processAllLeagues();
+processAllClasses();

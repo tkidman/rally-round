@@ -4,7 +4,7 @@ const { keyBy, sortBy } = require("lodash");
 
 const { pointsConfig, events } = require("./referenceData");
 const { fetchEventResults } = require("./dirtAPI");
-const { writeJSON } = require("./output");
+const { writeJSON, writeCSV } = require("./output");
 const { getTotalPoints, getDriver } = require("./shared");
 
 const getDuration = durationString => {
@@ -160,11 +160,11 @@ const processEvents = async events => {
   }
 };
 
-const populateOverallResults = leagues => {
+const populateOverallResults = classes => {
   const overall = [];
-  Object.keys(leagues).forEach(leagueName => {
-    const league = leagues[leagueName];
-    league.forEach(event => {
+  Object.keys(classes).forEach(className => {
+    const rallyClass = classes[className];
+    rallyClass.forEach(event => {
       let overallEvent = overall.find(
         overallEvent => overallEvent.location === event.location
       );
@@ -175,10 +175,10 @@ const populateOverallResults = leagues => {
         };
         overall.push(overallEvent);
       }
-      const driverResultsWithLeagueName = event.results.driverResults.map(
-        entry => Object.assign({ leagueName }, { ...entry })
+      const driverResultsWithClassName = event.results.driverResults.map(
+        entry => Object.assign({ className }, { ...entry })
       );
-      overallEvent.results.driverResults.push(...driverResultsWithLeagueName);
+      overallEvent.results.driverResults.push(...driverResultsWithClassName);
     });
   });
   overall.forEach(event => {
@@ -187,15 +187,16 @@ const populateOverallResults = leagues => {
       "totalTime"
     );
   });
-  leagues.overall = overall;
+  classes.overall = overall;
 };
-const processAllLeagues = async () => {
-  const leagues = events;
-  await processEvents(leagues.pro);
-  await processEvents(leagues.historic);
-  await processEvents(leagues.rookie);
-  populateOverallResults(leagues);
-  writeJSON(leagues);
+const processAllClasses = async () => {
+  const league = events;
+  await processEvents(league.pro);
+  await processEvents(league.historic);
+  await processEvents(league.rookie);
+  populateOverallResults(league);
+  writeCSV(league);
+  writeJSON(league);
 };
 
 module.exports = {
@@ -203,6 +204,6 @@ module.exports = {
   sortTeamResults,
   processEvent,
   calculateEventStandings,
-  processAllLeagues,
+  processAllClasses,
   populateOverallResults
 };

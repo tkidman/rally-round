@@ -9,8 +9,8 @@ const { teamsById } = require("./referenceData");
 const countryTemplate =
   '<img src="https://bluelineleague.com/wp-content/uploads/2020/01/%TWO_LETTER_CODE%.png" alt="" width="32" height="32" class="alignnone size-full wp-image-1476" />';
 
-const buildDriverRows = eventResults => {
-  const driverRows = eventResults.driverResults.map(result => {
+const buildDriverRows = event => {
+  const driverRows = event.results.driverResults.map(result => {
     const driver = getDriver(result.name);
     const country = lookup.byCountry(driver.countryName);
     if (!country) {
@@ -26,7 +26,7 @@ const buildDriverRows = eventResults => {
     driverRow.COUNTRY_IMG = country
       ? countryTemplate.replace("%TWO_LETTER_CODE%", country.iso2.toLowerCase())
       : "";
-    driverRow.CLASS = result.leagueName;
+    driverRow.CLASS = result.className;
     driverRow.DRIVER = driver.id;
     driverRow.VEHICLE = result.vehicleName;
     driverRow.TOTAL = result.totalTime;
@@ -39,13 +39,22 @@ const buildDriverRows = eventResults => {
   return driverRows;
 };
 
-const writeDriverCSV = (eventResults, leagueName) => {
-  const driverRows = buildDriverRows(eventResults, leagueName);
+const writeDriverCSV = (eventResults, className) => {
+  const driverRows = buildDriverRows(eventResults, className);
   const driversCSV = Papa.unparse(driverRows);
   fs.writeFileSync(
-    `./${outputPath}/${eventResults.location}-${leagueName}-driverResults.csv`,
+    `./${outputPath}/${eventResults.location}-${className}-driverResults.csv`,
     driversCSV
   );
+};
+
+const writeCSV = league => {
+  Object.keys(league).forEach(className => {
+    league[className].forEach(event => {
+      writeDriverCSV(event, className);
+    });
+  });
+  return true;
 };
 
 const writeJSON = eventResults => {
@@ -55,4 +64,4 @@ const writeJSON = eventResults => {
   );
 };
 
-module.exports = { writeJSON, writeDriverCSV, buildDriverRows };
+module.exports = { writeJSON, writeDriverCSV, buildDriverRows, writeCSV };

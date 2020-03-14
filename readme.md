@@ -45,8 +45,9 @@ Output will be written to `./hidden/out` - you may need to create this directory
 * Get Team standings ✓
 * Get driver config from google sheet ✓
 * Get overall event results ✓
-* Write driver csv (in progress)
+* Write driver csv ✓
 * Write driver standings csv
+* Write driver powerstage csv 
 * Write team standings csv
 * Instructions for use on readme
 * Use cached leagueResults.json
