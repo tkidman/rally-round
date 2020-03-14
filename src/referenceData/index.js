@@ -57,9 +57,29 @@ const loadDriversFromCSV = () => {
   return driversById;
 };
 
-const driversById = loadDriversFromCSV();
+const loadDriversFromMasterSheet = () => {
+  const csv = fs.readFileSync("./drivers.csv", "utf8");
+  const rows = Papa.parse(csv, { header: true }).data;
+  const driversById = rows.reduce((driversById, row) => {
+    const teamId = row["Team Name"];
+    const country = row["Country:"];
+    const driverName = row["Steam/Xbox/PS4 username:"];
+    driversById[driverName] = {
+      id: driverName,
+      name: driverName,
+      teamId,
+      teamImg: null, // TODO row.TEAM_IMG,
+      country,
+      countryImg: null // TODO row.COUNTRY_IMG
+    };
+    return driversById;
+  }, {});
+  return driversById;
+};
+
+const driversById = loadDriversFromMasterSheet();
 const teamsById = keyBy(teams, team => team.id);
 const pointsConfig = require("./pointsConfig");
 const { events } = require("./events");
 
-module.exports = { driversById, teamsById, pointsConfig, events };
+module.exports = { driversById, teamsById, pointsConfig, events, loadDriversFromMasterSheet, loadDriversFromCSV };

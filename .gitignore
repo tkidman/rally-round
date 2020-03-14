@@ -1,3 +1,5 @@
 /hidden
 /.idea
 /node_modules
+/creds.js
+/drivers.csv

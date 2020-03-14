@@ -1,9 +1,11 @@
 const {
   calculateEventResults,
   sortTeamResults,
-  calculateEventStandings
+  calculateEventStandings,
+  populateOverallResults
 } = require("./index");
 const leaderboard = require("./__fixtures__/leaderboard");
+const leagueResults = require("../hidden/out/leagueResults.json");
 
 describe("calculates event results", () => {
   test("returns results for drivers", () => {
@@ -18,6 +20,7 @@ describe("calculates event results", () => {
         overallPoints: 30,
         playerDiff: 0,
         powerStagePoints: 4,
+        totalPoints: 34,
         rank: 1,
         stageDiff: "--",
         stageTime: "15:00.000",
@@ -32,9 +35,10 @@ describe("calculates event results", () => {
         isVIP: false,
         name: "ThatGrosejanBoi",
         nationality: "eLngLatvian",
-        overallPoints: 20,
+        overallPoints: 24,
         playerDiff: 0,
         powerStagePoints: 5,
+        totalPoints: 29,
         rank: 2,
         stageDiff: "--",
         stageTime: "05:34.000",
@@ -49,8 +53,8 @@ describe("calculates event results", () => {
   test("returns results for teams", () => {
     const expected = [
       {
-        teamId: "Live and Let DNF",
-        totalPoints: 59
+        name: "Dammit Samir!",
+        totalPoints: 24
       }
     ];
     expect(calculateEventResults(leaderboard).teamResults).toEqual(expected);
@@ -81,16 +85,16 @@ describe("calculates event results", () => {
     ]);
   });
 
-  test("calculates standings", () => {
+  test("calculates standings with previous standings", () => {
     const event = {
       results: {
         driverResults: [
           {
-            name: "satchmo",
-            totalPoints: 10
+            name: "zisekoz",
+            totalPoints: 15
           },
           {
-            name: "zisekoz",
+            name: "satchmo",
             totalPoints: 8
           }
         ],
@@ -110,11 +114,11 @@ describe("calculates event results", () => {
       standings: {
         driverStandings: [
           {
-            name: "zisekoz",
+            name: "satchmo",
             totalPoints: 15
           },
           {
-            name: "satchmo",
+            name: "zisekoz",
             totalPoints: 10
           }
         ],
@@ -131,6 +135,93 @@ describe("calculates event results", () => {
       }
     };
     calculateEventStandings(event, previousEvent);
-    expect(event.standings).toEqual({});
+    expect(event.standings).toEqual({
+      driverStandings: [
+        {
+          currentPosition: 1,
+          name: "zisekoz",
+          totalPoints: 25,
+          positionChange: 1,
+          previousPosition: 2
+        },
+        {
+          currentPosition: 2,
+          name: "satchmo",
+          totalPoints: 23,
+          positionChange: -1,
+          previousPosition: 1
+        }
+      ],
+      teamStandings: [
+        {
+          currentPosition: 1,
+          name: "Live and Let DNF",
+          totalPoints: 20,
+          positionChange: 0,
+          previousPosition: 1
+        },
+        {
+          currentPosition: 2,
+          name: "Dammit Sammir!",
+          totalPoints: 16,
+          positionChange: 0,
+          previousPosition: 2
+        }
+      ]
+    });
+  });
+
+  test("calculates standings with no previous event", () => {
+    const event = {
+      results: {
+        driverResults: [
+          {
+            name: "zisekoz",
+            totalPoints: 15
+          },
+          {
+            name: "satchmo",
+            totalPoints: 8
+          }
+        ],
+        teamResults: [
+          {
+            name: "Live and Let DNF",
+            totalPoints: 10
+          },
+          {
+            name: "Dammit Sammir!",
+            totalPoints: 8
+          }
+        ]
+      }
+    };
+    calculateEventStandings(event);
+    expect(event.standings.driverStandings).toEqual([
+      {
+        currentPosition: 1,
+        name: "zisekoz",
+        totalPoints: 15,
+        positionChange: null,
+        previousPosition: null
+      },
+      {
+        currentPosition: 2,
+        name: "satchmo",
+        totalPoints: 8,
+        positionChange: null,
+        previousPosition: null
+      }
+    ]);
+  });
+
+  test("populates overall results", () => {
+    populateOverallResults(leagueResults);
+    expect(leagueResults.overall[0].results.driverResults[0].name).toEqual(
+      "Kuul"
+    );
+    expect(leagueResults.overall[0].results.driverResults[15].name).toEqual(
+      "SFR_rallimoilane"
+    );
   });
 });

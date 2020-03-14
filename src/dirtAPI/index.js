@@ -1,21 +1,21 @@
 const axios = require("axios");
 const debug = require("debug")("tkidman:dirt2-results:dirtAPI");
 
-const { cookie, xsrfh } = require("../../hidden/creds");
+const { cookie, xsrfh } = require("../../creds");
 
-const fetchChampionships = async () => {
+const fetchChampionships = async clubId => {
   const response = await axios({
     method: "GET",
-    url: "https://dirtrally2.com/api/Club/232735/championships",
+    url: `https://dirtrally2.com/api/Club/${clubId}/championships`,
     headers: { Cookie: cookie }
   });
   debug(response.data);
 };
 
-const fetchRecentResults = async () => {
+const fetchRecentResults = async clubId => {
   const response = await axios({
     method: "GET",
-    url: "https://dirtrally2.com/api/Club/232735/recentResults",
+    url: `https://dirtrally2.com/api/Club/${clubId}/recentResults`,
     headers: { Cookie: cookie, "RaceNet.XSRFH": xsrfh }
   });
   debug(JSON.stringify(response.data, null, 2));

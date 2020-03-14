@@ -2,8 +2,9 @@ const debug = require("debug")("tkidman:dirt2-results");
 const moment = require("moment");
 const { keyBy, sortBy } = require("lodash");
 
-const { teamsById, pointsConfig, driversById } = require("./referenceData");
+const { pointsConfig, driversById, events } = require("./referenceData");
 const { fetchEventResults } = require("./dirtAPI");
+const { writeJSON } = require("./output");
 
 const getDriver = name => {
   const driver = driversById[name.toUpperCase()];
@@ -104,35 +105,53 @@ const getTotalPoints = entry => {
 
 const calculateStandings = (results, previousStandings) => {
   const standings = results.map(entry => {
-    const previousIndex = previousStandings.findIndex(
-      standing => standing.name === entry.name
-    );
-    const previousStanding = previousStandings[previousIndex];
     const standing = {
       name: entry.name,
-      previousPosition: previousIndex + 1,
-      points: previousStanding.points + entry.totalPoints
+      totalPoints: entry.totalPoints,
+      previousPosition: null
     };
+    if (previousStandings) {
+      const previousIndex = previousStandings.findIndex(
+        standing => standing.name === entry.name
+      );
+      if (previousIndex !== -1) {
+        const previousStanding = previousStandings[previousIndex];
+        standing.previousPosition = previousIndex + 1;
+        standing.totalPoints = previousStanding.totalPoints + entry.totalPoints;
+      }
+    }
     return standing;
   });
-  const sortedStandings = sortBy(standings, standing => 0 - standing.points);
+  const sortedStandings = sortBy(
+    standings,
+    standing => 0 - standing.totalPoints
+  );
 
   for (let i = 0; i < sortedStandings.length; i++) {
     const standing = sortedStandings[i];
     standing.currentPosition = i + 1;
-    standing.positionChange =
-      standing.currentPosition - standing.previousPosition;
+    standing.positionChange = standing.previousPosition
+      ? standing.previousPosition - standing.currentPosition
+      : null;
   }
+  return sortedStandings;
 };
 
 const calculateEventStandings = (event, previousEvent) => {
+  const previousDriverStandings = previousEvent
+    ? previousEvent.standings.driverStandings
+    : null;
   const driverStandings = calculateStandings(
     event.results.driverResults,
-    previousEvent.standings.driverStandings
+    previousDriverStandings
   );
+
+  const previousTeamStandings = previousEvent
+    ? previousEvent.standings.teamStandings
+    : null;
   const teamStandings = calculateStandings(
     event.results.teamResults,
-    previousEvent.standings.teamStandings
+    previousTeamStandings
   );
   event.standings = { driverStandings, teamStandings };
 };
@@ -143,7 +162,7 @@ const processEvent = async (event, previousEvent) => {
     eventId: event.eventId
   });
   event.results = calculateEventResults(leaderboard);
-  calculateStandings(event, previousEvent);
+  calculateEventStandings(event, previousEvent);
 };
 
 const processEvents = async events => {
@@ -154,9 +173,49 @@ const processEvents = async events => {
   }
 };
 
+const populateOverallResults = leagues => {
+  const overall = [];
+  Object.keys(leagues).forEach(leagueName => {
+    const league = leagues[leagueName];
+    league.forEach(event => {
+      let overallEvent = overall.find(
+        overallEvent => overallEvent.location === event.location
+      );
+      if (!overallEvent) {
+        overallEvent = {
+          location: event.location,
+          results: { driverResults: [] }
+        };
+        overall.push(overallEvent);
+      }
+      const driverResultsWithLeagueName = event.results.driverResults.map(
+        entry => Object.assign({ leagueName }, { ...entry })
+      );
+      overallEvent.results.driverResults.push(...driverResultsWithLeagueName);
+    });
+  });
+  overall.forEach(event => {
+    event.results.driverResults = orderResultsBy(
+      event.results.driverResults,
+      "totalTime"
+    );
+  });
+  leagues.overall = overall;
+};
+const processAllLeagues = async () => {
+  const leagues = events;
+  await processEvents(leagues.pro);
+  await processEvents(leagues.historic);
+  await processEvents(leagues.rookie);
+  populateOverallResults(leagues);
+  writeJSON(leagues);
+};
+
 module.exports = {
   calculateEventResults,
   sortTeamResults,
   processEvent,
-  calculateEventStandings
+  calculateEventStandings,
+  processAllLeagues,
+  populateOverallResults
 };
