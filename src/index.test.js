@@ -5,7 +5,8 @@ const {
   populateOverallResults
 } = require("./index");
 const leaderboard = require("./__fixtures__/leaderboard");
-const leagueResults = require("../hidden/out/leagueResults.json");
+const { outputPath } = require("./shared");
+const leagueResults = require(`../${outputPath}/leagueResults.json`);
 
 describe("calculates event results", () => {
   test("returns results for drivers", () => {

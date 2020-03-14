@@ -1,4 +1,6 @@
+const fs = require("fs");
 const { loadDriversFromCSV, loadDriversFromMasterSheet } = require("./index");
+
 describe("referenceData", () => {
   test("loadDriversFromCSV", () => {
     expect(loadDriversFromCSV()["SATCHMO"]).toEqual({
@@ -15,12 +17,31 @@ describe("referenceData", () => {
 
   test("loadDriversFromMasterSheet", () => {
     expect(loadDriversFromMasterSheet()["satchmo"]).toEqual({
-      country: "Australia",
-      countryImg: null,
+      countryName: "Australia",
       id: "satchmo",
       name: "satchmo",
-      teamId: "Live and let DNF",
-      teamImg: null
+      teamId: "Live and let DNF"
     });
+  });
+
+  test("write teams.json from overall csv", () => {
+    const driversFromCSV = loadDriversFromCSV();
+    const teamsByID = Object.values(driversFromCSV).reduce(
+      (teamsById, driver) => {
+        if (driver.teamId) {
+          teamsById[driver.teamId] = {
+            teamId: driver.teamId,
+            teamName: driver.teamId,
+            teamImg: driver.teamImg
+          };
+        }
+        return teamsById;
+      }
+    );
+    const teams = Object.values(teamsByID);
+    fs.writeFileSync(
+      "./src/referenceData/teams.json",
+      JSON.stringify(teams, null, 2)
+    );
   });
 });

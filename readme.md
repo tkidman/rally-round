@@ -49,6 +49,7 @@ Output will be written to `./hidden/out` - you may need to create this directory
 * Write driver standings csv
 * Write team standings csv
 * Instructions for use on readme
+* Use cached leagueResults.json
 
 ### stretch goals
 * DNF calculator

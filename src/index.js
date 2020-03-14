@@ -2,17 +2,11 @@ const debug = require("debug")("tkidman:dirt2-results");
 const moment = require("moment");
 const { keyBy, sortBy } = require("lodash");
 
-const { pointsConfig, driversById, events } = require("./referenceData");
+const { pointsConfig, events } = require("./referenceData");
 const { fetchEventResults } = require("./dirtAPI");
 const { writeJSON } = require("./output");
+const { getTotalPoints, getDriver } = require("./shared");
 
-const getDriver = name => {
-  const driver = driversById[name.toUpperCase()];
-  if (!driver) {
-    debug(`unable to find driver for driver name: ${name}`);
-  }
-  return driver;
-};
 const getDuration = durationString => {
   if (durationString.split(":").length === 2) {
     return moment.duration(`00:${durationString}`);
@@ -94,13 +88,6 @@ const calculateEventResults = leaderboard => {
   const teamResultsById = calculateTeamResults(resultsByDriver);
   const teamResults = sortTeamResults(teamResultsById);
   return { driverResults, teamResults };
-};
-
-const getTotalPoints = entry => {
-  let totalPoints = 0;
-  totalPoints += entry.powerStagePoints ? entry.powerStagePoints : 0;
-  totalPoints += entry.overallPoints ? entry.overallPoints : 0;
-  return totalPoints;
 };
 
 const calculateStandings = (results, previousStandings) => {

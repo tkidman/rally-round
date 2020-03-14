@@ -1,9 +1,52 @@
 [
   {
-    "id": "Live and Let DNF",
-    "name": "Live and Let DNF",
-    "img": "https://bluelineleague.com/wp-content/uploads/2020/01/Live_and_let_DNF-300x225.png",
-    "proCar": "Mitsubishi Space Star",
-    "rookieCar": "Seat Ibiza"
+    "teamId": "Bin It Or Win It",
+    "teamName": "Bin It Or Win It",
+    "teamImg": "<img src=\"https://bluelineleague.com/wp-content/uploads/2020/01/bin-it-or-win-it-300x300.png\" alt=\"\" width=\"32\" height=\"32\" title=\"Bin It Or Win It\" />"
+  },
+  {
+    "teamId": "Ditch Dusters",
+    "teamName": "Ditch Dusters",
+    "teamImg": "<img src=\"https://bluelineleague.com/wp-content/uploads/2020/01/Ditch_Dusters.png\" alt=\"\" width=\"20\" height=\"20\" title=\"Ditch Dusters\" />"
+  },
+  {
+    "teamId": "Live and let DNF",
+    "teamName": "Live and let DNF",
+    "teamImg": "<img src=\"https://bluelineleague.com/wp-content/uploads/2020/01/Live_and_let_DNF-300x225.png\" alt=\"\" width=\"32\" height=\"32\" title=\"Live and let DNF\" />"
+  },
+  {
+    "teamId": "Speed Savages",
+    "teamName": "Speed Savages",
+    "teamImg": "<img src=\"https://bluelineleague.com/wp-content/uploads/2020/01/SpeedSavages_new_big-300x193.png\" alt=\"\" width=\"32\" height=\"32\" title=\"Speed Savages\" />"
+  },
+  {
+    "teamId": "Dammit Samir!",
+    "teamName": "Dammit Samir!",
+    "teamImg": "<img src=\"https://bluelineleague.com/wp-content/uploads/2020/01/Dammit_Samirpng-300x300.png\" alt=\"\" width=\"32\" height=\"32\" title=\"Dammit Samir!\"/>"
+  },
+  {
+    "teamId": "Drive Faster",
+    "teamName": "Drive Faster",
+    "teamImg": "<img src=\"https://bluelineleague.com/wp-content/uploads/2020/01/Team_3.png\" alt=\"\" width=\"32\" height=\"32\" title=\"Drive Faster\" />"
+  },
+  {
+    "teamId": "Loeblies",
+    "teamName": "Loeblies",
+    "teamImg": "<img src=\"https://bluelineleague.com/wp-content/uploads/2020/01/Loeblies-300x300.png\" alt=\"\" width=\"32\" height=\"32\" title=\"Loeblies\" />"
+  },
+  {
+    "teamId": "Not Enough Handbrake",
+    "teamName": "Not Enough Handbrake",
+    "teamImg": "<img src=\"https://bluelineleague.com/wp-content/uploads/2020/01/Not_Enough_Handbrake-266x300.png\" alt=\"\" width=\"32\" height=\"32\" title=\"Not Enough Handbrake\" />"
+  },
+  {
+    "teamId": "Flat Out 6'ers",
+    "teamName": "Flat Out 6'ers",
+    "teamImg": "<img src=\"https://bluelineleague.com/wp-content/uploads/2020/01/flat_out_6ers-300x300.png\" alt=\"\" width=\"32\" height=\"32\" title=\"Flat Out 6'ers\"/>"
+  },
+  {
+    "teamId": "30 Minutes Of Repair",
+    "teamName": "30 Minutes Of Repair",
+    "teamImg": "<img src=\"https://bluelineleague.com/wp-content/uploads/2020/01/30-minutes-300x239.png\" alt=\"\" width=\"32\" height=\"32\" title=\"30 Minutes Of Repair\" />"
   }
 ]
