@@ -1,7 +1,7 @@
 [
   {
-    "teamId": "Bin It Or Win It",
-    "teamName": "Bin It Or Win It",
+    "teamId": "Bin It or Win It",
+    "teamName": "Bin It or Win It",
     "teamImg": "<img src=\"https://bluelineleague.com/wp-content/uploads/2020/01/bin-it-or-win-it-300x300.png\" alt=\"\" width=\"32\" height=\"32\" title=\"Bin It Or Win It\" />"
   },
   {
@@ -20,13 +20,13 @@
     "teamImg": "<img src=\"https://bluelineleague.com/wp-content/uploads/2020/01/SpeedSavages_new_big-300x193.png\" alt=\"\" width=\"32\" height=\"32\" title=\"Speed Savages\" />"
   },
   {
-    "teamId": "Dammit Samir!",
+    "teamId": "Dammit Samir",
     "teamName": "Dammit Samir!",
     "teamImg": "<img src=\"https://bluelineleague.com/wp-content/uploads/2020/01/Dammit_Samirpng-300x300.png\" alt=\"\" width=\"32\" height=\"32\" title=\"Dammit Samir!\"/>"
   },
   {
-    "teamId": "Drive Faster",
-    "teamName": "Drive Faster",
+    "teamId": "Drive Faster!",
+    "teamName": "Drive Faster!",
     "teamImg": "<img src=\"https://bluelineleague.com/wp-content/uploads/2020/01/Team_3.png\" alt=\"\" width=\"32\" height=\"32\" title=\"Drive Faster\" />"
   },
   {
@@ -40,13 +40,13 @@
     "teamImg": "<img src=\"https://bluelineleague.com/wp-content/uploads/2020/01/Not_Enough_Handbrake-266x300.png\" alt=\"\" width=\"32\" height=\"32\" title=\"Not Enough Handbrake\" />"
   },
   {
-    "teamId": "Flat Out 6'ers",
+    "teamId": "Flat out 6ers",
     "teamName": "Flat Out 6'ers",
     "teamImg": "<img src=\"https://bluelineleague.com/wp-content/uploads/2020/01/flat_out_6ers-300x300.png\" alt=\"\" width=\"32\" height=\"32\" title=\"Flat Out 6'ers\"/>"
   },
   {
-    "teamId": "30 Minutes Of Repair",
-    "teamName": "30 Minutes Of Repair",
+    "teamId": "30 Minutes of Repair",
+    "teamName": "30 Minutes of Repair",
     "teamImg": "<img src=\"https://bluelineleague.com/wp-content/uploads/2020/01/30-minutes-300x239.png\" alt=\"\" width=\"32\" height=\"32\" title=\"30 Minutes Of Repair\" />"
   }
 ]

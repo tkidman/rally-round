@@ -3,8 +3,8 @@ const Papa = require("papaparse");
 const lookup = require("country-code-lookup");
 const debug = require("debug")("tkidman:dirt2-results:output");
 
-const { outputPath, getDriver } = require("./shared");
-const { teamsById } = require("./referenceData");
+const { outputPath } = require("./shared");
+const { teamsById, getDriver } = require("./referenceData");
 
 const countryTemplate =
   '<img src="https://bluelineleague.com/wp-content/uploads/2020/01/%TWO_LETTER_CODE%.png" alt="" width="32" height="32" class="alignnone size-full wp-image-1476" />';
@@ -12,14 +12,35 @@ const countryTemplate =
 const buildDriverRows = event => {
   const driverRows = event.results.driverResults.map(result => {
     const driver = getDriver(result.name);
-    const country = lookup.byCountry(driver.countryName);
-    if (!country) {
-      debug(
-        `unable to determine country for ${driver.countryName} for driver ${driver.name}`
-      );
+    let country;
+    let team;
+
+    if (driver) {
+      country = lookup.byCountry(driver.countryName);
+      if (!country) {
+        if (driver.countryName === "USA") {
+          country = lookup.byCountry("United States");
+        }
+        if (
+          driver.countryName === "England" ||
+          driver.countryName === "Scotland"
+        ) {
+          country = lookup.byCountry("United Kingdom");
+        }
+        if (!country) {
+          debug(
+            `unable to determine country for ${driver.countryName} for driver ${driver.name}`
+          );
+        }
+      }
+      team = teamsById[driver.teamId];
+      if (!team) {
+        debug(
+          `no team found for driver: ${driver.name} - team id: ${driver.teamId}`
+        );
+      }
     }
 
-    const team = teamsById[driver.teamId];
     const driverRow = {};
     driverRow["POS."] = result.rank;
     driverRow.TEAM_IMG = team ? team.teamImg : "";
@@ -27,7 +48,7 @@ const buildDriverRows = event => {
       ? countryTemplate.replace("%TWO_LETTER_CODE%", country.iso2.toLowerCase())
       : "";
     driverRow.CLASS = result.className;
-    driverRow.DRIVER = driver.id;
+    driverRow.DRIVER = result.name;
     driverRow.VEHICLE = result.vehicleName;
     driverRow.TOTAL = result.totalTime;
     driverRow.DIFF = result.totalDiff;

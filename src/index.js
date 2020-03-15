@@ -2,10 +2,10 @@ const debug = require("debug")("tkidman:dirt2-results");
 const moment = require("moment");
 const { keyBy, sortBy } = require("lodash");
 
-const { pointsConfig, events } = require("./referenceData");
+const { pointsConfig, events, getDriver } = require("./referenceData");
 const { fetchEventResults } = require("./dirtAPI");
 const { writeJSON, writeCSV } = require("./output");
-const { getTotalPoints, getDriver } = require("./shared");
+const { getTotalPoints } = require("./shared");
 
 const getDuration = durationString => {
   if (durationString.split(":").length === 2) {
