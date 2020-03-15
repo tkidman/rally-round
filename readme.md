@@ -4,8 +4,10 @@ Does your league do wild crazy things not supported by the basic Dirt Rally 2.0 
 
 ## Setup
 
-1. Install nodejs
+1. Install nodejs (https://nodejs.org/en/download/) - if installing on windows, you don't need the extra tools.
 1. Clone this repo to a location on your hard drive, or just download the zip and expand (https://github.com/tkidman/dirt2-results -> clone or download).
+1. Extract the zip to a location in your home folder
+1. Open a terminal / command prompt in this location. Eg, if in windows, open the unzipped directory in explorer, then copy the path at the top of the window, click the start menu, type 'cmd', then type 'cd ' and paste the path you copied earlier.
 1. Run `npm install` from your terminal from this directory
 1. Create your credentials file (this whole process will hopefully be automated later ...):
     1. Copy creds.example.js to a new file in this directory called creds.js
