@@ -30,7 +30,13 @@ Does your league do wild crazy things not supported by the basic Dirt Rally 2.0 
 
 1. run `node ./runner.js` from your terminal
 
-Output will be written to `./hidden/out` - you may need to create this directory before running the script.
+Output will be written to `./hidden/out` - you will need to create this directory before running the script.
+Cache files will be written to `./hidden/cache` - you will need to create this directory too.
+
+## Cache
+
+The tool keeps a file based cache of the API responses to speed things up on subsequent executions.  If you want to get fresh data, delete the 
+cache files you don't want from `./hidden/cache`
  
 ## To Do
 * Call dirt 2 Leaderboard API ✓
@@ -48,14 +54,17 @@ Output will be written to `./hidden/out` - you may need to create this directory
 * Get driver config from google sheet ✓
 * Get overall event results ✓
 * Write driver csv ✓
-* Write driver standings csv
+* Use cached leagueResults.json ✓
+* Create a result for all competitors, even if they didn't race ✓
+* Write driver standings csv ✓
+* Write team standings csv ✓
+* Instructions for use on readme ✓
 * Write driver powerstage csv 
-* Write team standings csv
-* Instructions for use on readme
-* Use cached leagueResults.json
+* Ensure the csvs and be imported into the website
+* Fix the issues with countries (2 character code in flag image lookup for rest of the world and the UK);
 
 ### stretch goals
 * DNF calculator
 * Automatically get cookie
-* Deploy to heroku
+* Deploy to AWS cloudfront
 * Automatically update website

@@ -68,10 +68,28 @@ const sortTeamResults = teamResultsById => {
   return teamResults.reverse();
 };
 
-const calculateEventResults = leaderboard => {
-  debug("calculating event results");
+const createDNSEntry = entry => {
+  return {
+    name: entry.name,
+    isDnsEntry: true,
+    stageTime: "15:00:00.000",
+    totalTime: "59:59:59.000"
+  };
+};
+
+const calculateEventResults = (leaderboard, previousEvent) => {
   const entries = leaderboard.entries;
   const resultsByDriver = keyBy(entries, entry => entry.name);
+
+  // create results for drivers that didn't start a run
+  if (previousEvent) {
+    previousEvent.results.driverResults.forEach(entry => {
+      if (!resultsByDriver[entry.name]) {
+        resultsByDriver[entry.name] = createDNSEntry(entry);
+      }
+    });
+  }
+
   const powerStageResults = orderResultsBy(entries, "stageTime");
   updatePoints(
     resultsByDriver,
@@ -87,6 +105,7 @@ const calculateEventResults = leaderboard => {
   driverResults.forEach(entry => (entry.totalPoints = getTotalPoints(entry)));
   const teamResultsById = calculateTeamResults(resultsByDriver);
   const teamResults = sortTeamResults(teamResultsById);
+
   return { driverResults, teamResults };
 };
 
@@ -143,19 +162,22 @@ const calculateEventStandings = (event, previousEvent) => {
   event.standings = { driverStandings, teamStandings };
 };
 
-const processEvent = async (event, previousEvent) => {
+const processEvent = async (className, event, previousEvent) => {
   const leaderboard = await fetchEventResults({
     challengeId: event.challengeId,
-    eventId: event.eventId
+    eventId: event.eventId,
+    location: event.location,
+    className
   });
-  event.results = calculateEventResults(leaderboard);
+  event.results = calculateEventResults(leaderboard, previousEvent);
   calculateEventStandings(event, previousEvent);
 };
 
-const processEvents = async events => {
+const processEvents = async (events, className) => {
   let previousEvent = null;
   for (const event of events) {
-    await processEvent(event, previousEvent);
+    debug(`processing ${className} ${event.location}`);
+    await processEvent(className, event, previousEvent);
     previousEvent = event;
   }
 };
@@ -191,9 +213,9 @@ const populateOverallResults = classes => {
 };
 const processAllClasses = async () => {
   const league = events;
-  await processEvents(league.pro);
-  await processEvents(league.historic);
-  await processEvents(league.rookie);
+  for (const rallyClassName of Object.keys(league)) {
+    await processEvents(league[rallyClassName], rallyClassName);
+  }
   populateOverallResults(league);
   writeCSV(league);
   writeJSON(league);

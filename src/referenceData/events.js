@@ -19,6 +19,11 @@ const events = {
       eventId: "67463",
       challengeId: "67012",
       location: "Poland"
+    },
+    {
+      eventId: "71377",
+      challengeId: "70924",
+      location: "Argentina"
     }
   ],
   historic: [
@@ -41,6 +46,11 @@ const events = {
       eventId: "67465",
       challengeId: "67014",
       location: "Poland"
+    },
+    {
+      eventId: "70519",
+      challengeId: "70066",
+      location: "Argentina"
     }
   ],
   rookie: [
@@ -63,6 +73,11 @@ const events = {
       eventId: "67464",
       challengeId: "67013",
       location: "Poland"
+    },
+    {
+      eventId: "70518",
+      challengeId: "70065",
+      location: "Argentina"
     }
   ]
 };

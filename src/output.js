@@ -69,11 +69,42 @@ const writeDriverCSV = (eventResults, className) => {
   );
 };
 
+const writeStandingsCSV = (className, events, type) => {
+  const allResultsById = events.reduce((allResultsById, event) => {
+    event.results[`${type}Results`].forEach(entry => {
+      if (!allResultsById[entry.name]) {
+        allResultsById[entry.name] = { name: entry.name };
+      }
+      allResultsById[entry.name][event.location] = entry.totalPoints;
+    });
+    return allResultsById;
+  }, {});
+  const lastEvent = events[events.length - 1];
+  const standingRows = lastEvent.standings[`${type}Standings`].map(standing => {
+    return {
+      ...allResultsById[standing.name],
+      ...standing
+    };
+  });
+
+  const standingsCSV = Papa.unparse(standingRows);
+  fs.writeFileSync(
+    `./${outputPath}/${lastEvent.location}-${className}-${type}Standings.csv`,
+    standingsCSV
+  );
+
+  // name: satchmo, location: points, location: points, name: satchmo, total points: points, position: number,
+};
+
 const writeCSV = league => {
   Object.keys(league).forEach(className => {
     league[className].forEach(event => {
       writeDriverCSV(event, className);
     });
+    if (className !== "overall") {
+      writeStandingsCSV(className, league[className], "driver");
+      writeStandingsCSV(className, league[className], "team");
+    }
   });
   return true;
 };
@@ -85,4 +116,9 @@ const writeJSON = eventResults => {
   );
 };
 
-module.exports = { writeJSON, writeDriverCSV, buildDriverRows, writeCSV };
+module.exports = {
+  writeJSON,
+  writeDriverCSV,
+  buildDriverRows,
+  writeCSV
+};
