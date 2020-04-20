@@ -3,7 +3,7 @@ const Papa = require("papaparse");
 const lookup = require("country-code-lookup");
 const debug = require("debug")("tkidman:dirt2-results:output");
 
-const { outputPath } = require("./shared");
+const { outputPath, hiddenPath, cachePath } = require("./shared");
 const { teamsById, getDriver } = require("./referenceData");
 
 const countryTemplate =
@@ -116,9 +116,16 @@ const writeJSON = eventResults => {
   );
 };
 
+const checkOutputDirs = () => {
+  fs.existsSync(hiddenPath) || fs.mkdirSync(hiddenPath);
+  fs.existsSync(cachePath) || fs.mkdirSync(cachePath);
+  fs.existsSync(outputPath) || fs.mkdirSync(outputPath);
+};
+
 module.exports = {
   writeJSON,
   writeDriverCSV,
   buildDriverRows,
-  writeCSV
+  writeCSV,
+  checkOutputDirs
 };

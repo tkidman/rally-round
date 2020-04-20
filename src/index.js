@@ -4,7 +4,7 @@ const { keyBy, sortBy } = require("lodash");
 
 const { pointsConfig, events, getDriver } = require("./referenceData");
 const { fetchEventResults } = require("./dirtAPI");
-const { writeJSON, writeCSV } = require("./output");
+const { writeJSON, writeCSV, checkOutputDirs } = require("./output");
 const { getTotalPoints } = require("./shared");
 
 const getDuration = durationString => {
@@ -211,14 +211,21 @@ const populateOverallResults = classes => {
   });
   classes.overall = overall;
 };
+
 const processAllClasses = async () => {
-  const league = events;
-  for (const rallyClassName of Object.keys(league)) {
-    await processEvents(league[rallyClassName], rallyClassName);
+  try {
+    checkOutputDirs();
+    const league = events;
+    for (const rallyClassName of Object.keys(league)) {
+      await processEvents(league[rallyClassName], rallyClassName);
+    }
+    populateOverallResults(league);
+    writeCSV(league);
+    writeJSON(league);
+  } catch (err) {
+    debug(err);
+    throw err;
   }
-  populateOverallResults(league);
-  writeCSV(league);
-  writeJSON(league);
 };
 
 module.exports = {

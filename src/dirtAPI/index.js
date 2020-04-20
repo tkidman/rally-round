@@ -1,7 +1,7 @@
 const axios = require("axios");
 const debug = require("debug")("tkidman:dirt2-results:dirtAPI");
 const fs = require("fs");
-const cacheDir = "./hidden/cache";
+const { cachePath } = require("../shared");
 
 const { cookie, xsrfh } = require("../../creds");
 
@@ -38,7 +38,7 @@ const fetchEventResults = async ({
   className,
   location
 }) => {
-  const cacheFileName = `${cacheDir}/${location}-${className}-${challengeId}.json`;
+  const cacheFileName = `${cachePath}/${location}-${className}-${challengeId}.json`;
   const cacheFile = loadFromCache(cacheFileName);
   if (cacheFile) {
     debug(`cached event results retrieved: ${cacheFileName}`);

@@ -91,6 +91,7 @@ const getTeam = teamCell => {
   }
   return null;
 };
+
 const loadDriversFromMasterSheet = () => {
   const csv = fs.readFileSync("./drivers.csv", "utf8");
   const rows = Papa.parse(csv, { header: true }).data;

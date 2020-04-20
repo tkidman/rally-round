@@ -1,6 +1,8 @@
 const debug = require("debug")("tkidman:dirt2-results:shared");
 
-const outputPath = "./hidden/out";
+const hiddenPath = "./hidden";
+const outputPath = `${hiddenPath}/out`;
+const cachePath = `${hiddenPath}/cache`;
 
 const getTotalPoints = entry => {
   let totalPoints = 0;
@@ -9,4 +11,4 @@ const getTotalPoints = entry => {
   return totalPoints;
 };
 
-module.exports = { outputPath, getTotalPoints };
+module.exports = { outputPath, cachePath, hiddenPath, getTotalPoints };
