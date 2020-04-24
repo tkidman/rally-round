@@ -25,7 +25,8 @@
     "jsdom": "^16.2.0",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
-    "papaparse": "^5.1.1"
+    "papaparse": "^5.1.1",
+    "puppeteer": "^2.0.0"
   },
   "devDependencies": {
     "@types/jest": "^25.1.0",
