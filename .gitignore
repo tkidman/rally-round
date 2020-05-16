@@ -3,3 +3,4 @@
 /node_modules
 /creds.js
 /drivers.csv
+/cached-creds.json
