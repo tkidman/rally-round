@@ -3,7 +3,6 @@ const debug = require("debug")("tkidman:dirt2-results:dirtAPI");
 const fs = require("fs");
 const { cachePath } = require("../shared");
 const cachedCredsFile = "./cached-creds.json";
-const { username, password } = require("../../../dirt2-config/creds");
 
 const USERNAME_SELECTOR = "#Email";
 const PASSWORD_SELECTOR = "#Password";
@@ -25,6 +24,9 @@ const getCreds = async () => {
 };
 
 const login = async resolve => {
+  const username = process.env.DIRT_USERNAME;
+  const password = process.env.DIRT_PASSWORD;
+
   if (fs.existsSync(cachedCredsFile)) {
     const cachedCreds = JSON.parse(fs.readFileSync(cachedCredsFile, "utf8"));
 
@@ -40,7 +42,7 @@ const login = async resolve => {
       debug("cached credentials are invalid, regenerating");
     }
   }
-  const browser = await puppeteer.launch({ headless: true });
+  const browser = await puppeteer.launch({ headless: false });
   const page = await browser.newPage();
   // page.on("console", msg => debug("PAGE LOG:", msg.text()));
 
