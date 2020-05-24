@@ -57,28 +57,6 @@ const getDriver = name => {
   return driver;
 };
 
-const loadDriversFromCSV = () => {
-  const csv = fs.readFileSync(
-    "./hidden/68-Poland_Overall_Time_28.02.2020.csv-2020-03-01.csv",
-    "utf8"
-  );
-  const rows = Papa.parse(csv, { header: true }).data;
-  const driversById = rows.reduce((driversById, row) => {
-    const teamId = parseTeam(row);
-    const country = parseCountry(row);
-    driversById[row.DRIVER] = {
-      id: row.DRIVER,
-      name: row.DRIVER,
-      teamId,
-      teamImg: row.TEAM_IMG,
-      country,
-      countryImg: row.COUNTRY_IMG
-    };
-    return driversById;
-  }, {});
-  return driversById;
-};
-
 const getTeam = teamCell => {
   if (teamCell) {
     const team = teams.find(
@@ -96,29 +74,30 @@ const loadDriversFromMasterSheet = () => {
   const csv = fs.readFileSync("./drivers.csv", "utf8");
   const rows = Papa.parse(csv, { header: true }).data;
   const driversById = rows.reduce((driversById, row) => {
-    const teamCell = row["Team Name"];
-    const team = getTeam(teamCell);
-    let teamId;
-    if (team) {
-      teamId = team.teamId;
-    }
-    const countryName = row["Country:"];
-    const driverName = row["Steam/Xbox/PS4 username:"];
-    const raceNetName = row["Racenet name:"];
-    const driverId = driverName.toUpperCase();
-    if (driverId) {
-      driversById[driverId] = {
-        id: driverId,
-        name: driverName,
-        raceNetName,
-        discordName: row["Discord name:"],
-        teamId,
-        countryName
-      };
-    } else {
-      debug(
-        `no username found for driver: ${raceNetName}, reference data sheet needs updating`
-      );
+    if (row["0"]) {
+      const teamId = row["Team"];
+      const countryName = row["Country"];
+      const driverName = row["Username/Gamertag on used platform. PC/XBOX/PS4"];
+      const discordName = row["Discord Username"];
+      const raceNetName =
+        row[
+          "Racenet Display Name (can be found here https://accounts.codemasters.com/account/update )"
+        ];
+      const driverId = driverName.toUpperCase();
+      if (driverId) {
+        driversById[driverId] = {
+          id: driverId,
+          name: driverName,
+          raceNetName,
+          discordName,
+          teamId,
+          countryName
+        };
+      } else {
+        debug(
+          `no username found for driver: ${raceNetName}, reference data sheet needs updating`
+        );
+      }
     }
     return driversById;
   }, {});
@@ -139,6 +118,5 @@ module.exports = {
   pointsConfig,
   events,
   loadDriversFromMasterSheet,
-  loadDriversFromCSV,
   getDriver
 };

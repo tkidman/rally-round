@@ -28,7 +28,9 @@ const updatePoints = (resultsByDriver, orderedResults, points, pointsField) => {
     if (orderedResults.length > i) {
       const result = orderedResults[i];
       const driver = result.name;
-      resultsByDriver[driver][pointsField] = points[i];
+      if (!result.isDnfEntry) {
+        resultsByDriver[driver][pointsField] = points[i];
+      }
     }
   }
 };
@@ -77,7 +79,7 @@ const createDNSEntry = entry => {
   };
 };
 
-const calculateEventResults = (leaderboard, previousEvent) => {
+const calculateEventResults = (leaderboard, previousEvent, className) => {
   const entries = leaderboard.entries;
   const resultsByDriver = keyBy(entries, entry => entry.name);
 
@@ -94,10 +96,15 @@ const calculateEventResults = (leaderboard, previousEvent) => {
   updatePoints(
     resultsByDriver,
     powerStageResults,
-    pointsConfig.powerStage,
+    pointsConfig[className].powerStage,
     "powerStagePoints"
   );
-  updatePoints(resultsByDriver, entries, pointsConfig.overall, "overallPoints");
+  updatePoints(
+    resultsByDriver,
+    entries,
+    pointsConfig[className].overall,
+    "overallPoints"
+  );
   const driverResults = orderResultsBy(
     Object.values(resultsByDriver),
     "totalTime"
@@ -106,6 +113,8 @@ const calculateEventResults = (leaderboard, previousEvent) => {
   const teamResultsById = calculateTeamResults(resultsByDriver);
   const teamResults = sortTeamResults(teamResultsById);
 
+  driverResults.forEach(result => (result.className = className));
+  teamResults.forEach(result => (result.className = className));
   return { driverResults, teamResults };
 };
 
@@ -169,7 +178,7 @@ const processEvent = async (className, event, previousEvent) => {
     location: event.location,
     className
   });
-  event.results = calculateEventResults(leaderboard, previousEvent);
+  event.results = calculateEventResults(leaderboard, previousEvent, className);
   calculateEventStandings(event, previousEvent);
 };
 

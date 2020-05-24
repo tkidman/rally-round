@@ -43,7 +43,7 @@ cache files you don't want from `./hidden/cache`
 * Write team standings csv ✓
 * Instructions for use on readme ✓
 * Automatically get cookie ✓
-* creds from env vars or command args
+* creds from env vars or command args ✓
 * DNF counter
 * Get drivers from google sheets automatically
 * Get challenge id from event

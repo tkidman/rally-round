@@ -22,6 +22,7 @@
     "axios": "^0.19.2",
     "country-code-lookup": "0.0.16",
     "debug": "^4.1.1",
+    "googleapis": "^51.0.0",
     "jsdom": "^16.2.0",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
