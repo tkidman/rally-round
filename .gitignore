@@ -4,3 +4,4 @@
 /creds.js
 /drivers.csv
 /cached-creds.json
+.~lock.*
