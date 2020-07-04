@@ -1,3 +1,5 @@
+const https = require("https");
+
 const axios = require("axios");
 const debug = require("debug")("tkidman:dirt2-results:dirtAPI");
 const fs = require("fs");
@@ -11,6 +13,15 @@ const puppeteer = require("puppeteer");
 const validCreds = {};
 
 const dirtRally2Domain = "https://dirtrally2.dirtgame.com";
+
+// export the three certs in the chain from chrome as x509 certificate
+const ca = fs.readFileSync("./src/dirtAPI/GlobalSignRoot-CA.cer");
+const g2 = fs.readFileSync("./src/dirtAPI/G2.cer");
+const cert = fs.readFileSync("./src/dirtAPI/dirtgame.cer");
+const httpsAgent = new https.Agent({
+  ca: [ca, g2, cert]
+});
+const instance = axios.create({ httpsAgent });
 
 const getCreds = async () => {
   if (validCreds.cookie) {
@@ -86,17 +97,18 @@ const login = async resolve => {
 
 const myClubs = async creds => {
   const { cookie, xsrfh } = creds;
-  const response = await axios({
+  const response = await instance({
     method: "GET",
     url: `${dirtRally2Domain}/api/Club/MyClubs?page=1&pageSize=10`,
-    headers: { Cookie: cookie, "RaceNet.XSRFH": xsrfh }
+    headers: { Cookie: cookie, "RaceNet.XSRFH": xsrfh },
+    httpsAgent
   });
   return response;
 };
 
 const fetchChampionships = async clubId => {
   const { cookie } = await getCreds();
-  const response = await axios({
+  const response = await instance({
     method: "GET",
     url: `${dirtRally2Domain}/api/Club/${clubId}/championships`,
     headers: { Cookie: cookie }
@@ -106,7 +118,7 @@ const fetchChampionships = async clubId => {
 
 const fetchRecentResults = async clubId => {
   const { cookie, xsrfh } = await getCreds();
-  const response = await axios({
+  const response = await instance({
     method: "GET",
     url: `${dirtRally2Domain}/api/Club/${clubId}/recentResults`,
     headers: { Cookie: cookie, "RaceNet.XSRFH": xsrfh }
@@ -150,7 +162,7 @@ const fetchEventResults = async ({
     nationalityFilter: "None",
     eventId
   };
-  const response = await axios({
+  const response = await instance({
     method: "POST",
     url: `${dirtRally2Domain}/api/Leaderboard`,
     headers: { Cookie: cookie.trim(), "RaceNet.XSRFH": xsrfh.trim() },
