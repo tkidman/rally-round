@@ -4,7 +4,9 @@
   "description": "dirt2 results",
   "main": "src/index.js",
   "scripts": {
-    "test": "test"
+    "test": "CLUB=test jest test",
+    "lint": "eslint src/",
+    "prepush": "npm run lint && npm run test"
   },
   "repository": {
     "type": "git",
@@ -41,7 +43,14 @@
     "eslint-plugin-prettier": "^2.6.2",
     "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-standard": "^3.1.0",
+    "husky": "^4.2.5",
     "jest": "^25.1.0",
     "prettier": "^1.14.2"
+  },
+  "husky": {
+    "skipCI": false,
+    "hooks": {
+      "pre-push": "npm run prepush"
+    }
   }
 }

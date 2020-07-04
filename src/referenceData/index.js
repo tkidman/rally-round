@@ -1,39 +1,39 @@
 const { keyBy } = require("lodash");
 const Papa = require("papaparse");
 const fs = require("fs");
-const { JSDOM } = require("jsdom");
 const debug = require("debug")("tkidman:dirt2-results:referenceData");
 
-// const drivers = require("./drivers");
-const teams = require("./teams");
+const club = process.env.CLUB || "brl";
+const leagueConfig = require(`./${club}/config`);
 
+// const drivers = require("./drivers");
 // const driversById = keyBy(drivers, driver => driver.id);
 
-const parseTeam = row => {
-  const teamImg = row.TEAM_IMG;
-  const dom = new JSDOM(teamImg);
-  const img = dom.window.document.querySelector("img");
-  if (img) {
-    return img.getAttribute("title");
-  } else {
-    debug(`can't find title for img: ${img} for driver ${row.DRIVER}`);
-  }
-  return null;
-};
+// const parseTeam = row => {
+//   const teamImg = row.TEAM_IMG;
+//   const dom = new JSDOM(teamImg);
+//   const img = dom.window.document.querySelector("img");
+//   if (img) {
+//     return img.getAttribute("title");
+//   } else {
+//     debug(`can't find title for img: ${img} for driver ${row.DRIVER}`);
+//   }
+//   return null;
+// };
 
-const parseCountry = row => {
-  const countryImg = row.COUNTRY_IMG;
-  const dom = new JSDOM(countryImg);
-
-  const img = dom.window.document.querySelector("img");
-  if (img) {
-    const src = img.getAttribute("src");
-    return src.substr(src.length - 6, 2);
-  } else {
-    debug(`can't find country for img: ${img} for driver ${row.DRIVER}`);
-  }
-  return null;
-};
+// const parseCountry = row => {
+//   const countryImg = row.COUNTRY_IMG;
+//   const dom = new JSDOM(countryImg);
+//
+//   const img = dom.window.document.querySelector("img");
+//   if (img) {
+//     const src = img.getAttribute("src");
+//     return src.substr(src.length - 6, 2);
+//   } else {
+//     debug(`can't find country for img: ${img} for driver ${row.DRIVER}`);
+//   }
+//   return null;
+// };
 
 const getDriver = name => {
   const upperName = name.toUpperCase();
@@ -57,21 +57,12 @@ const getDriver = name => {
   return driver;
 };
 
-const getTeam = teamCell => {
-  if (teamCell) {
-    const team = teams.find(
-      team => team.teamId.toUpperCase() === teamCell.toUpperCase().trim()
-    );
-    if (!team) {
-      debug(`unable to find team with team name ${teamCell} in teams.json`);
-    }
-    return team;
-  }
-  return null;
-};
-
 const loadDriversFromMasterSheet = () => {
-  const csv = fs.readFileSync("./drivers.csv", "utf8");
+  const club = process.env.CLUB || "brl";
+  const csv = fs.readFileSync(
+    `./src/referenceData/${club}/drivers.csv`,
+    "utf8"
+  );
   const rows = Papa.parse(csv, { header: true }).data;
   const driversById = rows.reduce((driversById, row) => {
     if (row["0"]) {
@@ -107,16 +98,9 @@ const loadDriversFromMasterSheet = () => {
   return { driversById, driversByRaceNet };
 };
 
-const { driversById, driversByRaceNet } = loadDriversFromMasterSheet();
-const teamsById = keyBy(teams, team => team.teamId);
-const pointsConfig = require("./pointsConfig");
-const { events } = require("./events");
+const { driversById, driversByRaceNet } = loadDriversFromMasterSheet(club);
 
 module.exports = {
-  driversById,
-  teamsById,
-  pointsConfig,
-  events,
-  loadDriversFromMasterSheet,
+  leagueConfig,
   getDriver
 };

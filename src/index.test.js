@@ -1,64 +1,44 @@
 const {
   calculateEventResults,
   sortTeamResults,
-  calculateEventStandings,
-  populateOverallResults
+  calculateEventStandings
 } = require("./index");
 const leaderboard = require("./__fixtures__/leaderboard");
-const { outputPath } = require("./shared");
-const leagueResults = require(`../${outputPath}/leagueResults.json`);
 
 describe("calculates event results", () => {
   test("returns results for drivers", () => {
     const expected = [
       {
-        isDnfEntry: true,
-        isFounder: false,
-        isPlayer: false,
-        isVIP: false,
+        className: "pro",
         name: "Spookex *-*",
-        nationality: "eLngLatvian",
-        overallPoints: 30,
-        playerDiff: 0,
+        overallPoints: 10,
         powerStagePoints: 4,
-        totalPoints: 34,
-        rank: 1,
-        stageDiff: "--",
-        stageTime: "15:00.000",
-        totalDiff: "--",
-        totalTime: "04:41:35.987",
-        vehicleName: "Alpine Renault A110 1600 S"
+        totalPoints: 14
       },
       {
-        isDnfEntry: true,
-        isFounder: false,
-        isPlayer: false,
-        isVIP: false,
-        name: "ThatGrosejanBoi",
-        nationality: "eLngLatvian",
-        overallPoints: 24,
-        playerDiff: 0,
+        className: "pro",
+        name: "SFRrallimoilane",
+        overallPoints: 9,
         powerStagePoints: 5,
-        totalPoints: 29,
-        rank: 2,
-        stageDiff: "--",
-        stageTime: "05:34.000",
-        totalDiff: "+18:24.013",
-        totalTime: "05:00:00.000",
-        vehicleName: "Ford Escort Mk II"
+        totalPoints: 14
       }
     ];
-    expect(calculateEventResults(leaderboard).driverResults).toEqual(expected);
+    expect(
+      calculateEventResults(leaderboard, null, "pro").driverResults
+    ).toMatchObject(expected);
   });
 
   test("returns results for teams", () => {
     const expected = [
       {
-        name: "Dammit Samir!",
-        totalPoints: 24
+        className: "pro",
+        name: "Time Penalty Boys",
+        totalPoints: 19
       }
     ];
-    expect(calculateEventResults(leaderboard).teamResults).toEqual(expected);
+    expect(calculateEventResults(leaderboard, null, "pro").teamResults).toEqual(
+      expected
+    );
   });
 
   test("sorts team results by points", () => {
@@ -214,15 +194,5 @@ describe("calculates event results", () => {
         previousPosition: null
       }
     ]);
-  });
-
-  test("populates overall results", () => {
-    populateOverallResults(leagueResults);
-    expect(leagueResults.overall[0].results.driverResults[0].name).toEqual(
-      "Kuul"
-    );
-    expect(leagueResults.overall[0].results.driverResults[15].name).toEqual(
-      "SFR_rallimoilane"
-    );
   });
 });

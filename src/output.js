@@ -6,9 +6,6 @@ const debug = require("debug")("tkidman:dirt2-results:output");
 const { outputPath, hiddenPath, cachePath } = require("./shared");
 const { getDriver } = require("./referenceData");
 
-// const countryTemplate =
-//   '<img src="https://bluelineleague.com/wp-content/uploads/2020/01/%TWO_LETTER_CODE%.png" alt="" width="32" height="32" class="alignnone size-full wp-image-1476" />';
-
 const buildDriverRows = event => {
   const driverRows = event.results.driverResults.map(result => {
     const driver = getDriver(result.name);
@@ -101,14 +98,12 @@ const writeStandingsCSV = (className, events, type) => {
 };
 
 const writeCSV = league => {
-  Object.keys(league).forEach(className => {
-    league[className].forEach(event => {
+  Object.keys(league.classes).forEach(className => {
+    league.classes[className].events.forEach(event => {
       writeDriverCSV(event, className);
     });
-    if (className !== "overall") {
-      writeStandingsCSV(className, league[className], "driver");
-      writeStandingsCSV(className, league[className], "team");
-    }
+    writeStandingsCSV(className, league.classes[className].events, "driver");
+    writeStandingsCSV(className, league.classes[className].events, "team");
   });
   return true;
 };

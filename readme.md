@@ -44,6 +44,8 @@ cache files you don't want from `./hidden/cache`
 * Instructions for use on readme ✓
 * Automatically get cookie ✓
 * creds from env vars or command args ✓
+* support second club
+* support points for DNF
 * DNF counter
 * Get drivers from google sheets automatically
 * Get challenge id from event

@@ -10,6 +10,8 @@ const LOGIN_BUTTON_SELECTOR = "#login_button_container > input";
 const puppeteer = require("puppeteer");
 const validCreds = {};
 
+const dirtRally2Domain = "https://dirtrally2.dirtgame.com";
+
 const getCreds = async () => {
   if (validCreds.cookie) {
     return validCreds;
@@ -59,7 +61,7 @@ const login = async resolve => {
   debug("logging in ...");
   await page.click(LOGIN_BUTTON_SELECTOR);
   debug("going to find-clubs page ...");
-  await page.goto(`https://dirtrally2.com/clubs/find-club/page/1`);
+  await page.goto(`${dirtRally2Domain}/clubs/find-club/page/1`);
 
   debug("extracting credentials ...");
 
@@ -86,7 +88,7 @@ const myClubs = async creds => {
   const { cookie, xsrfh } = creds;
   const response = await axios({
     method: "GET",
-    url: `https://dirtrally2.com/api/Club/MyClubs?page=1&pageSize=10`,
+    url: `${dirtRally2Domain}/api/Club/MyClubs?page=1&pageSize=10`,
     headers: { Cookie: cookie, "RaceNet.XSRFH": xsrfh }
   });
   return response;
@@ -96,7 +98,7 @@ const fetchChampionships = async clubId => {
   const { cookie } = await getCreds();
   const response = await axios({
     method: "GET",
-    url: `https://dirtrally2.com/api/Club/${clubId}/championships`,
+    url: `${dirtRally2Domain}/api/Club/${clubId}/championships`,
     headers: { Cookie: cookie }
   });
   debug(response.data);
@@ -106,7 +108,7 @@ const fetchRecentResults = async clubId => {
   const { cookie, xsrfh } = await getCreds();
   const response = await axios({
     method: "GET",
-    url: `https://dirtrally2.com/api/Club/${clubId}/recentResults`,
+    url: `${dirtRally2Domain}/api/Club/${clubId}/recentResults`,
     headers: { Cookie: cookie, "RaceNet.XSRFH": xsrfh }
   });
   debug(JSON.stringify(response.data, null, 2));
@@ -150,7 +152,7 @@ const fetchEventResults = async ({
   };
   const response = await axios({
     method: "POST",
-    url: "https://dirtrally2.com/api/Leaderboard",
+    url: `${dirtRally2Domain}/api/Leaderboard`,
     headers: { Cookie: cookie.trim(), "RaceNet.XSRFH": xsrfh.trim() },
     data: payload
   });

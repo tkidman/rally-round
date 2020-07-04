@@ -2,10 +2,12 @@ const debug = require("debug")("tkidman:dirt2-results");
 const moment = require("moment");
 const { keyBy, sortBy } = require("lodash");
 
-const { pointsConfig, events, getDriver } = require("./referenceData");
+const { leagueConfig: league, getDriver } = require("./referenceData");
 const { fetchEventResults } = require("./dirtAPI");
 const { writeJSON, writeCSV, checkOutputDirs } = require("./output");
 const { getTotalPoints } = require("./shared");
+
+const classes = league.classes;
 
 const getDuration = durationString => {
   if (durationString.split(":").length === 2) {
@@ -96,13 +98,13 @@ const calculateEventResults = (leaderboard, previousEvent, className) => {
   updatePoints(
     resultsByDriver,
     powerStageResults,
-    pointsConfig[className].powerStage,
+    classes[className].points.powerStage,
     "powerStagePoints"
   );
   updatePoints(
     resultsByDriver,
     entries,
-    pointsConfig[className].overall,
+    classes[className].points.overall,
     "overallPoints"
   );
   const driverResults = orderResultsBy(
@@ -191,11 +193,11 @@ const processEvents = async (events, className) => {
   }
 };
 
-const populateOverallResults = classes => {
+const populateOverallResults = () => {
   const overall = [];
   Object.keys(classes).forEach(className => {
     const rallyClass = classes[className];
-    rallyClass.forEach(event => {
+    rallyClass.events.forEach(event => {
       let overallEvent = overall.find(
         overallEvent => overallEvent.location === event.location
       );
@@ -218,17 +220,16 @@ const populateOverallResults = classes => {
       "totalTime"
     );
   });
-  classes.overall = overall;
+  league.overall = overall;
 };
 
 const processAllClasses = async () => {
   try {
     checkOutputDirs();
-    const league = events;
-    for (const rallyClassName of Object.keys(league)) {
-      await processEvents(league[rallyClassName], rallyClassName);
+    for (const rallyClassName of Object.keys(classes)) {
+      await processEvents(classes[rallyClassName].events, rallyClassName);
     }
-    populateOverallResults(league);
+    populateOverallResults();
     writeCSV(league);
     writeJSON(league);
   } catch (err) {

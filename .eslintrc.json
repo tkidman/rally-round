@@ -8,10 +8,7 @@
   ],
   "plugins": ["prettier", "json", "jest"],
   "parserOptions": {
-    "sourceType": "module",
-    "ecmaFeatures": {
-      "experimentalObjectRestSpread": true
-    }
+    "sourceType": "module"
   },
   "env": {
     "es6": true,

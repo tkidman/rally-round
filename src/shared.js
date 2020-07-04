@@ -1,5 +1,3 @@
-const debug = require("debug")("tkidman:dirt2-results:shared");
-
 const hiddenPath = "./hidden";
 const outputPath = `${hiddenPath}/out`;
 const cachePath = `${hiddenPath}/cache`;
