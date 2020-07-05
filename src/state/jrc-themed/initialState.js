@@ -1,5 +1,5 @@
 const initialState = {
-  pointsForDNF: true,
+  pointsForDNF: false,
   classes: {
     themed: {
       clubId: "256173",
