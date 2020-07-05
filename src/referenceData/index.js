@@ -58,37 +58,33 @@ const getDriver = name => {
 };
 
 const loadDriversFromMasterSheet = () => {
-  const club = process.env.CLUB || "brl";
   const csv = fs.readFileSync(
     `./src/referenceData/${club}/drivers.csv`,
     "utf8"
   );
+  const driverColumns = require(`./${club}/driverColumns`);
+
   const rows = Papa.parse(csv, { header: true }).data;
   const driversById = rows.reduce((driversById, row) => {
-    if (row["0"]) {
-      const teamId = row["Team"];
-      const countryName = row["Country"];
-      const driverName = row["Username/Gamertag on used platform. PC/XBOX/PS4"];
-      const discordName = row["Discord Username"];
-      const raceNetName =
-        row[
-          "Racenet Display Name (can be found here https://accounts.codemasters.com/account/update )"
-        ];
+    const teamId = row[driverColumns.teamId];
+    const countryName = row[driverColumns.countryName];
+    const driverName = row[driverColumns.driverName];
+    const discordName = row[driverColumns.discordName];
+    const raceNetName = row[driverColumns.raceNetName];
+    if (driverName) {
       const driverId = driverName.toUpperCase();
-      if (driverId) {
-        driversById[driverId] = {
-          id: driverId,
-          name: driverName,
-          raceNetName,
-          discordName,
-          teamId,
-          countryName
-        };
-      } else {
-        debug(
-          `no username found for driver: ${raceNetName}, reference data sheet needs updating`
-        );
-      }
+      driversById[driverId] = {
+        id: driverId,
+        name: driverName,
+        raceNetName,
+        discordName,
+        teamId,
+        countryName
+      };
+    } else {
+      debug(
+        `no username found for driver: ${raceNetName}, reference data sheet needs updating`
+      );
     }
     return driversById;
   }, {});

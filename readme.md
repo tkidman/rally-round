@@ -6,12 +6,12 @@ Does your league do wild crazy things not supported by the basic Dirt Rally 2.0 
 
 1. Install nodejs (https://nodejs.org/en/download/) - if installing on windows, you don't need the extra tools.
 1. Clone this repo to a location on your hard drive, or just download the zip to a location in your home folder and expand (https://github.com/tkidman/dirt2-results -> clone or download).
-1. Open a terminal / command prompt in this location. Eg, if in windows, open the unzipped directory in explorer, then copy the path at the top of the window, click the start menu, type 'cmd', then type 'cd ' and paste the path you copied earlier.
+1. Open a terminal / command prompt in this location. Eg: if in windows, open the unzipped directory in explorer, then copy the path at the top of the window, click the start menu, type 'cmd', then type 'cd ' and paste the path you copied earlier.
 1. Run `npm install` from your terminal from this directory
 
 ## Execution
 
-1. run `node ./runner.js <dirt_username> <dirt_password>` from your terminal
+1. run `node runner.js <dirt_username> <dirt_password>` from your terminal
 
 Output will be written to `./hidden/out`
 Cache files will be written to `./hidden/cache`
