@@ -123,7 +123,7 @@ const fetchRecentResults = async clubId => {
     url: `${dirtRally2Domain}/api/Club/${clubId}/recentResults`,
     headers: { Cookie: cookie, "RaceNet.XSRFH": xsrfh }
   });
-  debug(JSON.stringify(response.data, null, 2));
+  return response.data;
 };
 
 const loadFromCache = cacheFileName => {
@@ -139,38 +139,47 @@ const fetchEventResults = async ({
   eventId,
   challengeId,
   className,
-  location
+  location,
+  stageId
 }) => {
   const { cookie, xsrfh } = await getCreds();
-  const cacheFileName = `${cachePath}/${location}-${className}-${challengeId}.json`;
+  const cacheFileName = `${cachePath}/${location}-${className}-${eventId}.json`;
   const cacheFile = loadFromCache(cacheFileName);
   if (cacheFile) {
     debug(`cached event results retrieved: ${cacheFileName}`);
     return JSON.parse(cacheFile);
   }
   const payload = {
+    eventId,
     challengeId,
-    selectedEventId: 0,
-    stageId: "11",
+    stageId,
     page: 1,
-    pageSize: 100,
-    orderByTotalTime: true,
-    platformFilter: "None",
-    playerFilter: "Everyone",
-    filterByAssists: "Unspecified",
-    filterByWheel: "Unspecified",
-    nationalityFilter: "None",
-    eventId
+    pageSize: 100
+    // selectedEventId: 0,
+    // orderByTotalTime: true,
+    // platformFilter: "None",
+    // playerFilter: "Everyone",
+    // filterByAssists: "Unspecified",
+    // filterByWheel: "Unspecified",
+    // nationalityFilter: "None",
   };
-  const response = await instance({
-    method: "POST",
-    url: `${dirtRally2Domain}/api/Leaderboard`,
-    headers: { Cookie: cookie.trim(), "RaceNet.XSRFH": xsrfh.trim() },
-    data: payload
-  });
-  debug(`event results retrieved: ${eventId}`);
-  fs.writeFileSync(`${cacheFileName}`, JSON.stringify(response.data, null, 2));
-  return response.data;
+  try {
+    const response = await instance({
+      method: "POST",
+      url: `${dirtRally2Domain}/api/Leaderboard`,
+      headers: { Cookie: cookie.trim(), "RaceNet.XSRFH": xsrfh.trim() },
+      data: payload
+    });
+    debug(`event results retrieved: ${eventId}`);
+    fs.writeFileSync(
+      `${cacheFileName}`,
+      JSON.stringify(response.data, null, 2)
+    );
+    return response.data;
+  } catch (err) {
+    debug(err);
+    throw err;
+  }
 };
 
 module.exports = {

@@ -9,4 +9,15 @@ const getTotalPoints = result => {
   return totalPoints;
 };
 
-module.exports = { outputPath, cachePath, hiddenPath, getTotalPoints };
+const championshipTypes = {
+  single: "SINGLE",
+  multiple: "MULTIPLE",
+  events: "EVENTS"
+};
+module.exports = {
+  outputPath,
+  cachePath,
+  hiddenPath,
+  getTotalPoints,
+  championshipTypes
+};

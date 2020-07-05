@@ -5,6 +5,7 @@ const {
   calculateOverall
 } = require("./index");
 const leaderboard = require("./__fixtures__/leaderboard");
+const { getEventKeysFromRecentResults } = require("./index");
 
 describe("calculates event results", () => {
   test("returns results for drivers", () => {
@@ -276,6 +277,26 @@ describe("calculates event results", () => {
             }
           ]
         }
+      }
+    ]);
+  });
+
+  it("gets event keys from recent results", () => {
+    const recentResults = require("./__fixtures__/recentResults.json");
+    const eventKeys = getEventKeysFromRecentResults(
+      recentResults,
+      {
+        championshipIds: ["65933"]
+      },
+      "pro"
+    );
+    expect(eventKeys).toEqual([
+      {
+        challengeId: "65933",
+        className: "pro",
+        eventId: "66384",
+        location: "ŁĘCZNA COUNTY",
+        stageId: "4"
       }
     ]);
   });

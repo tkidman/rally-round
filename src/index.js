@@ -1,5 +1,6 @@
 const debug = require("debug")("tkidman:dirt2-results");
 const moment = require("moment");
+const { fetchRecentResults } = require("./dirtAPI");
 const { sortBy } = require("lodash");
 
 const { league, getDriver } = require("./state/league");
@@ -8,6 +9,7 @@ const { writeJSON, writeCSV, checkOutputDirs } = require("./output");
 const { getTotalPoints } = require("./shared");
 
 const classes = league.classes;
+const dnfFactor = 100000000;
 
 const getDuration = durationString => {
   if (durationString.split(":").length === 2) {
@@ -16,21 +18,27 @@ const getDuration = durationString => {
   return moment.duration(durationString);
 };
 
+const getSortNumber = (entry, field) => {
+  const durationInMillis = getDuration(entry[field]).asMilliseconds();
+  if (entry.isDnfEntry) {
+    return durationInMillis + dnfFactor;
+  }
+  return durationInMillis;
+};
+
+const getSortComparison = (entryA, entryB, field) => {
+  return getSortNumber(entryA, field) - getSortNumber(entryB, field);
+};
+
 const orderEntriesBy = (entries, field) => {
   return entries.slice().sort((a, b) => {
-    return (
-      getDuration(a[field]).asMilliseconds() -
-      getDuration(b[field]).asMilliseconds()
-    );
+    return getSortComparison(a, b, field);
   });
 };
 
 const orderResultsBy = (results, field) => {
   return results.slice().sort((a, b) => {
-    return (
-      getDuration(a.entry[field]).asMilliseconds() -
-      getDuration(b.entry[field]).asMilliseconds()
-    );
+    return getSortComparison(a.entry, b.entry, field);
   });
 };
 
@@ -39,7 +47,7 @@ const updatePoints = (resultsByDriver, orderedEntries, points, pointsField) => {
     if (orderedEntries.length > i) {
       const entry = orderedEntries[i];
       const driver = entry.name;
-      if (!entry.isDnfEntry) {
+      if (!entry.isDnfEntry || league.pointsForDNF) {
         resultsByDriver[driver][pointsField] = points[i];
       }
     }
@@ -112,6 +120,7 @@ const calculateEventResults = (leaderboard, previousEvent, className) => {
   }
 
   const powerStageEntries = orderEntriesBy(entries, "stageTime");
+  const totalEntries = orderEntriesBy(entries, "totalTime");
   updatePoints(
     resultsByDriver,
     powerStageEntries,
@@ -120,7 +129,7 @@ const calculateEventResults = (leaderboard, previousEvent, className) => {
   );
   updatePoints(
     resultsByDriver,
-    entries,
+    totalEntries,
     classes[className].points.overall,
     "overallPoints"
   );
@@ -193,12 +202,7 @@ const calculateEventStandings = (event, previousEvent) => {
 };
 
 const processEvent = async (className, event, previousEvent) => {
-  const leaderboard = await fetchEventResults({
-    challengeId: event.challengeId,
-    eventId: event.eventId,
-    location: event.location,
-    className
-  });
+  const leaderboard = await fetchEventResults(event);
   event.results = calculateEventResults(leaderboard, previousEvent, className);
   calculateEventStandings(event, previousEvent);
 };
@@ -246,11 +250,47 @@ const calculateOverallResults = () => {
   league.overall = calculateOverall(classes);
 };
 
+const fetchEventKeys = async (rallyClass, rallyClassName) => {
+  const recentResults = await fetchRecentResults(rallyClass.clubId);
+  return getEventKeysFromRecentResults(
+    recentResults,
+    rallyClass,
+    rallyClassName
+  );
+};
+
+const getEventKeysFromRecentResults = (
+  recentResults,
+  rallyClass,
+  rallyClassName
+) => {
+  // pull out championships matching championship ids
+  const championships = recentResults.championships.filter(championship =>
+    rallyClass.championshipIds.includes(championship.id)
+  );
+  const eventKeys = championships.reduce((events, championship) => {
+    const eventResultKeys = championship.events.map(event => {
+      return {
+        eventId: event.id,
+        challengeId: event.challengeId,
+        stageId: `${event.stages.length - 1}`,
+        location: event.name,
+        className: rallyClassName
+      };
+    });
+    events.push(...eventResultKeys);
+    return events;
+  }, []);
+  return eventKeys;
+};
+
 const processAllClasses = async () => {
   try {
     checkOutputDirs();
     for (const rallyClassName of Object.keys(classes)) {
-      await processEvents(classes[rallyClassName].events, rallyClassName);
+      const rallyClass = classes[rallyClassName];
+      rallyClass.events = await fetchEventKeys(rallyClass, rallyClassName);
+      await processEvents(rallyClass.events, rallyClassName);
     }
     calculateOverallResults();
     writeCSV(league);
@@ -268,5 +308,6 @@ module.exports = {
   sortTeamResults,
   processEvent,
   calculateEventStandings,
-  calculateOverall
+  calculateOverall,
+  getEventKeysFromRecentResults
 };
