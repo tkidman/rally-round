@@ -4,7 +4,7 @@ const lookup = require("country-code-lookup");
 const debug = require("debug")("tkidman:dirt2-results:output");
 
 const { outputPath, hiddenPath, cachePath } = require("./shared");
-const { getDriver } = require("./referenceData");
+const { getDriver } = require("./state/league");
 
 const buildDriverRows = event => {
   const driverRows = event.results.driverResults.map(result => {

@@ -1,10 +1,10 @@
 const { keyBy } = require("lodash");
 const Papa = require("papaparse");
 const fs = require("fs");
-const debug = require("debug")("tkidman:dirt2-results:referenceData");
+const debug = require("debug")("tkidman:dirt2-results:state");
 
 const club = process.env.CLUB || "brl";
-const leagueConfig = require(`./${club}/config`);
+const league = require(`./${club}/initialState`);
 
 // const drivers = require("./drivers");
 // const driversById = keyBy(drivers, driver => driver.id);
@@ -58,10 +58,7 @@ const getDriver = name => {
 };
 
 const loadDriversFromMasterSheet = () => {
-  const csv = fs.readFileSync(
-    `./src/referenceData/${club}/drivers.csv`,
-    "utf8"
-  );
+  const csv = fs.readFileSync(`./src/state/${club}/drivers.csv`, "utf8");
   const driverColumns = require(`./${club}/driverColumns`);
 
   const rows = Papa.parse(csv, { header: true }).data;
@@ -97,6 +94,6 @@ const loadDriversFromMasterSheet = () => {
 const { driversById, driversByRaceNet } = loadDriversFromMasterSheet(club);
 
 module.exports = {
-  leagueConfig,
+  league,
   getDriver
 };

@@ -2,7 +2,7 @@ const debug = require("debug")("tkidman:dirt2-results");
 const moment = require("moment");
 const { keyBy, sortBy } = require("lodash");
 
-const { leagueConfig: league, getDriver } = require("./referenceData");
+const { league, getDriver } = require("./state/league");
 const { fetchEventResults } = require("./dirtAPI");
 const { writeJSON, writeCSV, checkOutputDirs } = require("./output");
 const { getTotalPoints } = require("./shared");

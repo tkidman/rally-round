@@ -1,4 +1,4 @@
-const leagueConfig = {
+const initialState = {
   classes: {
     pro: {
       events: [
@@ -16,4 +16,4 @@ const leagueConfig = {
   }
 };
 
-module.exports = leagueConfig;
+module.exports = initialState;

@@ -3,6 +3,6 @@
 /node_modules
 /creds.js
 /drivers.csv
-/src/referenceData/brl/drivers.csv
+/src/state/brl/drivers.csv
 /cached-creds.json
 .~lock.*
