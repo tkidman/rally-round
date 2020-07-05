@@ -50,9 +50,9 @@ const buildDriverRows = event => {
     driverRow.COUNTRY = countryName;
     driverRow.CLASS = result.className;
     driverRow.DRIVER = result.name;
-    driverRow.VEHICLE = result.vehicleName;
-    driverRow.TOTAL = result.totalTime;
-    driverRow.DIFF = result.totalDiff;
+    driverRow.VEHICLE = result.entry.vehicleName;
+    driverRow.TOTAL = result.entry.totalTime;
+    driverRow.DIFF = result.entry.totalDiff;
     driverRow.POWER_STAGE_POINTS = result.powerStagePoints;
     driverRow.OVERALL_POINTS = result.overallPoints;
     driverRow.TOTAL_POINTS = result.totalPoints;

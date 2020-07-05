@@ -1,7 +1,8 @@
 const {
   calculateEventResults,
   sortTeamResults,
-  calculateEventStandings
+  calculateEventStandings,
+  calculateOverall
 } = require("./index");
 const leaderboard = require("./__fixtures__/leaderboard");
 
@@ -13,14 +14,20 @@ describe("calculates event results", () => {
         name: "Spookex *-*",
         overallPoints: 10,
         powerStagePoints: 4,
-        totalPoints: 14
+        totalPoints: 14,
+        entry: {
+          totalTime: "04:41:35.987"
+        }
       },
       {
         className: "pro",
         name: "SFRrallimoilane",
         overallPoints: 9,
         powerStagePoints: 5,
-        totalPoints: 14
+        totalPoints: 14,
+        entry: {
+          totalTime: "05:00:00.000"
+        }
       }
     ];
     expect(
@@ -192,6 +199,83 @@ describe("calculates event results", () => {
         totalPoints: 8,
         positionChange: null,
         previousPosition: null
+      }
+    ]);
+  });
+
+  it("calculates overall results", () => {
+    const preOverallResults = require("./__fixtures__/preOverallLeague.json");
+    expect(calculateOverall(preOverallResults.classes)).toEqual([
+      {
+        location: "Australia",
+        results: {
+          driverResults: [
+            {
+              className: "pro",
+              entry: {
+                isDnfEntry: false,
+                isFounder: false,
+                isPlayer: false,
+                isVIP: false,
+                name: "Kuul",
+                nationality: "eLngEstonian",
+                playerDiff: 0,
+                rank: 1,
+                stageDiff: "--",
+                stageTime: "03:40.461",
+                totalDiff: "--",
+                totalTime: "56:18.651",
+                vehicleName: "Peugeot 206 Rally"
+              },
+              name: "Kuul",
+              overallPoints: 115,
+              powerStagePoints: 5,
+              totalPoints: 120
+            },
+            {
+              className: "amateur",
+              entry: {
+                isDnfEntry: false,
+                isFounder: false,
+                isPlayer: false,
+                isVIP: false,
+                name: "Ssplatered",
+                nationality: "eLngCanadian",
+                playerDiff: 0,
+                rank: 1,
+                stageDiff: "--",
+                stageTime: "03:40.304",
+                totalDiff: "--",
+                totalTime: "56:44.370",
+                vehicleName: "Lancia Delta HF Integrale"
+              },
+              name: "Ssplatered",
+              overallPoints: 84,
+              powerStagePoints: 5,
+              totalPoints: 89
+            },
+            {
+              className: "pro",
+              entry: {
+                isDnfEntry: true,
+                isFounder: false,
+                isPlayer: false,
+                isVIP: false,
+                name: "Sladdikurvinen ™",
+                nationality: "eLngSwedish",
+                playerDiff: 0,
+                rank: 28,
+                stageDiff: "+11:19.539",
+                stageTime: "15:00.000",
+                totalDiff: "+03:03:41.349",
+                totalTime: "04:00:00.000",
+                vehicleName: "SUBARU Impreza (2001)"
+              },
+              name: "Sladdikurvinen ™",
+              totalPoints: 0
+            }
+          ]
+        }
       }
     ]);
   });

@@ -1,6 +1,6 @@
 const debug = require("debug")("tkidman:dirt2-results");
 const moment = require("moment");
-const { keyBy, sortBy } = require("lodash");
+const { sortBy } = require("lodash");
 
 const { league, getDriver } = require("./state/league");
 const { fetchEventResults } = require("./dirtAPI");
@@ -16,7 +16,7 @@ const getDuration = durationString => {
   return moment.duration(durationString);
 };
 
-const orderResultsBy = (entries, field) => {
+const orderEntriesBy = (entries, field) => {
   return entries.slice().sort((a, b) => {
     return (
       getDuration(a[field]).asMilliseconds() -
@@ -25,12 +25,21 @@ const orderResultsBy = (entries, field) => {
   });
 };
 
-const updatePoints = (resultsByDriver, orderedResults, points, pointsField) => {
+const orderResultsBy = (results, field) => {
+  return results.slice().sort((a, b) => {
+    return (
+      getDuration(a.entry[field]).asMilliseconds() -
+      getDuration(b.entry[field]).asMilliseconds()
+    );
+  });
+};
+
+const updatePoints = (resultsByDriver, orderedEntries, points, pointsField) => {
   for (let i = 0; i < points.length; i++) {
-    if (orderedResults.length > i) {
-      const result = orderedResults[i];
-      const driver = result.name;
-      if (!result.isDnfEntry) {
+    if (orderedEntries.length > i) {
+      const entry = orderedEntries[i];
+      const driver = entry.name;
+      if (!entry.isDnfEntry) {
         resultsByDriver[driver][pointsField] = points[i];
       }
     }
@@ -39,19 +48,19 @@ const updatePoints = (resultsByDriver, orderedResults, points, pointsField) => {
 
 const calculateTeamResults = resultsByDriver => {
   const teamResults = Object.values(resultsByDriver).reduce(
-    (teamResults, entry) => {
-      const driver = getDriver(entry.name);
+    (teamResults, result) => {
+      const driver = getDriver(result.name);
       if (driver) {
-        const entryTeamId = driver.teamId;
-        if (entryTeamId) {
-          if (!teamResults[entryTeamId]) {
-            teamResults[entryTeamId] = {
-              name: entryTeamId,
+        const resultTeamId = driver.teamId;
+        if (resultTeamId) {
+          if (!teamResults[resultTeamId]) {
+            teamResults[resultTeamId] = {
+              name: resultTeamId,
               totalPoints: 0
             };
           }
-          if (entry.overallPoints) {
-            teamResults[entryTeamId].totalPoints += entry.overallPoints;
+          if (result.overallPoints) {
+            teamResults[resultTeamId].totalPoints += result.overallPoints;
           }
         } else {
           debug(`driver has null team id: ${driver.id}`);
@@ -75,15 +84,23 @@ const sortTeamResults = teamResultsById => {
 const createDNSEntry = entry => {
   return {
     name: entry.name,
-    isDnsEntry: true,
-    stageTime: "15:00:00.000",
-    totalTime: "59:59:59.000"
+    entry: {
+      isDnsEntry: true,
+      stageTime: "15:00:00.000",
+      totalTime: "59:59:59.000"
+    }
   };
 };
 
 const calculateEventResults = (leaderboard, previousEvent, className) => {
   const entries = leaderboard.entries;
-  const resultsByDriver = keyBy(entries, entry => entry.name);
+  const resultsByDriver = entries.reduce((resultsByDriver, entry) => {
+    resultsByDriver[entry.name] = {
+      name: entry.name,
+      entry
+    };
+    return resultsByDriver;
+  }, {});
 
   // create results for drivers that didn't start a run
   if (previousEvent) {
@@ -94,10 +111,10 @@ const calculateEventResults = (leaderboard, previousEvent, className) => {
     });
   }
 
-  const powerStageResults = orderResultsBy(entries, "stageTime");
+  const powerStageEntries = orderEntriesBy(entries, "stageTime");
   updatePoints(
     resultsByDriver,
-    powerStageResults,
+    powerStageEntries,
     classes[className].points.powerStage,
     "powerStagePoints"
   );
@@ -111,7 +128,9 @@ const calculateEventResults = (leaderboard, previousEvent, className) => {
     Object.values(resultsByDriver),
     "totalTime"
   );
-  driverResults.forEach(entry => (entry.totalPoints = getTotalPoints(entry)));
+  driverResults.forEach(
+    result => (result.totalPoints = getTotalPoints(result))
+  );
   const teamResultsById = calculateTeamResults(resultsByDriver);
   const teamResults = sortTeamResults(teamResultsById);
 
@@ -193,10 +212,10 @@ const processEvents = async (events, className) => {
   }
 };
 
-const populateOverallResults = () => {
+const calculateOverall = processedClasses => {
   const overall = [];
-  Object.keys(classes).forEach(className => {
-    const rallyClass = classes[className];
+  Object.keys(processedClasses).forEach(className => {
+    const rallyClass = processedClasses[className];
     rallyClass.events.forEach(event => {
       let overallEvent = overall.find(
         overallEvent => overallEvent.location === event.location
@@ -220,7 +239,11 @@ const populateOverallResults = () => {
       "totalTime"
     );
   });
-  league.overall = overall;
+  return overall;
+};
+
+const calculateOverallResults = () => {
+  league.overall = calculateOverall(classes);
 };
 
 const processAllClasses = async () => {
@@ -229,7 +252,7 @@ const processAllClasses = async () => {
     for (const rallyClassName of Object.keys(classes)) {
       await processEvents(classes[rallyClassName].events, rallyClassName);
     }
-    populateOverallResults();
+    calculateOverallResults();
     writeCSV(league);
     writeJSON(league);
   } catch (err) {
@@ -239,10 +262,11 @@ const processAllClasses = async () => {
 };
 
 module.exports = {
+  processAllClasses,
+  // for tests
   calculateEventResults,
   sortTeamResults,
   processEvent,
   calculateEventStandings,
-  processAllClasses,
-  populateOverallResults
+  calculateOverall
 };

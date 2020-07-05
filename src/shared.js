@@ -2,10 +2,10 @@ const hiddenPath = "./hidden";
 const outputPath = `${hiddenPath}/out`;
 const cachePath = `${hiddenPath}/cache`;
 
-const getTotalPoints = entry => {
+const getTotalPoints = result => {
   let totalPoints = 0;
-  totalPoints += entry.powerStagePoints ? entry.powerStagePoints : 0;
-  totalPoints += entry.overallPoints ? entry.overallPoints : 0;
+  totalPoints += result.powerStagePoints ? result.powerStagePoints : 0;
+  totalPoints += result.overallPoints ? result.overallPoints : 0;
   return totalPoints;
 };
 
