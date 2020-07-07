@@ -73,24 +73,36 @@ const writeDriverCSV = (eventResults, className) => {
 };
 
 const getStandingCSVRows = (className, events, type) => {
-  const allResultsByDriverName = events.reduce((allResultsById, event) => {
+  const eventPointsByName = events.reduce((eventPointsByName, event) => {
     event.results[`${type}Results`].forEach(result => {
-      if (!allResultsById[result.name]) {
-        allResultsById[result.name] = { name: result.name };
+      if (!eventPointsByName[result.name]) {
+        eventPointsByName[result.name] = { name: result.name };
       }
-      allResultsById[result.name][event.location] = result.totalPoints;
+      if (type === "driver") {
+        eventPointsByName[result.name][`${event.location}`] =
+          result.overallPoints;
+        eventPointsByName[result.name][`${event.location}: PS`] =
+          result.powerStagePoints;
+        eventPointsByName[result.name][`${event.location}: Total`] =
+          result.totalPoints;
+      } else {
+        eventPointsByName[result.name][event.location] = result.totalPoints;
+      }
     });
-    return allResultsById;
+    return eventPointsByName;
   }, {});
   const lastEvent = events[events.length - 1];
   const standingRows = lastEvent.standings[`${type}Standings`].map(standing => {
-    const driver = getDriver(standing.name);
-    const raceNetName = driver ? driver.raceNetName : "";
+    let raceNetName;
+    if (type === "driver") {
+      const driver = getDriver(standing.name);
+      raceNetName = driver ? driver.raceNetName : "";
+    }
 
     return {
       name: standing.name,
       racenet: raceNetName,
-      ...allResultsByDriverName[standing.name],
+      ...eventPointsByName[standing.name],
       ...standing
     };
   });

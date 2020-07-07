@@ -30,21 +30,25 @@ describe("output", () => {
       getStandingCSVRows("pro", league.classes["pro"].events, "driver")
     ).toEqual([
       {
-        Australia: 120,
+        Australia: 115,
+        "Australia: PS": 5,
+        "Australia: Total": 120,
         currentPosition: 1,
         name: "Kuul",
-        racenet: "",
         positionChange: null,
         previousPosition: null,
+        racenet: "",
         totalPoints: 120
       },
       {
-        Australia: 0,
+        Australia: undefined,
+        "Australia - PS": undefined,
+        "Australia: Total": 0,
         currentPosition: 28,
         name: "Sladdikurvinen ™",
-        racenet: "",
         positionChange: null,
         previousPosition: null,
+        racenet: "",
         totalPoints: 0
       }
     ]);

@@ -11,8 +11,9 @@ Does your league do wild crazy things not supported by the basic Dirt Rally 2.0 
 
 ## Execution
 
-1. run `node runner.js <dirt_username> <dirt_password>` from your terminal
+1. run `node runner.js <dirt_username> <dirt_password> <club>` from your terminal
 
+Where `<club>` is a folder name in `./src/state` eg: `brl`, `jrc-themed`, `jrc`, `test`  
 Output will be written to `./hidden/out`
 Cache files will be written to `./hidden/cache`
 
@@ -20,6 +21,11 @@ Cache files will be written to `./hidden/cache`
 
 The tool keeps a file based cache of the API responses to speed things up on subsequent executions.  If you want to get fresh data, delete the 
 cache files you don't want from `./hidden/cache`
+
+## Club configuration
+
+Clubs are configured in `./src/state/<club_name>/initialState.js`. Here you can define points per class, and the championship ids to fetch results from. 
+To get team functionality working you need to download your club's registration sheet as a csv and add it to the club folder and name it `drivers.csv` 
  
 ## To Do
 * Call dirt 2 Leaderboard API ✓
@@ -47,10 +53,10 @@ cache files you don't want from `./hidden/cache`
 * support second club ✓
 * support points for DNF ✓
 * Championship mode (no need for event ids, just championship) ✓
-* Show PS in standings
+* Show PS in standings ✓
+* Don't log missing driver message when creating team standings ✓ 
 * Don't show racenet in Team standings
-* Just create csvs for current event
-* Don't log missing driver message when creating team standings
+* Just create csvs for last event
 * Output to a club folder
 * Don't cache 'in progress' events
 * DNF counter
