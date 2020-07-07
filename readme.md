@@ -44,14 +44,17 @@ cache files you don't want from `./hidden/cache`
 * Instructions for use on readme ✓
 * Automatically get cookie ✓
 * creds from env vars or command args ✓
-* support second club
-* support points for DNF
+* support second club ✓
+* support points for DNF ✓
+* Championship mode (no need for event ids, just championship) ✓
+* Show PS in standings
+* Don't show racenet in Team standings
+* Just create csvs for current event
+* Don't log missing driver message when creating team standings
+* Output to a club folder
+* Don't cache 'in progress' events
 * DNF counter
 * Get drivers from google sheets automatically
-* Get challenge id from event
-* Championship mode (no need for event ids, just championship)
-* Don't cache 'in progress' events
-* Write driver powerstage csv 
 * Fix the issues with countries (2 character code in flag image lookup for rest of the world and the UK);
 
 ### stretch goals

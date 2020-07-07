@@ -50,7 +50,7 @@
   "husky": {
     "skipCI": false,
     "hooks": {
-      "pre-push": "npm run prepush"
+      "pre-push": "CLUB=test npm run prepush"
     }
   }
 }

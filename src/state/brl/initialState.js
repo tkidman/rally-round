@@ -1,28 +1,18 @@
 const initialState = {
   classes: {
     pro: {
-      events: [
-        {
-          eventId: "221955",
-          challengeId: "221496",
-          location: "Australia"
-        }
-      ],
+      clubId: "232733",
+      championshipIds: ["221496", "238384", "252308", "265255"],
       points: {
-        powerStage: [5, 4, 3, 2, 1],
+        powerStage: [10, 8, 6, 4, 2],
         overall: [115, 106, 98, 91, 85, 79, 73, 69, 65, 60, 56, 53, 50, 47, 45]
       }
     },
     amateur: {
-      events: [
-        {
-          eventId: "221957",
-          challengeId: "221498",
-          location: "Australia"
-        }
-      ],
+      clubId: "302643",
+      championshipIds: ["221498", "238388", "252309", "265256"],
       points: {
-        powerStage: [5, 4, 3, 2, 1],
+        powerStage: [12, 10, 7, 5, 3],
         overall: [
           84,
           78,
@@ -57,17 +47,11 @@ const initialState = {
         ]
       }
     },
-    // historic: [],
     rookie: {
-      events: [
-        {
-          eventId: "221959",
-          challengeId: "221500",
-          location: "Australia"
-        }
-      ],
+      clubId: "232734",
+      championshipIds: ["221500", "238386", "252311", "265257"],
       points: {
-        powerStage: [5, 4, 3, 2, 1],
+        powerStage: [15, 12, 9, 6, 3],
         overall: [
           80,
           74,
@@ -109,6 +93,45 @@ const initialState = {
           3,
           2,
           1
+        ]
+      }
+    },
+    historic: {
+      clubId: "232735",
+      championshipIds: ["221508", "238387", "252312", "265259"],
+      points: {
+        powerStage: [12, 10, 7, 5, 3],
+        overall: [
+          84,
+          78,
+          71,
+          66,
+          62,
+          58,
+          54,
+          50,
+          47,
+          44,
+          41,
+          39,
+          37,
+          35,
+          33,
+          30,
+          28,
+          26,
+          24,
+          22,
+          21,
+          20,
+          19,
+          18,
+          17,
+          16,
+          15,
+          14,
+          13,
+          12
         ]
       }
     }

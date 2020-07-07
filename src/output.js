@@ -12,6 +12,7 @@ const buildDriverRows = event => {
     let country;
     let countryName;
     let team;
+    const raceNetName = driver ? driver.raceNetName : "";
 
     if (driver) {
       countryName = driver.countryName;
@@ -46,10 +47,11 @@ const buildDriverRows = event => {
     // driverRow.COUNTRY_IMG = country
     //   ? countryTemplate.replace("%TWO_LETTER_CODE%", country.iso2.toLowerCase())
     //   : "";
+    driverRow.DRIVER = result.name;
+    driverRow.RACENET = raceNetName;
     driverRow.TEAM = team;
     driverRow.COUNTRY = countryName;
     driverRow.CLASS = result.className;
-    driverRow.DRIVER = result.name;
     driverRow.VEHICLE = result.entry.vehicleName;
     driverRow.TOTAL = result.entry.totalTime;
     driverRow.DIFF = result.entry.totalDiff;
@@ -70,24 +72,34 @@ const writeDriverCSV = (eventResults, className) => {
   );
 };
 
-const writeStandingsCSV = (className, events, type) => {
-  const allResultsById = events.reduce((allResultsById, event) => {
-    event.results[`${type}Results`].forEach(entry => {
-      if (!allResultsById[entry.name]) {
-        allResultsById[entry.name] = { name: entry.name };
+const getStandingCSVRows = (className, events, type) => {
+  const allResultsByDriverName = events.reduce((allResultsById, event) => {
+    event.results[`${type}Results`].forEach(result => {
+      if (!allResultsById[result.name]) {
+        allResultsById[result.name] = { name: result.name };
       }
-      allResultsById[entry.name][event.location] = entry.totalPoints;
+      allResultsById[result.name][event.location] = result.totalPoints;
     });
     return allResultsById;
   }, {});
   const lastEvent = events[events.length - 1];
   const standingRows = lastEvent.standings[`${type}Standings`].map(standing => {
+    const driver = getDriver(standing.name);
+    const raceNetName = driver ? driver.raceNetName : "";
+
     return {
-      ...allResultsById[standing.name],
+      name: standing.name,
+      racenet: raceNetName,
+      ...allResultsByDriverName[standing.name],
       ...standing
     };
   });
+  return standingRows;
+};
 
+const writeStandingsCSV = (className, events, type) => {
+  const lastEvent = events[events.length - 1];
+  const standingRows = getStandingCSVRows(className, events, type);
   const standingsCSV = Papa.unparse(standingRows);
   fs.writeFileSync(
     `./${outputPath}/${lastEvent.location}-${className}-${type}Standings.csv`,
@@ -126,5 +138,7 @@ module.exports = {
   writeDriverCSV,
   buildDriverRows,
   writeCSV,
-  checkOutputDirs
+  checkOutputDirs,
+  // tests
+  getStandingCSVRows
 };

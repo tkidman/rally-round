@@ -93,6 +93,7 @@ const createDNSEntry = entry => {
   return {
     name: entry.name,
     entry: {
+      isDnfEntry: true,
       isDnsEntry: true,
       stageTime: "15:00:00.000",
       totalTime: "59:59:59.000"
