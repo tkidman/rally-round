@@ -58,7 +58,6 @@ const getDriver = name => {
 };
 
 const loadDriversFromMasterSheet = () => {
-
   // const countries = fs.readFileSync('./src/state/constants/countries.csv', 'utf8');
   // const c = Papa.parse(countries, {header:true}).data;
   // const countriesDict = c.reduce((dict, row) => {
@@ -77,7 +76,7 @@ const loadDriversFromMasterSheet = () => {
   if (fs.existsSync(`./src/state/${club}/drivers.csv`)) {
     const csv = fs.readFileSync(`./src/state/${club}/drivers.csv`, "utf8");
     const driverColumns = require(`./${club}/driverColumns`);
-  
+
     const rows = Papa.parse(csv, { header: true }).data;
     const driversById = rows.reduce((driversById, row) => {
       const teamId = row[driverColumns.teamId];

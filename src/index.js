@@ -7,8 +7,8 @@ const { league, getDriver } = require("./state/league");
 const { fetchEventResults } = require("./dirtAPI");
 const { writeJSON, writeCSV, checkOutputDirs } = require("./output");
 const { getTotalPoints } = require("./shared");
-const { calculateFantasyStandings } = require("./fantasy/fantasy_calculator")
-const { resultsToImage } = require("./visualisation/tableDrawer")
+const { calculateFantasyStandings } = require("./fantasy/fantasy_calculator");
+const { resultsToImage } = require("./visualisation/tableDrawer");
 
 const classes = league.classes;
 const dnfFactor = 100000000;
