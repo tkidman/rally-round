@@ -58,10 +58,26 @@ const getDriver = name => {
 };
 
 const loadDriversFromMasterSheet = () => {
+
+  // const countries = fs.readFileSync('./src/state/constants/countries.csv', 'utf8');
+  // const c = Papa.parse(countries, {header:true}).data;
+  // const countriesDict = c.reduce((dict, row) => {
+  //   var data = {
+  //     "code": row["alpha_3_code"].toLowerCase(),
+  //     "name": row["en_short_name"]
+  //   }
+  //   var key = row["nationality"].replace(/\s/g, "");
+  //   key = key.split(',')[0];
+  //   key = "eLng"+key
+
+  //   dict[key] = data;
+  //   return dict;
+  // }, {})
+
   if (fs.existsSync(`./src/state/${club}/drivers.csv`)) {
     const csv = fs.readFileSync(`./src/state/${club}/drivers.csv`, "utf8");
     const driverColumns = require(`./${club}/driverColumns`);
-
+  
     const rows = Papa.parse(csv, { header: true }).data;
     const driversById = rows.reduce((driversById, row) => {
       const teamId = row[driverColumns.teamId];

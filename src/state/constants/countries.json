@@ -1,0 +1,990 @@
+{
+	"eLngEnglish": {
+		"code": "engl",
+		"name": "England"
+	},
+	"eLngScottish": {
+		"code": "scot",
+		"name": "Scotland"
+	},
+	"eLngWelsh": {
+		"code": "welsh",
+		"name": "Wales"
+	},
+	"eLngAfghan": {
+	  "code": "afg",
+	  "name": "Afghanistan"
+	},
+	"eLngÅlandIsland": {
+	  "code": "ala",
+	  "name": "Åland Islands"
+	},
+	"eLngAlbanian": {
+	  "code": "alb",
+	  "name": "Albania"
+	},
+	"eLngAlgerian": {
+	  "code": "dza",
+	  "name": "Algeria"
+	},
+	"eLngAmericanSamoan": {
+	  "code": "asm",
+	  "name": "American Samoa"
+	},
+	"eLngAndorran": {
+	  "code": "and",
+	  "name": "Andorra"
+	},
+	"eLngAngolan": {
+	  "code": "ago",
+	  "name": "Angola"
+	},
+	"eLngAnguillan": {
+	  "code": "aia",
+	  "name": "Anguilla"
+	},
+	"eLngAntarctic": {
+	  "code": "ata",
+	  "name": "Antarctica"
+	},
+	"eLngAntiguanorBarbudan": {
+	  "code": "atg",
+	  "name": "Antigua and Barbuda"
+	},
+	"eLngArgentine": {
+	  "code": "arg",
+	  "name": "Argentina"
+	},
+	"eLngArmenian": {
+	  "code": "arm",
+	  "name": "Armenia"
+	},
+	"eLngAruban": {
+	  "code": "abw",
+	  "name": "Aruba"
+	},
+	"eLngAustralian": {
+	  "code": "aus",
+	  "name": "Australia"
+	},
+	"eLngAustrian": {
+	  "code": "aut",
+	  "name": "Austria"
+	},
+	"eLngAzerbaijani": {
+	  "code": "aze",
+	  "name": "Azerbaijan"
+	},
+	"eLngBahamian": {
+	  "code": "bhs",
+	  "name": "Bahamas"
+	},
+	"eLngBahraini": {
+	  "code": "bhr",
+	  "name": "Bahrain"
+	},
+	"eLngBangladeshi": {
+	  "code": "bgd",
+	  "name": "Bangladesh"
+	},
+	"eLngBarbadian": {
+	  "code": "brb",
+	  "name": "Barbados"
+	},
+	"eLngBelarusian": {
+	  "code": "blr",
+	  "name": "Belarus"
+	},
+	"eLngBelgian": {
+	  "code": "bel",
+	  "name": "Belgium"
+	},
+	"eLngBelizean": {
+	  "code": "blz",
+	  "name": "Belize"
+	},
+	"eLngBeninese": {
+	  "code": "ben",
+	  "name": "Benin"
+	},
+	"eLngBermudian": {
+	  "code": "bmu",
+	  "name": "Bermuda"
+	},
+	"eLngBhutanese": {
+	  "code": "btn",
+	  "name": "Bhutan"
+	},
+	"eLngBolivian": {
+	  "code": "bol",
+	  "name": "Bolivia (Plurinational State of)"
+	},
+	"eLngBonaire": {
+	  "code": "bes",
+	  "name": "Bonaire, Sint Eustatius and Saba"
+	},
+	"eLngBosnianorHerzegovinian": {
+	  "code": "bih",
+	  "name": "Bosnia and Herzegovina"
+	},
+	"eLngMotswana": {
+	  "code": "bwa",
+	  "name": "Botswana"
+	},
+	"eLngBouvetIsland": {
+	  "code": "bvt",
+	  "name": "Bouvet Island"
+	},
+	"eLngBrazilian": {
+	  "code": "bra",
+	  "name": "Brazil"
+	},
+	"eLngBIOT": {
+	  "code": "iot",
+	  "name": "British Indian Ocean Territory"
+	},
+	"eLngBruneian": {
+	  "code": "brn",
+	  "name": "Brunei Darussalam"
+	},
+	"eLngBulgarian": {
+	  "code": "bgr",
+	  "name": "Bulgaria"
+	},
+	"eLngBurkinabé": {
+	  "code": "bfa",
+	  "name": "Burkina Faso"
+	},
+	"eLngBurundian": {
+	  "code": "bdi",
+	  "name": "Burundi"
+	},
+	"eLngCaboVerdean": {
+	  "code": "cpv",
+	  "name": "Cabo Verde"
+	},
+	"eLngCambodian": {
+	  "code": "khm",
+	  "name": "Cambodia"
+	},
+	"eLngCameroonian": {
+	  "code": "cmr",
+	  "name": "Cameroon"
+	},
+	"eLngCanadian": {
+	  "code": "can",
+	  "name": "Canada"
+	},
+	"eLngCaymanian": {
+	  "code": "cym",
+	  "name": "Cayman Islands"
+	},
+	"eLngCentralAfrican": {
+	  "code": "caf",
+	  "name": "Central African Republic"
+	},
+	"eLngChadian": {
+	  "code": "tcd",
+	  "name": "Chad"
+	},
+	"eLngChilean": {
+	  "code": "chl",
+	  "name": "Chile"
+	},
+	"eLngChinese": {
+	  "code": "twn",
+	  "name": "Taiwan, Province of China"
+	},
+	"eLngChristmasIsland": {
+	  "code": "cxr",
+	  "name": "Christmas Island"
+	},
+	"eLngCocosIsland": {
+	  "code": "cck",
+	  "name": "Cocos (Keeling) Islands"
+	},
+	"eLngColombian": {
+	  "code": "col",
+	  "name": "Colombia"
+	},
+	"eLngComoran": {
+	  "code": "com",
+	  "name": "Comoros"
+	},
+	"eLngCongolese": {
+	  "code": "cog",
+	  "name": "Congo (Republic of the)"
+	},
+	"eLngCookIsland": {
+	  "code": "cok",
+	  "name": "Cook Islands"
+	},
+	"eLngCostaRican": {
+	  "code": "cri",
+	  "name": "Costa Rica"
+	},
+	"eLngIvorian": {
+	  "code": "civ",
+	  "name": "Côte d'Ivoire"
+	},
+	"eLngCroatian": {
+	  "code": "hrv",
+	  "name": "Croatia"
+	},
+	"eLngCuban": {
+	  "code": "cub",
+	  "name": "Cuba"
+	},
+	"eLngCuraçaoan": {
+	  "code": "cuw",
+	  "name": "Curaçao"
+	},
+	"eLngCypriot": {
+	  "code": "cyp",
+	  "name": "Cyprus"
+	},
+	"eLngCzech": {
+	  "code": "cze",
+	  "name": "Czech Republic"
+	},
+	"eLngDanish": {
+	  "code": "dnk",
+	  "name": "Denmark"
+	},
+	"eLngDjiboutian": {
+	  "code": "dji",
+	  "name": "Djibouti"
+	},
+	"eLngDominican": {
+	  "code": "dom",
+	  "name": "Dominican Republic"
+	},
+	"eLngEcuadorian": {
+	  "code": "ecu",
+	  "name": "Ecuador"
+	},
+	"eLngEgyptian": {
+	  "code": "egy",
+	  "name": "Egypt"
+	},
+	"eLngSalvadoran": {
+	  "code": "slv",
+	  "name": "El Salvador"
+	},
+	"eLngEquatorialGuinean": {
+	  "code": "gnq",
+	  "name": "Equatorial Guinea"
+	},
+	"eLngEritrean": {
+	  "code": "eri",
+	  "name": "Eritrea"
+	},
+	"eLngEstonian": {
+	  "code": "est",
+	  "name": "Estonia"
+	},
+	"eLngEthiopian": {
+	  "code": "eth",
+	  "name": "Ethiopia"
+	},
+	"eLngFalklandIsland": {
+	  "code": "flk",
+	  "name": "Falkland Islands (Malvinas)"
+	},
+	"eLngFaroese": {
+	  "code": "fro",
+	  "name": "Faroe Islands"
+	},
+	"eLngFijian": {
+	  "code": "fji",
+	  "name": "Fiji"
+	},
+	"eLngFinnish": {
+	  "code": "fin",
+	  "name": "Finland"
+	},
+	"eLngFrench": {
+	  "code": "fra",
+	  "name": "France"
+	},
+	"eLngFrenchGuianese": {
+	  "code": "guf",
+	  "name": "French Guiana"
+	},
+	"eLngFrenchPolynesian": {
+	  "code": "pyf",
+	  "name": "French Polynesia"
+	},
+	"eLngFrenchSouthernTerritories": {
+	  "code": "atf",
+	  "name": "French Southern Territories"
+	},
+	"eLngGabonese": {
+	  "code": "gab",
+	  "name": "Gabon"
+	},
+	"eLngGambian": {
+	  "code": "gmb",
+	  "name": "Gambia"
+	},
+	"eLngGeorgian": {
+	  "code": "geo",
+	  "name": "Georgia"
+	},
+	"eLngGerman": {
+	  "code": "deu",
+	  "name": "Germany"
+	},
+	"eLngGhanaian": {
+	  "code": "gha",
+	  "name": "Ghana"
+	},
+	"eLngGibraltar": {
+	  "code": "gib",
+	  "name": "Gibraltar"
+	},
+	"eLngGreek": {
+	  "code": "grc",
+	  "name": "Greece"
+	},
+	"eLngGreenlandic": {
+	  "code": "grl",
+	  "name": "Greenland"
+	},
+	"eLngGrenadian": {
+	  "code": "grd",
+	  "name": "Grenada"
+	},
+	"eLngGuadeloupe": {
+	  "code": "glp",
+	  "name": "Guadeloupe"
+	},
+	"eLngGuamanian": {
+	  "code": "gum",
+	  "name": "Guam"
+	},
+	"eLngGuatemalan": {
+	  "code": "gtm",
+	  "name": "Guatemala"
+	},
+	"eLngChannelIsland": {
+	  "code": "jey",
+	  "name": "Jersey"
+	},
+	"eLngGuinean": {
+	  "code": "gin",
+	  "name": "Guinea"
+	},
+	"eLngBissau-Guinean": {
+	  "code": "gnb",
+	  "name": "Guinea-Bissau"
+	},
+	"eLngGuyanese": {
+	  "code": "guy",
+	  "name": "Guyana"
+	},
+	"eLngHaitian": {
+	  "code": "hti",
+	  "name": "Haiti"
+	},
+	"eLngHeardIslandorMcDonaldIslands": {
+	  "code": "hmd",
+	  "name": "Heard Island and McDonald Islands"
+	},
+	"eLngVatican": {
+	  "code": "vat",
+	  "name": "Vatican City State"
+	},
+	"eLngHonduran": {
+	  "code": "hnd",
+	  "name": "Honduras"
+	},
+	"eLngHongKong": {
+	  "code": "hkg",
+	  "name": "Hong Kong"
+	},
+	"eLngHungarian": {
+	  "code": "hun",
+	  "name": "Hungary"
+	},
+	"eLngIcelandic": {
+	  "code": "isl",
+	  "name": "Iceland"
+	},
+	"eLngIndian": {
+	  "code": "ind",
+	  "name": "India"
+	},
+	"eLngIndonesian": {
+	  "code": "idn",
+	  "name": "Indonesia"
+	},
+	"eLngIranian": {
+	  "code": "irn",
+	  "name": "Iran"
+	},
+	"eLngIraqi": {
+	  "code": "irq",
+	  "name": "Iraq"
+	},
+	"eLngIrish": {
+	  "code": "irl",
+	  "name": "Ireland"
+	},
+	"eLngManx": {
+	  "code": "imn",
+	  "name": "Isle of Man"
+	},
+	"eLngIsraeli": {
+	  "code": "isr",
+	  "name": "Israel"
+	},
+	"eLngItalian": {
+	  "code": "ita",
+	  "name": "Italy"
+	},
+	"eLngJamaican": {
+	  "code": "jam",
+	  "name": "Jamaica"
+	},
+	"eLngJapanese": {
+	  "code": "jpn",
+	  "name": "Japan"
+	},
+	"eLngJordanian": {
+	  "code": "jor",
+	  "name": "Jordan"
+	},
+	"eLngKazakhstani": {
+	  "code": "kaz",
+	  "name": "Kazakhstan"
+	},
+	"eLngKenyan": {
+	  "code": "ken",
+	  "name": "Kenya"
+	},
+	"eLngI-Kiribati": {
+	  "code": "kir",
+	  "name": "Kiribati"
+	},
+	"eLngNorthKorean": {
+	  "code": "prk",
+	  "name": "Korea (Democratic People's Republic of)"
+	},
+	"eLngSouthKorean": {
+	  "code": "kor",
+	  "name": "Korea (Republic of)"
+	},
+	"eLngKuwaiti": {
+	  "code": "kwt",
+	  "name": "Kuwait"
+	},
+	"eLngKyrgyzstani": {
+	  "code": "kgz",
+	  "name": "Kyrgyzstan"
+	},
+	"eLngLao": {
+	  "code": "lao",
+	  "name": "Lao People's Democratic Republic"
+	},
+	"eLngLatvian": {
+	  "code": "lva",
+	  "name": "Latvia"
+	},
+	"eLngLebanese": {
+	  "code": "lbn",
+	  "name": "Lebanon"
+	},
+	"eLngBasotho": {
+	  "code": "lso",
+	  "name": "Lesotho"
+	},
+	"eLngLiberian": {
+	  "code": "lbr",
+	  "name": "Liberia"
+	},
+	"eLngLibyan": {
+	  "code": "lby",
+	  "name": "Libya"
+	},
+	"eLngLiechtenstein": {
+	  "code": "lie",
+	  "name": "Liechtenstein"
+	},
+	"eLngLithuanian": {
+	  "code": "ltu",
+	  "name": "Lithuania"
+	},
+	"eLngLuxembourg": {
+	  "code": "lux",
+	  "name": "Luxembourg"
+	},
+	"eLngMacanese": {
+	  "code": "mac",
+	  "name": "Macao"
+	},
+	"eLngMacedonian": {
+	  "code": "mkd",
+	  "name": "Macedonia (the former Yugoslav Republic of)"
+	},
+	"eLngMalagasy": {
+	  "code": "mdg",
+	  "name": "Madagascar"
+	},
+	"eLngMalawian": {
+	  "code": "mwi",
+	  "name": "Malawi"
+	},
+	"eLngMalaysian": {
+	  "code": "mys",
+	  "name": "Malaysia"
+	},
+	"eLngMaldivian": {
+	  "code": "mdv",
+	  "name": "Maldives"
+	},
+	"eLngMalian": {
+	  "code": "mli",
+	  "name": "Mali"
+	},
+	"eLngMaltese": {
+	  "code": "mlt",
+	  "name": "Malta"
+	},
+	"eLngMarshallese": {
+	  "code": "mhl",
+	  "name": "Marshall Islands"
+	},
+	"eLngMartiniquais": {
+	  "code": "mtq",
+	  "name": "Martinique"
+	},
+	"eLngMauritanian": {
+	  "code": "mrt",
+	  "name": "Mauritania"
+	},
+	"eLngMauritian": {
+	  "code": "mus",
+	  "name": "Mauritius"
+	},
+	"eLngMahoran": {
+	  "code": "myt",
+	  "name": "Mayotte"
+	},
+	"eLngMexican": {
+	  "code": "mex",
+	  "name": "Mexico"
+	},
+	"eLngMicronesian": {
+	  "code": "fsm",
+	  "name": "Micronesia (Federated States of)"
+	},
+	"eLngMoldovan": {
+	  "code": "mda",
+	  "name": "Moldova (Republic of)"
+	},
+	"eLngMonégasque": {
+	  "code": "mco",
+	  "name": "Monaco"
+	},
+	"eLngMongolian": {
+	  "code": "mng",
+	  "name": "Mongolia"
+	},
+	"eLngMontenegrin": {
+	  "code": "mne",
+	  "name": "Montenegro"
+	},
+	"eLngMontserratian": {
+	  "code": "msr",
+	  "name": "Montserrat"
+	},
+	"eLngMoroccan": {
+	  "code": "mar",
+	  "name": "Morocco"
+	},
+	"eLngMozambican": {
+	  "code": "moz",
+	  "name": "Mozambique"
+	},
+	"eLngBurmese": {
+	  "code": "mmr",
+	  "name": "Myanmar"
+	},
+	"eLngNamibian": {
+	  "code": "nam",
+	  "name": "Namibia"
+	},
+	"eLngNauruan": {
+	  "code": "nru",
+	  "name": "Nauru"
+	},
+	"eLngNepali": {
+	  "code": "npl",
+	  "name": "Nepal"
+	},
+	"eLngDutch": {
+	  "code": "nld",
+	  "name": "Netherlands"
+	},
+	"eLngNewCaledonian": {
+	  "code": "ncl",
+	  "name": "New Caledonia"
+	},
+	"eLngNewZealander": {
+	  "code": "nzl",
+	  "name": "New Zealand"
+	},
+	"eLngNicaraguan": {
+	  "code": "nic",
+	  "name": "Nicaragua"
+	},
+	"eLngNigerien": {
+	  "code": "ner",
+	  "name": "Niger"
+	},
+	"eLngNigerian": {
+	  "code": "nga",
+	  "name": "Nigeria"
+	},
+	"eLngNiuean": {
+	  "code": "niu",
+	  "name": "Niue"
+	},
+	"eLngNorfolkIsland": {
+	  "code": "nfk",
+	  "name": "Norfolk Island"
+	},
+	"eLngNorthernMarianan": {
+	  "code": "mnp",
+	  "name": "Northern Mariana Islands"
+	},
+	"eLngNorwegian": {
+	  "code": "nor",
+	  "name": "Norway"
+	},
+	"eLngOmani": {
+	  "code": "omn",
+	  "name": "Oman"
+	},
+	"eLngPakistani": {
+	  "code": "pak",
+	  "name": "Pakistan"
+	},
+	"eLngPalauan": {
+	  "code": "plw",
+	  "name": "Palau"
+	},
+	"eLngPalestinian": {
+	  "code": "pse",
+	  "name": "Palestine, State of"
+	},
+	"eLngPanamanian": {
+	  "code": "pan",
+	  "name": "Panama"
+	},
+	"eLngPapuaNewGuinean": {
+	  "code": "png",
+	  "name": "Papua New Guinea"
+	},
+	"eLngParaguayan": {
+	  "code": "pry",
+	  "name": "Paraguay"
+	},
+	"eLngPeruvian": {
+	  "code": "per",
+	  "name": "Peru"
+	},
+	"eLngPhilippine": {
+	  "code": "phl",
+	  "name": "Philippines"
+	},
+	"eLngPitcairnIsland": {
+	  "code": "pcn",
+	  "name": "Pitcairn"
+	},
+	"eLngPolish": {
+	  "code": "pol",
+	  "name": "Poland"
+	},
+	"eLngPortuguese": {
+	  "code": "prt",
+	  "name": "Portugal"
+	},
+	"eLngPuertoRican": {
+	  "code": "pri",
+	  "name": "Puerto Rico"
+	},
+	"eLngQatari": {
+	  "code": "qat",
+	  "name": "Qatar"
+	},
+	"eLngRéunionese": {
+	  "code": "reu",
+	  "name": "Réunion"
+	},
+	"eLngRomanian": {
+	  "code": "rou",
+	  "name": "Romania"
+	},
+	"eLngRussian": {
+	  "code": "rus",
+	  "name": "Russian Federation"
+	},
+	"eLngRwandan": {
+	  "code": "rwa",
+	  "name": "Rwanda"
+	},
+	"eLngBarthélemois": {
+	  "code": "blm",
+	  "name": "Saint Barthélemy"
+	},
+	"eLngSaintHelenian": {
+	  "code": "shn",
+	  "name": "Saint Helena, Ascension and Tristan da Cunha"
+	},
+	"eLngKittitianorNevisian": {
+	  "code": "kna",
+	  "name": "Saint Kitts and Nevis"
+	},
+	"eLngSaintLucian": {
+	  "code": "lca",
+	  "name": "Saint Lucia"
+	},
+	"eLngSaint-Martinoise": {
+	  "code": "maf",
+	  "name": "Saint Martin (French part)"
+	},
+	"eLngSaint-PierraisorMiquelonnais": {
+	  "code": "spm",
+	  "name": "Saint Pierre and Miquelon"
+	},
+	"eLngSaintVincentian": {
+	  "code": "vct",
+	  "name": "Saint Vincent and the Grenadines"
+	},
+	"eLngSamoan": {
+	  "code": "wsm",
+	  "name": "Samoa"
+	},
+	"eLngSammarinese": {
+	  "code": "smr",
+	  "name": "San Marino"
+	},
+	"eLngSãoToméan": {
+	  "code": "stp",
+	  "name": "Sao Tome and Principe"
+	},
+	"eLngSaudi": {
+	  "code": "sau",
+	  "name": "Saudi Arabia"
+	},
+	"eLngSenegalese": {
+	  "code": "sen",
+	  "name": "Senegal"
+	},
+	"eLngSerbian": {
+	  "code": "srb",
+	  "name": "Serbia"
+	},
+	"eLngSeychellois": {
+	  "code": "syc",
+	  "name": "Seychelles"
+	},
+	"eLngSierraLeonean": {
+	  "code": "sle",
+	  "name": "Sierra Leone"
+	},
+	"eLngSingaporean": {
+	  "code": "sgp",
+	  "name": "Singapore"
+	},
+	"eLngSintMaarten": {
+	  "code": "sxm",
+	  "name": "Sint Maarten (Dutch part)"
+	},
+	"eLngSlovak": {
+	  "code": "svk",
+	  "name": "Slovakia"
+	},
+	"eLngSlovenian": {
+	  "code": "svn",
+	  "name": "Slovenia"
+	},
+	"eLngSolomonIsland": {
+	  "code": "slb",
+	  "name": "Solomon Islands"
+	},
+	"eLngSomali": {
+	  "code": "som",
+	  "name": "Somalia"
+	},
+	"eLngSouthAfrican": {
+	  "code": "zaf",
+	  "name": "South Africa"
+	},
+	"eLngSouthGeorgiaorSouthSandwichIslands": {
+	  "code": "sgs",
+	  "name": "South Georgia and the South Sandwich Islands"
+	},
+	"eLngSouthSudanese": {
+	  "code": "ssd",
+	  "name": "South Sudan"
+	},
+	"eLngSpanish": {
+	  "code": "esp",
+	  "name": "Spain"
+	},
+	"eLngSriLankan": {
+	  "code": "lka",
+	  "name": "Sri Lanka"
+	},
+	"eLngSudanese": {
+	  "code": "sdn",
+	  "name": "Sudan"
+	},
+	"eLngSurinamese": {
+	  "code": "sur",
+	  "name": "Suriname"
+	},
+	"eLngSvalbard": {
+	  "code": "sjm",
+	  "name": "Svalbard and Jan Mayen"
+	},
+	"eLngSwazi": {
+	  "code": "swz",
+	  "name": "Swaziland"
+	},
+	"eLngSwedish": {
+	  "code": "swe",
+	  "name": "Sweden"
+	},
+	"eLngSwiss": {
+	  "code": "che",
+	  "name": "Switzerland"
+	},
+	"eLngSyrian": {
+	  "code": "syr",
+	  "name": "Syrian Arab Republic"
+	},
+	"eLngTajikistani": {
+	  "code": "tjk",
+	  "name": "Tajikistan"
+	},
+	"eLngTanzanian": {
+	  "code": "tza",
+	  "name": "Tanzania, United Republic of"
+	},
+	"eLngThai": {
+	  "code": "tha",
+	  "name": "Thailand"
+	},
+	"eLngTimorese": {
+	  "code": "tls",
+	  "name": "Timor-Leste"
+	},
+	"eLngTogolese": {
+	  "code": "tgo",
+	  "name": "Togo"
+	},
+	"eLngTokelauan": {
+	  "code": "tkl",
+	  "name": "Tokelau"
+	},
+	"eLngTongan": {
+	  "code": "ton",
+	  "name": "Tonga"
+	},
+	"eLngTrinidadianorTobagonian": {
+	  "code": "tto",
+	  "name": "Trinidad and Tobago"
+	},
+	"eLngTunisian": {
+	  "code": "tun",
+	  "name": "Tunisia"
+	},
+	"eLngTurkish": {
+	  "code": "tur",
+	  "name": "Turkey"
+	},
+	"eLngTurkmen": {
+	  "code": "tkm",
+	  "name": "Turkmenistan"
+	},
+	"eLngTurksandCaicosIsland": {
+	  "code": "tca",
+	  "name": "Turks and Caicos Islands"
+	},
+	"eLngTuvaluan": {
+	  "code": "tuv",
+	  "name": "Tuvalu"
+	},
+	"eLngUgandan": {
+	  "code": "uga",
+	  "name": "Uganda"
+	},
+	"eLngUkrainian": {
+	  "code": "ukr",
+	  "name": "Ukraine"
+	},
+	"eLngEmirati": {
+	  "code": "are",
+	  "name": "United Arab Emirates"
+	},
+	"eLngBritish": {
+	  "code": "gbr",
+	  "name": "United Kingdom of Great Britain and Northern Ireland"
+	},
+	"eLngAmerican": {
+	  "code": "usa",
+	  "name": "United States of America"
+	},
+	"eLngUruguayan": {
+	  "code": "ury",
+	  "name": "Uruguay"
+	},
+	"eLngUzbekistani": {
+	  "code": "uzb",
+	  "name": "Uzbekistan"
+	},
+	"eLngNi-Vanuatu": {
+	  "code": "vut",
+	  "name": "Vanuatu"
+	},
+	"eLngVenezuelan": {
+	  "code": "ven",
+	  "name": "Venezuela (Bolivarian Republic of)"
+	},
+	"eLngVietnamese": {
+	  "code": "vnm",
+	  "name": "Vietnam"
+	},
+	"eLngBritishVirginIsland": {
+	  "code": "vgb",
+	  "name": "Virgin Islands (British)"
+	},
+	"eLngU.S.VirginIsland": {
+	  "code": "vir",
+	  "name": "Virgin Islands (U.S.)"
+	},
+	"eLngWallisandFutuna": {
+	  "code": "wlf",
+	  "name": "Wallis and Futuna"
+	},
+	"eLngSahrawi": {
+	  "code": "esh",
+	  "name": "Western Sahara"
+	},
+	"eLngYemeni": {
+	  "code": "yem",
+	  "name": "Yemen"
+	},
+	"eLngZambian": {
+	  "code": "zmb",
+	  "name": "Zambia"
+	},
+	"eLngZimbabwean": {
+	  "code": "zwe",
+	  "name": "Zimbabwe"
+	}
+  }

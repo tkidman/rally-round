@@ -1,0 +1,56 @@
+var fs = require('fs');
+var Handlebars = require('handlebars');
+const { drive } = require('googleapis/build/src/apis/drive');
+const folder = './src/visualisation/'
+var counter = 0
+const htmlToImage = require('node-html-to-image')
+
+function processDriverResults(results){
+	let rawdata = fs.readFileSync('./src/state/constants/countries.json');
+	let countries = JSON.parse(rawdata); 
+	var driversArray = Object.values(results).filter(result => result.entry.rank);
+	driversArray = driversArray.map(result => {
+			var nationality = countries[result.entry.nationality];
+			if (!nationality){
+				console.log("oei");
+			}
+			return {
+				"rank" : result.entry.rank,
+				"nationality": nationality['code'],
+				"name": result.name,
+				"team": result.teamId,
+				"vehicle": result.entry.vehicleName,
+				"time": result.entry.totalTime,
+				"diff": result.entry.totalDiff,
+				"points": result.overallPoints,
+				"powerstage": result.powerStagePoints,
+				"total": result.totalPoints
+			};	
+		});
+	driversArray.sort((a, b) => b.total - a.total);
+	return {
+		"columns" : ["", "nationality", "driver", "team", "vehicle", "time", "diff", "points", "Power Stage", "Total"],
+		"drivers" : driversArray
+	}
+}
+
+const resultsToImage = (driverResults) => {
+	if(counter > 1)return;
+	var _t = fs.readFileSync(folder + 'week_result.hbs').toString()
+	var template = Handlebars.compile(_t);
+	var data = processDriverResults(driverResults);
+	var out = template(data);
+	counter++;
+
+	htmlToImage({
+		output: './image.png',
+		html: out
+	  })
+	fs.writeFile(folder + counter + 'test.html', out, function(err) {
+		if(err) { return console.log(err); }
+	});
+}
+
+module.exports = {
+	resultsToImage
+} 

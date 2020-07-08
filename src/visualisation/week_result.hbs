@@ -1,0 +1,31 @@
+<html>
+
+<body>
+	<div id="container">
+		<table id="table">
+			<tr>
+				{{#each columns}}
+				<th>{{this}}</th>
+				{{/each}}
+			</tr>
+			{{#each drivers}}
+			{{#with this}}
+			<tr>
+				<td>{{rank}}</td>
+				<td><img src="../../assets/country-flags/{{nationality}}.png" style="max-width:2em;"/></td>
+				<td>{{name}}</td>
+				<td>{{team}}</td>
+				<td>{{vehicle}}</td>
+				<td>{{time}}</td>
+				<td>{{diff}}</td>
+				<td>{{points}}</td>
+				<td>{{powerstage}}</td>
+				<td>{{total}}</td>
+			</tr>
+			{{/with}}
+			{{/each}}
+		</table>
+	</div>
+</body>
+
+</html>
