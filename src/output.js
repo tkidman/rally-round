@@ -99,12 +99,16 @@ const getStandingCSVRows = (className, events, type) => {
       raceNetName = driver ? driver.raceNetName : "";
     }
 
-    return {
+    const standingRow = {
       name: standing.name,
       racenet: raceNetName,
       ...eventPointsByName[standing.name],
       ...standing
     };
+    if (type === "team") {
+      delete standingRow.racenet;
+    }
+    return standingRow;
   });
   return standingRows;
 };

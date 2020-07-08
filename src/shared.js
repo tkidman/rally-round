@@ -1,5 +1,6 @@
 const hiddenPath = "./hidden";
-const outputPath = `${hiddenPath}/out`;
+const club = process.env.CLUB || "brl";
+const outputPath = `${hiddenPath}/out/${club}`;
 const cachePath = `${hiddenPath}/cache`;
 
 const getTotalPoints = result => {
@@ -19,5 +20,6 @@ module.exports = {
   cachePath,
   hiddenPath,
   getTotalPoints,
-  championshipTypes
+  championshipTypes,
+  club
 };

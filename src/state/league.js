@@ -2,8 +2,7 @@ const { keyBy } = require("lodash");
 const Papa = require("papaparse");
 const fs = require("fs");
 const debug = require("debug")("tkidman:dirt2-results:state");
-
-const club = process.env.CLUB || "brl";
+const { club } = require("../shared");
 const league = require(`./${club}/initialState`);
 
 // const drivers = require("./drivers");

@@ -55,9 +55,9 @@ To get team functionality working you need to download your club's registration 
 * Championship mode (no need for event ids, just championship) ✓
 * Show PS in standings ✓
 * Don't log missing driver message when creating team standings ✓ 
-* Don't show racenet in Team standings
-* Just create csvs for last event
-* Output to a club folder
+* Don't show racenet in Team standings ✓
+* Output to a club folder ✓
+* Output to sheets
 * Don't cache 'in progress' events
 * DNF counter
 * Get drivers from google sheets automatically
