@@ -7,6 +7,8 @@ const { league, getDriver } = require("./state/league");
 const { fetchEventResults } = require("./dirtAPI");
 const { writeJSON, writeCSV, checkOutputDirs } = require("./output");
 const { getTotalPoints } = require("./shared");
+const { calculateFantasyStandings } = require("./fantasy/fantasy_calculator");
+const { resultsToImage } = require("./visualisation/tableDrawer");
 
 const classes = league.classes;
 const dnfFactor = 100000000;
@@ -143,6 +145,9 @@ const calculateEventResults = (leaderboard, previousEvent, className) => {
   );
   const teamResultsById = calculateTeamResults(resultsByDriver);
   const teamResults = sortTeamResults(teamResultsById);
+
+  calculateFantasyStandings(resultsByDriver, previousEvent);
+  resultsToImage(resultsByDriver);
 
   driverResults.forEach(result => (result.className = className));
   teamResults.forEach(result => (result.className = className));
