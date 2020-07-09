@@ -46,8 +46,10 @@ function processDriverResults(results) {
 }
 
 const resultsToImage = driverResults => {
-  if (counter > 1) return;
-  var _t = fs.readFileSync(folder + "week_result.hbs").toString();
+  //const template_path = `./src/state/${process.env.CLUB}/templates/`
+  const template_path = `./src/state/jrc/templates/`
+  if (!fs.existsSync(template_path) || counter > 1) return;
+  var _t = fs.readFileSync(template_path + "week_result.hbs").toString();
   var template = Handlebars.compile(_t);
   var data = processDriverResults(driverResults);
   var out = template(data);
