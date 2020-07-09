@@ -8,7 +8,8 @@ const initialState = {
       points: {
         powerStage: [5, 4, 3, 2, 1],
         overall: [30, 24, 21, 19, 17, 15, 13, 11, 9, 7, 5, 4, 3, 2, 1]
-      }
+      },
+      fantasy: true
     },
     jrc2: {
       clubId: "244734",

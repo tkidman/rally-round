@@ -1,0 +1,56 @@
+{
+	"Peugeot 206 Rally": {
+		"class": "2000cc",
+		"brand": "peugot"
+	},
+	"Ford Focus RS Rally 2001":{
+		"class": "2000cc",
+		"brand": "ford"
+	},
+	"SUBARU Impreza (2001)":{
+		"class": "2000cc",
+		"brand": "subaru"
+	},
+
+	"Lancia Delta HF Integrale":{
+		"class": "groupA",
+		"brand": "lancia"
+	},
+	"SUBARU Legacy RS":{
+		"class": "groupA",
+		"brand": "subaru"
+	},
+	"SUBARU Impreza 1995":{
+		"class": "groupA",
+		"brand": "subaru"
+	},
+	"Mitsubishi Lancer Evolution VI":{
+		"class": "groupA",
+		"brand": "mitsubishi"
+	},
+
+	"Ford Fiesta R5":{
+		"class": "R5",
+		"brand": "ford"
+	},
+	"ŠKODA Fabia R5":{
+		"class": "R5",
+		"brand": "skoda"
+	},
+	"Mitsubishi Space Star R5":{
+		"class": "R5",
+		"brand": "mitsubishi"
+	},
+	"Citroën C3 R5":{
+		"class": "R5",
+		"brand": "citroen"
+	},
+	"Volkswagen Polo GTI R5":{
+		"class": "R5",
+		"brand": "volkswagen"
+	},
+	"Peugeot 208 T16 R5":{
+		"class": "R5",
+		"brand": "peugot"
+	}
+}

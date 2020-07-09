@@ -1,0 +1,18 @@
+{
+	"MONARO":{
+		"countryName": "Australia",
+		"countryCode": "aus"
+	},
+	"BAUMHOLDER":{
+		"countryName": "Germany",
+		"countryCode": "deu"
+	},
+	"HAWKES BAY":{
+		"countryName": "New Zealand",
+		"countryCode": "nzl"
+	},
+	"VÄRMLAND":{
+		"countryName": "Sweden",
+		"countryCode": "swe"
+	}
+}
