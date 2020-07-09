@@ -146,7 +146,7 @@ const writeJSON = eventResults => {
 const checkOutputDirs = () => {
   fs.existsSync(hiddenPath) || fs.mkdirSync(hiddenPath);
   fs.existsSync(cachePath) || fs.mkdirSync(cachePath);
-  fs.existsSync(outputPath) || fs.mkdirSync(outputPath);
+  fs.existsSync(outputPath) || fs.mkdirSync(outputPath, { recursive: true });
 };
 
 module.exports = {
