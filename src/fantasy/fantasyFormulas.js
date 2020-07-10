@@ -1,4 +1,4 @@
-const calculateInternalTeamStandings = resultsByDriver => {
+const calculateInternalTeamStandings = (resultsByDriver, allDrivers) => {
   var dictByTeam = Object.values(resultsByDriver).reduce((dict, driver) => {
     var teamId = driver.teamId;
     teamId = teamId ? teamId : "privateer";
@@ -8,10 +8,10 @@ const calculateInternalTeamStandings = resultsByDriver => {
   }, {});
   Object.keys(dictByTeam).forEach(teamId => {
     var team = dictByTeam[teamId];
-    if (teamId == "privateer" || team.size < 2) {
+    if (teamId == "privateer" || team.length < 2) {
       team.forEach(driver => addPointsToResult(driver, 0));
     } else {
-      team.sort((a, b) => a.entry.rank - b.entry.rank);
+      team.sort((a, b) => a.entry.overallPoints - b.entry.overallPoints);
       var score = 5;
       team.forEach(driver => {
         addPointsToResult(driver, score);
@@ -20,7 +20,6 @@ const calculateInternalTeamStandings = resultsByDriver => {
     }
   });
 };
-
 const calculatePowerStagePoints = resultsByDriver => {
   Object.values(resultsByDriver).forEach(result => {
     var points = result["powerStagePoints"];
@@ -28,15 +27,36 @@ const calculatePowerStagePoints = resultsByDriver => {
   });
 };
 
+const calculateStandingPoints = resultsByDriver => {
+  Object.values(resultsByDriver).forEach(result => {
+    var points = result["overallPoints"];
+    addPointsToResult(result, points ? points : 0);
+  });
+};
+
+const calculateDNFPoints = resultsByDriver => {
+  Object.values(resultsByDriver).forEach(result => {
+    var points = result.entry.isDnfEntry || result.entry.isDnsEntry ? -10 : 1;
+    addPointsToResult(result, points ? points : 0);
+  });
+};
+
+const calculatePodiumStreak = (resultsByDriver, previousEvent) => {
+  //TODO:- Podium streak, 10 points
+  return;
+};
 function addPointsToResult(result, points) {
   if (!("fantasyPoints" in result)) result["fantasyPoints"] = 0;
   result["fantasyPoints"] += points;
 }
 
-const ACTIVE_CALCULATIONS = [
+const JRC_CALCULATIONS = [
   calculateInternalTeamStandings,
-  calculatePowerStagePoints
+  calculatePowerStagePoints,
+  calculateStandingPoints,
+  calculateDNFPoints,
+  calculatePodiumStreak
 ];
 module.exports = {
-  ACTIVE_CALCULATIONS
+  JRC_CALCULATIONS
 };

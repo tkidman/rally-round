@@ -1,0 +1,338 @@
+[
+	{
+		"name": "Ram Ranchers",
+		"owner": "Pynklu",
+		"drivers": [
+			"Qazra",
+			"Babz",
+			"Sean_Da_Sheep24"
+		],
+		"joker": "Babz",
+		"budget": 15.5,
+		"points": 0,
+		"roster_history": {
+			"MONTE CARLO": {
+				"drivers": [
+					"Babz",
+					"SFRrallimoilane",
+					"Mysticman_22"
+				],
+				"joker": "Mysticman_22",
+				"points": 0
+			},
+			"VÄRMLAND": {
+				"drivers": [
+					"Pynklu",
+					"Babz",
+					"fazzixd"
+				],
+				"joker": "Pynklu",
+				"points": 0
+			}
+		}
+	},
+	{
+		"name": "Nekkid Cowboys",
+		"owner": "Babz",
+		"drivers": [
+			"FusionJohn",
+			"SFRrallimoilane",
+			"TUS Cham"
+		],
+		"joker": "SFRrallimoilane",
+		"budget": 17,
+		"points": 0,
+		"roster_history": {
+			"MONTE CARLO": {
+				"drivers": [
+					"FusionJohn",
+					"SFRrallimoilane",
+					"TUS Cham"
+				],
+				"joker": "SFRrallimoilane",
+				"points": 0
+			},
+			"VÄRMLAND": {
+				"drivers": [
+					"FusionJohn",
+					"SFRrallimoilane",
+					"TUS Cham"
+				],
+				"joker": "SFRrallimoilane",
+				"points": 0
+			}
+		}
+	},
+	{
+		"name": "Timo's Stones",
+		"owner": "ninko",
+		"drivers": [
+			"TUS Cham",
+			"FusionJohn",
+			"Babz"
+		],
+		"joker": "Babz",
+		"budget": 17,
+		"points": 0,
+		"roster_history": {
+			"MONTE CARLO": {
+				"drivers": [
+					"Flawless_Method",
+					"FusionJohn",
+					"Babz"
+				],
+				"joker": "Babz",
+				"points": 0
+			},
+			"VÄRMLAND": {
+				"drivers": [
+					"Flawless_Method",
+					"FusionJohn",
+					"Babz"
+				],
+				"joker": "Babz",
+				"points": 0
+			}
+		}
+	},
+	{
+		"name": "Hyundry",
+		"owner": "pigloaf",
+		"drivers": [
+			"TUS Phoenix",
+			"TUS Cham",
+			"emuga12"
+		],
+		"joker": "emuga12",
+		"budget": 18.5,
+		"points": 0,
+		"roster_history": {
+			"MONTE CARLO": {
+				"drivers": [
+					"TUS Phoenix",
+					"TUS Cham",
+					"emuga12"
+				],
+				"joker": "emuga12",
+				"points": 0
+			},
+			"VÄRMLAND": {
+				"drivers": [
+					"TUS Phoenix",
+					"TUS Cham",
+					"emuga12"
+				],
+				"joker": "emuga12",
+				"points": 0
+			}
+		}
+	},
+	{
+		"name": "The Chosen Ones",
+		"owner": "PiorARG",
+		"drivers": [
+			"TUS Phoenix",
+			"DirtPirate",
+			"Babz"
+		],
+		"joker": "Babz",
+		"budget": 18,
+		"points": 0,
+		"roster_history": {
+			"MONTE CARLO": {
+				"drivers": [
+					"TUS Phoenix",
+					"DirtPirate",
+					"SFRrallimoilane"
+				],
+				"joker": "SFRrallimoilane",
+				"points": 0
+			},
+			"VÄRMLAND": {
+				"drivers": [
+					"TUS Phoenix",
+					"DirtPirate",
+					"SFRrallimoilane"
+				],
+				"joker": "SFRrallimoilane",
+				"points": 0
+			}
+		}
+	},
+	{
+		"name": "Rally Legends",
+		"owner": "Thorellski",
+		"drivers": [
+			"Siggis90",
+			"Puki2579",
+			"fazzixd"
+		],
+		"joker": "",
+		"budget": 19,
+		"points": 0,
+		"roster_history": {
+			"MONTE CARLO": {
+				"drivers": [
+					"TUS Phoenix",
+					"WCD_misix",
+					"DirtPirate"
+				],
+				"joker": "DirtPirate",
+				"points": 0
+			},
+			"VÄRMLAND": {
+				"drivers": [
+					"Siggis90",
+					"Mike Dee",
+					"Pynklu"
+				],
+				"joker": "Pynklu",
+				"points": 0
+			}
+		}
+	},
+	{
+		"name": "speed bumps",
+		"owner": "Siggis90",
+		"drivers": [
+			"FusionJohn",
+			"MyOnePube",
+			"IM-MaxPower"
+		],
+		"joker": "IM-MaxPower",
+		"budget": 17.5,
+		"points": 0,
+		"roster_history": {
+			"MONTE CARLO": {
+				"drivers": [
+					"FusionJohn",
+					"MyOnePube",
+					"IM-MaxPower"
+				],
+				"joker": "IM-MaxPower",
+				"points": 0
+			},
+			"VÄRMLAND": {
+				"drivers": [
+					"FusionJohn",
+					"MyOnePube",
+					"IM-MaxPower"
+				],
+				"joker": "IM-MaxPower",
+				"points": 0
+			}
+		}
+	},
+	{
+		"name": "jazz hands",
+		"owner": "satchmo",
+		"drivers": [
+			"Puki2579",
+			"Babz",
+			"satchmo"
+		],
+		"joker": "Babz",
+		"budget": 15,
+		"points": 0,
+		"roster_history": {
+			"MONTE CARLO": {
+				"drivers": [
+					"Puki2579",
+					"Babz",
+					"satchmo"
+				],
+				"joker": "Babz",
+				"points": 0
+			},
+			"VÄRMLAND": {
+				"drivers": [
+					"Puki2579",
+					"Babz",
+					"satchmo"
+				],
+				"joker": "Babz",
+				"points": 0
+			}
+		}
+	},
+	{
+		"name": "Two Tommies and a Yank",
+		"owner": "Raumo",
+		"drivers": [
+			"BrothersChris",
+			"FusionJohn",
+			"TUS Cham"
+		],
+		"joker": "TUS Cham",
+		"budget": 17.5,
+		"points": 0,
+		"roster_history": {
+			"MONTE CARLO": {
+				"drivers": [
+					"BrothersChris",
+					"FusionJohn",
+					"TUS Cham"
+				],
+				"joker": "TUS Cham",
+				"points": 0
+			},
+			"VÄRMLAND": {
+				"drivers": [
+					"BrothersChris",
+					"FusionJohn",
+					"TUS Cham"
+				],
+				"joker": "TUS Cham",
+				"points": 0
+			}
+		}
+	},
+	{
+		"name": "Loeb's Meteo",
+		"owner": "nPiipo",
+		"drivers": [
+			"TUS Phoenix",
+			"SSplatered",
+			"Sean_Da_Sheep24"
+		],
+		"joker": "Sean_Da_Sheep24",
+		"budget": 15,
+		"points": 0,
+		"roster_history": {
+			"MONTE CARLO": {
+				"drivers": [],
+				"joker": "",
+				"points": 0
+			},
+			"VÄRMLAND": {
+				"drivers": [],
+				"joker": "",
+				"points": 0
+			}
+		}
+	},
+	{
+		"name": "8 minute babz",
+		"owner": "mkingy",
+		"drivers": [
+			"Qazra",
+			"Babz",
+			"Sean_Da_Sheep24"
+		],
+		"joker": "Sean_Da_Sheep24",
+		"budget": 15,
+		"points": 0,
+		"roster_history": {
+			"MONTE CARLO": {
+				"drivers": [],
+				"joker": "",
+				"points": 0
+			},
+			"VÄRMLAND": {
+				"drivers": [],
+				"joker": "",
+				"points": 0
+			}
+		}
+	}
+]

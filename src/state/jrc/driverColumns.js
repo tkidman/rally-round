@@ -1,9 +1,10 @@
 const driverColumns = {
-  countryName: "Flag",
-  driverName: "Gamertag",
+  //countryName: "Flag",
+  driverName: "Driver",
   discordName: "Discord",
   raceNetName: "Racenet",
-  teamId: "Themed Team"
+  teamId: "Team",
+  classes: "classes"
 };
 
 module.exports = driverColumns;

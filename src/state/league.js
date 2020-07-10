@@ -34,6 +34,69 @@ const league = require(`./${club}/initialState`);
 //   return null;
 // };
 
+// const getDriver = name => {
+//   const upperName = name.toUpperCase();
+//   let driver = driversById[upperName];
+//   if (!driver) {
+//     driver = driversByRaceNet[upperName];
+//     if (!driver) {
+//       driver = Object.values(driversByRaceNet).find(driver => {
+//         return (
+//           driver.raceNetName.toUpperCase().includes(upperName) ||
+//           driver.name.toUpperCase().includes(upperName) ||
+//           driver.discordName.toUpperCase().includes(upperName)
+//         );
+//       });
+//       if (!driver) {
+//         const message = `unable to find driver: ${name} - reference data sheet needs to be updated.`;
+//         debug(message);
+//       }
+//     }
+//   }
+//   return driver;
+// };
+
+const loadDriversFromMasterSheet = () => {
+  if (fs.existsSync(`./src/state/${club}/drivers.csv`)) {
+    const csv = fs.readFileSync(`./src/state/${club}/drivers.csv`, "utf8");
+    const driverColumns = require(`./${club}/driverColumns`);
+
+    const rows = Papa.parse(csv, { header: true }).data;
+    const driversById = rows.reduce((driversById, row) => {
+      const teamId = row[driverColumns.teamId];
+      const countryName = row[driverColumns.countryName];
+      const driverName = row[driverColumns.driverName];
+      const discordName = row[driverColumns.discordName];
+      const raceNetName = row[driverColumns.raceNetName];
+      const classes = row[driverColumns.classes];
+      if (driverName) {
+        const driverId = driverName.toUpperCase();
+        driversById[driverId] = {
+          id: driverId,
+          name: driverName,
+          raceNetName,
+          discordName,
+          teamId,
+          countryName,
+          classes
+        };
+      } else {
+        debug(
+          `no username found for driver: ${raceNetName}, reference data sheet needs updating`
+        );
+      }
+      return driversById;
+    }, {});
+    const driversByRaceNet = keyBy(Object.values(driversById), driver =>
+      driver.raceNetName.toUpperCase()
+    );
+    return { driversById, driversByRaceNet };
+  }
+  return { driversById: {}, driversByRaceNet: {} };
+};
+
+const { driversById, driversByRaceNet } = loadDriversFromMasterSheet(club);
+
 const getDriver = name => {
   const upperName = name.toUpperCase();
   let driver = driversById[upperName];
@@ -56,61 +119,14 @@ const getDriver = name => {
   return driver;
 };
 
-const loadDriversFromMasterSheet = () => {
-  // const countries = fs.readFileSync('./src/state/constants/countries.csv', 'utf8');
-  // const c = Papa.parse(countries, {header:true}).data;
-  // const countriesDict = c.reduce((dict, row) => {
-  //   var data = {
-  //     "code": row["alpha_3_code"].toLowerCase(),
-  //     "name": row["en_short_name"]
-  //   }
-  //   var key = row["nationality"].replace(/\s/g, "");
-  //   key = key.split(',')[0];
-  //   key = "eLng"+key
-
-  //   dict[key] = data;
-  //   return dict;
-  // }, {})
-
-  if (fs.existsSync(`./src/state/${club}/drivers.csv`)) {
-    const csv = fs.readFileSync(`./src/state/${club}/drivers.csv`, "utf8");
-    const driverColumns = require(`./${club}/driverColumns`);
-
-    const rows = Papa.parse(csv, { header: true }).data;
-    const driversById = rows.reduce((driversById, row) => {
-      const teamId = row[driverColumns.teamId];
-      const countryName = row[driverColumns.countryName];
-      const driverName = row[driverColumns.driverName];
-      const discordName = row[driverColumns.discordName];
-      const raceNetName = row[driverColumns.raceNetName];
-      if (driverName) {
-        const driverId = driverName.toUpperCase();
-        driversById[driverId] = {
-          id: driverId,
-          name: driverName,
-          raceNetName,
-          discordName,
-          teamId,
-          countryName
-        };
-      } else {
-        debug(
-          `no username found for driver: ${raceNetName}, reference data sheet needs updating`
-        );
-      }
-      return driversById;
-    }, {});
-    const driversByRaceNet = keyBy(Object.values(driversById), driver =>
-      driver.raceNetName.toUpperCase()
-    );
-    return { driversById, driversByRaceNet };
-  }
-  return { driversById: {}, driversByRaceNet: {} };
+const getDriversByClass = clazz => {
+  return Object.values(driversByRaceNet).filter(driver => {
+    return driver.classes && driver.classes.includes(clazz);
+  });
 };
-
-const { driversById, driversByRaceNet } = loadDriversFromMasterSheet(club);
 
 module.exports = {
   league,
-  getDriver
+  getDriver,
+  getDriversByClass
 };
