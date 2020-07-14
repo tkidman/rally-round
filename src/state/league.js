@@ -4,6 +4,7 @@ const fs = require("fs");
 const debug = require("debug")("tkidman:dirt2-results:state");
 const { club } = require("../shared");
 const league = require(`./${club}/initialState`);
+const missingDrivers = {};
 
 // const drivers = require("./drivers");
 // const driversById = keyBy(drivers, driver => driver.id);
@@ -111,8 +112,7 @@ const getDriver = name => {
         );
       });
       if (!driver) {
-        const message = `unable to find driver: ${name} - reference data sheet needs to be updated.`;
-        debug(message);
+        missingDrivers[name] = name;
       }
     }
   }
@@ -125,8 +125,12 @@ const getDriversByClass = clazz => {
   });
 };
 
+const printMissingDrivers = () =>
+  debug(`missing drivers: \n${Object.keys(missingDrivers).join("\n")}`);
+
 module.exports = {
   league,
   getDriver,
-  getDriversByClass
+  getDriversByClass,
+  printMissingDrivers
 };

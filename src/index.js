@@ -1,5 +1,6 @@
 const debug = require("debug")("tkidman:dirt2-results");
 const moment = require("moment");
+const { printMissingDrivers } = require("./state/league");
 const { fetchRecentResults } = require("./dirtAPI");
 const { sortBy } = require("lodash");
 
@@ -59,30 +60,27 @@ const updatePoints = (resultsByDriver, orderedEntries, points, pointsField) => {
   }
 };
 
-const calculateTeamResults = resultsByDriver => {
-  const teamResults = Object.values(resultsByDriver).reduce(
-    (teamResults, result) => {
-      const driver = getDriver(result.name);
-      if (driver) {
-        const resultTeamId = driver.teamId;
-        if (resultTeamId) {
-          if (!teamResults[resultTeamId]) {
-            teamResults[resultTeamId] = {
-              name: resultTeamId,
-              totalPoints: 0
-            };
-          }
-          if (result.overallPoints) {
-            teamResults[resultTeamId].totalPoints += result.overallPoints;
-          }
-        } else {
-          debug(`driver has null team id: ${driver.id}`);
+const calculateTeamResults = driverResults => {
+  const teamResults = driverResults.reduce((teamResults, result) => {
+    const driver = getDriver(result.name);
+    if (driver) {
+      const resultTeamId = driver.teamId;
+      if (resultTeamId && resultTeamId !== "privateer") {
+        if (!teamResults[resultTeamId]) {
+          teamResults[resultTeamId] = {
+            name: resultTeamId,
+            totalPoints: 0
+          };
         }
+        if (result.overallPoints) {
+          teamResults[resultTeamId].totalPoints += result.overallPoints;
+        }
+      } else if (!resultTeamId) {
+        debug(`driver has null team id: ${driver.id}`);
       }
-      return teamResults;
-    },
-    {}
-  );
+    }
+    return teamResults;
+  }, {});
   return teamResults;
 };
 
@@ -146,7 +144,7 @@ const calculateEventResults = (leaderboard, previousEvent, className) => {
   driverResults.forEach(
     result => (result.totalPoints = getTotalPoints(result))
   );
-  const teamResultsById = calculateTeamResults(resultsByDriver);
+  const teamResultsById = calculateTeamResults(driverResults);
   const teamResults = sortTeamResults(teamResultsById);
 
   resultsToImage(driverResults);
@@ -227,19 +225,19 @@ const processEvents = async (events, className) => {
 };
 
 const calculateOverall = processedClasses => {
-  const overall = [];
+  const overall = { events: [] };
   Object.keys(processedClasses).forEach(className => {
     const rallyClass = processedClasses[className];
     rallyClass.events.forEach(event => {
-      let overallEvent = overall.find(
+      let overallEvent = overall.events.find(
         overallEvent => overallEvent.location === event.location
       );
       if (!overallEvent) {
         overallEvent = {
           location: event.location,
-          results: { driverResults: [] }
+          results: { driverResults: [], teamResults: [] }
         };
-        overall.push(overallEvent);
+        overall.events.push(overallEvent);
       }
       const driverResultsWithClassName = event.results.driverResults.map(
         entry => Object.assign({ className }, { ...entry })
@@ -247,11 +245,17 @@ const calculateOverall = processedClasses => {
       overallEvent.results.driverResults.push(...driverResultsWithClassName);
     });
   });
-  overall.forEach(event => {
+
+  overall.events.forEach((event, index) => {
     event.results.driverResults = orderResultsBy(
       event.results.driverResults,
       "totalTime"
     );
+    const teamResultsById = calculateTeamResults(event.results.driverResults);
+    const teamResults = sortTeamResults(teamResultsById);
+    event.results.teamResults = teamResults;
+    const previousEvent = index > 0 ? overall.events[index - 1] : null;
+    calculateEventStandings(event, previousEvent);
   });
   return overall;
 };
@@ -306,6 +310,7 @@ const processAllClasses = async () => {
     if (league.fantasy) fantasyStandingsToImage(league.fantasy);
     writeCSV(league);
     writeJSON(league);
+    printMissingDrivers();
   } catch (err) {
     debug(err);
     throw err;

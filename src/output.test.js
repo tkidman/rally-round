@@ -26,9 +26,7 @@ describe("output", () => {
 
   test("getStandingCSVRows for driver", () => {
     const league = require("./__fixtures__/preOverallLeague.json");
-    expect(
-      getStandingCSVRows("pro", league.classes["pro"].events, "driver")
-    ).toEqual([
+    expect(getStandingCSVRows(league.classes["pro"].events, "driver")).toEqual([
       {
         Australia: 115,
         "Australia: PS": 5,
@@ -56,9 +54,7 @@ describe("output", () => {
 
   test("getStandingCSVRows for team", () => {
     const league = require("./__fixtures__/preOverallLeague.json");
-    expect(
-      getStandingCSVRows("pro", league.classes["pro"].events, "team")
-    ).toEqual([
+    expect(getStandingCSVRows(league.classes["pro"].events, "team")).toEqual([
       {
         Australia: 166,
         currentPosition: 1,

@@ -1,6 +1,6 @@
 const driverColumns = {
   //countryName: "Flag",
-  driverName: "Driver",
+  driverName: "Gamertag",
   discordName: "Discord",
   raceNetName: "Racenet",
   teamId: "Team",

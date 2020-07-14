@@ -72,7 +72,7 @@ const writeDriverCSV = (eventResults, className) => {
   );
 };
 
-const getStandingCSVRows = (className, events, type) => {
+const getStandingCSVRows = (events, type) => {
   const eventPointsByName = events.reduce((eventPointsByName, event) => {
     event.results[`${type}Results`].forEach(result => {
       if (!eventPointsByName[result.name]) {
@@ -115,7 +115,7 @@ const getStandingCSVRows = (className, events, type) => {
 
 const writeStandingsCSV = (className, events, type) => {
   const lastEvent = events[events.length - 1];
-  const standingRows = getStandingCSVRows(className, events, type);
+  const standingRows = getStandingCSVRows(events, type);
   const standingsCSV = Papa.unparse(standingRows);
   fs.writeFileSync(
     `./${outputPath}/${lastEvent.location}-${className}-${type}Standings.csv`,
@@ -133,6 +133,8 @@ const writeCSV = league => {
     writeStandingsCSV(className, league.classes[className].events, "driver");
     writeStandingsCSV(className, league.classes[className].events, "team");
   });
+  writeStandingsCSV("overall", league.overall.events, "driver");
+  writeStandingsCSV("overall", league.overall.events, "team");
   return true;
 };
 
@@ -145,7 +147,7 @@ const writeJSON = eventResults => {
 
 const checkOutputDirs = () => {
   fs.existsSync(hiddenPath) || fs.mkdirSync(hiddenPath);
-  fs.existsSync(cachePath) || fs.mkdirSync(cachePath);
+  fs.existsSync(cachePath) || fs.mkdirSync(cachePath, { recursive: true });
   fs.existsSync(outputPath) || fs.mkdirSync(outputPath, { recursive: true });
 };
 

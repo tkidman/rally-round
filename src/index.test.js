@@ -206,79 +206,132 @@ describe("calculates event results", () => {
 
   it("calculates overall results", () => {
     const preOverallResults = require("./__fixtures__/preOverallLeague.json");
-    expect(calculateOverall(preOverallResults.classes)).toEqual([
-      {
-        location: "Australia",
-        results: {
-          driverResults: [
-            {
-              className: "pro",
-              entry: {
-                isDnfEntry: false,
-                isFounder: false,
-                isPlayer: false,
-                isVIP: false,
+    expect(calculateOverall(preOverallResults.classes)).toEqual({
+      events: [
+        {
+          location: "Australia",
+          results: {
+            driverResults: [
+              {
+                className: "pro",
+                entry: {
+                  isDnfEntry: false,
+                  isFounder: false,
+                  isPlayer: false,
+                  isVIP: false,
+                  name: "Kuul",
+                  nationality: "eLngEstonian",
+                  playerDiff: 0,
+                  rank: 1,
+                  stageDiff: "--",
+                  stageTime: "03:40.461",
+                  totalDiff: "--",
+                  totalTime: "56:18.651",
+                  vehicleName: "Peugeot 206 Rally"
+                },
                 name: "Kuul",
-                nationality: "eLngEstonian",
-                playerDiff: 0,
-                rank: 1,
-                stageDiff: "--",
-                stageTime: "03:40.461",
-                totalDiff: "--",
-                totalTime: "56:18.651",
-                vehicleName: "Peugeot 206 Rally"
+                overallPoints: 115,
+                powerStagePoints: 5,
+                totalPoints: 120
               },
-              name: "Kuul",
-              overallPoints: 115,
-              powerStagePoints: 5,
-              totalPoints: 120
-            },
-            {
-              className: "amateur",
-              entry: {
-                isDnfEntry: false,
-                isFounder: false,
-                isPlayer: false,
-                isVIP: false,
+              {
+                className: "amateur",
+                entry: {
+                  isDnfEntry: false,
+                  isFounder: false,
+                  isPlayer: false,
+                  isVIP: false,
+                  name: "Ssplatered",
+                  nationality: "eLngCanadian",
+                  playerDiff: 0,
+                  rank: 1,
+                  stageDiff: "--",
+                  stageTime: "03:40.304",
+                  totalDiff: "--",
+                  totalTime: "56:44.370",
+                  vehicleName: "Lancia Delta HF Integrale"
+                },
                 name: "Ssplatered",
-                nationality: "eLngCanadian",
-                playerDiff: 0,
-                rank: 1,
-                stageDiff: "--",
-                stageTime: "03:40.304",
-                totalDiff: "--",
-                totalTime: "56:44.370",
-                vehicleName: "Lancia Delta HF Integrale"
+                overallPoints: 84,
+                powerStagePoints: 5,
+                totalPoints: 89
               },
-              name: "Ssplatered",
-              overallPoints: 84,
-              powerStagePoints: 5,
-              totalPoints: 89
-            },
-            {
-              className: "pro",
-              entry: {
-                isDnfEntry: true,
-                isFounder: false,
-                isPlayer: false,
-                isVIP: false,
+              {
+                className: "pro",
+                entry: {
+                  isDnfEntry: true,
+                  isFounder: false,
+                  isPlayer: false,
+                  isVIP: false,
+                  name: "Sladdikurvinen ™",
+                  nationality: "eLngSwedish",
+                  playerDiff: 0,
+                  rank: 28,
+                  stageDiff: "+11:19.539",
+                  stageTime: "15:00.000",
+                  totalDiff: "+03:03:41.349",
+                  totalTime: "04:00:00.000",
+                  vehicleName: "SUBARU Impreza (2001)"
+                },
                 name: "Sladdikurvinen ™",
-                nationality: "eLngSwedish",
-                playerDiff: 0,
-                rank: 28,
-                stageDiff: "+11:19.539",
-                stageTime: "15:00.000",
-                totalDiff: "+03:03:41.349",
-                totalTime: "04:00:00.000",
-                vehicleName: "SUBARU Impreza (2001)"
+                totalPoints: 0
+              }
+            ],
+            teamResults: [
+              {
+                name: "Unlimited Pedal Works",
+                totalPoints: 115
               },
-              name: "Sladdikurvinen ™",
-              totalPoints: 0
-            }
-          ]
+              {
+                name: "Ditch Dusters",
+                totalPoints: 0
+              }
+            ]
+          },
+          standings: {
+            driverStandings: [
+              {
+                currentPosition: 1,
+                name: "Kuul",
+                positionChange: null,
+                previousPosition: null,
+                totalPoints: 120
+              },
+              {
+                currentPosition: 2,
+                name: "Ssplatered",
+                positionChange: null,
+                previousPosition: null,
+                totalPoints: 89
+              },
+              {
+                currentPosition: 3,
+                name: "Sladdikurvinen ™",
+                positionChange: null,
+                previousPosition: null,
+                totalPoints: 0
+              }
+            ],
+            teamStandings: [
+              {
+                currentPosition: 1,
+                name: "Unlimited Pedal Works",
+                positionChange: null,
+                previousPosition: null,
+                totalPoints: 115
+              },
+              {
+                currentPosition: 2,
+                name: "Ditch Dusters",
+                positionChange: null,
+                previousPosition: null,
+                totalPoints: 0
+              }
+            ]
+          }
         }
-      }
-    ]);
+      ]
+    });
   });
 
   it("gets event keys from recent results", () => {
