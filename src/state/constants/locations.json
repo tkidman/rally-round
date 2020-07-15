@@ -14,5 +14,9 @@
 	"VÄRMLAND":{
 		"countryName": "Sweden",
 		"countryCode": "swe"
+	},
+	"NEW ENGLAND":{
+		"countryName": "USA",
+		"countryCode": "usa"
 	}
 }

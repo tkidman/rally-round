@@ -45,6 +45,116 @@ function processDriverResults(results) {
   };
 }
 
+function processFantasyDrivers(driverStandings) {
+  var drivers = Object.values(driverStandings);
+  var drivers_old = [...drivers];
+  drivers.sort((a, b) => b.total - a.total);
+  drivers_old.sort((a, b) => b.previous - a.previous);
+  const highestScore = drivers[0].total;
+  drivers.forEach(driver => (driver.gap = highestScore - driver.total));
+  for (let i = 0; i < drivers.length; i++) {
+    const driver = drivers[i];
+    var prev = drivers_old.findIndex(_d => _d.name == driver.name);
+    driver.positive = false;
+    driver.neutral = false;
+    driver.negative = false;
+    driver.rank = i + 1;
+    driver.evolution = prev - i;
+    if (driver.evolution > 0) {
+      driver.positive = true;
+    } else if (driver.evolution < 0) {
+      driver.negative = true;
+      driver.evolution *= -1;
+    } else {
+      driver.neutral = true;
+    }
+  }
+  return drivers;
+}
+function processFantasyTeams(teamStandings) {
+  var teams = Object.values(teamStandings).reduce((arr, team) => {
+    var out = {
+      name: team.name,
+      points: team.points,
+      previous: team.previous,
+      positive: false,
+      neutral: false,
+      negative: false,
+      drivers: team.drivers.join(", ")
+    };
+    Object.keys(team.roster_history).forEach(location => {
+      out[location] = team.roster_history[location].points;
+    });
+    arr.push(out);
+    return arr;
+  }, []);
+  var teams_old = [...teams];
+  teams.sort((a, b) => b.points - a.points);
+  teams_old.sort((a, b) => b.previous - a.previous);
+
+  const highestScore = teams[0].points;
+  teams.forEach(team => (team.gap = highestScore - team.points));
+
+  for (let i = 0; i < teams.length; i++) {
+    const team = teams[i];
+    var prev = teams_old.findIndex(_t => _t.name == team.name);
+    team.rank = i + 1;
+    team.evolution = prev - i;
+    if (team.evolution > 0) {
+      team.positive = true;
+    } else if (team.evolution < 0) {
+      team.negative = true;
+      team.evolution *= -1;
+    } else {
+      team.neutral = true;
+    }
+  }
+
+  return teams;
+}
+
+function processBestBuy() {
+  return [
+    {
+      name: "TUS Cham",
+      value: 8.72,
+      cost: 5.5,
+      total: 48
+    },
+    {
+      name: "BrothersChris",
+      value: 6.66,
+      cost: 4.5,
+      total: 30
+    },
+    {
+      name: "Wumy73",
+      value: 6.3,
+      cost: 3,
+      total: 19
+    },
+    {
+      name: "Satchmo",
+      value: 5.5,
+      cost: 2,
+      total: 11
+    },
+    {
+      name: "DirtPirate",
+      value: 5,
+      cost: 5,
+      total: 25
+    }
+  ];
+}
+
+function processFantasyResults(results) {
+  const drivers = processFantasyDrivers(results.driverStandings);
+  const teams = processFantasyTeams(results.teams);
+  const bestBuy = processBestBuy();
+  return { drivers: drivers, teams: teams, bestBuy: bestBuy };
+}
+
 const resultsToImage = driverResults => {
   const template_path = `./src/state/${process.env.CLUB}/templates/`;
   if (!fs.existsSync(template_path) || counter > 1) return;
@@ -65,9 +175,22 @@ const resultsToImage = driverResults => {
   });
 };
 
-const fantasyStandingsToImage = data => {
+const fantasyStandingsToImage = results => {
   const template_path = `./src/state/${process.env.CLUB}/templates/`;
   if (!fs.existsSync(template_path)) return;
+  var _t = fs.readFileSync(template_path + "fantasy.hbs").toString();
+  var template = Handlebars.compile(_t);
+  var data = processFantasyResults(results);
+  var out = template(data);
+  htmlToImage({
+    output: "./fantasy.png",
+    html: out
+  });
+  fs.writeFile(folder + "fantasy.html", out, function(err) {
+    if (err) {
+      return debug(`error writing html file`);
+    }
+  });
 };
 
 module.exports = {

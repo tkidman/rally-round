@@ -1,13 +1,14 @@
 [
 	{
 		"name": "Ram Ranchers",
+		"previous": 0,
 		"owner": "Pynklu",
 		"drivers": [
-			"Qazra",
-			"Babz",
-			"Sean_Da_Sheep24"
+			"QazRa",
+			"Mike Dee",
+			"SFRrallimoilane"
 		],
-		"joker": "Babz",
+		"joker": "Mike Dee",
 		"budget": 15.5,
 		"points": 0,
 		"roster_history": {
@@ -28,11 +29,21 @@
 				],
 				"joker": "Pynklu",
 				"points": 0
+			},
+			"NEW ENGLAND": {
+				"drivers": [
+					"QazRa",
+					"Babz",
+					"Sean_Da_Sheep24"
+				],
+				"joker": "Babz",
+				"points": 0
 			}
 		}
 	},
 	{
 		"name": "Nekkid Cowboys",
+		"previous": 0,
 		"owner": "Babz",
 		"drivers": [
 			"FusionJohn",
@@ -60,11 +71,21 @@
 				],
 				"joker": "SFRrallimoilane",
 				"points": 0
+			},
+			"NEW ENGLAND": {
+				"drivers": [
+					"FusionJohn",
+					"SFRrallimoilane",
+					"TUS Cham"
+				],
+				"joker": "SFRrallimoilane",
+				"points": 0
 			}
 		}
 	},
 	{
 		"name": "Timo's Stones",
+		"previous": 0,
 		"owner": "ninko",
 		"drivers": [
 			"TUS Cham",
@@ -92,11 +113,21 @@
 				],
 				"joker": "Babz",
 				"points": 0
+			},
+			"NEW ENGLAND": {
+				"drivers": [
+					"TUS Cham",
+					"FusionJohn",
+					"Babz"
+				],
+				"joker": "Babz",
+				"points": 0
 			}
 		}
 	},
 	{
 		"name": "Hyundry",
+		"previous": 0,
 		"owner": "pigloaf",
 		"drivers": [
 			"TUS Phoenix",
@@ -124,11 +155,21 @@
 				],
 				"joker": "emuga12",
 				"points": 0
+			},
+			"NEW ENGLAND": {
+				"drivers": [
+					"TUS Phoenix",
+					"TUS Cham",
+					"emuga12"
+				],
+				"joker": "emuga12",
+				"points": 0
 			}
 		}
 	},
 	{
 		"name": "The Chosen Ones",
+		"previous": 0,
 		"owner": "PiorARG",
 		"drivers": [
 			"TUS Phoenix",
@@ -156,18 +197,28 @@
 				],
 				"joker": "SFRrallimoilane",
 				"points": 0
+			},
+			"NEW ENGLAND": {
+				"drivers": [
+					"TUS Phoenix",
+					"DirtPirate",
+					"Babz"
+				],
+				"joker": "Babz",
+				"points": 0
 			}
 		}
 	},
 	{
 		"name": "Rally Legends",
+		"previous": 0,
 		"owner": "Thorellski",
 		"drivers": [
-			"Siggis90",
+			"DirtPirate",
 			"Puki2579",
-			"fazzixd"
+			"SFRrallimoilane"
 		],
-		"joker": "",
+		"joker": "SFRrallimoilane",
 		"budget": 19,
 		"points": 0,
 		"roster_history": {
@@ -188,11 +239,21 @@
 				],
 				"joker": "Pynklu",
 				"points": 0
+			},
+			"NEW ENGLAND": {
+				"drivers": [
+					"Siggis90",
+					"Puki2579",
+					"fazzixd"
+				],
+				"joker": "",
+				"points": 0
 			}
 		}
 	},
 	{
-		"name": "speed bumps",
+		"name": "Speed Bumps",
+		"previous": 0,
 		"owner": "Siggis90",
 		"drivers": [
 			"FusionJohn",
@@ -220,18 +281,28 @@
 				],
 				"joker": "IM-MaxPower",
 				"points": 0
+			},
+			"NEW ENGLAND": {
+				"drivers": [
+					"FusionJohn",
+					"MyOnePube",
+					"IM-MaxPower"
+				],
+				"joker": "IM-MaxPower",
+				"points": 0
 			}
 		}
 	},
 	{
-		"name": "jazz hands",
+		"name": "Jazz Hands",
+		"previous": 0,
 		"owner": "satchmo",
 		"drivers": [
 			"Puki2579",
 			"Babz",
-			"satchmo"
+			"SFRrallimoilane"
 		],
-		"joker": "Babz",
+		"joker": "SFRrallimoilane",
 		"budget": 15,
 		"points": 0,
 		"roster_history": {
@@ -252,11 +323,21 @@
 				],
 				"joker": "Babz",
 				"points": 0
+			},
+			"NEW ENGLAND": {
+				"drivers": [
+					"Puki2579",
+					"Babz",
+					"satchmo"
+				],
+				"joker": "Babz",
+				"points": 0
 			}
 		}
 	},
 	{
 		"name": "Two Tommies and a Yank",
+		"previous": 0,
 		"owner": "Raumo",
 		"drivers": [
 			"BrothersChris",
@@ -284,11 +365,21 @@
 				],
 				"joker": "TUS Cham",
 				"points": 0
+			},
+			"NEW ENGLAND": {
+				"drivers": [
+					"BrothersChris",
+					"FusionJohn",
+					"TUS Cham"
+				],
+				"joker": "TUS Cham",
+				"points": 0
 			}
 		}
 	},
 	{
 		"name": "Loeb's Meteo",
+		"previous": 0,
 		"owner": "nPiipo",
 		"drivers": [
 			"TUS Phoenix",
@@ -300,37 +391,120 @@
 		"points": 0,
 		"roster_history": {
 			"MONTE CARLO": {
-				"drivers": [],
-				"joker": "",
-				"points": 0
+				"drivers": [
+					"TUS Phoenix",
+					"SSplatered",
+					"Sean_Da_Sheep24"
+				],
+				"joker": "Sean_Da_Sheep24",
+				"points": 0,
+				"inactive": true
 			},
 			"VÄRMLAND": {
-				"drivers": [],
-				"joker": "",
+				"drivers": [
+					"TUS Phoenix",
+					"SSplatered",
+					"Sean_Da_Sheep24"
+				],
+				"joker": "Sean_Da_Sheep24",
+				"points": 0,
+				"inactive": true
+			},
+			"NEW ENGLAND": {
+				"drivers": [
+					"TUS Phoenix",
+					"SSplatered",
+					"Sean_Da_Sheep24"
+				],
+				"joker": "Sean_Da_Sheep24",
 				"points": 0
 			}
 		}
 	},
 	{
-		"name": "8 minute babz",
+		"name": "8 Minute Babz",
+		"previous": 0,
 		"owner": "mkingy",
 		"drivers": [
-			"Qazra",
+			"QazRa",
 			"Babz",
-			"Sean_Da_Sheep24"
+			"SSplatered"
 		],
-		"joker": "Sean_Da_Sheep24",
+		"joker": "SSplatered",
 		"budget": 15,
 		"points": 0,
 		"roster_history": {
 			"MONTE CARLO": {
-				"drivers": [],
-				"joker": "",
+				"drivers": [
+					"QazRa",
+					"Babz",
+					"Sean_Da_Sheep24"
+				],
+				"joker": "Sean_Da_Sheep24",
+				"inactive": "true",
 				"points": 0
 			},
 			"VÄRMLAND": {
-				"drivers": [],
-				"joker": "",
+				"drivers": [
+					"QazRa",
+					"Babz",
+					"Sean_Da_Sheep24"
+				],
+				"joker": "Sean_Da_Sheep24",
+				"inactive": true,
+				"points": 0
+			},
+			"NEW ENGLAND": {
+				"drivers": [
+					"QazRa",
+					"Babz",
+					"Sean_Da_Sheep24"
+				],
+				"joker": "Sean_Da_Sheep24",
+				"points": 0
+			}
+		}
+	},
+	{
+		"name": "Fork Sake",
+		"previous": 0,
+		"owner": "Agersi",
+		"drivers": [
+			"BrothersChris",
+			"Puki2579",
+			"DirtPirate"
+		],
+		"joker": "BrothersChris",
+		"budget": 15,
+		"points": 0,
+		"roster_history": {
+			"MONTE CARLO": {
+				"drivers": [
+					"BrothersChris",
+					"Puki2579",
+					"DirtPirate"
+				],
+				"joker": "BrothersChris",
+				"inactive": "true",
+				"points": 0
+			},
+			"VÄRMLAND": {
+				"drivers": [
+					"BrothersChris",
+					"Puki2579FA",
+					"DirtPirate"
+				],
+				"joker": "BrothersChris",
+				"inactive": true,
+				"points": 0
+			},
+			"NEW ENGLAND": {
+				"drivers": [
+					"BrothersChris",
+					"Puki2579",
+					"DirtPirate"
+				],
+				"joker": "BrothersChris",
 				"points": 0
 			}
 		}

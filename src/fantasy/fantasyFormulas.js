@@ -42,8 +42,15 @@ const calculateDNFPoints = resultsByDriver => {
 };
 
 const calculatePodiumStreak = (resultsByDriver, previousEvent) => {
-  //TODO:- Podium streak, 10 points
-  return;
+  if (!previousEvent) return;
+  var previousPodium = previousEvent.results.driverResults
+    .slice(0, 3)
+    .map(result => result.entry.name);
+  for (let i = 0; i < 3; i++) {
+    var result = resultsByDriver[i];
+    if (previousPodium.includes(result.entry.name))
+      addPointsToResult(result, 10);
+  }
 };
 function addPointsToResult(result, points) {
   if (!("fantasyPoints" in result)) result["fantasyPoints"] = 0;

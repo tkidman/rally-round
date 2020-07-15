@@ -38,7 +38,9 @@ const calculateFantasyStandings = (event, previousEvent, league, clazz) => {
 
   addDnsDrivers(driverResults, clazz);
 
-  league.fantasy.calculators.forEach(calculation => calculation(driverResults));
+  league.fantasy.calculators.forEach(calculation =>
+    calculation(driverResults, previousEvent)
+  );
 
   var lookuptable = driverResults.reduce((dict, driver) => {
     dict[driver.name] = driver.fantasyPoints;
@@ -48,7 +50,7 @@ const calculateFantasyStandings = (event, previousEvent, league, clazz) => {
   teams.map(team => {
     if (!(event.location in team.roster_history))
       team.roster_history[event.location] = {
-        drivers: team.current_drivers,
+        drivers: team.drivers,
         joker: team.joker,
         points: 0
       };
@@ -56,16 +58,37 @@ const calculateFantasyStandings = (event, previousEvent, league, clazz) => {
     var score = _roster.drivers.reduce((val, driver) => {
       var driverPoints = lookuptable[driver];
       driverPoints = driverPoints ? driverPoints : -10;
-      driverPoints = _roster.joker == driver ? driverPoints * 2 : driverPoints;
+      if (_roster.inactive) {
+        driverPoints = Math.round(driverPoints * 0.75);
+        //driverPoints = (driverPoints < 0) ? 0 : driverPoints;
+      } else if (_roster.joker == driver) {
+        driverPoints *= 2;
+      }
       return val + driverPoints;
     }, 0);
     _roster.points = score;
+    team.previous = team.points;
     team.points += score;
   });
 
-  if (!(event.location in league.fantasy.driverStandings)) {
-    league.fantasy.driverStandings[event.location] = lookuptable;
-  }
+  if (!league.fantasy.driverStandings) league.fantasy.driverStandings = {};
+  Object.keys(lookuptable).forEach(driver => {
+    if (!league.fantasy.driverStandings[driver]) {
+      league.fantasy.driverStandings[driver] = {
+        name: driver,
+        total: 0,
+        previous: 0
+      };
+    }
+    league.fantasy.driverStandings[driver][event.location] =
+      lookuptable[driver];
+    league.fantasy.driverStandings[driver].previous =
+      league.fantasy.driverStandings[driver].total;
+    league.fantasy.driverStandings[driver].total += lookuptable[driver];
+  });
+  // if (!(event.location in league.fantasy.driverStandings)) {
+  //   league.fantasy.driverStandings[event.location] = lookuptable;
+  // }
   return teams;
 };
 
