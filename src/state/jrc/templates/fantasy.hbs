@@ -1,0 +1,265 @@
+<html>
+
+<head>
+	<style>
+		#container {
+			width: 90%;
+			margin: auto;
+			padding: 4em;
+		}
+
+		body {
+			background-image: url("../../assets/background_fantasy.png");
+			font-family: Helvetica, sans-serif
+		}
+
+		h2 {
+			color: white;
+		}
+
+		
+		th,
+		td {
+			padding: 0.5em;
+			text-align: center;
+		}
+
+		.text-left {
+			text-align: left;
+		}
+
+		.bold {
+			font-weight: bold;
+		}
+
+		.bold > small {
+			font-weight:initial;
+		}
+
+		th>img {
+			max-height: 1.5em;
+			margin: auto;
+		}
+
+		thead>tr {
+			background-color: #5355bf;
+			color: white;
+		}
+
+		tbody>tr:nth-child(even) {
+			background-color: #dfedff
+		}
+
+		tbody>tr:nth-child(odd) {
+			background-color: #F5F5F5
+		}
+
+		.logo {
+			display: inline-block;
+		}
+
+		.logo>img {
+			max-height: 4em;
+			border-radius: 50%;
+		}
+
+		.right {
+			float: right;
+		}
+
+		.positive {
+			color: green;
+			font-weight: bold;
+		}
+
+		.neutral {
+			color: grey;
+			font-weight: bold;
+		}
+
+		.negative {
+			color: red;
+			font-weight: bold;
+		}
+
+		.arrow {
+			border: solid black;
+			border-width: 0 2px 2px 0;
+			display: inline-block;
+			padding: 3px;
+		}
+
+		.up {
+			border-color: green;
+			transform: rotate(-135deg);
+			-webkit-transform: rotate(-135deg);
+		}
+
+		.down {
+			border-color: red;
+			transform: rotate(45deg);
+			-webkit-transform: rotate(45deg);
+		}
+
+		#flexContainer {
+			display: flex;
+			justify-content: space-evenly;
+		}
+
+		.flexBox {
+
+		}
+	</style>
+</head>
+
+<body>
+	<div id="container">
+		<div class="logo"><img src="../../assets/jrc_round.jpg" /> </div>
+		<div class="logo right"><img src="../../assets/fantasy.jpg" /> </div>
+		<div id="flexContainer">
+			<div class="flexBox">
+				<h2>Team Standings</h2>
+				<table id="tableTeams">
+					<thead>
+						<tr>
+							<th></th>
+							<th></th>
+							<th>Team</th>
+							<th><img src="../../assets/country-flags/mco.png" /></th>
+							<th><img src="../../assets/country-flags/swe.png" /></th>
+							<th><img src="../../assets/country-flags/usa.png" /></th>
+							<th><img src="../../assets/country-flags/deu.png" /></th>
+							<th><img src="../../assets/country-flags/grc.png" /></th>
+							<th><img src="../../assets/country-flags/welsh.png" /></th>
+							<th><img src="../../assets/country-flags/esp.png" /></th>
+							<th><img src="../../assets/country-flags/aus.png" /></th>
+							<th>Points</th>
+							<th>Gap</th>
+						</tr>
+					</thead>
+					<tbody>
+						{{#each teams}}{{#with this}}
+						<tr>
+							<td>{{rank}}</td>
+							<td>
+								{{#if positive}}
+								<span class="positive"><i class="arrow up"></i>&nbsp;{{evolution}}</span>
+								{{/if}}
+								{{#if neutral}}
+								<span class="neutral">=</span>
+								{{/if}}
+								{{#if negative}}
+								<span class="negative"><i class="arrow down"></i>&nbsp;{{evolution}}</span>
+								{{/if}}
+							</td>
+							<td class="text-left bold">{{name}} <small>( {{drivers}} )</small></td>
+							<td>{{[MONTE CARLO]}}</td>
+							<td>{{VÄRMLAND}}</td>
+							<td>{{[NEW ENGLAND]}}</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td class="bold">{{points}}</td>
+							<td>{{gap}}</td>
+						</tr>
+						{{/with}}{{/each}}
+					</tbody>
+
+				</table>
+
+				
+			</div>
+
+			<div class="flexBox">
+				<h2>This week's JRC Best Buys™</h2>
+				<table id="bestBuys">
+					<thead>
+						<tr>
+							<th>Driver</th>
+							<th>Cost</th>
+							<th>Profit</th>
+							<th>Value / $</th>
+						</tr>
+					</thead>
+					<tbody>
+						{{#each bestBuy}}{{#with this}}
+						<tr>
+							<td class="text-left bold">{{name}}</td>
+							<td>{{cost}}</td>
+							<td>{{total}}</td>
+							<td class="bold">{{value}}</td>
+						</tr>
+						{{/with}}{{/each}}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<div id="container">
+		<div class="logo"><img src="../../assets/jrc_round.jpg" /> </div>
+		<div class="logo right"><img src="../../assets/fantasy.jpg" /> </div>
+		<div id="flexContainer">
+			<div class="flexBox">
+				<h2>Driver Standings</h2>
+				<table id="tableDrivers">
+					<thead>
+						<tr>
+							<th></th>
+							<th></th>
+							<th>Driver</th>
+							<th><img src="../../assets/country-flags/mco.png" /></th>
+							<th><img src="../../assets/country-flags/swe.png" /></th>
+							<th><img src="../../assets/country-flags/usa.png" /></th>
+							<th><img src="../../assets/country-flags/deu.png" /></th>
+							<th><img src="../../assets/country-flags/grc.png" /></th>
+							<th><img src="../../assets/country-flags/welsh.png" /></th>
+							<th><img src="../../assets/country-flags/esp.png" /></th>
+							<th><img src="../../assets/country-flags/aus.png" /></th>
+							<th>Points</th>
+							<th>Gap</th>
+						</tr>
+					</thead>
+					<tbody>
+						{{#each drivers}}{{#with this}}
+						<tr>
+							<td>{{rank}}</td>
+							<td>
+								{{#if positive}}
+								<span class="positive"><i class="arrow up"></i>&nbsp;{{evolution}}</span>
+								{{/if}}
+								{{#if neutral}}
+								<span class="neutral">=</span>
+								{{/if}}
+								{{#if negative}}
+								<span class="negative"><i class="arrow down"></i>&nbsp;{{evolution}}</span>
+								{{/if}}
+							</td>
+							<td class="text-left bold">{{name}}</td>
+							<td>{{[MONTE CARLO]}}</td>
+							<td>{{VÄRMLAND}}</td>
+							<td>{{[NEW ENGLAND]}}</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td class="bold">{{total}}</td>
+							<td>{{gap}}</td>
+						</tr>
+						{{/with}}{{/each}}
+					</tbody>
+
+				</table>
+			</div>
+
+		</div>
+	</div>
+</body>
+
+</html>
