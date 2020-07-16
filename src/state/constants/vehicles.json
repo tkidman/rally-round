@@ -11,7 +11,18 @@
 		"class": "2000cc",
 		"brand": "subaru"
 	},
-
+	"ŠKODA Fabia Rally": {
+		"class": "2000cc",
+		"brand": "skoda"
+	},
+	"SUBARU Impreza S4 Rally":{
+		"class": "2000cc",
+		"brand": "subaru"
+	},
+	"Citroën C4 Rally":{
+		"class": "2000cc",
+		"brand": "citroen"
+	},
 	"Lancia Delta HF Integrale":{
 		"class": "groupA",
 		"brand": "lancia"

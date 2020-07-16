@@ -4,7 +4,7 @@ const driverColumns = {
   discordName: "Discord",
   raceNetName: "Racenet",
   teamId: "Team",
-  classes: "classes"
+  class: "Class"
 };
 
 module.exports = driverColumns;
