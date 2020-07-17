@@ -232,6 +232,7 @@ describe("calculates event results", () => {
                 name: "Kuul",
                 overallPoints: 115,
                 powerStagePoints: 5,
+                teamId: "Unlimited Pedal Works",
                 totalPoints: 120
               },
               {
@@ -274,6 +275,7 @@ describe("calculates event results", () => {
                   vehicleName: "SUBARU Impreza (2001)"
                 },
                 name: "Sladdikurvinen ™",
+                teamId: "Ditch Dusters",
                 totalPoints: 0
               }
             ],
