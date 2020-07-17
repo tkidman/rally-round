@@ -75,9 +75,11 @@ function processClass(league, clazz) {
       if (result.name in driverMap) {
         var driver = driverMap[result.name];
         if (!driver.team) driver.team = result.teamId;
-        if (!driver.car) driver.car = vehicles[result.entry.vehicleName].brand;
-        if (!driver.nationality && result.entry.nationality) {
-          driver.nationality = countries[result.entry.nationality].code;
+        if(!result.entry.isDnsEntry){
+          if (!driver.car) driver.car = vehicles[result.entry.vehicleName].brand;
+          if (!driver.nationality && result.entry.nationality) {
+            driver.nationality = countries[result.entry.nationality].code;
+          }
         }
       }
     });

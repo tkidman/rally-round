@@ -6,10 +6,10 @@ function addDnsDrivers(driverResults, clazz) {
     return dict;
   }, {});
   getDriversByClass(clazz).forEach(driver => {
-    if (driver.raceNetName in lookupTable) return;
+    if (driver.name in lookupTable) return;
     driverResults.push({
       className: clazz,
-      name: driver.raceNetName,
+      name: driver.name,
       overallPoints: 0,
       powerStagePoints: 0,
       totalPoints: 0,
@@ -31,11 +31,7 @@ const calculateFantasyStandings = (event, previousEvent, league, clazz) => {
   //if(event.location in teams.points) return;
 
   var driverResults = event.results.driverResults;
-  driverResults.forEach(result => {
-    var driver = getDriver(result.name);
-    result.teamId = driver ? driver.teamId : undefined;
-  });
-
+  
   addDnsDrivers(driverResults, clazz);
 
   league.fantasy.calculators.forEach(calculation =>
