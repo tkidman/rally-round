@@ -1,4 +1,4 @@
-const { getDriver, getDriversByClass } = require("../state/league");
+const { getDriversByClass } = require("../state/league");
 
 function addDnsDrivers(driverResults, clazz) {
   var lookupTable = driverResults.reduce((dict, result) => {
@@ -31,7 +31,7 @@ const calculateFantasyStandings = (event, previousEvent, league, clazz) => {
   //if(event.location in teams.points) return;
 
   var driverResults = event.results.driverResults;
-  
+
   addDnsDrivers(driverResults, clazz);
 
   league.fantasy.calculators.forEach(calculation =>
