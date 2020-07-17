@@ -11,7 +11,8 @@ const { getTotalPoints } = require("./shared");
 const { calculateFantasyStandings } = require("./fantasy/fantasyCalculator");
 const {
   resultsToImage,
-  fantasyStandingsToImage
+  fantasyStandingsToImage,
+  drawResults
 } = require("./visualisation/tableDrawer");
 
 const classes = league.classes;
@@ -65,6 +66,7 @@ const calculateTeamResults = driverResults => {
     const driver = getDriver(result.name);
     if (driver) {
       const resultTeamId = driver.teamId;
+      result.teamId = resultTeamId;
       if (resultTeamId && resultTeamId !== "privateer") {
         if (!teamResults[resultTeamId]) {
           teamResults[resultTeamId] = {
@@ -147,8 +149,6 @@ const calculateEventResults = (leaderboard, previousEvent, className) => {
   const teamResultsById = calculateTeamResults(driverResults);
   const teamResults = sortTeamResults(teamResultsById);
 
-  resultsToImage(driverResults);
-
   driverResults.forEach(result => (result.className = className));
   teamResults.forEach(result => (result.className = className));
   return { driverResults, teamResults };
@@ -211,8 +211,9 @@ const processEvent = async (className, event, previousEvent) => {
   const leaderboard = await fetchEventResults(event);
   event.results = calculateEventResults(leaderboard, previousEvent, className);
   calculateEventStandings(event, previousEvent);
-  if (league.classes[className].fantasy)
-    calculateFantasyStandings(event, previousEvent, league, className);
+  // if (league.classes[className].fantasy){
+  //   calculateFantasyStandings(event, previousEvent, league, className);
+  // }  
 };
 
 const processEvents = async (events, className) => {
@@ -307,7 +308,8 @@ const processAllClasses = async () => {
       await processEvents(rallyClass.events, rallyClassName);
     }
     calculateOverallResults();
-    if (league.fantasy) fantasyStandingsToImage(league.fantasy);
+    //if (league.fantasy) fantasyStandingsToImage(league.fantasy);
+    drawResults(league);
     writeCSV(league);
     writeJSON(league);
     printMissingDrivers();

@@ -69,7 +69,7 @@ const loadDriversFromMasterSheet = () => {
       const driverName = row[driverColumns.driverName];
       const discordName = row[driverColumns.discordName];
       const raceNetName = row[driverColumns.raceNetName];
-      const classes = row[driverColumns.classes];
+      const clazz = row[driverColumns.class];
       if (driverName) {
         const driverId = driverName.toUpperCase();
         driversById[driverId] = {
@@ -79,7 +79,7 @@ const loadDriversFromMasterSheet = () => {
           discordName,
           teamId,
           countryName,
-          classes
+          clazz
         };
       } else {
         debug(
@@ -120,8 +120,8 @@ const getDriver = name => {
 };
 
 const getDriversByClass = clazz => {
-  return Object.values(driversByRaceNet).filter(driver => {
-    return driver.classes && driver.classes.includes(clazz);
+  return Object.values(driversById).filter(driver => {
+    return driver.clazz && (driver.clazz.toUpperCase() == clazz.toUpperCase());
   });
 };
 

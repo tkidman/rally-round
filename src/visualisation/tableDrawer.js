@@ -5,6 +5,10 @@ const folder = "./src/visualisation/";
 var counter = 0;
 const htmlToImage = require("node-html-to-image");
 
+const countries = JSON.parse(fs.readFileSync("./src/state/constants/countries.json"));
+const vehicles = JSON.parse(fs.readFileSync("./src/state/constants/vehicles.json"));
+const template_path = `./src/state/${process.env.CLUB}/templates/`;
+
 function processDriverResults(results) {
   let rawdata = fs.readFileSync("./src/state/constants/countries.json");
   let countries = JSON.parse(rawdata);
@@ -44,7 +48,61 @@ function processDriverResults(results) {
     drivers: driversArray
   };
 }
+/**
+ * @see JRC_MAIN_HELPERS
+ */
+function processClass(league, clazz){
+  const events = league.classes[clazz].events;
+  var driverMap = {};
+  var teamMap = {};
 
+  events.forEach(event => {
+    var location = event.location;
+    event.standings.driverStandings.forEach(driver => {
+      if(!(driver.name in driverMap)){
+        driverMap[driver.name] = { name: driver.name, total: 0 };
+      }
+      mapEntry = driverMap[driver.name]
+      mapEntry[event.location] = driver.totalPoints - mapEntry.total;
+      mapEntry.total = driver.totalPoints;
+      mapEntry.positionChange = driver.positionChange;
+    });
+
+    event.results.driverResults.forEach(result => {
+      if(result.name in driverMap){
+        var driver = driverMap[result.name];
+        if(!driver.team) driver.team = result.teamId;
+        if(!driver.car) driver.car = vehicles[result.entry.vehicleName].brand;
+        if(!driver.nationality && result.entry.nationality){
+          driver.nationality = countries[result.entry.nationality].code;
+        } 
+      }
+    });
+  });
+
+
+
+  var driverList = Object.values(driverMap);
+  driverList.sort((a,b) => b.total - a.total)
+
+  var highest_score = driverList[0].total;
+  var counter = 1;
+  driverList.forEach(driver => {
+    driver.position = counter;
+    driver.gap = highest_score - driver.total;
+    driver.positive = driver.positionChange > 0;
+    driver.neutral = driver.positionChange == 0;
+    driver.negative = driver.positionChange < 0;
+    if( driver.negative ) driver.positionChange *= -1;
+    counter++;
+  })
+
+  return {drivers: driverList}
+}
+
+/**
+ * @see FANTASY_HELPERS
+ */
 function processFantasyDrivers(driverStandings) {
   var drivers = Object.values(driverStandings);
   var drivers_old = [...drivers];
@@ -112,7 +170,6 @@ function processFantasyTeams(teamStandings) {
 
   return teams;
 }
-
 function processBestBuy() {
   return [
     {
@@ -147,13 +204,31 @@ function processBestBuy() {
     }
   ];
 }
-
 function processFantasyResults(results) {
   const drivers = processFantasyDrivers(results.driverStandings);
   const teams = processFantasyTeams(results.teams);
   const bestBuy = processBestBuy();
   return { drivers: drivers, teams: teams, bestBuy: bestBuy };
 }
+
+/**
+ * @see PROCESSORS
+ */
+function jrcAllResults(league){
+  const data = processClass(league, 'jrc1');
+
+  if (!fs.existsSync(template_path)) return;
+  var _t = fs.readFileSync(template_path + "standings.hbs").toString();
+  
+  var template = Handlebars.compile(_t);
+  var out = template(data);
+
+  fs.writeFile(folder + "driverStandings.html", out, function(err) {
+    if (err) {
+      return debug(`error writing html file`);
+    }
+  });
+} 
 
 const resultsToImage = driverResults => {
   const template_path = `./src/state/${process.env.CLUB}/templates/`;
@@ -176,9 +251,10 @@ const resultsToImage = driverResults => {
 };
 
 const fantasyStandingsToImage = results => {
-  const template_path = `./src/state/${process.env.CLUB}/templates/`;
+  
   if (!fs.existsSync(template_path)) return;
   var _t = fs.readFileSync(template_path + "fantasy.hbs").toString();
+  
   var template = Handlebars.compile(_t);
   var data = processFantasyResults(results);
   var out = template(data);
@@ -193,7 +269,16 @@ const fantasyStandingsToImage = results => {
   });
 };
 
+const drawResults = league => {
+  if(!league.visualization || !functionMapping[league.visualization]) return;
+  functionMapping[league.visualization](league);
+}
+
+const functionMapping = {
+  "jrc_all": jrcAllResults
+}
+
 module.exports = {
-  resultsToImage,
+  drawResults,
   fantasyStandingsToImage
 };
