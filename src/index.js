@@ -10,7 +10,6 @@ const { writeJSON, writeCSV, checkOutputDirs } = require("./output");
 const { getTotalPoints } = require("./shared");
 const { calculateFantasyStandings } = require("./fantasy/fantasyCalculator");
 const {
-  resultsToImage,
   fantasyStandingsToImage,
   drawResults
 } = require("./visualisation/tableDrawer");
@@ -211,9 +210,9 @@ const processEvent = async (className, event, previousEvent) => {
   const leaderboard = await fetchEventResults(event);
   event.results = calculateEventResults(leaderboard, previousEvent, className);
   calculateEventStandings(event, previousEvent);
-  // if (league.classes[className].fantasy){
-  //   calculateFantasyStandings(event, previousEvent, league, className);
-  // }  
+  if (league.classes[className].fantasy) {
+    calculateFantasyStandings(event, previousEvent, league, className);
+  }
 };
 
 const processEvents = async (events, className) => {
@@ -308,7 +307,7 @@ const processAllClasses = async () => {
       await processEvents(rallyClass.events, rallyClassName);
     }
     calculateOverallResults();
-    //if (league.fantasy) fantasyStandingsToImage(league.fantasy);
+    if (league.fantasy) fantasyStandingsToImage(league.fantasy);
     drawResults(league);
     writeCSV(league);
     writeJSON(league);

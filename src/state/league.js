@@ -121,7 +121,7 @@ const getDriver = name => {
 
 const getDriversByClass = clazz => {
   return Object.values(driversById).filter(driver => {
-    return driver.clazz && (driver.clazz.toUpperCase() == clazz.toUpperCase());
+    return driver.clazz && driver.clazz.toUpperCase() == clazz.toUpperCase();
   });
 };
 
