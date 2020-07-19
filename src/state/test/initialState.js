@@ -1,5 +1,5 @@
 const initialState = {
-  classes: {
+  divisions: {
     pro: {
       events: [
         {

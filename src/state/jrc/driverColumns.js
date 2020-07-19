@@ -1,10 +1,18 @@
+const {
+  teamId,
+  name,
+  division,
+  discordName,
+  raceNetName
+} = require("../constants/driverFieldNames");
+
 const driverColumns = {
   //countryName: "Flag",
-  driverName: "Gamertag",
-  discordName: "Discord",
-  raceNetName: "Racenet",
-  teamId: "Team",
-  class: "Class"
+  [name]: "Gamertag",
+  [discordName]: "Discord",
+  [raceNetName]: "Racenet",
+  [teamId]: "Team",
+  [division]: "Class"
 };
 
 module.exports = driverColumns;

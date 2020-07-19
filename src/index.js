@@ -14,7 +14,7 @@ const {
   drawResults
 } = require("./visualisation/tableDrawer");
 
-const classes = league.classes;
+const divisions = league.divisions;
 const dnfFactor = 100000000;
 
 const getDuration = durationString => {
@@ -93,9 +93,9 @@ const sortTeamResults = teamResultsById => {
   return teamResults.reverse();
 };
 
-const createDNSEntry = entry => {
+const createDNSResult = result => {
   return {
-    name: entry.name,
+    name: result.name,
     entry: {
       isDnfEntry: true,
       isDnsEntry: true,
@@ -105,21 +105,35 @@ const createDNSEntry = entry => {
   };
 };
 
-const calculateEventResults = (leaderboard, previousEvent, className) => {
+const setDnfIfIncorrectCar = entry => {
+  // validate correct car usage
+  const driver = getDriver(entry.name);
+  if (driver && driver.car && driver.car !== entry.vehicleName) {
+    debug(
+      `driver ${entry.name} used wrong car ${entry.vehicleName}, should have used ${driver.car}. Setting to dnf`
+    );
+    entry.isDnfEntry = true;
+    entry.disqualificationReason = "Wrong car choice";
+  }
+};
+
+const calculateEventResults = (leaderboard, previousEvent, divisionName) => {
   const entries = leaderboard.entries;
   const resultsByDriver = entries.reduce((resultsByDriver, entry) => {
     resultsByDriver[entry.name] = {
       name: entry.name,
       entry
     };
+    setDnfIfIncorrectCar(entry);
+    // TODO validate correct class
     return resultsByDriver;
   }, {});
 
   // create results for drivers that didn't start a run
   if (previousEvent) {
-    previousEvent.results.driverResults.forEach(entry => {
-      if (!resultsByDriver[entry.name]) {
-        resultsByDriver[entry.name] = createDNSEntry(entry);
+    previousEvent.results.driverResults.forEach(result => {
+      if (!resultsByDriver[result.name]) {
+        resultsByDriver[result.name] = createDNSResult(result);
       }
     });
   }
@@ -129,13 +143,13 @@ const calculateEventResults = (leaderboard, previousEvent, className) => {
   updatePoints(
     resultsByDriver,
     powerStageEntries,
-    classes[className].points.powerStage,
+    divisions[divisionName].points.powerStage,
     "powerStagePoints"
   );
   updatePoints(
     resultsByDriver,
     totalEntries,
-    classes[className].points.overall,
+    divisions[divisionName].points.overall,
     "overallPoints"
   );
   const driverResults = orderResultsBy(
@@ -148,8 +162,8 @@ const calculateEventResults = (leaderboard, previousEvent, className) => {
   const teamResultsById = calculateTeamResults(driverResults);
   const teamResults = sortTeamResults(teamResultsById);
 
-  driverResults.forEach(result => (result.className = className));
-  teamResults.forEach(result => (result.className = className));
+  driverResults.forEach(result => (result.divisionName = divisionName));
+  teamResults.forEach(result => (result.divisionName = divisionName));
   return { driverResults, teamResults };
 };
 
@@ -206,29 +220,33 @@ const calculateEventStandings = (event, previousEvent) => {
   event.standings = { driverStandings, teamStandings };
 };
 
-const processEvent = async (className, event, previousEvent) => {
+const processEvent = async (divisionName, event, previousEvent) => {
   const leaderboard = await fetchEventResults(event);
-  event.results = calculateEventResults(leaderboard, previousEvent, className);
+  event.results = calculateEventResults(
+    leaderboard,
+    previousEvent,
+    divisionName
+  );
   calculateEventStandings(event, previousEvent);
-  if (league.classes[className].fantasy) {
-    calculateFantasyStandings(event, previousEvent, league, className);
+  if (league.divisions[divisionName].fantasy) {
+    calculateFantasyStandings(event, previousEvent, league, divisionName);
   }
 };
 
-const processEvents = async (events, className) => {
+const processEvents = async (events, divisionName) => {
   let previousEvent = null;
   for (const event of events) {
-    debug(`processing ${className} ${event.location}`);
-    await processEvent(className, event, previousEvent);
+    debug(`processing ${divisionName} ${event.location}`);
+    await processEvent(divisionName, event, previousEvent);
     previousEvent = event;
   }
 };
 
-const calculateOverall = processedClasses => {
+const calculateOverall = processedDivisions => {
   const overall = { events: [] };
-  Object.keys(processedClasses).forEach(className => {
-    const rallyClass = processedClasses[className];
-    rallyClass.events.forEach(event => {
+  Object.keys(processedDivisions).forEach(divisionName => {
+    const division = processedDivisions[divisionName];
+    division.events.forEach(event => {
       let overallEvent = overall.events.find(
         overallEvent => overallEvent.location === event.location
       );
@@ -239,10 +257,10 @@ const calculateOverall = processedClasses => {
         };
         overall.events.push(overallEvent);
       }
-      const driverResultsWithClassName = event.results.driverResults.map(
-        entry => Object.assign({ className }, { ...entry })
+      const driverResultsWithDivisionName = event.results.driverResults.map(
+        entry => Object.assign({ divisionName: divisionName }, { ...entry })
       );
-      overallEvent.results.driverResults.push(...driverResultsWithClassName);
+      overallEvent.results.driverResults.push(...driverResultsWithDivisionName);
     });
   });
 
@@ -261,26 +279,22 @@ const calculateOverall = processedClasses => {
 };
 
 const calculateOverallResults = () => {
-  league.overall = calculateOverall(classes);
+  league.overall = calculateOverall(divisions);
 };
 
-const fetchEventKeys = async (rallyClass, rallyClassName) => {
-  const recentResults = await fetchRecentResults(rallyClass.clubId);
-  return getEventKeysFromRecentResults(
-    recentResults,
-    rallyClass,
-    rallyClassName
-  );
+const fetchEventKeys = async (division, divisionName) => {
+  const recentResults = await fetchRecentResults(division.clubId);
+  return getEventKeysFromRecentResults(recentResults, division, divisionName);
 };
 
 const getEventKeysFromRecentResults = (
   recentResults,
-  rallyClass,
-  rallyClassName
+  division,
+  divisionName
 ) => {
   // pull out championships matching championship ids
   const championships = recentResults.championships.filter(championship =>
-    rallyClass.championshipIds.includes(championship.id)
+    division.championshipIds.includes(championship.id)
   );
   const eventKeys = championships.reduce((events, championship) => {
     const eventResultKeys = championship.events.map(event => {
@@ -289,7 +303,7 @@ const getEventKeysFromRecentResults = (
         challengeId: event.challengeId,
         stageId: `${event.stages.length - 1}`,
         location: event.name,
-        className: rallyClassName
+        divisionName: divisionName
       };
     });
     events.push(...eventResultKeys);
@@ -298,13 +312,13 @@ const getEventKeysFromRecentResults = (
   return eventKeys;
 };
 
-const processAllClasses = async () => {
+const processAllDivisions = async () => {
   try {
     checkOutputDirs();
-    for (const rallyClassName of Object.keys(classes)) {
-      const rallyClass = classes[rallyClassName];
-      rallyClass.events = await fetchEventKeys(rallyClass, rallyClassName);
-      await processEvents(rallyClass.events, rallyClassName);
+    for (const divisionName of Object.keys(divisions)) {
+      const division = divisions[divisionName];
+      division.events = await fetchEventKeys(division, divisionName);
+      await processEvents(division.events, divisionName);
     }
     calculateOverallResults();
     if (league.fantasy) fantasyStandingsToImage(league.fantasy);
@@ -319,7 +333,7 @@ const processAllClasses = async () => {
 };
 
 module.exports = {
-  processAllClasses,
+  processAllDivisions,
   // for tests
   calculateEventResults,
   sortTeamResults,

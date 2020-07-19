@@ -3,7 +3,7 @@ var fantasy_teams = require("./fantasyTeams.json");
 const initialState = {
   driverSheetId: "1qa1-dLB0vK0dturPflPl4vVQ6twd4i6vFX-88Tyba-Y",
   pointsForDNF: false,
-  classes: {
+  divisions: {
     jrc1: {
       clubId: "180867",
       championshipIds: ["260543", "267588", "272837"],

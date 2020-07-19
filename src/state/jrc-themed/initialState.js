@@ -1,6 +1,6 @@
 const initialState = {
   pointsForDNF: false,
-  classes: {
+  divisions: {
     themed: {
       clubId: "256173",
       championshipIds: ["261855"],

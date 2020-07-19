@@ -1,5 +1,5 @@
 {
-  "classes": {
+  "divisions": {
     "pro": {
       "events": [
         {
@@ -28,7 +28,7 @@
                 "powerStagePoints": 5,
                 "overallPoints": 115,
                 "totalPoints": 120,
-                "className": "pro"
+                "divisionName": "pro"
               },
               {
                 "name": "Sladdikurvinen ™",
@@ -48,19 +48,19 @@
                   "nationality": "eLngSwedish"
                 },
                 "totalPoints": 0,
-                "className": "pro"
+                "divisionName": "pro"
               }
             ],
             "teamResults": [
               {
                 "name": "Ditch Dusters",
                 "totalPoints": 166,
-                "className": "pro"
+                "divisionName": "pro"
               },
               {
                 "name": "Unlimited Pedal Works",
                 "totalPoints": 164,
-                "className": "pro"
+                "divisionName": "pro"
               }
             ]
           },
@@ -155,14 +155,14 @@
                 "powerStagePoints": 5,
                 "overallPoints": 84,
                 "totalPoints": 89,
-                "className": "amateur"
+                "divisionName": "amateur"
               }
             ],
             "teamResults": [
               {
                 "name": "Ditch Dusters",
                 "totalPoints": 124,
-                "className": "amateur"
+                "divisionName": "amateur"
               }
             ]
           },

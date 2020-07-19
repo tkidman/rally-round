@@ -43,15 +43,11 @@ const buildDriverRows = event => {
 
     const driverRow = {};
     driverRow["POS."] = result.rank;
-    // driverRow.TEAM_IMG = team ? team.teamImg : "";
-    // driverRow.COUNTRY_IMG = country
-    //   ? countryTemplate.replace("%TWO_LETTER_CODE%", country.iso2.toLowerCase())
-    //   : "";
     driverRow.DRIVER = result.name;
     driverRow.RACENET = raceNetName;
     driverRow.TEAM = team;
     driverRow.COUNTRY = countryName;
-    driverRow.CLASS = result.className;
+    driverRow.DIVISION = result.divisionName;
     driverRow.VEHICLE = result.entry.vehicleName;
     driverRow.TOTAL = result.entry.totalTime;
     driverRow.DIFF = result.entry.totalDiff;
@@ -63,11 +59,11 @@ const buildDriverRows = event => {
   return driverRows;
 };
 
-const writeDriverCSV = (eventResults, className) => {
-  const driverRows = buildDriverRows(eventResults, className);
+const writeDriverCSV = (eventResults, divisionName) => {
+  const driverRows = buildDriverRows(eventResults, divisionName);
   const driversCSV = Papa.unparse(driverRows);
   fs.writeFileSync(
-    `./${outputPath}/${eventResults.location}-${className}-driverResults.csv`,
+    `./${outputPath}/${eventResults.location}-${divisionName}-driverResults.csv`,
     driversCSV
   );
 };
@@ -113,12 +109,12 @@ const getStandingCSVRows = (events, type) => {
   return standingRows;
 };
 
-const writeStandingsCSV = (className, events, type) => {
+const writeStandingsCSV = (divisionName, events, type) => {
   const lastEvent = events[events.length - 1];
   const standingRows = getStandingCSVRows(events, type);
   const standingsCSV = Papa.unparse(standingRows);
   fs.writeFileSync(
-    `./${outputPath}/${lastEvent.location}-${className}-${type}Standings.csv`,
+    `./${outputPath}/${lastEvent.location}-${divisionName}-${type}Standings.csv`,
     standingsCSV
   );
 
@@ -126,12 +122,13 @@ const writeStandingsCSV = (className, events, type) => {
 };
 
 const writeCSV = league => {
-  Object.keys(league.classes).forEach(className => {
-    league.classes[className].events.forEach(event => {
-      writeDriverCSV(event, className);
+  Object.keys(league.divisions).forEach(divisionName => {
+    const divisionEvents = league.divisions[divisionName].events;
+    divisionEvents.forEach(event => {
+      writeDriverCSV(event, divisionName);
     });
-    writeStandingsCSV(className, league.classes[className].events, "driver");
-    writeStandingsCSV(className, league.classes[className].events, "team");
+    writeStandingsCSV(divisionName, divisionEvents, "driver");
+    writeStandingsCSV(divisionName, divisionEvents, "team");
   });
   writeStandingsCSV("overall", league.overall.events, "driver");
   writeStandingsCSV("overall", league.overall.events, "team");

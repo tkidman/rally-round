@@ -1,5 +1,5 @@
 const initialState = {
-  classes: {
+  divisions: {
     pro: {
       clubId: "232733",
       championshipIds: ["221496", "238384", "252308", "265255"],

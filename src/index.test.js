@@ -11,37 +11,90 @@ describe("calculates event results", () => {
   test("returns results for drivers", () => {
     const expected = [
       {
-        className: "pro",
         name: "Spookex *-*",
-        overallPoints: 10,
-        powerStagePoints: 4,
-        totalPoints: 14,
         entry: {
-          totalTime: "04:41:35.987"
-        }
+          rank: 1,
+          name: "Spookex *-*",
+          isVIP: false,
+          isFounder: false,
+          isPlayer: false,
+          isDnfEntry: false,
+          playerDiff: 0,
+          vehicleName: "Alpine Renault A110 1600 S",
+          stageTime: "15:00.000",
+          stageDiff: "--",
+          totalTime: "04:41:35.987",
+          totalDiff: "--",
+          nationality: "eLngLatvian"
+        },
+        powerStagePoints: 4,
+        overallPoints: 10,
+        totalPoints: 14,
+        teamId: "Time Penalty Boys",
+        divisionName: "pro"
       },
       {
-        className: "pro",
         name: "SFRrallimoilane",
-        overallPoints: 9,
-        powerStagePoints: 5,
-        totalPoints: 14,
         entry: {
-          totalTime: "05:00:00.000"
-        }
+          rank: 2,
+          name: "SFRrallimoilane",
+          isVIP: false,
+          isFounder: false,
+          isPlayer: false,
+          isDnfEntry: false,
+          playerDiff: 0,
+          vehicleName: "Ford Escort Mk II",
+          stageTime: "05:34.000",
+          stageDiff: "--",
+          totalTime: "05:00:00.000",
+          totalDiff: "+18:24.013",
+          nationality: "eLngLatvian"
+        },
+        powerStagePoints: 5,
+        overallPoints: 9,
+        totalPoints: 14,
+        teamId: "Time Penalty Boys",
+        divisionName: "pro"
+      },
+      {
+        name: "Kuul",
+        entry: {
+          rank: 3,
+          name: "Kuul",
+          isVIP: false,
+          isFounder: false,
+          isPlayer: false,
+          isDnfEntry: true,
+          playerDiff: 0,
+          vehicleName: "Ford Escort Mk II",
+          stageTime: "05:34.001",
+          stageDiff: "--",
+          totalTime: "05:10:00.000",
+          totalDiff: "+18:24.013",
+          nationality: "eLngLatvian",
+          disqualificationReason: "Wrong car choice"
+        },
+        totalPoints: 0,
+        teamId: "Unlimited Pedal Works",
+        divisionName: "pro"
       }
     ];
-    expect(
-      calculateEventResults(leaderboard, null, "pro").driverResults
-    ).toMatchObject(expected);
+    const driverResults = calculateEventResults(leaderboard, null, "pro")
+      .driverResults;
+    expect(driverResults).toEqual(expected);
   });
 
   test("returns results for teams", () => {
     const expected = [
       {
-        className: "pro",
+        divisionName: "pro",
         name: "Time Penalty Boys",
         totalPoints: 19
+      },
+      {
+        divisionName: "pro",
+        name: "Unlimited Pedal Works",
+        totalPoints: 0
       }
     ];
     expect(calculateEventResults(leaderboard, null, "pro").teamResults).toEqual(
@@ -206,14 +259,14 @@ describe("calculates event results", () => {
 
   it("calculates overall results", () => {
     const preOverallResults = require("./__fixtures__/preOverallLeague.json");
-    expect(calculateOverall(preOverallResults.classes)).toEqual({
+    expect(calculateOverall(preOverallResults.divisions)).toEqual({
       events: [
         {
           location: "Australia",
           results: {
             driverResults: [
               {
-                className: "pro",
+                divisionName: "pro",
                 entry: {
                   isDnfEntry: false,
                   isFounder: false,
@@ -236,7 +289,7 @@ describe("calculates event results", () => {
                 totalPoints: 120
               },
               {
-                className: "amateur",
+                divisionName: "amateur",
                 entry: {
                   isDnfEntry: false,
                   isFounder: false,
@@ -258,7 +311,7 @@ describe("calculates event results", () => {
                 totalPoints: 89
               },
               {
-                className: "pro",
+                divisionName: "pro",
                 entry: {
                   isDnfEntry: true,
                   isFounder: false,
@@ -348,7 +401,7 @@ describe("calculates event results", () => {
     expect(eventKeys).toEqual([
       {
         challengeId: "65933",
-        className: "pro",
+        divisionName: "pro",
         eventId: "66384",
         location: "ŁĘCZNA COUNTY",
         stageId: "4"

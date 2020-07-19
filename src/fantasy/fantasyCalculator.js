@@ -1,14 +1,14 @@
-const { getDriversByClass } = require("../state/league");
+const { getDriversByDivision } = require("../state/league");
 
-function addDnsDrivers(driverResults, clazz) {
+function addDnsDrivers(driverResults, division) {
   var lookupTable = driverResults.reduce((dict, result) => {
     dict[result.name] = true;
     return dict;
   }, {});
-  getDriversByClass(clazz).forEach(driver => {
+  getDriversByDivision(division).forEach(driver => {
     if (driver.name in lookupTable) return;
     driverResults.push({
-      className: clazz,
+      division,
       name: driver.name,
       overallPoints: 0,
       powerStagePoints: 0,
@@ -25,14 +25,14 @@ function addDnsDrivers(driverResults, clazz) {
   });
 }
 
-const calculateFantasyStandings = (event, previousEvent, league, clazz) => {
+const calculateFantasyStandings = (event, previousEvent, league, division) => {
   var teams = league.fantasy.teams;
   if (!league.fantasy) return;
   //if(event.location in teams.points) return;
 
   var driverResults = event.results.driverResults;
 
-  addDnsDrivers(driverResults, clazz);
+  addDnsDrivers(driverResults, division);
 
   league.fantasy.calculators.forEach(calculation =>
     calculation(driverResults, previousEvent)

@@ -54,8 +54,8 @@ const template_path = `./src/state/${process.env.CLUB}/templates/`;
 /**
  * @see JRC_MAIN_HELPERS
  */
-function processClass(league, clazz) {
-  const events = league.classes[clazz].events;
+function processDivision(league, division) {
+  const events = league.divisions[division].events;
   var driverMap = {};
   //var teamMap = {};
 
@@ -75,8 +75,9 @@ function processClass(league, clazz) {
       if (result.name in driverMap) {
         var driver = driverMap[result.name];
         if (!driver.team) driver.team = result.teamId;
-        if(!result.entry.isDnsEntry){
-          if (!driver.car) driver.car = vehicles[result.entry.vehicleName].brand;
+        if (!result.entry.isDnsEntry) {
+          if (!driver.car)
+            driver.car = vehicles[result.entry.vehicleName].brand;
           if (!driver.nationality && result.entry.nationality) {
             driver.nationality = countries[result.entry.nationality].code;
           }
@@ -218,7 +219,7 @@ function processFantasyResults(results) {
  * @see PROCESSORS
  */
 function jrcAllResults(league) {
-  const data = processClass(league, "jrc1");
+  const data = processDivision(league, "jrc1");
 
   if (!fs.existsSync(template_path)) return;
   var _t = fs.readFileSync(template_path + "standings.hbs").toString();

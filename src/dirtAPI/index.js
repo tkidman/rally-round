@@ -138,12 +138,12 @@ const loadFromCache = cacheFileName => {
 const fetchEventResults = async ({
   eventId,
   challengeId,
-  className,
+  divisionName,
   location,
   stageId
 }) => {
   const { cookie, xsrfh } = await getCreds();
-  const cacheFileName = `${cachePath}/${location}-${className}-${eventId}.json`;
+  const cacheFileName = `${cachePath}/${location}-${divisionName}-${eventId}.json`;
   const cacheFile = loadFromCache(cacheFileName);
   if (cacheFile) {
     debug(`cached event results retrieved: ${cacheFileName}`);

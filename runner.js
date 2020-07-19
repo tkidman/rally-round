@@ -7,6 +7,6 @@ if (process.argv[2] && process.argv[3]) {
 if (process.argv[4]) {
   process.env.CLUB = process.argv[4];
 }
-const { processAllClasses } = require("./src");
+const { processAllDivisions } = require("./src");
 
-processAllClasses();
+processAllDivisions();

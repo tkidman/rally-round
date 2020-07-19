@@ -4,58 +4,10 @@ const fs = require("fs");
 const debug = require("debug")("tkidman:dirt2-results:state");
 const { club } = require("../shared");
 const league = require(`./${club}/initialState`);
+
+const driverFieldNames = require("./constants/driverFieldNames");
+
 const missingDrivers = {};
-
-// const drivers = require("./drivers");
-// const driversById = keyBy(drivers, driver => driver.id);
-
-// const parseTeam = row => {
-//   const teamImg = row.TEAM_IMG;
-//   const dom = new JSDOM(teamImg);
-//   const img = dom.window.document.querySelector("img");
-//   if (img) {
-//     return img.getAttribute("title");
-//   } else {
-//     debug(`can't find title for img: ${img} for driver ${row.DRIVER}`);
-//   }
-//   return null;
-// };
-
-// const parseCountry = row => {
-//   const countryImg = row.COUNTRY_IMG;
-//   const dom = new JSDOM(countryImg);
-//
-//   const img = dom.window.document.querySelector("img");
-//   if (img) {
-//     const src = img.getAttribute("src");
-//     return src.substr(src.length - 6, 2);
-//   } else {
-//     debug(`can't find country for img: ${img} for driver ${row.DRIVER}`);
-//   }
-//   return null;
-// };
-
-// const getDriver = name => {
-//   const upperName = name.toUpperCase();
-//   let driver = driversById[upperName];
-//   if (!driver) {
-//     driver = driversByRaceNet[upperName];
-//     if (!driver) {
-//       driver = Object.values(driversByRaceNet).find(driver => {
-//         return (
-//           driver.raceNetName.toUpperCase().includes(upperName) ||
-//           driver.name.toUpperCase().includes(upperName) ||
-//           driver.discordName.toUpperCase().includes(upperName)
-//         );
-//       });
-//       if (!driver) {
-//         const message = `unable to find driver: ${name} - reference data sheet needs to be updated.`;
-//         debug(message);
-//       }
-//     }
-//   }
-//   return driver;
-// };
 
 const loadDriversFromMasterSheet = () => {
   if (fs.existsSync(`./src/state/${club}/drivers.csv`)) {
@@ -64,26 +16,29 @@ const loadDriversFromMasterSheet = () => {
 
     const rows = Papa.parse(csv, { header: true }).data;
     const driversById = rows.reduce((driversById, row) => {
-      const teamId = row[driverColumns.teamId];
-      const countryName = row[driverColumns.countryName];
-      const driverName = row[driverColumns.driverName];
-      const discordName = row[driverColumns.discordName];
-      const raceNetName = row[driverColumns.raceNetName];
-      const clazz = row[driverColumns.class];
-      if (driverName) {
-        const driverId = driverName.toUpperCase();
-        driversById[driverId] = {
-          id: driverId,
-          name: driverName,
-          raceNetName,
-          discordName,
-          teamId,
-          countryName,
-          clazz
+      const driverNameValue = row[driverColumns[driverFieldNames.name]];
+      if (driverNameValue) {
+        const id = driverNameValue.toUpperCase();
+        driversById[id] = {
+          id,
+          [driverFieldNames.name]: driverNameValue,
+          [driverFieldNames.raceNetName]:
+            row[driverColumns[driverFieldNames.raceNetName]],
+          [driverFieldNames.discordName]:
+            row[driverColumns[driverFieldNames.discordName]],
+          [driverFieldNames.teamId]:
+            row[driverColumns[driverFieldNames.teamId]],
+          [driverFieldNames.countryName]:
+            row[driverColumns[driverFieldNames.countryName]],
+          [driverFieldNames.division]:
+            row[driverColumns[driverFieldNames.division]],
+          [driverFieldNames.car]: row[driverColumns[driverFieldNames.car]]
         };
       } else {
         debug(
-          `no username found for driver: ${raceNetName}, reference data sheet needs updating`
+          `Missing driver name in column ${
+            driverColumns[driverFieldNames.name]
+          }`
         );
       }
       return driversById;
@@ -119,9 +74,12 @@ const getDriver = name => {
   return driver;
 };
 
-const getDriversByClass = clazz => {
+const getDriversByDivision = division => {
   return Object.values(driversById).filter(driver => {
-    return driver.clazz && driver.clazz.toUpperCase() == clazz.toUpperCase();
+    return (
+      driver.division &&
+      driver.division.toUpperCase() === division.toUpperCase()
+    );
   });
 };
 
@@ -131,6 +89,6 @@ const printMissingDrivers = () =>
 module.exports = {
   league,
   getDriver,
-  getDriversByClass,
+  getDriversByDivision,
   printMissingDrivers
 };

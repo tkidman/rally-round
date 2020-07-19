@@ -1,8 +1,10 @@
 const { getDriver, league } = require("./league");
 
 const driver = {
+  car: "Alpine Renault A110 1600 S",
   countryName: "Latvia",
   discordName: "Spookex#8354",
+  division: "Amateur",
   id: "SPOOKEX *-*",
   name: "Spookex *-*",
   raceNetName: "Spookex",
