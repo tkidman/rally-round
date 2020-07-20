@@ -39,7 +39,6 @@
 		"class": "groupA",
 		"brand": "mitsubishi"
 	},
-
 	"Ford Fiesta R5":{
 		"class": "R5",
 		"brand": "ford"
@@ -63,5 +62,18 @@
 	"Peugeot 208 T16 R5":{
 		"class": "R5",
 		"brand": "peugot"
+	},
+	"Seat Ibiza Kit Car": {
+		"class": "F2",
+		"brand": "Seat"
+	},
+	"Peugeot 306 Maxi": {
+		"class": "F2",
+		"brand": "peugot"
+	},
+	"Volkswagen Golf Kitcar": {
+		"class": "F2",
+		"brand": "volkswagen"
 	}
+
 }

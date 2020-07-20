@@ -4,12 +4,8 @@ var Handlebars = require("handlebars");
 const folder = "./src/visualisation/";
 const htmlToImage = require("node-html-to-image");
 
-const countries = JSON.parse(
-  fs.readFileSync("./src/state/constants/countries.json")
-);
-const vehicles = JSON.parse(
-  fs.readFileSync("./src/state/constants/vehicles.json")
-);
+const countries = require("../state/constants/countries.json");
+const vehicles = require("../state/constants/vehicles.json");
 const template_path = `./src/state/${process.env.CLUB}/templates/`;
 
 // function processDriverResults(results) {
@@ -79,7 +75,15 @@ function processDivision(league, division) {
           if (!driver.car)
             driver.car = vehicles[result.entry.vehicleName].brand;
           if (!driver.nationality && result.entry.nationality) {
-            driver.nationality = countries[result.entry.nationality].code;
+            const nationality = countries[result.entry.nationality];
+            if (!nationality) {
+              debug(
+                `No nationality found in lookup for ${result.entry.nationality}`
+              );
+              driver.nationality = null;
+            } else {
+              driver.nationality = countries[result.entry.nationality].code;
+            }
           }
         }
       }
@@ -234,6 +238,22 @@ function jrcAllResults(league) {
   });
 }
 
+function jrcThemedResults(league) {
+  const data = processDivision(league, "themed");
+
+  if (!fs.existsSync(template_path)) return;
+  var _t = fs.readFileSync(template_path + "standings.hbs").toString();
+
+  var template = Handlebars.compile(_t);
+  var out = template(data);
+
+  fs.writeFile(folder + "driverStandings.html", out, function(err) {
+    if (err) {
+      return debug(`error writing html file`);
+    }
+  });
+}
+
 // const resultsToImage = driverResults => {
 //   const template_path = `./src/state/${process.env.CLUB}/templates/`;
 //   if (!fs.existsSync(template_path) || counter > 1) return;
@@ -278,7 +298,8 @@ const drawResults = league => {
 };
 
 const functionMapping = {
-  jrc_all: jrcAllResults
+  jrc_all: jrcAllResults,
+  jrc_themed: jrcThemedResults
 };
 
 module.exports = {

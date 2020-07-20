@@ -55,6 +55,10 @@
 	  "code": "arg",
 	  "name": "Argentina"
 	},
+	"eLngArgentinian": {
+		"code": "arg",
+		"name": "Argentina"
+	},
 	"eLngArmenian": {
 	  "code": "arm",
 	  "name": "Armenia"

@@ -10,7 +10,8 @@ const initialState = {
         overall: [30, 24, 21, 19, 17, 15, 13, 11, 9, 7, 5, 4, 3, 2, 1]
       }
     }
-  }
+  },
+  visualization: "jrc_themed"
 };
 
 module.exports = initialState;

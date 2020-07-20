@@ -1,0 +1,52 @@
+<html>
+<head>
+	<style>
+		.container {
+			width: 80%;
+			padding: 4em;
+		}
+		thead > tr {
+			background-color: #494949;
+			color: white;
+		}
+		tbody > tr:nth-child(even){
+			background-color: #b8e9ff
+		}
+		tbody > tr:nth-child(odd){
+			background-color:#DDDDDD
+		}
+
+	</style>
+</head>
+<body>
+	<div id="container">
+		<table id="table">
+			<thead>
+				<tr>
+				{{#each columns}}
+					<th>{{this}}</th>
+				{{/each}}
+			</tr>
+			</thead>
+			<tbody>
+				{{#each drivers}}{{#with this}}
+					<tr>
+						<td>{{rank}}</td>
+						<td><img src="../../assets/country-flags/{{nationality}}.png" style="max-width:2em;"/></td>
+						<td>{{name}}</td>
+						<td>{{team}}</td>
+						<td>{{vehicle}}</td>
+						<td>{{time}}</td>
+						<td>{{diff}}</td>
+						<td>{{points}}</td>
+						<td>{{powerstage}}</td>
+						<td>{{total}}</td>
+					</tr>
+				{{/with}}{{/each}}
+			</tbody>
+			
+		</table>
+	</div>
+</body>
+
+</html>
