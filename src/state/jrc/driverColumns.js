@@ -3,7 +3,8 @@ const {
   name,
   division,
   discordName,
-  raceNetName
+  raceNetName,
+  car
 } = require("../constants/driverFieldNames");
 
 const driverColumns = {
@@ -12,7 +13,8 @@ const driverColumns = {
   [discordName]: "Discord",
   [raceNetName]: "Racenet",
   [teamId]: "Team",
-  [division]: "Class"
+  [division]: "Class",
+  [car]: "Car"
 };
 
 module.exports = driverColumns;
