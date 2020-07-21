@@ -2,7 +2,7 @@ const debug = require("debug")("tkidman:dirt2-results");
 const moment = require("moment");
 const { printMissingDrivers } = require("./state/league");
 const { fetchRecentResults } = require("./dirtAPI");
-const { sortBy } = require("lodash");
+const { sortBy, keyBy } = require("lodash");
 
 const { league, getDriver } = require("./state/league");
 const { fetchEventResults } = require("./dirtAPI");
@@ -60,7 +60,10 @@ const updatePoints = (resultsByDriver, orderedEntries, points, pointsField) => {
   }
 };
 
-const calculateTeamResults = driverResults => {
+const calculateTeamResults = (
+  driverResults,
+  maxDriversScoringPointsForTeam
+) => {
   const teamResults = driverResults.reduce((teamResults, result) => {
     const driver = getDriver(result.name);
     if (driver) {
@@ -70,11 +73,23 @@ const calculateTeamResults = driverResults => {
         if (!teamResults[resultTeamId]) {
           teamResults[resultTeamId] = {
             name: resultTeamId,
-            totalPoints: 0
+            totalPoints: 0,
+            driverResultsCounted: 0
           };
         }
         if (result.overallPoints) {
-          teamResults[resultTeamId].totalPoints += result.overallPoints;
+          const maxDriversReached =
+            maxDriversScoringPointsForTeam &&
+            teamResults[resultTeamId].driverResultsCounted >=
+              maxDriversScoringPointsForTeam;
+          if (!maxDriversReached) {
+            teamResults[resultTeamId].totalPoints += result.overallPoints;
+            teamResults[resultTeamId].driverResultsCounted++;
+          } else {
+            debug(
+              `max drivers reached for team ${resultTeamId}, result ignored for ${result.name} `
+            );
+          }
         }
       } else if (!resultTeamId) {
         debug(`driver has null team id: ${driver.id}`);
@@ -138,6 +153,7 @@ const calculateEventResults = (leaderboard, previousEvent, divisionName) => {
     });
   }
 
+  // dnf entries are sorted below non-dnf entries
   const powerStageEntries = orderEntriesBy(entries, "stageTime");
   const totalEntries = orderEntriesBy(entries, "totalTime");
   updatePoints(
@@ -159,7 +175,10 @@ const calculateEventResults = (leaderboard, previousEvent, divisionName) => {
   driverResults.forEach(
     result => (result.totalPoints = getTotalPoints(result))
   );
-  const teamResultsById = calculateTeamResults(driverResults);
+  const teamResultsById = calculateTeamResults(
+    driverResults,
+    divisions[divisionName].maxDriversScoringPointsForTeam
+  );
   const teamResults = sortTeamResults(teamResultsById);
 
   driverResults.forEach(result => (result.divisionName = divisionName));
@@ -261,6 +280,26 @@ const calculateOverall = processedDivisions => {
         entry => Object.assign({ divisionName: divisionName }, { ...entry })
       );
       overallEvent.results.driverResults.push(...driverResultsWithDivisionName);
+
+      // team results
+      const overallTeamResultsByName = keyBy(
+        overallEvent.results.teamResults,
+        "name"
+      );
+      event.results.teamResults.forEach(teamResult => {
+        if (!overallTeamResultsByName[teamResult.name]) {
+          overallTeamResultsByName[teamResult.name] = {
+            ...teamResult,
+            divisionName: "overall"
+          };
+        } else {
+          overallTeamResultsByName[teamResult.name].totalPoints +=
+            teamResult.totalPoints;
+        }
+      });
+      overallEvent.results.teamResults = sortTeamResults(
+        overallTeamResultsByName
+      );
     });
   });
 
@@ -269,9 +308,6 @@ const calculateOverall = processedDivisions => {
       event.results.driverResults,
       "totalTime"
     );
-    const teamResultsById = calculateTeamResults(event.results.driverResults);
-    const teamResults = sortTeamResults(teamResultsById);
-    event.results.teamResults = teamResults;
     const previousEvent = index > 0 ? overall.events[index - 1] : null;
     calculateEventStandings(event, previousEvent);
   });

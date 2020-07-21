@@ -1,6 +1,7 @@
 const initialState = {
   divisions: {
     pro: {
+      maxDriversScoringPointsForTeam: 1,
       events: [
         {
           eventId: "221955",

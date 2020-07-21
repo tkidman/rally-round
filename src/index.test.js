@@ -88,11 +88,13 @@ describe("calculates event results", () => {
     const expected = [
       {
         divisionName: "pro",
+        driverResultsCounted: 1,
         name: "Time Penalty Boys",
-        totalPoints: 19
+        totalPoints: 10
       },
       {
         divisionName: "pro",
+        driverResultsCounted: 0,
         name: "Unlimited Pedal Works",
         totalPoints: 0
       }
@@ -285,7 +287,6 @@ describe("calculates event results", () => {
                 name: "Kuul",
                 overallPoints: 115,
                 powerStagePoints: 5,
-                teamId: "Unlimited Pedal Works",
                 totalPoints: 120
               },
               {
@@ -328,18 +329,19 @@ describe("calculates event results", () => {
                   vehicleName: "SUBARU Impreza (2001)"
                 },
                 name: "Sladdikurvinen ™",
-                teamId: "Ditch Dusters",
                 totalPoints: 0
               }
             ],
             teamResults: [
               {
-                name: "Unlimited Pedal Works",
-                totalPoints: 115
+                divisionName: "overall",
+                name: "Ditch Dusters",
+                totalPoints: 290
               },
               {
-                name: "Ditch Dusters",
-                totalPoints: 0
+                divisionName: "overall",
+                name: "Unlimited Pedal Works",
+                totalPoints: 164
               }
             ]
           },
@@ -370,17 +372,17 @@ describe("calculates event results", () => {
             teamStandings: [
               {
                 currentPosition: 1,
-                name: "Unlimited Pedal Works",
-                positionChange: null,
-                previousPosition: null,
-                totalPoints: 115
-              },
-              {
-                currentPosition: 2,
                 name: "Ditch Dusters",
                 positionChange: null,
                 previousPosition: null,
-                totalPoints: 0
+                totalPoints: 290
+              },
+              {
+                currentPosition: 2,
+                name: "Unlimited Pedal Works",
+                positionChange: null,
+                previousPosition: null,
+                totalPoints: 164
               }
             ]
           }
