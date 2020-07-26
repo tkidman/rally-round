@@ -1,38 +1,17 @@
 const fs = require("fs");
 const Papa = require("papaparse");
-const lookup = require("country-code-lookup");
 const debug = require("debug")("tkidman:dirt2-results:output");
 
 const { outputPath, hiddenPath, cachePath } = require("./shared");
-const { getDriver } = require("./state/league");
+const { leagueRef } = require("./state/league");
 
 const buildDriverRows = event => {
   const driverRows = event.results.driverResults.map(result => {
-    const driver = getDriver(result.name);
-    let country;
-    let countryName;
+    const driver = leagueRef.getDriver(result.name);
     let team;
     const raceNetName = driver ? driver.raceNetName : "";
 
     if (driver) {
-      countryName = driver.countryName;
-      country = lookup.byCountry(driver.countryName);
-      if (!country) {
-        if (driver.countryName === "USA") {
-          country = lookup.byCountry("United States");
-        }
-        if (
-          driver.countryName === "England" ||
-          driver.countryName === "Scotland"
-        ) {
-          country = lookup.byCountry("United Kingdom");
-        }
-        // if (!country) {
-        //   debug(
-        //     `unable to determine country for ${driver.countryName} for driver ${driver.name}`
-        //   );
-        // }
-      }
       team = driver.teamId;
       if (!team) {
         debug(
@@ -46,7 +25,6 @@ const buildDriverRows = event => {
     driverRow.DRIVER = result.name;
     driverRow.RACENET = raceNetName;
     driverRow.TEAM = team;
-    driverRow.COUNTRY = countryName;
     driverRow.DIVISION = result.divisionName;
     driverRow.VEHICLE = result.entry.vehicleName;
     driverRow.TOTAL = result.entry.totalTime;
@@ -91,7 +69,7 @@ const getStandingCSVRows = (events, type) => {
   const standingRows = lastEvent.standings[`${type}Standings`].map(standing => {
     let raceNetName;
     if (type === "driver") {
-      const driver = getDriver(standing.name);
+      const driver = leagueRef.getDriver(standing.name);
       raceNetName = driver ? driver.raceNetName : "";
     }
 
@@ -121,7 +99,8 @@ const writeStandingsCSV = (divisionName, events, type) => {
   // name: satchmo, location: points, location: points, name: satchmo, total points: points, position: number,
 };
 
-const writeCSV = league => {
+const writeCSV = () => {
+  const league = leagueRef.league;
   Object.keys(league.divisions).forEach(divisionName => {
     const divisionEvents = league.divisions[divisionName].events;
     divisionEvents.forEach(event => {

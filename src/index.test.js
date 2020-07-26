@@ -6,8 +6,13 @@ const {
 } = require("./index");
 const leaderboard = require("./__fixtures__/leaderboard");
 const { getEventKeysFromRecentResults } = require("./index");
+const { init } = require("./state/league");
 
 describe("calculates event results", () => {
+  beforeEach(async () => {
+    await init();
+  });
+
   test("returns results for drivers", () => {
     const expected = [
       {
@@ -391,22 +396,25 @@ describe("calculates event results", () => {
     });
   });
 
-  it("gets event keys from recent results", () => {
+  it("gets event keys from recent results and championships", () => {
     const recentResults = require("./__fixtures__/recentResults.json");
-    const eventKeys = getEventKeysFromRecentResults(
+    const championships = require("./__fixtures__/championships.json");
+    const eventKeys = getEventKeysFromRecentResults({
       recentResults,
-      {
+      championships,
+      division: {
         championshipIds: ["65933"]
       },
-      "pro"
-    );
+      divisionName: "pro"
+    });
     expect(eventKeys).toEqual([
       {
         challengeId: "65933",
         divisionName: "pro",
         eventId: "66384",
         location: "ŁĘCZNA COUNTY",
-        stageId: "4"
+        stageId: "4",
+        eventStatus: "Finished"
       }
     ]);
   });

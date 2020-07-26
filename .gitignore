@@ -5,6 +5,7 @@
 /drivers.csv
 /src/state/brl/drivers.csv
 /src/state/jrc-themed/drivers.csv
+/src/state/jrc/drivers.csv
 /cached-creds.json
 .~lock.*
 image.png

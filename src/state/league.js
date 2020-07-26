@@ -9,6 +9,8 @@ const driverFieldNames = require("./constants/driverFieldNames");
 const { loadSheet } = require("../sheetsAPI/sheets");
 
 const missingDrivers = {};
+const drivers = {};
+const leagueRef = {};
 
 // driver rows is an array of objects of column headers to cell values (ie: [{ racenet: "satchmo", ... }] )
 const transformDriverRows = driverRows => {
@@ -53,7 +55,7 @@ const loadDriversFromLocalCSV = () => {
   return transformDriverRows(rows);
 };
 
-const loadDrivers = () => {
+const loadDrivers = async () => {
   if (sheetsConfig && process.env.GOOGLE_SHEETS_API_KEY) {
     return loadDriversFromSheets();
   } else if (fs.existsSync(`./src/state/${club}/drivers.csv`)) {
@@ -63,15 +65,24 @@ const loadDrivers = () => {
   return { driversById: {}, driversByRaceNet: {} };
 };
 
-const { driversById, driversByRaceNet } = loadDrivers();
+const init = async () => {
+  const { driversById, driversByRaceNet } = await loadDrivers();
+  drivers.driversById = driversById;
+  drivers.driversByRaceNet = driversByRaceNet;
+  leagueRef.league = league;
+  leagueRef.getDriver = getDriver;
+  leagueRef.divisions = league.divisions;
+
+  return leagueRef;
+};
 
 const getDriver = name => {
   const upperName = name.toUpperCase();
-  let driver = driversById[upperName];
+  let driver = drivers.driversById[upperName];
   if (!driver) {
-    driver = driversByRaceNet[upperName];
+    driver = drivers.driversByRaceNet[upperName];
     if (!driver) {
-      driver = Object.values(driversByRaceNet).find(driver => {
+      driver = Object.values(drivers.driversByRaceNet).find(driver => {
         return (
           driver.raceNetName.toUpperCase().includes(upperName) ||
           driver.name.toUpperCase().includes(upperName)
@@ -86,7 +97,7 @@ const getDriver = name => {
 };
 
 const getDriversByDivision = division => {
-  return Object.values(driversById).filter(driver => {
+  return Object.values(drivers.driversById).filter(driver => {
     return (
       driver.division &&
       driver.division.toUpperCase() === division.toUpperCase()
@@ -98,8 +109,8 @@ const printMissingDrivers = () =>
   debug(`missing drivers: \n${Object.keys(missingDrivers).join("\n")}`);
 
 module.exports = {
-  league,
-  getDriver,
+  init,
+  leagueRef,
   getDriversByDivision,
   printMissingDrivers
 };

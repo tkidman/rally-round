@@ -1,4 +1,4 @@
-const { getDriver, league } = require("./league");
+const { leagueRef, init } = require("./league");
 
 const driver = {
   car: "Alpine Renault A110 1600 S",
@@ -10,12 +10,15 @@ const driver = {
 };
 
 describe("league", () => {
+  beforeEach(async () => {
+    await init();
+  });
   test("getDriver", () => {
-    expect(getDriver("SPOOKEX *-*")).toEqual(driver);
-    expect(getDriver("Spookex")).toEqual(driver);
+    expect(leagueRef.getDriver("SPOOKEX *-*")).toEqual(driver);
+    expect(leagueRef.getDriver("Spookex")).toEqual(driver);
   });
 
   test("loads initial state", () => {
-    expect(league).toEqual(require("./test/initialState"));
+    expect(leagueRef.league).toEqual(require("./test/initialState"));
   });
 });

@@ -1,11 +1,13 @@
 const debug = require("debug")("tkidman:dirt2-results");
 const moment = require("moment");
+const { eventStatuses } = require("./shared");
+const { fetchChampionships } = require("./dirtAPI");
 const { privateer } = require("./shared");
 const { printMissingDrivers } = require("./state/league");
 const { fetchRecentResults } = require("./dirtAPI");
 const { sortBy, keyBy } = require("lodash");
 
-const { league, getDriver } = require("./state/league");
+const { init, leagueRef } = require("./state/league");
 const { fetchEventResults } = require("./dirtAPI");
 const { writeJSON, writeCSV, checkOutputDirs } = require("./output");
 const { getTotalPoints } = require("./shared");
@@ -15,7 +17,6 @@ const {
   drawResults
 } = require("./visualisation/tableDrawer");
 
-const divisions = league.divisions;
 const dnfFactor = 100000000;
 
 const getDuration = durationString => {
@@ -54,7 +55,7 @@ const updatePoints = (resultsByDriver, orderedEntries, points, pointsField) => {
     if (orderedEntries.length > i) {
       const entry = orderedEntries[i];
       const driver = entry.name;
-      if (!entry.isDnfEntry || league.pointsForDNF) {
+      if (!entry.isDnfEntry || leagueRef.league.pointsForDNF) {
         resultsByDriver[driver][pointsField] = points[i];
       }
     }
@@ -66,7 +67,7 @@ const calculateTeamResults = (
   maxDriversScoringPointsForTeam
 ) => {
   const teamResults = driverResults.reduce((teamResults, result) => {
-    const driver = getDriver(result.name);
+    const driver = leagueRef.getDriver(result.name);
     if (driver) {
       const resultTeamId = driver.teamId;
       result.teamId = resultTeamId;
@@ -123,7 +124,7 @@ const createDNSResult = result => {
 
 const setDnfIfIncorrectCar = entry => {
   // validate correct car usage
-  const driver = getDriver(entry.name);
+  const driver = leagueRef.getDriver(entry.name);
   if (driver && driver.car && driver.car !== entry.vehicleName) {
     debug(
       `driver ${entry.name} used wrong car ${entry.vehicleName}, should have used ${driver.car}. Setting to dnf`
@@ -157,7 +158,7 @@ const calculateEventResults = (leaderboard, previousEvent, divisionName) => {
   // dnf entries are sorted below non-dnf entries
   const powerStageEntries = orderEntriesBy(entries, "stageTime");
   const totalEntries = orderEntriesBy(entries, "totalTime");
-  const division = divisions[divisionName];
+  const division = leagueRef.league.divisions[divisionName];
   updatePoints(
     resultsByDriver,
     powerStageEntries,
@@ -249,8 +250,13 @@ const processEvent = async (divisionName, event, previousEvent) => {
     divisionName
   );
   calculateEventStandings(event, previousEvent);
-  if (league.divisions[divisionName].fantasy) {
-    calculateFantasyStandings(event, previousEvent, league, divisionName);
+  if (leagueRef.league.divisions[divisionName].fantasy) {
+    calculateFantasyStandings(
+      event,
+      previousEvent,
+      leagueRef.league,
+      divisionName
+    );
   }
 };
 
@@ -317,33 +323,72 @@ const calculateOverall = processedDivisions => {
 };
 
 const calculateOverallResults = () => {
-  league.overall = calculateOverall(divisions);
+  leagueRef.league.overall = calculateOverall(leagueRef.league.divisions);
 };
 
 const fetchEventKeys = async (division, divisionName) => {
   const recentResults = await fetchRecentResults(division.clubId);
-  return getEventKeysFromRecentResults(recentResults, division, divisionName);
+  const championships = await fetchChampionships(division.clubId);
+  return getEventKeysFromRecentResults({
+    recentResults,
+    championships,
+    division,
+    divisionName
+  });
 };
 
-const getEventKeysFromRecentResults = (
+const getStageIds = ({ challengeId, championshipId, recentResults }) => {
+  const championship = recentResults.championships.find(
+    championship => championship.id === championshipId
+  );
+  // event id becomes challenge id ??
+  const event = championship.events.find(
+    event => event.challengeId === challengeId
+  );
+  if (!event) {
+    debug(`no event found in recent results for event id ${challengeId}`);
+  }
+  return {
+    eventId: event.id,
+    challengeId: event.challengeId,
+    stageId: `${event.stages.length - 1}`
+  };
+};
+
+const getEventKeysFromRecentResults = ({
   recentResults,
+  championships,
   division,
   divisionName
-) => {
+}) => {
   // pull out championships matching championship ids
-  const championships = recentResults.championships.filter(championship =>
+  const divisionChampionships = championships.filter(championship =>
     division.championshipIds.includes(championship.id)
   );
-  const eventKeys = championships.reduce((events, championship) => {
-    const eventResultKeys = championship.events.map(event => {
-      return {
-        eventId: event.id,
-        challengeId: event.challengeId,
-        stageId: `${event.stages.length - 1}`,
-        location: event.name,
-        divisionName: divisionName
-      };
-    });
+  const eventKeys = divisionChampionships.reduce((events, championship) => {
+    const eventResultKeys = championship.events.reduce(
+      (eventResultKeys, event) => {
+        if (
+          event.eventStatus === eventStatuses.active ||
+          event.eventStatus === eventStatuses.finished
+        ) {
+          const stageIds = getStageIds({
+            challengeId: event.id,
+            championshipId: championship.id,
+            recentResults
+          });
+          eventResultKeys.push({
+            eventId: event.id,
+            location: event.locationName,
+            divisionName: divisionName,
+            eventStatus: event.eventStatus,
+            ...stageIds
+          });
+        }
+        return eventResultKeys;
+      },
+      []
+    );
     events.push(...eventResultKeys);
     return events;
   }, []);
@@ -353,8 +398,11 @@ const getEventKeysFromRecentResults = (
 const processAllDivisions = async () => {
   try {
     checkOutputDirs();
-    for (const divisionName of Object.keys(divisions)) {
-      const division = divisions[divisionName];
+    const { league, getDriver } = await init();
+    leagueRef.league = league;
+    leagueRef.getDriver = getDriver;
+    for (const divisionName of Object.keys(leagueRef.league.divisions)) {
+      const division = leagueRef.league.divisions[divisionName];
       division.events = await fetchEventKeys(division, divisionName);
       await processEvents(division.events, divisionName);
     }

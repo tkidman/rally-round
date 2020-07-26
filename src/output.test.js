@@ -1,7 +1,12 @@
 const { getStandingCSVRows } = require("./output");
 const { buildDriverRows } = require("./output");
+const { init } = require("./state/league");
 
 describe("output", () => {
+  beforeEach(async () => {
+    await init();
+  });
+
   test("builds driver rows", () => {
     expect(
       buildDriverRows({
@@ -24,7 +29,7 @@ describe("output", () => {
     ]);
   });
 
-  test("getStandingCSVRows for driver", () => {
+  test("getStandingCSVRows for driver", async () => {
     const league = require("./__fixtures__/preOverallLeague.json");
     expect(
       getStandingCSVRows(league.divisions["pro"].events, "driver")

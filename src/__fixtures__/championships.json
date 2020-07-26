@@ -1,0 +1,74 @@
+[
+  {
+    "id": "65933",
+    "name": "Blueline H-Class Championship",
+    "events": [
+      {
+        "id": "65933",
+        "countryId": "ePoland",
+        "countryName": "POLAND",
+        "locationId": "ePoland",
+        "locationName": "ŁĘCZNA COUNTY",
+        "firstStageRouteId": "ePolandRally02Route5",
+        "firstStageConditions": "eMiddayDry",
+        "hasParticipated": false,
+        "entryWindow": {
+          "start": "2020-05-04T19:15:00Z",
+          "open": "2020-05-04T19:15:00Z",
+          "close": "2020-05-11T09:00:00Z",
+          "end": "2020-05-11T09:00:00Z"
+        },
+        "eventStatus": "Finished",
+        "eventTime": "",
+        "isDlc": true,
+        "vehicleClass": "eRallyUpTo20004wdCaps"
+      },
+      {
+        "id": "65934",
+        "countryId": "aus",
+        "countryName": "aus",
+        "locationId": "aus",
+        "locationName": "aus",
+        "firstStageRouteId": "eAusRally02Route5",
+        "firstStageConditions": "eMiddayDry",
+        "hasParticipated": false,
+        "entryWindow": {
+          "start": "2020-05-04T19:15:00Z",
+          "open": "2020-05-04T19:15:00Z",
+          "close": "2020-05-11T09:00:00Z",
+          "end": "2020-05-11T09:00:00Z"
+        },
+        "eventStatus": "Next",
+        "eventTime": "",
+        "isDlc": true,
+        "vehicleClass": "eRallyUpTo20004wdCaps"
+      }
+    ]
+  },
+  {
+    "id": "67014",
+    "name": "Blueline H-Class Championship",
+    "events": [
+      {
+        "id": "67014",
+        "countryId": "ePoland",
+        "countryName": "POLAND",
+        "locationId": "ePoland",
+        "locationName": "ŁĘCZNA COUNTY",
+        "firstStageRouteId": "ePolandRally02Route5",
+        "firstStageConditions": "eMiddayDry",
+        "hasParticipated": false,
+        "entryWindow": {
+          "start": "2020-05-04T19:15:00Z",
+          "open": "2020-05-04T19:15:00Z",
+          "close": "2020-05-11T09:00:00Z",
+          "end": "2020-05-11T09:00:00Z"
+        },
+        "eventStatus": "Active",
+        "eventTime": "",
+        "isDlc": true,
+        "vehicleClass": "eRallyUpTo20004wdCaps"
+      }
+    ]
+  }
+]

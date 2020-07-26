@@ -11,11 +11,17 @@ const getTotalPoints = result => {
   return totalPoints;
 };
 
+const eventStatuses = {
+  active: "Active",
+  finished: "Finished"
+};
+
 module.exports = {
   outputPath,
   cachePath,
   hiddenPath,
   getTotalPoints,
   privateer,
-  club
+  club,
+  eventStatuses
 };

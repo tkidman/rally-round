@@ -30,6 +30,17 @@
               "name": "Kopina"
             }
           ]
+        },
+        {
+          "id": "66666",
+          "challengeId": "65934",
+          "name": "Aus",
+          "stages": [
+            {
+              "id": "0",
+              "name": "monaro"
+            }
+          ]
         }
       ]
     },

@@ -10,6 +10,7 @@ const USERNAME_SELECTOR = "#Email";
 const PASSWORD_SELECTOR = "#Password";
 const LOGIN_BUTTON_SELECTOR = "#login_button_container > input";
 const puppeteer = require("puppeteer");
+const { eventStatuses } = require("../shared");
 const validCreds = {};
 
 const dirtRally2Domain = "https://dirtrally2.dirtgame.com";
@@ -113,7 +114,7 @@ const fetchChampionships = async clubId => {
     url: `${dirtRally2Domain}/api/Club/${clubId}/championships`,
     headers: { Cookie: cookie }
   });
-  debug(response.data);
+  return response.data;
 };
 
 const fetchRecentResults = async clubId => {
@@ -140,7 +141,8 @@ const fetchEventResults = async ({
   challengeId,
   divisionName,
   location,
-  stageId
+  stageId,
+  eventStatus
 }) => {
   const { cookie, xsrfh } = await getCreds();
   const cacheFileName = `${cachePath}/${location}-${divisionName}-${eventId}.json`;
@@ -171,10 +173,13 @@ const fetchEventResults = async ({
       data: payload
     });
     debug(`event results retrieved: ${eventId}`);
-    fs.writeFileSync(
-      `${cacheFileName}`,
-      JSON.stringify(response.data, null, 2)
-    );
+    // only cache finished events
+    if (eventStatus !== eventStatuses.active) {
+      fs.writeFileSync(
+        `${cacheFileName}`,
+        JSON.stringify(response.data, null, 2)
+      );
+    }
     return response.data;
   } catch (err) {
     debug(err);
