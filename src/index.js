@@ -398,11 +398,10 @@ const getEventKeysFromRecentResults = ({
 const processAllDivisions = async () => {
   try {
     checkOutputDirs();
-    const { league, getDriver } = await init();
-    leagueRef.league = league;
-    leagueRef.getDriver = getDriver;
-    for (const divisionName of Object.keys(leagueRef.league.divisions)) {
-      const division = leagueRef.league.divisions[divisionName];
+    await init();
+    const { league, divisions } = leagueRef;
+    for (const divisionName of Object.keys(divisions)) {
+      const division = divisions[divisionName];
       division.events = await fetchEventKeys(division, divisionName);
       await processEvents(division.events, divisionName);
     }

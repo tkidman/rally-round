@@ -60,9 +60,9 @@ You can also pull driver information directly from a google sheet. You need to h
 * Don't show racenet in Team standings ✓
 * Output to a club folder ✓
 * Get drivers from google sheets automatically ✓
-* Don't cache 'in progress' events 
-* Don't load pending events
-* Output themed to HTML
+* Don't cache 'in progress' events ✓
+* Don't load pending events ✓
+* Output themed to HTML 
 * Output to sheets
 * Support multiple driver cars (to support division promotions mid season)
 * Migrate club scraper to here
