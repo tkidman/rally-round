@@ -1,14 +1,15 @@
+const { privateer } = require("../shared");
 const calculateInternalTeamStandings = (resultsByDriver, allDrivers) => {
   var dictByTeam = Object.values(resultsByDriver).reduce((dict, driver) => {
     var teamId = driver.teamId;
-    teamId = teamId ? teamId : "privateer";
+    teamId = teamId ? teamId : privateer;
     if (!(teamId in dict)) dict[teamId] = [];
     dict[teamId].push(driver);
     return dict;
   }, {});
   Object.keys(dictByTeam).forEach(teamId => {
     var team = dictByTeam[teamId];
-    if (teamId == "privateer" || team.length < 2) {
+    if (teamId === privateer || team.length < 2) {
       team.forEach(driver => addPointsToResult(driver, 0));
     } else {
       team.sort((a, b) => a.entry.overallPoints - b.entry.overallPoints);

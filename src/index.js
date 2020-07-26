@@ -1,5 +1,6 @@
 const debug = require("debug")("tkidman:dirt2-results");
 const moment = require("moment");
+const { privateer } = require("./shared");
 const { printMissingDrivers } = require("./state/league");
 const { fetchRecentResults } = require("./dirtAPI");
 const { sortBy, keyBy } = require("lodash");
@@ -69,7 +70,7 @@ const calculateTeamResults = (
     if (driver) {
       const resultTeamId = driver.teamId;
       result.teamId = resultTeamId;
-      if (resultTeamId && resultTeamId !== "privateer") {
+      if (resultTeamId && resultTeamId !== privateer) {
         if (!teamResults[resultTeamId]) {
           teamResults[resultTeamId] = {
             name: resultTeamId,
@@ -156,16 +157,17 @@ const calculateEventResults = (leaderboard, previousEvent, divisionName) => {
   // dnf entries are sorted below non-dnf entries
   const powerStageEntries = orderEntriesBy(entries, "stageTime");
   const totalEntries = orderEntriesBy(entries, "totalTime");
+  const division = divisions[divisionName];
   updatePoints(
     resultsByDriver,
     powerStageEntries,
-    divisions[divisionName].points.powerStage,
+    division.points.powerStage,
     "powerStagePoints"
   );
   updatePoints(
     resultsByDriver,
     totalEntries,
-    divisions[divisionName].points.overall,
+    division.points.overall,
     "overallPoints"
   );
   const driverResults = orderResultsBy(
@@ -177,7 +179,7 @@ const calculateEventResults = (leaderboard, previousEvent, divisionName) => {
   );
   const teamResultsById = calculateTeamResults(
     driverResults,
-    divisions[divisionName].maxDriversScoringPointsForTeam
+    division.maxDriversScoringPointsForTeam
   );
   const teamResults = sortTeamResults(teamResultsById);
 

@@ -57,11 +57,13 @@ To get team functionality working you need to download your club's registration 
 * Don't log missing driver message when creating team standings ✓ 
 * Don't show racenet in Team standings ✓
 * Output to a club folder ✓
-* Output to sheets
-* Don't cache 'in progress' events
-* DNF counter
 * Get drivers from google sheets automatically
-* Fix the issues with countries (2 character code in flag image lookup for rest of the world and the UK);
+* Don't cache 'in progress' events
+* Don't load pending events
+* Support multiple driver cars (to support division promotions mid season)
+* Output to sheets
+* Migrate club scraper to here
+* DNF counter
 
 ### stretch goals
 * Deploy to AWS cloudfront
