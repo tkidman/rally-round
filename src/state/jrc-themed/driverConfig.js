@@ -3,18 +3,20 @@ const {
   name,
   car,
   division,
-  discordName,
   raceNetName
 } = require("../constants/driverFieldNames");
 
 const driverColumns = {
-  //countryName: "Flag",
   [name]: "Gamertag",
-  [discordName]: "Discord",
   [raceNetName]: "Racenet",
   [teamId]: "Themed",
   [car]: "Themed",
   [division]: "class"
 };
 
-module.exports = driverColumns;
+const sheetsConfig = {
+  sheetId: "1mLDzhofRL3ZfZts7Zp-1lekLQx6ApFXkhnpEyZdPXZM",
+  tabName: "All"
+};
+
+module.exports = { driverColumns, sheetsConfig };

@@ -25,7 +25,9 @@ cache files you don't want from `./hidden/cache`
 ## Club configuration
 
 Clubs are configured in `./src/state/<club_name>/initialState.js`. Here you can define points per class, and the championship ids to fetch results from. 
-To get team functionality working you need to download your club's registration sheet as a csv and add it to the club folder and name it `drivers.csv` 
+To get team functionality working you need to download your club's registration sheet as a csv and add it to the club folder and name it `drivers.csv`.
+
+You can also pull driver information directly from a google sheet. You need to have a google sheets API key for this specified in the GOOGLE_SHEETS_API_KEY env var. Sheet configuration is specified in the club's driverConfig.js file.
  
 ## To Do
 * Call dirt 2 Leaderboard API ✓
@@ -63,6 +65,8 @@ To get team functionality working you need to download your club's registration 
 * Support multiple driver cars (to support division promotions mid season)
 * Output to sheets
 * Migrate club scraper to here
+* Multiple classes per division
+* Output themed to HTML
 * DNF counter
 
 ### stretch goals
