@@ -238,22 +238,6 @@ function jrcAllResults(league) {
   });
 }
 
-function jrcThemedResults(league) {
-  const data = processDivision(league, "themed");
-
-  if (!fs.existsSync(template_path)) return;
-  var _t = fs.readFileSync(template_path + "standings.hbs").toString();
-
-  var template = Handlebars.compile(_t);
-  var out = template(data);
-
-  fs.writeFile(folder + "driverStandings.html", out, function(err) {
-    if (err) {
-      return debug(`error writing html file`);
-    }
-  });
-}
-
 // const resultsToImage = driverResults => {
 //   const template_path = `./src/state/${process.env.CLUB}/templates/`;
 //   if (!fs.existsSync(template_path) || counter > 1) return;
@@ -298,8 +282,7 @@ const drawResults = league => {
 };
 
 const functionMapping = {
-  jrc_all: jrcAllResults,
-  jrc_themed: jrcThemedResults
+  jrc_all: jrcAllResults
 };
 
 module.exports = {

@@ -2,6 +2,8 @@ const hiddenPath = "./hidden";
 const club = process.env.CLUB || "test";
 const outputPath = `${hiddenPath}/out/${club}`;
 const cachePath = `${hiddenPath}/cache/${club}`;
+const templatePath = `./src/state/${club}/templates/`;
+
 const privateer = "privateer";
 
 const getTotalPoints = result => {
@@ -20,6 +22,7 @@ module.exports = {
   outputPath,
   cachePath,
   hiddenPath,
+  templatePath,
   getTotalPoints,
   privateer,
   club,

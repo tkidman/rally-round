@@ -1,22 +1,55 @@
 {
-	"MONARO":{
-		"countryName": "Australia",
-		"countryCode": "aus"
-	},
-	"BAUMHOLDER":{
-		"countryName": "Germany",
-		"countryCode": "deu"
-	},
-	"HAWKES BAY":{
-		"countryName": "New Zealand",
-		"countryCode": "nzl"
-	},
-	"VÄRMLAND":{
-		"countryName": "Sweden",
-		"countryCode": "swe"
-	},
-	"NEW ENGLAND":{
-		"countryName": "USA",
-		"countryCode": "usa"
-	}
+  "MONARO": {
+    "countryName": "Australia",
+    "countryCode": "aus"
+  },
+  "BAUMHOLDER": {
+    "countryName": "Germany",
+    "countryCode": "deu"
+  },
+  "HAWKES BAY": {
+    "countryName": "New Zealand",
+    "countryCode": "nzl"
+  },
+  "VÄRMLAND": {
+    "countryName": "Sweden",
+    "countryCode": "swe"
+  },
+  "MONTE CARLO": {
+    "countryName": "Monaco",
+    "countryCode": "mco"
+  },
+  "NEW ENGLAND": {
+    "countryName": "USA",
+    "countryCode": "usa"
+  },
+  "RIBADELLES": {
+    "countryName": "Spain",
+    "countryCode": "esp"
+  },
+  "CATAMARCA PROVINCE": {
+    "countryName": "Argentina",
+    "countryCode": "arg"
+  },
+  "JÄMSÄ": {
+    "countryName": "Finland",
+    "countryCode": "fin"
+  },
+  "ARGOLIS": {
+    "countryName": "Greece",
+    "countryCode": "grc"
+  },
+  "ŁĘCZNA COUNTY": {
+    "countryName": "Poland",
+    "countryCode": "pol"
+  },
+  "POWYS": {
+    "countryName": "Wales",
+    "countryCode": "welsh"
+  },
+  "PERTH AND KINROSS": {
+    "countryName": "Scotland",
+    "countryCode": "scot"
+  }
+
 }

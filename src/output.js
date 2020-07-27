@@ -1,9 +1,13 @@
 const fs = require("fs");
 const Papa = require("papaparse");
 const debug = require("debug")("tkidman:dirt2-results:output");
+const Handlebars = require("handlebars");
 
-const { outputPath, hiddenPath, cachePath } = require("./shared");
+const { outputPath, hiddenPath, cachePath, templatePath } = require("./shared");
 const { leagueRef } = require("./state/league");
+const locations = require("./state/constants/locations.json");
+const countries = require("./state/constants/countries.json");
+const vehicles = require("./state/constants/vehicles.json");
 
 const buildDriverRows = event => {
   const driverRows = event.results.driverResults.map(result => {
@@ -46,45 +50,110 @@ const writeDriverCSV = (eventResults, divisionName) => {
   );
 };
 
+const addDriverLocationResult = (eventPointsByName, result, event) => {
+  if (!eventPointsByName[result.name]) {
+    const nationality = countries[result.entry.nationality];
+    if (!nationality) {
+      debug(`no country found in lookup for ${result.entry.nationality}`);
+    }
+    eventPointsByName[result.name] = {
+      name: result.name,
+      nationality: nationality.code
+    };
+  }
+  eventPointsByName[result.name][event.location] = result.totalPoints;
+};
+
+const addTeamLocationResult = (eventPointsByName, result, event) => {
+  if (!eventPointsByName[result.name]) {
+    eventPointsByName[result.name] = {
+      name: result.name
+    };
+  }
+  eventPointsByName[result.name][event.location] = result.totalPoints;
+};
+
 const getStandingCSVRows = (events, type) => {
   const eventPointsByName = events.reduce((eventPointsByName, event) => {
     event.results[`${type}Results`].forEach(result => {
-      if (!eventPointsByName[result.name]) {
-        eventPointsByName[result.name] = { name: result.name };
-      }
       if (type === "driver") {
-        eventPointsByName[result.name][`${event.location}`] =
-          result.overallPoints;
-        eventPointsByName[result.name][`${event.location}: PS`] =
-          result.powerStagePoints;
-        eventPointsByName[result.name][`${event.location}: Total`] =
-          result.totalPoints;
+        addDriverLocationResult(eventPointsByName, result, event);
       } else {
-        eventPointsByName[result.name][event.location] = result.totalPoints;
+        addTeamLocationResult(eventPointsByName, result, event);
       }
     });
     return eventPointsByName;
   }, {});
   const lastEvent = events[events.length - 1];
   const standingRows = lastEvent.standings[`${type}Standings`].map(standing => {
+    // TODO fix this
     let raceNetName;
+    let driverTeam;
+    let driverCar;
     if (type === "driver") {
       const driver = leagueRef.getDriver(standing.name);
       raceNetName = driver ? driver.raceNetName : "";
+      driverTeam = driver ? driver.teamId : "";
+      driverCar = driver ? driver.car : "";
     }
 
     const standingRow = {
       name: standing.name,
       racenet: raceNetName,
+      team: driverTeam,
+      car: driverCar,
       ...eventPointsByName[standing.name],
       ...standing
     };
     if (type === "team") {
       delete standingRow.racenet;
+      delete standingRow.team;
     }
     return standingRow;
   });
   return standingRows;
+};
+
+const transformForHTML = standingRows => {
+  const headerLocations = Object.keys(standingRows[0]).reduce(
+    (headerLocations, columnName) => {
+      if (locations[columnName]) {
+        headerLocations.push(locations[columnName].countryCode);
+      }
+      return headerLocations;
+    },
+    []
+  );
+
+  const rows = standingRows.map(row => {
+    const locationPoints = Object.keys(row).reduce(
+      (locationPoints, columnName) => {
+        if (locations[columnName]) {
+          locationPoints.push(row[columnName]);
+        }
+        return locationPoints;
+      },
+      []
+    );
+    const movement = {
+      positive: row.positionChange > 0,
+      neutral: row.positionChange === 0,
+      negative: row.positionChange < 0
+    };
+
+    const car = vehicles[row.car];
+    let carBrand;
+    if (!car) {
+      debug(`no car found in lookup for ${car}`);
+    } else {
+      carBrand = car.brand;
+    }
+    return { ...row, locationPoints, ...movement, car: carBrand };
+  });
+  return {
+    headerLocations,
+    rows
+  };
 };
 
 const writeStandingsCSV = (divisionName, events, type) => {
@@ -95,6 +164,26 @@ const writeStandingsCSV = (divisionName, events, type) => {
     `./${outputPath}/${lastEvent.location}-${divisionName}-${type}Standings.csv`,
     standingsCSV
   );
+
+  if (type === "driver") {
+    const data = transformForHTML(standingRows);
+
+    const standingsTemplateFile = `${templatePath}standings.hbs`;
+    if (!fs.existsSync(standingsTemplateFile)) {
+      debug("no standings html template found, returning");
+      return;
+    }
+    var _t = fs.readFileSync(standingsTemplateFile).toString();
+
+    var template = Handlebars.compile(_t);
+    var out = template(data);
+
+    fs.writeFile(`./${outputPath}/driverStandings.html`, out, function(err) {
+      if (err) {
+        return debug(`error writing html file`);
+      }
+    });
+  }
 
   // name: satchmo, location: points, location: points, name: satchmo, total points: points, position: number,
 };

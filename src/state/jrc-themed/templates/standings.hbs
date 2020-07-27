@@ -37,7 +37,7 @@
 		}
 
 		body {
-			/*background-image: url("../../assets/germany.gif");*/
+			/*background-image: url("../../../assets/germany.gif");*/
 			font-family: Helvetica, sans-serif
 		}
 
@@ -153,7 +153,7 @@
 
 <body>
 {{!-- 	<video autoplay muted loop id="myVideo"> --}}
-{{!-- 		<source src="../../assets/pynklu.mp4" type="video/mp4"> --}}
+{{!-- 		<source src="../../../assets/pynklu.mp4" type="video/mp4"> --}}
 {{!-- 	</video> --}}
 
 
@@ -163,7 +163,7 @@
 			<div class="flexBox">
 				<div style="margin-bottom: 1em;">
 					<div class="logo" style="display:flex;">
-						<img src="../../assets/jrc_round.jpg" />
+						<img src="../../../assets/jrc_round.jpg" />
 						<h2 style="margin-left:1em;">JRC Themed Driver Standings</h2>
 					</div>
 				</div>
@@ -177,22 +177,17 @@
 							<th>Driver</th>
 							<th>Team</th>
 							<th>Car</th>
-							<th><img src="../../assets/country-flags/mco.png" /></th>
-							<th><img src="../../assets/country-flags/swe.png" /></th>
-							<th><img src="../../assets/country-flags/usa.png" /></th>
-							<th><img src="../../assets/country-flags/deu.png" /></th>
-							<th><img src="../../assets/country-flags/grc.png" /></th>
-{{!-- 							<th><img src="../../assets/country-flags/welsh.png" /></th> --}}
-{{!-- 							<th><img src="../../assets/country-flags/esp.png" /></th> --}}
-{{!-- 							<th><img src="../../assets/country-flags/aus.png" /></th> --}}
-							<th>Points</th>
-							<th>Gap</th>
-						</tr>
+
+    						{{#each headerLocations}}
+    							<th><img src="../../../assets/country-flags/{{this}}.png" /></th>
+							{{/each}}
+                            <th>Points</th>
+    					</tr>
 					</thead>
 					<tbody>
-						{{#each drivers}}{{#with this}}
+						{{#each rows}}{{#with this}}
 						<tr>
-							<td>{{position}}</td>
+							<td>{{currentPosition}}</td>
 							<td>
 								{{#if positive}}
 								<span class="positive"><i class="arrow up"></i>&nbsp;{{positionChange}}</span>
@@ -204,47 +199,29 @@
 								<span class="negative"><i class="arrow down"></i>&nbsp;{{positionChange}}</span>
 								{{/if}}
 							</td>
-							<td><img src="../../assets/country-flags/{{nationality}}.png"
+							<td><img src="../../../assets/country-flags/{{nationality}}.png"
 									style="max-width:1.5em; max-height:1.5em;" /></td>
 							<td class="text-left bold">{{name}}</td>
 							<td>
 								{{#if team}}
-								<img src="../../assets/teams/{{team}}.png" style="max-width:2em; max-height:2em;" />
+								<img src="../../../assets/teams/{{team}}.png" style="max-width:2em; max-height:2em;" />
 								{{else}}
-								<img src="../../assets/teams/Privateer.png" style="max-width:2em; max-height:2em;" />
+								<img src="../../../assets/teams/Privateer.png" style="max-width:2em; max-height:2em;" />
 								{{/if}}
 							</td>
 							<td>
 								{{#if car}}
-								<img src="../../assets/cars/{{car}}.png" style="max-width:2em; max-height:2em;" />
+								<img src="../../../assets/cars/{{car}}.png" style="max-width:2em; max-height:2em;" />
 								{{else}}
-								<img src="../../assets/teams/Privateer.png" style="max-width:2em; max-height:2em;" />
-								{{/if}}</td>
-							<td>
-								{{#if [MONTE CARLO]}}
-								{{[MONTE CARLO]}}
-								{{else}} 0
+								<img src="../../../assets/teams/Privateer.png" style="max-width:2em; max-height:2em;" />
 								{{/if}}
-							</td>
-							<td>
-								{{#if [VÄRMLAND]}}
-								{{[VÄRMLAND]}}
-								{{else}} 0
-								{{/if}}
-							</td>
-							<td>
-								{{#if [NEW ENGLAND]}}
-								{{[NEW ENGLAND]}}
-								{{else}} 0
-								{{/if}}
-							</td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td class="bold">{{total}}</td>
-							<td>{{gap}}</td>
+                            </td>
+                            {{#each locationPoints}}
+                                <td>
+                                    {{this}}
+                                </td>
+                            {{/each}}
+							<td class="bold">{{totalPoints}}</td>
 						</tr>
 						{{/with}}{{/each}}
 					</tbody>

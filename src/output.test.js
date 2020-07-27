@@ -35,25 +35,27 @@ describe("output", () => {
       getStandingCSVRows(league.divisions["pro"].events, "driver")
     ).toEqual([
       {
-        Australia: 115,
-        "Australia: PS": 5,
-        "Australia: Total": 120,
+        Australia: 120,
+        car: "Alpine Renault A110 1600 S",
         currentPosition: 1,
         name: "Kuul",
+        nationality: "est",
         positionChange: null,
         previousPosition: null,
         racenet: "Kuul",
+        team: "Unlimited Pedal Works",
         totalPoints: 120
       },
       {
-        Australia: undefined,
-        "Australia: PS": undefined,
-        "Australia: Total": 0,
+        Australia: 0,
+        car: "Ford Escort Mk II",
         currentPosition: 28,
         name: "Sladdikurvinen ™",
+        nationality: "swe",
         positionChange: null,
         previousPosition: null,
         racenet: "Sladdikurvinen",
+        team: "Ditch Dusters",
         totalPoints: 0
       }
     ]);
