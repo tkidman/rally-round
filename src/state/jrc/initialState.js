@@ -7,7 +7,7 @@ const initialState = {
     jrc1: {
       maxDriversScoringPointsForTeam: 2,
       clubId: "180867",
-      championshipIds: ["260543", "267588", "272837", "277620"],
+      championshipIds: ["260543", "267588", "272837", "277620", "280989"],
       events: [],
       points: {
         powerStage: [5, 4, 3, 2, 1],
@@ -18,7 +18,7 @@ const initialState = {
     jrc2: {
       maxDriversScoringPointsForTeam: 2,
       clubId: "244734",
-      championshipIds: ["260546", "267595", "272918", "277730"],
+      championshipIds: ["260546", "267595", "272918", "277730", "280996"],
       events: [],
       points: {
         powerStage: [5, 4, 3, 2, 1],
@@ -28,7 +28,7 @@ const initialState = {
     jrc3: {
       maxDriversScoringPointsForTeam: 2,
       clubId: "330674",
-      championshipIds: ["260549", "267602", "272991", "277731"],
+      championshipIds: ["260549", "267602", "272991", "277731", "280997"],
       events: [],
       points: {
         powerStage: [5, 4, 3, 2, 1],

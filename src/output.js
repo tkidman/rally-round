@@ -53,12 +53,17 @@ const writeDriverCSV = (eventResults, divisionName) => {
 const addDriverLocationResult = (eventPointsByName, result, event) => {
   if (!eventPointsByName[result.name]) {
     const nationality = countries[result.entry.nationality];
+    let nationalityCode;
     if (!nationality) {
-      debug(`no country found in lookup for ${result.entry.nationality}`);
+      debug(
+        `no country found in lookup for ${result.entry.nationality} ${result.name}`
+      );
+    } else {
+      nationalityCode = nationality.code;
     }
     eventPointsByName[result.name] = {
       name: result.name,
-      nationality: nationality.code
+      nationality: nationalityCode
     };
   }
   eventPointsByName[result.name][event.location] = result.totalPoints;
@@ -144,7 +149,7 @@ const transformForHTML = standingRows => {
     const car = vehicles[row.car];
     let carBrand;
     if (!car) {
-      debug(`no car found in lookup for ${car}`);
+      debug(`no car found in lookup for ${row.car}`);
     } else {
       carBrand = car.brand;
     }

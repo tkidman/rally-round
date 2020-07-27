@@ -15,4 +15,9 @@ const driverColumns = {
   [car]: "Car"
 };
 
-module.exports = { driverColumns };
+const sheetsConfig = {
+  sheetId: "1mLDzhofRL3ZfZts7Zp-1lekLQx6ApFXkhnpEyZdPXZM",
+  tabName: "All"
+};
+
+module.exports = { driverColumns, sheetsConfig };
