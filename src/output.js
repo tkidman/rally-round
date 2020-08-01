@@ -120,6 +120,12 @@ const getStandingCSVRows = (events, type) => {
   return standingRows;
 };
 
+const getAllResults = (name, events, type) => {
+  return events.map(event =>
+    event.results[`${type}Results`].find(result => result.name === name)
+  );
+};
+
 const transformForHTML = events => {
   const headerLocations = events.reduce((headerLocations, event) => {
     headerLocations.push(locations[event.location].countryCode);
@@ -128,26 +134,23 @@ const transformForHTML = events => {
 
   const lastEvent = events[events.length - 1];
   const rows = lastEvent.standings.driverStandings.map(standing => {
-    const currentStanding = standing.currentStanding;
     const movement = {
-      positive: currentStanding.positionChange > 0,
-      neutral: currentStanding.positionChange === 0,
-      negative: currentStanding.positionChange < 0
+      positive: standing.positionChange > 0,
+      neutral: standing.positionChange === 0,
+      negative: standing.positionChange < 0
     };
 
-    const driver = leagueRef.getDriver(currentStanding.name);
+    const results = getAllResults(standing.name, events, "driver");
+    const driver = leagueRef.getDriver(standing.name);
     const country = countries[driver.nationality];
-    let car = vehicles[driver.car];
-    if (!car) {
-      car = vehicles[currentStanding.result.entry.vehicleName];
-    }
+    const car = vehicles[driver.car];
     let carBrand;
     if (!car) {
-      debug(`no car found in lookup for ${currentStanding.result.entry.car}`);
+      debug(`no car found in lookup for ${driver.car}`);
     } else {
       carBrand = car.brand;
     }
-    return { standing, ...movement, car: carBrand, driver, country };
+    return { results, standing, ...movement, car: carBrand, driver, country };
   });
   return {
     headerLocations,

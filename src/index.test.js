@@ -169,49 +169,22 @@ describe("calculates event results", () => {
       standings: {
         driverStandings: [
           {
-            currentStanding: {
-              name: "satchmo",
-              totalPoints: 15
-            },
-            allStandings: [{ name: "satchmo", totalPoints: 15 }]
+            name: "satchmo",
+            totalPoints: 15
           },
           {
-            currentStanding: {
-              name: "zisekoz",
-              totalPoints: 10
-            },
-            allStandings: [
-              {
-                name: "zisekoz",
-                totalPoints: 10
-              }
-            ]
+            name: "zisekoz",
+            totalPoints: 10
           }
         ],
         teamStandings: [
           {
-            currentStanding: {
-              name: "Live and Let DNF",
-              totalPoints: 10
-            },
-            allStandings: [
-              {
-                name: "Live and Let DNF",
-                totalPoints: 10
-              }
-            ]
+            name: "Live and Let DNF",
+            totalPoints: 10
           },
           {
-            currentStanding: {
-              name: "Dammit Sammir!",
-              totalPoints: 8
-            },
-            allStandings: [
-              {
-                name: "Dammit Sammir!",
-                totalPoints: 8
-              }
-            ]
+            name: "Dammit Sammir!",
+            totalPoints: 8
           }
         ]
       }
@@ -220,42 +193,34 @@ describe("calculates event results", () => {
     expect(event.standings).toMatchObject({
       driverStandings: [
         {
-          currentStanding: {
-            currentPosition: 1,
-            name: "zisekoz",
-            totalPoints: 25,
-            positionChange: 1,
-            previousPosition: 2
-          }
+          currentPosition: 1,
+          name: "zisekoz",
+          totalPoints: 25,
+          positionChange: 1,
+          previousPosition: 2
         },
         {
-          currentStanding: {
-            currentPosition: 2,
-            name: "satchmo",
-            totalPoints: 23,
-            positionChange: -1,
-            previousPosition: 1
-          }
+          currentPosition: 2,
+          name: "satchmo",
+          totalPoints: 23,
+          positionChange: -1,
+          previousPosition: 1
         }
       ],
       teamStandings: [
         {
-          currentStanding: {
-            currentPosition: 1,
-            name: "Live and Let DNF",
-            totalPoints: 20,
-            positionChange: 0,
-            previousPosition: 1
-          }
+          currentPosition: 1,
+          name: "Live and Let DNF",
+          totalPoints: 20,
+          positionChange: 0,
+          previousPosition: 1
         },
         {
-          currentStanding: {
-            currentPosition: 2,
-            name: "Dammit Sammir!",
-            totalPoints: 16,
-            positionChange: 0,
-            previousPosition: 2
-          }
+          currentPosition: 2,
+          name: "Dammit Sammir!",
+          totalPoints: 16,
+          positionChange: 0,
+          previousPosition: 2
         }
       ]
     });
@@ -289,22 +254,18 @@ describe("calculates event results", () => {
     calculateEventStandings(event);
     expect(event.standings.driverStandings).toMatchObject([
       {
-        currentStanding: {
-          currentPosition: 1,
-          name: "zisekoz",
-          totalPoints: 15,
-          positionChange: null,
-          previousPosition: null
-        }
+        currentPosition: 1,
+        name: "zisekoz",
+        totalPoints: 15,
+        positionChange: null,
+        previousPosition: null
       },
       {
-        currentStanding: {
-          currentPosition: 2,
-          name: "satchmo",
-          totalPoints: 8,
-          positionChange: null,
-          previousPosition: null
-        }
+        currentPosition: 2,
+        name: "satchmo",
+        totalPoints: 8,
+        positionChange: null,
+        previousPosition: null
       }
     ]);
   });

@@ -188,23 +188,23 @@
                 <tbody>
                 {{#each rows}}{{#with this}}
                     <tr>
-                        <td>{{standing.currentStanding.currentPosition}}</td>
+                        <td>{{standing.currentPosition}}</td>
                         <td>
                             {{#if positive}}
                                 <span class="positive"><i
-                                        class="arrow up"></i>&nbsp;{{standing.currentStanding.positionChange}}</span>
+                                        class="arrow up"></i>&nbsp;{{standing.positionChange}}</span>
                             {{/if}}
                             {{#if neutral}}
                                 <span class="neutral">=</span>
                             {{/if}}
                             {{#if negative}}
                                 <span class="negative"><i
-                                        class="arrow down"></i>&nbsp;{{standing.currentStanding.positionChange}}</span>
+                                        class="arrow down"></i>&nbsp;{{standing.positionChange}}</span>
                             {{/if}}
                         </td>
                         <td><img src="../../../assets/country-flags/{{country.code}}.png"
                                  style="max-width:1.5em; max-height:1.5em;"/></td>
-                        <td class="text-left bold">{{standing.currentStanding.name}}</td>
+                        <td class="text-left bold">{{standing.name}}</td>
 <!--                        <td>-->
 <!--                            {{#if team}}-->
 <!--                                <img src="../../../assets/teams/{{team}}.png" style="max-width:2em; max-height:2em;"/>-->
@@ -219,12 +219,12 @@
                                 <img src="../../../assets/teams/Privateer.png" style="max-width:2em; max-height:2em;"/>
                             {{/if}}
                         </td>
-                        {{#each standing.allStandings}}{{#with this}}
+                        {{#each results}}{{#with this}}
                             <td>
-                                {{result.totalPoints}}
+                                {{totalPoints}}
                             </td>
                         {{/with}}{{/each}}
-                        <td class="bold">{{standing.currentStanding.totalPoints}}</td>
+                        <td class="bold">{{standing.totalPoints}}</td>
                     </tr>
                 {{/with}}{{/each}}
                 </tbody>

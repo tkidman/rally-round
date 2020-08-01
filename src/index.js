@@ -185,45 +185,35 @@ const calculateEventResults = ({ event, divisionName, drivers }) => {
   return { driverResults, teamResults };
 };
 
-const calculateStandings = (results, previousStandings, location) => {
-  const standings = results.map(result => {
+const calculateStandings = (results, previousStandings) => {
+  const standings = results.map(entry => {
     const standing = {
-      currentStanding: {
-        name: result.name,
-        totalPoints: result.totalPoints,
-        previousPosition: null,
-        location,
-        result
-      },
-      allStandings: []
+      name: entry.name,
+      totalPoints: entry.totalPoints,
+      previousPosition: null
     };
     if (previousStandings) {
       const previousIndex = previousStandings.findIndex(
-        standing => standing.currentStanding.name === result.name
+        standing => standing.name === entry.name
       );
       if (previousIndex !== -1) {
         const previousStanding = previousStandings[previousIndex];
-        standing.currentStanding.previousPosition = previousIndex + 1;
-        standing.currentStanding.totalPoints =
-          previousStanding.currentStanding.totalPoints + result.totalPoints;
-        standing.allStandings.push(...previousStanding.allStandings);
+        standing.previousPosition = previousIndex + 1;
+        standing.totalPoints = previousStanding.totalPoints + entry.totalPoints;
       }
     }
-    standing.allStandings.push(standing.currentStanding);
     return standing;
   });
   const sortedStandings = sortBy(
     standings,
-    standing => 0 - standing.currentStanding.totalPoints
+    standing => 0 - standing.totalPoints
   );
 
   for (let i = 0; i < sortedStandings.length; i++) {
     const standing = sortedStandings[i];
-    standing.currentStanding.currentPosition = i + 1;
-    standing.currentStanding.positionChange = standing.currentStanding
-      .previousPosition
-      ? standing.currentStanding.previousPosition -
-        standing.currentStanding.currentPosition
+    standing.currentPosition = i + 1;
+    standing.positionChange = standing.previousPosition
+      ? standing.previousPosition - standing.currentPosition
       : null;
   }
   return sortedStandings;
