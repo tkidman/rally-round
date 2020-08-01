@@ -107,6 +107,34 @@ const myClubs = async creds => {
   return response;
 };
 
+const fetchClubs = async () => {
+  const { cookie, xsrfh } = await getCreds();
+  const clubs = [];
+  let pageNumber = 1;
+  let numPages = null;
+
+  while (!numPages || pageNumber <= numPages) {
+    const payload = {
+      searchTerm: "",
+      pageNumber,
+      pageSize: 100
+    };
+
+    const response = await instance({
+      method: "POST",
+      url: `${dirtRally2Domain}/api/Club/Search`,
+      headers: { Cookie: cookie, "RaceNet.XSRFH": xsrfh },
+      httpsAgent,
+      data: payload
+    });
+    clubs.push(...response.data.clubs);
+    numPages = response.data.pageCount;
+    debug(`loaded clubs page ${pageNumber} of ${numPages}`);
+    pageNumber++;
+  }
+  return clubs;
+};
+
 const fetchChampionships = async clubId => {
   const { cookie } = await getCreds();
   const response = await instance({
@@ -191,5 +219,6 @@ module.exports = {
   fetchChampionships,
   fetchRecentResults,
   fetchEventResults,
+  fetchClubs,
   getCreds
 };

@@ -1,5 +1,6 @@
 const { google } = require("googleapis");
 const debug = require("debug")("tkidman:dirt2-results:sheets");
+const sheetId = "1M-JZAPJMp0ASihKi7z2kHMiL9BFi7PQlakvvl7pcal0";
 
 const loadSheet = async ({ sheetId, tabName }) => {
   const sheets = google.sheets({
@@ -28,4 +29,49 @@ const loadSheet = async ({ sheetId, tabName }) => {
   }
 };
 
-module.exports = { loadSheet };
+const updateClubsSheet = async clubs => {
+  const clientId = process.env.DIRT_SHEETS_CLIENT_ID;
+  const clientSecret = process.env.DIRT_SHEETS_CLIENT_SECRET;
+  const refreshToken = process.env.DIRT_SHEETS_REFRESH_TOKEN;
+
+  const oauth2Client = new google.auth.OAuth2(
+    clientId,
+    clientSecret,
+    "http://localhost"
+  );
+
+  const tokens = {
+    refresh_token: refreshToken
+  };
+  oauth2Client.setCredentials(tokens);
+
+  const sheets = google.sheets({
+    version: "v4",
+    auth: oauth2Client
+  });
+  await sheets.spreadsheets.values.clear({
+    spreadsheetId: sheetId,
+    range: "A2:F"
+  });
+
+  const sortedClubs = clubs.sort((a, b) => b.memberCount - a.memberCount);
+  const values = sortedClubs.reduce((acc, club) => {
+    acc.push([
+      club.name,
+      club.memberCount,
+      club.clubAccessType === "Moderated",
+      club.hasActiveChampionship,
+      club.description
+    ]);
+    return acc;
+  }, []);
+  await sheets.spreadsheets.values.append({
+    spreadsheetId: sheetId,
+    resource: { values },
+    range: "A1",
+    valueInputOption: "USER_ENTERED"
+  });
+  debug(`sheet updated with ${values.length} rows`);
+};
+
+module.exports = { loadSheet, updateClubsSheet };
