@@ -5,7 +5,6 @@ const {
   calculateOverall
 } = require("./index");
 const leaderboard = require("./__fixtures__/leaderboard");
-const { getEventKeysFromRecentResults } = require("./index");
 const { init } = require("./state/league");
 
 describe("calculates event results", () => {
@@ -84,8 +83,11 @@ describe("calculates event results", () => {
         divisionName: "pro"
       }
     ];
-    const driverResults = calculateEventResults(leaderboard, null, "pro")
-      .driverResults;
+    const driverResults = calculateEventResults({
+      event: { racenetLeaderboard: leaderboard },
+      drivers: {},
+      divisionName: "pro"
+    }).driverResults;
     expect(driverResults).toEqual(expected);
   });
 
@@ -104,9 +106,13 @@ describe("calculates event results", () => {
         totalPoints: 0
       }
     ];
-    expect(calculateEventResults(leaderboard, null, "pro").teamResults).toEqual(
-      expected
-    );
+    expect(
+      calculateEventResults({
+        event: { racenetLeaderboard: leaderboard },
+        drivers: {},
+        divisionName: "pro"
+      }).teamResults
+    ).toEqual(expected);
   });
 
   test("sorts team results by points", () => {
@@ -163,58 +169,93 @@ describe("calculates event results", () => {
       standings: {
         driverStandings: [
           {
-            name: "satchmo",
-            totalPoints: 15
+            currentStanding: {
+              name: "satchmo",
+              totalPoints: 15
+            },
+            allStandings: [{ name: "satchmo", totalPoints: 15 }]
           },
           {
-            name: "zisekoz",
-            totalPoints: 10
+            currentStanding: {
+              name: "zisekoz",
+              totalPoints: 10
+            },
+            allStandings: [
+              {
+                name: "zisekoz",
+                totalPoints: 10
+              }
+            ]
           }
         ],
         teamStandings: [
           {
-            name: "Live and Let DNF",
-            totalPoints: 10
+            currentStanding: {
+              name: "Live and Let DNF",
+              totalPoints: 10
+            },
+            allStandings: [
+              {
+                name: "Live and Let DNF",
+                totalPoints: 10
+              }
+            ]
           },
           {
-            name: "Dammit Sammir!",
-            totalPoints: 8
+            currentStanding: {
+              name: "Dammit Sammir!",
+              totalPoints: 8
+            },
+            allStandings: [
+              {
+                name: "Dammit Sammir!",
+                totalPoints: 8
+              }
+            ]
           }
         ]
       }
     };
     calculateEventStandings(event, previousEvent);
-    expect(event.standings).toEqual({
+    expect(event.standings).toMatchObject({
       driverStandings: [
         {
-          currentPosition: 1,
-          name: "zisekoz",
-          totalPoints: 25,
-          positionChange: 1,
-          previousPosition: 2
+          currentStanding: {
+            currentPosition: 1,
+            name: "zisekoz",
+            totalPoints: 25,
+            positionChange: 1,
+            previousPosition: 2
+          }
         },
         {
-          currentPosition: 2,
-          name: "satchmo",
-          totalPoints: 23,
-          positionChange: -1,
-          previousPosition: 1
+          currentStanding: {
+            currentPosition: 2,
+            name: "satchmo",
+            totalPoints: 23,
+            positionChange: -1,
+            previousPosition: 1
+          }
         }
       ],
       teamStandings: [
         {
-          currentPosition: 1,
-          name: "Live and Let DNF",
-          totalPoints: 20,
-          positionChange: 0,
-          previousPosition: 1
+          currentStanding: {
+            currentPosition: 1,
+            name: "Live and Let DNF",
+            totalPoints: 20,
+            positionChange: 0,
+            previousPosition: 1
+          }
         },
         {
-          currentPosition: 2,
-          name: "Dammit Sammir!",
-          totalPoints: 16,
-          positionChange: 0,
-          previousPosition: 2
+          currentStanding: {
+            currentPosition: 2,
+            name: "Dammit Sammir!",
+            totalPoints: 16,
+            positionChange: 0,
+            previousPosition: 2
+          }
         }
       ]
     });
@@ -246,176 +287,30 @@ describe("calculates event results", () => {
       }
     };
     calculateEventStandings(event);
-    expect(event.standings.driverStandings).toEqual([
+    expect(event.standings.driverStandings).toMatchObject([
       {
-        currentPosition: 1,
-        name: "zisekoz",
-        totalPoints: 15,
-        positionChange: null,
-        previousPosition: null
+        currentStanding: {
+          currentPosition: 1,
+          name: "zisekoz",
+          totalPoints: 15,
+          positionChange: null,
+          previousPosition: null
+        }
       },
       {
-        currentPosition: 2,
-        name: "satchmo",
-        totalPoints: 8,
-        positionChange: null,
-        previousPosition: null
+        currentStanding: {
+          currentPosition: 2,
+          name: "satchmo",
+          totalPoints: 8,
+          positionChange: null,
+          previousPosition: null
+        }
       }
     ]);
   });
 
   it("calculates overall results", () => {
     const preOverallResults = require("./__fixtures__/preOverallLeague.json");
-    expect(calculateOverall(preOverallResults.divisions)).toEqual({
-      events: [
-        {
-          location: "Australia",
-          results: {
-            driverResults: [
-              {
-                divisionName: "pro",
-                entry: {
-                  isDnfEntry: false,
-                  isFounder: false,
-                  isPlayer: false,
-                  isVIP: false,
-                  name: "Kuul",
-                  nationality: "eLngEstonian",
-                  playerDiff: 0,
-                  rank: 1,
-                  stageDiff: "--",
-                  stageTime: "03:40.461",
-                  totalDiff: "--",
-                  totalTime: "56:18.651",
-                  vehicleName: "Peugeot 206 Rally"
-                },
-                name: "Kuul",
-                overallPoints: 115,
-                powerStagePoints: 5,
-                totalPoints: 120
-              },
-              {
-                divisionName: "amateur",
-                entry: {
-                  isDnfEntry: false,
-                  isFounder: false,
-                  isPlayer: false,
-                  isVIP: false,
-                  name: "Ssplatered",
-                  nationality: "eLngCanadian",
-                  playerDiff: 0,
-                  rank: 1,
-                  stageDiff: "--",
-                  stageTime: "03:40.304",
-                  totalDiff: "--",
-                  totalTime: "56:44.370",
-                  vehicleName: "Lancia Delta HF Integrale"
-                },
-                name: "Ssplatered",
-                overallPoints: 84,
-                powerStagePoints: 5,
-                totalPoints: 89
-              },
-              {
-                divisionName: "pro",
-                entry: {
-                  isDnfEntry: true,
-                  isFounder: false,
-                  isPlayer: false,
-                  isVIP: false,
-                  name: "Sladdikurvinen ™",
-                  nationality: "eLngSwedish",
-                  playerDiff: 0,
-                  rank: 28,
-                  stageDiff: "+11:19.539",
-                  stageTime: "15:00.000",
-                  totalDiff: "+03:03:41.349",
-                  totalTime: "04:00:00.000",
-                  vehicleName: "SUBARU Impreza (2001)"
-                },
-                name: "Sladdikurvinen ™",
-                totalPoints: 0
-              }
-            ],
-            teamResults: [
-              {
-                divisionName: "overall",
-                name: "Ditch Dusters",
-                totalPoints: 290
-              },
-              {
-                divisionName: "overall",
-                name: "Unlimited Pedal Works",
-                totalPoints: 164
-              }
-            ]
-          },
-          standings: {
-            driverStandings: [
-              {
-                currentPosition: 1,
-                name: "Kuul",
-                positionChange: null,
-                previousPosition: null,
-                totalPoints: 120
-              },
-              {
-                currentPosition: 2,
-                name: "Ssplatered",
-                positionChange: null,
-                previousPosition: null,
-                totalPoints: 89
-              },
-              {
-                currentPosition: 3,
-                name: "Sladdikurvinen ™",
-                positionChange: null,
-                previousPosition: null,
-                totalPoints: 0
-              }
-            ],
-            teamStandings: [
-              {
-                currentPosition: 1,
-                name: "Ditch Dusters",
-                positionChange: null,
-                previousPosition: null,
-                totalPoints: 290
-              },
-              {
-                currentPosition: 2,
-                name: "Unlimited Pedal Works",
-                positionChange: null,
-                previousPosition: null,
-                totalPoints: 164
-              }
-            ]
-          }
-        }
-      ]
-    });
-  });
-
-  it("gets event keys from recent results and championships", () => {
-    const recentResults = require("./__fixtures__/recentResults.json");
-    const championships = require("./__fixtures__/championships.json");
-    const eventKeys = getEventKeysFromRecentResults({
-      recentResults,
-      championships,
-      division: {
-        championshipIds: ["65933"]
-      },
-      divisionName: "pro"
-    });
-    expect(eventKeys).toEqual([
-      {
-        challengeId: "65933",
-        divisionName: "pro",
-        eventId: "66384",
-        location: "ŁĘCZNA COUNTY",
-        stageId: "4",
-        eventStatus: "Finished"
-      }
-    ]);
+    expect(calculateOverall(preOverallResults.divisions)).toMatchSnapshot();
   });
 });

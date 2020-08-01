@@ -1,21 +1,18 @@
 const debug = require("debug")("tkidman:dirt2-results");
 const moment = require("moment");
-const { eventStatuses } = require("./shared");
-const { fetchChampionships } = require("./dirtAPI");
 const { privateer } = require("./shared");
 const { printMissingDrivers } = require("./state/league");
-const { fetchRecentResults } = require("./dirtAPI");
 const { sortBy, keyBy } = require("lodash");
 
 const { init, leagueRef } = require("./state/league");
-const { fetchEventResults } = require("./dirtAPI");
-const { writeJSON, writeCSV, checkOutputDirs } = require("./output");
+const { writeOutput, checkOutputDirs } = require("./output");
 const { getTotalPoints } = require("./shared");
 const { calculateFantasyStandings } = require("./fantasy/fantasyCalculator");
 const {
   fantasyStandingsToImage,
   drawResults
 } = require("./visualisation/tableDrawer");
+const { fetchEvents } = require("./fetch");
 
 const dnfFactor = 100000000;
 
@@ -110,10 +107,11 @@ const sortTeamResults = teamResultsById => {
   return teamResults.reverse();
 };
 
-const createDNSResult = result => {
+const createDNSResult = driverName => {
   return {
-    name: result.name,
+    name: driverName,
     entry: {
+      name: driverName,
       isDnfEntry: true,
       isDnsEntry: true,
       stageTime: "15:00:00.000",
@@ -134,8 +132,8 @@ const setDnfIfIncorrectCar = entry => {
   }
 };
 
-const calculateEventResults = (leaderboard, previousEvent, divisionName) => {
-  const entries = leaderboard.entries;
+const calculateEventResults = ({ event, divisionName, drivers }) => {
+  const entries = event.racenetLeaderboard.entries;
   const resultsByDriver = entries.reduce((resultsByDriver, entry) => {
     resultsByDriver[entry.name] = {
       name: entry.name,
@@ -147,13 +145,11 @@ const calculateEventResults = (leaderboard, previousEvent, divisionName) => {
   }, {});
 
   // create results for drivers that didn't start a run
-  if (previousEvent) {
-    previousEvent.results.driverResults.forEach(result => {
-      if (!resultsByDriver[result.name]) {
-        resultsByDriver[result.name] = createDNSResult(result);
-      }
-    });
-  }
+  Object.keys(drivers).forEach(driver => {
+    if (!resultsByDriver[driver]) {
+      resultsByDriver[driver] = createDNSResult(driver);
+    }
+  });
 
   // dnf entries are sorted below non-dnf entries
   const powerStageEntries = orderEntriesBy(entries, "stageTime");
@@ -189,35 +185,45 @@ const calculateEventResults = (leaderboard, previousEvent, divisionName) => {
   return { driverResults, teamResults };
 };
 
-const calculateStandings = (results, previousStandings) => {
-  const standings = results.map(entry => {
+const calculateStandings = (results, previousStandings, location) => {
+  const standings = results.map(result => {
     const standing = {
-      name: entry.name,
-      totalPoints: entry.totalPoints,
-      previousPosition: null
+      currentStanding: {
+        name: result.name,
+        totalPoints: result.totalPoints,
+        previousPosition: null,
+        location,
+        result
+      },
+      allStandings: []
     };
     if (previousStandings) {
       const previousIndex = previousStandings.findIndex(
-        standing => standing.name === entry.name
+        standing => standing.currentStanding.name === result.name
       );
       if (previousIndex !== -1) {
         const previousStanding = previousStandings[previousIndex];
-        standing.previousPosition = previousIndex + 1;
-        standing.totalPoints = previousStanding.totalPoints + entry.totalPoints;
+        standing.currentStanding.previousPosition = previousIndex + 1;
+        standing.currentStanding.totalPoints =
+          previousStanding.currentStanding.totalPoints + result.totalPoints;
+        standing.allStandings.push(...previousStanding.allStandings);
       }
     }
+    standing.allStandings.push(standing.currentStanding);
     return standing;
   });
   const sortedStandings = sortBy(
     standings,
-    standing => 0 - standing.totalPoints
+    standing => 0 - standing.currentStanding.totalPoints
   );
 
   for (let i = 0; i < sortedStandings.length; i++) {
     const standing = sortedStandings[i];
-    standing.currentPosition = i + 1;
-    standing.positionChange = standing.previousPosition
-      ? standing.previousPosition - standing.currentPosition
+    standing.currentStanding.currentPosition = i + 1;
+    standing.currentStanding.positionChange = standing.currentStanding
+      .previousPosition
+      ? standing.currentStanding.previousPosition -
+        standing.currentStanding.currentPosition
       : null;
   }
   return sortedStandings;
@@ -229,7 +235,8 @@ const calculateEventStandings = (event, previousEvent) => {
     : null;
   const driverStandings = calculateStandings(
     event.results.driverResults,
-    previousDriverStandings
+    previousDriverStandings,
+    event.location
   );
 
   const previousTeamStandings = previousEvent
@@ -242,13 +249,17 @@ const calculateEventStandings = (event, previousEvent) => {
   event.standings = { driverStandings, teamStandings };
 };
 
-const processEvent = async (divisionName, event, previousEvent) => {
-  const leaderboard = await fetchEventResults(event);
-  event.results = calculateEventResults(
-    leaderboard,
-    previousEvent,
-    divisionName
-  );
+const processEvent = async ({
+  divisionName,
+  event,
+  previousEvent,
+  drivers
+}) => {
+  event.results = calculateEventResults({
+    event,
+    divisionName,
+    drivers
+  });
   calculateEventStandings(event, previousEvent);
   if (leagueRef.league.divisions[divisionName].fantasy) {
     calculateFantasyStandings(
@@ -262,9 +273,17 @@ const processEvent = async (divisionName, event, previousEvent) => {
 
 const processEvents = async (events, divisionName) => {
   let previousEvent = null;
+  const drivers = events.reduce((drivers, event) => {
+    event.racenetLeaderboard.entries.forEach(entry => {
+      const driver = leagueRef.getDriver(entry.name);
+      driver.nationality = entry.nationality;
+      drivers[entry.name] = driver;
+    });
+    return drivers;
+  }, {});
   for (const event of events) {
     debug(`processing ${divisionName} ${event.location}`);
-    await processEvent(divisionName, event, previousEvent);
+    await processEvent({ divisionName, event, previousEvent, drivers });
     previousEvent = event;
   }
 };
@@ -326,75 +345,6 @@ const calculateOverallResults = () => {
   leagueRef.league.overall = calculateOverall(leagueRef.league.divisions);
 };
 
-const fetchEventKeys = async (division, divisionName) => {
-  const recentResults = await fetchRecentResults(division.clubId);
-  const championships = await fetchChampionships(division.clubId);
-  return getEventKeysFromRecentResults({
-    recentResults,
-    championships,
-    division,
-    divisionName
-  });
-};
-
-const getStageIds = ({ challengeId, championshipId, recentResults }) => {
-  const championship = recentResults.championships.find(
-    championship => championship.id === championshipId
-  );
-  // event id becomes challenge id ??
-  const event = championship.events.find(
-    event => event.challengeId === challengeId
-  );
-  if (!event) {
-    debug(`no event found in recent results for event id ${challengeId}`);
-  }
-  return {
-    eventId: event.id,
-    challengeId: event.challengeId,
-    stageId: `${event.stages.length - 1}`
-  };
-};
-
-const getEventKeysFromRecentResults = ({
-  recentResults,
-  championships,
-  division,
-  divisionName
-}) => {
-  // pull out championships matching championship ids
-  const divisionChampionships = championships.filter(championship =>
-    division.championshipIds.includes(championship.id)
-  );
-  const eventKeys = divisionChampionships.reduce((events, championship) => {
-    const eventResultKeys = championship.events.reduce(
-      (eventResultKeys, event) => {
-        if (
-          event.eventStatus === eventStatuses.active ||
-          event.eventStatus === eventStatuses.finished
-        ) {
-          const stageIds = getStageIds({
-            challengeId: event.id,
-            championshipId: championship.id,
-            recentResults
-          });
-          eventResultKeys.push({
-            eventId: event.id,
-            location: event.locationName,
-            divisionName: divisionName,
-            eventStatus: event.eventStatus,
-            ...stageIds
-          });
-        }
-        return eventResultKeys;
-      },
-      []
-    );
-    events.push(...eventResultKeys);
-    return events;
-  }, []);
-  return eventKeys;
-};
-
 const processAllDivisions = async () => {
   try {
     checkOutputDirs();
@@ -402,14 +352,13 @@ const processAllDivisions = async () => {
     const { league, divisions } = leagueRef;
     for (const divisionName of Object.keys(divisions)) {
       const division = divisions[divisionName];
-      division.events = await fetchEventKeys(division, divisionName);
+      division.events = await fetchEvents(division, divisionName);
       await processEvents(division.events, divisionName);
     }
     calculateOverallResults();
     if (league.fantasy) fantasyStandingsToImage(league.fantasy);
     drawResults(league);
-    writeCSV(league);
-    writeJSON(league);
+    writeOutput(league);
     printMissingDrivers();
   } catch (err) {
     debug(err);
@@ -424,6 +373,5 @@ module.exports = {
   sortTeamResults,
   processEvent,
   calculateEventStandings,
-  calculateOverall,
-  getEventKeysFromRecentResults
+  calculateOverall
 };

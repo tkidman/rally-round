@@ -41,6 +41,7 @@ const buildDriverRows = event => {
   return driverRows;
 };
 
+// eslint-disable-next-line no-unused-vars
 const writeDriverCSV = (eventResults, divisionName) => {
   const driverRows = buildDriverRows(eventResults, divisionName);
   const driversCSV = Papa.unparse(driverRows);
@@ -119,41 +120,34 @@ const getStandingCSVRows = (events, type) => {
   return standingRows;
 };
 
-const transformForHTML = standingRows => {
-  const headerLocations = Object.keys(standingRows[0]).reduce(
-    (headerLocations, columnName) => {
-      if (locations[columnName]) {
-        headerLocations.push(locations[columnName].countryCode);
-      }
-      return headerLocations;
-    },
-    []
-  );
+const transformForHTML = events => {
+  const headerLocations = events.reduce((headerLocations, event) => {
+    headerLocations.push(locations[event.location].countryCode);
+    return headerLocations;
+  }, []);
 
-  const rows = standingRows.map(row => {
-    const locationPoints = Object.keys(row).reduce(
-      (locationPoints, columnName) => {
-        if (locations[columnName]) {
-          locationPoints.push(row[columnName]);
-        }
-        return locationPoints;
-      },
-      []
-    );
+  const lastEvent = events[events.length - 1];
+  const rows = lastEvent.standings.driverStandings.map(standing => {
+    const currentStanding = standing.currentStanding;
     const movement = {
-      positive: row.positionChange > 0,
-      neutral: row.positionChange === 0,
-      negative: row.positionChange < 0
+      positive: currentStanding.positionChange > 0,
+      neutral: currentStanding.positionChange === 0,
+      negative: currentStanding.positionChange < 0
     };
 
-    const car = vehicles[row.car];
+    const driver = leagueRef.getDriver(currentStanding.name);
+    const country = countries[driver.nationality];
+    let car = vehicles[driver.car];
+    if (!car) {
+      car = vehicles[currentStanding.result.entry.vehicleName];
+    }
     let carBrand;
     if (!car) {
-      debug(`no car found in lookup for ${row.car}`);
+      debug(`no car found in lookup for ${currentStanding.result.entry.car}`);
     } else {
       carBrand = car.brand;
     }
-    return { ...row, locationPoints, ...movement, car: carBrand };
+    return { standing, ...movement, car: carBrand, driver, country };
   });
   return {
     headerLocations,
@@ -161,6 +155,29 @@ const transformForHTML = standingRows => {
   };
 };
 
+const writeStandingsHTML = (divisionName, events, type) => {
+  if (type === "driver") {
+    const data = transformForHTML(events);
+
+    const standingsTemplateFile = `${templatePath}standings.hbs`;
+    if (!fs.existsSync(standingsTemplateFile)) {
+      debug("no standings html template found, returning");
+      return;
+    }
+    const _t = fs.readFileSync(standingsTemplateFile).toString();
+
+    const template = Handlebars.compile(_t);
+    const out = template(data);
+
+    fs.writeFile(`./${outputPath}/driverStandings.html`, out, function(err) {
+      if (err) {
+        return debug(`error writing html file`);
+      }
+    });
+  }
+};
+
+// eslint-disable-next-line no-unused-vars
 const writeStandingsCSV = (divisionName, events, type) => {
   const lastEvent = events[events.length - 1];
   const standingRows = getStandingCSVRows(events, type);
@@ -170,41 +187,23 @@ const writeStandingsCSV = (divisionName, events, type) => {
     standingsCSV
   );
 
-  if (type === "driver") {
-    const data = transformForHTML(standingRows);
-
-    const standingsTemplateFile = `${templatePath}standings.hbs`;
-    if (!fs.existsSync(standingsTemplateFile)) {
-      debug("no standings html template found, returning");
-      return;
-    }
-    var _t = fs.readFileSync(standingsTemplateFile).toString();
-
-    var template = Handlebars.compile(_t);
-    var out = template(data);
-
-    fs.writeFile(`./${outputPath}/driverStandings.html`, out, function(err) {
-      if (err) {
-        return debug(`error writing html file`);
-      }
-    });
-  }
-
   // name: satchmo, location: points, location: points, name: satchmo, total points: points, position: number,
 };
 
-const writeCSV = () => {
+const writeOutput = () => {
   const league = leagueRef.league;
   Object.keys(league.divisions).forEach(divisionName => {
     const divisionEvents = league.divisions[divisionName].events;
-    divisionEvents.forEach(event => {
-      writeDriverCSV(event, divisionName);
-    });
-    writeStandingsCSV(divisionName, divisionEvents, "driver");
-    writeStandingsCSV(divisionName, divisionEvents, "team");
+    // divisionEvents.forEach(event => {
+    //   writeDriverCSV(event, divisionName);
+    // });
+    // writeStandingsCSV(divisionName, divisionEvents, "driver");
+    // writeStandingsCSV(divisionName, divisionEvents, "team");
+    writeStandingsHTML(divisionName, divisionEvents, "driver");
   });
-  writeStandingsCSV("overall", league.overall.events, "driver");
-  writeStandingsCSV("overall", league.overall.events, "team");
+  // writeStandingsCSV("overall", league.overall.events, "driver");
+  // writeStandingsCSV("overall", league.overall.events, "team");
+  writeJSON(league);
   return true;
 };
 
@@ -222,11 +221,9 @@ const checkOutputDirs = () => {
 };
 
 module.exports = {
-  writeJSON,
-  writeDriverCSV,
-  buildDriverRows,
-  writeCSV,
+  writeOutput,
   checkOutputDirs,
   // tests
-  getStandingCSVRows
+  getStandingCSVRows,
+  buildDriverRows
 };

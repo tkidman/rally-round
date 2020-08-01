@@ -1,154 +1,155 @@
 <html>
 
 <head>
-	<style>
-		#container {
-			width: 90%;
-			margin: auto;
-			padding: 4em;
-		}
+    <style>
+        #container {
+            width: 90%;
+            margin: auto;
+            padding: 4em;
+        }
 
-		.background {
-			position: absolute;
-			display: block;
-			top: 0;
-			left: 0;
-			z-index: -1;
-		}
+        .background {
+            position: absolute;
+            display: block;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
 
-		#particles-js {
-			display: none;
-			position: absolute;
-			top: 0;
-			left: 0;
-			z-index: -1;
-			width: 100%;
-			height: 140%;
-			background-color: #e6f4ff;
-			background-image: url("");
-			background-repeat: no-repeat;
-			background-size: cover;
-			background-position: 50% 50%;
-		}
+        #particles-js {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            width: 100%;
+            height: 140%;
+            background-color: #e6f4ff;
+            background-image: url("");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: 50% 50%;
+        }
 
-		canvas {
-			display: block;
-			vertical-align: bottom;
-		}
+        canvas {
+            display: block;
+            vertical-align: bottom;
+        }
 
-		body {
-			/*background-image: url("../../../assets/germany.gif");*/
-			font-family: Helvetica, sans-serif
-		}
+        body {
+            /*background-image: url("../../../assets/germany.gif");*/
+            font-family: Helvetica, sans-serif
+        }
 
-		#myVideo {
-			z-index: -1;
-			position: fixed;
-			right: 0;
-			bottom: 0;
-			min-width: 130%;
-			min-height: 130%;
-		}
+        #myVideo {
+            z-index: -1;
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 130%;
+            min-height: 130%;
+        }
 
-		h2 {
-			color: black;
-		}
+        h2 {
+            color: black;
+        }
 
-		table {
-			border-collapse: collapse;
-		}
+        table {
+            border-collapse: collapse;
+        }
 
-		th,
-		td {
-			padding: 0.5em;
-			text-align: center;
-		}
+        th,
+        td {
+            padding: 0.5em;
+            text-align: center;
+        }
 
-		.text-left {
-			text-align: left;
-		}
+        .text-left {
+            text-align: left;
+        }
 
-		.bold {
-			font-weight: bold;
-		}
+        .bold {
+            font-weight: bold;
+        }
 
-		.bold>small {
-			font-weight: initial;
-		}
+        .bold > small {
+            font-weight: initial;
+        }
 
-		th>img {
-			max-height: 1.5em;
-			margin: auto;
-		}
+        th > img {
+            max-height: 1.5em;
+            margin: auto;
+        }
 
-		thead>tr {
-			background-color: #5355bf;
-			color: white;
-		}
+        thead > tr {
+            background-color: #5355bf;
+            color: white;
+        }
 
-		tbody>tr:nth-child(even) {
-			background-color: #dfedff
-		}
+        tbody > tr:nth-child(even) {
+            background-color: #dfedff
+        }
 
-		tbody>tr:nth-child(odd) {
-			background-color: #F5F5F5
-		}
+        tbody > tr:nth-child(odd) {
+            background-color: #F5F5F5
+        }
 
-		.logo {
-			display: inline-block;
-		}
+        .logo {
+            display: inline-block;
+        }
 
-		.logo>img {
-			max-height: 4em;
-			border-radius: 50%;
-			border: 1px solid darkgray;
-		}
+        .logo > img {
+            max-height: 4em;
+            border-radius: 50%;
+            border: 1px solid darkgray;
+        }
 
-		.right {
-			float: right;
-		}
+        .right {
+            float: right;
+        }
 
-		.positive {
-			color: green;
-			font-weight: bold;
-		}
+        .positive {
+            color: green;
+            font-weight: bold;
+        }
 
-		.neutral {
-			color: grey;
-			font-weight: bold;
-		}
+        .neutral {
+            color: grey;
+            font-weight: bold;
+        }
 
-		.negative {
-			color: red;
-			font-weight: bold;
-		}
+        .negative {
+            color: red;
+            font-weight: bold;
+        }
 
-		.arrow {
-			border: solid black;
-			border-width: 0 2px 2px 0;
-			display: inline-block;
-			padding: 3px;
-		}
+        .arrow {
+            border: solid black;
+            border-width: 0 2px 2px 0;
+            display: inline-block;
+            padding: 3px;
+        }
 
-		.up {
-			border-color: green;
-			transform: rotate(-135deg);
-			-webkit-transform: rotate(-135deg);
-		}
+        .up {
+            border-color: green;
+            transform: rotate(-135deg);
+            -webkit-transform: rotate(-135deg);
+        }
 
-		.down {
-			border-color: red;
-			transform: rotate(45deg);
-			-webkit-transform: rotate(45deg);
-		}
+        .down {
+            border-color: red;
+            transform: rotate(45deg);
+            -webkit-transform: rotate(45deg);
+        }
 
-		#flexContainer {
-			display: flex;
-			justify-content: space-evenly;
-		}
+        #flexContainer {
+            display: flex;
+            justify-content: space-evenly;
+        }
 
-		.flexBox {}
-	</style>
+        .flexBox {
+        }
+    </style>
 </head>
 
 <body>
@@ -158,90 +159,140 @@
 
 
 
-	<div id="container">
-		<div id="flexContainer">
-			<div class="flexBox">
-				<div style="margin-bottom: 1em;">
-					<div class="logo" style="display:flex;">
-						<img src="../../../assets/jrc_round.jpg" />
-						<h2 style="margin-left:1em;">JRC Themed Driver Standings</h2>
-					</div>
-				</div>
+<div id="container">
+    <div id="flexContainer">
+        <div class="flexBox">
+            <div style="margin-bottom: 1em;">
+                <div class="logo" style="display:flex;">
+                    <img src="../../../assets/jrc_round.jpg"/>
+                    <h2 style="margin-left:1em;">JRC Themed Driver Standings</h2>
+                </div>
+            </div>
 
-				<table id="tableDrivers">
-					<thead>
-						<tr>
-							<th></th>
-							<th></th>
-							<th>Nat</th>
-							<th>Driver</th>
-							<th>Team</th>
-							<th>Car</th>
+            <table id="tableDrivers">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th>Nat</th>
+                    <th>Driver</th>
+<!--                    <th>Team</th>-->
+                    <th>Car</th>
 
-    						{{#each headerLocations}}
-    							<th><img src="../../../assets/country-flags/{{this}}.png" /></th>
-							{{/each}}
-                            <th>Points</th>
-    					</tr>
-					</thead>
-					<tbody>
-						{{#each rows}}{{#with this}}
-						<tr>
-							<td>{{currentPosition}}</td>
-							<td>
-								{{#if positive}}
-								<span class="positive"><i class="arrow up"></i>&nbsp;{{positionChange}}</span>
-								{{/if}}
-								{{#if neutral}}
-								<span class="neutral">=</span>
-								{{/if}}
-								{{#if negative}}
-								<span class="negative"><i class="arrow down"></i>&nbsp;{{positionChange}}</span>
-								{{/if}}
-							</td>
-							<td><img src="../../../assets/country-flags/{{nationality}}.png"
-									style="max-width:1.5em; max-height:1.5em;" /></td>
-							<td class="text-left bold">{{name}}</td>
-							<td>
-								{{#if team}}
-								<img src="../../../assets/teams/{{team}}.png" style="max-width:2em; max-height:2em;" />
-								{{else}}
-								<img src="../../../assets/teams/Privateer.png" style="max-width:2em; max-height:2em;" />
-								{{/if}}
-							</td>
-							<td>
-								{{#if car}}
-								<img src="../../../assets/cars/{{car}}.png" style="max-width:2em; max-height:2em;" />
-								{{else}}
-								<img src="../../../assets/teams/Privateer.png" style="max-width:2em; max-height:2em;" />
-								{{/if}}
+                    {{#each headerLocations}}
+                        <th><img src="../../../assets/country-flags/{{this}}.png"/></th>
+                    {{/each}}
+                    <th>Points</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#each rows}}{{#with this}}
+                    <tr>
+                        <td>{{standing.currentStanding.currentPosition}}</td>
+                        <td>
+                            {{#if positive}}
+                                <span class="positive"><i
+                                        class="arrow up"></i>&nbsp;{{standing.currentStanding.positionChange}}</span>
+                            {{/if}}
+                            {{#if neutral}}
+                                <span class="neutral">=</span>
+                            {{/if}}
+                            {{#if negative}}
+                                <span class="negative"><i
+                                        class="arrow down"></i>&nbsp;{{standing.currentStanding.positionChange}}</span>
+                            {{/if}}
+                        </td>
+                        <td><img src="../../../assets/country-flags/{{country.code}}.png"
+                                 style="max-width:1.5em; max-height:1.5em;"/></td>
+                        <td class="text-left bold">{{standing.currentStanding.name}}</td>
+<!--                        <td>-->
+<!--                            {{#if team}}-->
+<!--                                <img src="../../../assets/teams/{{team}}.png" style="max-width:2em; max-height:2em;"/>-->
+<!--                            {{else}}-->
+<!--                                <img src="../../../assets/teams/Privateer.png" style="max-width:2em; max-height:2em;"/>-->
+<!--                            {{/if}}-->
+<!--                        </td>-->
+                        <td>
+                            {{#if car}}
+                                <img src="../../../assets/cars/{{car}}.png" style="max-width:2em; max-height:2em;"/>
+                            {{else}}
+                                <img src="../../../assets/teams/Privateer.png" style="max-width:2em; max-height:2em;"/>
+                            {{/if}}
+                        </td>
+                        {{#each standing.allStandings}}{{#with this}}
+                            <td>
+                                {{result.totalPoints}}
                             </td>
-                            {{#each locationPoints}}
-                                <td>
-                                    {{this}}
-                                </td>
-                            {{/each}}
-							<td class="bold">{{totalPoints}}</td>
-						</tr>
-						{{/with}}{{/each}}
-					</tbody>
+                        {{/with}}{{/each}}
+                        <td class="bold">{{standing.currentStanding.totalPoints}}</td>
+                    </tr>
+                {{/with}}{{/each}}
+                </tbody>
 
-				</table>
-			</div>
+            </table>
+        </div>
 
-		</div>
-	</div>
+    </div>
+</div>
 
-	<div id="particles-js"></div>
-	<script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-	<script>
-		particlesJS("particles-js",
-			{ "particles": { "number": { "value": 80, "density": { "enable": true, "value_area": 800 } }, "color": { "value": "#70abff" }, "shape": { "type": "circle", "stroke": { "width": 1, "color": "#0077ff" }, "polygon": { "nb_sides": 5 }, "image": { "src": "img/github.svg", "width": 100, "height": 100 } }, "opacity": { "value": 0.5287372649289357, "random": false, "anim": { "enable": false, "speed": 1, "opacity_min": 0.1, "sync": false } }, "size": { "value": 3, "random": true, "anim": { "enable": false, "speed": 40, "size_min": 0.1, "sync": false } }, "line_linked": { "enable": true, "distance": 150, "color": "#0067dc", "opacity": 0.4, "width": 1 }, "move": { "enable": true, "speed": 2.2, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false, "attract": { "enable": false, "rotateX": 600, "rotateY": 1200 } } }, "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": false, "mode": "repulse" }, "onclick": { "enable": true, "mode": "push" }, "resize": true }, "modes": { "grab": { "distance": 400, "line_linked": { "opacity": 1 } }, "bubble": { "distance": 400, "size": 40, "duration": 2, "opacity": 8, "speed": 3 }, "repulse": { "distance": 200, "duration": 0.4 }, "push": { "particles_nb": 4 }, "remove": { "particles_nb": 2 } } }, "retina_detect": true });
-		update = function () {
-			requestAnimationFrame(update);
-		};
-		requestAnimationFrame(update);
-	</script>
+<div id="particles-js"></div>
+<script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script>
+    particlesJS("particles-js",
+            {
+                "particles": {
+                    "number": {"value": 80, "density": {"enable": true, "value_area": 800}},
+                    "color": {"value": "#70abff"},
+                    "shape": {
+                        "type": "circle",
+                        "stroke": {"width": 1, "color": "#0077ff"},
+                        "polygon": {"nb_sides": 5},
+                        "image": {"src": "img/github.svg", "width": 100, "height": 100}
+                    },
+                    "opacity": {
+                        "value": 0.5287372649289357,
+                        "random": false,
+                        "anim": {"enable": false, "speed": 1, "opacity_min": 0.1, "sync": false}
+                    },
+                    "size": {
+                        "value": 3,
+                        "random": true,
+                        "anim": {"enable": false, "speed": 40, "size_min": 0.1, "sync": false}
+                    },
+                    "line_linked": {"enable": true, "distance": 150, "color": "#0067dc", "opacity": 0.4, "width": 1},
+                    "move": {
+                        "enable": true,
+                        "speed": 2.2,
+                        "direction": "none",
+                        "random": false,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false,
+                        "attract": {"enable": false, "rotateX": 600, "rotateY": 1200}
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": {"enable": false, "mode": "repulse"},
+                        "onclick": {"enable": true, "mode": "push"},
+                        "resize": true
+                    },
+                    "modes": {
+                        "grab": {"distance": 400, "line_linked": {"opacity": 1}},
+                        "bubble": {"distance": 400, "size": 40, "duration": 2, "opacity": 8, "speed": 3},
+                        "repulse": {"distance": 200, "duration": 0.4},
+                        "push": {"particles_nb": 4},
+                        "remove": {"particles_nb": 2}
+                    }
+                },
+                "retina_detect": true
+            });
+    update = function () {
+        requestAnimationFrame(update);
+    };
+    requestAnimationFrame(update);
+</script>
 </body>
 
 </html>
