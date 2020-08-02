@@ -6,7 +6,7 @@ const { club } = require("../shared");
 const league = require(`./${club}/initialState`);
 const { driverColumns, sheetsConfig } = require(`./${club}/driverConfig`);
 const driverFieldNames = require("./constants/driverFieldNames");
-const { loadSheet } = require("../sheetsAPI/sheets");
+const { loadSheetAndTransform } = require("../sheetsAPI/sheets");
 
 const missingDrivers = {};
 const drivers = {};
@@ -43,7 +43,7 @@ const transformDriverRows = driverRows => {
 
 const loadDriversFromSheets = async () => {
   debug("attempting to load drivers from google sheets");
-  const driverRows = await loadSheet(sheetsConfig);
+  const driverRows = await loadSheetAndTransform(sheetsConfig);
   return transformDriverRows(driverRows);
 };
 

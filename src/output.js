@@ -8,6 +8,7 @@ const { leagueRef } = require("./state/league");
 const locations = require("./state/constants/locations.json");
 const countries = require("./state/constants/countries.json");
 const vehicles = require("./state/constants/vehicles.json");
+const { updateResultsSheet } = require("./sheetsAPI/sheets");
 
 const buildDriverRows = event => {
   const driverRows = event.results.driverResults.map(result => {
@@ -126,12 +127,16 @@ const getAllResults = (name, events, type) => {
   );
 };
 
-const transformForHTML = events => {
+const getHeaderLocations = events => {
   const headerLocations = events.reduce((headerLocations, event) => {
     headerLocations.push(locations[event.location].countryCode);
     return headerLocations;
   }, []);
+  return headerLocations;
+};
 
+const transformForHTML = events => {
+  const headerLocations = getHeaderLocations(events);
   const lastEvent = events[events.length - 1];
   const rows = lastEvent.standings.driverStandings.map(standing => {
     const movement = {
@@ -156,6 +161,124 @@ const transformForHTML = events => {
     headerLocations,
     rows
   };
+};
+
+const getDriverStandingData = (standing, events) => {
+  const results = getAllResults(standing.name, events, "driver");
+  const resultsTotalPoints = results.map(result => result.totalPoints);
+  return {
+    results,
+    resultsTotalPoints,
+    ...getDriverData(standing.name)
+  };
+};
+
+const getDriverData = driverName => {
+  const driver = leagueRef.getDriver(driverName);
+  const country = countries[driver.nationality];
+  const car = vehicles[driver.car];
+  let carBrand;
+  if (!car) {
+    debug(`no car found in lookup for ${driver.car}`);
+  } else {
+    carBrand = car.brand;
+  }
+  return {
+    driver,
+    country,
+    car,
+    carBrand
+  };
+};
+
+const transformForDriverResultsSheet = event => {
+  const header = [
+    "Pos",
+    "Nat",
+    "Driver",
+    "Car",
+    "Team",
+    "DNF?",
+    "Total",
+    "Diff",
+    "PS",
+    "PS Diff",
+    "Points",
+    "PS Points",
+    "Total Points"
+  ];
+  const rows = event.results.driverResults.map((result, index) => {
+    const { driver, country, carBrand } = getDriverData(result.name);
+    let dnf = "";
+    if (result.entry.disqualificationReason) {
+      dnf = "DQ";
+    } else if (result.entry.isDnsEntry) {
+      dnf = "DNS";
+    } else if (result.entry.isDnfEntry) {
+      dnf = "DNF";
+    }
+    const row = [
+      index + 1,
+      country.code,
+      result.name,
+      carBrand,
+      driver.team,
+      dnf,
+      `'${result.entry.totalTime}`,
+      `'${result.entry.totalDiff}`,
+      `'${result.entry.stageTime}`,
+      `'${result.entry.stageDiff}`,
+      result.overallPoints,
+      result.powerStagePoints,
+      result.totalPoints
+    ];
+    return row;
+  });
+  return [header, ...rows];
+};
+
+const writeDriverResultsSheet = async (event, sheetId) => {
+  const rows = transformForDriverResultsSheet(event);
+  await updateResultsSheet(rows, sheetId, event.location);
+};
+
+const transformForDriverStandingsSheets = events => {
+  const headerLocations = getHeaderLocations(events);
+  const header = [
+    "Pos",
+    "'+/-",
+    "Nat",
+    "Driver",
+    "Car",
+    ...headerLocations,
+    "Points"
+  ];
+  const lastEvent = events[events.length - 1];
+  const rows = lastEvent.standings.driverStandings.map(standing => {
+    const {
+      resultsTotalPoints,
+      driver,
+      country,
+      carBrand
+    } = getDriverStandingData(standing, events);
+    const row = [
+      standing.currentPosition,
+      standing.positionChange,
+      country.code,
+      driver.name,
+      carBrand,
+      ...resultsTotalPoints,
+      standing.totalPoints
+    ];
+    return row;
+  });
+  const allRows = [header, ...rows];
+  return allRows;
+};
+
+const writeStandingsSheet = async division => {
+  const rows = transformForDriverStandingsSheets(division.events);
+  await updateResultsSheet(rows, division.outputSheetId, "Driver Standings");
 };
 
 const writeStandingsHTML = (divisionName, events, type) => {
@@ -193,16 +316,26 @@ const writeStandingsCSV = (divisionName, events, type) => {
   // name: satchmo, location: points, location: points, name: satchmo, total points: points, position: number,
 };
 
+const writeSheet = async division => {
+  writeStandingsSheet(division);
+  for (const event of division.events) {
+    await writeDriverResultsSheet(event, division.outputSheetId);
+  }
+};
 const writeOutput = () => {
   const league = leagueRef.league;
   Object.keys(league.divisions).forEach(divisionName => {
-    const divisionEvents = league.divisions[divisionName].events;
+    const division = league.divisions[divisionName];
+    const divisionEvents = division.events;
     // divisionEvents.forEach(event => {
     //   writeDriverCSV(event, divisionName);
     // });
     // writeStandingsCSV(divisionName, divisionEvents, "driver");
     // writeStandingsCSV(divisionName, divisionEvents, "team");
     writeStandingsHTML(divisionName, divisionEvents, "driver");
+    if (division.outputSheetId) {
+      writeSheet(division);
+    }
   });
   // writeStandingsCSV("overall", league.overall.events, "driver");
   // writeStandingsCSV("overall", league.overall.events, "team");

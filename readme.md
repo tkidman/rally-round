@@ -63,8 +63,8 @@ You can also pull driver information directly from a google sheet. You need to h
 * Don't cache 'in progress' events ✓
 * Don't load pending events ✓
 * Output themed to HTML ✓
-* Migrate club scraper to here
-* Output to sheets
+* Migrate club scraper to here ✓
+* Output to sheets ✓
 * Support multiple driver cars (to support division promotions mid season)
 * Multiple classes per division
 * DNF counter

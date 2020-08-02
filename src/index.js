@@ -115,7 +115,9 @@ const createDNSResult = driverName => {
       isDnfEntry: true,
       isDnsEntry: true,
       stageTime: "15:00:00.000",
-      totalTime: "59:59:59.000"
+      stageDiff: "N/A",
+      totalTime: "59:59:59.000",
+      totalDiff: "N/A"
     }
   };
 };
