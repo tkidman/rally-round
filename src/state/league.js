@@ -72,8 +72,16 @@ const init = async () => {
   leagueRef.league = league;
   leagueRef.getDriver = getDriver;
   leagueRef.divisions = league.divisions;
-
+  leagueRef.addDriver = addDriver;
+  leagueRef.drivers = drivers;
+  leagueRef.missingDrivers = missingDrivers;
+  leagueRef.hasTeams = !!driverColumns.teamId;
   return leagueRef;
+};
+
+const addDriver = driver => {
+  driver.id = driver.name.toUpperCase();
+  drivers.driversById[driver.id] = driver;
 };
 
 const getDriver = name => {
@@ -88,9 +96,6 @@ const getDriver = name => {
           driver.name.toUpperCase().includes(upperName)
         );
       });
-      if (!driver) {
-        missingDrivers[name] = name;
-      }
     }
   }
   return driver;

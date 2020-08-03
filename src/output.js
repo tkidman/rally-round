@@ -146,15 +146,7 @@ const transformForHTML = events => {
     };
 
     const results = getAllResults(standing.name, events, "driver");
-    const driver = leagueRef.getDriver(standing.name);
-    const country = countries[driver.nationality];
-    const car = vehicles[driver.car];
-    let carBrand;
-    if (!car) {
-      debug(`no car found in lookup for ${driver.car}`);
-    } else {
-      carBrand = car.brand;
-    }
+    const { driver, country, carBrand } = getDriverData(standing.name);
     return { results, standing, ...movement, car: carBrand, driver, country };
   });
   return {
@@ -179,7 +171,9 @@ const getDriverData = driverName => {
   const car = vehicles[driver.car];
   let carBrand;
   if (!car) {
-    debug(`no car found in lookup for ${driver.car}`);
+    if (driver.car) {
+      debug(`no car found in lookup for ${driver.car}`);
+    }
   } else {
     carBrand = car.brand;
   }
@@ -331,7 +325,7 @@ const writeOutput = () => {
     //   writeDriverCSV(event, divisionName);
     // });
     // writeStandingsCSV(divisionName, divisionEvents, "driver");
-    // writeStandingsCSV(divisionName, divisionEvents, "team");
+    writeStandingsCSV(divisionName, divisionEvents, "team");
     writeStandingsHTML(divisionName, divisionEvents, "driver");
     if (division.outputSheetId) {
       writeSheet(division);

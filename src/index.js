@@ -176,11 +176,15 @@ const calculateEventResults = ({ event, divisionName, drivers }) => {
   driverResults.forEach(
     result => (result.totalPoints = getTotalPoints(result))
   );
-  const teamResultsById = calculateTeamResults(
-    driverResults,
-    division.maxDriversScoringPointsForTeam
-  );
-  const teamResults = sortTeamResults(teamResultsById);
+
+  const teamResults = [];
+  if (leagueRef.hasTeams) {
+    const teamResultsById = calculateTeamResults(
+      driverResults,
+      division.maxDriversScoringPointsForTeam
+    );
+    teamResults.push(...sortTeamResults(teamResultsById));
+  }
 
   driverResults.forEach(result => (result.divisionName = divisionName));
   teamResults.forEach(result => (result.divisionName = divisionName));
@@ -267,7 +271,13 @@ const processEvents = async (events, divisionName) => {
   let previousEvent = null;
   const drivers = events.reduce((drivers, event) => {
     event.racenetLeaderboard.entries.forEach(entry => {
-      const driver = leagueRef.getDriver(entry.name);
+      let driver = leagueRef.getDriver(entry.name);
+      if (!driver) {
+        debug(`adding unknown driver ${entry.name}`);
+        driver = { name: entry.name };
+        leagueRef.addDriver(driver);
+        leagueRef.missingDrivers[entry.name] = entry.name;
+      }
       driver.nationality = entry.nationality;
       drivers[entry.name] = driver;
     });
