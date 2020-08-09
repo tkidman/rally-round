@@ -2,7 +2,7 @@ const hiddenPath = "./hidden";
 const club = process.env.CLUB || "test";
 const outputPath = `${hiddenPath}/out/${club}`;
 const cachePath = `${hiddenPath}/cache/${club}`;
-const templatePath = `./src/state/${club}/templates/`;
+const templatePath = `./src/output`;
 
 const privateer = "privateer";
 

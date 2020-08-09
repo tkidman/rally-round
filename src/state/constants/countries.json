@@ -727,6 +727,10 @@
 	  "code": "reu",
 	  "name": "Réunion"
 	},
+	"eLngRestOfWorld": {
+		"code": "row",
+		"name": "Rest of World"
+	},
 	"eLngRomanian": {
 	  "code": "rou",
 	  "name": "Romania"

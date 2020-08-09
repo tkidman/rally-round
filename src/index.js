@@ -5,7 +5,7 @@ const { printMissingDrivers } = require("./state/league");
 const { sortBy, keyBy } = require("lodash");
 
 const { init, leagueRef } = require("./state/league");
-const { writeOutput, checkOutputDirs } = require("./output");
+const { writeOutput, checkOutputDirs } = require("./output/output");
 const { getTotalPoints } = require("./shared");
 const { calculateFantasyStandings } = require("./fantasy/fantasyCalculator");
 const {

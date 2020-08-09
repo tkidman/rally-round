@@ -3,12 +3,18 @@ const Papa = require("papaparse");
 const debug = require("debug")("tkidman:dirt2-results:output");
 const Handlebars = require("handlebars");
 
-const { outputPath, hiddenPath, cachePath, templatePath } = require("./shared");
-const { leagueRef } = require("./state/league");
-const locations = require("./state/constants/locations.json");
-const countries = require("./state/constants/countries.json");
-const vehicles = require("./state/constants/vehicles.json");
-const { updateResultsSheet } = require("./sheetsAPI/sheets");
+const {
+  outputPath,
+  hiddenPath,
+  cachePath,
+  templatePath
+} = require("../shared");
+const { leagueRef } = require("../state/league");
+const locations = require("../state/constants/locations.json");
+const countries = require("../state/constants/countries.json");
+const vehicles = require("../state/constants/vehicles.json");
+const copydir = require("copy-dir");
+const { updateResultsSheet } = require("../sheetsAPI/sheets");
 
 const buildDriverRows = event => {
   const driverRows = event.results.driverResults.map(result => {
@@ -52,75 +58,6 @@ const writeDriverCSV = (eventResults, divisionName) => {
   );
 };
 
-const addDriverLocationResult = (eventPointsByName, result, event) => {
-  if (!eventPointsByName[result.name]) {
-    const nationality = countries[result.entry.nationality];
-    let nationalityCode;
-    if (!nationality) {
-      debug(
-        `no country found in lookup for ${result.entry.nationality} ${result.name}`
-      );
-    } else {
-      nationalityCode = nationality.code;
-    }
-    eventPointsByName[result.name] = {
-      name: result.name,
-      nationality: nationalityCode
-    };
-  }
-  eventPointsByName[result.name][event.location] = result.totalPoints;
-};
-
-const addTeamLocationResult = (eventPointsByName, result, event) => {
-  if (!eventPointsByName[result.name]) {
-    eventPointsByName[result.name] = {
-      name: result.name
-    };
-  }
-  eventPointsByName[result.name][event.location] = result.totalPoints;
-};
-
-const getStandingCSVRows = (events, type) => {
-  const eventPointsByName = events.reduce((eventPointsByName, event) => {
-    event.results[`${type}Results`].forEach(result => {
-      if (type === "driver") {
-        addDriverLocationResult(eventPointsByName, result, event);
-      } else {
-        addTeamLocationResult(eventPointsByName, result, event);
-      }
-    });
-    return eventPointsByName;
-  }, {});
-  const lastEvent = events[events.length - 1];
-  const standingRows = lastEvent.standings[`${type}Standings`].map(standing => {
-    // TODO fix this
-    let raceNetName;
-    let driverTeam;
-    let driverCar;
-    if (type === "driver") {
-      const driver = leagueRef.getDriver(standing.name);
-      raceNetName = driver ? driver.raceNetName : "";
-      driverTeam = driver ? driver.teamId : "";
-      driverCar = driver ? driver.car : "";
-    }
-
-    const standingRow = {
-      name: standing.name,
-      racenet: raceNetName,
-      team: driverTeam,
-      car: driverCar,
-      ...eventPointsByName[standing.name],
-      ...standing
-    };
-    if (type === "team") {
-      delete standingRow.racenet;
-      delete standingRow.team;
-    }
-    return standingRow;
-  });
-  return standingRows;
-};
-
 const getAllResults = (name, events, type) => {
   return events.map(event =>
     event.results[`${type}Results`].find(result => result.name === name)
@@ -135,23 +72,33 @@ const getHeaderLocations = events => {
   return headerLocations;
 };
 
-const transformForHTML = events => {
+const transformForHTML = (divisionName, events, type) => {
   const headerLocations = getHeaderLocations(events);
   const lastEvent = events[events.length - 1];
-  const rows = lastEvent.standings.driverStandings.map(standing => {
+  const rows = lastEvent.standings[`${type}Standings`].map(standing => {
     const movement = {
       positive: standing.positionChange > 0,
       neutral: standing.positionChange === 0,
       negative: standing.positionChange < 0
     };
 
-    const results = getAllResults(standing.name, events, "driver");
-    const { driver, country, carBrand } = getDriverData(standing.name);
-    return { results, standing, ...movement, car: carBrand, driver, country };
+    const results = getAllResults(standing.name, events, type);
+    const row = {
+      results,
+      standing,
+      ...movement
+    };
+    if (type === "driver") {
+      const { driver, country, carBrand } = getDriverData(standing.name);
+      return { ...row, car: carBrand, driver, country };
+    }
+    return row;
   });
   return {
     headerLocations,
-    rows
+    rows,
+    showTeam: leagueRef.hasTeams,
+    title: divisionName
   };
 };
 
@@ -165,9 +112,23 @@ const getDriverStandingData = (standing, events) => {
   };
 };
 
+const getTeamStandingData = (standing, events) => {
+  const results = getAllResults(standing.name, events, "team");
+  const resultsTotalPoints = results.map(result => result.totalPoints);
+  return {
+    results,
+    resultsTotalPoints,
+    team: standing.name
+  };
+};
+
 const getDriverData = driverName => {
   const driver = leagueRef.getDriver(driverName);
-  const country = countries[driver.nationality];
+  let country = countries[driver.nationality];
+  if (!country) {
+    debug(`no country found for ${driver.nationality} ${driver.name}`);
+    country = countries["eLngRestOfWorld"];
+  }
   const car = vehicles[driver.car];
   let carBrand;
   if (!car) {
@@ -243,6 +204,8 @@ const transformForDriverStandingsSheets = events => {
     "'+/-",
     "Nat",
     "Driver",
+    "Team",
+    "Division",
     "Car",
     ...headerLocations,
     "Points"
@@ -260,6 +223,8 @@ const transformForDriverStandingsSheets = events => {
       standing.positionChange,
       country.code,
       driver.name,
+      driver.teamId,
+      driver.division,
       carBrand,
       ...resultsTotalPoints,
       standing.totalPoints
@@ -270,37 +235,69 @@ const transformForDriverStandingsSheets = events => {
   return allRows;
 };
 
-const writeStandingsSheet = async division => {
-  const rows = transformForDriverStandingsSheets(division.events);
-  await updateResultsSheet(rows, division.outputSheetId, "Driver Standings");
+const transformForTeamStandingsSheets = events => {
+  const headerLocations = getHeaderLocations(events);
+  const header = ["Pos", "'+/-", "Team", ...headerLocations, "Points"];
+  const lastEvent = events[events.length - 1];
+  const rows = lastEvent.standings.teamStandings.map(standing => {
+    const { resultsTotalPoints, team } = getTeamStandingData(standing, events);
+    const row = [
+      standing.currentPosition,
+      standing.positionChange,
+      team,
+      ...resultsTotalPoints,
+      standing.totalPoints
+    ];
+    return row;
+  });
+  const allRows = [header, ...rows];
+  return allRows;
+};
+
+const writeStandingsSheet = async (division, divisionName) => {
+  const standingsSheetId = leagueRef.league.standingsOutputSheetId;
+  const driverRows = transformForDriverStandingsSheets(division.events);
+  await updateResultsSheet(
+    driverRows,
+    standingsSheetId,
+    `${divisionName} Driver Standings`
+  );
+  const teamRows = transformForTeamStandingsSheets(division.events);
+  await updateResultsSheet(
+    teamRows,
+    standingsSheetId,
+    `${divisionName} Team Standings`
+  );
 };
 
 const writeStandingsHTML = (divisionName, events, type) => {
-  if (type === "driver") {
-    const data = transformForHTML(events);
+  const data = transformForHTML(divisionName, events, type);
 
-    const standingsTemplateFile = `${templatePath}standings.hbs`;
-    if (!fs.existsSync(standingsTemplateFile)) {
-      debug("no standings html template found, returning");
-      return;
-    }
-    const _t = fs.readFileSync(standingsTemplateFile).toString();
+  const standingsTemplateFile = `${templatePath}/${type}Standings.hbs`;
+  if (!fs.existsSync(standingsTemplateFile)) {
+    debug("no standings html template found, returning");
+    return;
+  }
+  const _t = fs.readFileSync(standingsTemplateFile).toString();
 
-    const template = Handlebars.compile(_t);
-    const out = template(data);
+  const template = Handlebars.compile(_t);
+  const out = template(data);
 
-    fs.writeFile(`./${outputPath}/driverStandings.html`, out, function(err) {
+  fs.writeFile(
+    `./${outputPath}/website/${divisionName}-${type}-standings.html`,
+    out,
+    function(err) {
       if (err) {
         return debug(`error writing html file`);
       }
-    });
-  }
+    }
+  );
 };
 
 // eslint-disable-next-line no-unused-vars
 const writeStandingsCSV = (divisionName, events, type) => {
   const lastEvent = events[events.length - 1];
-  const standingRows = getStandingCSVRows(events, type);
+  const standingRows = transformForDriverStandingsSheets(events);
   const standingsCSV = Papa.unparse(standingRows);
   fs.writeFileSync(
     `./${outputPath}/${lastEvent.location}-${divisionName}-${type}Standings.csv`,
@@ -310,10 +307,12 @@ const writeStandingsCSV = (divisionName, events, type) => {
   // name: satchmo, location: points, location: points, name: satchmo, total points: points, position: number,
 };
 
-const writeSheet = async division => {
-  writeStandingsSheet(division);
-  for (const event of division.events) {
-    await writeDriverResultsSheet(event, division.outputSheetId);
+const writeSheet = async (division, divisionName) => {
+  if (process.env.DIRT_SHEETS_CLIENT_SECRET) {
+    writeStandingsSheet(division, divisionName);
+    for (const event of division.events) {
+      await writeDriverResultsSheet(event, division.outputSheetId);
+    }
   }
 };
 const writeOutput = () => {
@@ -321,18 +320,15 @@ const writeOutput = () => {
   Object.keys(league.divisions).forEach(divisionName => {
     const division = league.divisions[divisionName];
     const divisionEvents = division.events;
-    // divisionEvents.forEach(event => {
-    //   writeDriverCSV(event, divisionName);
-    // });
-    // writeStandingsCSV(divisionName, divisionEvents, "driver");
-    writeStandingsCSV(divisionName, divisionEvents, "team");
     writeStandingsHTML(divisionName, divisionEvents, "driver");
+    writeStandingsHTML(divisionName, divisionEvents, "team");
     if (division.outputSheetId) {
-      writeSheet(division);
+      writeSheet(division, divisionName);
     }
   });
-  // writeStandingsCSV("overall", league.overall.events, "driver");
-  // writeStandingsCSV("overall", league.overall.events, "team");
+  writeStandingsHTML("overall", league.overall.events, "driver");
+  writeStandingsHTML("overall", league.overall.events, "team");
+  writeSheet(league.overall, "Overall");
   writeJSON(league);
   return true;
 };
@@ -348,12 +344,14 @@ const checkOutputDirs = () => {
   fs.existsSync(hiddenPath) || fs.mkdirSync(hiddenPath);
   fs.existsSync(cachePath) || fs.mkdirSync(cachePath, { recursive: true });
   fs.existsSync(outputPath) || fs.mkdirSync(outputPath, { recursive: true });
+  fs.existsSync(`${outputPath}/website`) ||
+    fs.mkdirSync(`${outputPath}/website`);
+  copydir.sync("./assets", `${outputPath}/website/assets`);
 };
 
 module.exports = {
   writeOutput,
   checkOutputDirs,
   // tests
-  getStandingCSVRows,
   buildDriverRows
 };

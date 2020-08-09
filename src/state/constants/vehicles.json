@@ -74,6 +74,17 @@
 	"Volkswagen Golf Kitcar": {
 		"class": "F2",
 		"brand": "volkswagen"
+	},
+	"Opel Adam R2": {
+		"class": "R2",
+		"brand": "opel"
+	},
+	"Ford Fiesta R2": {
+		"class": "R2",
+		"brand": "ford"
+	},
+	"Peugeot 208 R2": {
+		"class": "R2",
+		"brand": "peugot"
 	}
-
 }
