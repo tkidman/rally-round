@@ -270,9 +270,9 @@ const writeStandingsSheet = async (division, divisionName) => {
   );
 };
 
-const writeStandingsHTML = (divisionName, events, type) => {
+const writeStandingsHTML = (divisionName, events, type, links) => {
   const data = transformForHTML(divisionName, events, type);
-
+  data.links = links;
   const standingsTemplateFile = `${templatePath}/${type}Standings.hbs`;
   if (!fs.existsSync(standingsTemplateFile)) {
     debug("no standings html template found, returning");
@@ -283,14 +283,12 @@ const writeStandingsHTML = (divisionName, events, type) => {
   const template = Handlebars.compile(_t);
   const out = template(data);
 
-  fs.writeFile(
+  if (divisionName === "overall" && type === "team") {
+    fs.writeFileSync(`./${outputPath}/website/index.html`, out);
+  }
+  fs.writeFileSync(
     `./${outputPath}/website/${divisionName}-${type}-standings.html`,
-    out,
-    function(err) {
-      if (err) {
-        return debug(`error writing html file`);
-      }
-    }
+    out
   );
 };
 
@@ -308,26 +306,45 @@ const writeStandingsCSV = (divisionName, events, type) => {
 };
 
 const writeSheet = async (division, divisionName) => {
-  if (process.env.DIRT_SHEETS_CLIENT_SECRET) {
+  const disabled = true;
+  if (process.env.DIRT_SHEETS_CLIENT_SECRET && !disabled) {
     writeStandingsSheet(division, divisionName);
     for (const event of division.events) {
       await writeDriverResultsSheet(event, division.outputSheetId);
     }
   }
 };
+
+const addLinks = (links, name) => {
+  links.push(
+    {
+      link: `${name} team standings`,
+      href: `./${name}-team-standings.html`
+    },
+    {
+      link: `${name} driver standings`,
+      href: `./${name}-driver-standings.html`
+    }
+  );
+};
 const writeOutput = () => {
   const league = leagueRef.league;
+  const links = Object.keys(league.divisions).reduce((links, divisionName) => {
+    addLinks(links, divisionName);
+    return links;
+  }, []);
+  addLinks(links, "overall");
   Object.keys(league.divisions).forEach(divisionName => {
     const division = league.divisions[divisionName];
     const divisionEvents = division.events;
-    writeStandingsHTML(divisionName, divisionEvents, "driver");
-    writeStandingsHTML(divisionName, divisionEvents, "team");
+    writeStandingsHTML(divisionName, divisionEvents, "driver", links);
+    writeStandingsHTML(divisionName, divisionEvents, "team", links);
     if (division.outputSheetId) {
       writeSheet(division, divisionName);
     }
   });
-  writeStandingsHTML("overall", league.overall.events, "driver");
-  writeStandingsHTML("overall", league.overall.events, "team");
+  writeStandingsHTML("overall", league.overall.events, "driver", links);
+  writeStandingsHTML("overall", league.overall.events, "team", links);
   writeSheet(league.overall, "Overall");
   writeJSON(league);
   return true;
