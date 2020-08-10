@@ -6,154 +6,110 @@
 
 <body>
 
-<div id="container">
-    <div id="flexContainer">
-        <div class="flexBox">
-            <div style="margin-bottom: 1em;">
-                <div class="logo" style="display:flex;">
-                    <img src="./assets/{{logo}}"/>
-                    <h2 style="margin-left:1em;">{{title}} Driver Standings</h2>
+    <div id="container">
+        <div id="flexContainer">
+            <div class="flexBox">
+                <div class="navBox">
+                    {{#with links.driver}}
+                    <div class="navGroup">
+                        <span class="navHeader">Driver Standings</span>
+                        <ul class="navList" aria-label="Driver Standings">
+                            {{#each this}}
+                            <li><a href="{{href}}">{{link}}</a></li>
+                            {{/each}}
+                        </ul>
+                    </div>
+
+                    {{/with}}
+                    {{#with links.team}}
+                    <div class="navGroup">
+                        <span class="navHeader">Team Standings</span>
+                        <ul class="navList" aria-label="Team Standings">
+                            {{#each this}}
+                            <li><a style="text-decoration:none;" href="{{href}}">{{link}}</a></li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                    {{/with}}
                 </div>
             </div>
+            <div class="flexBox">
+                <div style="margin-bottom: 1em;">
+                    <div class="logo" style="display:flex;">
+                        <img src="./assets/{{logo}}" />
+                        <h2 style="margin-left:1em;">{{title}} Driver Standings</h2>
+                    </div>
+                </div>
 
-            <table id="tableDrivers">
-                <thead>
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th>Nat</th>
-                    <th>Driver</th>
-                    {{#if showTeam}}
-                        <th>Team</th>
-                    {{/if}}
-                    {{#if showCar}}
-                        <th>Car</th>
-                    {{/if}}
+                <table id="tableDrivers">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th>Nat</th>
+                            <th>Driver</th>
+                            {{#if showTeam}}
+                            <th>Team</th>
+                            {{/if}}
+                            {{#if showCar}}
+                            <th>Car</th>
+                            {{/if}}
 
-                    {{#each headerLocations}}
-                        <th><img src="./assets/country-flags/{{this}}.png"/></th>
-                    {{/each}}
-                    <th>Points</th>
-                </tr>
-                </thead>
-                <tbody>
-                {{#each rows}}
-                    <tr>
-                        <td>{{this.standing.currentPosition}}</td>
-                        <td>
-                            {{#if this.positive}}
+                            {{#each headerLocations}}
+                            <th><img src="./assets/country-flags/{{this}}.png" /></th>
+                            {{/each}}
+                            <th>Points</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each rows}}
+                        <tr>
+                            <td>{{this.standing.currentPosition}}</td>
+                            <td>
+                                {{#if this.positive}}
                                 <span class="positive"><i
                                         class="arrow up"></i>&nbsp;{{this.standing.positionChange}}</span>
-                            {{/if}}
-                            {{#if this.neutral}}
+                                {{/if}}
+                                {{#if this.neutral}}
                                 <span class="neutral">=</span>
-                            {{/if}}
-                            {{#if this.negative}}
+                                {{/if}}
+                                {{#if this.negative}}
                                 <span class="negative"><i
                                         class="arrow down"></i>&nbsp;{{this.standing.positionChange}}</span>
-                            {{/if}}
-                        </td>
-                        <td><img src="./assets/country-flags/{{this.country.code}}.png"
-                                 style="max-width:1.5em; max-height:1.5em;"/></td>
-                        <td class="text-left bold">{{this.standing.name}}</td>
+                                {{/if}}
+                            </td>
+                            <td><img src="./assets/country-flags/{{this.country.code}}.png"
+                                    style="max-width:1.5em; max-height:1.5em;" /></td>
+                            <td class="text-left bold">{{this.standing.name}}</td>
                             <td>
-                                <img src="./assets/teams/{{this.driver.teamId}}.png" style="max-width:2em; max-height:2em;"/>
+                                <img src="./assets/teams/{{this.driver.teamId}}.png"
+                                    style="max-width:2em; max-height:2em;" />
                             </td>
                             <td>
-                                <img src="./assets/cars/{{this.car}}.png" style="max-width:2em; max-height:2em;"/>
+                                <img src="./assets/cars/{{this.car}}.png" style="max-width:2em; max-height:2em;" />
                             </td>
-                        {{#each this.results}}{{#with this}}
+                            {{#each this.results}}{{#with this}}
                             <td>
                                 {{pointsDisplay}}
                             </td>
-                        {{/with}}{{/each}}
-                        <td class="bold">{{this.standing.totalPoints}}</td>
-                    </tr>
-                    {{/each}}
-                </tbody>
+                            {{/with}}{{/each}}
+                            <td class="bold">{{this.standing.totalPoints}}</td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
 
-            </table>
+                </table>
+            </div>
+
         </div>
-
     </div>
-</div>
-<div align="center">
-    {{#with links.driver}}
-        <h2>Driver Standings</h2>
-        <ul style="list-style: none;">
-            {{#each this}}
-                <li><a style="text-decoration:none;" href="{{href}}">{{link}}</a></li>
-            {{/each}}
-        </ul>
-    {{/with}}
-    {{#with links.team}}
-        <h2>Team Standings</h2>
-        <ul style="list-style: none;">
-            {{#each this}}
-                <li><a style="text-decoration:none;" href="{{href}}">{{link}}</a></li>
-            {{/each}}
-        </ul>
-    {{/with}}
-</div>
 
-<div id="particles-js"></div>
-<script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-<script>
-    particlesJS("particles-js",
-            {
-                "particles": {
-                    "number": {"value": 80, "density": {"enable": true, "value_area": 800}},
-                    "color": {"value": "#70abff"},
-                    "shape": {
-                        "type": "circle",
-                        "stroke": {"width": 1, "color": "#0077ff"},
-                        "polygon": {"nb_sides": 5},
-                        "image": {"src": "img/github.svg", "width": 100, "height": 100}
-                    },
-                    "opacity": {
-                        "value": 0.5287372649289357,
-                        "random": false,
-                        "anim": {"enable": false, "speed": 1, "opacity_min": 0.1, "sync": false}
-                    },
-                    "size": {
-                        "value": 3,
-                        "random": true,
-                        "anim": {"enable": false, "speed": 40, "size_min": 0.1, "sync": false}
-                    },
-                    "line_linked": {"enable": true, "distance": 150, "color": "#0067dc", "opacity": 0.4, "width": 1},
-                    "move": {
-                        "enable": true,
-                        "speed": 2.2,
-                        "direction": "none",
-                        "random": false,
-                        "straight": false,
-                        "out_mode": "out",
-                        "bounce": false,
-                        "attract": {"enable": false, "rotateX": 600, "rotateY": 1200}
-                    }
-                },
-                "interactivity": {
-                    "detect_on": "canvas",
-                    "events": {
-                        "onhover": {"enable": false, "mode": "repulse"},
-                        "onclick": {"enable": true, "mode": "push"},
-                        "resize": true
-                    },
-                    "modes": {
-                        "grab": {"distance": 400, "line_linked": {"opacity": 1}},
-                        "bubble": {"distance": 400, "size": 40, "duration": 2, "opacity": 8, "speed": 3},
-                        "repulse": {"distance": 200, "duration": 0.4},
-                        "push": {"particles_nb": 4},
-                        "remove": {"particles_nb": 2}
-                    }
-                },
-                "retina_detect": true
-            });
-    update = function () {
-        requestAnimationFrame(update);
-    };
-    requestAnimationFrame(update);
-</script>
+    <!--
+        BACKGROUND ANIMATION
+    -->
+    <div id="particles-js"></div>
+    <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="./assets/particleConfig.js"></script>
 </body>
 
 </html>

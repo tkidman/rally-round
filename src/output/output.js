@@ -327,11 +327,11 @@ const addLinks = (links, name) => {
     links["team"] = [];
   }
   links["team"].push({
-    link: `${name} team standings`,
+    link: `${name}`,
     href: `./${name}-team-standings.html`
   });
   links["driver"].push({
-    link: `${name} driver standings`,
+    link: `${name}`,
     href: `./${name}-driver-standings.html`
   });
 };

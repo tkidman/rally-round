@@ -141,6 +141,53 @@ tbody>tr:nth-child(odd) {
 #flexContainer {
 	display: flex;
 	justify-content: space-evenly;
+	flex-wrap: wrap;
 }
 
 .flexBox {}
+
+/**
+	NAVIGATION STUFF
+*/
+.navBox {
+	background: #5355bf;
+	padding: 1em;
+	border-radius: 0.5em;
+	color:white;
+	display:flex;
+	flex-direction: column;
+}
+
+.navHeader {
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+.navList {
+	list-style: none;
+}
+
+.navList > li {
+	padding-bottom: 0.5em;
+}
+
+.navList a {
+	text-decoration: none;
+	color:white;
+	text-transform: uppercase;
+}
+
+.navList a:hover {
+	text-decoration: none;
+	color:#dfedff;
+}
+
+@media (max-width: 1300px){
+	.navBox {
+		flex-direction:row;
+	}
+
+	.navGroup {
+		padding:0.5em;
+	}
+}
