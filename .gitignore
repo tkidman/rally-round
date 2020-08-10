@@ -15,4 +15,6 @@ src/visualisation/1test.html
 fantasy.png
 src/visualisation/driverStandings.html
 src/visualisation/fantasy.html
-src/visualisation/fantasy.html
+
+
+*.html

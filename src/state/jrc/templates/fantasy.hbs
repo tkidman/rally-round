@@ -8,6 +8,12 @@
 			padding: 4em;
 		}
 
+		#container {
+			width: 30%;
+			margin: auto;
+			padding: 4em;
+		}
+
 		body {
 			background-image: url("../../assets/background_fantasy.png");
 			font-family: Helvetica, sans-serif
@@ -17,11 +23,15 @@
 			color: white;
 		}
 
-		
+		table {
+			border-collapse: collapse;
+		}
+
 		th,
 		td {
 			padding: 0.5em;
 			text-align: center;
+			border: solid 1px rgba(180, 180, 180, 0.2);
 		}
 
 		.text-left {
@@ -32,8 +42,8 @@
 			font-weight: bold;
 		}
 
-		.bold > small {
-			font-weight:initial;
+		.bold>small {
+			font-weight: initial;
 		}
 
 		th>img {
@@ -106,9 +116,7 @@
 			justify-content: space-evenly;
 		}
 
-		.flexBox {
-
-		}
+		.flexBox {}
 	</style>
 </head>
 
@@ -156,9 +164,9 @@
 							<td>{{[MONTE CARLO]}}</td>
 							<td>{{VÄRMLAND}}</td>
 							<td>{{[NEW ENGLAND]}}</td>
-							<td></td>
-							<td></td>
-							<td></td>
+							<td>{{[BAUMHOLDER]}}</td>
+							<td>{{[ARGOLIS]}}</td>
+							<td>{{[POWYS]}}</td>
 							<td></td>
 							<td></td>
 							<td class="bold">{{points}}</td>
@@ -169,7 +177,7 @@
 
 				</table>
 
-				
+
 			</div>
 
 			<div class="flexBox">
@@ -201,7 +209,7 @@
 
 
 
-	<div id="container">
+	<div id="container2">
 		<div class="logo"><img src="../../assets/jrc_round.jpg" /> </div>
 		<div class="logo right"><img src="../../assets/fantasy.jpg" /> </div>
 		<div id="flexContainer">
@@ -244,9 +252,9 @@
 							<td>{{[MONTE CARLO]}}</td>
 							<td>{{VÄRMLAND}}</td>
 							<td>{{[NEW ENGLAND]}}</td>
-							<td></td>
-							<td></td>
-							<td></td>
+							<td>{{[BAUMHOLDER]}}</td>
+							<td>{{[ARGOLIS]}}</td>
+							<td>{{[POWYS]}}</td>
 							<td></td>
 							<td></td>
 							<td class="bold">{{total}}</td>

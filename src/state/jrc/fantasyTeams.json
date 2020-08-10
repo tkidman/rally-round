@@ -1,25 +1,25 @@
 [
 	{
 		"name": "Ram Ranchers",
-		"previous": 0,
+		"previous": 114,
 		"owner": "Pynklu",
 		"drivers": [
 			"QazRa",
-			"Mike Dee",
-			"SFRrallimoilane"
+			"fazzixd",
+			"SFR_rallimoilane"
 		],
-		"joker": "Mike Dee",
+		"joker": "fazzixd",
 		"budget": 15.5,
-		"points": 0,
+		"points": 169,
 		"roster_history": {
 			"MONTE CARLO": {
 				"drivers": [
 					"Babz",
-					"SFRrallimoilane",
+					"SFR_rallimoilane",
 					"Mysticman_22"
 				],
 				"joker": "Mysticman_22",
-				"points": 0
+				"points": 27
 			},
 			"VÄRMLAND": {
 				"drivers": [
@@ -28,7 +28,7 @@
 					"fazzixd"
 				],
 				"joker": "Pynklu",
-				"points": 0
+				"points": 51
 			},
 			"NEW ENGLAND": {
 				"drivers": [
@@ -37,64 +37,100 @@
 					"Sean_Da_Sheep24"
 				],
 				"joker": "Babz",
-				"points": 0
+				"points": 37
+			},
+			"BAUMHOLDER": {
+				"drivers": [
+					"QazRa",
+					"Mike Dee",
+					"SFR_rallimoilane"
+				],
+				"joker": "Mike Dee",
+				"points": -1
+			},
+			"ARGOLIS": {
+				"drivers": [
+					"QazRa",
+					"fazzixd",
+					"SFR_rallimoilane"
+				],
+				"joker": "fazzixd",
+				"points": 55
 			}
 		}
 	},
 	{
 		"name": "Nekkid Cowboys",
-		"previous": 0,
+		"previous": 114,
 		"owner": "Babz",
 		"drivers": [
 			"FusionJohn",
-			"SFRrallimoilane",
+			"SFR_rallimoilane",
 			"TUS Cham"
 		],
-		"joker": "SFRrallimoilane",
+		"joker": "SFR_rallimoilane",
 		"budget": 17,
-		"points": 0,
+		"points": 166,
 		"roster_history": {
 			"MONTE CARLO": {
 				"drivers": [
 					"FusionJohn",
-					"SFRrallimoilane",
+					"SFR_rallimoilane",
 					"TUS Cham"
 				],
-				"joker": "SFRrallimoilane",
-				"points": 0
+				"joker": "SFR_rallimoilane",
+				"points": -8
 			},
 			"VÄRMLAND": {
 				"drivers": [
 					"FusionJohn",
-					"SFRrallimoilane",
+					"SFR_rallimoilane",
 					"TUS Cham"
 				],
-				"joker": "SFRrallimoilane",
-				"points": 0
+				"joker": "SFR_rallimoilane",
+				"points": 38
 			},
 			"NEW ENGLAND": {
 				"drivers": [
 					"FusionJohn",
-					"SFRrallimoilane",
+					"SFR_rallimoilane",
 					"TUS Cham"
 				],
-				"joker": "SFRrallimoilane",
-				"points": 0
+				"joker": "SFR_rallimoilane",
+				"points": 18
+			},
+			"BAUMHOLDER": {
+				"drivers": [
+					"FusionJohn",
+					"SFR_rallimoilane",
+					"TUS Cham"
+				],
+				"joker": "SFR_rallimoilane",
+				"points": 66
+			},
+			"ARGOLIS": {
+				"drivers": [
+					"FusionJohn",
+					"SFR_rallimoilane",
+					"TUS Cham"
+				],
+				"joker": "SFR_rallimoilane",
+				"points": 52
 			}
 		}
 	},
 	{
 		"name": "Timo's Stones",
-		"previous": 0,
+		"previous": 245,
 		"owner": "ninko",
 		"drivers": [
 			"TUS Cham",
-			"FusionJohn",
+			"Puki2579",
 			"Babz"
 		],
 		"joker": "Babz",
-		"budget": 17,
-		"points": 0,
+		"budget": 22,
+		"points": 301,
 		"roster_history": {
 			"MONTE CARLO": {
 				"drivers": [
@@ -103,7 +139,7 @@
 					"Babz"
 				],
 				"joker": "Babz",
-				"points": 0
+				"points": 85
 			},
 			"VÄRMLAND": {
 				"drivers": [
@@ -112,7 +148,7 @@
 					"Babz"
 				],
 				"joker": "Babz",
-				"points": 0
+				"points": 22
 			},
 			"NEW ENGLAND": {
 				"drivers": [
@@ -121,13 +157,31 @@
 					"Babz"
 				],
 				"joker": "Babz",
-				"points": 0
+				"points": 58
+			},
+			"BAUMHOLDER": {
+				"drivers": [
+					"TUS Cham",
+					"FusionJohn",
+					"Babz"
+				],
+				"joker": "Babz",
+				"points": 80
+			},
+			"ARGOLIS": {
+				"drivers": [
+					"TUS Cham",
+					"FusionJohn",
+					"fazzixd"
+				],
+				"joker": "fazzixd",
+				"points": 56
 			}
 		}
 	},
 	{
 		"name": "Hyundry",
-		"previous": 0,
+		"previous": 263,
 		"owner": "pigloaf",
 		"drivers": [
 			"TUS Phoenix",
@@ -136,7 +190,7 @@
 		],
 		"joker": "emuga12",
 		"budget": 18.5,
-		"points": 0,
+		"points": 293,
 		"roster_history": {
 			"MONTE CARLO": {
 				"drivers": [
@@ -145,7 +199,7 @@
 					"emuga12"
 				],
 				"joker": "emuga12",
-				"points": 0
+				"points": 61
 			},
 			"VÄRMLAND": {
 				"drivers": [
@@ -154,7 +208,7 @@
 					"emuga12"
 				],
 				"joker": "emuga12",
-				"points": 0
+				"points": 80
 			},
 			"NEW ENGLAND": {
 				"drivers": [
@@ -163,40 +217,58 @@
 					"emuga12"
 				],
 				"joker": "emuga12",
-				"points": 0
+				"points": 99
+			},
+			"BAUMHOLDER": {
+				"drivers": [
+					"TUS Phoenix",
+					"TUS Cham",
+					"emuga12"
+				],
+				"joker": "emuga12",
+				"points": 23
+			},
+			"ARGOLIS": {
+				"drivers": [
+					"TUS Phoenix",
+					"TUS Cham",
+					"emuga12"
+				],
+				"joker": "emuga12",
+				"points": 30
 			}
 		}
 	},
 	{
 		"name": "The Chosen Ones",
-		"previous": 0,
+		"previous": 183,
 		"owner": "PiorARG",
 		"drivers": [
 			"TUS Phoenix",
-			"DirtPirate",
+			"TUS Cham",
 			"Babz"
 		],
 		"joker": "Babz",
-		"budget": 18,
-		"points": 0,
+		"budget": 21.5,
+		"points": 230,
 		"roster_history": {
 			"MONTE CARLO": {
 				"drivers": [
 					"TUS Phoenix",
 					"DirtPirate",
-					"SFRrallimoilane"
+					"SFR_rallimoilane"
 				],
-				"joker": "SFRrallimoilane",
-				"points": 0
+				"joker": "SFR_rallimoilane",
+				"points": 12
 			},
 			"VÄRMLAND": {
 				"drivers": [
 					"TUS Phoenix",
 					"DirtPirate",
-					"SFRrallimoilane"
+					"SFR_rallimoilane"
 				],
-				"joker": "SFRrallimoilane",
-				"points": 0
+				"joker": "SFR_rallimoilane",
+				"points": 39
 			},
 			"NEW ENGLAND": {
 				"drivers": [
@@ -205,22 +277,40 @@
 					"Babz"
 				],
 				"joker": "Babz",
-				"points": 0
+				"points": 80
+			},
+			"BAUMHOLDER": {
+				"drivers": [
+					"TUS Phoenix",
+					"DirtPirate",
+					"Babz"
+				],
+				"joker": "Babz",
+				"points": 52
+			},
+			"ARGOLIS": {
+				"drivers": [
+					"TUS Phoenix",
+					"DirtPirate",
+					"Babz"
+				],
+				"joker": "Babz",
+				"points": 47
 			}
 		}
 	},
 	{
 		"name": "Rally Legends",
-		"previous": 0,
+		"previous": 114,
 		"owner": "Thorellski",
 		"drivers": [
-			"DirtPirate",
-			"Puki2579",
-			"SFRrallimoilane"
+			"TUS Phoenix",
+			"MyOnePube",
+			"SFR_rallimoilane"
 		],
-		"joker": "SFRrallimoilane",
-		"budget": 19,
-		"points": 0,
+		"joker": "MyOnePube",
+		"budget": 18.5,
+		"points": 147,
 		"roster_history": {
 			"MONTE CARLO": {
 				"drivers": [
@@ -229,7 +319,7 @@
 					"DirtPirate"
 				],
 				"joker": "DirtPirate",
-				"points": 0
+				"points": 24
 			},
 			"VÄRMLAND": {
 				"drivers": [
@@ -238,7 +328,7 @@
 					"Pynklu"
 				],
 				"joker": "Pynklu",
-				"points": 0
+				"points": 14
 			},
 			"NEW ENGLAND": {
 				"drivers": [
@@ -247,13 +337,31 @@
 					"fazzixd"
 				],
 				"joker": "",
-				"points": 0
+				"points": 14
+			},
+			"BAUMHOLDER": {
+				"drivers": [
+					"DirtPirate",
+					"Puki2579",
+					"SFR_rallimoilane"
+				],
+				"joker": "SFR_rallimoilane",
+				"points": 62
+			},
+			"ARGOLIS": {
+				"drivers": [
+					"DirtPirate",
+					"FusionJohn",
+					"SFR_rallimoilane"
+				],
+				"joker": "SFR_rallimoilane",
+				"points": 33
 			}
 		}
 	},
 	{
 		"name": "Speed Bumps",
-		"previous": 0,
+		"previous": 14,
 		"owner": "Siggis90",
 		"drivers": [
 			"FusionJohn",
@@ -262,7 +370,7 @@
 		],
 		"joker": "IM-MaxPower",
 		"budget": 17.5,
-		"points": 0,
+		"points": 18,
 		"roster_history": {
 			"MONTE CARLO": {
 				"drivers": [
@@ -271,7 +379,7 @@
 					"IM-MaxPower"
 				],
 				"joker": "IM-MaxPower",
-				"points": 0
+				"points": 43
 			},
 			"VÄRMLAND": {
 				"drivers": [
@@ -280,7 +388,7 @@
 					"IM-MaxPower"
 				],
 				"joker": "IM-MaxPower",
-				"points": 0
+				"points": -13
 			},
 			"NEW ENGLAND": {
 				"drivers": [
@@ -289,22 +397,40 @@
 					"IM-MaxPower"
 				],
 				"joker": "IM-MaxPower",
-				"points": 0
+				"points": -18
+			},
+			"BAUMHOLDER": {
+				"drivers": [
+					"FusionJohn",
+					"MyOnePube",
+					"IM-MaxPower"
+				],
+				"joker": "IM-MaxPower",
+				"points": 2
+			},
+			"ARGOLIS": {
+				"drivers": [
+					"FusionJohn",
+					"MyOnePube",
+					"IM-MaxPower"
+				],
+				"joker": "IM-MaxPower",
+				"points": 4
 			}
 		}
 	},
 	{
 		"name": "Jazz Hands",
-		"previous": 0,
+		"previous": 189,
 		"owner": "satchmo",
 		"drivers": [
 			"Puki2579",
 			"Babz",
-			"SFRrallimoilane"
+			"SFR_rallimoilane"
 		],
-		"joker": "SFRrallimoilane",
+		"joker": "Babz",
 		"budget": 15,
-		"points": 0,
+		"points": 238,
 		"roster_history": {
 			"MONTE CARLO": {
 				"drivers": [
@@ -313,7 +439,7 @@
 					"satchmo"
 				],
 				"joker": "Babz",
-				"points": 0
+				"points": 51
 			},
 			"VÄRMLAND": {
 				"drivers": [
@@ -322,7 +448,7 @@
 					"satchmo"
 				],
 				"joker": "Babz",
-				"points": 0
+				"points": 23
 			},
 			"NEW ENGLAND": {
 				"drivers": [
@@ -331,13 +457,31 @@
 					"satchmo"
 				],
 				"joker": "Babz",
-				"points": 0
+				"points": 52
+			},
+			"ARGOLIS": {
+				"drivers": [
+					"Puki2579",
+					"Babz",
+					"SFR_rallimoilane"
+				],
+				"joker": "Babz",
+				"points": 49
+			},
+			"BAUMHOLDER": {
+				"drivers": [
+					"Puki2579",
+					"Babz",
+					"SFR_rallimoilane"
+				],
+				"joker": "Babz",
+				"points": 63
 			}
 		}
 	},
 	{
 		"name": "Two Tommies and a Yank",
-		"previous": 0,
+		"previous": 298,
 		"owner": "Raumo",
 		"drivers": [
 			"BrothersChris",
@@ -346,7 +490,7 @@
 		],
 		"joker": "TUS Cham",
 		"budget": 17.5,
-		"points": 0,
+		"points": 377,
 		"roster_history": {
 			"MONTE CARLO": {
 				"drivers": [
@@ -355,7 +499,7 @@
 					"TUS Cham"
 				],
 				"joker": "TUS Cham",
-				"points": 0
+				"points": 5
 			},
 			"VÄRMLAND": {
 				"drivers": [
@@ -364,7 +508,7 @@
 					"TUS Cham"
 				],
 				"joker": "TUS Cham",
-				"points": 0
+				"points": 103
 			},
 			"NEW ENGLAND": {
 				"drivers": [
@@ -373,22 +517,40 @@
 					"TUS Cham"
 				],
 				"joker": "TUS Cham",
-				"points": 0
+				"points": 116
+			},
+			"BAUMHOLDER": {
+				"drivers": [
+					"BrothersChris",
+					"FusionJohn",
+					"TUS Cham"
+				],
+				"joker": "TUS Cham",
+				"points": 74
+			},
+			"ARGOLIS": {
+				"drivers": [
+					"BrothersChris",
+					"FusionJohn",
+					"TUS Cham"
+				],
+				"joker": "TUS Cham",
+				"points": 79
 			}
 		}
 	},
 	{
 		"name": "Loeb's Meteo",
-		"previous": 0,
+		"previous": 19,
 		"owner": "nPiipo",
 		"drivers": [
-			"TUS Phoenix",
-			"SSplatered",
-			"Sean_Da_Sheep24"
+			"BrothersChris",
+			"Babz",
+			"fazzixd"
 		],
-		"joker": "Sean_Da_Sheep24",
+		"joker": "fazzixd",
 		"budget": 15,
-		"points": 0,
+		"points": 38,
 		"roster_history": {
 			"MONTE CARLO": {
 				"drivers": [
@@ -397,7 +559,7 @@
 					"Sean_Da_Sheep24"
 				],
 				"joker": "Sean_Da_Sheep24",
-				"points": 0,
+				"points": 9,
 				"inactive": true
 			},
 			"VÄRMLAND": {
@@ -407,7 +569,7 @@
 					"Sean_Da_Sheep24"
 				],
 				"joker": "Sean_Da_Sheep24",
-				"points": 0,
+				"points": 12,
 				"inactive": true
 			},
 			"NEW ENGLAND": {
@@ -417,22 +579,40 @@
 					"Sean_Da_Sheep24"
 				],
 				"joker": "Sean_Da_Sheep24",
-				"points": 0
+				"points": 5
+			},
+			"BAUMHOLDER": {
+				"drivers": [
+					"TUS Phoenix",
+					"SSplatered",
+					"Sean_Da_Sheep24"
+				],
+				"joker": "Sean_Da_Sheep24",
+				"points": -7
+			},
+			"ARGOLIS": {
+				"drivers": [
+					"TUS Phoenix",
+					"Babz",
+					"WCD_misix"
+				],
+				"joker": "WCD_misix",
+				"points": 19
 			}
 		}
 	},
 	{
 		"name": "8 Minute Babz",
-		"previous": 0,
+		"previous": 74,
 		"owner": "mkingy",
 		"drivers": [
-			"QazRa",
+			"Puki2579",
 			"Babz",
-			"SSplatered"
+			"SFR_rallimoilane"
 		],
-		"joker": "SSplatered",
+		"joker": "SFR_rallimoilane",
 		"budget": 15,
-		"points": 0,
+		"points": 84,
 		"roster_history": {
 			"MONTE CARLO": {
 				"drivers": [
@@ -442,7 +622,7 @@
 				],
 				"joker": "Sean_Da_Sheep24",
 				"inactive": "true",
-				"points": 0
+				"points": 39
 			},
 			"VÄRMLAND": {
 				"drivers": [
@@ -452,7 +632,7 @@
 				],
 				"joker": "Sean_Da_Sheep24",
 				"inactive": true,
-				"points": 0
+				"points": 2
 			},
 			"NEW ENGLAND": {
 				"drivers": [
@@ -461,22 +641,40 @@
 					"Sean_Da_Sheep24"
 				],
 				"joker": "Sean_Da_Sheep24",
-				"points": 0
+				"points": 17
+			},
+			"BAUMHOLDER": {
+				"drivers": [
+					"QazRa",
+					"Babz",
+					"SSplatered"
+				],
+				"joker": "SSplatered",
+				"points": 16
+			},
+			"ARGOLIS": {
+				"drivers": [
+					"QazRa",
+					"Babz",
+					"SSplatered"
+				],
+				"joker": "SSplatered",
+				"points": 10
 			}
 		}
 	},
 	{
 		"name": "Fork Sake",
-		"previous": 0,
+		"previous": 192,
 		"owner": "Agersi",
 		"drivers": [
-			"BrothersChris",
+			"Qazra",
 			"Puki2579",
-			"DirtPirate"
+			"SFR_rallimoilane"
 		],
-		"joker": "BrothersChris",
+		"joker": "SFR_rallimoilane",
 		"budget": 15,
-		"points": 0,
+		"points": 255,
 		"roster_history": {
 			"MONTE CARLO": {
 				"drivers": [
@@ -486,7 +684,7 @@
 				],
 				"joker": "BrothersChris",
 				"inactive": "true",
-				"points": 0
+				"points": 14
 			},
 			"VÄRMLAND": {
 				"drivers": [
@@ -496,7 +694,7 @@
 				],
 				"joker": "BrothersChris",
 				"inactive": true,
-				"points": 0
+				"points": 14
 			},
 			"NEW ENGLAND": {
 				"drivers": [
@@ -505,7 +703,25 @@
 					"DirtPirate"
 				],
 				"joker": "BrothersChris",
-				"points": 0
+				"points": 106
+			},
+			"BAUMHOLDER": {
+				"drivers": [
+					"BrothersChris",
+					"Puki2579",
+					"DirtPirate"
+				],
+				"joker": "BrothersChris",
+				"points": 58
+			},
+			"ARGOLIS": {
+				"drivers": [
+					"FusionJohn",
+					"Puki2579",
+					"SFR_rallimoilane"
+				],
+				"joker": "SFR_rallimoilane",
+				"points": 63
 			}
 		}
 	}

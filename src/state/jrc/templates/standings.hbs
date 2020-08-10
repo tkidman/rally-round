@@ -37,7 +37,7 @@
 		}
 
 		body {
-			/*background-image: url("../../assets/germany.gif");*/
+			/*background-image: url("../../assets/wales_bg.jpg");*/
 			font-family: Helvetica, sans-serif
 		}
 
@@ -237,7 +237,7 @@
 		</div>
 	</div> --}}
 	<video autoplay muted loop id="myVideo">
-		<source src="../../assets/pynklu.mp4" type="video/mp4">
+		<source src="../../assets/wales.mp4" type="video/mp4">
 	</video>
 
 
@@ -322,9 +322,24 @@
 								{{else}} 0
 								{{/if}}
 							</td>
-							<td></td>
-							<td></td>
-							<td></td>
+							<td>
+								{{#if [BAUMHOLDER]}}
+								{{[BAUMHOLDER]}}
+								{{else}} 0
+								{{/if}}
+							</td>
+							<td>
+								{{#if [ARGOLIS]}}
+								{{[ARGOLIS]}}
+								{{else}} 0
+								{{/if}}
+							</td>
+							<td>
+								{{#if [POWYS]}}
+								{{[POWYS]}}
+								{{else}} 0
+								{{/if}}
+							</td>
 							<td></td>
 							<td></td>
 							<td class="bold">{{total}}</td>

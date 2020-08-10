@@ -8,7 +8,7 @@ function addDnsDrivers(driverResults, division) {
   getDriversByDivision(division).forEach(driver => {
     if (driver.name in lookupTable) return;
     driverResults.push({
-      division,
+      divisionName: division,
       name: driver.name,
       overallPoints: 0,
       powerStagePoints: 0,
@@ -85,6 +85,12 @@ const calculateFantasyStandings = (event, previousEvent, league, division) => {
   // if (!(event.location in league.fantasy.driverStandings)) {
   //   league.fantasy.driverStandings[event.location] = lookuptable;
   // }
+  var fs = require("fs");
+  fs.writeFile("./src/state/jrc/new_fantasyTeams.json", JSON.stringify(teams), function(err) {
+    if (err) {
+      return debug(`error writing fantasyJson file`);
+    }
+  });
   return teams;
 };
 

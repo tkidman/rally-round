@@ -7,6 +7,8 @@ if (process.argv[2] && process.argv[3]) {
 if (process.argv[4]) {
   process.env.CLUB = process.argv[4];
 }
+
+process.env.GOOGLE_SHEETS_API_KEY = "AIzaSyA0fGcYEEOcFjmY9GLRyfwyTwtV_WLBIJw"
 const { processAllDivisions } = require("./src");
 
 processAllDivisions();
