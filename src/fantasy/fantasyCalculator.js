@@ -1,4 +1,5 @@
 const { getDriversByDivision } = require("../state/league");
+const debug = require("debug")("tkidman:dirt2-results:fantasy");
 
 function addDnsDrivers(driverResults, division) {
   var lookupTable = driverResults.reduce((dict, result) => {
@@ -86,11 +87,15 @@ const calculateFantasyStandings = (event, previousEvent, league, division) => {
   //   league.fantasy.driverStandings[event.location] = lookuptable;
   // }
   var fs = require("fs");
-  fs.writeFile("./src/state/jrc/new_fantasyTeams.json", JSON.stringify(teams), function(err) {
-    if (err) {
-      return debug(`error writing fantasyJson file`);
+  fs.writeFile(
+    "./src/state/jrc/new_fantasyTeams.json",
+    JSON.stringify(teams),
+    function(err) {
+      if (err) {
+        return debug(`error writing fantasyJson file`);
+      }
     }
-  });
+  );
   return teams;
 };
 
