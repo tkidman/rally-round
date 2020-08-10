@@ -316,23 +316,25 @@ const writeSheet = async (division, divisionName) => {
 };
 
 const addLinks = (links, name) => {
-  links.push(
-    {
-      link: `${name} team standings`,
-      href: `./${name}-team-standings.html`
-    },
-    {
-      link: `${name} driver standings`,
-      href: `./${name}-driver-standings.html`
-    }
-  );
+  if (Object.keys(links).length === 0) {
+    links["driver"] = [];
+    links["team"] = [];
+  }
+  links["team"].push({
+    link: `${name} team standings`,
+    href: `./${name}-team-standings.html`
+  });
+  links["driver"].push({
+    link: `${name} driver standings`,
+    href: `./${name}-driver-standings.html`
+  });
 };
 const writeOutput = () => {
   const league = leagueRef.league;
   const links = Object.keys(league.divisions).reduce((links, divisionName) => {
     addLinks(links, divisionName);
     return links;
-  }, []);
+  }, {});
   addLinks(links, "overall");
   Object.keys(league.divisions).forEach(divisionName => {
     const division = league.divisions[divisionName];
