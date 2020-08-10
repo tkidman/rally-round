@@ -73,12 +73,16 @@ const getHeaderLocations = events => {
 };
 
 const transformForHTML = (divisionName, events, type) => {
+  let division = leagueRef.divisions[divisionName];
+  if (divisionName === "overall") {
+    division = leagueRef.league.overall;
+  }
   const headerLocations = getHeaderLocations(events);
   const lastEvent = events[events.length - 1];
   const rows = lastEvent.standings[`${type}Standings`].map(standing => {
     const movement = {
       positive: standing.positionChange > 0,
-      neutral: standing.positionChange === 0,
+      neutral: !standing.positionChange,
       negative: standing.positionChange < 0
     };
 
@@ -98,7 +102,9 @@ const transformForHTML = (divisionName, events, type) => {
     headerLocations,
     rows,
     showTeam: leagueRef.hasTeams,
-    title: divisionName
+    showCar: leagueRef.hasCars,
+    title: division.displayName || divisionName,
+    logo: division.logo || "jrc_round.jpg"
   };
 };
 
@@ -340,13 +346,19 @@ const writeOutput = () => {
     const division = league.divisions[divisionName];
     const divisionEvents = division.events;
     writeStandingsHTML(divisionName, divisionEvents, "driver", links);
-    writeStandingsHTML(divisionName, divisionEvents, "team", links);
+    if (leagueRef.hasTeams) {
+      writeStandingsHTML(divisionName, divisionEvents, "team", links);
+    }
     if (division.outputSheetId) {
       writeSheet(division, divisionName);
     }
   });
-  writeStandingsHTML("overall", league.overall.events, "driver", links);
-  writeStandingsHTML("overall", league.overall.events, "team", links);
+  if (league.overall) {
+    writeStandingsHTML("overall", league.overall.events, "driver", links);
+    if (leagueRef.hasTeams) {
+      writeStandingsHTML("overall", league.overall.events, "team", links);
+    }
+  }
   writeSheet(league.overall, "Overall");
   writeJSON(league);
   return true;

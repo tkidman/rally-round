@@ -76,6 +76,7 @@ const init = async () => {
   leagueRef.drivers = drivers;
   leagueRef.missingDrivers = missingDrivers;
   leagueRef.hasTeams = !!driverColumns.teamId;
+  leagueRef.hasCars = !!driverColumns.car;
   return leagueRef;
 };
 

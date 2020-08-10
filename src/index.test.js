@@ -15,72 +15,75 @@ describe("calculates event results", () => {
   test("returns results for drivers", () => {
     const expected = [
       {
-        name: "Spookex *-*",
+        divisionName: "pro",
         entry: {
-          rank: 1,
+          isDnfEntry: false,
+          isFounder: false,
+          isPlayer: false,
+          isVIP: false,
           name: "Spookex *-*",
-          isVIP: false,
-          isFounder: false,
-          isPlayer: false,
-          isDnfEntry: false,
-          playerDiff: 0,
-          vehicleName: "Alpine Renault A110 1600 S",
-          stageTime: "15:00.000",
-          stageDiff: "--",
-          totalTime: "04:41:35.987",
-          totalDiff: "--",
-          nationality: "eLngLatvian"
-        },
-        powerStagePoints: 4,
-        overallPoints: 10,
-        totalPoints: 14,
-        teamId: "Time Penalty Boys",
-        divisionName: "pro"
-      },
-      {
-        name: "SFRrallimoilane",
-        entry: {
-          rank: 2,
-          name: "SFRrallimoilane",
-          isVIP: false,
-          isFounder: false,
-          isPlayer: false,
-          isDnfEntry: false,
-          playerDiff: 0,
-          vehicleName: "Ford Escort Mk II",
-          stageTime: "05:34.000",
-          stageDiff: "--",
-          totalTime: "05:00:00.000",
-          totalDiff: "+18:24.013",
-          nationality: "eLngLatvian"
-        },
-        powerStagePoints: 5,
-        overallPoints: 9,
-        totalPoints: 14,
-        teamId: "Time Penalty Boys",
-        divisionName: "pro"
-      },
-      {
-        name: "Kuul",
-        entry: {
-          rank: 3,
-          name: "Kuul",
-          isVIP: false,
-          isFounder: false,
-          isPlayer: false,
-          isDnfEntry: true,
-          playerDiff: 0,
-          vehicleName: "Ford Escort Mk II",
-          stageTime: "05:34.001",
-          stageDiff: "--",
-          totalTime: "05:10:00.000",
-          totalDiff: "+18:24.013",
           nationality: "eLngLatvian",
-          disqualificationReason: "Wrong car choice"
+          playerDiff: 0,
+          rank: 1,
+          stageDiff: "--",
+          stageTime: "15:00.000",
+          totalDiff: "--",
+          totalTime: "04:41:35.987",
+          vehicleName: "Alpine Renault A110 1600 S"
         },
-        totalPoints: 0,
+        name: "Spookex *-*",
+        overallPoints: 10,
+        pointsDisplay: 14,
+        powerStagePoints: 4,
+        teamId: "Time Penalty Boys",
+        totalPoints: 14
+      },
+      {
+        divisionName: "pro",
+        entry: {
+          isDnfEntry: false,
+          isFounder: false,
+          isPlayer: false,
+          isVIP: false,
+          name: "SFRrallimoilane",
+          nationality: "eLngLatvian",
+          playerDiff: 0,
+          rank: 2,
+          stageDiff: "--",
+          stageTime: "05:34.000",
+          totalDiff: "+18:24.013",
+          totalTime: "05:00:00.000",
+          vehicleName: "Ford Escort Mk II"
+        },
+        name: "SFRrallimoilane",
+        overallPoints: 9,
+        pointsDisplay: 14,
+        powerStagePoints: 5,
+        teamId: "Time Penalty Boys",
+        totalPoints: 14
+      },
+      {
+        divisionName: "pro",
+        entry: {
+          disqualificationReason: "Wrong car choice",
+          isDnfEntry: true,
+          isFounder: false,
+          isPlayer: false,
+          isVIP: false,
+          name: "Kuul",
+          nationality: "eLngLatvian",
+          playerDiff: 0,
+          rank: 3,
+          stageDiff: "--",
+          stageTime: "05:34.001",
+          totalDiff: "+18:24.013",
+          totalTime: "05:10:00.000",
+          vehicleName: "Ford Escort Mk II"
+        },
+        name: "Kuul",
+        pointsDisplay: "DQ",
         teamId: "Unlimited Pedal Works",
-        divisionName: "pro"
+        totalPoints: 0
       }
     ];
     const driverResults = calculateEventResults({
@@ -97,12 +100,14 @@ describe("calculates event results", () => {
         divisionName: "pro",
         driverResultsCounted: 1,
         name: "Time Penalty Boys",
+        pointsDisplay: 10,
         totalPoints: 10
       },
       {
         divisionName: "pro",
         driverResultsCounted: 0,
         name: "Unlimited Pedal Works",
+        pointsDisplay: 0,
         totalPoints: 0
       }
     ];

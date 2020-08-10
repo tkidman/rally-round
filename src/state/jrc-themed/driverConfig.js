@@ -1,17 +1,11 @@
-const {
-  teamId,
-  name,
-  car,
-  division,
-  raceNetName
-} = require("../constants/driverFieldNames");
+const { name, raceNetName } = require("../constants/driverFieldNames");
 
 const driverColumns = {
   [name]: "Gamertag",
-  [raceNetName]: "Racenet",
-  [teamId]: "Themed",
-  [car]: "Themed",
-  [division]: "class"
+  [raceNetName]: "Racenet"
+  // [teamId]: "Themed",
+  // [car]: "Themed",
+  // [division]: "class"
 };
 
 const sheetsConfig = {

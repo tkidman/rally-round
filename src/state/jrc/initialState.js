@@ -5,6 +5,7 @@ const initialState = {
   pointsForDNF: false,
   divisions: {
     jrc1: {
+      displayName: "JRC",
       maxDriversScoringPointsForTeam: 2,
       clubId: "180867",
       championshipIds: [
@@ -13,7 +14,8 @@ const initialState = {
         "272837",
         "277620",
         "280989",
-        "284559"
+        "284559",
+        "289440"
       ],
       events: [],
       points: {
@@ -24,6 +26,7 @@ const initialState = {
       outputSheetId: "1P-0CJ4rm7xBaMsan0yMcFKwDIWkqjIvYWHNrjgFDixc"
     },
     jrc2: {
+      displayName: "JRC2",
       maxDriversScoringPointsForTeam: 2,
       clubId: "244734",
       championshipIds: [
@@ -32,7 +35,8 @@ const initialState = {
         "272918",
         "277730",
         "280996",
-        "285214"
+        "285214",
+        "289447"
       ],
       events: [],
       points: {
@@ -42,6 +46,7 @@ const initialState = {
       outputSheetId: "1WaBmoqfRtXO8CEGhnE2g1b93F5o2Kjh7Nx3vi13U5Tg"
     },
     jrc3: {
+      displayName: "JRC3",
       maxDriversScoringPointsForTeam: 2,
       clubId: "330674",
       championshipIds: [
@@ -50,7 +55,8 @@ const initialState = {
         "272991",
         "277731",
         "280997",
-        "285216"
+        "285216",
+        "289454"
       ],
       events: [],
       points: {

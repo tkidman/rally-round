@@ -122,12 +122,20 @@ const createDNSResult = driverName => {
   };
 };
 
-const setDnfIfIncorrectCar = entry => {
+const setDnfIfIncorrectCar = (entry, divisionName) => {
   // validate correct car usage
   const driver = leagueRef.getDriver(entry.name);
+  const division = leagueRef.league.divisions[divisionName];
   if (driver && driver.car && driver.car !== entry.vehicleName) {
     debug(
       `driver ${entry.name} used wrong car ${entry.vehicleName}, should have used ${driver.car}. Setting to dnf`
+    );
+    entry.isDnfEntry = true;
+    entry.disqualificationReason = "Wrong car choice";
+  }
+  if (division.cars && !division.cars.includes(entry.vehicleName)) {
+    debug(
+      `driver ${entry.name} used wrong car ${entry.vehicleName}, should have used one of ${division.cars}. Setting to dnf`
     );
     entry.isDnfEntry = true;
     entry.disqualificationReason = "Wrong car choice";
@@ -141,7 +149,7 @@ const calculateEventResults = ({ event, divisionName, drivers }) => {
       name: entry.name,
       entry
     };
-    setDnfIfIncorrectCar(entry);
+    setDnfIfIncorrectCar(entry, divisionName);
     // TODO validate correct class
     return resultsByDriver;
   }, {});
@@ -173,9 +181,18 @@ const calculateEventResults = ({ event, divisionName, drivers }) => {
     Object.values(resultsByDriver),
     "totalTime"
   );
-  driverResults.forEach(
-    result => (result.totalPoints = getTotalPoints(result))
-  );
+  driverResults.forEach(result => {
+    result.totalPoints = getTotalPoints(result);
+    let display = result.totalPoints;
+    if (result.entry.disqualificationReason) {
+      display = "DQ";
+    } else if (result.entry.isDnsEntry) {
+      display = "DNS";
+    } else if (result.entry.isDnfEntry) {
+      display = "DNF";
+    }
+    result.pointsDisplay = display;
+  });
 
   const teamResults = [];
   if (leagueRef.hasTeams) {
@@ -187,7 +204,10 @@ const calculateEventResults = ({ event, divisionName, drivers }) => {
   }
 
   driverResults.forEach(result => (result.divisionName = divisionName));
-  teamResults.forEach(result => (result.divisionName = divisionName));
+  teamResults.forEach(result => {
+    result.divisionName = divisionName;
+    result.pointsDisplay = result.totalPoints;
+  });
   return { driverResults, teamResults };
 };
 
@@ -357,7 +377,9 @@ const processAllDivisions = async () => {
       division.events = await fetchEvents(division, divisionName);
       await processEvents(division.events, divisionName);
     }
-    calculateOverallResults();
+    if (Object.keys(divisions).length > 1) {
+      calculateOverallResults();
+    }
     if (league.fantasy) fantasyStandingsToImage(league.fantasy);
     drawResults(league);
     writeOutput(league);

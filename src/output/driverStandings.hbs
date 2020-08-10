@@ -11,7 +11,7 @@
         <div class="flexBox">
             <div style="margin-bottom: 1em;">
                 <div class="logo" style="display:flex;">
-                    <img src="./assets/jrc_round.jpg"/>
+                    <img src="./assets/{{logo}}"/>
                     <h2 style="margin-left:1em;">{{title}} Driver Standings</h2>
                 </div>
             </div>
@@ -26,7 +26,9 @@
                     {{#if showTeam}}
                         <th>Team</th>
                     {{/if}}
-                    <th>Car</th>
+                    {{#if showCar}}
+                        <th>Car</th>
+                    {{/if}}
 
                     {{#each headerLocations}}
                         <th><img src="./assets/country-flags/{{this}}.png"/></th>
@@ -35,43 +37,39 @@
                 </tr>
                 </thead>
                 <tbody>
-                {{#each rows}}{{#with this}}
+                {{#each rows}}
                     <tr>
-                        <td>{{standing.currentPosition}}</td>
+                        <td>{{this.standing.currentPosition}}</td>
                         <td>
-                            {{#if positive}}
+                            {{#if this.positive}}
                                 <span class="positive"><i
-                                        class="arrow up"></i>&nbsp;{{standing.positionChange}}</span>
+                                        class="arrow up"></i>&nbsp;{{this.standing.positionChange}}</span>
                             {{/if}}
-                            {{#if neutral}}
+                            {{#if this.neutral}}
                                 <span class="neutral">=</span>
                             {{/if}}
-                            {{#if negative}}
+                            {{#if this.negative}}
                                 <span class="negative"><i
-                                        class="arrow down"></i>&nbsp;{{standing.positionChange}}</span>
+                                        class="arrow down"></i>&nbsp;{{this.standing.positionChange}}</span>
                             {{/if}}
                         </td>
-                        <td><img src="./assets/country-flags/{{country.code}}.png"
+                        <td><img src="./assets/country-flags/{{this.country.code}}.png"
                                  style="max-width:1.5em; max-height:1.5em;"/></td>
-                        <td class="text-left bold">{{standing.name}}</td>
-                        <td>
-                            <img src="./assets/teams/{{driver.teamId}}.png" style="max-width:2em; max-height:2em;"/>
-                        </td>
-                        <td>
-                            {{#if car}}
-                                <img src="./assets/cars/{{car}}.png" style="max-width:2em; max-height:2em;"/>
-                            {{else}}
-                                <img src="./assets/teams/Privateer.png" style="max-width:2em; max-height:2em;"/>
-                            {{/if}}
-                        </td>
-                        {{#each results}}{{#with this}}
+                        <td class="text-left bold">{{this.standing.name}}</td>
                             <td>
-                                {{totalPoints}}
+                                <img src="./assets/teams/{{this.driver.teamId}}.png" style="max-width:2em; max-height:2em;"/>
+                            </td>
+                            <td>
+                                <img src="./assets/cars/{{this.car}}.png" style="max-width:2em; max-height:2em;"/>
+                            </td>
+                        {{#each this.results}}{{#with this}}
+                            <td>
+                                {{pointsDisplay}}
                             </td>
                         {{/with}}{{/each}}
-                        <td class="bold">{{standing.totalPoints}}</td>
+                        <td class="bold">{{this.standing.totalPoints}}</td>
                     </tr>
-                {{/with}}{{/each}}
+                    {{/each}}
                 </tbody>
 
             </table>
