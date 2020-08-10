@@ -142,8 +142,38 @@ const setDnfIfIncorrectCar = (entry, divisionName) => {
   }
 };
 
+const setManualResults = (event, entries) => {
+  const challengeId = event.challengeId;
+  const defaultEntry = {
+    isDnfEntry: false,
+    isFounder: false,
+    isPlayer: false,
+    isVIP: false,
+    name: "",
+    nationality: "eLngSpanish",
+    playerDiff: 0,
+    rank: 1,
+    stageDiff: "--",
+    stageTime: "",
+    totalDiff: "",
+    totalTime: "",
+    vehicleName: "Citroën C4 Rally"
+  };
+  switch (challengeId) {
+    case "289440":
+      var maxPower = { ...defaultEntry };
+      (maxPower.name = "IM-MaxPower"), (maxPower.stageDiff = "+00:11.635");
+      maxPower.stageTime = "03:04.419";
+      maxPower.totalDiff = "+00:01:54.067";
+      maxPower.totalTime = "00:41:28.668";
+      entries.push(maxPower);
+      break;
+  }
+};
+
 const calculateEventResults = ({ event, divisionName, drivers }) => {
   const entries = event.racenetLeaderboard.entries;
+  setManualResults(event, entries);
   const resultsByDriver = entries.reduce((resultsByDriver, entry) => {
     resultsByDriver[entry.name] = {
       name: entry.name,
