@@ -181,34 +181,34 @@ function processFantasyTeams(teamStandings) {
 function processBestBuy() {
   return [
     {
-      name: "TUS Cham",
-      value: 8.72,
-      cost: 5.5,
-      total: 48
+      name: "FusionJohn",
+      value: 5.53,
+      cost: 6.5,
+      total: 36
     },
     {
-      name: "BrothersChris",
-      value: 6.66,
-      cost: 4.5,
-      total: 30
-    },
-    {
-      name: "Wumy73",
-      value: 6.3,
+      name: "emuga12",
+      value: 5,
       cost: 3,
-      total: 19
+      total: 15
+    },
+    {
+      name: "Rallymanic1964",
+      value: 5,
+      cost: 1,
+      total: 5
     },
     {
       name: "Satchmo",
-      value: 5.5,
-      cost: 2,
-      total: 11
+      value: 4.86,
+      cost: 3.5,
+      total: 17
     },
     {
-      name: "DirtPirate",
-      value: 5,
-      cost: 5,
-      total: 25
+      name: "Babz",
+      value: 4.22,
+      cost: 4.5,
+      total: 19
     }
   ];
 }
