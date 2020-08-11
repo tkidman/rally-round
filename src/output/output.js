@@ -278,7 +278,12 @@ const writeStandingsSheet = async (division, divisionName) => {
 
 const writeStandingsHTML = (divisionName, events, type, links) => {
   const data = transformForHTML(divisionName, events, type);
-  data.links = links;
+  data.links = JSON.parse(JSON.stringify(links)); //<-- LOL javascript
+  data.links[type].forEach(link => {
+    if (link["link"] == divisionName) {
+      link.active = true;
+    }
+  });
   const standingsTemplateFile = `${templatePath}/${type}Standings.hbs`;
   if (!fs.existsSync(standingsTemplateFile)) {
     debug("no standings html template found, returning");
@@ -328,11 +333,13 @@ const addLinks = (links, name) => {
   }
   links["team"].push({
     link: `${name}`,
-    href: `./${name}-team-standings.html`
+    href: `./${name}-team-standings.html`,
+    active: false
   });
   links["driver"].push({
     link: `${name}`,
-    href: `./${name}-driver-standings.html`
+    href: `./${name}-driver-standings.html`,
+    active: false
   });
 };
 const writeOutput = () => {

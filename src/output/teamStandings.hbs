@@ -1,98 +1,131 @@
 <html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="./assets/style.css">
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="./assets/css/animation.css">
+    <link rel="stylesheet" type="text/css" href="./assets/css/w3.css">
 </head>
 
 <body>
-{{!-- 	<video autoplay muted loop id="myVideo"> --}}
-{{!-- 		<source src="./assets/pynklu.mp4" type="video/mp4"> --}}
-{{!-- 	</video> --}}
-
-
-
-<div id="container">
-    <div id="flexContainer">
-        <div class="flexBox">
-            <div style="margin-bottom: 1em;">
-                <div class="logo" style="display:flex;">
-                    <img src="./assets/jrc_round.jpg"/>
-                    <h2 style="margin-left:1em;">{{title}} Team Standings</h2>
+    <div class="w3-top">
+        <div class="w3-bar w3-black">
+            <div class="logo" style="float:left;padding:0.3em;">
+                <img src="./assets/jrc_round.jpg" style="max-height:2em;">
+            </div>
+            <div class="w3-dropdown-hover w3-hide-small">
+                <button class="w3-button">Driver Standings</button>
+                <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small">
+                    {{#with links.driver}}
+                    {{#each this}}
+                        <a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">{{link}}</a>
+                    {{/each}}
+                    {{/with}}
                 </div>
             </div>
-
-            <table id="tableDrivers">
-                <thead>
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th>Team</th>
-                    {{#each headerLocations}}
-                        <th><img src="./assets/country-flags/{{this}}.png"/></th>
+            <div class="w3-dropdown-hover w3-hide-small">
+                <button class="w3-button">Team Standings</button>
+                <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small">
+                    {{#with links.team}}
+                    {{#each this}}
+                    <a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">{{link}}</a>
                     {{/each}}
-                    <th>Points</th>
-                </tr>
-                </thead>
-                <tbody>
-                {{#each rows}}{{#with this}}
-                    <tr>
-                        <td>{{standing.currentPosition}}</td>
-                        <td>
-                            {{#if positive}}
-                                <span class="positive"><i
-                                        class="arrow up"></i>&nbsp;{{standing.positionChange}}</span>
-                            {{/if}}
-                            {{#if neutral}}
+                    {{/with}}
+                </div>
+            </div>
+            <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium"
+                onclick="openNav()">&#9776;</a>
+
+        </div>
+
+        <div id="mobileNav" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium">
+            <span class="w3-bar-item">Driver Standings</span>
+            {{#with links.driver}}
+            {{#each this}}
+            <a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">{{link}}</a>
+            {{/each}}
+            {{/with}}
+            <span class="w3-bar-item">Team Standings</span>
+            {{#with links.team}}
+            {{#each this}}
+            <a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">{{link}}</a>
+            {{/each}}
+            {{/with}}
+        </div>
+    </div>
+
+    <div id="container">
+        <div id="flexContainer">
+            <div class="flexBox">
+                <div style="margin-bottom: 1em;">
+                    <div class="logo" style="display:flex;">
+                        <img src="./assets/jrc_round.jpg" />
+                        <h2 style="margin-left:1em;">{{title}} Team Standings</h2>
+                    </div>
+                </div>
+
+                <table id="tableDrivers">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th>Team</th>
+                            {{#each headerLocations}}
+                            <th><img src="./assets/country-flags/{{this}}.png" /></th>
+                            {{/each}}
+                            <th>Points</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each rows}}{{#with this}}
+                        <tr>
+                            <td>{{standing.currentPosition}}</td>
+                            <td>
+                                {{#if positive}}
+                                <span class="positive"><i class="arrow up"></i>&nbsp;{{standing.positionChange}}</span>
+                                {{/if}}
+                                {{#if neutral}}
                                 <span class="neutral">=</span>
-                            {{/if}}
-                            {{#if negative}}
+                                {{/if}}
+                                {{#if negative}}
                                 <span class="negative"><i
                                         class="arrow down"></i>&nbsp;{{standing.positionChange}}</span>
-                            {{/if}}
-                        </td>
-                        <td>
-                            <img src="./assets/teams/{{standing.name}}.png" style="max-width:2em; max-height:2em;"/>
-                        </td>
-                        <td class="text-left bold">{{standing.name}}</td>
-                        {{#each results}}{{#with this}}
+                                {{/if}}
+                            </td>
+                            <td>
+                                <img src="./assets/teams/{{standing.name}}.png"
+                                    style="max-width:2em; max-height:2em;" />
+                            </td>
+                            <td class="text-left bold">{{standing.name}}</td>
+                            {{#each results}}{{#with this}}
                             <td>
                                 {{totalPoints}}
                             </td>
+                            {{/with}}{{/each}}
+                            <td class="bold">{{standing.totalPoints}}</td>
+                        </tr>
                         {{/with}}{{/each}}
-                        <td class="bold">{{standing.totalPoints}}</td>
-                    </tr>
-                {{/with}}{{/each}}
-                </tbody>
+                    </tbody>
 
-            </table>
+                </table>
+            </div>
+
         </div>
-
     </div>
-</div>
 
-<div align="center">
-    {{#with links.driver}}
-        <h2>Driver Standings</h2>
-        <ul style="list-style: none;">
-            {{#each this}}
-                <li><a style="text-decoration:none;" href="{{href}}">{{link}}</a></li>
-            {{/each}}
-        </ul>
-    {{/with}}
-    {{#with links.team}}
-        <h2>Team Standings</h2>
-        <ul style="list-style: none;">
-            {{#each this}}
-                <li><a style="text-decoration:none;" href="{{href}}">{{link}}</a></li>
-            {{/each}}
-        </ul>
-    {{/with}}
-</div>
-
-<div id="particles-js"></div>
-<script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-<script src="./assets/particleConfig.js"></script>
+    <div id="particles-js"></div>
+    <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="./assets/particleConfig.js"></script>
+    <script>
+        function openNav() {
+            var x = document.getElementById("mobileNav");
+            if (x.className.indexOf("w3-show") == -1) {
+                x.className += " w3-show";
+            } else {
+                x.className = x.className.replace(" w3-show", "");
+            }
+        }
+    </script>
 </body>
 
 </html>
