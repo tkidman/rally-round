@@ -8,10 +8,6 @@ const { init, leagueRef } = require("./state/league");
 const { writeOutput, checkOutputDirs } = require("./output/output");
 const { getTotalPoints } = require("./shared");
 const { calculateFantasyStandings } = require("./fantasy/fantasyCalculator");
-const {
-  fantasyStandingsToImage,
-  drawResults
-} = require("./visualisation/tableDrawer");
 const { fetchEvents } = require("./fetch");
 
 const dnfFactor = 100000000;
@@ -410,8 +406,6 @@ const processAllDivisions = async () => {
     if (Object.keys(divisions).length > 1) {
       calculateOverallResults();
     }
-    if (league.fantasy) fantasyStandingsToImage(league.fantasy);
-    drawResults(league);
     writeOutput(league);
     printMissingDrivers();
   } catch (err) {

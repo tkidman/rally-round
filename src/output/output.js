@@ -15,6 +15,7 @@ const countries = require("../state/constants/countries.json");
 const vehicles = require("../state/constants/vehicles.json");
 const copydir = require("copy-dir");
 const { updateResultsSheet } = require("../sheetsAPI/sheets");
+const { getFantasyHTML } = require("../visualisation/tableDrawer");
 
 const buildDriverRows = event => {
   const driverRows = event.results.driverResults.map(result => {
@@ -303,6 +304,17 @@ const writeStandingsHTML = (divisionName, events, type, links) => {
   );
 };
 
+const writeFantasyHTML = (fantasy, links) => {
+  const out = getFantasyHTML(fantasy, links);
+  fs.writeFileSync(
+    `./${outputPath}/website/team-fantasy-standings.html`,
+    out[0]
+  );
+  fs.writeFileSync(
+    `./${outputPath}/website/driver-fantasy-standings.html`,
+    out[1]
+  );
+};
 // eslint-disable-next-line no-unused-vars
 const writeStandingsCSV = (divisionName, events, type) => {
   const lastEvent = events[events.length - 1];
@@ -325,30 +337,28 @@ const writeSheet = async (division, divisionName) => {
     }
   }
 };
-
-const addLinks = (links, name) => {
-  if (Object.keys(links).length === 0) {
-    links["driver"] = [];
-    links["team"] = [];
-  }
-  links["team"].push({
+const addLinks = (links, name, group) => {
+  if (Object.keys(links).indexOf(group) == -1) links[group] = [];
+  links[group].push({
     link: `${name}`,
-    href: `./${name}-team-standings.html`,
-    active: false
-  });
-  links["driver"].push({
-    link: `${name}`,
-    href: `./${name}-driver-standings.html`,
+    href: `./${name}-${group}-standings.html`,
     active: false
   });
 };
+
 const writeOutput = () => {
   const league = leagueRef.league;
   const links = Object.keys(league.divisions).reduce((links, divisionName) => {
-    addLinks(links, divisionName);
+    addLinks(links, divisionName, "team");
+    addLinks(links, divisionName, "driver");
     return links;
   }, {});
-  addLinks(links, "overall");
+  addLinks(links, "overall", "team");
+  addLinks(links, "overall", "driver");
+  if (league.fantasy) {
+    addLinks(links, "team", "fantasy");
+    addLinks(links, "driver", "fantasy");
+  }
   Object.keys(league.divisions).forEach(divisionName => {
     const division = league.divisions[divisionName];
     const divisionEvents = division.events;
@@ -364,6 +374,9 @@ const writeOutput = () => {
     writeStandingsHTML("overall", league.overall.events, "driver", links);
     if (leagueRef.hasTeams) {
       writeStandingsHTML("overall", league.overall.events, "team", links);
+    }
+    if (league.fantasy) {
+      writeFantasyHTML(league.fantasy, links);
     }
   }
   writeSheet(league.overall, "Overall");

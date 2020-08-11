@@ -1,13 +1,13 @@
 <html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+	<link rel="stylesheet" type="text/css" href="./assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="./assets/css/animation.css">
     <link rel="stylesheet" type="text/css" href="./assets/css/w3.css">
 </head>
 
 <body>
-    <div class="w3-top">
+	<div class="w3-top">
 		<div class="w3-bar w3-black">
 			<div class="logo" style="float:left;padding:0.3em;">
 				<img src="./assets/jrc_round.jpg" style="max-height:2em;">
@@ -70,69 +70,96 @@
 		</div>
 	</div>
 
-    <div id="container">
-        <div id="flexContainer">
-            <div class="flexBox">
-                <div style="margin-bottom: 1em;" class="w3-hide-large w3-hide-medium">
+	<div id="container">
+		<div id="flexContainer">
+			<div class="flexBox">
+				<div style="margin-bottom: 1em;" class="w3-hide-large w3-hide-medium">
                     <div class="logo" style="display:flex;">
-                        <img src="./assets/jrc_round.jpg" />
-                        <h2 style="margin-left:1em;">{{title}} Team Standings</h2>
+                        <img src="./assets/fantasy.jpg" />
+                        <h2 style="margin-left:1em;">Team Standings</h2>
                     </div>
                 </div>
+				<table id="tableTeams">
+					<thead>
+						<tr>
+							<th></th>
+							<th></th>
+							<th>Team</th>
+							<th><img src="./assets/country-flags/mco.png" /></th>
+							<th><img src="./assets/country-flags/swe.png" /></th>
+							<th><img src="./assets/country-flags/usa.png" /></th>
+							<th><img src="./assets/country-flags/deu.png" /></th>
+							<th><img src="./assets/country-flags/grc.png" /></th>
+							<th><img src="./assets/country-flags/welsh.png" /></th>
+							<th><img src="./assets/country-flags/esp.png" /></th>
+							<th><img src="./assets/country-flags/aus.png" /></th>
+							<th>Points</th>
+							<th>Gap</th>
+						</tr>
+					</thead>
+					<tbody>
+						{{#each teams}}{{#with this}}
+						<tr>
+							<td>{{rank}}</td>
+							<td>
+								{{#if positive}}
+								<span class="positive"><i class="arrow up"></i>&nbsp;{{evolution}}</span>
+								{{/if}}
+								{{#if neutral}}
+								<span class="neutral">=</span>
+								{{/if}}
+								{{#if negative}}
+								<span class="negative"><i class="arrow down"></i>&nbsp;{{evolution}}</span>
+								{{/if}}
+							</td>
+							<td class="text-left bold">{{name}} <small>( {{drivers}} )</small></td>
+							<td>{{[MONTE CARLO]}}</td>
+							<td>{{VÄRMLAND}}</td>
+							<td>{{[NEW ENGLAND]}}</td>
+							<td>{{[BAUMHOLDER]}}</td>
+							<td>{{[ARGOLIS]}}</td>
+							<td>{{[POWYS]}}</td>
+							<td>{{[RIBADELLES]}}</td>
+							<td></td>
+							<td class="bold">{{points}}</td>
+							<td>{{gap}}</td>
+						</tr>
+						{{/with}}{{/each}}
+					</tbody>
 
-                <table id="tableDrivers">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th>Team</th>
-                            {{#each headerLocations}}
-                            <th><img src="./assets/country-flags/{{this}}.png" /></th>
-                            {{/each}}
-                            <th>Points</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {{#each rows}}{{#with this}}
-                        <tr>
-                            <td>{{standing.currentPosition}}</td>
-                            <td>
-                                {{#if positive}}
-                                <span class="positive"><i class="arrow up"></i>&nbsp;{{standing.positionChange}}</span>
-                                {{/if}}
-                                {{#if neutral}}
-                                <span class="neutral">=</span>
-                                {{/if}}
-                                {{#if negative}}
-                                <span class="negative"><i
-                                        class="arrow down"></i>&nbsp;{{standing.positionChange}}</span>
-                                {{/if}}
-                            </td>
-                            <td>
-                                <img src="./assets/teams/{{standing.name}}.png"
-                                    style="max-width:2em; max-height:2em;" />
-                            </td>
-                            <td class="text-left bold">{{standing.name}}</td>
-                            {{#each results}}{{#with this}}
-                            <td>
-                                {{totalPoints}}
-                            </td>
-                            {{/with}}{{/each}}
-                            <td class="bold">{{standing.totalPoints}}</td>
-                        </tr>
-                        {{/with}}{{/each}}
-                    </tbody>
+				</table>
 
-                </table>
-            </div>
 
-        </div>
-    </div>
+			</div>
 
-    <div id="particles-js"></div>
-    <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="./assets/particleConfig.js"></script>
+			<div class="flexBox">
+				<h2>This week's JRC Best Buys™</h2>
+				<table id="bestBuys">
+					<thead>
+						<tr>
+							<th>Driver</th>
+							<th>Cost</th>
+							<th>Profit</th>
+							<th>Value / $</th>
+						</tr>
+					</thead>
+					<tbody>
+						{{#each bestBuy}}{{#with this}}
+						<tr>
+							<td class="text-left bold">{{name}}</td>
+							<td>{{cost}}</td>
+							<td>{{total}}</td>
+							<td class="bold">{{value}}</td>
+						</tr>
+						{{/with}}{{/each}}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	 <!--
+        DROPDOWN
+    -->
     <script>
         function openNav() {
             var x = document.getElementById("mobileNav");
@@ -143,6 +170,12 @@
             }
         }
     </script>
+    <!--
+        BACKGROUND ANIMATION
+    -->
+    <div id="particles-js"></div>
+    <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="./assets/particleConfig.js"></script>
 </body>
 
 </html>
