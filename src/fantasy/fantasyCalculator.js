@@ -98,7 +98,6 @@ const calculateFantasyStandings = (event, previousEvent, league, division) => {
   return teams;
 };
 
-
 /**
  * RENDERER HELPERS
  */

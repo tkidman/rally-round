@@ -279,15 +279,15 @@ const writeStandingsSheet = async (division, divisionName) => {
 };
 
 const getNavigationHTML = (currentPage, currentMenu, links) => {
-  if (compiled_navigation == null){
+  if (compiled_navigation == null) {
     const navigationTemplateFile = `${templatePath}/navigation.hbs`;
     const _t = fs.readFileSync(navigationTemplateFile).toString();
     this.compiled_navigation = Handlebars.compile(_t);
   }
   var _links = JSON.parse(JSON.stringify(links)); //<-- LOL javascript
   _links[currentMenu].forEach(link => (link.active = link.link == currentPage));
-  return this.compiled_navigation({links: _links});
-}
+  return this.compiled_navigation({ links: _links });
+};
 
 const writeStandingsHTML = (divisionName, events, type, links) => {
   const data = transformForHTML(divisionName, events, type);
@@ -317,13 +317,17 @@ const writeFantasyHTML = (fantasyResults, links) => {
 
   const _t = fs.readFileSync(`${templatePath}/fantasyTeams.hbs`).toString();
   const team_template = Handlebars.compile(_t);
-  const team_nav = getNavigationHTML('team', 'fantasy', links);
-  const teamData = {teams: data.teams, bestBuy:data.bestBuy, navigation:team_nav};
+  const team_nav = getNavigationHTML("team", "fantasy", links);
+  const teamData = {
+    teams: data.teams,
+    bestBuy: data.bestBuy,
+    navigation: team_nav
+  };
 
   var _d = fs.readFileSync(`${templatePath}/fantasyDrivers.hbs`).toString();
   var driver_template = Handlebars.compile(_d);
-  const driver_nav = getNavigationHTML('driver', 'fantasy', links);
-  const driverData = {drivers:data.drivers, navigation:driver_nav};
+  const driver_nav = getNavigationHTML("driver", "fantasy", links);
+  const driverData = { drivers: data.drivers, navigation: driver_nav };
 
   fs.writeFileSync(
     `./${outputPath}/website/team-fantasy-standings.html`,
