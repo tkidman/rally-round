@@ -7,69 +7,7 @@
 </head>
 
 <body>
-    <div class="w3-top">
-		<div class="w3-bar w3-black">
-			<div class="logo" style="float:left;padding:0.3em;">
-				<img src="./assets/jrc_round.jpg" style="max-height:2em;">
-			</div>
-			<div class="w3-dropdown-hover w3-hide-small">
-				<button class="w3-button">Driver Standings</button>
-				<div class="w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small">
-					{{#with links.driver}}
-					{{#each this}}
-					<a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">{{link}}</a>
-					{{/each}}
-					{{/with}}
-				</div>
-			</div>
-			<div class="w3-dropdown-hover w3-hide-small">
-				<button class="w3-button">Team Standings</button>
-				<div class="w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small">
-					{{#with links.team}}
-					{{#each this}}
-					<a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">{{link}}</a>
-					{{/each}}
-					{{/with}}
-				</div>
-			</div>
-			<div class="w3-dropdown-hover w3-hide-small">
-				<button class="w3-button">Fantasy JRC</button>
-				<div class="w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small">
-					{{#with links.fantasy}}
-					{{#each this}}
-					<a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">{{link}}</a>
-					{{/each}}
-					{{/with}}
-				</div>
-			</div>
-			<a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium"
-				onclick="openNav()">&#9776;</a>
-
-		</div>
-
-		<div id="mobileNav" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium">
-			<span class="w3-bar-item w3-grey">Driver Standings</span>
-			{{#with links.driver}}
-			{{#each this}}
-			<a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">{{link}}</a>
-			{{/each}}
-			{{/with}}
-			<span class="w3-bar-item w3-grey">Team Standings</span>
-			{{#with links.team}}
-			{{#each this}}
-			<a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">{{link}}</a>
-			{{/each}}
-			{{/with}}
-			<span class="w3-bar-item w3-grey">Fantasy JRC</span>
-			{{#with links.fantasy}}
-			{{#each this}}
-			<a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">{{link}}</a>
-			{{/each}}
-			{{/with}}
-
-		</div>
-	</div>
-
+    {{{navigation}}}
     <div id="container">
         <div id="flexContainer">
             <div class="flexBox">

@@ -6,6 +6,7 @@ body {
 	width: 90%;
 	margin: auto;
 	padding: 4em;
+	margin-top: 2em;
 }
 
 .background {
@@ -103,6 +104,13 @@ tbody>tr:nth-child(odd) {
 	border-radius: 50%;
 	border: 1px solid darkgray;
 }
+.w3-bar>.logo {
+	float:left;
+	padding:0.3em;
+}
+.w3-bar>.logo>img {
+	max-height:2em;
+}
 
 .right {
 	float: right;
@@ -148,9 +156,23 @@ tbody>tr:nth-child(odd) {
 	flex-wrap: wrap;
 }
 
-.flexBox {}
+#mobileNav {
+	font-weight: bold;
+}
+
+#mobileNav>span,
+#mobileNav>a {
+	text-align: center;
+}
 
 .active {
 	background: #5355bf !important; 
 	color: white !important;
 }
+
+@media only screen and (max-width: 992px) {
+	.w3-bar>.logo>img {
+		max-height:4em;
+		margin: 0.5em;
+	}
+  }

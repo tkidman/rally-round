@@ -2,6 +2,7 @@ const fs = require("fs");
 const Papa = require("papaparse");
 const debug = require("debug")("tkidman:dirt2-results:output");
 const Handlebars = require("handlebars");
+const compiled_navigation = null;
 
 const {
   outputPath,
@@ -15,7 +16,7 @@ const countries = require("../state/constants/countries.json");
 const vehicles = require("../state/constants/vehicles.json");
 const copydir = require("copy-dir");
 const { updateResultsSheet } = require("../sheetsAPI/sheets");
-const { getFantasyHTML } = require("../visualisation/tableDrawer");
+const { processFantasyResults } = require("../fantasy/fantasyCalculator");
 
 const buildDriverRows = event => {
   const driverRows = event.results.driverResults.map(result => {
@@ -277,14 +278,21 @@ const writeStandingsSheet = async (division, divisionName) => {
   );
 };
 
+const getNavigationHTML = (currentPage, currentMenu, links) => {
+  if (compiled_navigation == null){
+    const navigationTemplateFile = `${templatePath}/navigation.hbs`;
+    const _t = fs.readFileSync(navigationTemplateFile).toString();
+    this.compiled_navigation = Handlebars.compile(_t);
+  }
+  var _links = JSON.parse(JSON.stringify(links)); //<-- LOL javascript
+  _links[currentMenu].forEach(link => (link.active = link.link == currentPage));
+  return this.compiled_navigation({links: _links});
+}
+
 const writeStandingsHTML = (divisionName, events, type, links) => {
   const data = transformForHTML(divisionName, events, type);
-  data.links = JSON.parse(JSON.stringify(links)); //<-- LOL javascript
-  data.links[type].forEach(link => {
-    if (link["link"] == divisionName) {
-      link.active = true;
-    }
-  });
+  data.navigation = getNavigationHTML(divisionName, type, links);
+
   const standingsTemplateFile = `${templatePath}/${type}Standings.hbs`;
   if (!fs.existsSync(standingsTemplateFile)) {
     debug("no standings html template found, returning");
@@ -304,15 +312,26 @@ const writeStandingsHTML = (divisionName, events, type, links) => {
   );
 };
 
-const writeFantasyHTML = (fantasy, links) => {
-  const out = getFantasyHTML(fantasy, links);
+const writeFantasyHTML = (fantasyResults, links) => {
+  const data = processFantasyResults(fantasyResults);
+
+  const _t = fs.readFileSync(`${templatePath}/fantasyTeams.hbs`).toString();
+  const team_template = Handlebars.compile(_t);
+  const team_nav = getNavigationHTML('team', 'fantasy', links);
+  const teamData = {teams: data.teams, bestBuy:data.bestBuy, navigation:team_nav};
+
+  var _d = fs.readFileSync(`${templatePath}/fantasyDrivers.hbs`).toString();
+  var driver_template = Handlebars.compile(_d);
+  const driver_nav = getNavigationHTML('driver', 'fantasy', links);
+  const driverData = {drivers:data.drivers, navigation:driver_nav};
+
   fs.writeFileSync(
     `./${outputPath}/website/team-fantasy-standings.html`,
-    out[0]
+    team_template(teamData)
   );
   fs.writeFileSync(
     `./${outputPath}/website/driver-fantasy-standings.html`,
-    out[1]
+    driver_template(driverData)
   );
 };
 // eslint-disable-next-line no-unused-vars

@@ -1,0 +1,119 @@
+<html>
+
+<head>
+	<link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+	<link rel="stylesheet" type="text/css" href="./assets/css/animation.css">
+	<link rel="stylesheet" type="text/css" href="./assets/css/w3.css">
+</head>
+
+<body>
+	{{{navigation}}}
+	<div id="container">
+		<div id="flexContainer">
+			<div class="flexBox">
+				<div style="margin-bottom: 1em;" class="w3-hide-large w3-hide-medium">
+					<div class="logo" style="display:flex;">
+						<img src="./assets/fantasy.jpg" />
+						<h2 style="margin-left:1em;">Team Standings</h2>
+					</div>
+				</div>
+				<table id="tableTeams">
+					<thead>
+						<tr>
+							<th></th>
+							<th></th>
+							<th>Team</th>
+							<th><img src="./assets/country-flags/mco.png" /></th>
+							<th><img src="./assets/country-flags/swe.png" /></th>
+							<th><img src="./assets/country-flags/usa.png" /></th>
+							<th><img src="./assets/country-flags/deu.png" /></th>
+							<th><img src="./assets/country-flags/grc.png" /></th>
+							<th><img src="./assets/country-flags/welsh.png" /></th>
+							<th><img src="./assets/country-flags/esp.png" /></th>
+							<th><img src="./assets/country-flags/aus.png" /></th>
+							<th>Points</th>
+							<th>Gap</th>
+						</tr>
+					</thead>
+					<tbody>
+						{{#each teams}}{{#with this}}
+						<tr>
+							<td>{{rank}}</td>
+							<td>
+								{{#if positive}}
+								<span class="positive"><i class="arrow up"></i>&nbsp;{{evolution}}</span>
+								{{/if}}
+								{{#if neutral}}
+								<span class="neutral">=</span>
+								{{/if}}
+								{{#if negative}}
+								<span class="negative"><i class="arrow down"></i>&nbsp;{{evolution}}</span>
+								{{/if}}
+							</td>
+							<td class="text-left bold">{{name}} <small>( {{drivers}} )</small></td>
+							<td>{{[MONTE CARLO]}}</td>
+							<td>{{VÄRMLAND}}</td>
+							<td>{{[NEW ENGLAND]}}</td>
+							<td>{{[BAUMHOLDER]}}</td>
+							<td>{{[ARGOLIS]}}</td>
+							<td>{{[POWYS]}}</td>
+							<td>{{[RIBADELLES]}}</td>
+							<td></td>
+							<td class="bold">{{points}}</td>
+							<td>{{gap}}</td>
+						</tr>
+						{{/with}}{{/each}}
+					</tbody>
+
+				</table>
+
+
+			</div>
+
+			<div class="flexBox">
+				<h2>This week's JRC Best Buys™</h2>
+				<table id="bestBuys">
+					<thead>
+						<tr>
+							<th>Driver</th>
+							<th>Cost</th>
+							<th>Profit</th>
+							<th>Value / $</th>
+						</tr>
+					</thead>
+					<tbody>
+						{{#each bestBuy}}{{#with this}}
+						<tr>
+							<td class="text-left bold">{{name}}</td>
+							<td>{{cost}}</td>
+							<td>{{total}}</td>
+							<td class="bold">{{value}}</td>
+						</tr>
+						{{/with}}{{/each}}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<!--
+        DROPDOWN
+    -->
+	<script>
+		function openNav() {
+			var x = document.getElementById("mobileNav");
+			if (x.className.indexOf("w3-show") == -1) {
+				x.className += " w3-show";
+			} else {
+				x.className = x.className.replace(" w3-show", "");
+			}
+		}
+	</script>
+	<!--
+        BACKGROUND ANIMATION
+    -->
+	<div id="particles-js"></div>
+	<script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+	<script src="./assets/particleConfig.js"></script>
+</body>
+
+</html>
