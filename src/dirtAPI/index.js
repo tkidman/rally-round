@@ -173,7 +173,7 @@ const fetchEventResults = async ({
   eventStatus
 }) => {
   const { cookie, xsrfh } = await getCreds();
-  const cacheFileName = `${cachePath}/${location}-${divisionName}-${eventId}.json`;
+  const cacheFileName = `${cachePath}/${location}-${divisionName}-${eventId}-${stageId}.json`;
   const cacheFile = loadFromCache(cacheFileName);
   if (cacheFile) {
     debug(`cached event results retrieved: ${cacheFileName}`);

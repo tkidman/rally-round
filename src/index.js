@@ -103,13 +103,13 @@ const sortTeamResults = teamResultsById => {
   return teamResults.reverse();
 };
 
-const createDNSResult = driverName => {
+const createDNFResult = (driverName, isDnsEntry) => {
   return {
     name: driverName,
     entry: {
       name: driverName,
       isDnfEntry: true,
-      isDnsEntry: true,
+      isDnsEntry,
       stageTime: "15:00:00.000",
       stageDiff: "N/A",
       totalTime: "59:59:59.000",
@@ -118,24 +118,26 @@ const createDNSResult = driverName => {
   };
 };
 
-const setDnfIfIncorrectCar = (entry, divisionName) => {
+const setDnfIfIncorrectCar = (event, entries, divisionName) => {
   // validate correct car usage
-  const driver = leagueRef.getDriver(entry.name);
-  const division = leagueRef.league.divisions[divisionName];
-  if (driver && driver.car && driver.car !== entry.vehicleName) {
-    debug(
-      `driver ${entry.name} used wrong car ${entry.vehicleName}, should have used ${driver.car}. Setting to dnf`
-    );
-    entry.isDnfEntry = true;
-    entry.disqualificationReason = "Wrong car choice";
-  }
-  if (division.cars && !division.cars.includes(entry.vehicleName)) {
-    debug(
-      `driver ${entry.name} used wrong car ${entry.vehicleName}, should have used one of ${division.cars}. Setting to dnf`
-    );
-    entry.isDnfEntry = true;
-    entry.disqualificationReason = "Wrong car choice";
-  }
+  entries.forEach(entry => {
+    const driver = leagueRef.getDriver(entry.name);
+    const division = leagueRef.league.divisions[divisionName];
+    if (driver && driver.car && driver.car !== entry.vehicleName) {
+      debug(
+        `driver ${entry.name} used wrong car ${entry.vehicleName}, should have used ${driver.car}. Setting to dnf`
+      );
+      entry.isDnfEntry = true;
+      entry.disqualificationReason = "Wrong car choice";
+    }
+    if (division.cars && !division.cars.includes(entry.vehicleName)) {
+      debug(
+        `driver ${entry.name} used wrong car ${entry.vehicleName}, should have used one of ${division.cars}. Setting to dnf`
+      );
+      entry.isDnfEntry = true;
+      entry.disqualificationReason = "Wrong car choice";
+    }
+  });
 };
 
 const setManualResults = (event, entries) => {
@@ -167,23 +169,36 @@ const setManualResults = (event, entries) => {
   }
 };
 
-const calculateEventResults = ({ event, divisionName, drivers }) => {
-  const entries = event.racenetLeaderboard.entries;
-  setManualResults(event, entries);
+const getResultsByDriver = entries => {
   const resultsByDriver = entries.reduce((resultsByDriver, entry) => {
     resultsByDriver[entry.name] = {
       name: entry.name,
       entry
     };
-    setDnfIfIncorrectCar(entry, divisionName);
-    // TODO validate correct class
     return resultsByDriver;
   }, {});
+  return resultsByDriver;
+};
 
-  // create results for drivers that didn't start a run
-  Object.keys(drivers).forEach(driver => {
-    if (!resultsByDriver[driver]) {
-      resultsByDriver[driver] = createDNSResult(driver);
+const calculateEventResults = ({ event, divisionName, drivers }) => {
+  const entries = event.racenetLeaderboard.entries;
+  setManualResults(event, entries);
+  setDnfIfIncorrectCar(event, entries, divisionName);
+  // TODO validate correct class
+  const resultsByDriver = getResultsByDriver(entries, divisionName);
+  const firstStageResultsByDriver = getResultsByDriver(
+    event.firstStageRacenetLeaderboard.entries,
+    divisionName
+  );
+
+  // create results for drivers didn't finish the run
+  Object.keys(drivers).forEach(driverName => {
+    if (!resultsByDriver[driverName]) {
+      if (!firstStageResultsByDriver[driverName]) {
+        resultsByDriver[driverName] = createDNFResult(driverName, true);
+      } else {
+        resultsByDriver[driverName] = createDNFResult(driverName, false);
+      }
     }
   });
 
@@ -313,22 +328,31 @@ const processEvent = async ({
   }
 };
 
+const loadEventDrivers = (drivers, event) => {
+  event.firstStageRacenetLeaderboard.entries.forEach(entry => {
+    let driver = leagueRef.getDriver(entry.name);
+    if (!driver) {
+      debug(`adding unknown driver ${entry.name}`);
+      driver = { name: entry.name };
+      leagueRef.addDriver(driver);
+      leagueRef.missingDrivers[entry.name] = entry.name;
+    }
+    driver.nationality = entry.nationality;
+    drivers[entry.name] = driver;
+  });
+  return drivers;
+};
+
+const loadDriversAcrossAllEvents = events => {
+  const allDrivers = events.reduce((drivers, event) => {
+    return loadEventDrivers(drivers, event);
+  }, {});
+  return allDrivers;
+};
+
 const processEvents = async (events, divisionName) => {
   let previousEvent = null;
-  const drivers = events.reduce((drivers, event) => {
-    event.racenetLeaderboard.entries.forEach(entry => {
-      let driver = leagueRef.getDriver(entry.name);
-      if (!driver) {
-        debug(`adding unknown driver ${entry.name}`);
-        driver = { name: entry.name };
-        leagueRef.addDriver(driver);
-        leagueRef.missingDrivers[entry.name] = entry.name;
-      }
-      driver.nationality = entry.nationality;
-      drivers[entry.name] = driver;
-    });
-    return drivers;
-  }, {});
+  const drivers = loadDriversAcrossAllEvents(events);
   for (const event of events) {
     debug(`processing ${divisionName} ${event.location}`);
     await processEvent({ divisionName, event, previousEvent, drivers });

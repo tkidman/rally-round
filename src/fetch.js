@@ -16,9 +16,14 @@ const fetchEvents = async (division, divisionName) => {
   });
   for (const key of eventKeys) {
     const racenetLeaderboard = await fetchEventResults(key);
+    const firstStageRacenetLeaderboard = await fetchEventResults({
+      ...key,
+      stageId: 0
+    });
     events.push({
       ...key,
-      racenetLeaderboard
+      racenetLeaderboard,
+      firstStageRacenetLeaderboard
     });
   }
   return events;
