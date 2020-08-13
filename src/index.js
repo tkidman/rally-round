@@ -195,7 +195,11 @@ const calculateEventResults = ({ event, divisionName, drivers }) => {
   // create results for drivers didn't finish the run
   Object.keys(drivers).forEach(driverName => {
     if (!resultsByDriver[driverName]) {
-      if (!firstStageResultsByDriver[driverName]) {
+      if (
+        !firstStageResultsByDriver[driverName] ||
+        // treat unfinished runs as DNS while active
+        event.eventStatus === eventStatuses.active
+      ) {
         resultsByDriver[driverName] = createDNFResult(driverName, true);
       } else {
         resultsByDriver[driverName] = createDNFResult(driverName, false);
