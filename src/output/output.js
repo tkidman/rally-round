@@ -285,7 +285,13 @@ const getNavigationHTML = (currentPage, currentMenu, links) => {
     this.compiled_navigation = Handlebars.compile(_t);
   }
   var _links = JSON.parse(JSON.stringify(links)); //<-- LOL javascript
-  _links[currentMenu].forEach(link => (link.active = link.link == currentPage));
+  _links[currentMenu].forEach(link => {
+    link.active = link.link == currentPage;
+    if (link.active) {
+      _links.active = link;
+      _links.active.menu = currentMenu;
+    }
+  });
   return this.compiled_navigation({ links: _links });
 };
 

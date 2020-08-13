@@ -1,8 +1,11 @@
 <div class="w3-top">
-	<div class="w3-bar w3-black">
+	<div class="w3-bar w3-black" style="text-align:center;">
 		<div class="logo">
 			<img src="./assets/jrc_round.jpg">
 		</div>
+		{{#with links.active}}
+			<h1 class="w3-hide-large navTitle bold">{{menu}} - {{link}}</h1>
+		{{/with}}
 		<div class="w3-dropdown-hover w3-hide-small w3-hide-medium">
 			<button class="w3-button">Driver Standings</button>
 			<div class="w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small w3-hide-medium">
