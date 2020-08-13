@@ -1,5 +1,6 @@
 const debug = require("debug")("tkidman:dirt2-results");
 const moment = require("moment");
+const { eventStatuses } = require("./shared");
 const { privateer } = require("./shared");
 const { printMissingDrivers } = require("./state/league");
 const { sortBy, keyBy } = require("lodash");
@@ -228,7 +229,12 @@ const calculateEventResults = ({ event, divisionName, drivers }) => {
     if (result.entry.disqualificationReason) {
       display = "DQ";
     } else if (result.entry.isDnsEntry) {
-      display = "DNS";
+      if (event.eventStatus === eventStatuses.active) {
+        // don't display DNS if event is still active
+        display = "";
+      } else {
+        display = "DNS";
+      }
     } else if (result.entry.isDnfEntry) {
       display = "DNF";
     }
