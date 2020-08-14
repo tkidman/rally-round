@@ -107,6 +107,11 @@ th>img {
 	margin: auto;
 }
 
+th>a>img {
+	max-height: 1.5em;
+	margin: auto;
+}
+
 thead>tr {
 	background-color: #5355bf;
 	color: white;

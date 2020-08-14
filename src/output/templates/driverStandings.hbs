@@ -33,7 +33,12 @@
                             {{/if}}
 
                             {{#each headerLocations}}
-                            <th><img src="./assets/country-flags/{{this}}.png" /></th>
+                            <th>
+                                <a href="./{{../divisionName}}-{{this}}-driver-results.html">
+                                    <img src="./assets/country-flags/{{this}}.png" />
+                                </a>
+                            </th>
+
                             {{/each}}
                             <th>Points</th>
                         </tr>

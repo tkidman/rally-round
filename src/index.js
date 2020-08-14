@@ -371,7 +371,11 @@ const processEvents = async (events, divisionName) => {
 };
 
 const calculateOverall = processedDivisions => {
-  const overall = { events: [] };
+  const overall = {
+    events: [],
+    divisionName: "overall",
+    divisionDisplayName: "Overall"
+  };
   Object.keys(processedDivisions).forEach(divisionName => {
     const division = processedDivisions[divisionName];
     division.events.forEach(event => {
@@ -385,8 +389,9 @@ const calculateOverall = processedDivisions => {
         };
         overall.events.push(overallEvent);
       }
+      // TODO do we need this?
       const driverResultsWithDivisionName = event.results.driverResults.map(
-        entry => Object.assign({ divisionName: divisionName }, { ...entry })
+        result => Object.assign({ divisionName: divisionName }, { ...result })
       );
       overallEvent.results.driverResults.push(...driverResultsWithDivisionName);
 

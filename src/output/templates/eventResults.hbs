@@ -1,52 +1,107 @@
 <html>
-<head>
-	<style>
-		.container {
-			width: 80%;
-			padding: 4em;
-		}
-		thead > tr {
-			background-color: #494949;
-			color: white;
-		}
-		tbody > tr:nth-child(even){
-			background-color: #b8e9ff
-		}
-		tbody > tr:nth-child(odd){
-			background-color:#DDDDDD
-		}
 
-	</style>
+<head>
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="./assets/css/animation.css">
+    <link rel="stylesheet" type="text/css" href="./assets/css/w3.css">
 </head>
+
 <body>
-	<div id="container">
-		<table id="table">
-			<thead>
-				<tr>
-				{{#each columns}}
-					<th>{{this}}</th>
-				{{/each}}
-			</tr>
-			</thead>
-			<tbody>
-				{{#each drivers}}{{#with this}}
-					<tr>
-						<td>{{rank}}</td>
-						<td><img src="../../assets/country-flags/{{nationality}}.png" style="max-width:2em;"/></td>
-						<td>{{name}}</td>
-						<td>{{team}}</td>
-						<td>{{vehicle}}</td>
-						<td>{{time}}</td>
-						<td>{{diff}}</td>
-						<td>{{points}}</td>
-						<td>{{powerstage}}</td>
-						<td>{{total}}</td>
-					</tr>
-				{{/with}}{{/each}}
-			</tbody>
-			
-		</table>
-	</div>
+{{{navigation}}}
+<div id="container">
+    <div id="flexContainer">
+        <div class="flexBox">
+            <div style="margin-bottom: 1em;" class="w3-hide-large w3-hide-medium w3-hide-small">
+                <div class="logo" style="display:flex;">
+                    <img src="./assets/{{logo}}" />
+                    <h2 style="margin-left:1em;">{{title}} {{location}} Driver Results</h2>
+                </div>
+            </div>
+
+            <table id="tableDrivers">
+                <thead>
+                <tr>
+                    <th>Pos</th>
+                    <th>Nat</th>
+                    <th>Driver</th>
+                    {{#if overall}}
+                        <th>Div</th>
+                    {{/if}}
+                    {{#if showTeam}}
+                        <th>Team</th>
+                    {{/if}}
+                    {{#if showCar}}
+                        <th>Car</th>
+                    {{/if}}
+                    <td>PS</td>
+                    {{#unless overall}}
+                        <td>Diff</td>
+                    {{/unless}}
+                    <td>Total</td>
+                    {{#unless overall}}
+                        <td>Diff</td>
+                    {{/unless}}
+                    <td>PS Points</td>
+                    <td>Points</td>
+                    <td>Total Points</td>
+                </tr>
+                </thead>
+                <tbody>
+                {{#each rows}}
+                    <tr>
+                        <td>{{this.position}}</td>
+                        <td>
+                            <img src="./assets/country-flags/{{this.country.code}}.png" style="max-width:1.5em; max-height:1.5em;" />
+                        </td>
+                        <td class="text-left bold">{{this.name}}</td>
+                        {{#if ../overall}}
+                            <td>{{this.divisionDisplayName}}</td>
+                        {{/if}}
+                        <td>
+                            <img src="./assets/teams/{{this.driver.teamId}}.png" style="max-width:2em; max-height:2em;" />
+                        </td>
+                        <td>
+                            <img src="./assets/cars/{{this.car}}.png" style="max-width:2em; max-height:2em;" />
+                        </td>
+                        <td>{{this.entry.stageTime}}</td>
+                        {{#unless ../overall}}
+                            <td>{{this.entry.stageDiff}}</td>
+                        {{/unless}}
+                        <td>{{this.entry.totalTime}}</td>
+                        {{#unless ../overall}}
+                            <td>{{this.entry.totalDiff}}</td>
+                        {{/unless}}
+                        <td>{{this.powerStagePoints}}</td>
+                        <td>{{this.overallPoints}}</td>
+                        <td class="bold">{{this.pointsDisplay}}</td>
+                    </tr>
+                {{/each}}
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>
+
+<!--
+    DROPDOWN
+-->
+<script>
+    function openNav() {
+        var x = document.getElementById("mobileNav");
+        if (x.className.indexOf("w3-show") == -1) {
+            x.className += " w3-show";
+        } else {
+            x.className = x.className.replace(" w3-show", "");
+        }
+    }
+</script>
+<!--
+    BACKGROUND ANIMATION
+-->
+<div id="particles-js"></div>
+<script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script src="./assets/particleConfig.js"></script>
 </body>
 
 </html>

@@ -2,6 +2,8 @@
 
 exports[`calculates event results calculates overall results 1`] = `
 Object {
+  "divisionDisplayName": "Overall",
+  "divisionName": "overall",
   "events": Array [
     Object {
       "location": "Australia",

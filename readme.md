@@ -65,12 +65,13 @@ You can also pull driver information directly from a google sheet. You need to h
 * Output themed to HTML ✓
 * Migrate club scraper to here ✓
 * Output to sheets ✓
-* In progress standings
+* In progress standings ✓
+* Link to results from standings ✓
+* Overall results from standings 
+* Recalculate diffs in overall and show in overall results
+* Move manual result config to initialState.js 
 * Define required car per event
 * Github action to build & deploy website on a schedule
 * Support multiple driver cars (to support division promotions mid season)
 * Multiple classes per division
 * DNF counter
-
-### stretch goals
-* Deploy to AWS cloudfront

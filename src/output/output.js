@@ -106,7 +106,8 @@ const transformForHTML = (divisionName, events, type) => {
     showTeam: leagueRef.hasTeams,
     showCar: leagueRef.hasCars,
     title: division.displayName || divisionName,
-    logo: division.logo || "jrc_round.jpg"
+    logo: division.logo || "jrc_round.jpg",
+    divisionName
   };
 };
 
@@ -375,6 +376,55 @@ const addLinks = (links, name, group) => {
   });
 };
 
+const transformForDriverResultsHTML = (event, division) => {
+  const divisionName = division.divisionName;
+  const rows = event.results.driverResults.map((result, index) => {
+    const resultDivision = leagueRef.divisions[result.divisionName];
+    const { driver, country, carBrand } = getDriverData(result.name);
+    return {
+      ...result,
+      position: index + 1,
+      car: carBrand,
+      driver,
+      country,
+      divisionDisplayName:
+        resultDivision.displayName || resultDivision.divisionName
+    };
+  });
+  return {
+    rows,
+    title: division.displayName || divisionName,
+    logo: division.logo || "jrc_round.jpg",
+    showTeam: leagueRef.hasTeams,
+    showCar: leagueRef.hasCars,
+    event,
+    location: locations[event.location],
+    divisionName
+  };
+};
+
+const writeDriverResultsHTML = (event, division, links) => {
+  const data = transformForDriverResultsHTML(event, division);
+  const location = locations[event.location];
+  data.navigation = getNavigationHTML(division.divisionName, "driver", links);
+  data.overall = division.divisionName === "overall";
+
+  const templateFile = `${templatePath}/eventResults.hbs`;
+  if (!fs.existsSync(templateFile)) {
+    debug("no standings html template found, returning");
+    return;
+  }
+  const _t = fs.readFileSync(templateFile).toString();
+
+  const template = Handlebars.compile(_t);
+  const out = template(data);
+
+  fs.writeFileSync(
+    `./${outputPath}/website/${division.divisionName}-${location.countryCode}-driver-results.html`,
+    out
+  );
+};
+
 const writeOutput = () => {
   const league = leagueRef.league;
   const links = Object.keys(league.divisions).reduce((links, divisionName) => {
@@ -398,11 +448,18 @@ const writeOutput = () => {
     if (division.outputSheetId) {
       writeSheet(division, divisionName);
     }
+    divisionEvents.forEach(event =>
+      writeDriverResultsHTML(event, division, links)
+    );
   });
   if (league.overall) {
-    writeStandingsHTML("overall", league.overall.events, "driver", links);
+    const overallEvents = league.overall.events;
+    overallEvents.forEach(event =>
+      writeDriverResultsHTML(event, league.overall, links)
+    );
+    writeStandingsHTML("overall", overallEvents, "driver", links);
     if (leagueRef.hasTeams) {
-      writeStandingsHTML("overall", league.overall.events, "team", links);
+      writeStandingsHTML("overall", overallEvents, "team", links);
     }
     if (league.fantasy) {
       writeFantasyHTML(league.fantasy, links);

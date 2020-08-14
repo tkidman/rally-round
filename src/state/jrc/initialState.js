@@ -6,6 +6,7 @@ const initialState = {
   divisions: {
     jrc1: {
       displayName: "JRC",
+      divisionName: "jrc1",
       maxDriversScoringPointsForTeam: 2,
       clubId: "180867",
       championshipIds: [
@@ -28,6 +29,7 @@ const initialState = {
     },
     jrc2: {
       displayName: "JRC2",
+      divisionName: "jrc2",
       maxDriversScoringPointsForTeam: 2,
       clubId: "244734",
       championshipIds: [
@@ -49,6 +51,7 @@ const initialState = {
     },
     jrc3: {
       displayName: "JRC3",
+      divisionName: "jrc3",
       maxDriversScoringPointsForTeam: 2,
       clubId: "330674",
       championshipIds: [
