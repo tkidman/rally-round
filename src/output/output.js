@@ -1,3 +1,5 @@
+const moment = require("moment");
+
 const fs = require("fs");
 const Papa = require("papaparse");
 const debug = require("debug")("tkidman:dirt2-results:output");
@@ -299,6 +301,9 @@ const getNavigationHTML = (currentPage, currentMenu, links) => {
 const writeStandingsHTML = (divisionName, events, type, links) => {
   const data = transformForHTML(divisionName, events, type);
   data.navigation = getNavigationHTML(divisionName, type, links);
+  data.lastUpdatedAt = moment()
+    .utc()
+    .format();
 
   const standingsTemplateFile = `${templatePath}/${type}Standings.hbs`;
   if (!fs.existsSync(standingsTemplateFile)) {
@@ -408,6 +413,9 @@ const writeDriverResultsHTML = (event, division, links) => {
   const location = locations[event.location];
   data.navigation = getNavigationHTML(division.divisionName, "driver", links);
   data.overall = division.divisionName === "overall";
+  data.lastUpdatedAt = moment()
+    .utc()
+    .format();
 
   const templateFile = `${templatePath}/eventResults.hbs`;
   if (!fs.existsSync(templateFile)) {
