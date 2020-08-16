@@ -67,7 +67,8 @@ You can also pull driver information directly from a google sheet. You need to h
 * Output to sheets ✓
 * In progress standings ✓
 * Link to results from standings ✓
-* Overall results from standings 
+* Overall results from standings ✓
+* Fix emojis in driver names in HTML
 * Recalculate diffs in overall and show in overall results
 * Move manual result config to initialState.js 
 * Define required car per event
