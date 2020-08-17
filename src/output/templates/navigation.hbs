@@ -4,7 +4,7 @@
 			<img src="./assets/jrc_round.jpg">
 		</div>
 		{{#with links.active}}
-			<h1 class="w3-hide-large navTitle bold">{{menu}} - {{link}}</h1>
+		<h1 class="w3-hide-large navTitle bold">{{menu}} - {{link}}</h1>
 		{{/with}}
 		<div class="w3-dropdown-hover w3-hide-small w3-hide-medium">
 			<button class="w3-button">Driver Standings</button>
@@ -36,29 +36,36 @@
 				{{/with}}
 			</div>
 		</div>
-		<a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large"
-			style="font-size:3em;" onclick="openNav()">&#9776;</a>
+		<a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large" style="font-size:3em;"
+			onclick="openNav()">&#9776;</a>
 
 	</div>
-
+	
 	<div id="mobileNav" class="w3-bar-block w3-black w3-hide w3-hide-large">
-		<span class="w3-bar-item w3-light-gray">Driver Standings</span>
 		{{#with links.driver}}
 		{{#each this}}
-		<a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">{{link}}</a>
+		<a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">Driver Standings - {{link}}</a>
 		{{/each}}
 		{{/with}}
-		<span class="w3-bar-item w3-light-gray">Team Standings</span>
 		{{#with links.team}}
 		{{#each this}}
-		<a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">{{link}}</a>
+		<a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">Team Standings - {{link}}</a>
 		{{/each}}
 		{{/with}}
-		<span class="w3-bar-item w3-light-gray">Fantasy JRC</span>
 		{{#with links.fantasy}}
 		{{#each this}}
-		<a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">{{link}}</a>
+		<a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">Fantasy JRC - {{link}}</a>
 		{{/each}}
 		{{/with}}
 	</div>
+
+	{{#if secondary}}
+	<div class="w3-bar w3-light-grey secondaryNav">
+		{{#each secondary}}
+			<a href="./{{../links.active.link}}-{{this}}-driver-results.html">
+				<img src="./assets/country-flags/{{this}}.png" />
+			</a>
+		{{/each}}
+	</div>
+	{{/if}}
 </div>

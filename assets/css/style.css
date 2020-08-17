@@ -7,7 +7,7 @@ body {
 	width: 90%;
 	margin: auto;
 	padding: 4em;
-	margin-top: 2em;
+	margin-top: 4em;
 }
 
 #flexContainer {
@@ -165,11 +165,21 @@ tbody>tr:nth-child(odd) {
 /**
 	NAVIGATION
 **/
+.secondaryNav {
+	display: flex;
+	justify-content: space-around;
+}
+
+.secondaryNav>a>img {
+	vertical-align: middle;
+	max-height: 2em;
+	margin: 0.2em 1em;
+	border-radius:0.3em;
+}
 
 .navTitle {
-	display:inline-block;
-	text-transform:uppercase; 
-	font-weight: bold;
+	display: inline-block;
+	text-transform: uppercase;
 }
 
 #mobileNav {
@@ -179,24 +189,36 @@ tbody>tr:nth-child(odd) {
 #mobileNav>span,
 #mobileNav>a {
 	text-align: center;
+	font-size: 2.5em;
+	padding: 1em 0;
 }
 
 .active {
-	background: #5355bf !important; 
+	background: #5355bf !important;
 	color: white !important;
 }
 
 .w3-bar>.logo {
-	float:left;
-	padding:0.3em;
+	float: left;
+	padding: 0.3em;
 }
-.w3-bar>.logo>img {
-	max-height:2em;
+
+.w3-bar>.logo> img {
+	max-height: 2em;
 }
 
 @media only screen and (max-width: 992px) {
 	.w3-bar>.logo>img {
-		max-height:4em;
+		max-height: 4em;
 		margin: 0.5em;
 	}
-  }
+
+	.secondaryNav>a>img {
+		max-height: 3em;
+		
+	}
+
+	#container {
+		margin-top: 7em;
+	}
+}

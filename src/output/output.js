@@ -281,7 +281,12 @@ const writeStandingsSheet = async (division, divisionName) => {
   );
 };
 
-const getNavigationHTML = (currentPage, currentMenu, links) => {
+const getNavigationHTML = (
+  currentPage,
+  currentMenu,
+  links,
+  headerLocations
+) => {
   if (compiled_navigation == null) {
     const navigationTemplateFile = `${templatePath}/navigation.hbs`;
     const _t = fs.readFileSync(navigationTemplateFile).toString();
@@ -295,12 +300,20 @@ const getNavigationHTML = (currentPage, currentMenu, links) => {
       _links.active.menu = currentMenu;
     }
   });
-  return this.compiled_navigation({ links: _links });
+  return this.compiled_navigation({
+    links: _links,
+    secondary: headerLocations
+  });
 };
 
 const writeStandingsHTML = (divisionName, events, type, links) => {
   const data = transformForHTML(divisionName, events, type);
-  data.navigation = getNavigationHTML(divisionName, type, links);
+  data.navigation = getNavigationHTML(
+    divisionName,
+    type,
+    links,
+    data.headerLocations
+  );
   data.lastUpdatedAt = moment()
     .utc()
     .format();
