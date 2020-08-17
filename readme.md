@@ -68,6 +68,7 @@ You can also pull driver information directly from a google sheet. You need to h
 * In progress standings ✓
 * Link to results from standings ✓
 * Overall results from standings ✓
+* Show division in overall driver standings
 * Fix emojis in driver names in HTML
 * Recalculate diffs in overall and show in overall results
 * Move manual result config to initialState.js 
