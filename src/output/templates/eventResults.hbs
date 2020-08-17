@@ -14,7 +14,7 @@
             <div style="margin-bottom: 1em;" class="w3-hide-large w3-hide-medium w3-hide-small">
                 <div class="logo" style="display:flex;">
                     <img src="./assets/{{logo}}" />
-                    <h2 style="margin-left:1em;">{{title}} {{location}} Driver Results</h2>
+                    <h2 style="margin-left:1em;">{{title}} {{location.countryName}} Driver Results</h2>
                 </div>
             </div>
 
@@ -57,12 +57,16 @@
                         {{#if ../overall}}
                             <td>{{this.divisionDisplayName}}</td>
                         {{/if}}
-                        <td>
-                            <img src="./assets/teams/{{this.driver.teamId}}.png" style="max-width:2em; max-height:2em;" />
-                        </td>
-                        <td>
-                            <img src="./assets/cars/{{this.car}}.png" style="max-width:2em; max-height:2em;" />
-                        </td>
+                        {{#if ../showTeam}}
+                            <td>
+                                <img src="./assets/teams/{{this.driver.teamId}}.png" style="max-width:2em; max-height:2em;" />
+                            </td>
+                        {{/if}}
+                        {{#if ../showCar}}
+                            <td>
+                                <img src="./assets/cars/{{this.car}}.png" style="max-width:2em; max-height:2em;" />
+                            </td>
+                        {{/if}}
                         <td>{{this.entry.stageTime}}</td>
                         {{#unless ../overall}}
                             <td>{{this.entry.stageDiff}}</td>

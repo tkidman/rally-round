@@ -61,7 +61,8 @@ const getEventKeysFromRecentResults = ({
     const eventResultKeys = championship.events.reduce(
       (eventResultKeys, event) => {
         if (
-          event.eventStatus === eventStatuses.active ||
+          (!division.onlyLoadFinishedEvents &&
+            event.eventStatus === eventStatuses.active) ||
           event.eventStatus === eventStatuses.finished
         ) {
           const stageIds = getStageIds({

@@ -2,9 +2,11 @@ const initialState = {
   pointsForDNF: false,
   divisions: {
     themed: {
+      divisionName: "themed",
       displayName: "Colin McRae Tribute",
+      onlyLoadFinishedEvents: true,
       logo: "colin.jpg",
-      cars: ["Ford Sierra Cosworth RS500"],
+      cars: ["Ford Sierra Cosworth RS500", "SUBARU Legacy RS"],
       clubId: "256173",
       championshipIds: ["290761"],
       events: [],

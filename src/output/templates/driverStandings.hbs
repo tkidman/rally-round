@@ -63,13 +63,16 @@
                             <td><img src="./assets/country-flags/{{this.country.code}}.png"
                                     style="max-width:1.5em; max-height:1.5em;" /></td>
                             <td class="text-left bold">{{this.standing.name}}</td>
-                            <td>
-                                <img src="./assets/teams/{{this.driver.teamId}}.png"
-                                    style="max-width:2em; max-height:2em;" />
-                            </td>
-                            <td>
-                                <img src="./assets/cars/{{this.car}}.png" style="max-width:2em; max-height:2em;" />
-                            </td>
+                            {{#if ../showTeam}}
+                                <td>
+                                    <img src="./assets/teams/{{this.driver.teamId}}.png" style="max-width:2em; max-height:2em;" />
+                                </td>
+                            {{/if}}
+                            {{#if ../showCar}}
+                                <td>
+                                    <img src="./assets/cars/{{this.car}}.png" style="max-width:2em; max-height:2em;" />
+                                </td>
+                            {{/if}}
                             {{#each this.results}}{{#with this}}
                             <td>
                                 {{pointsDisplay}}
