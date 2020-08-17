@@ -5,10 +5,10 @@
 		"owner": "Pynklu",
 		"drivers": [
 			"QazRa",
-			"Mike Dee",
+			"satchmo",
 			"Babz"
 		],
-		"joker": "Babz",
+		"joker": "satchmo",
 		"budget": 15.5,
 		"points": 0,
 		"roster_history": {
@@ -160,8 +160,8 @@
 		"previous": 0,
 		"owner": "ninko",
 		"drivers": [
-			"TUS Cham",
-			"Puki2579",
+			"TUS Phoenix",
+			"FusionJohn",
 			"Babz"
 		],
 		"joker": "Babz",
@@ -868,9 +868,9 @@
 		"drivers": [
 			"Qazra",
 			"Puki2579",
-			"Mysticman_22"
+			"Raumo"
 		],
-		"joker": "Mysticman_22",
+		"joker": "",
 		"budget": 15,
 		"points": 0,
 		"roster_history": {
