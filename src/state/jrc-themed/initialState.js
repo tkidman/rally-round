@@ -6,7 +6,11 @@ const initialState = {
       displayName: "Colin McRae Tribute",
       onlyLoadFinishedEvents: true,
       logo: "colin.jpg",
-      cars: ["Ford Sierra Cosworth RS500", "SUBARU Legacy RS"],
+      cars: [
+        "Ford Sierra Cosworth RS500",
+        "SUBARU Legacy RS",
+        "SUBARU Impreza 1995"
+      ],
       clubId: "256173",
       championshipIds: ["290761"],
       events: [],
