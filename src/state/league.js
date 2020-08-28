@@ -65,6 +65,35 @@ const loadDrivers = async () => {
   return { driversById: {}, driversByRaceNet: {} };
 };
 
+const loadFantasy = async league => {
+  if (!league.fantasy) {
+    return;
+  }
+  await loadSheetAndTransform({
+    sheetId: league.fantasy.sheetId,
+    tabName: "teams"
+  }).then(teams => {
+    league.fantasy.teams2 = teams;
+    league.fantasy.teams2.forEach(team => {
+      team.points = 0;
+      loadSheetAndTransform({
+        sheetId: league.fantasy.sheetId,
+        tabName: team.name
+      }).then(weeks => {
+        team.roster = weeks.reduce((roster, week) => {
+          roster.push({
+            location: week.location,
+            captain: week.captain,
+            reserve: week.reserve,
+            drivers: [week.driver1, week.driver2, week.driver3]
+          });
+          return roster;
+        }, []);
+      });
+    });
+  });
+};
+
 const init = async () => {
   const { driversById, driversByRaceNet } = await loadDrivers();
   drivers.driversById = driversById;
@@ -77,6 +106,7 @@ const init = async () => {
   leagueRef.missingDrivers = missingDrivers;
   leagueRef.hasTeams = !!driverColumns.teamId;
   leagueRef.hasCars = !!driverColumns.car;
+  await loadFantasy(leagueRef.league);
   return leagueRef;
 };
 

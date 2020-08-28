@@ -1,11 +1,15 @@
 <div class="w3-top">
 	<div class="w3-bar w3-black" style="text-align:center;">
 		<div class="logo">
-			<img src="./assets/jrc_round.jpg">
+			<a href="./index.html">
+				<img src="./assets/jrc_round.jpg">
+			</a>
 		</div>
 		{{#with links.active}}
 		<h1 class="w3-hide-large navTitle bold">{{menu}} - {{link}}</h1>
 		{{/with}}
+
+		{{#if links.driver}}
 		<div class="w3-dropdown-hover w3-hide-small w3-hide-medium">
 			<button class="w3-button">Driver Standings</button>
 			<div class="w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small w3-hide-medium">
@@ -16,6 +20,9 @@
 				{{/with}}
 			</div>
 		</div>
+		{{/if}}
+
+		{{#if links.team}}
 		<div class="w3-dropdown-hover w3-hide-small w3-hide-medium">
 			<button class="w3-button">Team Standings</button>
 			<div class="w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small w3-hide-medium">
@@ -26,6 +33,9 @@
 				{{/with}}
 			</div>
 		</div>
+		{{/if}}
+
+		{{#if links.fantasy}}
 		<div class="w3-dropdown-hover w3-hide-small w3-hide-medium">
 			<button class="w3-button">Fantasy JRC</button>
 			<div class="w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small">
@@ -36,6 +46,51 @@
 				{{/with}}
 			</div>
 		</div>
+		{{/if}}
+
+		{{#if links.JRC1}}
+		<div class="w3-dropdown-hover w3-hide-small w3-hide-medium">
+			<button class="w3-button">JRC1</button>
+			<div class="w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small">
+				{{#with links.JRC1}}
+				{{#each this}}
+				<a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">{{link}}</a>
+				{{/each}}
+				{{/with}}
+			</div>
+		</div>
+		<div class="w3-dropdown-hover w3-hide-small w3-hide-medium">
+			<button class="w3-button">JRC2</button>
+			<div class="w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small">
+				{{#with links.JRC2}}
+				{{#each this}}
+				<a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">{{link}}</a>
+				{{/each}}
+				{{/with}}
+			</div>
+		</div>
+		<div class="w3-dropdown-hover w3-hide-small w3-hide-medium">
+			<button class="w3-button">JRC3</button>
+			<div class="w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small">
+				{{#with links.JRC3}}
+				{{#each this}}
+				<a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">{{link}}</a>
+				{{/each}}
+				{{/with}}
+			</div>
+		</div>
+		<div class="w3-dropdown-hover w3-hide-small w3-hide-medium">
+			<button class="w3-button">overall</button>
+			<div class="w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small">
+				{{#with links.overall}}
+				{{#each this}}
+				<a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">{{link}}</a>
+				{{/each}}
+				{{/with}}
+			</div>
+		</div>
+		{{/if}}
+
 		<a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large" style="font-size:3em;"
 			onclick="openNav()">&#9776;</a>
 
@@ -55,6 +110,26 @@
 		{{#with links.fantasy}}
 		{{#each this}}
 		<a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">Fantasy JRC - {{link}}</a>
+		{{/each}}
+		{{/with}}
+		{{#with links.JRC1}}
+		{{#each this}}
+		<a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">JRC1 - {{link}}</a>
+		{{/each}}
+		{{/with}}
+		{{#with links.JRC2}}
+		{{#each this}}
+		<a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">JRC2 - {{link}}</a>
+		{{/each}}
+		{{/with}}
+		{{#with links.JRC3}}
+		{{#each this}}
+		<a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">JRC3 - {{link}}</a>
+		{{/each}}
+		{{/with}}
+		{{#with links.overall}}
+		{{#each this}}
+		<a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">overall - {{link}}</a>
 		{{/each}}
 		{{/with}}
 	</div>

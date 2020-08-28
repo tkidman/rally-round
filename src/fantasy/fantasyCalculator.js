@@ -25,9 +25,56 @@ function addDnsDrivers(driverResults, division) {
     });
   });
 }
+function removeDoubleCaptains(teams) {
+  teams.forEach(team => {
+    let captains = [];
+    team.roster.forEach(week => {
+      if (captains.indexOf(week.captain) > -1) {
+        week.captain = "";
+      }
+      captains.push(week.captain);
+    });
+  });
+}
+// function addReservePoints(team) {}
+function calculateTeamPoints(team, event, lookuptable) {
+  team.roster.forEach(week => {
+    if (week.location != event.location) return;
+    let hasDnf = false;
+    var score = week.drivers.reduce((val, driver) => {
+      var driverPoints = lookuptable[driver];
+      driverPoints = driverPoints ? driverPoints : -3;
+      if (driverPoints < 0) hasDnf = true;
+      if (week.capain == driver) {
+        driverPoints *= 2;
+      }
+      return val + driverPoints;
+    }, 0);
+    if (hasDnf) score += lookuptable[week.reserve];
+    week.points = score;
+    team.previous = team.points;
+    team.points += score;
+  });
+}
+// function buildDriverStandings(driverStandings, lookuptable, event) {
+//   Object.keys(lookuptable).forEach(driver => {
+//     if (!driverStandings[driver]) {
+//       driverStandings[driver] = {
+//         name: driver,
+//         total: 0,
+//         previous: 0
+//       };
+//     }
+//     driverStandings[driver][event.location] = lookuptable[driver];
+//     driverStandings[driver].previous = driverStandings[driver].total;
+//     driverStandings[driver].total += lookuptable[driver];
+//   });
+// }
 const calculateFantasyStandings = (event, previousEvent, league, division) => {
-  var teams = league.fantasy.teams;
   if (!league.fantasy) return;
+  var teams = league.fantasy.teams;
+  var teams2 = league.fantasy.teams2;
+  if (!previousEvent) removeDoubleCaptains(teams2); //no need to run this multiple times
   //if(event.location in teams.points) return;
 
   var driverResults = event.results.driverResults;
@@ -43,6 +90,7 @@ const calculateFantasyStandings = (event, previousEvent, league, division) => {
     return dict;
   }, {});
 
+  teams2.forEach(team => calculateTeamPoints(team, event, lookuptable));
   teams.map(team => {
     if (!(event.location in team.roster_history))
       team.roster_history[event.location] = {
@@ -53,11 +101,8 @@ const calculateFantasyStandings = (event, previousEvent, league, division) => {
     var _roster = team.roster_history[event.location];
     var score = _roster.drivers.reduce((val, driver) => {
       var driverPoints = lookuptable[driver];
-      driverPoints = driverPoints ? driverPoints : -10;
-      if (_roster.inactive) {
-        driverPoints = Math.round(driverPoints * 0.75);
-        //driverPoints = (driverPoints < 0) ? 0 : driverPoints;
-      } else if (_roster.joker == driver) {
+      driverPoints = driverPoints ? driverPoints : -3;
+      if (_roster.joker == driver) {
         driverPoints *= 2;
       }
       return val + driverPoints;

@@ -181,6 +181,16 @@ const getResultsByDriver = entries => {
   return resultsByDriver;
 };
 
+const addStageTimesToResultsByDriver = (resultsByDriver, allStages) => {
+  allStages.forEach(stageTimes => {
+    stageTimes.forEach(driverTime => {
+      const driver = resultsByDriver[driverTime.name];
+      if (!driver) return;
+      if (!driver.stageTimes) driver.stageTimes = [];
+      driver.stageTimes.push(driverTime.stageTime);
+    });
+  });
+};
 const calculateEventResults = ({ event, divisionName, drivers }) => {
   const entries = event.racenetLeaderboard.entries;
   setManualResults(event, entries);
@@ -191,6 +201,8 @@ const calculateEventResults = ({ event, divisionName, drivers }) => {
     event.firstStageRacenetLeaderboard.entries,
     divisionName
   );
+  if (leagueRef.league.getAllResults)
+    addStageTimesToResultsByDriver(resultsByDriver, event.allStages);
 
   // create results for drivers didn't finish the run
   Object.keys(drivers).forEach(driverName => {

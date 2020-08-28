@@ -1,0 +1,85 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="./assets/css/animation.css">
+    <link rel="stylesheet" type="text/css" href="./assets/css/w3.css">
+</head>
+
+<body>
+{{{navigation}}}
+<div id="container">
+    <div id="flexContainer">
+        <div class="flexBox">
+            <div style="margin-bottom: 1em;" class="">
+                <div class="logo" style="display:flex;">
+                    <img src="./assets/{{logo}}" />
+                    <h2 style="margin-left:1em;">{{title}} {{location.countryName}} Driver Results</h2>
+                </div>
+            </div>
+
+            <table id="tableDrivers">
+                <thead>
+                <tr>
+                    <th>Pos</th>
+                    <th>Nat</th>
+                    <th>Driver</th>
+					
+					<th>Div</th>
+					<th>SS1</th>
+					<th>SS2</th>
+					<th>SS3</th>
+					<th>SS4</th>
+                    <td>Total</td>
+                </tr>
+                </thead>
+                <tbody>
+                {{#each rows}}
+                    <tr>
+                        <td>{{this.position}}</td>
+                        <td>
+                            <img src="./assets/country-flags/{{this.country.code}}.png" style="max-width:1.5em; max-height:1.5em;" />
+                        </td>
+                        <td class="text-left bold">{{this.name}}</td>
+						<td>{{this.divisionDisplayName}}</td>
+						{{#each stageTimes}}
+							<td style="background-color: {{this.colour}}">{{this.time}}</td>
+							{{else}}
+							<td>0</td><td>0</td><td>0</td><td>0</td>
+						{{/each}}
+                        {{!-- <td>{{this.entry.stageTime}}</td> --}}
+                        <td style="font-weight:bold;">{{this.entry.totalTime}}</td>
+                    </tr>
+                {{/each}}
+                </tbody>
+
+            </table>
+            <div style="margin:0 auto; text-align:center;">
+                <p>last updated at: {{lastUpdatedAt}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
+    DROPDOWN
+-->
+<script>
+    function openNav() {
+        var x = document.getElementById("mobileNav");
+        if (x.className.indexOf("w3-show") == -1) {
+            x.className += " w3-show";
+        } else {
+            x.className = x.className.replace(" w3-show", "");
+        }
+    }
+</script>
+<!--
+    BACKGROUND ANIMATION
+-->
+<div id="particles-js"></div>
+<script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script src="./assets/particleConfig.js"></script>
+</body>
+
+</html>

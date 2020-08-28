@@ -56,7 +56,7 @@ const login = async resolve => {
       debug("cached credentials are invalid, regenerating");
     }
   }
-  const browser = await puppeteer.launch({ headless: true });
+  const browser = await puppeteer.launch({ headless: false });
   const page = await browser.newPage();
   // page.on("console", msg => debug("PAGE LOG:", msg.text()));
 

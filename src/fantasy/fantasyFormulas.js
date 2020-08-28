@@ -1,5 +1,5 @@
 const { privateer } = require("../shared");
-const calculateInternalTeamStandings = (resultsByDriver, allDrivers) => {
+const calculateInternalTeamStandings = resultsByDriver => {
   var dictByTeam = Object.values(resultsByDriver).reduce((dict, driver) => {
     var teamId = driver.teamId;
     teamId = teamId ? teamId : privateer;
@@ -9,15 +9,9 @@ const calculateInternalTeamStandings = (resultsByDriver, allDrivers) => {
   }, {});
   Object.keys(dictByTeam).forEach(teamId => {
     var team = dictByTeam[teamId];
-    if (teamId === privateer || team.length < 2) {
-      team.forEach(driver => addPointsToResult(driver, 0));
-    } else {
-      team.sort((a, b) => a.entry.overallPoints - b.entry.overallPoints);
-      var score = 5;
-      team.forEach(driver => {
-        addPointsToResult(driver, score);
-        score -= 5;
-      });
+    if (!(teamId === privateer || team.length < 2)) {
+      team.sort((a, b) => a.entry.overallPoints - b.entry.overallPoints); //resultsByDriver is already sorted; this sort can probably be skipped
+      addPointsToResult(team[0], 3);
     }
   });
 };
@@ -29,15 +23,20 @@ const calculatePowerStagePoints = resultsByDriver => {
 };
 
 const calculateStandingPoints = resultsByDriver => {
-  Object.values(resultsByDriver).forEach(result => {
-    var points = result["overallPoints"];
-    addPointsToResult(result, points ? points : 0);
-  });
+  for (let i = 0; i < 25; i++) {
+    var result = resultsByDriver[i];
+    if (result.entry.isDnfEntry || result.entry.isDnsEntry) continue;
+    addPointsToResult(result, 25 - i);
+  }
+  // Object.values(resultsByDriver).forEach(result => {
+  //   var points = result["overallPoints"];
+  //   addPointsToResult(result, points ? points : 0);
+  // });
 };
 
 const calculateDNFPoints = resultsByDriver => {
   Object.values(resultsByDriver).forEach(result => {
-    var points = result.entry.isDnfEntry || result.entry.isDnsEntry ? -10 : 1;
+    var points = result.entry.isDnfEntry || result.entry.isDnsEntry ? -3 : 0;
     addPointsToResult(result, points ? points : 0);
   });
 };
@@ -50,7 +49,7 @@ const calculatePodiumStreak = (resultsByDriver, previousEvent) => {
   for (let i = 0; i < 3; i++) {
     var result = resultsByDriver[i];
     if (previousPodium.includes(result.entry.name))
-      addPointsToResult(result, 10);
+      addPointsToResult(result, 3);
   }
 };
 function addPointsToResult(result, points) {

@@ -20,10 +20,19 @@ const fetchEvents = async (division, divisionName) => {
       ...key,
       stageId: 0
     });
+    const allStages = [];
+    for (let i = 0; i <= key.stageId * 1; i++) {
+      let stageTimes = await fetchEventResults({
+        ...key,
+        stageId: i
+      });
+      allStages.push(stageTimes.entries);
+    }
     events.push({
       ...key,
       racenetLeaderboard,
-      firstStageRacenetLeaderboard
+      firstStageRacenetLeaderboard,
+      allStages
     });
   }
   return events;

@@ -1,0 +1,56 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="./assets/css/animation.css">
+    <link rel="stylesheet" type="text/css" href="./assets/css/w3.css">
+</head>
+
+<body>
+    {{{navigation}}}
+    <div id="container">
+        <div id="flexContainer">
+            <div class="flexBox">
+                <h2>Rulebooks</h2>
+				<ul>
+					<li><a href="https://cdn.discordapp.com/attachments/679708933434114093/744264939140808764/JRC_Season_6_Rulebook.pdf">English</a></li>
+					<li><a href="https://cdn.discordapp.com/attachments/679708933434114093/744264963660447824/JRC_Temporada_6_-_Reglamento_en_Espanol.pdf">Espanol</a></li>
+					<li><a href="https://cdn.discordapp.com/attachments/679708933434114093/744264986460815416/JRC_Saison_6_Reglement_en_francais.pdf">Français</a></li>
+					<li><a href="https://cdn.discordapp.com/attachments/679708933434114093/744265091041722368/JRC_6._kauden_saantokirja.pdf">Saantokirja</a></li>
+					<li><a href="https://cdn.discordapp.com/attachments/679708933434114093/744265121018413166/JRC_6.hooaja_reegliraamat.pdf">Reegliraamat</a></li>
+				</ul>
+				
+            </div>
+			<div class="flexBox">
+				<h2>Season 6 Calendar</h2>
+				<img src="./assets/S6_calendar.png"/>
+			</div>
+			<div class="flexBox">
+				<h2>Pre-Placement Tiers</h2>
+				<img src="./assets/preplacement.png"/>
+			</div>
+        </div>
+    </div>
+
+    <!--
+        DROPDOWN
+    -->
+    <script>
+        function openNav() {
+            var x = document.getElementById("mobileNav");
+            if (x.className.indexOf("w3-show") == -1) {
+                x.className += " w3-show";
+            } else {
+                x.className = x.className.replace(" w3-show", "");
+            }
+        }
+    </script>
+    <!--
+        BACKGROUND ANIMATION
+    -->
+    <div id="particles-js"></div>
+    <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="./assets/particleConfig.js"></script>
+</body>
+
+</html>

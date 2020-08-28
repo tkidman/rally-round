@@ -75,7 +75,8 @@ const initialState = {
   fantasy: {
     calculators: JRC_CALCULATIONS,
     teams: fantasy_teams,
-    driverStandings: {}
+    driverStandings: {},
+    sheetId: "1ifywqh1xfyVjpUqiG1zODpXupbyHwIzVsZCmOvcHtmg"
   },
   visualization: "jrc_all",
   standingsOutputSheetId: "1iLIPjB2fsi3HI5S5CgrvnkEzrdA6fT71m_9zmtL19VI"
