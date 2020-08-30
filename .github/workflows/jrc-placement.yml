@@ -1,14 +1,7 @@
 on:
-  workflow_dispatch
-#    # Inputs the workflow accepts.
-#    inputs:
-#      name:
-#        # Friendly description to be shown in the UI instead of 'name'
-#        description: 'Person to greet'
-#        # Default value if no value is explicitly provided
-#        default: 'World'
-#        # Input has to be provided for the workflow to run
-#        required: true
+  schedule:
+    # every hour on the hour
+    - cron:  '0 * * * *'
 
 jobs:
   publish-results:
@@ -21,10 +14,6 @@ jobs:
       DEBUG: tkidman:*
       CLUB: jrc-placement
     runs-on: ubuntu-latest
-
-#    strategy:
-#      matrix:
-#        node-version: [10.x, 12.x, 14.x]
 
     steps:
       - uses: actions/checkout@v2
