@@ -17,9 +17,11 @@ const locations = require("../state/constants/locations.json");
 const countries = require("../state/constants/countries.json");
 const vehicles = require("../state/constants/vehicles.json");
 const copydir = require("copy-dir");
+const { uploadFiles } = require("../awsAPI/s3");
 const { updateResultsSheet } = require("../sheetsAPI/sheets");
 const { processFantasyResults } = require("../fantasy/fantasyCalculator");
-const resultColours = ["#76FF6A", "#faff5d", "#ffe300", "#ff5858"];
+// const resultColours = ["#76FF6A", "#faff5d", "#ffe300", "#ff5858"];
+const resultColours = ["", "", "", ""];
 const buildDriverRows = event => {
   const driverRows = event.results.driverResults.map(result => {
     const driver = leagueRef.getDriver(result.name);
@@ -417,7 +419,8 @@ const timeToSeconds = time => {
 const getStageColours = (stageTimes, benchmarks) => {
   if (!stageTimes) return undefined;
   const out = [];
-  const defaultColour = benchmarks ? "#ff5858" : "";
+  // const defaultColour = benchmarks ? "#ff5858" : "";
+  const defaultColour = "";
   for (let i = 0; i < stageTimes.length; i++) {
     const time = timeToSeconds(stageTimes[i]);
     const obj = { time: stageTimes[i], colour: defaultColour };
@@ -494,10 +497,13 @@ const writeDriverResultsHTML = (event, division, links) => {
   );
 };
 
-const writeOutput = () => {
+const writeOutput = async () => {
   const league = leagueRef.league;
   if (league.placement) {
     writePlacementOutput();
+    if (process.env.DIRT_AWS_ACCESS_KEY && league.websiteName) {
+      await uploadFiles(`./${outputPath}/website`, league.websiteName);
+    }
     return true;
   }
   const links = Object.keys(league.divisions).reduce((links, divisionName) => {
@@ -541,6 +547,9 @@ const writeOutput = () => {
   }
   writeSheet(league.overall, "Overall");
   writeJSON(league);
+  if (process.env.DIRT_AWS_ACCESS_KEY && league.websiteName) {
+    await uploadFiles(`./${outputPath}/website`, league.websiteName);
+  }
   return true;
 };
 
