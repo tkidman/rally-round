@@ -69,7 +69,7 @@ You can also pull driver information directly from a google sheet. You need to h
 * Link to results from standings ✓
 * Overall results from standings ✓
 * Fix emojis in driver names in HTML ✓
-* Deploy website via code
+* Deploy website via code ✓
 * Show division in overall driver standings
 * Recalculate diffs in overall and show in overall results
 * Move manual result config to initialState.js 
@@ -77,4 +77,5 @@ You can also pull driver information directly from a google sheet. You need to h
 * Github action to build & deploy website on a schedule
 * Support multiple driver cars (to support division promotions mid season)
 * Multiple classes per division
+* split output.js up into smaller files
 * DNF counter
