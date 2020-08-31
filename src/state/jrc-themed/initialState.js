@@ -9,7 +9,8 @@ const initialState = {
       cars: [
         "Ford Sierra Cosworth RS500",
         "SUBARU Legacy RS",
-        "SUBARU Impreza 1995"
+        "SUBARU Impreza 1995",
+        "SUBARU Impreza S4 Rally"
       ],
       clubId: "256173",
       championshipIds: ["290761"],
