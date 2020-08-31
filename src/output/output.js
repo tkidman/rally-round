@@ -20,8 +20,8 @@ const copydir = require("copy-dir");
 const { uploadFiles } = require("../awsAPI/s3");
 const { updateResultsSheet } = require("../sheetsAPI/sheets");
 const { processFantasyResults } = require("../fantasy/fantasyCalculator");
-// const resultColours = ["#76FF6A", "#faff5d", "#ffe300", "#ff5858"];
-const resultColours = ["", "", "", ""];
+const resultColours = ["#76FF6A", "#faff5d", "#ffe300", "#ff5858"];
+// const resultColours = ["", "", "", ""];
 const buildDriverRows = event => {
   const driverRows = event.results.driverResults.map(result => {
     const driver = leagueRef.getDriver(result.name);
@@ -419,8 +419,8 @@ const timeToSeconds = time => {
 const getStageColours = (stageTimes, benchmarks) => {
   if (!stageTimes) return undefined;
   const out = [];
-  // const defaultColour = benchmarks ? "#ff5858" : "";
-  const defaultColour = "";
+  const defaultColour = benchmarks ? "#ff5858" : "";
+  // const defaultColour = "";
   for (let i = 0; i < stageTimes.length; i++) {
     const time = timeToSeconds(stageTimes[i]);
     const obj = { time: stageTimes[i], colour: defaultColour };
