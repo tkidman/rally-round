@@ -2,10 +2,10 @@ const { eventStatuses } = require("./shared");
 const { fetchEventResults } = require("./dirtAPI");
 const { fetchChampionships } = require("./dirtAPI");
 const { fetchRecentResults } = require("./dirtAPI");
+const { leagueRef } = require("./state/league");
 const debug = require("debug")("tkidman:dirt2-results:fetch");
 
 const fetchEvents = async (division, divisionName) => {
-  const events = [];
   const recentResults = await fetchRecentResults(division.clubId);
   const championships = await fetchChampionships(division.clubId);
   const eventKeys = getEventKeysFromRecentResults({
@@ -14,31 +14,44 @@ const fetchEvents = async (division, divisionName) => {
     division,
     divisionName
   });
+  return fetchEventsFromKeys(eventKeys, leagueRef.league.getAllResults);
+};
+
+const fetchEventsFromKeys = async (eventKeys, getAllResults) => {
+  const events = [];
   for (const key of eventKeys) {
-    const racenetLeaderboard = await fetchEventResults(key);
-    const firstStageRacenetLeaderboard = await fetchEventResults({
-      ...key,
-      stageId: 0
-    });
-    const allStages = [];
-    for (let i = 0; i <= key.stageId * 1; i++) {
-      let stageTimes = await fetchEventResults({
-        ...key,
-        stageId: i
-      });
-      allStages.push(stageTimes.entries);
+    const racenetLeaderboardStages = [];
+    for (let i = 0; i <= key.lastStageId; i++) {
+      if (getAllResults || i === 0 || i === key.lastStageId) {
+        let racenetLeaderboard = await fetchEventResults({
+          ...key,
+          stageId: i
+        });
+        racenetLeaderboardStages.push(racenetLeaderboard);
+      }
     }
-    events.push({
-      ...key,
-      racenetLeaderboard,
-      firstStageRacenetLeaderboard,
-      allStages
-    });
+
+    const previousEvent = events.length > 0 ? events[events.length - 1] : null;
+
+    // multiclass event, merge the results
+    if (previousEvent && previousEvent.location === key.location) {
+      debug("Two events found with same location, merging results");
+      for (let i = 0; i < racenetLeaderboardStages.length; i++) {
+        previousEvent.racenetLeaderboardStages[i].entries.push(
+          ...racenetLeaderboardStages[i].entries
+        );
+      }
+    } else {
+      events.push({
+        ...key,
+        racenetLeaderboardStages
+      });
+    }
   }
   return events;
 };
 
-const getStageIds = ({ challengeId, championshipId, recentResults }) => {
+const getLastStageIds = ({ challengeId, championshipId, recentResults }) => {
   const championship = recentResults.championships.find(
     championship => championship.id === championshipId
   );
@@ -52,7 +65,7 @@ const getStageIds = ({ challengeId, championshipId, recentResults }) => {
   return {
     eventId: event.id,
     challengeId: event.challengeId,
-    stageId: `${event.stages.length - 1}`
+    lastStageId: event.stages.length - 1
   };
 };
 
@@ -74,7 +87,7 @@ const getEventKeysFromRecentResults = ({
             event.eventStatus === eventStatuses.active) ||
           event.eventStatus === eventStatuses.finished
         ) {
-          const stageIds = getStageIds({
+          const lastStageIds = getLastStageIds({
             challengeId: event.id,
             championshipId: championship.id,
             recentResults
@@ -84,7 +97,7 @@ const getEventKeysFromRecentResults = ({
             location: event.locationName,
             divisionName: divisionName,
             eventStatus: event.eventStatus,
-            ...stageIds
+            ...lastStageIds
           });
         }
         return eventResultKeys;
@@ -100,5 +113,6 @@ const getEventKeysFromRecentResults = ({
 module.exports = {
   fetchEvents,
   // tests
-  getEventKeysFromRecentResults
+  getEventKeysFromRecentResults,
+  fetchEventsFromKeys
 };

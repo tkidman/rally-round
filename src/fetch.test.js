@@ -1,7 +1,14 @@
-const { getEventKeysFromRecentResults } = require("./fetch");
+const {
+  getEventKeysFromRecentResults,
+  fetchEventsFromKeys
+} = require("./fetch");
 const { init } = require("./state/league");
 
-describe("calculates event results", () => {
+const { fetchEventResults } = require("./dirtAPI");
+
+jest.mock("./dirtAPI");
+
+describe("fetch", () => {
   beforeEach(async () => {
     await init();
   });
@@ -23,8 +30,132 @@ describe("calculates event results", () => {
         divisionName: "pro",
         eventId: "66384",
         location: "ŁĘCZNA COUNTY",
-        stageId: "4",
+        lastStageId: 4,
         eventStatus: "Finished"
+      }
+    ]);
+  });
+
+  it("merges racenetLeaderboardStages when same location found", async () => {
+    // aus 1
+    fetchEventResults.mockResolvedValueOnce({
+      entries: [{ name: "punkly" }, { name: "nonko" }]
+    });
+    fetchEventResults.mockResolvedValueOnce({
+      entries: [{ name: "punkly" }, { name: "nonko" }]
+    });
+    // aus 2
+    fetchEventResults.mockResolvedValueOnce({
+      entries: [{ name: "satchmo" }]
+    });
+    fetchEventResults.mockResolvedValueOnce({
+      entries: [{ name: "satchmo" }]
+    });
+    // swe
+    fetchEventResults.mockResolvedValue({
+      entries: [{ name: "npiipo" }]
+    });
+    const events = await fetchEventsFromKeys(
+      [
+        { location: "Aus", lastStageId: 1 },
+        { location: "Aus", lastStageId: 1 },
+        { location: "Swe", lastStageId: 2 }
+      ],
+      false
+    );
+
+    expect(events).toEqual([
+      {
+        lastStageId: 1,
+        location: "Aus",
+        racenetLeaderboardStages: [
+          {
+            entries: [
+              {
+                name: "punkly"
+              },
+              {
+                name: "nonko"
+              },
+              {
+                name: "satchmo"
+              }
+            ]
+          },
+          {
+            entries: [
+              {
+                name: "punkly"
+              },
+              {
+                name: "nonko"
+              },
+              {
+                name: "satchmo"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        lastStageId: 2,
+        location: "Swe",
+        racenetLeaderboardStages: [
+          {
+            entries: [
+              {
+                name: "npiipo"
+              }
+            ]
+          },
+          {
+            entries: [
+              {
+                name: "npiipo"
+              }
+            ]
+          }
+        ]
+      }
+    ]);
+  });
+
+  it("loads all stages when getAllResults is true", async () => {
+    fetchEventResults.mockResolvedValue({
+      entries: [{ name: "punkly" }]
+    });
+    const events = await fetchEventsFromKeys(
+      [{ location: "Aus", lastStageId: 2 }],
+      true
+    );
+
+    expect(events).toEqual([
+      {
+        lastStageId: 2,
+        location: "Aus",
+        racenetLeaderboardStages: [
+          {
+            entries: [
+              {
+                name: "punkly"
+              }
+            ]
+          },
+          {
+            entries: [
+              {
+                name: "punkly"
+              }
+            ]
+          },
+          {
+            entries: [
+              {
+                name: "punkly"
+              }
+            ]
+          }
+        ]
       }
     ]);
   });

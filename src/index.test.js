@@ -88,9 +88,7 @@ describe("calculates event results", () => {
     ];
     const driverResults = calculateEventResults({
       event: {
-        racenetLeaderboard: leaderboard,
-        // lazy of me
-        firstStageRacenetLeaderboard: leaderboard
+        racenetLeaderboardStages: [leaderboard, leaderboard]
       },
       drivers: {},
       divisionName: "pro"
@@ -118,9 +116,7 @@ describe("calculates event results", () => {
     expect(
       calculateEventResults({
         event: {
-          racenetLeaderboard: leaderboard,
-          // lazy of me
-          firstStageRacenetLeaderboard: leaderboard
+          racenetLeaderboardStages: [leaderboard, leaderboard]
         },
         drivers: {},
         divisionName: "pro"

@@ -192,13 +192,15 @@ const addStageTimesToResultsByDriver = (resultsByDriver, allStages) => {
   });
 };
 const calculateEventResults = ({ event, divisionName, drivers }) => {
-  const entries = event.racenetLeaderboard.entries;
+  const entries =
+    event.racenetLeaderboardStages[event.racenetLeaderboardStages.length - 1]
+      .entries;
   setManualResults(event, entries);
   setDnfIfIncorrectCar(event, entries, divisionName);
   // TODO validate correct class
   const resultsByDriver = getResultsByDriver(entries, divisionName);
   const firstStageResultsByDriver = getResultsByDriver(
-    event.firstStageRacenetLeaderboard.entries,
+    event.racenetLeaderboardStages[0].entries,
     divisionName
   );
   if (leagueRef.league.getAllResults)
@@ -351,7 +353,7 @@ const processEvent = async ({
 };
 
 const loadEventDrivers = (drivers, event) => {
-  event.firstStageRacenetLeaderboard.entries.forEach(entry => {
+  event.racenetLeaderboardStages[0].entries.forEach(entry => {
     let driver = leagueRef.getDriver(entry.name);
     if (!driver) {
       debug(`adding unknown driver ${entry.name}`);
