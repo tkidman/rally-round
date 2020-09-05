@@ -3,22 +3,22 @@ const https = require("https");
 const axios = require("axios");
 const debug = require("debug")("tkidman:dirt2-results:dirtAPI");
 const fs = require("fs");
-const { cachePath } = require("../shared");
+const { cachePath } = require("../../shared");
 const cachedCredsFile = "./cached-creds.json";
 
 const USERNAME_SELECTOR = "#Email";
 const PASSWORD_SELECTOR = "#Password";
 const LOGIN_BUTTON_SELECTOR = "#login_button_container > input";
 const puppeteer = require("puppeteer");
-const { eventStatuses } = require("../shared");
+const { eventStatuses } = require("../../shared");
 const validCreds = {};
 
 const dirtRally2Domain = "https://dirtrally2.dirtgame.com";
 
 // export the three certs in the chain from chrome as x509 certificate
-const ca = fs.readFileSync("./src/dirtAPI/GlobalSignRoot-CA.cer");
-const g2 = fs.readFileSync("./src/dirtAPI/G2.cer");
-const cert = fs.readFileSync("./src/dirtAPI/dirtgame.cer");
+const ca = fs.readFileSync("./src/api/dirt/GlobalSignRoot-CA.cer");
+const g2 = fs.readFileSync("./src/api/dirt/G2.cer");
+const cert = fs.readFileSync("./src/api/dirt/dirtgame.cer");
 const httpsAgent = new https.Agent({
   ca: [ca, g2, cert]
 });

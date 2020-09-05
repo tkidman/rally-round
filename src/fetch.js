@@ -1,7 +1,7 @@
 const { eventStatuses } = require("./shared");
-const { fetchEventResults } = require("./dirtAPI");
-const { fetchChampionships } = require("./dirtAPI");
-const { fetchRecentResults } = require("./dirtAPI");
+const { fetchEventResults } = require("./api/dirt");
+const { fetchChampionships } = require("./api/dirt");
+const { fetchRecentResults } = require("./api/dirt");
 const { leagueRef } = require("./state/league");
 const debug = require("debug")("tkidman:dirt2-results:fetch");
 

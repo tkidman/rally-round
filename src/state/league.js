@@ -6,7 +6,7 @@ const { club } = require("../shared");
 const league = require(`./${club}/initialState`);
 const { driverColumns, sheetsConfig } = require(`./${club}/driverConfig`);
 const driverFieldNames = require("./constants/driverFieldNames");
-const { loadSheetAndTransform } = require("../sheetsAPI/sheets");
+const { loadSheetAndTransform } = require("../api/sheets/sheets");
 
 const missingDrivers = {};
 const drivers = {};

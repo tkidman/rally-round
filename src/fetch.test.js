@@ -4,9 +4,9 @@ const {
 } = require("./fetch");
 const { init } = require("./state/league");
 
-const { fetchEventResults } = require("./dirtAPI");
+const { fetchEventResults } = require("./api/dirt");
 
-jest.mock("./dirtAPI");
+jest.mock("./api/dirt");
 
 describe("fetch", () => {
   beforeEach(async () => {

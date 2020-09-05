@@ -4,8 +4,8 @@ if (process.argv[2] && process.argv[3]) {
   process.env.DIRT_PASSWORD = process.argv[3];
 }
 
-const { fetchClubs } = require("./src/dirtAPI");
-const { updateClubsSheet } = require("./src/sheetsAPI/sheets");
+const { fetchClubs } = require("./src/api/dirt");
+const { updateClubsSheet } = require("./src/api/sheets/sheets");
 
 const scrapeClubs = async () => {
   const clubs = await fetchClubs();

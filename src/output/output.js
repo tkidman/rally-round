@@ -9,7 +9,7 @@ const { writeHTMLOutputForDivision } = require("./html");
 const { writePlacementOutput } = require("./html");
 const { writeFantasyHTML } = require("./html");
 const { writeHomeHTML } = require("./html");
-const { uploadFiles } = require("../awsAPI/s3");
+const { uploadFiles } = require("../api/aws/s3");
 
 const addLinks = (links, name, type) => {
   if (!links[type]) links[type] = [];

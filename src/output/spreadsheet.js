@@ -6,7 +6,7 @@ const { getTeamStandingData } = require("./shared");
 const { getDriverStandingData } = require("./shared");
 const { getHeaderLocations } = require("./shared");
 const { getDriverData } = require("./shared");
-const { updateResultsSheet } = require("../sheetsAPI/sheets");
+const { updateResultsSheet } = require("../api/sheets/sheets");
 const { leagueRef } = require("../state/league");
 const locations = require("../state/constants/locations.json");
 
