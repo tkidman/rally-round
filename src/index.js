@@ -141,32 +141,46 @@ const setDnfIfIncorrectCar = (event, entries, divisionName) => {
   });
 };
 
-const setManualResults = (event, entries) => {
-  const challengeId = event.challengeId;
+const setManualResults = (
+  event,
+  entries,
+  divisionName,
+  firstStageResultsByDriver
+) => {
   const defaultEntry = {
-    isDnfEntry: false,
-    isFounder: false,
-    isPlayer: false,
-    isVIP: false,
-    name: "",
-    nationality: "eLngSpanish",
-    playerDiff: 0,
-    rank: 1,
-    stageDiff: "--",
-    stageTime: "",
-    totalDiff: "",
-    totalTime: "",
-    vehicleName: "Citroën C4 Rally"
+    isManualResult: true,
+    isDnfEntry: false
   };
-  switch (challengeId) {
-    case "289440":
-      var maxPower = { ...defaultEntry };
-      (maxPower.name = "IM-MaxPower"), (maxPower.stageDiff = "+00:11.635");
-      maxPower.stageTime = "03:04.419";
-      maxPower.totalDiff = "+00:01:54.067";
-      maxPower.totalTime = "00:41:28.668";
-      entries.push(maxPower);
-      break;
+  const division = leagueRef.divisions[divisionName];
+  const eventId = event.eventId;
+  if (division.manualResults) {
+    const eventManualResults = division.manualResults.find(
+      eventManualResults => eventManualResults.eventId === eventId
+    );
+    if (eventManualResults) {
+      eventManualResults.results.forEach(manualResult => {
+        debug(`applying manual result for ${manualResult.name}`);
+        const existingResult = entries.find(
+          entry => entry.name === manualResult.name
+        );
+        if (existingResult) {
+          Object.assign(existingResult, manualResult, defaultEntry);
+        } else {
+          const firstStageResult = firstStageResultsByDriver[manualResult.name];
+          if (!firstStageResult) {
+            debug(
+              `unable to find first stage result for manual result for driver ${manualResult.name}`
+            );
+          } else {
+            entries.push({
+              ...firstStageResult,
+              ...manualResult,
+              ...defaultEntry
+            });
+          }
+        }
+      });
+    }
   }
 };
 
@@ -181,9 +195,12 @@ const getResultsByDriver = entries => {
   return resultsByDriver;
 };
 
-const addStageTimesToResultsByDriver = (resultsByDriver, allStages) => {
-  allStages.forEach(stageTimes => {
-    stageTimes.forEach(driverTime => {
+const addStageTimesToResultsByDriver = (
+  resultsByDriver,
+  racenetLeaderboardStages
+) => {
+  racenetLeaderboardStages.forEach(racenetLeaderboard => {
+    racenetLeaderboard.entries.forEach(driverTime => {
       const driver = resultsByDriver[driverTime.name];
       if (!driver) return;
       if (!driver.stageTimes) driver.stageTimes = [];
@@ -192,19 +209,19 @@ const addStageTimesToResultsByDriver = (resultsByDriver, allStages) => {
   });
 };
 const calculateEventResults = ({ event, divisionName, drivers }) => {
-  const entries =
-    event.racenetLeaderboardStages[event.racenetLeaderboardStages.length - 1]
-      .entries;
-  setManualResults(event, entries);
-  setDnfIfIncorrectCar(event, entries, divisionName);
-  // TODO validate correct class
-  const resultsByDriver = getResultsByDriver(entries, divisionName);
   const firstStageResultsByDriver = getResultsByDriver(
     event.racenetLeaderboardStages[0].entries,
     divisionName
   );
-  if (leagueRef.league.getAllResults)
-    addStageTimesToResultsByDriver(resultsByDriver, event.allStages);
+
+  // alert! mutations to the racenetLeaderboard entries occur here, and should only occur here
+  const entries =
+    event.racenetLeaderboardStages[event.racenetLeaderboardStages.length - 1]
+      .entries;
+  setManualResults(event, entries, divisionName, firstStageResultsByDriver);
+  setDnfIfIncorrectCar(event, entries, divisionName);
+  // TODO validate correct class
+  const resultsByDriver = getResultsByDriver(entries, divisionName);
 
   // create results for drivers didn't finish the run
   Object.keys(drivers).forEach(driverName => {
@@ -220,6 +237,13 @@ const calculateEventResults = ({ event, divisionName, drivers }) => {
       }
     }
   });
+  // end alert
+
+  if (leagueRef.league.getAllResults)
+    addStageTimesToResultsByDriver(
+      resultsByDriver,
+      event.racenetLeaderboardStages
+    );
 
   // dnf entries are sorted below non-dnf entries
   const powerStageEntries = orderEntriesBy(entries, "stageTime");

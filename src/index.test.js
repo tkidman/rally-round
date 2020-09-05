@@ -43,6 +43,7 @@ describe("calculates event results", () => {
         entry: {
           isDnfEntry: false,
           isFounder: false,
+          isManualResult: true,
           isPlayer: false,
           isVIP: false,
           name: "SFRrallimoilane",
@@ -50,9 +51,9 @@ describe("calculates event results", () => {
           playerDiff: 0,
           rank: 2,
           stageDiff: "--",
-          stageTime: "05:34.000",
-          totalDiff: "+18:24.013",
-          totalTime: "05:00:00.000",
+          stageTime: "05:33.000",
+          totalDiff: "+18:23.013",
+          totalTime: "04:59:59.000",
           vehicleName: "Ford Escort Mk II"
         },
         name: "SFRrallimoilane",
@@ -88,7 +89,8 @@ describe("calculates event results", () => {
     ];
     const driverResults = calculateEventResults({
       event: {
-        racenetLeaderboardStages: [leaderboard, leaderboard]
+        racenetLeaderboardStages: [leaderboard, leaderboard],
+        eventId: "221955"
       },
       drivers: {},
       divisionName: "pro"

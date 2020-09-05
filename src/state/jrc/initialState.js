@@ -25,7 +25,21 @@ const initialState = {
         overall: [30, 24, 21, 19, 17, 15, 13, 11, 9, 7, 5, 4, 3, 2, 1]
       },
       fantasy: true,
-      outputSheetId: "1P-0CJ4rm7xBaMsan0yMcFKwDIWkqjIvYWHNrjgFDixc"
+      outputSheetId: "1P-0CJ4rm7xBaMsan0yMcFKwDIWkqjIvYWHNrjgFDixc",
+      manualResults: [
+        {
+          eventId: 289440,
+          results: [
+            {
+              name: "IM-MaxPower",
+              stageTime: "+00:01:54.067",
+              stageDiff: "+00:11.635",
+              totalDiff: "+00:01:54.067",
+              totalTime: "00:41:28.668"
+            }
+          ]
+        }
+      ]
     },
     jrc2: {
       displayName: "JRC2",
