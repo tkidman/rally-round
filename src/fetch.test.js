@@ -19,10 +19,12 @@ describe("fetch", () => {
     const eventKeys = getEventKeysFromRecentResults({
       recentResults,
       championships,
-      division: {
+      division: {},
+      divisionName: "pro",
+      club: {
+        clubId: "123",
         championshipIds: ["65933"]
-      },
-      divisionName: "pro"
+      }
     });
     expect(eventKeys).toEqual([
       {
@@ -36,7 +38,7 @@ describe("fetch", () => {
     ]);
   });
 
-  it("merges racenetLeaderboardStages when same location found", async () => {
+  it("fetches events from keys", async () => {
     // aus 1
     fetchEventResults.mockResolvedValueOnce({
       entries: [{ name: "punkly" }, { name: "nonko" }]
@@ -44,20 +46,12 @@ describe("fetch", () => {
     fetchEventResults.mockResolvedValueOnce({
       entries: [{ name: "punkly" }, { name: "nonko" }]
     });
-    // aus 2
-    fetchEventResults.mockResolvedValueOnce({
-      entries: [{ name: "satchmo" }]
-    });
-    fetchEventResults.mockResolvedValueOnce({
-      entries: [{ name: "satchmo" }]
-    });
     // swe
     fetchEventResults.mockResolvedValue({
       entries: [{ name: "npiipo" }]
     });
     const events = await fetchEventsFromKeys(
       [
-        { location: "Aus", lastStageId: 1 },
         { location: "Aus", lastStageId: 1 },
         { location: "Swe", lastStageId: 2 }
       ],
@@ -76,9 +70,6 @@ describe("fetch", () => {
               },
               {
                 name: "nonko"
-              },
-              {
-                name: "satchmo"
               }
             ]
           },
@@ -89,9 +80,6 @@ describe("fetch", () => {
               },
               {
                 name: "nonko"
-              },
-              {
-                name: "satchmo"
               }
             ]
           }

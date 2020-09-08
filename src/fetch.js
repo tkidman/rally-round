@@ -5,16 +5,43 @@ const { fetchRecentResults } = require("./api/dirt");
 const { leagueRef } = require("./state/league");
 const debug = require("debug")("tkidman:dirt2-results:fetch");
 
-const fetchEvents = async (division, divisionName) => {
-  const recentResults = await fetchRecentResults(division.clubId);
-  const championships = await fetchChampionships(division.clubId);
+const fetchEventsForClub = async (club, division, divisionName) => {
+  const recentResults = await fetchRecentResults(club.clubId);
+  const championships = await fetchChampionships(club.clubId);
   const eventKeys = getEventKeysFromRecentResults({
     recentResults,
     championships,
     division,
-    divisionName
+    divisionName,
+    club
   });
   return fetchEventsFromKeys(eventKeys, leagueRef.league.getAllResults);
+};
+
+const mergeEvent = (mergedEvent, event) => {
+  if (mergedEvent.location !== event.location) {
+    throw new Error("multiclass championship but events do not line up.");
+  }
+  for (let i = 0; i < event.racenetLeaderboardStages.length; i++) {
+    mergedEvent.racenetLeaderboardStages[i].entries.push(
+      ...event.racenetLeaderboardStages[i].entries
+    );
+  }
+};
+
+const fetchEvents = async (division, divisionName) => {
+  const mergedEvents = [];
+  for (let club of division.clubs) {
+    const events = await fetchEventsForClub(club, division, divisionName);
+    if (mergedEvents.length === 0) {
+      mergedEvents.push(...events);
+    } else {
+      for (let i = 0; i < events.length; i++) {
+        mergeEvent(mergedEvents[i], events[i]);
+      }
+    }
+  }
+  return mergedEvents;
 };
 
 const fetchEventsFromKeys = async (eventKeys, getAllResults) => {
@@ -30,23 +57,10 @@ const fetchEventsFromKeys = async (eventKeys, getAllResults) => {
         racenetLeaderboardStages.push(racenetLeaderboard);
       }
     }
-
-    const previousEvent = events.length > 0 ? events[events.length - 1] : null;
-
-    // multiclass event, merge the results
-    if (previousEvent && previousEvent.location === key.location) {
-      debug("Two events found with same location, merging results");
-      for (let i = 0; i < racenetLeaderboardStages.length; i++) {
-        previousEvent.racenetLeaderboardStages[i].entries.push(
-          ...racenetLeaderboardStages[i].entries
-        );
-      }
-    } else {
-      events.push({
-        ...key,
-        racenetLeaderboardStages
-      });
-    }
+    events.push({
+      ...key,
+      racenetLeaderboardStages
+    });
   }
   return events;
 };
@@ -73,11 +87,12 @@ const getEventKeysFromRecentResults = ({
   recentResults,
   championships,
   division,
-  divisionName
+  divisionName,
+  club
 }) => {
   // pull out championships matching championship ids
   const divisionChampionships = championships.filter(championship =>
-    division.championshipIds.includes(championship.id)
+    club.championshipIds.includes(championship.id)
   );
   const eventKeys = divisionChampionships.reduce((events, championship) => {
     const eventResultKeys = championship.events.reduce(

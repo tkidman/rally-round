@@ -3,21 +3,21 @@ var fantasy_teams = require("./fantasyTeams.json");
 const initialState = {
   driverSheetId: "1qa1-dLB0vK0dturPflPl4vVQ6twd4i6vFX-88Tyba-Y",
   pointsForDNF: false,
+  websiteName: null,
   divisions: {
     jrc1: {
       displayName: "JRC",
       divisionName: "jrc1",
       maxDriversScoringPointsForTeam: 2,
-      clubId: "180867",
-      championshipIds: [
-        "260543",
-        "267588",
-        "272837",
-        "277620",
-        "280989",
-        "284559",
-        "289440",
-        "293105"
+      clubs: [
+        {
+          clubId: "180867",
+          championshipIds: ["307328"]
+        },
+        {
+          clubId: "342498",
+          championshipIds: ["307333"]
+        }
       ],
       events: [],
       points: {
@@ -26,35 +26,17 @@ const initialState = {
       },
       fantasy: true,
       outputSheetId: "1P-0CJ4rm7xBaMsan0yMcFKwDIWkqjIvYWHNrjgFDixc",
-      manualResults: [
-        {
-          eventId: 289440,
-          results: [
-            {
-              name: "IM-MaxPower",
-              stageTime: "+00:01:54.067",
-              stageDiff: "+00:11.635",
-              totalDiff: "+00:01:54.067",
-              totalTime: "00:41:28.668"
-            }
-          ]
-        }
-      ]
+      manualResults: []
     },
     jrc2: {
       displayName: "JRC2",
       divisionName: "jrc2",
       maxDriversScoringPointsForTeam: 2,
-      clubId: "244734",
-      championshipIds: [
-        "260546",
-        "267595",
-        "272918",
-        "277730",
-        "280996",
-        "285214",
-        "289447",
-        "293109"
+      clubs: [
+        {
+          clubId: "244734",
+          championshipIds: []
+        }
       ],
       events: [],
       points: {
@@ -67,16 +49,11 @@ const initialState = {
       displayName: "JRC3",
       divisionName: "jrc3",
       maxDriversScoringPointsForTeam: 2,
-      clubId: "330674",
-      championshipIds: [
-        "260549",
-        "267602",
-        "272991",
-        "277731",
-        "280997",
-        "285216",
-        "289454",
-        "293110"
+      clubs: [
+        {
+          clubId: "330674",
+          championshipIds: []
+        }
       ],
       events: [],
       points: {

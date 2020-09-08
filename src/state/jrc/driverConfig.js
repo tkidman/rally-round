@@ -7,17 +7,16 @@ const {
 } = require("../constants/driverFieldNames");
 
 const driverColumns = {
-  //countryName: "Flag",
   [name]: "Gamertag",
   [raceNetName]: "Racenet",
   [teamId]: "Team",
-  [division]: "Class",
+  [division]: "Tier",
   [car]: "Car"
 };
 
 const sheetsConfig = {
-  sheetId: "1mLDzhofRL3ZfZts7Zp-1lekLQx6ApFXkhnpEyZdPXZM",
-  tabName: "All"
+  sheetId: "155Q1NPyMUSflBoDkdJK3SElq_NEzNaibZNalgcM7NGI",
+  tabName: "All tiers"
 };
 
 module.exports = { driverColumns, sheetsConfig };
