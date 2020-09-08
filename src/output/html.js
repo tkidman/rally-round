@@ -265,8 +265,8 @@ const transformForDriverResultsHTML = (event, division) => {
     showCar: leagueRef.hasCars,
     event,
     location: locations[event.location],
-    divisionName,
-    stages: rows[0].stageTimes
+    divisionName
+    // stages: rows[0].stageTimes
   };
 };
 

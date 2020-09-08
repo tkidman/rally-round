@@ -354,12 +354,7 @@ const calculateEventStandings = (event, previousEvent) => {
   event.standings = { driverStandings, teamStandings };
 };
 
-const processEvent = async ({
-  divisionName,
-  event,
-  previousEvent,
-  drivers
-}) => {
+const processEvent = ({ divisionName, event, previousEvent, drivers }) => {
   event.results = calculateEventResults({
     event,
     divisionName,
@@ -398,12 +393,12 @@ const loadDriversAcrossAllEvents = events => {
   return allDrivers;
 };
 
-const processEvents = async (events, divisionName) => {
+const processEvents = (events, divisionName) => {
   let previousEvent = null;
   const drivers = loadDriversAcrossAllEvents(events);
   for (const event of events) {
     debug(`processing ${divisionName} ${event.location}`);
-    await processEvent({ divisionName, event, previousEvent, drivers });
+    processEvent({ divisionName, event, previousEvent, drivers });
     previousEvent = event;
   }
 };
@@ -478,7 +473,7 @@ const processAllDivisions = async () => {
     for (const divisionName of Object.keys(divisions)) {
       const division = divisions[divisionName];
       division.events = await fetchEvents(division, divisionName);
-      await processEvents(division.events, divisionName);
+      processEvents(division.events, divisionName);
     }
     if (Object.keys(divisions).length > 1) {
       calculateOverallResults();

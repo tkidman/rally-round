@@ -32,6 +32,7 @@ const mergeEvent = (mergedEvent, event) => {
 const fetchEvents = async (division, divisionName) => {
   const mergedEvents = [];
   for (let club of division.clubs) {
+    debug(`fetching event for club ${club.clubId}`);
     const events = await fetchEventsForClub(club, division, divisionName);
     if (mergedEvents.length === 0) {
       mergedEvents.push(...events);

@@ -136,6 +136,7 @@ const fetchClubs = async () => {
 };
 
 const fetchChampionships = async clubId => {
+  debug(`fetching championships for club ${clubId}`);
   const { cookie } = await getCreds();
   const response = await instance({
     method: "GET",
@@ -146,6 +147,7 @@ const fetchChampionships = async clubId => {
 };
 
 const fetchRecentResults = async clubId => {
+  debug(`fetching recent results for club ${clubId}`);
   const { cookie, xsrfh } = await getCreds();
   const response = await instance({
     method: "GET",
@@ -194,6 +196,7 @@ const fetchEventResults = async ({
     // nationalityFilter: "None",
   };
   try {
+    debug(`retrieving event results from racenet: ${eventId}`);
     const response = await instance({
       method: "POST",
       url: `${dirtRally2Domain}/api/Leaderboard`,

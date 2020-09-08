@@ -35,7 +35,7 @@ const initialState = {
       clubs: [
         {
           clubId: "244734",
-          championshipIds: []
+          championshipIds: ["307342"]
         }
       ],
       events: [],
@@ -52,7 +52,7 @@ const initialState = {
       clubs: [
         {
           clubId: "330674",
-          championshipIds: []
+          championshipIds: ["307343"]
         }
       ],
       events: [],
@@ -61,6 +61,22 @@ const initialState = {
         overall: [30, 24, 21, 19, 17, 15, 13, 11, 9, 7, 5, 4, 3, 2, 1]
       },
       outputSheetId: "1hrpLvoXjZVSjiIWGr1JVTxfAFM-Se83mFntaTcYYY1E"
+    },
+    jrc4: {
+      displayName: "JRC4",
+      divisionName: "jrc4",
+      maxDriversScoringPointsForTeam: 2,
+      clubs: [
+        {
+          clubId: "342117",
+          championshipIds: ["307345"]
+        }
+      ],
+      events: [],
+      points: {
+        powerStage: [5, 4, 3, 2, 1],
+        overall: [30, 24, 21, 19, 17, 15, 13, 11, 9, 7, 5, 4, 3, 2, 1]
+      }
     }
   },
   fantasy: {
