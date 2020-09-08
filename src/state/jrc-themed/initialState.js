@@ -10,7 +10,8 @@ const initialState = {
         "Ford Sierra Cosworth RS500",
         "SUBARU Legacy RS",
         "SUBARU Impreza 1995",
-        "SUBARU Impreza S4 Rally"
+        "SUBARU Impreza S4 Rally",
+        "Ford Focus RS Rally 2001"
       ],
       clubId: "256173",
       championshipIds: ["290761"],
