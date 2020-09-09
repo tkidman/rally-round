@@ -1,3 +1,7 @@
+const moment = require("moment");
+
+const { getDuration } = require("./shared");
+const { orderEntriesBy } = require("./shared");
 const { eventStatuses } = require("./shared");
 const { fetchEventResults } = require("./api/dirt");
 const { fetchChampionships } = require("./api/dirt");
@@ -29,6 +33,30 @@ const mergeEvent = (mergedEvent, event) => {
   }
 };
 
+// field is stage or total
+const recalculateDiffsForStage = (stage, field) => {
+  const timeField = `${field}Time`;
+  const diffField = `${field}Diff`;
+  const sortedEntries = orderEntriesBy(stage.entries, timeField);
+  if (sortedEntries.length > 0) {
+    const topTime = getDuration(sortedEntries[0][timeField]);
+    for (let i = 1; i < sortedEntries.length; i++) {
+      const entry = sortedEntries[i];
+      const entryTime = getDuration(sortedEntries[i][timeField]);
+      const diff = entryTime.subtract(topTime);
+      entry[diffField] = moment
+        .utc(diff.as("milliseconds"))
+        .format("HH:mm:ss:SSS");
+    }
+  }
+};
+
+const recalculateDiffs = event => {
+  event.racenetLeaderboardStages.forEach(stage => {
+    recalculateDiffsForStage(stage, "total");
+    recalculateDiffsForStage(stage, "stage");
+  });
+};
 const fetchEvents = async (division, divisionName) => {
   const mergedEvents = [];
   for (let club of division.clubs) {
@@ -41,6 +69,11 @@ const fetchEvents = async (division, divisionName) => {
         mergeEvent(mergedEvents[i], events[i]);
       }
     }
+  }
+  if (division.clubs.length > 1) {
+    mergedEvents.forEach(event => {
+      recalculateDiffs(event);
+    });
   }
   return mergedEvents;
 };
@@ -130,5 +163,6 @@ module.exports = {
   fetchEvents,
   // tests
   getEventKeysFromRecentResults,
-  fetchEventsFromKeys
+  fetchEventsFromKeys,
+  recalculateDiffsForStage
 };

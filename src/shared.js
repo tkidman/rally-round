@@ -1,3 +1,5 @@
+const moment = require("moment");
+
 const hiddenPath = "./hidden";
 const club = process.env.CLUB || "test";
 const outputPath = `${hiddenPath}/out/${club}`;
@@ -18,6 +20,39 @@ const eventStatuses = {
   finished: "Finished"
 };
 
+const dnfFactor = 100000000;
+
+const getDuration = durationString => {
+  if (durationString.split(":").length === 2) {
+    return moment.duration(`00:${durationString}`);
+  }
+  return moment.duration(durationString);
+};
+
+const getSortNumber = (entry, field) => {
+  const durationInMillis = getDuration(entry[field]).asMilliseconds();
+  if (entry.isDnfEntry) {
+    return durationInMillis + dnfFactor;
+  }
+  return durationInMillis;
+};
+
+const getSortComparison = (entryA, entryB, field) => {
+  return getSortNumber(entryA, field) - getSortNumber(entryB, field);
+};
+
+const orderEntriesBy = (entries, field) => {
+  return entries.slice().sort((a, b) => {
+    return getSortComparison(a, b, field);
+  });
+};
+
+const orderResultsBy = (results, field) => {
+  return results.slice().sort((a, b) => {
+    return getSortComparison(a.entry, b.entry, field);
+  });
+};
+
 module.exports = {
   outputPath,
   cachePath,
@@ -26,5 +61,8 @@ module.exports = {
   getTotalPoints,
   privateer,
   club,
-  eventStatuses
+  eventStatuses,
+  orderEntriesBy,
+  orderResultsBy,
+  getDuration
 };

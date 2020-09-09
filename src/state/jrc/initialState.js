@@ -1,5 +1,5 @@
-const { JRC_CALCULATIONS } = require("../../fantasy/fantasyFormulas");
-var fantasy_teams = require("./fantasyTeams.json");
+// const { JRC_CALCULATIONS } = require("../../fantasy/fantasyFormulas");
+// var fantasy_teams = require("./fantasyTeams.json");
 const initialState = {
   driverSheetId: "1qa1-dLB0vK0dturPflPl4vVQ6twd4i6vFX-88Tyba-Y",
   pointsForDNF: false,
@@ -79,12 +79,12 @@ const initialState = {
       }
     }
   },
-  fantasy: {
-    calculators: JRC_CALCULATIONS,
-    teams: fantasy_teams,
-    driverStandings: {},
-    sheetId: "1ifywqh1xfyVjpUqiG1zODpXupbyHwIzVsZCmOvcHtmg"
-  },
+  // fantasy: {
+  //   calculators: JRC_CALCULATIONS,
+  //   teams: fantasy_teams,
+  //   driverStandings: {},
+  //   sheetId: "1ifywqh1xfyVjpUqiG1zODpXupbyHwIzVsZCmOvcHtmg"
+  // },
   visualization: "jrc_all",
   standingsOutputSheetId: "1iLIPjB2fsi3HI5S5CgrvnkEzrdA6fT71m_9zmtL19VI"
 };

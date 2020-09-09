@@ -1,3 +1,4 @@
+const { recalculateDiffsForStage } = require("./fetch");
 const {
   getEventKeysFromRecentResults,
   fetchEventsFromKeys
@@ -146,5 +147,18 @@ describe("fetch", () => {
         ]
       }
     ]);
+  });
+
+  it("recalculateDiffs", () => {
+    const stage = {
+      entries: [
+        { totalTime: "05:00.000", stageTime: "04:00.000" },
+        { totalTime: "04:12.256", stageTime: "04:12.256" }
+      ]
+    };
+    recalculateDiffsForStage(stage, "total");
+    recalculateDiffsForStage(stage, "stage");
+    expect(stage.entries[0].totalDiff).toEqual("00:00:47:744");
+    expect(stage.entries[1].stageDiff).toEqual("00:00:12:256");
   });
 });

@@ -1,5 +1,6 @@
+const { orderResultsBy } = require("./shared");
+const { orderEntriesBy } = require("./shared");
 const debug = require("debug")("tkidman:dirt2-results");
-const moment = require("moment");
 const { eventStatuses } = require("./shared");
 const { privateer } = require("./shared");
 const { printMissingDrivers } = require("./state/league");
@@ -10,39 +11,6 @@ const { writeOutput, checkOutputDirs } = require("./output/output");
 const { getTotalPoints } = require("./shared");
 const { calculateFantasyStandings } = require("./fantasy/fantasyCalculator");
 const { fetchEvents } = require("./fetch");
-
-const dnfFactor = 100000000;
-
-const getDuration = durationString => {
-  if (durationString.split(":").length === 2) {
-    return moment.duration(`00:${durationString}`);
-  }
-  return moment.duration(durationString);
-};
-
-const getSortNumber = (entry, field) => {
-  const durationInMillis = getDuration(entry[field]).asMilliseconds();
-  if (entry.isDnfEntry) {
-    return durationInMillis + dnfFactor;
-  }
-  return durationInMillis;
-};
-
-const getSortComparison = (entryA, entryB, field) => {
-  return getSortNumber(entryA, field) - getSortNumber(entryB, field);
-};
-
-const orderEntriesBy = (entries, field) => {
-  return entries.slice().sort((a, b) => {
-    return getSortComparison(a, b, field);
-  });
-};
-
-const orderResultsBy = (results, field) => {
-  return results.slice().sort((a, b) => {
-    return getSortComparison(a.entry, b.entry, field);
-  });
-};
 
 const updatePoints = (resultsByDriver, orderedEntries, points, pointsField) => {
   for (let i = 0; i < points.length; i++) {
