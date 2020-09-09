@@ -3,7 +3,7 @@
 const initialState = {
   driverSheetId: "1qa1-dLB0vK0dturPflPl4vVQ6twd4i6vFX-88Tyba-Y",
   pointsForDNF: false,
-  websiteName: null,
+  websiteName: "jrc-results",
   divisions: {
     jrc1: {
       displayName: "JRC",
@@ -22,7 +22,7 @@ const initialState = {
       events: [],
       points: {
         powerStage: [5, 4, 3, 2, 1],
-        overall: [30, 24, 21, 19, 17, 15, 13, 11, 9, 7, 5, 4, 3, 2, 1]
+        overall: [30, 24, 21, 19, 17, 15, 13, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
       },
       fantasy: true,
       outputSheetId: "1P-0CJ4rm7xBaMsan0yMcFKwDIWkqjIvYWHNrjgFDixc",
@@ -41,7 +41,7 @@ const initialState = {
       events: [],
       points: {
         powerStage: [5, 4, 3, 2, 1],
-        overall: [30, 24, 21, 19, 17, 15, 13, 11, 9, 7, 5, 4, 3, 2, 1]
+        overall: [30, 24, 21, 19, 17, 15, 13, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
       },
       outputSheetId: "1WaBmoqfRtXO8CEGhnE2g1b93F5o2Kjh7Nx3vi13U5Tg"
     },
@@ -58,7 +58,7 @@ const initialState = {
       events: [],
       points: {
         powerStage: [5, 4, 3, 2, 1],
-        overall: [30, 24, 21, 19, 17, 15, 13, 11, 9, 7, 5, 4, 3, 2, 1]
+        overall: [30, 24, 21, 19, 17, 15, 13, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
       },
       outputSheetId: "1hrpLvoXjZVSjiIWGr1JVTxfAFM-Se83mFntaTcYYY1E"
     },
@@ -75,7 +75,7 @@ const initialState = {
       events: [],
       points: {
         powerStage: [5, 4, 3, 2, 1],
-        overall: [30, 24, 21, 19, 17, 15, 13, 11, 9, 7, 5, 4, 3, 2, 1]
+        overall: [30, 24, 21, 19, 17, 15, 13, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
       }
     }
   },

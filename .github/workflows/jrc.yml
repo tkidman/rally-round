@@ -1,9 +1,9 @@
-#on:
-#  schedule:
-#    # every hour on the hour
-#    - cron:  '0 * * * *'
 on:
-  workflow_dispatch
+  schedule:
+    # every hour on the hour
+    - cron:  '0 * * * *'
+#on:
+#  workflow_dispatch
 
 jobs:
   publish-results:
@@ -14,7 +14,7 @@ jobs:
       DIRT_AWS_SECRET_ACCESS_KEY: ${{ secrets.DIRT_AWS_SECRET_ACCESS_KEY }}
       GOOGLE_SHEETS_API_KEY: ${{ secrets.GOOGLE_SHEETS_API_KEY }}
       DEBUG: tkidman:*
-      CLUB: jrc-placement
+      CLUB: jrc
     runs-on: ubuntu-latest
     timeout-minutes: 5
 
