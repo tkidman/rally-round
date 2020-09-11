@@ -5,9 +5,7 @@ const Handlebars = require("handlebars");
 const debug = require("debug")("tkidman:dirt2-results:output:html");
 
 const { leagueRef } = require("../state/league");
-const { getDriverData } = require("./shared");
-const { getAllResults } = require("./shared");
-const { getHeaderLocations } = require("./shared");
+const { getDriverData, getActiveCountry, getHeaderLocations, getAllResults } = require("./shared");
 const { outputPath, templatePath } = require("../shared");
 const { processFantasyResults } = require("../fantasy/fantasyCalculator");
 const locations = require("../state/constants/locations.json");
@@ -154,7 +152,9 @@ const getNavigationHTML = (
   }
   return this.compiled_navigation({
     links,
-    secondary: headerLocations
+    secondary: headerLocations,
+    endTime: leagueRef.endTime,
+    activeCountry: getActiveCountry()
   });
 };
 

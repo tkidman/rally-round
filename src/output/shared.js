@@ -62,9 +62,14 @@ const getDriverData = driverName => {
   };
 };
 
+const getActiveCountry = () => {
+  if(leagueRef.activeCountry) return locations[leagueRef.activeCountry].countryCode; 
+}
+
 module.exports = {
   getAllResults,
   getHeaderLocations,
+  getActiveCountry,
   getDriverStandingData,
   getTeamStandingData,
   getDriverData

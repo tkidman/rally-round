@@ -63,7 +63,7 @@ const writeOutput = async () => {
     await writeOutputForDivision(league.overall, links);
   }
   if (league.fantasy) {
-    writeFantasyHTML(league.fantasy, links);
+    //writeFantasyHTML(league.fantasy, links);
   }
   writeJSON(league);
   if (process.env.DIRT_AWS_ACCESS_KEY && league.websiteName) {
