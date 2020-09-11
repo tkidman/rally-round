@@ -7,7 +7,7 @@ const copydir = require("copy-dir");
 const { writeSheetsForDivision } = require("./spreadsheet");
 const { writeHTMLOutputForDivision } = require("./html");
 const { writePlacementOutput } = require("./html");
-const { writeFantasyHTML } = require("./html");
+//const { writeFantasyHTML } = require("./html");
 const { writeHomeHTML } = require("./html");
 const { uploadFiles } = require("../api/aws/s3");
 
