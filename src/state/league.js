@@ -15,8 +15,9 @@ const leagueRef = {};
 // driver rows is an array of objects of column headers to cell values (ie: [{ racenet: "satchmo", ... }] )
 const transformDriverRows = driverRows => {
   const driversById = driverRows.reduce((driversById, row) => {
-    const driverNameValue = row[driverColumns[driverFieldNames.name]];
-    if (driverNameValue) {
+    const nameValue = row[driverColumns[driverFieldNames.name]];
+    if (nameValue) {
+      const driverNameValue = nameValue.trim();
       const id = driverNameValue.toUpperCase();
       driversById[id] = {
         id,
@@ -120,14 +121,6 @@ const getDriver = name => {
   let driver = drivers.driversById[upperName];
   if (!driver) {
     driver = drivers.driversByRaceNet[upperName];
-    if (!driver) {
-      driver = Object.values(drivers.driversByRaceNet).find(driver => {
-        return (
-          driver.raceNetName.toUpperCase().includes(upperName) ||
-          driver.name.toUpperCase().includes(upperName)
-        );
-      });
-    }
   }
   return driver;
 };
