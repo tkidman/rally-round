@@ -26,6 +26,9 @@
                             <th></th>
                             <th>Nat</th>
                             <th>Driver</th>
+                            {{#if overall}}
+                                <th>Div</th>
+                            {{/if}}
                             {{#if showTeam}}
                             <th>Team</th>
                             {{/if}}
@@ -64,6 +67,9 @@
                             <td><img src="./assets/country-flags/{{this.country.code}}.png"
                                     style="max-width:1.5em; max-height:1.5em;" /></td>
                             <td class="text-left bold">{{this.standing.name}}</td>
+                            {{#if ../overall}}
+                                <td>{{this.divisionDisplayName}}</td>
+                            {{/if}}
                             {{#if ../showTeam}}
                                 <td>
                                     <img src="./assets/teams/{{this.driver.teamId}}.png" style="max-width:2em; max-height:2em;" />

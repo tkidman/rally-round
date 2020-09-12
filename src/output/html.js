@@ -182,6 +182,7 @@ const writeHomeHTML = links => {
 
 const writeStandingsHTML = (division, type, links) => {
   const data = transformForHTML(division, type);
+  data.overall = division.divisionName === "overall";
   data.navigation = getNavigationHTML(
     division.divisionName,
     type,
@@ -220,10 +221,17 @@ const transformForHTML = (division, type) => {
     };
 
     const results = getAllResults(standing.name, events, type);
+
+    // can be null for team overall
+    const standingDivision = leagueRef.divisions[standing.divisionName];
+    const divisionDisplayName =
+      standingDivision &&
+      (standingDivision.displayName || standingDivision.divisionName);
     const row = {
       results,
       standing,
-      ...movement
+      ...movement,
+      divisionDisplayName
     };
     if (type === "driver") {
       const { driver, country, carBrand } = getDriverData(standing.name);

@@ -290,20 +290,22 @@ const calculateEventResults = ({ event, divisionName, drivers }) => {
 };
 
 const calculateStandings = (results, previousStandings) => {
-  const standings = results.map(entry => {
+  const standings = results.map(result => {
     const standing = {
-      name: entry.name,
-      totalPoints: entry.totalPoints,
-      previousPosition: null
+      name: result.name,
+      totalPoints: result.totalPoints,
+      previousPosition: null,
+      divisionName: result.divisionName
     };
     if (previousStandings) {
       const previousIndex = previousStandings.findIndex(
-        standing => standing.name === entry.name
+        standing => standing.name === result.name
       );
       if (previousIndex !== -1) {
         const previousStanding = previousStandings[previousIndex];
         standing.previousPosition = previousIndex + 1;
-        standing.totalPoints = previousStanding.totalPoints + entry.totalPoints;
+        standing.totalPoints =
+          previousStanding.totalPoints + result.totalPoints;
       }
     }
     return standing;
