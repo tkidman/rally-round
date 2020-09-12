@@ -1,18 +1,19 @@
 const initialState = {
   pointsForDNF: false,
   websiteName: null,
+  showLivePoints: false,
   divisions: {
     themed: {
       divisionName: "themed",
       displayName: "Colin McRae Tribute",
-      onlyLoadFinishedEvents: true,
       logo: "colin.jpg",
       cars: [
         "Ford Sierra Cosworth RS500",
         "SUBARU Legacy RS",
         "SUBARU Impreza 1995",
         "SUBARU Impreza S4 Rally",
-        "Ford Focus RS Rally 2001"
+        "Ford Focus RS Rally 2001",
+        "ŠKODA Fabia Rally"
       ],
       clubs: [{ clubId: "256173", championshipIds: ["290761"] }],
       events: [],

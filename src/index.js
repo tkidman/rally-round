@@ -179,6 +179,32 @@ const addStageTimesToResultsByDriver = (
     });
   });
 };
+
+const getTotalPointsDisplay = (result, event) => {
+  let display = result.totalPoints;
+  if (
+    !leagueRef.league.showLivePoints &&
+    event.eventStatus === eventStatuses.active
+  ) {
+    display = "";
+  }
+  if (result.entry) {
+    if (result.entry.disqualificationReason) {
+      display = "DQ";
+    } else if (result.entry.isDnsEntry) {
+      if (event.eventStatus === eventStatuses.active) {
+        // don't display DNS if event is still active
+        display = "";
+      } else {
+        display = "DNS";
+      }
+    } else if (result.entry.isDnfEntry) {
+      display = "DNF";
+    }
+  }
+  return display;
+};
+
 const calculateEventResults = ({ event, divisionName, drivers }) => {
   const firstStageResultsByDriver = getResultsByDriver(
     event.racenetLeaderboardStages[0].entries,
@@ -220,38 +246,30 @@ const calculateEventResults = ({ event, divisionName, drivers }) => {
   const powerStageEntries = orderEntriesBy(entries, "stageTime");
   const totalEntries = orderEntriesBy(entries, "totalTime");
   const division = leagueRef.league.divisions[divisionName];
-  updatePoints(
-    resultsByDriver,
-    powerStageEntries,
-    division.points.powerStage,
-    "powerStagePoints"
-  );
-  updatePoints(
-    resultsByDriver,
-    totalEntries,
-    division.points.overall,
-    "overallPoints"
-  );
+  if (
+    event.eventStatus === eventStatuses.finished ||
+    leagueRef.league.showLivePoints
+  ) {
+    updatePoints(
+      resultsByDriver,
+      powerStageEntries,
+      division.points.powerStage,
+      "powerStagePoints"
+    );
+    updatePoints(
+      resultsByDriver,
+      totalEntries,
+      division.points.overall,
+      "overallPoints"
+    );
+  }
   const driverResults = orderResultsBy(
     Object.values(resultsByDriver),
     "totalTime"
   );
   driverResults.forEach(result => {
     result.totalPoints = getTotalPoints(result);
-    let display = result.totalPoints;
-    if (result.entry.disqualificationReason) {
-      display = "DQ";
-    } else if (result.entry.isDnsEntry) {
-      if (event.eventStatus === eventStatuses.active) {
-        // don't display DNS if event is still active
-        display = "";
-      } else {
-        display = "DNS";
-      }
-    } else if (result.entry.isDnfEntry) {
-      display = "DNF";
-    }
-    result.pointsDisplay = display;
+    result.pointsDisplay = getTotalPointsDisplay(result, event);
   });
 
   const teamResults = [];
@@ -266,7 +284,7 @@ const calculateEventResults = ({ event, divisionName, drivers }) => {
   driverResults.forEach(result => (result.divisionName = divisionName));
   teamResults.forEach(result => {
     result.divisionName = divisionName;
-    result.pointsDisplay = result.totalPoints;
+    result.pointsDisplay = getTotalPointsDisplay(result, event);
   });
   return { driverResults, teamResults };
 };

@@ -1,4 +1,5 @@
 const initialState = {
+  showLivePoints: true,
   divisions: {
     pro: {
       maxDriversScoringPointsForTeam: 1,

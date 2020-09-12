@@ -75,6 +75,7 @@ You can also pull driver information directly from a google sheet. You need to h
 * Move manual result config to initialState.js ✓ 
 * split output.js up into smaller files ✓
 * Write and read cache from S3 ✓
+* Flag so points aren't calculated for in progress events ✓
 * Show division in overall driver standings
 * Recalculate diffs in overall and show in overall results
 
