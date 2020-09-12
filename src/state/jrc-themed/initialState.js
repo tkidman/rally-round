@@ -1,5 +1,6 @@
 const initialState = {
   pointsForDNF: false,
+  websiteName: null,
   divisions: {
     themed: {
       divisionName: "themed",
@@ -13,8 +14,7 @@ const initialState = {
         "SUBARU Impreza S4 Rally",
         "Ford Focus RS Rally 2001"
       ],
-      clubId: "256173",
-      championshipIds: ["290761"],
+      clubs: [{ clubId: "256173", championshipIds: ["290761"] }],
       events: [],
       points: {
         powerStage: [],

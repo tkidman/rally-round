@@ -74,9 +74,12 @@ You can also pull driver information directly from a google sheet. You need to h
 * Multiple classes per division ✓
 * Move manual result config to initialState.js ✓ 
 * split output.js up into smaller files ✓
-* Write and read cache from S3
+* Write and read cache from S3 ✓
 * Show division in overall driver standings
 * Recalculate diffs in overall and show in overall results
+
+* enable cloudfront
+* get a cheap domain jrc.xyz?
 * Define required car per event
 * Support multiple driver cars (to support division promotions mid season)
 * DNF counter

@@ -160,13 +160,13 @@ const getEventKeysFromRecentResults = ({
   return eventKeys;
 };
 
-const getEventEndTime = (championships) => {
+const getEventEndTime = championships => {
   const latest = championships[championships.length - 1];
-  if(latest.isActive){
+  if (latest.isActive) {
     leagueRef.endTime = latest.events[0].entryWindow.end;
-    leagueRef.activeCountry = latest.events[0].locationName
+    leagueRef.activeCountry = latest.events[0].locationName;
   }
-}
+};
 
 module.exports = {
   fetchEvents,

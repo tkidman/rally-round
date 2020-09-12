@@ -1,3 +1,4 @@
+const { downloadCache } = require("./api/aws/s3");
 const { orderResultsBy } = require("./shared");
 const { orderEntriesBy } = require("./shared");
 const debug = require("debug")("tkidman:dirt2-results");
@@ -5,6 +6,8 @@ const { eventStatuses } = require("./shared");
 const { privateer } = require("./shared");
 const { printMissingDrivers } = require("./state/league");
 const { sortBy, keyBy } = require("lodash");
+const { cachePath } = require("./shared");
+const fs = require("fs");
 
 const { init, leagueRef } = require("./state/league");
 const { writeOutput, checkOutputDirs } = require("./output/output");
@@ -433,11 +436,22 @@ const calculateOverallResults = () => {
   leagueRef.league.overall = calculateOverall(leagueRef.league.divisions);
 };
 
+const loadCache = async () => {
+  if (process.env.DIRT_AWS_ACCESS_KEY && leagueRef.league.websiteName) {
+    const cacheFiles = await downloadCache(leagueRef.league.websiteName);
+    cacheFiles.forEach(cacheFile => {
+      const cacheFileName = cacheFile.key.split("/")[1];
+      fs.writeFileSync(`${cachePath}/${cacheFileName}`, cacheFile.data.Body);
+    });
+  }
+};
+
 const processAllDivisions = async () => {
   try {
     checkOutputDirs();
     await init();
     const { league, divisions } = leagueRef;
+    await loadCache();
     for (const divisionName of Object.keys(divisions)) {
       const division = divisions[divisionName];
       division.events = await fetchEvents(division, divisionName);
@@ -446,7 +460,7 @@ const processAllDivisions = async () => {
     if (Object.keys(divisions).length > 1) {
       calculateOverallResults();
     }
-    writeOutput(league);
+    await writeOutput(league);
     printMissingDrivers();
   } catch (err) {
     debug(err);

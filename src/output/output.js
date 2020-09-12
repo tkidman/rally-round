@@ -4,12 +4,12 @@ const fs = require("fs");
 const { outputPath, hiddenPath, cachePath } = require("../shared");
 const { leagueRef } = require("../state/league");
 const copydir = require("copy-dir");
+const { upload } = require("../api/aws/s3");
 const { writeSheetsForDivision } = require("./spreadsheet");
 const { writeHTMLOutputForDivision } = require("./html");
 const { writePlacementOutput } = require("./html");
 //const { writeFantasyHTML } = require("./html");
 const { writeHomeHTML } = require("./html");
-const { uploadFiles } = require("../api/aws/s3");
 
 const addLinks = (links, name, type) => {
   if (!links[type]) links[type] = [];
@@ -48,7 +48,7 @@ const writeOutput = async () => {
   if (league.placement) {
     writePlacementOutput();
     if (process.env.DIRT_AWS_ACCESS_KEY && league.websiteName) {
-      await uploadFiles(`./${outputPath}/website`, league.websiteName);
+      await upload(league.websiteName);
     }
     debug("only writing placements, returning");
     return true;
@@ -67,7 +67,7 @@ const writeOutput = async () => {
   }
   writeJSON(league);
   if (process.env.DIRT_AWS_ACCESS_KEY && league.websiteName) {
-    await uploadFiles(`./${outputPath}/website`, league.websiteName);
+    await upload(league.websiteName);
   }
   return true;
 };
