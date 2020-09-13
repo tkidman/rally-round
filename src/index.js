@@ -438,6 +438,9 @@ const calculateOverall = processedDivisions => {
       overallEvent.results.teamResults = sortTeamResults(
         overallTeamResultsByName
       );
+      overallEvent.results.teamResults.forEach(result => {
+        result.pointsDisplay = getTotalPointsDisplay(result, event);
+      });
     });
   });
 

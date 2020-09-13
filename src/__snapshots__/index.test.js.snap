@@ -78,11 +78,13 @@ Object {
           Object {
             "divisionName": "overall",
             "name": "Ditch Dusters",
+            "pointsDisplay": 290,
             "totalPoints": 290,
           },
           Object {
             "divisionName": "overall",
             "name": "Unlimited Pedal Works",
+            "pointsDisplay": 164,
             "totalPoints": 164,
           },
         ],
