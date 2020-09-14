@@ -22,3 +22,5 @@ src/visualisation/fantasy.html
 *.mp4
 
 src/state/jrc/new_fantasyTeams.json
+
+.env
