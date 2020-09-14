@@ -181,21 +181,25 @@ describe("calculates event results", () => {
         driverStandings: [
           {
             name: "satchmo",
-            totalPoints: 15
+            totalPoints: 15,
+            currentPosition: 1
           },
           {
             name: "zisekoz",
-            totalPoints: 10
+            totalPoints: 10,
+            currentPosition: 2
           }
         ],
         teamStandings: [
           {
             name: "Live and Let DNF",
-            totalPoints: 10
+            totalPoints: 10,
+            currentPosition: 1
           },
           {
             name: "Dammit Sammir!",
-            totalPoints: 8
+            totalPoints: 8,
+            currentPosition: 2
           }
         ]
       }

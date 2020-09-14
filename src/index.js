@@ -298,12 +298,11 @@ const calculateStandings = (results, previousStandings) => {
       divisionName: result.divisionName
     };
     if (previousStandings) {
-      const previousIndex = previousStandings.findIndex(
+      const previousStanding = previousStandings.find(
         standing => standing.name === result.name
       );
-      if (previousIndex !== -1) {
-        const previousStanding = previousStandings[previousIndex];
-        standing.previousPosition = previousIndex + 1;
+      if (previousStanding) {
+        standing.previousPosition = previousStanding.currentPosition;
         standing.totalPoints =
           previousStanding.totalPoints + result.totalPoints;
       }
@@ -317,7 +316,14 @@ const calculateStandings = (results, previousStandings) => {
 
   for (let i = 0; i < sortedStandings.length; i++) {
     const standing = sortedStandings[i];
-    standing.currentPosition = i + 1;
+    if (
+      i !== 0 &&
+      standing.totalPoints === sortedStandings[i - 1].totalPoints
+    ) {
+      standing.currentPosition = sortedStandings[i - 1].currentPosition;
+    } else {
+      standing.currentPosition = i + 1;
+    }
     standing.positionChange = standing.previousPosition
       ? standing.previousPosition - standing.currentPosition
       : null;
