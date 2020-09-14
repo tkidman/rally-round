@@ -78,7 +78,7 @@ You can also pull driver information directly from a google sheet. You need to h
 * Flag so points aren't calculated for in progress events ✓
 * Show division in overall driver standings ✓
 * Recalculate diffs in overall and show in overall results
-
+* Fix weird movements calculations when points are the same, and order 0 points above DNFs
 * enable cloudfront
 * get a cheap domain jrc.xyz?
 * Define required car per event
