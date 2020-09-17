@@ -76,7 +76,7 @@ const login = async resolve => {
   await page.goto(`${dirtRally2Domain}/clubs/find-club/page/1`);
 
   debug("extracting credentials ...");
-
+  page.reload();
   page.on("request", async request => {
     if (request._url.includes("Search")) {
       const cookies = await page.cookies();
