@@ -97,7 +97,16 @@ const writeFantasyHTML = (fantasyResults, links) => {
   var _d = fs.readFileSync(`${templatePath}/fantasyDrivers.hbs`).toString();
   var driver_template = Handlebars.compile(_d);
   const driver_nav = getNavigationHTML("driver", "fantasy", links);
-  const driverData = { drivers: data.drivers, navigation: driver_nav };
+  const driverData = {
+    drivers: data.drivers,
+    navigation: driver_nav,
+    prices: data.prices
+  };
+
+  var _r = fs.readFileSync(`${templatePath}/fantasyRosters.hbs`).toString();
+  var rosters_template = Handlebars.compile(_r);
+  const roster_nav = getNavigationHTML("rosters", "fantasy", links);
+  const rosterData = { teams: data.teams, navigation: roster_nav };
 
   fs.writeFileSync(
     `./${outputPath}/website/team-fantasy-standings.html`,
@@ -106,6 +115,10 @@ const writeFantasyHTML = (fantasyResults, links) => {
   fs.writeFileSync(
     `./${outputPath}/website/driver-fantasy-standings.html`,
     driver_template(driverData)
+  );
+  fs.writeFileSync(
+    `./${outputPath}/website/rosters-fantasy-standings.html`,
+    rosters_template(rosterData)
   );
 };
 

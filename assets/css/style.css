@@ -178,7 +178,7 @@ tbody>tr:nth-child(odd) {
 }
 
 .navTitle {
-	display: inline-block;
+	display: block;
 	text-transform: uppercase;
 }
 

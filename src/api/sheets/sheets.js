@@ -120,6 +120,7 @@ const updateResultsSheet = async (rows, sheetId, tabName) => {
 
 module.exports = {
   loadSheetAndTransform,
+  loadSheet,
   updateClubsSheet,
   updateResultsSheet
 };

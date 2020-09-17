@@ -8,7 +8,7 @@ const { upload } = require("../api/aws/s3");
 const { writeSheetsForDivision } = require("./spreadsheet");
 const { writeHTMLOutputForDivision } = require("./html");
 const { writePlacementOutput } = require("./html");
-//const { writeFantasyHTML } = require("./html");
+const { writeFantasyHTML } = require("./html");
 const { writeHomeHTML } = require("./html");
 
 const addLinks = (links, name, type) => {
@@ -32,6 +32,7 @@ const getHtmlLinks = () => {
   if (league.fantasy) {
     addLinks(links, "team", "fantasy");
     addLinks(links, "driver", "fantasy");
+    addLinks(links, "rosters", "fantasy");
   }
   return links;
 };
@@ -63,7 +64,7 @@ const writeOutput = async () => {
     await writeOutputForDivision(league.overall, links);
   }
   if (league.fantasy) {
-    //writeFantasyHTML(league.fantasy, links);
+    writeFantasyHTML(league.fantasy, links);
   }
   writeJSON(league);
   if (process.env.DIRT_AWS_ACCESS_KEY && league.websiteName) {

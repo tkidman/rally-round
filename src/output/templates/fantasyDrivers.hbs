@@ -27,12 +27,12 @@
 							<th>Driver</th>
 							<th><img src="./assets/country-flags/mco.png" /></th>
 							<th><img src="./assets/country-flags/swe.png" /></th>
-							<th><img src="./assets/country-flags/usa.png" /></th>
+							<th><img src="./assets/country-flags/nzl.png" /></th>
+							<th><img src="./assets/country-flags/arg.png" /></th>
+							<th><img src="./assets/country-flags/fin.png" /></th>
 							<th><img src="./assets/country-flags/deu.png" /></th>
 							<th><img src="./assets/country-flags/grc.png" /></th>
-							<th><img src="./assets/country-flags/welsh.png" /></th>
-							<th><img src="./assets/country-flags/esp.png" /></th>
-							<th><img src="./assets/country-flags/aus.png" /></th>
+							<th><img src="./assets/country-flags/scot.png" /></th>
 							<th>Points</th>
 							<th>Gap</th>
 						</tr>
@@ -70,6 +70,51 @@
 				</table>
 			</div>
 
+			<div class="flexBox">
+				<div style="margin-bottom: 1em;" class="w3-hide-large w3-hide-medium w3-hide-small">
+					<div class="logo" style="display:flex;">
+						<img src="./assets/fantasy.jpg" />
+						<h2 style="margin-left:1em;">Driver Prices</h2>
+					</div>
+				</div>
+				<table id="tableDrivers">
+					<thead>
+						<tr>
+							<th>Driver</th>
+							<th><img src="./assets/country-flags/mco.png" /></th>
+							<th><img src="./assets/country-flags/swe.png" /></th>
+							{{!-- <th><img src="./assets/country-flags/nzl.png" /></th>
+							<th><img src="./assets/country-flags/arg.png" /></th>
+							<th><img src="./assets/country-flags/fin.png" /></th>
+							<th><img src="./assets/country-flags/deu.png" /></th>
+							<th><img src="./assets/country-flags/grc.png" /></th>
+							<th><img src="./assets/country-flags/scot.png" /></th> --}}
+						</tr>
+					</thead>
+					<tbody>
+						{{#each prices}}{{#with this}}
+						<tr>
+							<td class="text-left bold">{{driver}}</td>
+							{{#each prices}}{{#with this}}
+							<td style="text-align:left;">
+								£{{price}}
+								{{#if positive}}
+								<span class="positive">(<i class="arrow up"></i>&nbsp;{{evolution}})</span>
+								{{/if}}
+								{{#if neutral}}
+								<span class="neutral">(=)</span>
+								{{/if}}
+								{{#if negative}}
+								<span class="negative">(<i class="arrow down"></i>&nbsp;{{evolution}})</span>
+								{{/if}}
+							</td>
+							{{/with}}{{/each}}
+						</tr>
+						{{/with}}{{/each}}
+					</tbody>
+
+				</table>
+			</div>
 		</div>
 	</div>
 

@@ -1,5 +1,5 @@
 const { getDriversByDivision } = require("../state/league");
-const debug = require("debug")("tkidman:dirt2-results:fantasy");
+let eventList = [];
 
 function addDnsDrivers(driverResults, division) {
   var lookupTable = driverResults.reduce((dict, result) => {
@@ -36,7 +36,6 @@ function removeDoubleCaptains(teams) {
     });
   });
 }
-// function addReservePoints(team) {}
 function calculateTeamPoints(team, event, lookuptable) {
   team.roster.forEach(week => {
     if (week.location != event.location) return;
@@ -45,7 +44,7 @@ function calculateTeamPoints(team, event, lookuptable) {
       var driverPoints = lookuptable[driver];
       driverPoints = driverPoints ? driverPoints : -3;
       if (driverPoints < 0) hasDnf = true;
-      if (week.capain == driver) {
+      if (week.captain == driver) {
         driverPoints *= 2;
       }
       return val + driverPoints;
@@ -56,31 +55,67 @@ function calculateTeamPoints(team, event, lookuptable) {
     team.points += score;
   });
 }
-// function buildDriverStandings(driverStandings, lookuptable, event) {
-//   Object.keys(lookuptable).forEach(driver => {
-//     if (!driverStandings[driver]) {
-//       driverStandings[driver] = {
-//         name: driver,
-//         total: 0,
-//         previous: 0
-//       };
-//     }
-//     driverStandings[driver][event.location] = lookuptable[driver];
-//     driverStandings[driver].previous = driverStandings[driver].total;
-//     driverStandings[driver].total += lookuptable[driver];
-//   });
-// }
+function calculateBudget(team, event, previousEvent, prices) {
+  if (!previousEvent) {
+    team.budget.push(18);
+    return;
+  } else {
+    team.roster.forEach(week => {
+      if (week.location != previousEvent.location) return;
+      let count = 0;
+      week.drivers.forEach(driver => {
+        count += parseFloat(prices[driver][event.location]);
+      });
+      count += parseFloat(prices[week.reserve][event.location]);
+      let budget = count < 18 ? 18 : count;
+      team.budget.push(budget);
+      team.value.push(count);
+    });
+  }
+}
+function calculateBestBuys(event, lookuptable, fantasy) {
+  const driverPrices = fantasy.drivers;
+  const loc = event.location;
+  let out = [];
+  Object.values(driverPrices).forEach(price => {
+    out.push({
+      name: price.driver,
+      cost: price[loc],
+      total: lookuptable[price.driver],
+      value: (lookuptable[price.driver] / price[loc]).toFixed(3)
+    });
+  });
+  out.sort((a, b) => b.value - a.value);
+  fantasy.bestBuy = out.slice(0, 5);
+}
+function buildDriverStandings(driverStandings, lookuptable, event) {
+  Object.keys(lookuptable).forEach(driver => {
+    if (!driverStandings[driver]) {
+      driverStandings[driver] = {
+        name: driver,
+        total: 0,
+        previous: 0
+      };
+    }
+    driverStandings[driver][event.location] = lookuptable[driver];
+    driverStandings[driver].previous = driverStandings[driver].total;
+    driverStandings[driver].total += lookuptable[driver];
+  });
+}
 const calculateFantasyStandings = (event, previousEvent, league, division) => {
   if (!league.fantasy) return;
+  eventList.push(event.location);
   var teams = league.fantasy.teams;
-  var teams2 = league.fantasy.teams2;
-  if (!previousEvent) removeDoubleCaptains(teams2); //no need to run this multiple times
-  //if(event.location in teams.points) return;
+  teams.forEach(team =>
+    calculateBudget(team, event, previousEvent, league.fantasy.drivers)
+  );
+
+  if (event.eventStatus == "Active") return;
+
+  if (!previousEvent) removeDoubleCaptains(teams); //no need to run this multiple times
 
   var driverResults = event.results.driverResults;
-
   addDnsDrivers(driverResults, division);
-
   league.fantasy.calculators.forEach(calculation =>
     calculation(driverResults, previousEvent)
   );
@@ -90,56 +125,13 @@ const calculateFantasyStandings = (event, previousEvent, league, division) => {
     return dict;
   }, {});
 
-  teams2.forEach(team => calculateTeamPoints(team, event, lookuptable));
-  teams.map(team => {
-    if (!(event.location in team.roster_history))
-      team.roster_history[event.location] = {
-        drivers: team.drivers,
-        joker: team.joker,
-        points: 0
-      };
-    var _roster = team.roster_history[event.location];
-    var score = _roster.drivers.reduce((val, driver) => {
-      var driverPoints = lookuptable[driver];
-      driverPoints = driverPoints ? driverPoints : -3;
-      if (_roster.joker == driver) {
-        driverPoints *= 2;
-      }
-      return val + driverPoints;
-    }, 0);
-    _roster.points = score;
-    team.previous = team.points;
-    team.points += score;
-  });
+  teams.forEach(team => calculateTeamPoints(team, event, lookuptable));
+
+  calculateBestBuys(event, lookuptable, league.fantasy);
 
   if (!league.fantasy.driverStandings) league.fantasy.driverStandings = {};
-  Object.keys(lookuptable).forEach(driver => {
-    if (!league.fantasy.driverStandings[driver]) {
-      league.fantasy.driverStandings[driver] = {
-        name: driver,
-        total: 0,
-        previous: 0
-      };
-    }
-    league.fantasy.driverStandings[driver][event.location] =
-      lookuptable[driver];
-    league.fantasy.driverStandings[driver].previous =
-      league.fantasy.driverStandings[driver].total;
-    league.fantasy.driverStandings[driver].total += lookuptable[driver];
-  });
-  // if (!(event.location in league.fantasy.driverStandings)) {
-  //   league.fantasy.driverStandings[event.location] = lookuptable;
-  // }
-  var fs = require("fs");
-  fs.writeFile(
-    "./src/state/jrc/new_fantasyTeams.json",
-    JSON.stringify(teams),
-    function(err) {
-      if (err) {
-        return debug(`error writing fantasyJson file`);
-      }
-    }
-  );
+  buildDriverStandings(league.fantasy.driverStandings, lookuptable, event);
+
   return teams;
 };
 
@@ -174,6 +166,9 @@ function processFantasyDrivers(driverStandings) {
 }
 function processFantasyTeams(teamStandings) {
   var teams = Object.values(teamStandings).reduce((arr, team) => {
+    team.budget.forEach((budget, i) => {
+      team.roster[i].budget = "฿" + budget;
+    });
     var out = {
       name: team.name,
       points: team.points,
@@ -181,10 +176,14 @@ function processFantasyTeams(teamStandings) {
       positive: false,
       neutral: false,
       negative: false,
-      drivers: team.drivers.join(", ")
+      drivers: team.manager, //team.drivers.join(", "),
+      weekPoints: {},
+      budget: Math.max(...team.budget),
+      roster: team.roster
     };
-    Object.keys(team.roster_history).forEach(location => {
-      out[location] = team.roster_history[location].points;
+    Object.values(team.roster).forEach(week => {
+      let points = week.points ? week.points : "";
+      out[week.location] = points;
     });
     arr.push(out);
     return arr;
@@ -213,45 +212,40 @@ function processFantasyTeams(teamStandings) {
 
   return teams;
 }
-function processBestBuy() {
-  return [
-    {
-      name: "Pynklu",
-      value: 210,
-      cost: 0.1,
-      total: 21
-    },
-    {
-      name: "Raumo",
-      value: 6.22,
-      cost: 4.5,
-      total: 28
-    },
-    {
-      name: "BrothersChris",
-      value: 5.23,
-      cost: 6.5,
-      total: 34
-    },
-    {
-      name: "Satchmo",
-      value: 4.75,
-      cost: 4,
-      total: 19
-    },
-    {
-      name: "TUS Cham",
-      value: 4.75,
-      cost: 8,
-      total: 38
-    }
-  ];
+function processPriceList(prices) {
+  return Object.values(prices).reduce((arr, driver) => {
+    let priceArr = [];
+    let prev = driver[eventList[0]];
+    let notfirst = false;
+    eventList.forEach(event => {
+      let pr = parseFloat(driver[event]);
+      let diff = pr - prev;
+      priceArr.push({
+        price: pr,
+        evolution: diff,
+        positive: diff > 0 && notfirst,
+        neutral: diff == 0 && notfirst,
+        negative: diff < 0 && notfirst
+      });
+      prev = pr;
+      notfirst = true;
+    });
+    arr.push({
+      driver: driver.driver,
+      prices: priceArr,
+      current: prev
+    });
+    return arr;
+  }, []);
 }
 function processFantasyResults(results) {
   const drivers = processFantasyDrivers(results.driverStandings);
   const teams = processFantasyTeams(results.teams);
-  const bestBuy = processBestBuy();
-  return { drivers: drivers, teams: teams, bestBuy: bestBuy };
+  const bestBuy = results.bestBuy;
+  const prices = processPriceList(results.drivers).sort(
+    (a, b) => b.current - a.current
+  );
+  return { drivers: drivers, teams: teams, bestBuy: bestBuy, prices: prices };
 }
 
 module.exports = {

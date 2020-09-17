@@ -74,9 +74,11 @@ const loadFantasy = async league => {
     sheetId: league.fantasy.sheetId,
     tabName: "teams"
   }).then(teams => {
-    league.fantasy.teams2 = teams;
-    league.fantasy.teams2.forEach(team => {
+    league.fantasy.teams = teams;
+    league.fantasy.teams.forEach(team => {
       team.points = 0;
+      team.budget = [];
+      team.value = [];
       loadSheetAndTransform({
         sheetId: league.fantasy.sheetId,
         tabName: team.name
@@ -92,6 +94,16 @@ const loadFantasy = async league => {
         }, []);
       });
     });
+  });
+
+  await loadSheetAndTransform({
+    sheetId: league.fantasy.sheetId,
+    tabName: "drivers"
+  }).then(result => {
+    league.fantasy.drivers = result.reduce((out, driver) => {
+      out[driver.driver] = driver;
+      return out;
+    }, {});
   });
 };
 

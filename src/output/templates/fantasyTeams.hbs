@@ -5,6 +5,11 @@
 	<link rel="stylesheet" type="text/css" href="./assets/css/animation.css">
 	<link rel="stylesheet" type="text/css" href="./assets/css/w3.css">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<style>
+		.collapsed {
+			visibility: collapse;
+		}
+	</style>
 </head>
 
 <body>
@@ -24,14 +29,15 @@
 							<th></th>
 							<th></th>
 							<th>Team</th>
+							<th>💰</th>
 							<th><img src="./assets/country-flags/mco.png" /></th>
 							<th><img src="./assets/country-flags/swe.png" /></th>
-							<th><img src="./assets/country-flags/usa.png" /></th>
+							<th><img src="./assets/country-flags/nzl.png" /></th>
+							<th><img src="./assets/country-flags/arg.png" /></th>
+							<th><img src="./assets/country-flags/fin.png" /></th>
 							<th><img src="./assets/country-flags/deu.png" /></th>
 							<th><img src="./assets/country-flags/grc.png" /></th>
-							<th><img src="./assets/country-flags/welsh.png" /></th>
-							<th><img src="./assets/country-flags/esp.png" /></th>
-							<th><img src="./assets/country-flags/aus.png" /></th>
+							<th><img src="./assets/country-flags/scot.png" /></th>
 							<th>Points</th>
 							<th>Gap</th>
 						</tr>
@@ -52,14 +58,15 @@
 								{{/if}}
 							</td>
 							<td class="text-left bold">{{name}} <small>( {{drivers}} )</small></td>
+							<td>${{budget}}</td>
 							<td>{{[MONTE CARLO]}}</td>
 							<td>{{VÄRMLAND}}</td>
-							<td>{{[NEW ENGLAND]}}</td>
+							<td>{{[HAWKES BAY]}}</td>
+							<td>{{[CATAMARCA PROVINCE]}}</td>
+							<td>{{[JÄMSÄ]}}</td>
 							<td>{{[BAUMHOLDER]}}</td>
 							<td>{{[ARGOLIS]}}</td>
-							<td>{{[POWYS]}}</td>
-							<td>{{[RIBADELLES]}}</td>
-							<td>{{[MONARO]}}</td>
+							<td>{{[PERTH AND KINROSS]}}</td>
 							<td class="bold">{{points}}</td>
 							<td>{{gap}}</td>
 						</tr>
@@ -79,7 +86,7 @@
 							<th>Driver</th>
 							<th>Cost</th>
 							<th>Profit</th>
-							<th>Value / $</th>
+							<th>Value / €</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -100,6 +107,9 @@
         DROPDOWN
     -->
 	<script>
+		var teamDiv = document.getElementById("teamNav")
+		var topNav = document.getElementsByClassName("w3-top")[0];
+		topNav.appendChild(teamDiv);
 		function openNav() {
 			var x = document.getElementById("mobileNav");
 			if (x.className.indexOf("w3-show") == -1) {

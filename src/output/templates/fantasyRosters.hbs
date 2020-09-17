@@ -1,0 +1,109 @@
+<html lang="en">
+
+<head>
+	<link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+	<link rel="stylesheet" type="text/css" href="./assets/css/animation.css">
+	<link rel="stylesheet" type="text/css" href="./assets/css/w3.css">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<style>
+		.collapsed {
+			visibility: collapse;
+		}
+	</style>
+</head>
+
+<body>
+	{{{navigation}}}
+
+	<div id="teamNav" class="w3-bar w3-light-grey secondaryNav">
+		{{#each teams}}
+			<button onclick="openAccordion('{{name}}Section')" class="w3-button" style="overflow:initial; font-weight:bold; padding:0;">
+				{{name}}
+			</button>
+		{{/each}}
+	</div>
+
+	<div id="container">
+		{{#each teams}}{{#with this}}
+		<div class="w3-container">
+			<div id="{{name}}Section" 
+				class="teamContainer w3-container{{#if @first}}{{else}} collapsed{{/if}}"
+				style="margin: 0 auto; display: table;">
+				<h2>{{drivers}}'s {{name}}</h2>
+				<table>
+					<thead>
+						<tr>
+							<th>Location</th>
+							<th>💰</th>
+							<th>Captain</th>
+							<th>Driver 1</th>
+							<th>Driver 2</th>
+							<th>Driver 3</th>
+							<th>Reserve</th>
+							<th>Points</th>
+						</tr>
+					</thead>
+					<tbody>
+						{{#each roster}}{{#with this}}
+							<tr>
+								<td>{{location}}</td>
+								<td id="a">{{budget}}</td>
+								<td id="b">{{captain}}</td>
+								{{#each drivers}}
+									<td id="c">{{this}}</td>
+									{{else}}
+									<td id="c"></td>
+									<td id="c"></td>
+									<td id="c"></td>
+								{{/each}}
+								<td id="d">{{reserve}}</td>
+								<td id="e">{{points}}</td>
+							</tr>
+						{{/with}}{{/each}}
+					</tbody>
+				</table>
+			</div>
+		</div>
+		{{/with}}{{/each}}
+	</div>
+
+
+	<!--
+        DROPDOWN
+    -->
+	<script>
+		var teamDiv = document.getElementById("teamNav")
+		var topNav = document.getElementsByClassName("w3-top")[0];
+		topNav.appendChild(teamDiv);
+
+		function openNav() {
+			var x = document.getElementById("mobileNav");
+			if (x.className.indexOf("w3-show") == -1) {
+				x.className += " w3-show";
+			} else {
+				x.className = x.className.replace(" w3-show", "");
+			}
+		}
+
+		var prev = document.getElementsByClassName("teamContainer")[0];
+		function openAccordion(id) {
+			var x = document.getElementById(id);
+			if (prev == x) return;
+			if (x.className.indexOf("collapsed") == -1) {
+				x.className += " collapsed";
+			} else {
+				x.className = x.className.replace(" collapsed", "");
+			}
+			prev.className += " collapsed";
+			prev = x;
+		}
+	</script>
+	<!--
+        BACKGROUND ANIMATION
+    -->
+	<div id="particles-js"></div>
+	<script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+	<script src="./assets/particleConfig.js"></script>
+</body>
+
+</html>
