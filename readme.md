@@ -80,6 +80,7 @@ You can also pull driver information directly from a google sheet. You need to h
 * Fix weird movements calculations when points are the same ✓
 * Recalculate diffs in overall and show in overall results
 * Order 0 points above DNFs
+* Toggle for live / actual points
 * enable cloudfront
 * get a cheap domain jrc.xyz?
 * Define required car per event
