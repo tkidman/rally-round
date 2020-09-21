@@ -1,3 +1,4 @@
+const { createDNFResult } = require("../shared");
 const { getDriversByDivision } = require("../state/league");
 let eventList = [];
 
@@ -9,19 +10,13 @@ function addDnsDrivers(driverResults, division) {
   getDriversByDivision(division).forEach(driver => {
     if (driver.name in lookupTable) return;
     driverResults.push({
+      ...createDNFResult(driver.name, true),
       divisionName: division,
-      name: driver.name,
       overallPoints: 0,
       powerStagePoints: 0,
       totalPoints: 0,
       fantasyPoints: 0,
-      teamId: driver.teamId,
-      entry: {
-        isDnfEntry: true,
-        isDnsEntry: true,
-        name: driver.name,
-        totalTime: "99:99:99.999"
-      }
+      teamId: driver.teamId
     });
   });
 }

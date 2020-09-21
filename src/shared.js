@@ -53,6 +53,41 @@ const orderResultsBy = (results, field) => {
   });
 };
 
+// field is stage or total
+const recalculateDiffsForEntries = (entries, field) => {
+  const timeField = `${field}Time`;
+  const diffField = `${field}Diff`;
+  const sortedEntries = orderEntriesBy(entries, timeField);
+  if (sortedEntries.length > 0) {
+    const topTime = getDuration(sortedEntries[0][timeField]);
+    for (let i = 1; i < sortedEntries.length; i++) {
+      const entry = sortedEntries[i];
+      if (!entry.isDnsEntry) {
+        const entryTime = getDuration(sortedEntries[i][timeField]);
+        const diff = entryTime.subtract(topTime);
+        entry[diffField] = moment
+          .utc(diff.as("milliseconds"))
+          .format("+HH:mm:ss.SSS");
+      }
+    }
+  }
+};
+
+const createDNFResult = (driverName, isDnsEntry) => {
+  return {
+    name: driverName,
+    entry: {
+      name: driverName,
+      isDnfEntry: true,
+      isDnsEntry,
+      stageTime: "15:00:00.000",
+      stageDiff: "N/A",
+      totalTime: "23:59:59.000",
+      totalDiff: "N/A"
+    }
+  };
+};
+
 module.exports = {
   outputPath,
   cachePath,
@@ -64,5 +99,7 @@ module.exports = {
   eventStatuses,
   orderEntriesBy,
   orderResultsBy,
-  getDuration
+  getDuration,
+  recalculateDiffsForEntries,
+  createDNFResult
 };

@@ -35,13 +35,9 @@
                         <th>Car</th>
                     {{/if}}
                     <td>PS</td>
-                    {{#unless overall}}
-                        <td>Diff</td>
-                    {{/unless}}
+                    <td>Diff</td>
                     <td>Total</td>
-                    {{#unless overall}}
-                        <td>Diff</td>
-                    {{/unless}}
+                    <td>Diff</td>
                     <td>PS Points</td>
                     <td>Points</td>
                     <td>Total Points</td>
@@ -69,13 +65,9 @@
                             </td>
                         {{/if}}
                         <td>{{this.entry.stageTime}}</td>
-                        {{#unless ../overall}}
-                            <td>{{this.entry.stageDiff}}</td>
-                        {{/unless}}
+                        <td>{{this.entry.stageDiff}}</td>
                         <td>{{this.entry.totalTime}}</td>
-                        {{#unless ../overall}}
-                            <td>{{this.entry.totalDiff}}</td>
-                        {{/unless}}
+                        <td>{{this.entry.totalDiff}}</td>
                         <td>{{this.powerStagePoints}}</td>
                         <td>{{this.overallPoints}}</td>
                         <td class="bold">{{this.pointsDisplay}}</td>

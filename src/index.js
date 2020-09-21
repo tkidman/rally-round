@@ -8,6 +8,9 @@ const { printMissingDrivers } = require("./state/league");
 const { sortBy, keyBy } = require("lodash");
 const { cachePath } = require("./shared");
 const fs = require("fs");
+const { createDNFResult } = require("./shared");
+const { cloneDeep } = require("lodash");
+const { recalculateDiffsForEntries } = require("./shared");
 
 const { init, leagueRef } = require("./state/league");
 const { writeOutput, checkOutputDirs } = require("./output/output");
@@ -73,21 +76,6 @@ const sortTeamResults = teamResultsById => {
     teamResult => teamResult.totalPoints
   );
   return teamResults.reverse();
-};
-
-const createDNFResult = (driverName, isDnsEntry) => {
-  return {
-    name: driverName,
-    entry: {
-      name: driverName,
-      isDnfEntry: true,
-      isDnsEntry,
-      stageTime: "15:00:00.000",
-      stageDiff: "N/A",
-      totalTime: "59:59:59.000",
-      totalDiff: "N/A"
-    }
-  };
 };
 
 const setDnfIfIncorrectCar = (event, entries, divisionName) => {
@@ -420,9 +408,10 @@ const calculateOverall = processedDivisions => {
         };
         overall.events.push(overallEvent);
       }
-      // TODO do we need this?
+
       const driverResultsWithDivisionName = event.results.driverResults.map(
-        result => Object.assign({ divisionName: divisionName }, { ...result })
+        result =>
+          Object.assign({ divisionName: divisionName }, cloneDeep(result))
       );
       overallEvent.results.driverResults.push(...driverResultsWithDivisionName);
 
@@ -456,6 +445,9 @@ const calculateOverall = processedDivisions => {
       event.results.driverResults,
       "totalTime"
     );
+    const entries = event.results.driverResults.map(result => result.entry);
+    recalculateDiffsForEntries(entries, "total");
+    recalculateDiffsForEntries(entries, "stage");
     const previousEvent = index > 0 ? overall.events[index - 1] : null;
     calculateEventStandings(event, previousEvent);
   });
