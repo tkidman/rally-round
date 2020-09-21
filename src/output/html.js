@@ -159,15 +159,16 @@ const getNavigationHTML = (
     const _t = fs.readFileSync(navigationTemplateFile).toString();
     this.compiled_navigation = Handlebars.compile(_t);
   }
-  if (Object.keys(links).indexOf(currentMenu) !== -1) {
-    links[currentMenu].forEach(link => {
-      link.active = link.link === currentPage;
+  Object.keys(links).forEach(menu => {
+    if (menu === "active") return;
+    links[menu].forEach(link => {
+      link.active = link.link === currentPage && menu === currentMenu;
       if (link.active) {
         links.active = link;
         links.active.menu = currentMenu;
       }
     });
-  }
+  });
   return this.compiled_navigation({
     links,
     secondary: headerLocations,

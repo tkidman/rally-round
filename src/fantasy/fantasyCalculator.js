@@ -25,7 +25,7 @@ function removeDoubleCaptains(teams) {
     let captains = [];
     team.roster.forEach(week => {
       if (captains.indexOf(week.captain) > -1) {
-        week.captain = "";
+        week.captain = "/";
       }
       captains.push(week.captain);
     });
@@ -105,7 +105,7 @@ const calculateFantasyStandings = (event, previousEvent, league, division) => {
     calculateBudget(team, event, previousEvent, league.fantasy.drivers)
   );
 
-  if (event.eventStatus == "Active") return;
+  if (event.eventStatus == "Active") return teams;
 
   if (!previousEvent) removeDoubleCaptains(teams); //no need to run this multiple times
 

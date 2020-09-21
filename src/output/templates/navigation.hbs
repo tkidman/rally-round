@@ -108,7 +108,7 @@
 		{{/if}}
 	</div>
 	
-	<div id="mobileNav" class="w3-bar-block w3-black w3-hide w3-hide-large">
+	<div id="mobileNav" class="w3-bar-block w3-black w3-hide w3-hide-large" style="overflow-y:scroll;max-height:95vh;">
 		{{#with links.driver}}
 		{{#each this}}
 		<a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">Driver Standings - {{link}}</a>
