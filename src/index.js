@@ -19,9 +19,9 @@ const updatePoints = (resultsByDriver, orderedEntries, points, pointsField) => {
   for (let i = 0; i < points.length; i++) {
     if (orderedEntries.length > i) {
       const entry = orderedEntries[i];
-      const driver = entry.name;
+      const driver = leagueRef.getDriver(entry.name);
       if (!entry.isDnfEntry || leagueRef.league.pointsForDNF) {
-        resultsByDriver[driver][pointsField] = points[i];
+        resultsByDriver[driver.name][pointsField] = points[i];
       }
     }
   }
@@ -157,8 +157,9 @@ const setManualResults = (
 
 const getResultsByDriver = entries => {
   const resultsByDriver = entries.reduce((resultsByDriver, entry) => {
-    resultsByDriver[entry.name] = {
-      name: entry.name,
+    const driver = leagueRef.getDriver(entry.name);
+    resultsByDriver[driver.name] = {
+      name: driver.name,
       entry
     };
     return resultsByDriver;
@@ -378,7 +379,7 @@ const loadEventDrivers = (drivers, event) => {
       leagueRef.missingDrivers[entry.name] = entry.name;
     }
     driver.nationality = entry.nationality;
-    drivers[entry.name] = driver;
+    drivers[driver.name] = driver;
   });
   return drivers;
 };

@@ -56,7 +56,7 @@ describe("calculates event results", () => {
           totalTime: "04:59:59.000",
           vehicleName: "Ford Escort Mk II"
         },
-        name: "SFRrallimoilane",
+        name: "SFR_rallimoilane",
         overallPoints: 9,
         pointsDisplay: 14,
         powerStagePoints: 5,
