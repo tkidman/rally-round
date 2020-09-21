@@ -17,17 +17,17 @@
 
 	<div id="teamNav" class="w3-bar w3-light-grey secondaryNav">
 		{{#each teams}}
-			<button onclick="openAccordion('{{name}}Section')" class="w3-button" style="overflow:initial; font-weight:bold; padding:0;">
-				{{name}}
-			</button>
+		<button onclick="openAccordion('{{name}}Section')" class="w3-button"
+			style="overflow:initial; font-weight:bold; padding:0;">
+			{{name}}
+		</button>
 		{{/each}}
 	</div>
 
 	<div id="container">
 		{{#each teams}}{{#with this}}
 		<div class="w3-container">
-			<div id="{{name}}Section" 
-				class="teamContainer w3-container{{#if @first}}{{else}} collapsed{{/if}}"
+			<div id="{{name}}Section" class="teamContainer w3-container{{#if @first}}{{else}} collapsed{{/if}}"
 				style="margin: 0 auto; display: table;">
 				<h2>{{drivers}}'s {{name}}</h2>
 				<table>
@@ -45,26 +45,103 @@
 					</thead>
 					<tbody>
 						{{#each roster}}{{#with this}}
-							<tr>
-								<td>{{location}}</td>
-								<td id="a">{{budget}}</td>
-								<td id="b">{{captain}}</td>
-								{{#each drivers}}
-									<td id="c">{{this}}</td>
-									{{else}}
-									<td id="c"></td>
-									<td id="c"></td>
-									<td id="c"></td>
-								{{/each}}
-								<td id="d">{{reserve}}</td>
-								<td id="e">{{points}}</td>
-							</tr>
+						<tr>
+							<td>{{location}}</td>
+							<td id="a">{{budget}}</td>
+							<td id="b">{{captain}}</td>
+							{{#each drivers}}
+							<td id="c">{{this}}</td>
+							{{else}}
+							<td id="c"></td>
+							<td id="c"></td>
+							<td id="c"></td>
+							{{/each}}
+							<td id="d">{{reserve}}</td>
+							<td id="e">{{points}}</td>
+						</tr>
 						{{/with}}{{/each}}
 					</tbody>
 				</table>
 			</div>
 		</div>
 		{{/with}}{{/each}}
+
+		<div class="w3-container">
+			<div class="w3-container" style="margin: 0 auto; display: table;">
+				<h1>Pynklu, is this roster in budget??</h1>
+				<div class="w3-row-padding">
+					<div class="w3-half"><input list="driverPrices" id="driver1" name="driver1" placeholder="driver1"
+							class="w3-input w3-border" />
+					</div>
+					<div class="w3-half"><input list="driverPrices" id="driver2" name="driver2" placeholder="driver2"
+							class="w3-input w3-border" />
+					</div>
+					<div class="w3-half"><input list="driverPrices" id="driver3" name="driver3" placeholder="driver3"
+							class="w3-input w3-border" />
+					</div>
+					<div class="w3-half"><input list="driverPrices" id="driver4" name="driver4" placeholder="driver4"
+							class="w3-input w3-border" />
+					</div>
+				</div>
+				<button class="w3-btn w3-blue" onclick="calculatePrice()">Calculate!</button>
+
+				<p>Driverprice: <span id="totalPrice"></span></p>
+
+				<datalist id="driverPrices">
+					{{#each prices}}{{#with this}}
+					{{#each prices}}{{#with this}}
+					{{#if @first}}
+					<option data-value="{{price}}" value="{{../driver}} (${{price}})">{{../driver}} (${{price}})
+					</option>
+					{{/if}}
+					{{/with}}{{/each}}
+					{{/with}}{{/each}}
+				</datalist>
+			</div>
+		</div>
+
+		<div class="w3-container">
+			<div class="w3-container" style="margin: 0 auto; display: table;">
+				<table id="tableDrivers">
+					<thead>
+						<tr>
+							<th>Driver</th>
+							<th><img src="./assets/country-flags/mco.png" /></th>
+							<th><img src="./assets/country-flags/swe.png" /></th>
+							<th><img src="./assets/country-flags/nzl.png" /></th>
+							{{!-- <th><img src="./assets/country-flags/arg.png" /></th>
+							<th><img src="./assets/country-flags/fin.png" /></th>
+							<th><img src="./assets/country-flags/deu.png" /></th>
+							<th><img src="./assets/country-flags/grc.png" /></th>
+							<th><img src="./assets/country-flags/scot.png" /></th> --}}
+						</tr>
+					</thead>
+					<tbody>
+						{{#each prices}}{{#with this}}
+						<tr>
+							<td class="text-left bold">{{driver}}</td>
+							{{#each prices}}{{#with this}}
+							<td style="text-align:left;">
+								£{{price}}
+								{{#if positive}}
+								<span class="positive">(<i class="arrow up"></i>&nbsp;{{evolution}})</span>
+								{{/if}}
+								{{#if neutral}}
+								<span class="neutral">(=)</span>
+								{{/if}}
+								{{#if negative}}
+								<span class="negative">(<i class="arrow down"></i>&nbsp;{{evolution}})</span>
+								{{/if}}
+							</td>
+							{{/with}}{{/each}}
+						</tr>
+						{{/with}}{{/each}}
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+
 	</div>
 
 
@@ -97,6 +174,27 @@
 			prev.className += " collapsed";
 			prev = x;
 		}
+
+		/**
+			CALCULATOR
+		*/
+		function getDataValue(value) {
+			var _v = document.querySelector("#driverPrices option[value='" + value + "']");
+			return _v ? _v.dataset.value*1 : 0;
+		}
+
+		function calculatePrice() {
+			var out = document.getElementById('totalPrice')
+			var count = 0;
+			for (let i = 1; i < 5; i++) {
+				var input = document.getElementById('driver' + i);
+				count += getDataValue(input.value);
+			}
+			out.innerHTML = count;
+		}
+
+
+
 	</script>
 	<!--
         BACKGROUND ANIMATION

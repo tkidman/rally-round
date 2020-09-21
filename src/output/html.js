@@ -106,7 +106,11 @@ const writeFantasyHTML = (fantasyResults, links) => {
   var _r = fs.readFileSync(`${templatePath}/fantasyRosters.hbs`).toString();
   var rosters_template = Handlebars.compile(_r);
   const roster_nav = getNavigationHTML("rosters", "fantasy", links);
-  const rosterData = { teams: data.teams, navigation: roster_nav };
+  const rosterData = {
+    teams: data.teams,
+    navigation: roster_nav,
+    prices: data.prices
+  };
 
   fs.writeFileSync(
     `./${outputPath}/website/team-fantasy-standings.html`,
