@@ -29,6 +29,7 @@
 		<div class="w3-container">
 			<div id="{{name}}Section" class="teamContainer w3-container{{#if @first}}{{else}} collapsed{{/if}}"
 				style="margin: 0 auto; display: table;">
+				<span style="display:none;" class="currentBudget">{{budget}}</span>
 				<h2>{{drivers}}'s {{name}}</h2>
 				<table>
 					<thead>
@@ -47,17 +48,17 @@
 						{{#each roster}}{{#with this}}
 						<tr>
 							<td>{{location}}</td>
-							<td id="a">{{budget}}</td>
-							<td id="b">{{captain}}</td>
+							<td>{{budget}}</td>
+							<td>{{captain}}</td>
 							{{#each drivers}}
-							<td id="c">{{this}}</td>
+							<td>{{this}}</td>
 							{{else}}
-							<td id="c"></td>
-							<td id="c"></td>
-							<td id="c"></td>
+							<td></td>
+							<td></td>
+							<td></td>
 							{{/each}}
-							<td id="d">{{reserve}}</td>
-							<td id="e">{{points}}</td>
+							<td>{{reserve}}</td>
+							<td>{{points}}</td>
 						</tr>
 						{{/with}}{{/each}}
 					</tbody>
@@ -83,14 +84,15 @@
 							class="w3-input w3-border" />
 					</div>
 				</div>
-				<button class="w3-btn w3-blue" onclick="calculatePrice()">Calculate!</button>
+				<button class="w3-btn w3-blue" style="margin: auto;display: table;margin-top: 1em;" 
+					onclick="calculatePrice()">Calculate!</button>
 
-				<p>Driverprice: <span id="totalPrice"></span></p>
+				<p style="font-weight:bold;">Budget: <span id="totalPrice"></span></p>
 
 				<datalist id="driverPrices">
 					{{#each prices}}{{#with this}}
 					{{#each prices}}{{#with this}}
-					{{#if @first}}
+					{{#if @last}}
 					<option data-value="{{price}}" value="{{../driver}} (${{price}})">{{../driver}} (${{price}})
 					</option>
 					{{/if}}
@@ -185,12 +187,19 @@
 
 		function calculatePrice() {
 			var out = document.getElementById('totalPrice')
+			var currentBudget = document.querySelector('.teamContainer:not(.collapsed) .currentBudget').innerHTML*1;
 			var count = 0;
 			for (let i = 1; i < 5; i++) {
 				var input = document.getElementById('driver' + i);
 				count += getDataValue(input.value);
 			}
-			out.innerHTML = count;
+			var inBudget = (count <= currentBudget);
+			var str = "This lineup is ";
+			str += (inBudget) ? "": "not ";
+			str += "in budget! ";
+			str += "(" + count + " / " + currentBudget + ")";
+			out.innerHTML = str;
+			out.style = (inBudget) ? "color: green;" : "color: red";
 		}
 
 
