@@ -5,17 +5,9 @@ const initialState = {
   divisions: {
     themed: {
       divisionName: "themed",
-      displayName: "Colin McRae Tribute",
+      displayName: "Group B - 1986",
       logo: "colin.jpg",
-      cars: [
-        "Ford Sierra Cosworth RS500",
-        "SUBARU Legacy RS",
-        "SUBARU Impreza 1995",
-        "SUBARU Impreza S4 Rally",
-        "Ford Focus RS Rally 2001",
-        "ŠKODA Fabia Rally"
-      ],
-      clubs: [{ clubId: "256173", championshipIds: ["290761"] }],
+      clubs: [{ clubId: "256173", championshipIds: ["315039"] }],
       events: [],
       points: {
         powerStage: [],

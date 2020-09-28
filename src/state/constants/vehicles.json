@@ -94,5 +94,25 @@
 	"SUBARU WRX STI NR4": {
 		"class": "R4",
 		"brand": "subaru"
+	},
+	"Lancia Delta S4": {
+		"class": "groupB",
+		"brand": "lancia"
+	},
+	"Ford RS200": {
+		"class": "groupB",
+		"brand": "ford"
+	},
+	"Peugeot 205 T16 Evo 2": {
+		"class": "groupB",
+		"brand": "peugot"
+	},
+	"Audi Sport quattro S1 E2": {
+		"class": "groupB",
+		"brand": "audi"
+	},
+	"MG Metro 6R4": {
+		"class": "groupB",
+		"brand": "mg"
 	}
 }
