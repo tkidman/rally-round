@@ -171,15 +171,23 @@ function processFantasyTeams(teamStandings) {
       positive: false,
       neutral: false,
       negative: false,
-      drivers: team.manager, //team.drivers.join(", "),
+      drivers: team.manager,
       weekPoints: {},
       budget: Math.max(...team.budget),
-      roster: team.roster
+      roster: team.roster,
+      captains: []
     };
     Object.values(team.roster).forEach(week => {
       let points = week.points ? week.points : "";
+      if (week.reserve) {
+        var lastRoster = [...week.drivers];
+        lastRoster.push(week.reserve);
+        out.lastRoster = JSON.stringify(lastRoster);
+        out.captains.push(week.captain);
+      }
       out[week.location] = points;
     });
+    out.captains = JSON.stringify(out.captains);
     arr.push(out);
     return arr;
   }, []);

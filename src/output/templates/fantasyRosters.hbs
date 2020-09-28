@@ -9,6 +9,10 @@
 		.collapsed {
 			visibility: collapse;
 		}
+
+		#container .w3-blue {
+			background-color: #5355bf !important;
+		}
 	</style>
 </head>
 
@@ -18,7 +22,7 @@
 	<div id="teamNav" class="w3-bar w3-light-grey secondaryNav">
 		{{#each teams}}
 		<button onclick="openAccordion('{{name}}Section')" class="w3-button"
-			style="overflow:initial; font-weight:bold; padding:0;">
+			style="overflow:initial; font-weight:bold; padding:0.1em;">
 			{{name}}
 		</button>
 		{{/each}}
@@ -30,6 +34,7 @@
 			<div id="{{name}}Section" class="teamContainer w3-container{{#if @first}}{{else}} collapsed{{/if}}"
 				style="margin: 0 auto; display: table;">
 				<span style="display:none;" class="currentBudget">{{budget}}</span>
+				<span style="display:none;" class="currentTeam">{{name}}</span>
 				<h2>{{drivers}}'s {{name}}</h2>
 				<table>
 					<thead>
@@ -67,43 +72,60 @@
 		</div>
 		{{/with}}{{/each}}
 
-		<div class="w3-container">
-			<div class="w3-container" style="margin: 0 auto; display: table;">
-				<h1>Pynklu, is this roster in budget??</h1>
-				<div class="w3-row-padding">
-					<div class="w3-half"><input list="driverPrices" id="driver1" name="driver1" placeholder="driver1"
-							class="w3-input w3-border" />
-					</div>
-					<div class="w3-half"><input list="driverPrices" id="driver2" name="driver2" placeholder="driver2"
-							class="w3-input w3-border" />
-					</div>
-					<div class="w3-half"><input list="driverPrices" id="driver3" name="driver3" placeholder="driver3"
-							class="w3-input w3-border" />
-					</div>
-					<div class="w3-half"><input list="driverPrices" id="driver4" name="driver4" placeholder="driver4"
-							class="w3-input w3-border" />
+		<div id="flexContainer" style="margin-top: 1em;">
+			<div class="flexBox">
+				<div class="w3-card-4">
+					<header class="w3-container w3-blue">
+						<h1>Pynklu, is this roster ok??</h1>
+					</header>
+					<div class="w3-container w3-light-grey">
+						<div class="w3-container">
+							<div class="w3-row w3-row-padding" style="padding:0.5em;">
+								<div class="w3-col m6 l6">
+									<label>Captain</label>
+									<input list="driverPrices" id="driver1" name="driver1" placeholder="Captain"
+										class="w3-input w3-border" />
+									<label>Driver 2</label>
+									<input list="driverPrices" id="driver2" name="driver2" placeholder="driver 2"
+										class="w3-input w3-border" />
+									<label>Driver 3</label>
+									<input list="driverPrices" id="driver3" name="driver3" placeholder="driver 3"
+										class="w3-input w3-border" />
+									<label>Reserve</label>
+									<input list="driverPrices" id="driver4" name="driver4" placeholder="Reserve"
+										class="w3-input w3-border" />
+									<button class="w3-btn w3-blue" style="margin: auto;display: table;margin-top: 1em;"
+										onclick="calculatePrice()">Is it valid?</button>
+								</div>
+								<div class="w3-col m6 l6">
+									<p style="font-weight:bold;">Budget: <span id="budget_check"></span></p>
+									<p style="font-weight:bold;">Captain: <span id="captain_check"></span></p>
+									<p style="font-weight:bold;">Reserve: <span id="reserve_check"></span></p>
+									<p style="font-weight:bold;">Transfers: <span id="transfer_check"></span></p>
+			
+									<input type="text" style="display:none;" id="discordString" value="placeholder" >	
+									<button class="w3-btn w3-blue" id="discordButton" style="margin: auto;display: table;margin-top: 1em;" 
+										 disabled="true" onclick="copyDiscordText()">Copy roster to clipboard</button>
+								</div>
+							</div>
+							<datalist id="driverPrices">
+								{{#each prices}}{{#with this}}
+								{{#each prices}}{{#with this}}
+								{{#if @last}}
+								<option data-value="{{price}}" value="{{../driver}} (${{price}})">{{../driver}}
+									(${{price}})
+								</option>
+								{{/if}}
+								{{/with}}{{/each}}
+								{{/with}}{{/each}}
+							</datalist>
+						</div>
 					</div>
 				</div>
-				<button class="w3-btn w3-blue" style="margin: auto;display: table;margin-top: 1em;" 
-					onclick="calculatePrice()">Calculate!</button>
 
-				<p style="font-weight:bold;">Budget: <span id="totalPrice"></span></p>
-
-				<datalist id="driverPrices">
-					{{#each prices}}{{#with this}}
-					{{#each prices}}{{#with this}}
-					{{#if @last}}
-					<option data-value="{{price}}" value="{{../driver}} (${{price}})">{{../driver}} (${{price}})
-					</option>
-					{{/if}}
-					{{/with}}{{/each}}
-					{{/with}}{{/each}}
-				</datalist>
 			</div>
-		</div>
 
-		<div class="w3-container">
-			<div class="w3-container" style="margin: 0 auto; display: table;">
+			<div class="flexBox">
 				<table id="tableDrivers">
 					<thead>
 						<tr>
@@ -111,8 +133,8 @@
 							<th><img src="./assets/country-flags/mco.png" /></th>
 							<th><img src="./assets/country-flags/swe.png" /></th>
 							<th><img src="./assets/country-flags/nzl.png" /></th>
-							{{!-- <th><img src="./assets/country-flags/arg.png" /></th>
-							<th><img src="./assets/country-flags/fin.png" /></th>
+							<th><img src="./assets/country-flags/arg.png" /></th>
+							{{!-- <th><img src="./assets/country-flags/fin.png" /></th>
 							<th><img src="./assets/country-flags/deu.png" /></th>
 							<th><img src="./assets/country-flags/grc.png" /></th>
 							<th><img src="./assets/country-flags/scot.png" /></th> --}}
@@ -141,9 +163,7 @@
 					</tbody>
 				</table>
 			</div>
-
 		</div>
-
 	</div>
 
 
@@ -151,6 +171,14 @@
         DROPDOWN
     -->
 	<script>
+		var teams = {}
+		{{#each teams}}{{#with this}}
+			teams['{{name}}']  = {
+				'lastRoster': {{{lastRoster}}},
+				'captains': {{{captains}}}
+			}
+		{{/with}}{{/each}}
+
 		var teamDiv = document.getElementById("teamNav")
 		var topNav = document.getElementsByClassName("w3-top")[0];
 		topNav.appendChild(teamDiv);
@@ -177,32 +205,84 @@
 			prev = x;
 		}
 
+		function copyDiscordText(){
+			var discordInput = document.getElementById('discordString');
+			discordInput.select();
+			discordInput.setSelectionRange(0, 99999);
+			document.execCommand("copy");
+			alert("Discord message copied to clipboard: CTRL+V in #fantasy-jrc");
+		}
 		/**
 			CALCULATOR
 		*/
 		function getDataValue(value) {
 			var _v = document.querySelector("#driverPrices option[value='" + value + "']");
-			return _v ? _v.dataset.value*1 : 0;
+			return _v ? _v.dataset.value * 1 : 0;
 		}
-
 		function calculatePrice() {
-			var out = document.getElementById('totalPrice')
-			var currentBudget = document.querySelector('.teamContainer:not(.collapsed) .currentBudget').innerHTML*1;
+			var budget_check = document.getElementById('budget_check');
+			var captain_check = document.getElementById('captain_check');
+			var transfer_check = document.getElementById('transfer_check');
+			var reserve_check = document.getElementById('reserve_check');
+
+			var discordSpan = document.getElementById('discordString');
+			var discordButton = document.getElementById('discordButton');
+
+			var currentBudget = document.querySelector('.teamContainer:not(.collapsed) .currentBudget').innerHTML * 1;
+			var currentTeam = document.querySelector('.teamContainer:not(.collapsed) .currentTeam').innerHTML;
+			var discordString = "**" + currentTeam + " new roster:** ";
+			currentTeam = teams[currentTeam];
+
+			
+			var new_roster = []
+			var reservePrice = 0;
 			var count = 0;
+			var transfers = 0;
+			var captainOk = true;
 			for (let i = 1; i < 5; i++) {
 				var input = document.getElementById('driver' + i);
-				count += getDataValue(input.value);
+				var driverPrice = getDataValue(input.value)
+				var driverName = input.value.split(' (')[0];
+
+				if(currentTeam.lastRoster.indexOf(driverName) == -1) transfers++;
+				if(i == 1 && currentTeam.captains.indexOf(driverName) > -1) captainOk = false;
+				if(i == 4){ reservePrice = driverPrice; }
+				count += driverPrice;
+
+				discordString += driverName;
+				if(i == 1) discordString += ' (C)';
+				if(i == 4) discordString += ' (R)';
+				discordString += ' ';
 			}
-			var inBudget = (count <= currentBudget);
-			var str = "This lineup is ";
-			str += (inBudget) ? "": "not ";
+
+			var budgetOk = (count <= currentBudget);
+			var str = (budgetOk) ? "✔️ " : "❌ not ";
 			str += "in budget! ";
 			str += "(" + count + " / " + currentBudget + ")";
-			out.innerHTML = str;
-			out.style = (inBudget) ? "color: green;" : "color: red";
+			budget_check.innerHTML = str;
+			budget_check.style = (budgetOk) ? "color: green;" : "color: red";
+
+			var reserveOk = (reservePrice < 5);
+			var str = (reserveOk) ? "✔️ " : "❌ ";
+			str += "Reserve "
+			str += (reserveOk) ? "ok" : "too expensive (" + reservePrice + ' / 5)'
+			reserve_check.innerHTML = str;
+			reserve_check.style = (reserveOk) ? "color: green;" : "color: red";
+
+			var transfersOk = (transfers < 3);
+			var str = (transfersOk) ? "✔️ " : "❌ ";
+			str += transfers + ' transfers';
+			transfer_check.innerHTML = str;
+			transfer_check.style = (transfersOk) ? "color: green;" : "color: red";
+
+			var str = (captainOk) ? "✔️ " : "❌ ";
+			str += (captainOk) ? "Captain not used before" : "Captain already used";
+			captain_check.innerHTML = str;
+			captain_check.style = (captainOk) ? "color: green;" : "color: red";
+			
+			discordSpan.value = discordString;
+			discordButton.disabled = !(budgetOk && reserveOk && transfersOk && captainOk);
 		}
-
-
 
 	</script>
 	<!--
