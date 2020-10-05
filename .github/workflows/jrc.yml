@@ -2,8 +2,9 @@ on:
   schedule:
     # every hour on the hour
     - cron:  '0 * * * *'
-#on:
-#  workflow_dispatch
+  workflow_dispatch:
+      tags:
+        description: 'Manual'  
 
 jobs:
   publish-results:
