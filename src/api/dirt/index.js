@@ -58,7 +58,7 @@ const login = async resolve => {
   }
   const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
-  // page.on("console", msg => debug("PAGE LOG:", msg.text()));
+  //page.on("console", msg => debug("PAGE LOG:", msg.text()));
 
   debug("going to https://accounts.codemasters.com");
   await page.goto("https://accounts.codemasters.com/");
@@ -73,10 +73,9 @@ const login = async resolve => {
   debug("logging in ...");
   await page.click(LOGIN_BUTTON_SELECTOR);
   debug("going to find-clubs page ...");
-  await page.goto(`${dirtRally2Domain}/clubs/find-club/page/1`);
 
   debug("extracting credentials ...");
-  page.reload();
+
   page.on("request", async request => {
     if (request._url.includes("Search")) {
       const cookies = await page.cookies();
@@ -94,6 +93,8 @@ const login = async resolve => {
       resolve(creds);
     }
   });
+  await page.goto(`${dirtRally2Domain}/clubs/find-club/page/1`);
+  //page.reload();
 };
 
 const myClubs = async creds => {
@@ -195,27 +196,38 @@ const fetchEventResults = async ({
     // filterByWheel: "Unspecified",
     // nationalityFilter: "None",
   };
-  try {
-    debug(`retrieving event results from racenet: ${eventId}`);
-    const response = await instance({
-      method: "POST",
-      url: `${dirtRally2Domain}/api/Leaderboard`,
-      headers: { Cookie: cookie.trim(), "RaceNet.XSRFH": xsrfh.trim() },
-      data: payload
-    });
-    debug(`event results retrieved: ${eventId}`);
-    // only cache finished events
-    if (eventStatus !== eventStatuses.active) {
-      fs.writeFileSync(
-        `${cacheFileName}`,
-        JSON.stringify(response.data, null, 2)
-      );
+  let succes = true,
+    count = 0;
+  do {
+    try {
+      debug(`retrieving event results from racenet: ${eventId}`);
+      const response = await instance({
+        method: "POST",
+        url: `${dirtRally2Domain}/api/Leaderboard`,
+        headers: { Cookie: cookie.trim(), "RaceNet.XSRFH": xsrfh.trim() },
+        data: payload
+      });
+      debug(`event results retrieved: ${eventId}`);
+      // only cache finished events
+      if (eventStatus !== eventStatuses.active) {
+        fs.writeFileSync(
+          `${cacheFileName}`,
+          JSON.stringify(response.data, null, 2)
+        );
+      }
+      succes = false;
+      return response.data;
+    } catch (err) {
+      count++;
+      succes = count < 15;
+      if (succes) {
+        debug(`Retrying fetch for: ${eventId}. ${15 - count} tries remaining`);
+      } else {
+        debug(err);
+        throw err;
+      }
     }
-    return response.data;
-  } catch (err) {
-    debug(err);
-    throw err;
-  }
+  } while (succes);
 };
 
 module.exports = {
