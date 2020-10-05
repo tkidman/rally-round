@@ -63,6 +63,7 @@ function calculateBudget(team, event, previousEvent, prices) {
       });
       count += parseFloat(prices[week.reserve][event.location]);
       let budget = count < 18 ? 18 : count;
+      budget = budget > 25 ? 25 : budget;
       team.budget.push(budget);
       team.value.push(count);
     });
