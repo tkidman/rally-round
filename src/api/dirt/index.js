@@ -139,23 +139,55 @@ const fetchClubs = async () => {
 const fetchChampionships = async clubId => {
   debug(`fetching championships for club ${clubId}`);
   const { cookie } = await getCreds();
-  const response = await instance({
-    method: "GET",
-    url: `${dirtRally2Domain}/api/Club/${clubId}/championships`,
-    headers: { Cookie: cookie }
-  });
-  return response.data;
+  let succes = true,
+    count = 0;
+  do {
+    try {
+      const response = await instance({
+        method: "GET",
+        url: `${dirtRally2Domain}/api/Club/${clubId}/championships`,
+        headers: { Cookie: cookie }
+      });
+      succes = false;
+      return response.data;
+    } catch (err) {
+      count++;
+      succes = count < 15;
+      if (succes) {
+        debug(`Retrying fetch for: ${eventId}. ${15 - count} tries remaining`);
+      } else {
+        debug(err);
+        throw err;
+      }
+    }
+  } while (count < 15)
 };
 
 const fetchRecentResults = async clubId => {
   debug(`fetching recent results for club ${clubId}`);
   const { cookie, xsrfh } = await getCreds();
-  const response = await instance({
-    method: "GET",
-    url: `${dirtRally2Domain}/api/Club/${clubId}/recentResults`,
-    headers: { Cookie: cookie, "RaceNet.XSRFH": xsrfh }
-  });
-  return response.data;
+  let succes = true,
+    count = 0;
+  do {
+    try {
+      const response = await instance({
+        method: "GET",
+        url: `${dirtRally2Domain}/api/Club/${clubId}/recentResults`,
+        headers: { Cookie: cookie, "RaceNet.XSRFH": xsrfh }
+      });
+      succes = false;
+      return response.data;
+    } catch (err) {
+      count++;
+      succes = count < 15;
+      if (succes) {
+        debug(`Retrying fetch for: ${eventId}. ${15 - count} tries remaining`);
+      } else {
+        debug(err);
+        throw err;
+      }
+    }
+  } while (count < 15)
 };
 
 const loadFromCache = cacheFileName => {
