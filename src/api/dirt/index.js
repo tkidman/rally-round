@@ -154,13 +154,16 @@ const fetchChampionships = async clubId => {
       count++;
       succes = count < 15;
       if (succes) {
-        debug(`Retrying fetch for: ${eventId}. ${15 - count} tries remaining`);
+        debug(
+          `Retrying fetchChampionships for: ${clubId}. ${15 -
+            count} tries remaining`
+        );
       } else {
         debug(err);
         throw err;
       }
     }
-  } while (count < 15)
+  } while (count < 15);
 };
 
 const fetchRecentResults = async clubId => {
@@ -181,13 +184,16 @@ const fetchRecentResults = async clubId => {
       count++;
       succes = count < 15;
       if (succes) {
-        debug(`Retrying fetch for: ${eventId}. ${15 - count} tries remaining`);
+        debug(
+          `Retrying fetchRecentResults for: ${clubId}. ${15 -
+            count} tries remaining`
+        );
       } else {
         debug(err);
         throw err;
       }
     }
-  } while (count < 15)
+  } while (count < 15);
 };
 
 const loadFromCache = cacheFileName => {
@@ -253,7 +259,10 @@ const fetchEventResults = async ({
       count++;
       succes = count < 15;
       if (succes) {
-        debug(`Retrying fetch for: ${eventId}. ${15 - count} tries remaining`);
+        debug(
+          `Retrying fetchEventResults for: ${eventId}. ${15 -
+            count} tries remaining`
+        );
       } else {
         debug(err);
         throw err;
