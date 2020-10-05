@@ -1,8 +1,5 @@
-on:
-  schedule:
-    # every hour on the hour
-    - cron: "0 * * * *"
-    
+on: workflow_dispatch
+
 jobs:
   publish-results:
     env:
