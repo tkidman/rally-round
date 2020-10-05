@@ -1,10 +1,10 @@
-const { JRC_CALCULATIONS } = require("../../fantasy/fantasyFormulas");
+// const { JRC_CALCULATIONS } = require("../../fantasy/fantasyFormulas");
 // var fantasy_teams = require("./fantasyTeams.json");
 const initialState = {
   driverSheetId: "1qa1-dLB0vK0dturPflPl4vVQ6twd4i6vFX-88Tyba-Y",
   pointsForDNF: false,
   websiteName: "jrc-results",
-  showLivePoints: true,
+  showLivePoints: false,
   divisions: {
     jrc1: {
       displayName: "JRC",
@@ -13,11 +13,11 @@ const initialState = {
       clubs: [
         {
           clubId: "180867",
-          championshipIds: ["307328", "310674", "313159", "317631"]
+          championshipIds: ["307328", "310674", "313159", "317631", "320939"]
         },
         {
           clubId: "342498",
-          championshipIds: ["307333", "310677", "313222", "317634"]
+          championshipIds: ["307333", "310677", "313222", "317634", "320940"]
         }
       ],
       events: [],
@@ -36,7 +36,7 @@ const initialState = {
       clubs: [
         {
           clubId: "244734",
-          championshipIds: ["307342", "310678", "313264", "317635"]
+          championshipIds: ["307342", "310678", "313264", "317635", "320942"]
         }
       ],
       events: [],
@@ -53,7 +53,7 @@ const initialState = {
       clubs: [
         {
           clubId: "330674",
-          championshipIds: ["307343", "310679", "313274", "317636"]
+          championshipIds: ["307343", "310679", "313274", "317636", "320943"]
         }
       ],
       events: [],
@@ -70,7 +70,7 @@ const initialState = {
       clubs: [
         {
           clubId: "342117",
-          championshipIds: ["307345", "310680", "313290", "317637"]
+          championshipIds: ["307345", "310680", "313290", "317637", "320947"]
         }
       ],
       events: [],
@@ -80,12 +80,12 @@ const initialState = {
       }
     }
   },
-  fantasy: {
-    calculators: JRC_CALCULATIONS,
-    teams: [],
-    driverStandings: {},
-    sheetId: "1ifywqh1xfyVjpUqiG1zODpXupbyHwIzVsZCmOvcHtmg"
-  },
+  // fantasy: {
+  //   calculators: JRC_CALCULATIONS,
+  //   teams: [],
+  //   driverStandings: {},
+  //   sheetId: "1ifywqh1xfyVjpUqiG1zODpXupbyHwIzVsZCmOvcHtmg"
+  // },
   visualization: "jrc_all",
   standingsOutputSheetId: "1iLIPjB2fsi3HI5S5CgrvnkEzrdA6fT71m_9zmtL19VI"
 };
