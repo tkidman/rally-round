@@ -14,6 +14,7 @@ const {
 const { outputPath, templatePath } = require("../shared");
 const { processFantasyResults } = require("../fantasy/fantasyCalculator");
 const locations = require("../state/constants/locations.json");
+const { eventStatuses } = require("../shared");
 const resultColours = ["#76FF6A", "#faff5d", "#ffe300", "#ff5858"];
 
 const compiled_navigation = null;
@@ -230,7 +231,14 @@ const writeStandingsHTML = (division, type, links) => {
 const transformForHTML = (division, type) => {
   const events = division.events;
   const headerLocations = getHeaderLocations(events);
-  const lastEvent = events[events.length - 1];
+  let lastEvent = events[events.length - 1];
+  if (
+    lastEvent.eventStatus !== eventStatuses.finished &&
+    !leagueRef.league.showLivePoints &&
+    events.length > 1
+  ) {
+    lastEvent = events[events.length - 2];
+  }
   const rows = lastEvent.standings[`${type}Standings`].map(standing => {
     const movement = {
       positive: standing.positionChange > 0,
