@@ -17,6 +17,13 @@ const locations = require("../state/constants/locations.json");
 const { eventStatuses } = require("../shared");
 const resultColours = ["#76FF6A", "#faff5d", "#ffe300", "#ff5858"];
 
+const colours = {
+  red: "#ff5858",
+  green: "#76FF6A",
+  gold: "#ffe300",
+  default: ""
+};
+
 const compiled_navigation = null;
 
 const writePlacementResultsHTML = (event, division, links) => {
@@ -228,6 +235,26 @@ const writeStandingsHTML = (division, type, links) => {
   );
 };
 
+const getStandingColour = (division, standing, numDrivers) => {
+  const position = standing.currentPosition;
+  let colour = colours.default;
+  const promotionDoubleZone = division.promotionDoubleZone || 0;
+  if (promotionDoubleZone && position <= division.promotionDoubleZone) {
+    colour = colours.gold;
+  } else if (
+    division.promotionZone &&
+    position <= division.promotionZone + promotionDoubleZone
+  ) {
+    colour = colours.green;
+  } else if (
+    division.relegationZone &&
+    numDrivers - division.relegationZone < position
+  ) {
+    colour = colours.red;
+  }
+  return colour;
+};
+
 const transformForHTML = (division, type) => {
   const events = division.events;
   const headerLocations = getHeaderLocations(events);
@@ -239,7 +266,8 @@ const transformForHTML = (division, type) => {
   ) {
     lastEvent = events[events.length - 2];
   }
-  const rows = lastEvent.standings[`${type}Standings`].map(standing => {
+  const lastEventStandings = lastEvent.standings[`${type}Standings`];
+  const rows = lastEventStandings.map(standing => {
     const movement = {
       positive: standing.positionChange > 0,
       neutral: !standing.positionChange,
@@ -253,11 +281,17 @@ const transformForHTML = (division, type) => {
     const divisionDisplayName =
       standingDivision &&
       (standingDivision.displayName || standingDivision.divisionName);
+    const colour = getStandingColour(
+      division,
+      standing,
+      lastEventStandings.length
+    );
     const row = {
       results,
       standing,
       ...movement,
-      divisionDisplayName
+      divisionDisplayName,
+      colour
     };
     if (type === "driver") {
       const { driver, country, carBrand } = getDriverData(standing.name);
@@ -350,5 +384,8 @@ module.exports = {
   writeHomeHTML,
   writeFantasyHTML,
   writePlacementOutput,
-  writeHTMLOutputForDivision
+  writeHTMLOutputForDivision,
+  colours,
+  // tests
+  getStandingColour
 };

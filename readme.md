@@ -78,7 +78,8 @@ You can also pull driver information directly from a google sheet. You need to h
 * Flag so points aren't calculated for in progress events ✓
 * Show division in overall driver standings ✓
 * Fix weird movements calculations when points are the same ✓
-* Recalculate diffs in overall and show in overall results
+* Recalculate diffs in overall and show in overall results ✓
+* Relegation zone colours ✓
 * Order 0 points above DNFs
 * Toggle for live / actual points
 * enable cloudfront

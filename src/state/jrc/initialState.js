@@ -1,10 +1,16 @@
 const { JRC_CALCULATIONS } = require("../../fantasy/fantasyFormulas");
 // var fantasy_teams = require("./fantasyTeams.json");
+
+// Current       27 30  26   30 = 113 , 28,25
+// promotion   -    6  1+5  1+6
+// demotion     6   7    5      -
+// New             28 29 28   28
+
 const initialState = {
   driverSheetId: "1qa1-dLB0vK0dturPflPl4vVQ6twd4i6vFX-88Tyba-Y",
   pointsForDNF: false,
   websiteName: "jrc-results",
-  showLivePoints: false,
+  showLivePoints: true,
   divisions: {
     jrc1: {
       displayName: "JRC",
@@ -27,7 +33,8 @@ const initialState = {
       },
       fantasy: true,
       outputSheetId: "1P-0CJ4rm7xBaMsan0yMcFKwDIWkqjIvYWHNrjgFDixc",
-      manualResults: []
+      manualResults: [],
+      relegationZone: 6
     },
     jrc2: {
       displayName: "JRC2",
@@ -44,7 +51,9 @@ const initialState = {
         powerStage: [5, 4, 3, 2, 1],
         overall: [30, 24, 21, 19, 17, 15, 13, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
       },
-      outputSheetId: "1WaBmoqfRtXO8CEGhnE2g1b93F5o2Kjh7Nx3vi13U5Tg"
+      outputSheetId: "1WaBmoqfRtXO8CEGhnE2g1b93F5o2Kjh7Nx3vi13U5Tg",
+      promotionZone: 6,
+      relegationZone: 7
     },
     jrc3: {
       displayName: "JRC3",
@@ -61,7 +70,10 @@ const initialState = {
         powerStage: [5, 4, 3, 2, 1],
         overall: [30, 24, 21, 19, 17, 15, 13, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
       },
-      outputSheetId: "1hrpLvoXjZVSjiIWGr1JVTxfAFM-Se83mFntaTcYYY1E"
+      outputSheetId: "1hrpLvoXjZVSjiIWGr1JVTxfAFM-Se83mFntaTcYYY1E",
+      promotionDoubleZone: 1,
+      promotionZone: 5,
+      relegationZone: 5
     },
     jrc4: {
       displayName: "JRC4",
@@ -77,7 +89,9 @@ const initialState = {
       points: {
         powerStage: [5, 4, 3, 2, 1],
         overall: [30, 24, 21, 19, 17, 15, 13, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
-      }
+      },
+      promotionDoubleZone: 1,
+      promotionZone: 6
     }
   },
   fantasy: {
