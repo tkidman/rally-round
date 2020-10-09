@@ -18,9 +18,9 @@ const { eventStatuses } = require("../shared");
 const resultColours = ["#76FF6A", "#faff5d", "#ffe300", "#ff5858"];
 
 const colours = {
-  red: "#ff5858",
-  green: "#76FF6A",
-  gold: "#ffe300",
+  red: "#ffb4b4",
+  green: "#ccffc8",
+  gold: "#ffd74e",
   default: ""
 };
 
