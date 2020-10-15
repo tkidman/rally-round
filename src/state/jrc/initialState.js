@@ -1,5 +1,4 @@
 const { JRC_CALCULATIONS } = require("../../fantasy/fantasyFormulas");
-// var fantasy_teams = require("./fantasyTeams.json");
 
 // Current       27 30  26   30 = 113 , 28,25
 // promotion   -    6  1+5  1+6
@@ -57,7 +56,7 @@ const initialState = {
       clubs: [
         {
           clubId: "244734",
-          championshipIds: ["307342", "310678", "313264", "317635", "320942"]
+          championshipIds: ["307342", "310678", "313264", "317635", "320942", "325336"]
         }
       ],
       events: [],
@@ -76,7 +75,7 @@ const initialState = {
       clubs: [
         {
           clubId: "330674",
-          championshipIds: ["307343", "310679", "313274", "317636", "320943"]
+          championshipIds: ["307343", "310679", "313274", "317636", "320943", "325356"]
         }
       ],
       events: [],
@@ -96,7 +95,7 @@ const initialState = {
       clubs: [
         {
           clubId: "342117",
-          championshipIds: ["307345", "310680", "313290", "317637", "320947"]
+          championshipIds: ["307345", "310680", "313290", "317637", "320947", "325361"]
         }
       ],
       events: [],
