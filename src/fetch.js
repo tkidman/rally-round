@@ -1,4 +1,6 @@
+const { cachePath } = require("./shared");
 const { recalculateDiffsForEntries } = require("./shared");
+const fs = require("fs");
 
 const { eventStatuses } = require("./shared");
 const { fetchEventResults } = require("./api/dirt");
@@ -18,7 +20,29 @@ const fetchEventsForClub = async (club, division, divisionName) => {
     divisionName,
     club
   });
-  return fetchEventsFromKeys(eventKeys, leagueRef.league.getAllResults);
+  const events = await fetchEventsFromKeys(
+    eventKeys,
+    leagueRef.league.getAllResults
+  );
+
+  if (club.cachedEvent) {
+    const racenetLeaderboardStages = [];
+    club.cachedEvent.files.forEach(fileName => {
+      const leaderboard = JSON.parse(
+        fs.readFileSync(`${cachePath}/${fileName}`, "utf8")
+      );
+      racenetLeaderboardStages.push(leaderboard);
+    });
+    const cachedEvent = {
+      eventId: club.cachedEvent.eventId,
+      divisionName,
+      location: club.cachedEvent.location,
+      eventStatus: eventStatuses.finished,
+      racenetLeaderboardStages
+    };
+    events.splice(club.cachedEvent.index, 0, cachedEvent);
+  }
+  return events;
 };
 
 const mergeEvent = (mergedEvent, event) => {

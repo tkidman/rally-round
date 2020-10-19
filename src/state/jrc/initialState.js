@@ -9,7 +9,7 @@ const initialState = {
   driverSheetId: "1qa1-dLB0vK0dturPflPl4vVQ6twd4i6vFX-88Tyba-Y",
   pointsForDNF: false,
   websiteName: "jrc-results",
-  showLivePoints: true,
+  showLivePoints: false,
   divisions: {
     jrc1: {
       displayName: "JRC",
@@ -24,8 +24,16 @@ const initialState = {
             "313159",
             "317631",
             "320939",
-            "325024"
-          ]
+            "327977"
+          ],
+          cachedEvent: {
+            index: 5,
+            location: "BAUMHOLDER",
+            files: [
+              "BAUMHOLDER-jrc1-325692-0.json",
+              "BAUMHOLDER-jrc1-325692-9.json"
+            ]
+          }
         },
         {
           clubId: "342498",
@@ -35,8 +43,16 @@ const initialState = {
             "313222",
             "317634",
             "320940",
-            "325042"
-          ]
+            "327980"
+          ],
+          cachedEvent: {
+            index: 5,
+            location: "BAUMHOLDER",
+            files: [
+              "BAUMHOLDER-jrc1-325710-0.json",
+              "BAUMHOLDER-jrc1-325710-9.json"
+            ]
+          }
         }
       ],
       events: [],
@@ -62,8 +78,17 @@ const initialState = {
             "313264",
             "317635",
             "320942",
-            "325336"
-          ]
+            "327981"
+          ],
+          cachedEvent: {
+            eventId: "326004",
+            index: 5,
+            location: "BAUMHOLDER",
+            files: [
+              "BAUMHOLDER-jrc2-326004-0.json",
+              "BAUMHOLDER-jrc2-326004-9.json"
+            ]
+          }
         }
       ],
       events: [],
@@ -72,18 +97,20 @@ const initialState = {
         overall: [30, 24, 21, 19, 17, 15, 13, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
       },
       outputSheetId: "1WaBmoqfRtXO8CEGhnE2g1b93F5o2Kjh7Nx3vi13U5Tg",
-      manualResults: [{
-        'eventId': "326004",
-        'results': [
-          {
-            'name': "The Last Son of Hyperborea",
-            'stageTime': "03:08.006",
-            'totalTime': "40:05.824",
-            'totalDiff': "+00:47.748",
-            'stageDiff': "+00:05.027"
-          }
-        ]
-      }],
+      manualResults: [
+        {
+          eventId: "326004",
+          results: [
+            {
+              name: "The Last Son of Hyperborea",
+              stageTime: "03:08.006",
+              totalTime: "40:05.824",
+              totalDiff: "+00:47.748",
+              stageDiff: "+00:05.027"
+            }
+          ]
+        }
+      ],
       promotionZone: 6,
       relegationZone: 7
     },
@@ -100,8 +127,16 @@ const initialState = {
             "313274",
             "317636",
             "320943",
-            "325356"
-          ]
+            "327982"
+          ],
+          cachedEvent: {
+            index: 5,
+            location: "BAUMHOLDER",
+            files: [
+              "BAUMHOLDER-jrc3-326024-0.json",
+              "BAUMHOLDER-jrc3-326024-9.json"
+            ]
+          }
         }
       ],
       events: [],
@@ -127,8 +162,16 @@ const initialState = {
             "313290",
             "317637",
             "320947",
-            "325361"
-          ]
+            "327985"
+          ],
+          cachedEvent: {
+            index: 5,
+            location: "BAUMHOLDER",
+            files: [
+              "BAUMHOLDER-jrc4-326029-0.json",
+              "BAUMHOLDER-jrc4-326029-9.json"
+            ]
+          }
         }
       ],
       events: [],
