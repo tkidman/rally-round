@@ -56,7 +56,14 @@ const initialState = {
       clubs: [
         {
           clubId: "244734",
-          championshipIds: ["307342", "310678", "313264", "317635", "320942", "325336"]
+          championshipIds: [
+            "307342",
+            "310678",
+            "313264",
+            "317635",
+            "320942",
+            "325336"
+          ]
         }
       ],
       events: [],
@@ -65,6 +72,18 @@ const initialState = {
         overall: [30, 24, 21, 19, 17, 15, 13, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
       },
       outputSheetId: "1WaBmoqfRtXO8CEGhnE2g1b93F5o2Kjh7Nx3vi13U5Tg",
+      manualResults: [{
+        'eventId': "326004",
+        'results': [
+          {
+            'name': "The Last Son of Hyperborea",
+            'stageTime': "03:08.006",
+            'totalTime': "40:05.824",
+            'totalDiff': "+00:47.748",
+            'stageDiff': "+00:05.027"
+          }
+        ]
+      }],
       promotionZone: 6,
       relegationZone: 7
     },
@@ -75,7 +94,14 @@ const initialState = {
       clubs: [
         {
           clubId: "330674",
-          championshipIds: ["307343", "310679", "313274", "317636", "320943", "325356"]
+          championshipIds: [
+            "307343",
+            "310679",
+            "313274",
+            "317636",
+            "320943",
+            "325356"
+          ]
         }
       ],
       events: [],
@@ -95,7 +121,14 @@ const initialState = {
       clubs: [
         {
           clubId: "342117",
-          championshipIds: ["307345", "310680", "313290", "317637", "320947", "325361"]
+          championshipIds: [
+            "307345",
+            "310680",
+            "313290",
+            "317637",
+            "320947",
+            "325361"
+          ]
         }
       ],
       events: [],

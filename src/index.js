@@ -132,7 +132,7 @@ const setManualResults = (
             );
           } else {
             entries.push({
-              ...firstStageResult,
+              ...firstStageResult.entry,
               ...manualResult,
               ...defaultEntry
             });
