@@ -9,7 +9,7 @@ const initialState = {
   driverSheetId: "1qa1-dLB0vK0dturPflPl4vVQ6twd4i6vFX-88Tyba-Y",
   pointsForDNF: false,
   websiteName: "jrc-results",
-  showLivePoints: false,
+  showLivePoints: true,
   divisions: {
     jrc1: {
       displayName: "JRC",
