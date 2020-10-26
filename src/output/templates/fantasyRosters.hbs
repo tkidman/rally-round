@@ -269,7 +269,7 @@
 			reserve_check.innerHTML = str;
 			reserve_check.style = (reserveOk) ? "color: green;" : "color: red";
 
-			var transfersOk = (transfers < 3);
+			var transfersOk = (transfers < /*3*/5);
 			var str = (transfersOk) ? "✔️ " : "❌ ";
 			str += transfers + ' transfers';
 			transfer_check.innerHTML = str;
