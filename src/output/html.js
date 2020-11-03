@@ -220,10 +220,6 @@ const writeStandingsHTML = (division, type, links) => {
     .format();
 
   const standingsTemplateFile = `${templatePath}/${type}Standings.hbs`;
-  if (!fs.existsSync(standingsTemplateFile)) {
-    debug("no standings html template found, returning");
-    return;
-  }
   const _t = fs.readFileSync(standingsTemplateFile).toString();
 
   const template = Handlebars.compile(_t);
@@ -233,6 +229,9 @@ const writeStandingsHTML = (division, type, links) => {
     `./${outputPath}/website/${division.divisionName}-${type}-standings.html`,
     out
   );
+  if (!fs.existsSync(`./${outputPath}/website/index.html`)) {
+    fs.writeFileSync(`./${outputPath}/website/index.html`, out);
+  }
 };
 
 const getStandingColour = (division, standing, numDrivers) => {

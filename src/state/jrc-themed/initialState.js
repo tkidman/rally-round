@@ -1,6 +1,7 @@
 const initialState = {
   pointsForDNF: false,
-  websiteName: null,
+  websiteName: "jrc-results",
+  subfolderName: "themed",
   showLivePoints: false,
   divisions: {
     themed: {

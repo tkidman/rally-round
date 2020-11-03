@@ -27,8 +27,12 @@ const getHtmlLinks = () => {
     addLinks(links, divisionName, "driver");
     return links;
   }, {});
-  addLinks(links, "overall", "team");
-  addLinks(links, "overall", "driver");
+  if (leagueRef.includeOverall) {
+    if (leagueRef.hasTeams) {
+      addLinks(links, "overall", "team");
+    }
+    addLinks(links, "overall", "driver");
+  }
   if (league.fantasy) {
     addLinks(links, "team", "fantasy");
     addLinks(links, "driver", "fantasy");
@@ -49,13 +53,15 @@ const writeOutput = async () => {
   if (league.placement) {
     writePlacementOutput();
     if (process.env.DIRT_AWS_ACCESS_KEY && league.websiteName) {
-      await upload(league.websiteName);
+      await upload(league.websiteName, league.subfolderName);
     }
     debug("only writing placements, returning");
     return true;
   }
   const links = getHtmlLinks();
-  writeHomeHTML(links);
+  if (!league.subfolderName) {
+    writeHomeHTML(links);
+  }
   for (let divisionName of Object.keys(league.divisions)) {
     const division = league.divisions[divisionName];
     await writeOutputForDivision(division, links);
@@ -68,7 +74,7 @@ const writeOutput = async () => {
   }
   writeJSON(league);
   if (process.env.DIRT_AWS_ACCESS_KEY && league.websiteName) {
-    await upload(league.websiteName);
+    await upload(league.websiteName, league.subfolderName);
   }
   return true;
 };

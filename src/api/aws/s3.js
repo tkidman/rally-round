@@ -66,13 +66,14 @@ const getObject = async (bucket, key) => {
   });
 };
 
-const uploadHTML = async (directory, bucket) => {
+const uploadHTML = async (directory, bucket, subfolderName) => {
   const files = fs.readdirSync(directory);
   const htmlFiles = files.filter(file => file.endsWith(".html"));
   const promises = htmlFiles.map(file => {
+    const key = subfolderName ? `${subfolderName}/${file}` : file;
     return uploadToS3({
       file: `${directory}/${file}`,
-      key: file,
+      key,
       bucket,
       contentType: "text/html"
     });
@@ -81,13 +82,16 @@ const uploadHTML = async (directory, bucket) => {
   debug(`uploaded ${htmlFiles.length} files to s3`);
 };
 
-const uploadCache = async (directory, bucket) => {
+const uploadCache = async (directory, bucket, subfolderName) => {
   const files = fs.readdirSync(directory);
   const cacheFiles = files.filter(file => file.endsWith(".json"));
   const promises = cacheFiles.map(file => {
+    const key = subfolderName
+      ? `${subfolderName}/cache/${file}`
+      : `cache/${file}`;
     return uploadToS3({
       file: `${directory}/${file}`,
-      key: `cache/${file}`,
+      key,
       bucket,
       contentType: "application/json"
     });
@@ -96,9 +100,9 @@ const uploadCache = async (directory, bucket) => {
   debug(`uploaded ${cacheFiles.length} cache files to s3`);
 };
 
-const upload = async bucket => {
-  await uploadHTML(`./${outputPath}/website`, bucket);
-  await uploadCache(`./${cachePath}`, bucket);
+const upload = async (bucket, subfolderName) => {
+  await uploadHTML(`./${outputPath}/website`, bucket, subfolderName);
+  await uploadCache(`./${cachePath}`, bucket, subfolderName);
 };
 
 const downloadFiles = async (bucket, keys) => {
@@ -107,11 +111,12 @@ const downloadFiles = async (bucket, keys) => {
   return files;
 };
 
-const downloadCache = async bucket => {
+const downloadCache = async (bucket, subfolderName) => {
   debug("downloading cache files from s3");
   const objects = await listObjects(bucket);
+  const cachePrefix = subfolderName ? `${subfolderName}/cache` : "cache";
   const cacheObjects = objects.Contents.filter(s3Object =>
-    s3Object.Key.startsWith("cache")
+    s3Object.Key.startsWith(cachePrefix)
   );
   const cacheFileKeys = cacheObjects.map(cacheObject => cacheObject.Key);
   const cacheFiles = await downloadFiles(bucket, cacheFileKeys);

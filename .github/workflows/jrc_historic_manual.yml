@@ -1,9 +1,5 @@
 on: workflow_dispatch
-#on:
-#  schedule:
-#    # every hour on the hour
-#    - cron: "0 * * * *"
-    
+
 jobs:
   publish-results:
     env:
@@ -13,7 +9,7 @@ jobs:
       DIRT_AWS_SECRET_ACCESS_KEY: ${{ secrets.DIRT_AWS_SECRET_ACCESS_KEY }}
       GOOGLE_SHEETS_API_KEY: ${{ secrets.GOOGLE_SHEETS_API_KEY }}
       DEBUG: tkidman:*
-      CLUB: jrc
+      CLUB: jrc-historic
     runs-on: ubuntu-latest
     timeout-minutes: 5
 

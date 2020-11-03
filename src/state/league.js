@@ -119,6 +119,7 @@ const init = async () => {
   leagueRef.missingDrivers = missingDrivers;
   leagueRef.hasTeams = !!driverColumns.teamId;
   leagueRef.hasCars = !!driverColumns.car;
+  leagueRef.includeOverall = Object.keys(league.divisions).length > 1;
   await loadFantasy(leagueRef.league);
   return leagueRef;
 };
@@ -146,8 +147,9 @@ const getDriversByDivision = division => {
   });
 };
 
-const printMissingDrivers = () =>
+const printMissingDrivers = () => {
   debug(`missing drivers: \n${Object.keys(missingDrivers).join("\n")}`);
+};
 
 module.exports = {
   init,

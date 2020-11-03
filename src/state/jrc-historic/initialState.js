@@ -1,15 +1,18 @@
 const initialState = {
   pointsForDNF: false,
+  websiteName: "jrc-results",
+  subfolderName: "historic",
+  showLivePoints: false,
   divisions: {
-    themed: {
-      clubId: "192069",
-      championshipIds: ["262970"],
+    historic: {
+      divisionName: "historic",
+      displayName: "JRC Historic",
+      clubs: [{ clubId: "192069", championshipIds: ["315027"] }],
       events: [],
       points: {
         powerStage: [],
-        overall: [30, 24, 21, 19, 17, 15, 13, 11, 9, 7, 5, 4, 3, 2, 1]
-      },
-      outputSheetId: "1u4ymtoWri0SH0LJDhg-MIefV5572lRyGBK5-rt_ipxg"
+        overall: [30, 24, 21, 19, 17, 15, 13, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+      }
     }
   }
 };

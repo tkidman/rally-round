@@ -12,7 +12,7 @@
 <div class="w3-top">
 	<div class="w3-bar w3-black" style="text-align:center;">
 		<div class="logo">
-			<a href="./index.html">
+			<a href="http://jrc-results.s3-website-ap-southeast-2.amazonaws.com/index.html">
 				<img src="./assets/jrc_round.jpg">
 			</a>
 		</div>
@@ -66,46 +66,46 @@
 		{{/if}}
 
 		{{#if links.JRC1}}
-		<div class="w3-dropdown-hover w3-hide-small w3-hide-medium">
-			<button class="w3-button">JRC1</button>
-			<div class="w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small">
-				{{#with links.JRC1}}
-				{{#each this}}
-				<a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">{{link}}</a>
-				{{/each}}
-				{{/with}}
-			</div>
-		</div>
-		<div class="w3-dropdown-hover w3-hide-small w3-hide-medium">
-			<button class="w3-button">JRC2</button>
-			<div class="w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small">
-				{{#with links.JRC2}}
-				{{#each this}}
-				<a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">{{link}}</a>
-				{{/each}}
-				{{/with}}
-			</div>
-		</div>
-		<div class="w3-dropdown-hover w3-hide-small w3-hide-medium">
-			<button class="w3-button">JRC3</button>
-			<div class="w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small">
-				{{#with links.JRC3}}
-				{{#each this}}
-				<a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">{{link}}</a>
-				{{/each}}
-				{{/with}}
-			</div>
-		</div>
-		<div class="w3-dropdown-hover w3-hide-small w3-hide-medium">
-			<button class="w3-button">overall</button>
-			<div class="w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small">
-				{{#with links.overall}}
-				{{#each this}}
-				<a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">{{link}}</a>
-				{{/each}}
-				{{/with}}
-			</div>
-		</div>
+            <div class="w3-dropdown-hover w3-hide-small w3-hide-medium">
+                <button class="w3-button">JRC1</button>
+                <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small">
+                    {{#with links.JRC1}}
+                    {{#each this}}
+                    <a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">{{link}}</a>
+                    {{/each}}
+                    {{/with}}
+                </div>
+            </div>
+            <div class="w3-dropdown-hover w3-hide-small w3-hide-medium">
+                <button class="w3-button">JRC2</button>
+                <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small">
+                    {{#with links.JRC2}}
+                    {{#each this}}
+                    <a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">{{link}}</a>
+                    {{/each}}
+                    {{/with}}
+                </div>
+            </div>
+            <div class="w3-dropdown-hover w3-hide-small w3-hide-medium">
+                <button class="w3-button">JRC3</button>
+                <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small">
+                    {{#with links.JRC3}}
+                    {{#each this}}
+                    <a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">{{link}}</a>
+                    {{/each}}
+                    {{/with}}
+                </div>
+            </div>
+            <div class="w3-dropdown-hover w3-hide-small w3-hide-medium">
+                <button class="w3-button">overall</button>
+                <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small">
+                    {{#with links.overall}}
+                    {{#each this}}
+                    <a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">{{link}}</a>
+                    {{/each}}
+                    {{/with}}
+                </div>
+            </div>
 		{{/if}}
 
 		{{#if endTime}}

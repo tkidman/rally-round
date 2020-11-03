@@ -460,9 +460,14 @@ const calculateOverallResults = () => {
 
 const loadCache = async () => {
   if (process.env.DIRT_AWS_ACCESS_KEY && leagueRef.league.websiteName) {
-    const cacheFiles = await downloadCache(leagueRef.league.websiteName);
+    const cacheFiles = await downloadCache(
+      leagueRef.league.websiteName,
+      leagueRef.league.subfolderName
+    );
     cacheFiles.forEach(cacheFile => {
-      const cacheFileName = cacheFile.key.split("/")[1];
+      const cacheFileName = cacheFile.key.slice(
+        cacheFile.key.lastIndexOf("/") + 1
+      );
       fs.writeFileSync(`${cachePath}/${cacheFileName}`, cacheFile.data.Body);
     });
   }
@@ -479,7 +484,7 @@ const processAllDivisions = async () => {
       division.events = await fetchEvents(division, divisionName);
       processEvents(division.events, divisionName);
     }
-    if (Object.keys(divisions).length > 1) {
+    if (leagueRef.includeOverall) {
       calculateOverallResults();
     }
     await writeOutput(league);

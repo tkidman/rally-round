@@ -80,6 +80,9 @@ You can also pull driver information directly from a google sheet. You need to h
 * Fix weird movements calculations when points are the same ✓
 * Recalculate diffs in overall and show in overall results ✓
 * Relegation zone colours ✓
+* Show car used in driver results for multi class championships
+* Show car used by missing drivers
+* Shared assets across sub-sites
 * Order 0 points above DNFs
 * Toggle for live / actual points
 * enable cloudfront
