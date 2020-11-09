@@ -7,7 +7,7 @@ const initialState = {
     historic: {
       divisionName: "historic",
       displayName: "JRC Historic",
-      clubs: [{ clubId: "192069", championshipIds: ["315027"] }],
+      clubs: [{ clubId: "192069", championshipIds: ["336908"] }],
       events: [],
       points: {
         powerStage: [],

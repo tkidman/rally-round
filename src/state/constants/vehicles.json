@@ -114,5 +114,25 @@
 	"MG Metro 6R4": {
 		"class": "groupB",
 		"brand": "mg"
+	},
+	"BMW M2 Competition": {
+		"class": "RGT",
+		"brand": "BMW"
+	},
+	"Aston Martin V8 Vantage GT4": {
+		"class": "RGT",
+		"brand": "aston"
+	},
+	"Ford Mustang GT4": {
+		"class": "RGT",
+		"brand": "ford"
+	},
+	"Porsche 911 RGT Rally Spec": {
+		"class": "RGT",
+		"brand": "porsche"
+	},
+	"Chevrolet Camaro GT4.R": {
+		"class": "RGT",
+		"brand": "chevrolet"
 	}
 }

@@ -8,9 +8,8 @@ const {
 const driverColumns = {
   [name]: "Gamertag",
   [raceNetName]: "Racenet",
-  [teamId]: "ThemedTeam",
+  [teamId]: "Themed",
   [car]: "Themed"
-  // [division]: "class"
 };
 
 const sheetsConfig = {

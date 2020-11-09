@@ -62,7 +62,9 @@ const calculateTeamResults = (
           }
         }
       } else if (!resultTeamId) {
-        debug(`driver has null team id: ${driver.id}`);
+        debug(
+          `driver has null team id: ${driver.name} - ${driver.firstCarDriven}`
+        );
       }
     }
     return teamResults;

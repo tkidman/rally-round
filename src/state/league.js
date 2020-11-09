@@ -7,6 +7,7 @@ const league = require(`./${club}/initialState`);
 const { driverColumns, sheetsConfig } = require(`./${club}/driverConfig`);
 const driverFieldNames = require("./constants/driverFieldNames");
 const { loadSheetAndTransform } = require("../api/sheets/sheets");
+const vehicles = require("./constants/vehicles.json");
 
 const missingDrivers = {};
 const drivers = {};
@@ -19,12 +20,24 @@ const transformDriverRows = driverRows => {
     if (nameValue) {
       const driverNameValue = nameValue.trim();
       const id = driverNameValue.toUpperCase();
+      let team = null;
+      if (league.useCarAsTeam) {
+        const carName = row[driverColumns[driverFieldNames.car]];
+        const car = vehicles[carName];
+        if (!car && carName) {
+          debug(`no car found in lookup for ${carName}`);
+        } else if (car) {
+          team = car.brand;
+        }
+      } else {
+        team = row[driverColumns[driverFieldNames.teamId]];
+      }
       driversById[id] = {
         id,
         [driverFieldNames.name]: driverNameValue,
         [driverFieldNames.raceNetName]:
           row[driverColumns[driverFieldNames.raceNetName]],
-        [driverFieldNames.teamId]: row[driverColumns[driverFieldNames.teamId]],
+        [driverFieldNames.teamId]: team,
         [driverFieldNames.division]:
           row[driverColumns[driverFieldNames.division]],
         [driverFieldNames.car]: row[driverColumns[driverFieldNames.car]]

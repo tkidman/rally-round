@@ -2,13 +2,13 @@ const initialState = {
   pointsForDNF: false,
   websiteName: "jrc-results",
   subfolderName: "themed",
-  showLivePoints: false,
+  showLivePoints: true,
+  useCarAsTeam: true,
   divisions: {
     themed: {
       divisionName: "themed",
-      displayName: "Group B - 1986",
-      logo: "colin.jpg",
-      clubs: [{ clubId: "256173", championshipIds: ["315039"] }],
+      displayName: "ERC2",
+      clubs: [{ clubId: "256173", championshipIds: ["336914"] }],
       events: [],
       points: {
         powerStage: [],
