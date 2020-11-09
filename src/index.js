@@ -364,9 +364,12 @@ const loadEventDrivers = (drivers, event) => {
       debug(`adding unknown driver ${entry.name}`);
       driver = { name: entry.name };
       leagueRef.addDriver(driver);
-      leagueRef.missingDrivers[entry.name] = entry.name;
+      leagueRef.missingDrivers[entry.name] = driver;
     }
     driver.nationality = entry.nationality;
+    if (!driver.firstCarDriven) {
+      driver.firstCarDriven = entry.vehicleName;
+    }
     drivers[driver.name] = driver;
   });
   return drivers;

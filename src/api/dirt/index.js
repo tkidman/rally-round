@@ -247,7 +247,7 @@ const fetchEventResults = async ({
       });
       debug(`event results retrieved: ${eventId}`);
       // only cache finished events
-      if (eventStatus !== eventStatuses.active) {
+      if (eventStatus === eventStatuses.finished) {
         fs.writeFileSync(
           `${cacheFileName}`,
           JSON.stringify(response.data, null, 2)

@@ -148,7 +148,10 @@ const getDriversByDivision = division => {
 };
 
 const printMissingDrivers = () => {
-  debug(`missing drivers: \n${Object.keys(missingDrivers).join("\n")}`);
+  debug(`missing drivers:`);
+  Object.values(missingDrivers).forEach(driver => {
+    debug(`${driver.name} - ${driver.firstCarDriven}`);
+  });
 };
 
 module.exports = {
