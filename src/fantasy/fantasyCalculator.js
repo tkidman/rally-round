@@ -34,7 +34,6 @@ function removeDoubleCaptains(teams) {
 function calculateTeamPoints(team, event, lookuptable) {
   team.roster.forEach(week => {
     if (week.location != event.location) return;
-    let hasDnf = false;
     var score = week.drivers.reduce((val, driver) => {
       var driverPoints = lookuptable[driver];
       driverPoints = driverPoints ? driverPoints : -3;
