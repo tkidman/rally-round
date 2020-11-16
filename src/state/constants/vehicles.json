@@ -134,5 +134,13 @@
 	"Chevrolet Camaro GT4.R": {
 		"class": "RGT",
 		"brand": "chevrolet"
+	},
+	"Volkswagen Golf GTI 16V": {
+		"class": "H2",
+		"brand": "volkswagen"
+	},
+	"Peugeot 205 GTI": {
+		"class": "H2",
+		"brand": "peugeot"
 	}
 }
