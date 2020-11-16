@@ -4,7 +4,7 @@ const initialState = {
   driverSheetId: "1rpVYNoSlkRwY_r22jRmSDM347dsCgWBL_kwf4015Nkc",
   pointsForDNF: false,
   websiteName: "jrc-results",
-  showLivePoints: true,
+  showLivePoints: false,
   divisions: {
     jrc1: {
       displayName: "JRC",
@@ -53,7 +53,7 @@ const initialState = {
       clubs: [
         {
           clubId: "330674",
-          championshipIds: []
+          championshipIds: ["346054"]
         }
       ],
       events: [],
@@ -73,7 +73,7 @@ const initialState = {
       clubs: [
         {
           clubId: "342117",
-          championshipIds: []
+          championshipIds: ["346055"]
         }
       ],
       events: [],
@@ -91,7 +91,7 @@ const initialState = {
       clubs: [
         {
           clubId: "357106",
-          championshipIds: []
+          championshipIds: ["346074"]
         }
       ],
       events: [],
