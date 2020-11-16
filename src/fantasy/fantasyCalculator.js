@@ -37,7 +37,6 @@ function calculateTeamPoints(team, event, lookuptable) {
     var score = week.drivers.reduce((val, driver) => {
       var driverPoints = lookuptable[driver];
       driverPoints = driverPoints ? driverPoints : -3;
-      if (driverPoints < 0) hasDnf = true;
       if (week.captain == driver) {
         driverPoints *= 2;
       }
