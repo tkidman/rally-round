@@ -44,7 +44,6 @@ function calculateTeamPoints(team, event, lookuptable) {
       }
       return val + driverPoints;
     }, 0);
-    if (hasDnf) score += lookuptable[week.reserve];
     week.points = score;
     team.previous = team.points;
     team.points += score;
@@ -52,7 +51,7 @@ function calculateTeamPoints(team, event, lookuptable) {
 }
 function calculateBudget(team, event, previousEvent, prices) {
   if (!previousEvent) {
-    team.budget.push(18);
+    team.budget.push(13);
     return;
   } else {
     team.roster.forEach(week => {
@@ -61,9 +60,8 @@ function calculateBudget(team, event, previousEvent, prices) {
       week.drivers.forEach(driver => {
         count += parseFloat(prices[driver][event.location]);
       });
-      count += parseFloat(prices[week.reserve][event.location]);
-      let budget = count < 18 ? 18 : count;
-      budget = budget > 25 ? 25 : budget;
+      let budget = count < 13 ? 13 : count;
+      budget = budget > 20 ? 20 : budget;
       team.budget.push(budget);
       team.value.push(count);
     });
@@ -180,9 +178,8 @@ function processFantasyTeams(teamStandings) {
     };
     Object.values(team.roster).forEach(week => {
       let points = week.points ? week.points : "";
-      if (week.reserve) {
+      if (week.drivers) {
         var lastRoster = [...week.drivers];
-        lastRoster.push(week.reserve);
         out.lastRoster = JSON.stringify(lastRoster);
         out.captains.push(week.captain);
       }

@@ -92,16 +92,12 @@
 									<label>Driver 3</label>
 									<input list="driverPrices" id="driver3" name="driver3" placeholder="driver 3"
 										class="w3-input w3-border" />
-									<label>Reserve</label>
-									<input list="driverPrices" id="driver4" name="driver4" placeholder="Reserve"
-										class="w3-input w3-border" />
 									<button class="w3-btn w3-blue" style="margin: auto;display: table;margin-top: 1em;"
 										onclick="calculatePrice()">Is it valid?</button>
 								</div>
 								<div class="w3-col m6 l6">
 									<p style="font-weight:bold;">Budget: <span id="budget_check"></span></p>
 									<p style="font-weight:bold;">Captain: <span id="captain_check"></span></p>
-									<p style="font-weight:bold;">Reserve: <span id="reserve_check"></span></p>
 									<p style="font-weight:bold;">Transfers: <span id="transfer_check"></span></p>
 			
 									<input type="text" style="display:none;" id="discordString" value="placeholder" >	
@@ -224,7 +220,6 @@
 			var budget_check = document.getElementById('budget_check');
 			var captain_check = document.getElementById('captain_check');
 			var transfer_check = document.getElementById('transfer_check');
-			var reserve_check = document.getElementById('reserve_check');
 
 			var discordSpan = document.getElementById('discordString');
 			var discordButton = document.getElementById('discordButton');
@@ -236,7 +231,6 @@
 
 			
 			var new_roster = []
-			var reservePrice = 0;
 			var count = 0;
 			var transfers = 0;
 			var captainOk = true;
@@ -247,12 +241,10 @@
 
 				if(currentTeam.lastRoster.indexOf(driverName) == -1) transfers++;
 				if(i == 1 && currentTeam.captains.indexOf(driverName) > -1) captainOk = false;
-				if(i == 4){ reservePrice = driverPrice; }
 				count += driverPrice;
 
 				discordString += driverName;
 				if(i == 1) discordString += ' (C)';
-				if(i == 4) discordString += ' (R)';
 				discordString += ' ';
 			}
 
@@ -263,14 +255,8 @@
 			budget_check.innerHTML = str;
 			budget_check.style = (budgetOk) ? "color: green;" : "color: red";
 
-			var reserveOk = (reservePrice < 5);
-			var str = (reserveOk) ? "✔️ " : "❌ ";
-			str += "Reserve "
-			str += (reserveOk) ? "ok" : "too expensive (" + reservePrice + ' / 5)'
-			reserve_check.innerHTML = str;
-			reserve_check.style = (reserveOk) ? "color: green;" : "color: red";
 
-			var transfersOk = (transfers < /*3*/5);
+			var transfersOk = (transfers < 3);
 			var str = (transfersOk) ? "✔️ " : "❌ ";
 			str += transfers + ' transfers';
 			transfer_check.innerHTML = str;
@@ -282,7 +268,7 @@
 			captain_check.style = (captainOk) ? "color: green;" : "color: red";
 			
 			discordSpan.value = discordString;
-			discordButton.disabled = !(budgetOk && reserveOk && transfersOk && captainOk);
+			discordButton.disabled = !(budgetOk && transfersOk && captainOk);
 		}
 
 	</script>
