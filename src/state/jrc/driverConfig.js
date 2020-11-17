@@ -7,15 +7,15 @@ const {
 } = require("../constants/driverFieldNames");
 
 const driverColumns = {
-  [name]: "Gamertag",
-  [raceNetName]: "Racenet",
+  [name]: "Driver",
+  [raceNetName]: "Gamertag",
   [teamId]: "Team",
   [division]: "Tier",
   [car]: "Car"
 };
 
 const sheetsConfig = {
-  sheetId: "155Q1NPyMUSflBoDkdJK3SElq_NEzNaibZNalgcM7NGI",
+  sheetId: "1rpVYNoSlkRwY_r22jRmSDM347dsCgWBL_kwf4015Nkc",
   tabName: "All tiers"
 };
 

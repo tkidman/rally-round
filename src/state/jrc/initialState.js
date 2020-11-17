@@ -1,5 +1,4 @@
-const { JRC_CALCULATIONS } = require("../../fantasy/fantasyFormulas");
-
+// const { JRC_CALCULATIONS } = require("../../fantasy/fantasyFormulas");
 const initialState = {
   driverSheetId: "1rpVYNoSlkRwY_r22jRmSDM347dsCgWBL_kwf4015Nkc",
   pointsForDNF: false,
@@ -103,12 +102,12 @@ const initialState = {
       // promotionZone: 6
     }
   },
-  fantasy: {
-    calculators: JRC_CALCULATIONS,
-    teams: [],
-    driverStandings: {},
-    sheetId: "1ifywqh1xfyVjpUqiG1zODpXupbyHwIzVsZCmOvcHtmg"
-  },
+  // fantasy: {
+  //   calculators: JRC_CALCULATIONS,
+  //   teams: [],
+  //   driverStandings: {},
+  //   sheetId: "1ifywqh1xfyVjpUqiG1zODpXupbyHwIzVsZCmOvcHtmg"
+  // },
   visualization: "jrc_all",
   standingsOutputSheetId: "1iLIPjB2fsi3HI5S5CgrvnkEzrdA6fT71m_9zmtL19VI"
 };

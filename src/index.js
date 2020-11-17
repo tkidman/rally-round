@@ -148,6 +148,9 @@ const setManualResults = (
 const getResultsByDriver = entries => {
   const resultsByDriver = entries.reduce((resultsByDriver, entry) => {
     const driver = leagueRef.getDriver(entry.name);
+    if (!driver) {
+      debug(`unable to find driver in lookup for ${entry.name}`);
+    }
     resultsByDriver[driver.name] = {
       name: driver.name,
       entry
@@ -359,20 +362,29 @@ const processEvent = ({ divisionName, event, previousEvent, drivers }) => {
   }
 };
 
+const loadEventDriver = (entry, drivers) => {
+  let driver = leagueRef.getDriver(entry.name);
+  if (!driver) {
+    debug(`adding unknown driver ${entry.name}`);
+    driver = { name: entry.name };
+    leagueRef.addDriver(driver);
+    leagueRef.missingDrivers[entry.name] = driver;
+  }
+  driver.nationality = entry.nationality;
+  if (!driver.firstCarDriven) {
+    driver.firstCarDriven = entry.vehicleName;
+  }
+  drivers[driver.name] = driver;
+};
+
 const loadEventDrivers = (drivers, event) => {
   event.racenetLeaderboardStages[0].entries.forEach(entry => {
-    let driver = leagueRef.getDriver(entry.name);
-    if (!driver) {
-      debug(`adding unknown driver ${entry.name}`);
-      driver = { name: entry.name };
-      leagueRef.addDriver(driver);
-      leagueRef.missingDrivers[entry.name] = driver;
-    }
-    driver.nationality = entry.nationality;
-    if (!driver.firstCarDriven) {
-      driver.firstCarDriven = entry.vehicleName;
-    }
-    drivers[driver.name] = driver;
+    loadEventDriver(entry, drivers);
+  });
+  event.racenetLeaderboardStages[
+    event.racenetLeaderboardStages.length - 1
+  ].entries.forEach(entry => {
+    loadEventDriver(entry, drivers);
   });
   return drivers;
 };
