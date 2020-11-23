@@ -1,13 +1,13 @@
 const initialState = {
   pointsForDNF: false,
   websiteName: "jrc-results",
-  subfolderName: "historic",
+  subfolderName: "endurance",
   showLivePoints: false,
   divisions: {
-    historic: {
-      divisionName: "historic",
-      displayName: "JRC Historic",
-      clubs: [{ clubId: "192069", championshipIds: ["336908"] }],
+    endurance: {
+      divisionName: "endurance",
+      displayName: "JRC Endurance",
+      clubs: [{ clubId: "353757", championshipIds: ["331780"] }],
       events: [],
       points: {
         powerStage: [],
