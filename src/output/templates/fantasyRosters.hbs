@@ -254,7 +254,7 @@
 			budget_check.style = (budgetOk) ? "color: green;" : "color: red";
 
 
-			var transfersOk = (transfers < 3);
+			var transfersOk = true//(transfers < 3);
 			var str = (transfersOk) ? "✔️ " : "❌ ";
 			str += transfers + ' transfers';
 			transfer_check.innerHTML = str;
