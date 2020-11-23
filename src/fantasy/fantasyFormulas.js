@@ -23,10 +23,10 @@ const calculatePowerStagePoints = resultsByDriver => {
 };
 
 const calculateStandingPoints = resultsByDriver => {
-  for (let i = 0; i < 31; i++) {
+  for (let i = 0; i < 30; i++) {
     var result = resultsByDriver[i];
     if (result.entry.isDnfEntry || result.entry.isDnsEntry) continue;
-    addPointsToResult(result, 31 - i);
+    addPointsToResult(result, 30 - i);
   }
   // Object.values(resultsByDriver).forEach(result => {
   //   var points = result["overallPoints"];

@@ -46,7 +46,6 @@
 							<th>Driver 1</th>
 							<th>Driver 2</th>
 							<th>Driver 3</th>
-							<th>Reserve</th>
 							<th>Points</th>
 						</tr>
 					</thead>
@@ -63,7 +62,6 @@
 							<td></td>
 							<td></td>
 							{{/each}}
-							<td>{{reserve}}</td>
 							<td>{{points}}</td>
 						</tr>
 						{{/with}}{{/each}}
@@ -129,12 +127,12 @@
 							<th>Driver</th>
 							<th><img src="./assets/country-flags/mco.png" /></th>
 							<th><img src="./assets/country-flags/swe.png" /></th>
-							<th><img src="./assets/country-flags/nzl.png" /></th>
+							{{!-- <th><img src="./assets/country-flags/nzl.png" /></th>
 							<th><img src="./assets/country-flags/arg.png" /></th>
 							<th><img src="./assets/country-flags/fin.png" /></th>
 							<th><img src="./assets/country-flags/deu.png" /></th>
 							<th><img src="./assets/country-flags/grc.png" /></th>
-							<th><img src="./assets/country-flags/scot.png" /></th>
+							<th><img src="./assets/country-flags/scot.png" /></th> --}}
 						</tr>
 					</thead>
 					<tbody>
@@ -234,7 +232,7 @@
 			var count = 0;
 			var transfers = 0;
 			var captainOk = true;
-			for (let i = 1; i < 5; i++) {
+			for (let i = 1; i < 4; i++) {
 				var input = document.getElementById('driver' + i);
 				var driverPrice = getDataValue(input.value)
 				var driverName = input.value.split(' (')[0];

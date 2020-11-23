@@ -59,7 +59,7 @@ function calculateBudget(team, event, previousEvent, prices) {
         count += parseFloat(prices[driver][event.location]);
       });
       let budget = count < 13 ? 13 : count;
-      budget = budget > 20 ? 20 : budget;
+      budget = budget > 18 ? 18 : budget;
       team.budget.push(budget);
       team.value.push(count);
     });
@@ -102,7 +102,7 @@ const calculateFantasyStandings = (event, previousEvent, league, division) => {
     calculateBudget(team, event, previousEvent, league.fantasy.drivers)
   );
 
-  if (event.eventStatus == "Active") return teams;
+  //if (event.eventStatus == "Active") return teams;
 
   if (!previousEvent) removeDoubleCaptains(teams); //no need to run this multiple times
 
@@ -131,6 +131,7 @@ const calculateFantasyStandings = (event, previousEvent, league, division) => {
  * RENDERER HELPERS
  */
 function processFantasyDrivers(driverStandings) {
+  if (!driverStandings || Object.keys(driverStandings).length === 0) return [];
   var drivers = Object.values(driverStandings);
   var drivers_old = [...drivers];
   drivers.sort((a, b) => b.total - a.total);
