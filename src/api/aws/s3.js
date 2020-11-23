@@ -35,9 +35,10 @@ const uploadToS3 = ({ file, key, bucket, contentType }) => {
   });
 };
 
-const listObjects = async bucket => {
+const listObjects = async (bucket, prefix) => {
   const params = {
-    Bucket: bucket
+    Bucket: bucket,
+    Prefix: prefix
   };
 
   return new Promise((resolve, reject) => {
@@ -113,8 +114,8 @@ const downloadFiles = async (bucket, keys) => {
 
 const downloadCache = async (bucket, subfolderName) => {
   debug("downloading cache files from s3");
-  const objects = await listObjects(bucket);
   const cachePrefix = subfolderName ? `${subfolderName}/cache` : "cache";
+  const objects = await listObjects(bucket, cachePrefix);
   const cacheObjects = objects.Contents.filter(s3Object =>
     s3Object.Key.startsWith(cachePrefix)
   );
