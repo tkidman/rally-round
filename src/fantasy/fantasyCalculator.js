@@ -103,7 +103,7 @@ const calculateFantasyStandings = (event, previousEvent, league, division) => {
     calculateBudget(team, event, previousEvent, league.fantasy.drivers)
   );
 
-  //if (event.eventStatus == "Active") return teams;
+  if (event.eventStatus == "Active") return teams;
 
   if (!previousEvent) removeDoubleCaptains(teams); //no need to run this multiple times
 
