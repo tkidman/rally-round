@@ -120,7 +120,8 @@ const calculateFantasyStandings = (event, previousEvent, league, division) => {
 
   teams.forEach(team => calculateTeamPoints(team, event, lookuptable));
 
-  if (event.eventStatus != "Active") calculateBestBuys(event, lookuptable, league.fantasy);
+  if (event.eventStatus != "Active")
+    calculateBestBuys(event, lookuptable, league.fantasy);
 
   if (!league.fantasy.driverStandings) league.fantasy.driverStandings = {};
   buildDriverStandings(league.fantasy.driverStandings, lookuptable, event);
