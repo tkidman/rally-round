@@ -42,6 +42,7 @@ function calculateTeamPoints(team, event, lookuptable) {
       }
       return val + driverPoints;
     }, 0);
+    if (event.eventStatus == "Active") score = 0;
     week.points = score;
     team.previous = team.points;
     team.points += score;
