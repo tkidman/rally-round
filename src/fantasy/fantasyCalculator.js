@@ -179,7 +179,7 @@ function processFantasyTeams(teamStandings) {
     };
     Object.values(team.roster).forEach(week => {
       let points = week.points ? week.points : "";
-      if (week.drivers) {
+      if (week.drivers && week.drivers[0]) {
         var lastRoster = [...week.drivers];
         out.lastRoster = JSON.stringify(lastRoster);
         out.captains.push(week.captain);

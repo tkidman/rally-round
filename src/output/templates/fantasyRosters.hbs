@@ -127,12 +127,12 @@
 							<th>Driver</th>
 							<th><img src="./assets/country-flags/mco.png" /></th>
 							<th><img src="./assets/country-flags/swe.png" /></th>
-							{{!-- <th><img src="./assets/country-flags/nzl.png" /></th>
-							<th><img src="./assets/country-flags/arg.png" /></th>
-							<th><img src="./assets/country-flags/fin.png" /></th>
-							<th><img src="./assets/country-flags/deu.png" /></th>
-							<th><img src="./assets/country-flags/grc.png" /></th>
-							<th><img src="./assets/country-flags/scot.png" /></th> --}}
+							<th><img src="./assets/country-flags/aus.png" /></th>
+							<th><img src="./assets/country-flags/pol.png" /></th>
+							{{!-- <th><img src="./assets/country-flags/fin.png" /></th>
+							<th><img src="./assets/country-flags/esp.png" /></th>
+							<th><img src="./assets/country-flags/usa.png" /></th>
+							<th><img src="./assets/country-flags/gbr.png" /></th> --}}
 						</tr>
 					</thead>
 					<tbody>
@@ -254,7 +254,7 @@
 			budget_check.style = (budgetOk) ? "color: green;" : "color: red";
 
 
-			var transfersOk = true//(transfers < 3);
+			var transfersOk = (transfers < 3);
 			var str = (transfersOk) ? "✔️ " : "❌ ";
 			str += transfers + ' transfers';
 			transfer_check.innerHTML = str;
