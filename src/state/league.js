@@ -70,7 +70,11 @@ const loadDriversFromLocalCSV = () => {
 };
 
 const loadDrivers = async () => {
-  if (sheetsConfig && process.env.GOOGLE_SHEETS_API_KEY) {
+  if (
+    sheetsConfig &&
+    sheetsConfig.sheetId &&
+    process.env.GOOGLE_SHEETS_API_KEY
+  ) {
     return loadDriversFromSheets();
   } else if (fs.existsSync(`./src/state/${club}/drivers.csv`)) {
     return loadDriversFromLocalCSV();
@@ -132,7 +136,8 @@ const init = async () => {
   leagueRef.missingDrivers = missingDrivers;
   leagueRef.hasTeams = !!driverColumns.teamId;
   leagueRef.hasCars = !!driverColumns.car;
-  leagueRef.includeOverall = Object.keys(league.divisions).length > 1;
+  leagueRef.includeOverall =
+    Object.keys(league.divisions).length > 1 && !league.disableOverall;
   await loadFantasy(leagueRef.league);
   return leagueRef;
 };

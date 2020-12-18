@@ -11,10 +11,13 @@ const { writePlacementOutput } = require("./html");
 const { writeFantasyHTML } = require("./html");
 const { writeHomeHTML } = require("./html");
 
-const addLinks = (links, name, type) => {
-  if (!links[type]) links[type] = [];
+const addLinks = (links, name, type, displayName) => {
+  const linkDisplay = displayName || name;
+  if (!links[type]) {
+    links[type] = [];
+  }
   links[type].push({
-    link: `${name}`,
+    link: `${linkDisplay}`,
     href: `./${name}-${type}-standings.html`,
     active: false
   });
@@ -22,9 +25,13 @@ const addLinks = (links, name, type) => {
 
 const getHtmlLinks = () => {
   const league = leagueRef.league;
-  const links = Object.keys(league.divisions).reduce((links, divisionName) => {
-    if (leagueRef.hasTeams) addLinks(links, divisionName, "team");
-    addLinks(links, divisionName, "driver");
+  const links = Object.values(league.divisions).reduce((links, division) => {
+    const divisionName = division.divisionName;
+    const displayName = division.displayName;
+    if (leagueRef.hasTeams) {
+      addLinks(links, divisionName, "team", displayName);
+    }
+    addLinks(links, divisionName, "driver", displayName);
     return links;
   }, {});
   if (leagueRef.includeOverall) {

@@ -11,6 +11,7 @@ const fs = require("fs");
 const { createDNFResult } = require("./shared");
 const { cloneDeep } = require("lodash");
 const { recalculateDiffsForEntries } = require("./shared");
+const vehicles = require("./state/constants/vehicles.json");
 
 const { init, leagueRef } = require("./state/league");
 const { writeOutput, checkOutputDirs } = require("./output/output");
@@ -373,6 +374,12 @@ const loadEventDriver = (entry, drivers) => {
   driver.nationality = entry.nationality;
   if (!driver.firstCarDriven) {
     driver.firstCarDriven = entry.vehicleName;
+  }
+  if (!driver.teamId && leagueRef.league.useCarAsTeam) {
+    driver.teamId = vehicles[driver.firstCarDriven].brand;
+  }
+  if (!driver.car) {
+    driver.car = driver.firstCarDriven;
   }
   drivers[driver.name] = driver;
 };

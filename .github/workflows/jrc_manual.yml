@@ -9,7 +9,6 @@ jobs:
       DIRT_AWS_SECRET_ACCESS_KEY: ${{ secrets.DIRT_AWS_SECRET_ACCESS_KEY }}
       GOOGLE_SHEETS_API_KEY: ${{ secrets.GOOGLE_SHEETS_API_KEY }}
       DEBUG: tkidman:*
-      CLUB: jrc
     runs-on: ubuntu-latest
     timeout-minutes: 5
 
@@ -20,4 +19,5 @@ jobs:
         with:
           node-version: 12.x
       - run: npm install
-      - run: node ./runner.js
+      - run: CLUB=jrc node ./runner.js
+      - run: CLUB=jrc-themed node ./runner.js
