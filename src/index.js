@@ -33,12 +33,13 @@ const updatePoints = (resultsByDriver, orderedEntries, points, pointsField) => {
 
 const calculateTeamResults = (
   driverResults,
-  maxDriversScoringPointsForTeam
+  maxDriversScoringPointsForTeam,
+  eventIndex
 ) => {
   const teamResults = driverResults.reduce((teamResults, result) => {
     const driver = leagueRef.getDriver(result.name);
     if (driver) {
-      const resultTeamId = driver.teamId;
+      const resultTeamId = getResultTeamId(eventIndex, driver);
       result.teamId = resultTeamId;
       if (resultTeamId && resultTeamId !== privateer) {
         if (!teamResults[resultTeamId]) {
@@ -200,7 +201,24 @@ const getTotalPointsDisplay = (result, event) => {
   return display;
 };
 
-const calculateEventResults = ({ event, divisionName, drivers }) => {
+const getResultTeamId = (eventIndex, driver) => {
+  const teamOverride = leagueRef.league.teamOverride;
+  if (
+    teamOverride &&
+    teamOverride[driver.name] &&
+    teamOverride[driver.name][eventIndex]
+  ) {
+    return teamOverride[driver.name][eventIndex];
+  }
+  return driver.teamId;
+};
+
+const calculateEventResults = ({
+  event,
+  divisionName,
+  drivers,
+  eventIndex
+}) => {
   const firstStageResultsByDriver = getResultsByDriver(
     event.racenetLeaderboardStages[0].entries,
     divisionName
@@ -271,7 +289,8 @@ const calculateEventResults = ({ event, divisionName, drivers }) => {
   if (leagueRef.hasTeams) {
     const teamResultsById = calculateTeamResults(
       driverResults,
-      division.maxDriversScoringPointsForTeam
+      division.maxDriversScoringPointsForTeam,
+      eventIndex
     );
     teamResults.push(...sortTeamResults(teamResultsById));
   }
@@ -346,11 +365,18 @@ const calculateEventStandings = (event, previousEvent) => {
   event.standings = { driverStandings, teamStandings };
 };
 
-const processEvent = ({ divisionName, event, previousEvent, drivers }) => {
+const processEvent = ({
+  divisionName,
+  event,
+  previousEvent,
+  drivers,
+  eventIndex
+}) => {
   event.results = calculateEventResults({
     event,
     divisionName,
-    drivers
+    drivers,
+    eventIndex
   });
   calculateEventStandings(event, previousEvent);
   if (leagueRef.league.divisions[divisionName].fantasy) {
@@ -406,9 +432,10 @@ const loadDriversAcrossAllEvents = events => {
 const processEvents = (events, divisionName) => {
   let previousEvent = null;
   const drivers = loadDriversAcrossAllEvents(events);
-  for (const event of events) {
+  for (let eventIndex = 0; eventIndex < events.length; eventIndex++) {
+    const event = events[eventIndex];
     debug(`processing ${divisionName} ${event.location}`);
-    processEvent({ divisionName, event, previousEvent, drivers });
+    processEvent({ divisionName, event, previousEvent, drivers, eventIndex });
     previousEvent = event;
   }
 };

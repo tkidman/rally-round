@@ -83,7 +83,7 @@ describe("calculates event results", () => {
         },
         name: "Kuul",
         pointsDisplay: "DQ",
-        teamId: "Unlimited Pedal Works",
+        teamId: "Ditch Dusters",
         totalPoints: 0
       }
     ];
@@ -93,7 +93,8 @@ describe("calculates event results", () => {
         eventId: "221955"
       },
       drivers: {},
-      divisionName: "pro"
+      divisionName: "pro",
+      eventIndex: 0
     }).driverResults;
     expect(driverResults).toEqual(expected);
   });

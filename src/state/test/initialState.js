@@ -29,6 +29,9 @@ const initialState = {
         }
       ]
     }
+  },
+  teamOverride: {
+    Kuul: ["Ditch Dusters"]
   }
 };
 

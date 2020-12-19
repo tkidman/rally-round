@@ -1,4 +1,5 @@
 const { JRC_CALCULATIONS } = require("../../fantasy/fantasyFormulas");
+const { privateer } = require("../../shared");
 const initialState = {
   driverSheetId: "1rpVYNoSlkRwY_r22jRmSDM347dsCgWBL_kwf4015Nkc",
   pointsForDNF: false,
@@ -109,7 +110,10 @@ const initialState = {
     sheetId: "1ifywqh1xfyVjpUqiG1zODpXupbyHwIzVsZCmOvcHtmg"
   },
   visualization: "jrc_all",
-  standingsOutputSheetId: "1iLIPjB2fsi3HI5S5CgrvnkEzrdA6fT71m_9zmtL19VI"
+  standingsOutputSheetId: "1iLIPjB2fsi3HI5S5CgrvnkEzrdA6fT71m_9zmtL19VI",
+  teamOverride: {
+    TheOfficialZenor: [privateer, privateer, privateer, privateer]
+  }
 };
 
 module.exports = initialState;
