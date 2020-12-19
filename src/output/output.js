@@ -17,6 +17,7 @@ const addLinks = (links, name, type, displayName) => {
     links[type] = [];
   }
   links[type].push({
+    name,
     link: `${linkDisplay}`,
     href: `./${name}-${type}-standings.html`,
     active: false

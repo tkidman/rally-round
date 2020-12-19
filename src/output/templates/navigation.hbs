@@ -1,8 +1,8 @@
 <head>
 	<title>
-		JRC | 
+		JRC |
 		{{#if links.active.menu}}
-			{{links.active.menu}} {{links.active.link}} 
+			{{links.active.menu}} {{links.active.link}}
 			{{else}}
 			Home
 		{{/if}}
@@ -19,13 +19,13 @@
 		<a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large" style="font-size:3em;"
 			onclick="openNav()">&#9776;</a>
 
-		
+
 		<h3 class="w3-hide-large navTitle bold" style="display:block;">
-			{{links.active.menu}} - {{links.active.link}} 
+			{{links.active.menu}} - {{links.active.link}}
 			{{#if endTime}}<br><span id="countdown"></span>{{/if}}
 		</h3>
-		
-		
+
+
 		{{#if links.driver}}
 		<div class="w3-dropdown-hover w3-hide-small w3-hide-medium">
 			<button class="w3-button">Driver Standings</button>
@@ -109,7 +109,7 @@
 		{{/if}}
 
 		{{#if endTime}}
-		
+
 		<div class="w3-bar-item w3-right w3-hide-small w3-hide-medium">
 			<div class="logo">
 				<img src="./assets/country-flags/{{activeCountry}}.png" style="max-height: 0.9em;border-radius: 0.3em;"/>
@@ -118,7 +118,7 @@
 		</div>
 		{{/if}}
 	</div>
-	
+
 	<div id="mobileNav" class="w3-bar-block w3-black w3-hide w3-hide-large" style="overflow-y:scroll;max-height:95vh;">
 		{{#with links.driver}}
 		{{#each this}}
@@ -160,7 +160,7 @@
 	{{#if secondary}}
 	<div class="w3-bar w3-light-grey secondaryNav">
 		{{#each secondary}}
-			<a href="./{{../links.active.link}}-{{this}}-driver-results.html">
+			<a href="./{{../links.active.name}}-{{this}}-driver-results.html">
 				<img src="./assets/country-flags/{{this}}.png" />
 			</a>
 		{{/each}}
@@ -177,23 +177,23 @@
 
 	// Get today's date and time
 	var now = new Date().getTime();
-		
+
 	// Find the distance between now and the count down date
 	var distance = countDownDate - now;
-		
+
 	// Time calculations for days, hours, minutes and seconds
 	var days = Math.floor(distance / (1000 * 60 * 60 * 24));
 	var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 	var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 	var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-		
+
 	// Output the result in an element with id="demo"
 	document.getElementById("countdown").innerHTML = days + "d " + hours + "h "
 	+ minutes + "m " + seconds + "s ";
 	document.getElementById("countdown2").innerHTML = days + "d " + hours + "h "
 	+ minutes + "m " + seconds + "s ";
-		
-	// If the count down is over, write some text 
+
+	// If the count down is over, write some text
 	if (distance < 0) {
 		clearInterval(x);
 		document.getElementById("countdown").innerHTML = "Event Ended";

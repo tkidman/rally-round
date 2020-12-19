@@ -174,7 +174,7 @@ const getNavigationHTML = (
   Object.keys(links).forEach(menu => {
     if (menu === "active") return;
     links[menu].forEach(link => {
-      link.active = link.link === currentPage && menu === currentMenu;
+      link.active = link.name === currentPage && menu === currentMenu;
       if (link.active) {
         links.active = link;
         links.active.menu = currentMenu;
