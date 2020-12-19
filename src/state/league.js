@@ -37,6 +37,7 @@ const transformDriverRows = driverRows => {
         [driverFieldNames.name]: driverNameValue,
         [driverFieldNames.raceNetName]:
           row[driverColumns[driverFieldNames.raceNetName]],
+        [driverFieldNames.name3]: row[driverColumns[driverFieldNames.name3]],
         [driverFieldNames.teamId]: team,
         [driverFieldNames.division]:
           row[driverColumns[driverFieldNames.division]],
@@ -52,7 +53,13 @@ const transformDriverRows = driverRows => {
   const driversByRaceNet = keyBy(Object.values(driversById), driver =>
     driver.raceNetName.toUpperCase()
   );
-  return { driversById, driversByRaceNet };
+  const driversWithName3 = Object.values(driversById).filter(
+    driver => driver.name3
+  );
+  const driversByName3 = keyBy(driversWithName3, driver =>
+    driver.name3.toUpperCase()
+  );
+  return { driversById, driversByRaceNet, driversByName3 };
 };
 
 const loadDriversFromSheets = async () => {
@@ -80,7 +87,7 @@ const loadDrivers = async () => {
     return loadDriversFromLocalCSV();
   }
   debug("no driver config found, team functionality will not work");
-  return { driversById: {}, driversByRaceNet: {} };
+  return { driversById: {}, driversByRaceNet: {}, driversByName3: {} };
 };
 
 const loadFantasy = async league => {
@@ -125,9 +132,10 @@ const loadFantasy = async league => {
 };
 
 const init = async () => {
-  const { driversById, driversByRaceNet } = await loadDrivers();
+  const { driversById, driversByRaceNet, driversByName3 } = await loadDrivers();
   drivers.driversById = driversById;
   drivers.driversByRaceNet = driversByRaceNet;
+  drivers.driversByName3 = driversByName3;
   leagueRef.league = league;
   leagueRef.getDriver = getDriver;
   leagueRef.divisions = league.divisions;
@@ -152,6 +160,9 @@ const getDriver = name => {
   let driver = drivers.driversById[upperName];
   if (!driver) {
     driver = drivers.driversByRaceNet[upperName];
+  }
+  if (!driver) {
+    driver = drivers.driversByName3[upperName];
   }
   return driver;
 };

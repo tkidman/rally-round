@@ -3,12 +3,14 @@ const {
   name,
   division,
   raceNetName,
-  car
+  car,
+  name3
 } = require("../constants/driverFieldNames");
 
 const driverColumns = {
   [name]: "Driver",
   [raceNetName]: "Gamertag",
+  [name3]: "Name 3",
   [teamId]: "Team",
   [division]: "Tier",
   [car]: "Car"

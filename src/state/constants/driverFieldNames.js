@@ -3,7 +3,8 @@ const driverFieldNames = {
   teamId: "teamId",
   raceNetName: "raceNetName",
   division: "division",
-  car: "car"
+  car: "car",
+  name3: "name3"
 };
 
 module.exports = driverFieldNames;
