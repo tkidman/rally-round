@@ -5,6 +5,7 @@ const initialState = {
   showLivePoints: false,
   useCarAsTeam: true,
   disableOverall: true,
+  teamPointsForPowerstage: true,
   divisions: {
     wrc: {
       divisionName: "wrc",
@@ -16,9 +17,17 @@ const initialState = {
       ],
       events: [],
       points: {
-        powerStage: [],
+        powerStage: [3, 2, 1],
         overall: [30, 24, 21, 19, 17, 15, 13, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
-      }
+      },
+      cars: [
+        "Mitsubishi Lancer Evolution VI",
+        "SUBARU Impreza S4 Rally",
+        "Peugeot 206 Rally",
+        "Seat Ibiza Kit Car",
+        "Peugeot 306 Maxi",
+        "Volkswagen Golf Kitcar"
+      ]
       // outputSheetId: "1C3fU9y1236wFmPuKcui4CEXBuSsUANH6OJ0BpQIasTc"
     },
     kitcar: {
@@ -27,9 +36,10 @@ const initialState = {
       clubs: [{ clubId: "361684", championshipIds: ["362767"] }],
       events: [],
       points: {
-        powerStage: [],
+        powerStage: [3, 2, 1],
         overall: [30, 24, 21, 19, 17, 15, 13, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
-      }
+      },
+      cars: ["Seat Ibiza Kit Car", "Peugeot 306 Maxi", "Volkswagen Golf Kitcar"]
       // outputSheetId: "1C3fU9y1236wFmPuKcui4CEXBuSsUANH6OJ0BpQIasTc"
     }
   }

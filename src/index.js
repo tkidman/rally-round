@@ -36,7 +36,13 @@ const calculateTeamResults = (
   maxDriversScoringPointsForTeam,
   eventIndex
 ) => {
-  const teamResults = driverResults.reduce((teamResults, result) => {
+  const pointsField = leagueRef.league.teamPointsForPowerstage
+    ? "totalPoints"
+    : "overallPoints";
+  const sortedDriverResults = [...driverResults].sort(
+    (a, b) => b[pointsField] - a[pointsField]
+  );
+  const teamResults = sortedDriverResults.reduce((teamResults, result) => {
     const driver = leagueRef.getDriver(result.name);
     if (driver) {
       const resultTeamId = getResultTeamId(eventIndex, driver);
@@ -49,13 +55,13 @@ const calculateTeamResults = (
             driverResultsCounted: 0
           };
         }
-        if (result.overallPoints) {
+        if (result[pointsField]) {
           const maxDriversReached =
             maxDriversScoringPointsForTeam &&
             teamResults[resultTeamId].driverResultsCounted >=
               maxDriversScoringPointsForTeam;
           if (!maxDriversReached) {
-            teamResults[resultTeamId].totalPoints += result.overallPoints;
+            teamResults[resultTeamId].totalPoints += result[pointsField];
             teamResults[resultTeamId].driverResultsCounted++;
           } else {
             debug(
@@ -389,7 +395,8 @@ const processEvent = ({
   }
 };
 
-const loadEventDriver = (entry, drivers) => {
+const loadEventDriver = (entry, drivers, divisionName) => {
+  const division = leagueRef.league.divisions[divisionName];
   let driver = leagueRef.getDriver(entry.name);
   if (!driver) {
     debug(`adding unknown driver ${entry.name}`);
@@ -398,11 +405,16 @@ const loadEventDriver = (entry, drivers) => {
     leagueRef.missingDrivers[entry.name] = driver;
   }
   driver.nationality = entry.nationality;
-  if (!driver.firstCarDriven) {
+  if (
+    !driver.firstCarDriven &&
+    (!division.cars || division.cars.includes(entry.vehicleName))
+  ) {
     driver.firstCarDriven = entry.vehicleName;
   }
   if (!driver.teamId && leagueRef.league.useCarAsTeam) {
-    driver.teamId = vehicles[driver.firstCarDriven].brand;
+    if (driver.firstCarDriven) {
+      driver.teamId = vehicles[driver.firstCarDriven].brand;
+    }
   }
   if (!driver.car) {
     driver.car = driver.firstCarDriven;
@@ -412,12 +424,12 @@ const loadEventDriver = (entry, drivers) => {
 
 const loadEventDrivers = (drivers, event) => {
   event.racenetLeaderboardStages[0].entries.forEach(entry => {
-    loadEventDriver(entry, drivers);
+    loadEventDriver(entry, drivers, event.divisionName);
   });
   event.racenetLeaderboardStages[
     event.racenetLeaderboardStages.length - 1
   ].entries.forEach(entry => {
-    loadEventDriver(entry, drivers);
+    loadEventDriver(entry, drivers, event.divisionName);
   });
   return drivers;
 };

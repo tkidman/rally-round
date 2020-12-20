@@ -85,6 +85,29 @@ describe("calculates event results", () => {
         pointsDisplay: "DQ",
         teamId: "Ditch Dusters",
         totalPoints: 0
+      },
+      {
+        divisionName: "pro",
+        entry: {
+          disqualificationReason: "Wrong car choice",
+          isDnfEntry: true,
+          isFounder: false,
+          isPlayer: false,
+          isVIP: false,
+          name: "Pynklu",
+          nationality: "belgish",
+          playerDiff: 0,
+          rank: 4,
+          stageDiff: "--",
+          stageTime: "05:34.001",
+          totalDiff: "+18:24.013",
+          totalTime: "05:10:00.000",
+          vehicleName: "Wrong Car"
+        },
+        name: "Pynklu",
+        pointsDisplay: "DQ",
+        teamId: "Ditch Dusters",
+        totalPoints: 0
       }
     ];
     const driverResults = calculateEventResults({
@@ -107,6 +130,13 @@ describe("calculates event results", () => {
         name: "Time Penalty Boys",
         pointsDisplay: 10,
         totalPoints: 10
+      },
+      {
+        divisionName: "pro",
+        driverResultsCounted: 0,
+        name: "Ditch Dusters",
+        pointsDisplay: 0,
+        totalPoints: 0
       },
       {
         divisionName: "pro",
