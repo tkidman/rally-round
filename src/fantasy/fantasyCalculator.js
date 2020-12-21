@@ -57,7 +57,11 @@ function calculateBudget(team, event, previousEvent, prices) {
       if (week.location != previousEvent.location) return;
       let count = 0;
       week.drivers.forEach(driver => {
-        count += parseFloat(prices[driver][event.location]);
+        if(driver === undefined){
+          count += 0
+        }else{
+          count += parseFloat(prices[driver][event.location]);
+        }
       });
       let budget = count < 13 ? 13 : count;
       budget = budget > 17 ? 17 : budget;
