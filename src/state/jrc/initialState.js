@@ -13,7 +13,7 @@ const initialState = {
       clubs: [
         {
           clubId: "180867",
-          championshipIds: ["346049", "350281", "354184", "359559", "364217"]
+          championshipIds: ["346049", "350281", "354184", "359559", "364217","367184"]
         }
       ],
       events: [],
