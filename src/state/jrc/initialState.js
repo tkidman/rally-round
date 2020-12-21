@@ -53,7 +53,7 @@ const initialState = {
       clubs: [
         {
           clubId: "330674",
-          championshipIds: ["346054", "350283", "354200", "359567", "364219"]
+          championshipIds: ["346054", "350283", "354200", "359567", "364219","367231"]
         }
       ],
       events: [],
@@ -73,7 +73,7 @@ const initialState = {
       clubs: [
         {
           clubId: "342117",
-          championshipIds: ["346055", "350284", "354201", "359573", "364221"]
+          championshipIds: ["346055", "350284", "354201", "359573", "364221","367232"]
         }
       ],
       events: [],
@@ -92,7 +92,7 @@ const initialState = {
       clubs: [
         {
           clubId: "357106",
-          championshipIds: ["346074", "350287", "354203", "359575", "364222"]
+          championshipIds: ["346074", "350287", "354203", "359575", "364222", "367233"]
         }
       ],
       events: [],
