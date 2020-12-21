@@ -18,7 +18,33 @@ const initialState = {
       events: [],
       points: {
         powerStage: [3, 2, 1],
-        overall: [30, 24, 21, 19, 17, 15, 13, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+        overall: [
+          35,
+          32,
+          29,
+          27,
+          25,
+          23,
+          21,
+          19,
+          17,
+          15,
+          13,
+          12,
+          11,
+          10,
+          9,
+          8,
+          7,
+          6,
+          5,
+          4,
+          3,
+          2,
+          1,
+          1,
+          1
+        ]
       },
       cars: [
         "Mitsubishi Lancer Evolution VI",
@@ -37,7 +63,7 @@ const initialState = {
       events: [],
       points: {
         powerStage: [3, 2, 1],
-        overall: [30, 24, 21, 19, 17, 15, 13, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+        overall: [12, 10, 8, 6, 4, 3, 2, 1]
       },
       cars: ["Seat Ibiza Kit Car", "Peugeot 306 Maxi", "Volkswagen Golf Kitcar"]
       // outputSheetId: "1C3fU9y1236wFmPuKcui4CEXBuSsUANH6OJ0BpQIasTc"

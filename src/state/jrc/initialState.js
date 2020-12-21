@@ -23,8 +23,8 @@ const initialState = {
       },
       fantasy: true,
       outputSheetId: "1P-0CJ4rm7xBaMsan0yMcFKwDIWkqjIvYWHNrjgFDixc",
-      manualResults: []
-      // relegationZone: 6
+      manualResults: [],
+      relegationZone: 6
     },
     jrc2: {
       displayName: "JRC2",
@@ -42,9 +42,9 @@ const initialState = {
         overall: [30, 24, 21, 19, 17, 15, 13, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
       },
       outputSheetId: "1WaBmoqfRtXO8CEGhnE2g1b93F5o2Kjh7Nx3vi13U5Tg",
-      manualResults: []
-      // promotionZone: 6,
-      // relegationZone: 7
+      manualResults: [],
+      promotionZone: 7,
+      relegationZone: 8
     },
     jrc3: {
       displayName: "JRC3",
@@ -61,10 +61,10 @@ const initialState = {
         powerStage: [5, 4, 3, 2, 1],
         overall: [30, 24, 21, 19, 17, 15, 13, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
       },
-      outputSheetId: "1hrpLvoXjZVSjiIWGr1JVTxfAFM-Se83mFntaTcYYY1E"
-      // promotionDoubleZone: 1,
-      // promotionZone: 5,
-      // relegationZone: 5
+      outputSheetId: "1hrpLvoXjZVSjiIWGr1JVTxfAFM-Se83mFntaTcYYY1E",
+      promotionDoubleZone: 1,
+      promotionZone: 7,
+      relegationZone: 8
     },
     jrc4: {
       displayName: "JRC4",
@@ -80,9 +80,10 @@ const initialState = {
       points: {
         powerStage: [5, 4, 3, 2, 1],
         overall: [30, 24, 21, 19, 17, 15, 13, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
-      }
-      // promotionDoubleZone: 1,
-      // promotionZone: 6
+      },
+      promotionDoubleZone: 1,
+      promotionZone: 6,
+      relegationZone: 8
     },
     jrc5: {
       displayName: "JRC5",
@@ -98,9 +99,9 @@ const initialState = {
       points: {
         powerStage: [5, 4, 3, 2, 1],
         overall: [30, 24, 21, 19, 17, 15, 13, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
-      }
-      // promotionDoubleZone: 1,
-      // promotionZone: 6
+      },
+      promotionDoubleZone: 1,
+      promotionZone: 6
     }
   },
   fantasy: {
