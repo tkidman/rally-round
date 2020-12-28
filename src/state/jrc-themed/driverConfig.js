@@ -1,20 +1,13 @@
-const {
-  name,
-  raceNetName,
-  teamId,
-  car
-} = require("../constants/driverFieldNames");
+const { name, car } = require("../constants/driverFieldNames");
 
 const driverColumns = {
-  [name]: "Gamertag",
-  [raceNetName]: "Racenet",
-  [teamId]: "Themed",
-  [car]: "Themed"
+  [name]: "Driver",
+  [car]: "Car"
 };
 
 const sheetsConfig = {
-  // sheetId: "155Q1NPyMUSflBoDkdJK3SElq_NEzNaibZNalgcM7NGI",
-  // tabName: "All tiers"
+  sheetId: "1kWouazyd-eLiKmpVdmt8pF1X_A6KjBklzIGimM74Fqo",
+  tabName: "Sheet1"
 };
 
 module.exports = { driverColumns, sheetsConfig };

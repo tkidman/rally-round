@@ -50,7 +50,10 @@ const transformDriverRows = driverRows => {
     }
     return driversById;
   }, {});
-  const driversByRaceNet = keyBy(Object.values(driversById), driver =>
+  const driversWithRaceNet = Object.values(driversById).filter(
+    driver => driver.raceNetName
+  );
+  const driversByRaceNet = keyBy(driversWithRaceNet, driver =>
     driver.raceNetName.toUpperCase()
   );
   const driversWithName3 = Object.values(driversById).filter(
@@ -142,7 +145,7 @@ const init = async () => {
   leagueRef.addDriver = addDriver;
   leagueRef.drivers = drivers;
   leagueRef.missingDrivers = missingDrivers;
-  leagueRef.hasTeams = !!driverColumns.teamId;
+  leagueRef.hasTeams = !!driverColumns.teamId || league.useCarAsTeam;
   leagueRef.hasCars = !!driverColumns.car;
   leagueRef.includeOverall =
     Object.keys(league.divisions).length > 1 && !league.disableOverall;
