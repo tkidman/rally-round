@@ -2,7 +2,7 @@ const initialState = {
   pointsForDNF: false,
   websiteName: "jrc-results",
   subfolderName: "endurance",
-  showLivePoints: false,
+  showLivePoints: true,
   divisions: {
     endurance: {
       divisionName: "endurance",
