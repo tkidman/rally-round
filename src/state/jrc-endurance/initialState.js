@@ -7,6 +7,7 @@ const initialState = {
     endurance: {
       divisionName: "endurance",
       displayName: "JRC Endurance",
+      disableCarValidation: true,
       clubs: [{ clubId: "353757", championshipIds: ["331780"] }],
       events: [],
       points: {

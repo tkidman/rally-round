@@ -93,7 +93,12 @@ const setDnfIfIncorrectCar = (event, entries, divisionName) => {
   entries.forEach(entry => {
     const driver = leagueRef.getDriver(entry.name);
     const division = leagueRef.league.divisions[divisionName];
-    if (driver && driver.car && driver.car !== entry.vehicleName) {
+    if (
+      !division.disableCarValidation &&
+      driver &&
+      driver.car &&
+      driver.car !== entry.vehicleName
+    ) {
       debug(
         `driver ${entry.name} used wrong car ${entry.vehicleName}, should have used ${driver.car}. Setting to dnf`
       );

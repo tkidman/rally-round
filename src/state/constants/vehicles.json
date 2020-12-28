@@ -43,6 +43,10 @@
 		"class": "groupA",
 		"brand": "mitsubishi"
 	},
+	"Ford Escort RS Cosworth":{
+		"class": "groupA",
+		"brand": "ford"
+	},
 	"Ford Fiesta R5":{
 		"class": "R5",
 		"brand": "ford"
@@ -146,5 +150,21 @@
 	"Peugeot 205 GTI": {
 		"class": "H2",
 		"brand": "peugot"
+	},
+	"Ford Escort Mk II": {
+		"class": "H2R",
+		"brand": "ford"
+	},
+	"Opel Kadett C GT/E": {
+		"class": "H2R",
+		"brand": "opel"
+	},
+	"Renault 5 Turbo": {
+		"class": "H3",
+		"brand": "renault"
+	},
+	"BMW E30 M3 Evo Rally": {
+		"class": "H3",
+		"brand": "bmw"
 	}
 }
