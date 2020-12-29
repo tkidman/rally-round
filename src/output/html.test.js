@@ -9,26 +9,26 @@ describe("html", () => {
     };
 
     it("returns red when standing is in relegation zone", () => {
-      const colour = getStandingColour(division, { currentPosition: 18 }, 20);
+      const colour = getStandingColour(division, 18, 20);
       expect(colour).toEqual(colours.red);
     });
 
     it("returns default when standing is not in relegation zone or promotion zone", () => {
-      let colour = getStandingColour(division, { currentPosition: 17 }, 20);
+      let colour = getStandingColour(division, 17, 20);
       expect(colour).toEqual(colours.default);
-      colour = getStandingColour(division, { currentPosition: 6 }, 20);
+      colour = getStandingColour(division, 6, 20);
       expect(colour).toEqual(colours.default);
     });
 
     it("returns gold when standing is in promotion double zone", () => {
-      const colour = getStandingColour(division, { currentPosition: 2 }, 20);
+      const colour = getStandingColour(division, 2, 20);
       expect(colour).toEqual(colours.gold);
     });
 
     it("returns green when standing is in promotion zone", () => {
-      let colour = getStandingColour(division, { currentPosition: 3 }, 20);
+      let colour = getStandingColour(division, 3, 20);
       expect(colour).toEqual(colours.green);
-      colour = getStandingColour(division, { currentPosition: 5 }, 20);
+      colour = getStandingColour(division, 5, 20);
       expect(colour).toEqual(colours.green);
     });
 
@@ -37,7 +37,7 @@ describe("html", () => {
         {
           promotionZone: 3
         },
-        { currentPosition: 3 },
+        3,
         20
       );
       expect(colour).toEqual(colours.green);

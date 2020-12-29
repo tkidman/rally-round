@@ -234,20 +234,22 @@ const writeStandingsHTML = (division, type, links) => {
   }
 };
 
-const getStandingColour = (division, standing, numDrivers) => {
-  const position = standing.currentPosition;
+const getStandingColour = (division, standingIndexPlusOne, numDrivers) => {
   let colour = colours.default;
   const promotionDoubleZone = division.promotionDoubleZone || 0;
-  if (promotionDoubleZone && position <= division.promotionDoubleZone) {
+  if (
+    promotionDoubleZone &&
+    standingIndexPlusOne <= division.promotionDoubleZone
+  ) {
     colour = colours.gold;
   } else if (
     division.promotionZone &&
-    position <= division.promotionZone + promotionDoubleZone
+    standingIndexPlusOne <= division.promotionZone + promotionDoubleZone
   ) {
     colour = colours.green;
   } else if (
     division.relegationZone &&
-    numDrivers - division.relegationZone < position
+    numDrivers - division.relegationZone < standingIndexPlusOne
   ) {
     colour = colours.red;
   }
@@ -266,7 +268,7 @@ const transformForHTML = (division, type) => {
     lastEvent = events[events.length - 2];
   }
   const lastEventStandings = lastEvent.standings[`${type}Standings`];
-  const rows = lastEventStandings.map(standing => {
+  const rows = lastEventStandings.map((standing, standingIndex) => {
     const movement = {
       positive: standing.positionChange > 0,
       neutral: !standing.positionChange,
@@ -282,7 +284,7 @@ const transformForHTML = (division, type) => {
       (standingDivision.displayName || standingDivision.divisionName);
     const colour = getStandingColour(
       division,
-      standing,
+      standingIndex + 1,
       lastEventStandings.length
     );
     const row = {
