@@ -22,6 +22,11 @@ const initialState = {
             "367184",
             "371940"
           ]
+        },
+        {
+          clubId: "xxx",
+          championshipIds: ["xxx"],
+          appendToEventIndex: 7
         }
       ],
       events: [],

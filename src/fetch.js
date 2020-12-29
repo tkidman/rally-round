@@ -1,6 +1,7 @@
 const { cachePath } = require("./shared");
 const { recalculateDiffsForEntries } = require("./shared");
 const fs = require("fs");
+const { getSummedTotalTime } = require("./shared");
 
 const { eventStatuses } = require("./shared");
 const { fetchEventResults } = require("./api/dirt");
@@ -62,12 +63,55 @@ const recalculateDiffs = event => {
     recalculateDiffsForEntries(stage.entries, "stage");
   });
 };
+
+const adjustAppendStageTimes = (stage, lastStageBeforeAppend) => {
+  const adjustedStageEntries = [];
+  lastStageBeforeAppend.entries.forEach(lastStageBeforeAppendEntry => {
+    const appendEntryForDriver = stage.entries.find(
+      appendEntry => appendEntry.name === lastStageBeforeAppendEntry.name
+    );
+    if (appendEntryForDriver) {
+      const appendEntry = { ...appendEntryForDriver };
+      appendEntry.totalTime = getSummedTotalTime(
+        appendEntryForDriver,
+        lastStageBeforeAppendEntry
+      );
+      adjustedStageEntries.push(appendEntry);
+    }
+  });
+  stage.entries = adjustedStageEntries;
+};
+
+const appendResultsToPreviousEvent = (events, mergedEvents, club) => {
+  debug(`appending results to previous event`);
+  if (events.length !== 1) {
+    throw new Error(
+      "append results returned wrong number of events, should only return 1 event."
+    );
+  }
+  if (mergedEvents.length <= club.appendToEventIndex) {
+    throw new Error(
+      `invalid index ${club.appendToEventIndex} to append results to, only ${mergedEvents.length} events available`
+    );
+  }
+  const event = mergedEvents[club.appendToEventIndex];
+  const lastStageBeforeAppend =
+    event.racenetLeaderboardStages[event.racenetLeaderboardStages.length - 1];
+  const appendEvent = events[0];
+  appendEvent.racenetLeaderboardStages.forEach(stage => {
+    const adjustedStage = adjustAppendStageTimes(stage, lastStageBeforeAppend);
+    event.racenetLeaderboardStages.push(adjustedStage);
+  });
+};
+
 const fetchEvents = async (division, divisionName) => {
   const mergedEvents = [];
   for (let club of division.clubs) {
     debug(`fetching event for club ${club.clubId}`);
     const events = await fetchEventsForClub(club, division, divisionName);
-    if (mergedEvents.length === 0) {
+    if (club.appendToEventIndex === 0 || club.appendToEventIndex > 0) {
+      appendResultsToPreviousEvent(events, mergedEvents, club);
+    } else if (mergedEvents.length === 0) {
       mergedEvents.push(...events);
     } else {
       for (let i = 0; i < events.length; i++) {

@@ -73,6 +73,13 @@ const recalculateDiffsForEntries = (entries, field) => {
   }
 };
 
+const getSummedTotalTime = (entry1, entry2) => {
+  const entry1Duration = getDuration(entry1.totalTime);
+  const entry2Duration = getDuration(entry2.totalTime);
+  const summedDuration = entry1Duration.add(entry2Duration);
+  return moment.utc(summedDuration.as("milliseconds")).format("+HH:mm:ss.SSS");
+};
+
 const createDNFResult = (driverName, isDnsEntry) => {
   return {
     name: driverName,
@@ -101,5 +108,6 @@ module.exports = {
   orderResultsBy,
   getDuration,
   recalculateDiffsForEntries,
-  createDNFResult
+  createDNFResult,
+  getSummedTotalTime
 };
