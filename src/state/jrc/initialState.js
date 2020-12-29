@@ -31,7 +31,20 @@ const initialState = {
       },
       fantasy: true,
       outputSheetId: "1P-0CJ4rm7xBaMsan0yMcFKwDIWkqjIvYWHNrjgFDixc",
-      manualResults: [],
+      manualResults: [
+        {
+          eventId: "367878",
+          results: [
+            {
+              name: "the last son of hyperborea",
+              stageTime: "03:49.263",
+              stageDiff: "+00:21.189",
+              totalTime: "44:53.984",
+              totalDiff: "+02:33.576"
+            }
+          ]
+        }
+      ],
       relegationZone: 6
     },
     jrc2: {
