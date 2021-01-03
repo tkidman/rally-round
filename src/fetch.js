@@ -80,11 +80,16 @@ const adjustAppendStageTimes = (stage, lastStageBeforeAppend) => {
     }
   });
   stage.entries = adjustedStageEntries;
+  return stage;
 };
 
-const appendResultsToPreviousEvent = (events, mergedEvents, club) => {
+const appendResultsToPreviousEvent = (
+  eventToAppendArray,
+  mergedEvents,
+  club
+) => {
   debug(`appending results to previous event`);
-  if (events.length !== 1) {
+  if (eventToAppendArray.length !== 1) {
     throw new Error(
       "append results returned wrong number of events, should only return 1 event."
     );
@@ -97,8 +102,8 @@ const appendResultsToPreviousEvent = (events, mergedEvents, club) => {
   const event = mergedEvents[club.appendToEventIndex];
   const lastStageBeforeAppend =
     event.racenetLeaderboardStages[event.racenetLeaderboardStages.length - 1];
-  const appendEvent = events[0];
-  appendEvent.racenetLeaderboardStages.forEach(stage => {
+  const eventToAppend = eventToAppendArray[0];
+  eventToAppend.racenetLeaderboardStages.forEach(stage => {
     const adjustedStage = adjustAppendStageTimes(stage, lastStageBeforeAppend);
     event.racenetLeaderboardStages.push(adjustedStage);
   });
@@ -219,5 +224,6 @@ module.exports = {
   // tests
   getEventKeysFromRecentResults,
   fetchEventsFromKeys,
-  recalculateDiffsForEntries
+  recalculateDiffsForEntries,
+  appendResultsToPreviousEvent
 };

@@ -60,6 +60,7 @@ const recalculateDiffsForEntries = (entries, field) => {
   const sortedEntries = orderEntriesBy(entries, timeField);
   if (sortedEntries.length > 0) {
     const topTime = getDuration(sortedEntries[0][timeField]);
+    sortedEntries[0][diffField] = "--";
     for (let i = 1; i < sortedEntries.length; i++) {
       const entry = sortedEntries[i];
       if (!entry.isDnsEntry) {
@@ -77,7 +78,7 @@ const getSummedTotalTime = (entry1, entry2) => {
   const entry1Duration = getDuration(entry1.totalTime);
   const entry2Duration = getDuration(entry2.totalTime);
   const summedDuration = entry1Duration.add(entry2Duration);
-  return moment.utc(summedDuration.as("milliseconds")).format("+HH:mm:ss.SSS");
+  return moment.utc(summedDuration.as("milliseconds")).format("HH:mm:ss.SSS");
 };
 
 const createDNFResult = (driverName, isDnsEntry) => {
