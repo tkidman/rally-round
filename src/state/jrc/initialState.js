@@ -1,10 +1,10 @@
-const { JRC_CALCULATIONS } = require("../../fantasy/fantasyFormulas");
+// const { JRC_CALCULATIONS } = require("../../fantasy/fantasyFormulas");
 const { privateer } = require("../../shared");
 const initialState = {
   driverSheetId: "1rpVYNoSlkRwY_r22jRmSDM347dsCgWBL_kwf4015Nkc",
   pointsForDNF: false,
   websiteName: "jrc-results",
-  showLivePoints: true,
+  showLivePoints: false,
   divisions: {
     jrc1: {
       displayName: "JRC",
@@ -20,8 +20,14 @@ const initialState = {
             "359559",
             "364217",
             "367184",
-            "371940"
+            "371940",
+            "378348"
           ]
+        },
+        {
+          clubId: "366003",
+          championshipIds: ["378351"],
+          appendToEventIndex: 7
         }
       ],
       events: [],
@@ -61,8 +67,14 @@ const initialState = {
             "359562",
             "364218",
             "367193",
-            "373213"
+            "373213",
+            "378725"
           ]
+        },
+        {
+          clubId: "366004",
+          championshipIds: ["378734"],
+          appendToEventIndex: 7
         }
       ],
       events: [],
@@ -157,12 +169,12 @@ const initialState = {
       promotionZone: 6
     }
   },
-  fantasy: {
-    calculators: JRC_CALCULATIONS,
-    teams: [],
-    driverStandings: {},
-    sheetId: "1ifywqh1xfyVjpUqiG1zODpXupbyHwIzVsZCmOvcHtmg"
-  },
+  // fantasy: {
+  //   calculators: JRC_CALCULATIONS,
+  //   teams: [],
+  //   driverStandings: {},
+  //   sheetId: "1ifywqh1xfyVjpUqiG1zODpXupbyHwIzVsZCmOvcHtmg"
+  // },
   visualization: "jrc_all",
   standingsOutputSheetId: "1iLIPjB2fsi3HI5S5CgrvnkEzrdA6fT71m_9zmtL19VI",
   teamOverride: {
