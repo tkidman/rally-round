@@ -101,8 +101,14 @@ const initialState = {
             "359567",
             "364219",
             "367231",
-            "373215"
+            "373215",
+            "379160"
           ]
+        },
+        {
+          clubId: "366006",
+          championshipIds: ["378746"],
+          appendToEventIndex: 7
         }
       ],
       events: [],
@@ -129,8 +135,14 @@ const initialState = {
             "359573",
             "364221",
             "367232",
-            "373243"
+            "373243",
+            "379159"
           ]
+        },
+        {
+          clubId: "366007",
+          championshipIds: ["379205"],
+          appendToEventIndex: 7
         }
       ],
       events: [],
@@ -156,8 +168,14 @@ const initialState = {
             "359575",
             "364222",
             "367233",
-            "373250"
+            "373250",
+            "379162"
           ]
+        },
+        {
+          clubId: "366008",
+          championshipIds: ["379194"],
+          appendToEventIndex: 7
         }
       ],
       events: [],
