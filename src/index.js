@@ -258,6 +258,21 @@ const calculateEventResults = ({
       }
     }
   });
+
+  // cascade DNF results for appended events
+  event.racenetLeaderboardStages.forEach(stages => {
+    stages.entries.forEach(entry => {
+      const driver = leagueRef.getDriver(entry.name);
+      if (
+        entry.isDnfEntry &&
+        !resultsByDriver[driver.name].entry.isDnfEntry &&
+        !resultsByDriver[driver.name].entry.isManualResult
+      ) {
+        debug(`cascading DNF for ${driver.name}`);
+        resultsByDriver[driver.name].entry.isDnfEntry = true;
+      }
+    });
+  });
   // end alert
 
   if (leagueRef.league.getAllResults)
