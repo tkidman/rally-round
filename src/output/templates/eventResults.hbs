@@ -61,9 +61,15 @@
                             </td>
                         {{/if}}
                         {{#if ../showCar}}
-                            <td>
-                                <img src="./assets/cars/{{this.car}}.png" style="max-width:2em; max-height:2em;" />
-                            </td>
+                            {{#if ../showCarName}}
+                                <td class="text-left">
+                                    {{this.entry.vehicleName}}
+                                </td>
+                            {{else}}
+                                <td>
+                                    <img src="./assets/cars/{{this.car}}.png" style="max-width:2em; max-height:2em;" />
+                                </td>
+                            {{/if}}
                         {{/if}}
                         <td>{{this.entry.stageTime}}</td>
                         <td>{{this.entry.stageDiff}}</td>

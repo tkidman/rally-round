@@ -77,9 +77,15 @@
                                 </td>
                             {{/if}}
                             {{#if ../showCar}}
-                                <td>
-                                    <img src="./assets/cars/{{this.car}}.png" style="max-width:2em; max-height:2em;" />
-                                </td>
+                                {{#if ../showCarName}}
+                                    <td class="text-left">
+                                        {{this.driver.car}}
+                                    </td>
+                                {{else}}
+                                    <td>
+                                        <img src="./assets/cars/{{this.car}}.png" style="max-width:2em; max-height:2em;" />
+                                    </td>
+                                {{/if}}
                             {{/if}}
                             {{#each this.results}}{{#with this}}
                             <td>

@@ -305,6 +305,7 @@ const transformForHTML = (division, type) => {
     rows,
     showTeam: leagueRef.hasTeams,
     showCar: leagueRef.hasCars,
+    showCarName: leagueRef.league.showCarNameAsTextInStandings,
     title: division.displayName || division.divisionName,
     logo: division.logo || "jrc_round.jpg",
     divisionName: division.divisionName
@@ -336,7 +337,8 @@ const transformForDriverResultsHTML = (event, division) => {
     title: division.displayName || divisionName,
     logo: division.logo || "jrc_round.jpg",
     showTeam: leagueRef.hasTeams,
-    showCar: leagueRef.hasCars,
+    showCar: leagueRef.hasCars || leagueRef.league.showCarNameAsTextInResults,
+    showCarName: leagueRef.league.showCarNameAsTextInResults,
     event,
     location: locations[event.location],
     divisionName

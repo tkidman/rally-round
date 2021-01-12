@@ -3,6 +3,7 @@ const initialState = {
   websiteName: "jrc-results",
   subfolderName: "historic",
   showLivePoints: false,
+  showCarNameAsTextInResults: true,
   divisions: {
     historic: {
       divisionName: "historic",
