@@ -2,7 +2,7 @@ const initialState = {
   pointsForDNF: false,
   websiteName: "jrc-results",
   subfolderName: "themed",
-  showLivePoints: false,
+  showLivePoints: true,
   showCarNameAsTextInStandings: true,
   showCarNameAsTextInResults: true,
   useCarAsTeam: true,
