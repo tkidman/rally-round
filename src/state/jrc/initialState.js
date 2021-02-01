@@ -1,10 +1,11 @@
 const { JRC_CALCULATIONS } = require("../../fantasy/fantasyFormulas");
-const { privateer } = require("../../shared");
+// const { privateer } = require("../../shared");
+
 const initialState = {
-  driverSheetId: "1rpVYNoSlkRwY_r22jRmSDM347dsCgWBL_kwf4015Nkc",
+  driverSheetId: "1DZzbnC_2t0p8SKSyzX-cXhaxJSlxRGKeN3OvF0aEcwY",
   pointsForDNF: false,
   websiteName: "jrc-results",
-  showLivePoints: true,
+  showLivePoints: false,
   divisions: {
     jrc1: {
       displayName: "JRC",
@@ -13,21 +14,7 @@ const initialState = {
       clubs: [
         {
           clubId: "180867",
-          championshipIds: [
-            "346049",
-            "350281",
-            "354184",
-            "359559",
-            "364217",
-            "367184",
-            "371940",
-            "378348"
-          ]
-        },
-        {
-          clubId: "366003",
-          championshipIds: ["378351"],
-          appendToEventIndex: 7
+          championshipIds: ["400958"]
         }
       ],
       events: [],
@@ -36,22 +23,8 @@ const initialState = {
         overall: [30, 24, 21, 19, 17, 15, 13, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
       },
       fantasy: true,
-      outputSheetId: "1P-0CJ4rm7xBaMsan0yMcFKwDIWkqjIvYWHNrjgFDixc",
-      manualResults: [
-        {
-          eventId: "367878",
-          results: [
-            {
-              name: "the last son of hyperborea",
-              stageTime: "03:49.263",
-              stageDiff: "+00:21.189",
-              totalTime: "44:53.984",
-              totalDiff: "+02:33.576"
-            }
-          ]
-        }
-      ],
-      relegationZone: 6
+      outputSheetId: "1P-0CJ4rm7xBaMsan0yMcFKwDIWkqjIvYWHNrjgFDixc"
+      // relegationZone: 6
     },
     jrc2: {
       displayName: "JRC2",
@@ -60,21 +33,7 @@ const initialState = {
       clubs: [
         {
           clubId: "244734",
-          championshipIds: [
-            "346050",
-            "350282",
-            "354185",
-            "359562",
-            "364218",
-            "367193",
-            "373213",
-            "378725"
-          ]
-        },
-        {
-          clubId: "366004",
-          championshipIds: ["378734"],
-          appendToEventIndex: 7
+          championshipIds: ["400980"]
         }
       ],
       events: [],
@@ -83,9 +42,9 @@ const initialState = {
         overall: [30, 24, 21, 19, 17, 15, 13, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
       },
       outputSheetId: "1WaBmoqfRtXO8CEGhnE2g1b93F5o2Kjh7Nx3vi13U5Tg",
-      manualResults: [],
-      promotionZone: 7,
-      relegationZone: 8
+      manualResults: []
+      // promotionZone: 7,
+      // relegationZone: 8
     },
     jrc3: {
       displayName: "JRC3",
@@ -94,21 +53,7 @@ const initialState = {
       clubs: [
         {
           clubId: "330674",
-          championshipIds: [
-            "346054",
-            "350283",
-            "354200",
-            "359567",
-            "364219",
-            "367231",
-            "373215",
-            "379160"
-          ]
-        },
-        {
-          clubId: "366006",
-          championshipIds: ["378746"],
-          appendToEventIndex: 7
+          championshipIds: ["400994"]
         }
       ],
       events: [],
@@ -116,76 +61,48 @@ const initialState = {
         powerStage: [5, 4, 3, 2, 1],
         overall: [30, 24, 21, 19, 17, 15, 13, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
       },
-      outputSheetId: "1hrpLvoXjZVSjiIWGr1JVTxfAFM-Se83mFntaTcYYY1E",
-      promotionDoubleZone: 1,
-      promotionZone: 7,
-      relegationZone: 8
-    },
-    jrc4: {
-      displayName: "JRC4",
-      divisionName: "jrc4",
-      maxDriversScoringPointsForTeam: 2,
-      clubs: [
-        {
-          clubId: "342117",
-          championshipIds: [
-            "346055",
-            "350284",
-            "354201",
-            "359573",
-            "364221",
-            "367232",
-            "373243",
-            "379159"
-          ]
-        },
-        {
-          clubId: "366007",
-          championshipIds: ["379205"],
-          appendToEventIndex: 7
-        }
-      ],
-      events: [],
-      points: {
-        powerStage: [5, 4, 3, 2, 1],
-        overall: [30, 24, 21, 19, 17, 15, 13, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
-      },
-      promotionDoubleZone: 1,
-      promotionZone: 6,
-      relegationZone: 8
-    },
-    jrc5: {
-      displayName: "JRC5",
-      divisionName: "jrc5",
-      maxDriversScoringPointsForTeam: 2,
-      clubs: [
-        {
-          clubId: "357106",
-          championshipIds: [
-            "346074",
-            "350287",
-            "354203",
-            "359575",
-            "364222",
-            "367233",
-            "373250",
-            "379162"
-          ]
-        },
-        {
-          clubId: "366008",
-          championshipIds: ["379194"],
-          appendToEventIndex: 7
-        }
-      ],
-      events: [],
-      points: {
-        powerStage: [5, 4, 3, 2, 1],
-        overall: [30, 24, 21, 19, 17, 15, 13, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
-      },
-      promotionDoubleZone: 1,
-      promotionZone: 6
+      outputSheetId: "1hrpLvoXjZVSjiIWGr1JVTxfAFM-Se83mFntaTcYYY1E"
+      // promotionDoubleZone: 1,
+      // promotionZone: 7,
+      // relegationZone: 8
     }
+    // jrc4: {
+    //   displayName: "JRC4",
+    //   divisionName: "jrc4",
+    //   maxDriversScoringPointsForTeam: 2,
+    //   clubs: [
+    //     {
+    //       clubId: "342117",
+    //       championshipIds: []
+    //     }
+    //   ],
+    //   events: [],
+    //   points: {
+    //     powerStage: [5, 4, 3, 2, 1],
+    //     overall: [30, 24, 21, 19, 17, 15, 13, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+    //   }
+    //   // promotionDoubleZone: 1,
+    //   // promotionZone: 6,
+    //   // relegationZone: 8
+    // },
+    // jrc5: {
+    //   displayName: "JRC5",
+    //   divisionName: "jrc5",
+    //   maxDriversScoringPointsForTeam: 2,
+    //   clubs: [
+    //     {
+    //       clubId: "357106",
+    //       championshipIds: []
+    //     }
+    //   ],
+    //   events: [],
+    //   points: {
+    //     powerStage: [5, 4, 3, 2, 1],
+    //     overall: [30, 24, 21, 19, 17, 15, 13, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+    //   }
+    //   // promotionDoubleZone: 1,
+    //   // promotionZone: 6
+    // }
   },
   fantasy: {
     calculators: JRC_CALCULATIONS,
@@ -194,10 +111,10 @@ const initialState = {
     sheetId: "1ifywqh1xfyVjpUqiG1zODpXupbyHwIzVsZCmOvcHtmg"
   },
   visualization: "jrc_all",
-  standingsOutputSheetId: "1iLIPjB2fsi3HI5S5CgrvnkEzrdA6fT71m_9zmtL19VI",
-  teamOverride: {
-    TheOfficialZenor: [privateer, privateer, privateer, privateer]
-  }
+  standingsOutputSheetId: "1iLIPjB2fsi3HI5S5CgrvnkEzrdA6fT71m_9zmtL19VI"
+  // teamOverride: {
+  //   TheOfficialZenor: [privateer, privateer, privateer, privateer]
+  // }
 };
 
 module.exports = initialState;

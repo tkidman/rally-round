@@ -163,6 +163,14 @@
 		"class": "H2R",
 		"brand": "opel"
 	},
+	"Alpine Renault A110 1600 S": {
+		"class": "H2R",
+		"brand": "renault"
+	},
+	"Fiat 131 Abarth Rally": {
+		"class": "H2R",
+		"brand": "fiat"
+	},
 	"Renault 5 Turbo": {
 		"class": "H3",
 		"brand": "renault"
