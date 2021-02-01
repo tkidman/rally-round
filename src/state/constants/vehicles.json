@@ -27,6 +27,10 @@
 		"class": "2000cc",
 		"brand": "citroen"
 	},
+	"Ford Focus RS Rally 2007": {
+		"class": "2000cc",
+		"brand": "ford"
+	},
 	"Lancia Delta HF Integrale":{
 		"class": "groupA",
 		"brand": "lancia"

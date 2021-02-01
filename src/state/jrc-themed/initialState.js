@@ -11,15 +11,11 @@ const initialState = {
   divisions: {
     wrc: {
       divisionName: "wrc",
-      displayName: "WRC 1999",
-      clubs: [
-        { clubId: "256173", championshipIds: ["362744"] },
-        { clubId: "360961", championshipIds: ["362738"] },
-        { clubId: "361684", championshipIds: ["362767"] }
-      ],
+      displayName: "WRC 2008",
+      clubs: [{ clubId: "256173", championshipIds: ["396882"] }],
       events: [],
       points: {
-        powerStage: [3, 2, 1],
+        powerStage: [],
         overall: [
           35,
           32,
@@ -48,26 +44,7 @@ const initialState = {
           1
         ]
       },
-      cars: [
-        "Mitsubishi Lancer Evolution VI",
-        "SUBARU Impreza S4 Rally",
-        "Peugeot 206 Rally",
-        "Seat Ibiza Kit Car",
-        "Peugeot 306 Maxi",
-        "Volkswagen Golf Kitcar"
-      ]
-      // outputSheetId: "1C3fU9y1236wFmPuKcui4CEXBuSsUANH6OJ0BpQIasTc"
-    },
-    kitcar: {
-      divisionName: "kitcar",
-      displayName: "WRC 1999 Kitcar",
-      clubs: [{ clubId: "361684", championshipIds: ["362767"] }],
-      events: [],
-      points: {
-        powerStage: [3, 2, 1],
-        overall: [12, 10, 8, 6, 4, 3, 2, 1]
-      },
-      cars: ["Seat Ibiza Kit Car", "Peugeot 306 Maxi", "Volkswagen Golf Kitcar"]
+      cars: ["Citroën C4 Rally", "SUBARU Impreza", "Ford Focus RS Rally 2007"]
       // outputSheetId: "1C3fU9y1236wFmPuKcui4CEXBuSsUANH6OJ0BpQIasTc"
     }
   }

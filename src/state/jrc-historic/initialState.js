@@ -9,7 +9,7 @@ const initialState = {
       divisionName: "historic",
       displayName: "JRC Historic",
       disableCarValidation: true,
-      clubs: [{ clubId: "192069", championshipIds: ["364565"] }],
+      clubs: [{ clubId: "192069", championshipIds: ["395317"] }],
       events: [],
       points: {
         powerStage: [],
