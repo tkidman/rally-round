@@ -1,5 +1,4 @@
 const initialState = {
-  driverSheetId: "1qa1-dLB0vK0dturPflPl4vVQ6twd4i6vFX-88Tyba-Y",
   websiteName: "satchmo-temp",
   pointsForDNF: false,
   getAllResults: true,
