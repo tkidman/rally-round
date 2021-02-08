@@ -307,7 +307,7 @@ const transformForHTML = (division, type) => {
     showCar: leagueRef.hasCars,
     showCarName: leagueRef.league.showCarNameAsTextInStandings,
     title: division.displayName || division.divisionName,
-    logo: division.logo || "jrc_round.jpg",
+    logo: division.logo || "JRC.png",
     divisionName: division.divisionName
   };
 };
@@ -335,7 +335,7 @@ const transformForDriverResultsHTML = (event, division) => {
   return {
     rows,
     title: division.displayName || divisionName,
-    logo: division.logo || "jrc_round.jpg",
+    logo: division.logo || "JRC.png",
     showTeam: leagueRef.hasTeams,
     showCar: leagueRef.hasCars || leagueRef.league.showCarNameAsTextInResults,
     showCarName: leagueRef.league.showCarNameAsTextInResults,

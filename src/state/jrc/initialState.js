@@ -19,7 +19,28 @@ const initialState = {
       events: [],
       points: {
         powerStage: [5, 4, 3, 2, 1],
-        overall: [30, 24, 21, 19, 17, 15, 13, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+        overall: [
+          35,
+          30,
+          27,
+          24,
+          21,
+          19,
+          17,
+          15,
+          13,
+          11,
+          10,
+          9,
+          8,
+          7,
+          6,
+          5,
+          4,
+          3,
+          2,
+          1
+        ]
       },
       cars: [
         "SUBARU Impreza 1995",
@@ -45,7 +66,28 @@ const initialState = {
       events: [],
       points: {
         powerStage: [5, 4, 3, 2, 1],
-        overall: [30, 24, 21, 19, 17, 15, 13, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+        overall: [
+          35,
+          30,
+          27,
+          24,
+          21,
+          19,
+          17,
+          15,
+          13,
+          11,
+          10,
+          9,
+          8,
+          7,
+          6,
+          5,
+          4,
+          3,
+          2,
+          1
+        ]
       },
       cars: [
         "SUBARU Impreza (2001)",
@@ -71,7 +113,28 @@ const initialState = {
       events: [],
       points: {
         powerStage: [5, 4, 3, 2, 1],
-        overall: [30, 24, 21, 19, 17, 15, 13, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+        overall: [
+          35,
+          30,
+          27,
+          24,
+          21,
+          19,
+          17,
+          15,
+          13,
+          11,
+          10,
+          9,
+          8,
+          7,
+          6,
+          5,
+          4,
+          3,
+          2,
+          1
+        ]
       },
       cars: [
         "Mitsubishi Space Star R5",
@@ -99,7 +162,28 @@ const initialState = {
       events: [],
       points: {
         powerStage: [5, 4, 3, 2, 1],
-        overall: [30, 24, 21, 19, 17, 15, 13, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+        overall: [
+          35,
+          30,
+          27,
+          24,
+          21,
+          19,
+          17,
+          15,
+          13,
+          11,
+          10,
+          9,
+          8,
+          7,
+          6,
+          5,
+          4,
+          3,
+          2,
+          1
+        ]
       },
       cars: ["Ford Fiesta R2", "Peugeot 208 R2", "Opel Adam R2"]
       // promotionDoubleZone: 1,
@@ -119,7 +203,28 @@ const initialState = {
       events: [],
       points: {
         powerStage: [5, 4, 3, 2, 1],
-        overall: [30, 24, 21, 19, 17, 15, 13, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+        overall: [
+          35,
+          30,
+          27,
+          24,
+          21,
+          19,
+          17,
+          15,
+          13,
+          11,
+          10,
+          9,
+          8,
+          7,
+          6,
+          5,
+          4,
+          3,
+          2,
+          1
+        ]
       },
       cars: ["Peugeot 205 GTI", "Volkswagen Golf GTI 16V"]
       // promotionDoubleZone: 1,

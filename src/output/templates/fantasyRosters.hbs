@@ -14,7 +14,7 @@
 			background-color: #5355bf !important;
 		}
 	</style>
-    <link rel="icon" href="./assets/jrc_round.jpg">
+    <link rel="icon" href="./assets/JRC.png">
 </head>
 
 <body>
@@ -97,9 +97,9 @@
 									<p style="font-weight:bold;">Budget: <span id="budget_check"></span></p>
 									<p style="font-weight:bold;">Captain: <span id="captain_check"></span></p>
 									<p style="font-weight:bold;">Transfers: <span id="transfer_check"></span></p>
-			
-									<input type="text" style="display:none;" id="discordString" value="placeholder" >	
-									<button class="w3-btn w3-blue" id="discordButton" style="margin: auto;display: table;margin-top: 1em;" 
+
+									<input type="text" style="display:none;" id="discordString" value="placeholder" >
+									<button class="w3-btn w3-blue" id="discordButton" style="margin: auto;display: table;margin-top: 1em;"
 										 disabled="true" onclick="copyDiscordText()">Copy roster to clipboard</button>
 								</div>
 							</div>
@@ -227,7 +227,7 @@
 			var discordString = "**" + currentTeam + " new roster:** ";
 			currentTeam = teams[currentTeam];
 
-			
+
 			var new_roster = []
 			var count = 0;
 			var transfers = 0;
@@ -264,7 +264,7 @@
 			str += (captainOk) ? "Captain not used before" : "Captain already used";
 			captain_check.innerHTML = str;
 			captain_check.style = (captainOk) ? "color: green;" : "color: red";
-			
+
 			discordSpan.value = discordString;
 			discordButton.disabled = !(budgetOk && transfersOk && captainOk);
 		}
