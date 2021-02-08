@@ -63,8 +63,12 @@ function calculateBudget(team, event, previousEvent, prices) {
           count += parseFloat(prices[driver][event.location]);
         }
       });
+      let prev_budget = team.budget[team.budget.length-1]
       let budget = count < 13 ? 13 : count;
       budget = budget > 17 ? 17 : budget;
+      if((budget-prev_budget) > 1){
+        budget = prev_budget+1;
+      }
       team.budget.push(budget);
       team.value.push(count);
     });
