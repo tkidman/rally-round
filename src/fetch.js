@@ -212,10 +212,17 @@ const getEventKeysFromRecentResults = ({
 };
 
 const getEventEndTime = championships => {
-  const latest = championships[championships.length - 1];
-  if (latest.isActive) {
-    leagueRef.endTime = latest.events[0].entryWindow.end;
-    leagueRef.activeCountry = latest.events[0].locationName;
+  const activeChampionship = championships.find(
+    championship => championship.isActive
+  );
+  if (activeChampionship) {
+    const activeEvent = activeChampionship.events.find(
+      event => event.eventStatus === eventStatuses.active
+    );
+    if (activeEvent) {
+      leagueRef.endTime = activeEvent.entryWindow.end;
+      leagueRef.activeCountry = activeEvent.locationName;
+    }
   }
 };
 
