@@ -238,10 +238,13 @@ const initialState = {
     sheetId: "1ifywqh1xfyVjpUqiG1zODpXupbyHwIzVsZCmOvcHtmg"
   },
   visualization: "jrc_all",
-  standingsOutputSheetId: "1iLIPjB2fsi3HI5S5CgrvnkEzrdA6fT71m_9zmtL19VI"
-  // teamOverride: {
-  //   TheOfficialZenor: [privateer, privateer, privateer, privateer]
-  // }
+  standingsOutputSheetId: "1iLIPjB2fsi3HI5S5CgrvnkEzrdA6fT71m_9zmtL19VI",
+  teamOverride: {
+    "The Last Son of Hyperborea": [
+      "Barrel Rollers Cobras",
+      "Barrel Rollers Cobras"
+    ]
+  }
 };
 
 module.exports = initialState;

@@ -219,6 +219,11 @@ const getResultTeamId = (eventIndex, driver) => {
     teamOverride[driver.name] &&
     teamOverride[driver.name][eventIndex]
   ) {
+    debug(
+      `applying team override for ${driver.name} with team ${
+        teamOverride[driver.name][eventIndex]
+      }`
+    );
     return teamOverride[driver.name][eventIndex];
   }
   return driver.teamId;
