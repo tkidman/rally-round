@@ -4,7 +4,7 @@ const { JRC_CALCULATIONS } = require("../../fantasy/fantasyFormulas");
 const initialState = {
   pointsForDNF: false,
   websiteName: "jrc-results",
-  showLivePoints: false,
+  showLivePoints: true,
   divisions: {
     jrc1: {
       displayName: "JRC",
