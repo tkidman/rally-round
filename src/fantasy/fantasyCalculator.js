@@ -1,3 +1,5 @@
+const debug = require("debug")("tkidman:fantasy:fantasyCalculator");
+
 const { createDNFResult } = require("../shared");
 const { getDriversByDivision } = require("../state/league");
 let eventList = [];
@@ -33,16 +35,16 @@ function removeDoubleCaptains(teams) {
 }
 function calculateTeamPoints(team, event, lookuptable) {
   team.roster.forEach(week => {
-    if (week.location != event.location) return;
+    if (week.location !== event.location) return;
     var score = week.drivers.reduce((val, driver) => {
       var driverPoints = lookuptable[driver];
       driverPoints = driverPoints ? driverPoints : -3;
-      if (week.captain == driver) {
+      if (week.captain === driver) {
         driverPoints *= 2;
       }
       return val + driverPoints;
     }, 0);
-    if (event.eventStatus == "Active") score = 0;
+    if (event.eventStatus === "Active") score = 0;
     week.points = score;
     team.previous = team.points;
     team.points += score;
@@ -51,15 +53,18 @@ function calculateTeamPoints(team, event, lookuptable) {
 function calculateBudget(team, event, previousEvent, prices) {
   if (!previousEvent) {
     team.budget.push(13);
-    return;
   } else {
     team.roster.forEach(week => {
-      if (week.location != previousEvent.location) return;
+      if (week.location !== previousEvent.location) return;
       let count = 0;
       week.drivers.forEach(driver => {
         if (driver === undefined) {
           count += 0;
         } else {
+          if (!prices[driver]) {
+            debug(`unable to find fantasy prices for ${driver}`);
+            throw new Error(`unable to find fantasy prices for ${driver}`);
+          }
           count += parseFloat(prices[driver][event.location]);
         }
       });
@@ -111,7 +116,7 @@ const calculateFantasyStandings = (event, previousEvent, league, division) => {
     calculateBudget(team, event, previousEvent, league.fantasy.drivers)
   );
 
-  if (event.eventStatus == "Active") return teams;
+  if (event.eventStatus === "Active") return teams;
 
   if (!previousEvent) removeDoubleCaptains(teams); //no need to run this multiple times
 
@@ -128,7 +133,7 @@ const calculateFantasyStandings = (event, previousEvent, league, division) => {
 
   teams.forEach(team => calculateTeamPoints(team, event, lookuptable));
 
-  if (event.eventStatus != "Active")
+  if (event.eventStatus !== "Active")
     calculateBestBuys(event, lookuptable, league.fantasy);
 
   if (!league.fantasy.driverStandings) league.fantasy.driverStandings = {};
@@ -150,7 +155,7 @@ function processFantasyDrivers(driverStandings) {
   drivers.forEach(driver => (driver.gap = highestScore - driver.total));
   for (let i = 0; i < drivers.length; i++) {
     const driver = drivers[i];
-    var prev = drivers_old.findIndex(_d => _d.name == driver.name);
+    var prev = drivers_old.findIndex(_d => _d.name === driver.name);
     driver.positive = false;
     driver.neutral = false;
     driver.negative = false;
@@ -207,7 +212,7 @@ function processFantasyTeams(teamStandings) {
 
   for (let i = 0; i < teams.length; i++) {
     const team = teams[i];
-    var prev = teams_old.findIndex(_t => _t.name == team.name);
+    var prev = teams_old.findIndex(_t => _t.name === team.name);
     team.rank = i + 1;
     team.evolution = prev - i;
     if (team.evolution > 0) {
@@ -234,7 +239,7 @@ function processPriceList(prices) {
         price: pr,
         evolution: diff,
         positive: diff > 0 && notfirst,
-        neutral: diff == 0 && notfirst,
+        neutral: diff === 0 && notfirst,
         negative: diff < 0 && notfirst
       });
       prev = pr;
