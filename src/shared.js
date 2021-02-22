@@ -74,6 +74,11 @@ const recalculateDiffsForEntries = (entries, field) => {
   }
 };
 
+const recalculateDiffs = entries => {
+  recalculateDiffsForEntries(entries, "stage");
+  recalculateDiffsForEntries(entries, "total");
+};
+
 const getSummedTotalTime = (entry1, entry2) => {
   const entry1Duration = getDuration(entry1.totalTime);
   const entry2Duration = getDuration(entry2.totalTime);
@@ -109,6 +114,7 @@ module.exports = {
   orderResultsBy,
   getDuration,
   recalculateDiffsForEntries,
+  recalculateDiffs,
   createDNFResult,
   getSummedTotalTime
 };

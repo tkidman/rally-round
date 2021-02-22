@@ -12,6 +12,7 @@ const { createDNFResult } = require("./shared");
 const { cloneDeep } = require("lodash");
 const { recalculateDiffsForEntries } = require("./shared");
 const vehicles = require("./state/constants/vehicles.json");
+const { recalculateDiffs } = require("./shared");
 
 const { init, leagueRef } = require("./state/league");
 const { writeOutput, checkOutputDirs } = require("./output/output");
@@ -115,21 +116,20 @@ const setDnfIfIncorrectCar = (event, entries, divisionName) => {
   });
 };
 
-const setManualResults = (
-  event,
+const setManualResults = ({
+  eventIndex,
   entries,
   divisionName,
   firstStageResultsByDriver
-) => {
+}) => {
   const defaultEntry = {
     isManualResult: true,
     isDnfEntry: false
   };
   const division = leagueRef.divisions[divisionName];
-  const eventId = event.eventId;
   if (division.manualResults) {
     const eventManualResults = division.manualResults.find(
-      eventManualResults => eventManualResults.eventId === eventId
+      eventManualResults => eventManualResults.eventIndex === eventIndex
     );
     if (eventManualResults) {
       eventManualResults.results.forEach(manualResult => {
@@ -154,6 +154,7 @@ const setManualResults = (
           }
         }
       });
+      recalculateDiffs(entries);
     }
   }
 };
@@ -244,7 +245,12 @@ const calculateEventResults = ({
   const entries =
     event.racenetLeaderboardStages[event.racenetLeaderboardStages.length - 1]
       .entries;
-  setManualResults(event, entries, divisionName, firstStageResultsByDriver);
+  setManualResults({
+    eventIndex,
+    entries,
+    divisionName,
+    firstStageResultsByDriver
+  });
   setDnfIfIncorrectCar(event, entries, divisionName);
   // TODO validate correct class
   const resultsByDriver = getResultsByDriver(entries, divisionName);

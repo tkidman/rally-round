@@ -17,14 +17,12 @@ const initialState = {
       cars: ["Alpine Renault A110 1600 S", "Ford Escort Mk II"],
       manualResults: [
         {
-          eventId: "221955",
+          eventIndex: 0,
           results: [
             {
               name: "SFRrallimoilane",
               stageTime: "05:33.000",
-              stageDiff: "--",
-              totalTime: "04:59:59.000",
-              totalDiff: "+18:23.013"
+              totalTime: "04:59:59.000"
             }
           ]
         }

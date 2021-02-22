@@ -43,14 +43,12 @@ const initialState = {
       },
       manualResults: [
         {
-          eventId: "396036",
+          eventIndex: 1,
           results: [
             {
               name: "ERIKSSON Torbjörn",
               stageTime: "03:34.008",
-              stageDiff: "+00:03.250",
-              totalTime: "22:12.500",
-              totalDiff: "+00:07.170"
+              totalTime: "22:12.500"
             }
           ]
         }

@@ -50,7 +50,19 @@ const initialState = {
         "Mitsubishi Lancer Evolution VI"
       ],
       fantasy: true,
-      outputSheetId: "1P-0CJ4rm7xBaMsan0yMcFKwDIWkqjIvYWHNrjgFDixc"
+      outputSheetId: "1P-0CJ4rm7xBaMsan0yMcFKwDIWkqjIvYWHNrjgFDixc",
+      manualResults: [
+        {
+          eventIndex: 2,
+          results: [
+            {
+              name: "ERIKSSON Torbjörn",
+              stageTime: "03:01.392",
+              totalTime: "39:10.705"
+            }
+          ]
+        }
+      ]
       // relegationZone: 6
     },
     jrc2: {
