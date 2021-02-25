@@ -8,6 +8,7 @@ const { driverColumns, sheetsConfig } = require(`./${club}/driverConfig`);
 const driverFieldNames = require("./constants/driverFieldNames");
 const { loadSheetAndTransform } = require("../api/sheets/sheets");
 const vehicles = require("./constants/vehicles.json");
+const moment = require("moment");
 
 const missingDrivers = {};
 const drivers = {};
@@ -149,6 +150,19 @@ const init = async () => {
   leagueRef.hasCars = !!driverColumns.car;
   leagueRef.includeOverall =
     Object.keys(league.divisions).length > 1 && !league.disableOverall;
+  leagueRef.showLivePoints = () => {
+    if (league.showLivePoints) {
+      if (league.showLivePointsDaysRemaining) {
+        const daysTillEventEnd = moment
+          .duration(moment(leagueRef.endTime).diff(moment()))
+          .asDays();
+        return daysTillEventEnd <= league.showLivePointsDaysRemaining;
+      }
+      return true;
+    }
+    return false;
+  };
+
   await loadFantasy(leagueRef.league);
   return leagueRef;
 };

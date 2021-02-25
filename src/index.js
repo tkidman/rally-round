@@ -191,7 +191,7 @@ const addStageTimesToResultsByDriver = (
 const getTotalPointsDisplay = (result, event) => {
   let display = result.totalPoints;
   if (
-    !leagueRef.league.showLivePoints &&
+    !leagueRef.showLivePoints() &&
     event.eventStatus === eventStatuses.active
   ) {
     display = "";
@@ -298,7 +298,7 @@ const calculateEventResults = ({
   const division = leagueRef.league.divisions[divisionName];
   if (
     event.eventStatus === eventStatuses.finished ||
-    leagueRef.league.showLivePoints
+    leagueRef.showLivePoints()
   ) {
     updatePoints(
       resultsByDriver,

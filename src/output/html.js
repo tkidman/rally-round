@@ -262,7 +262,7 @@ const transformForHTML = (division, type) => {
   let lastEvent = events[events.length - 1];
   if (
     lastEvent.eventStatus !== eventStatuses.finished &&
-    !leagueRef.league.showLivePoints &&
+    !leagueRef.showLivePoints() &&
     events.length > 1
   ) {
     lastEvent = events[events.length - 2];
