@@ -198,6 +198,18 @@ const initialState = {
           1
         ]
       },
+      manualResults: [
+        {
+          eventIndex: 3,
+          results: [
+            {
+              name: "Bonesoap",
+              stageTime: "04:12.311",
+              totalTime: "52:13.911"
+            }
+          ]
+        }
+      ],
       cars: ["Ford Fiesta R2", "Peugeot 208 R2", "Opel Adam R2"]
       // promotionDoubleZone: 1,
       // promotionZone: 6,
