@@ -242,18 +242,18 @@ const calculateEventResults = ({
   );
 
   // alert! mutations to the racenetLeaderboard entries occur here, and should only occur here
-  const entries =
+  const lastStageEntries =
     event.racenetLeaderboardStages[event.racenetLeaderboardStages.length - 1]
       .entries;
   setManualResults({
     eventIndex,
-    entries,
+    entries: lastStageEntries,
     divisionName,
     firstStageResultsByDriver
   });
-  setDnfIfIncorrectCar(event, entries, divisionName);
+  setDnfIfIncorrectCar(event, lastStageEntries, divisionName);
   // TODO validate correct class
-  const resultsByDriver = getResultsByDriver(entries, divisionName);
+  const resultsByDriver = getResultsByDriver(lastStageEntries, divisionName);
 
   // create results for drivers didn't finish the run
   Object.keys(drivers).forEach(driverName => {
@@ -271,8 +271,8 @@ const calculateEventResults = ({
   });
 
   // cascade DNF results for appended events
-  event.racenetLeaderboardStages.forEach(stages => {
-    stages.entries.forEach(entry => {
+  event.racenetLeaderboardStages.forEach(stage => {
+    stage.entries.forEach(entry => {
       const driver = leagueRef.getDriver(entry.name);
       if (
         entry.isDnfEntry &&
@@ -281,6 +281,10 @@ const calculateEventResults = ({
       ) {
         debug(`cascading DNF for ${driver.name}`);
         resultsByDriver[driver.name].entry.isDnfEntry = true;
+      }
+      // mark each entry as dnf if the driver's last entry is a dnf
+      if (resultsByDriver[driver.name].entry.isDnfEntry) {
+        entry.isDnfEntry = true;
       }
     });
   });
@@ -293,8 +297,8 @@ const calculateEventResults = ({
     );
 
   // dnf entries are sorted below non-dnf entries
-  const powerStageEntries = orderEntriesBy(entries, "stageTime");
-  const totalEntries = orderEntriesBy(entries, "totalTime");
+  const powerStageEntries = orderEntriesBy(lastStageEntries, "stageTime");
+  const totalEntries = orderEntriesBy(lastStageEntries, "totalTime");
   const division = leagueRef.league.divisions[divisionName];
   if (
     event.eventStatus === eventStatuses.finished ||
@@ -312,6 +316,17 @@ const calculateEventResults = ({
       division.points.overall,
       "overallPoints"
     );
+    if (division.points.stage) {
+      event.racenetLeaderboardStages.forEach(stage => {
+        const stageEntries = orderEntriesBy(stage.entries, "stageTime");
+        updatePoints(
+          resultsByDriver,
+          stageEntries,
+          division.points.stage,
+          "stagePoints"
+        );
+      });
+    }
   }
   const driverResults = orderResultsBy(
     Object.values(resultsByDriver),

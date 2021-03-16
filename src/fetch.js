@@ -23,7 +23,7 @@ const fetchEventsForClub = async (club, division, divisionName) => {
   });
   const events = await fetchEventsFromKeys(
     eventKeys,
-    leagueRef.league.getAllResults
+    leagueRef.league.getAllResults || division.points.stage
   );
 
   if (club.cachedEvent) {
@@ -181,6 +181,19 @@ const getEventKeysFromRecentResults = ({
   const divisionChampionships = championships.filter(championship =>
     club.championshipIds.includes(championship.id)
   );
+
+  if (club.includeNextChampionships) {
+    const matchingChampionshipIndex = championships.findIndex(
+      championship =>
+        championship.id ===
+        club.championshipIds[club.championshipIds.length - 1]
+    );
+    const nextChampionships = championships.slice(
+      matchingChampionshipIndex + 1
+    );
+    divisionChampionships.push(...nextChampionships);
+  }
+
   const eventKeys = divisionChampionships.reduce((events, championship) => {
     const eventResultKeys = championship.events.reduce(
       (eventResultKeys, event) => {

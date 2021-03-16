@@ -40,6 +40,40 @@ describe("fetch", () => {
     ]);
   });
 
+  it("gets event keys from recent results and championships including next championships", () => {
+    const recentResults = require("./__fixtures__/recentResults.json");
+    const championships = require("./__fixtures__/championships.json");
+    const eventKeys = getEventKeysFromRecentResults({
+      recentResults,
+      championships,
+      division: {},
+      divisionName: "pro",
+      club: {
+        clubId: "123",
+        championshipIds: ["65933"],
+        includeNextChampionships: true
+      }
+    });
+    expect(eventKeys).toEqual([
+      {
+        challengeId: "65933",
+        divisionName: "pro",
+        eventId: "66384",
+        eventStatus: "Finished",
+        lastStageId: 4,
+        location: "ŁĘCZNA COUNTY"
+      },
+      {
+        challengeId: "67014",
+        divisionName: "pro",
+        eventId: "67465",
+        eventStatus: "Active",
+        lastStageId: 11,
+        location: "ŁĘCZNA COUNTY"
+      }
+    ]);
+  });
+
   it("fetches events from keys", async () => {
     // aus 1
     fetchEventResults.mockResolvedValueOnce({

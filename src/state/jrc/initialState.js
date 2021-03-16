@@ -14,7 +14,8 @@ const initialState = {
       clubs: [
         {
           clubId: "180867",
-          championshipIds: ["400958", "427406"]
+          championshipIds: ["400958"],
+          includeNextChampionships: true
         }
       ],
       events: [],
@@ -73,7 +74,8 @@ const initialState = {
       clubs: [
         {
           clubId: "244734",
-          championshipIds: ["400980", "427407"]
+          championshipIds: ["400980"],
+          includeNextChampionships: true
         }
       ],
       events: [],
@@ -120,7 +122,8 @@ const initialState = {
       clubs: [
         {
           clubId: "330674",
-          championshipIds: ["400994", "427408"]
+          championshipIds: ["400994"],
+          includeNextChampionships: true
         }
       ],
       events: [],
@@ -169,7 +172,8 @@ const initialState = {
       clubs: [
         {
           clubId: "342117",
-          championshipIds: ["401002", "427409"]
+          championshipIds: ["401002"],
+          includeNextChampionships: true
         }
       ],
       events: [],
@@ -222,7 +226,8 @@ const initialState = {
       clubs: [
         {
           clubId: "357106",
-          championshipIds: ["401015", "427412"]
+          championshipIds: ["401015"],
+          includeNextChampionships: true
         }
       ],
       events: [],

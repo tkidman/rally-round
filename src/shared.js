@@ -12,6 +12,7 @@ const getTotalPoints = result => {
   let totalPoints = 0;
   totalPoints += result.powerStagePoints ? result.powerStagePoints : 0;
   totalPoints += result.overallPoints ? result.overallPoints : 0;
+  totalPoints += result.stagePoints ? result.stagePoints : 0;
   return totalPoints;
 };
 
