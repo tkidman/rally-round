@@ -26,7 +26,11 @@ const updatePoints = (resultsByDriver, orderedEntries, points, pointsField) => {
       const entry = orderedEntries[i];
       const driver = leagueRef.getDriver(entry.name);
       if (!entry.isDnfEntry || leagueRef.league.pointsForDNF) {
-        resultsByDriver[driver.name][pointsField] = points[i];
+        let newPoints = points[i];
+        if (resultsByDriver[driver.name][pointsField]) {
+          newPoints += resultsByDriver[driver.name][pointsField];
+        }
+        resultsByDriver[driver.name][pointsField] = newPoints;
       }
     }
   }

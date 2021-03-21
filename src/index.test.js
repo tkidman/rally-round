@@ -58,10 +58,11 @@ describe("calculates event results", () => {
         },
         name: "SFR_rallimoilane",
         overallPoints: 9,
-        pointsDisplay: 14,
+        pointsDisplay: 16,
         powerStagePoints: 5,
+        stagePoints: 2,
         teamId: "Time Penalty Boys",
-        totalPoints: 14
+        totalPoints: 16
       },
       {
         divisionName: "pro",

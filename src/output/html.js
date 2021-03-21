@@ -312,6 +312,10 @@ const transformForHTML = (division, type) => {
   };
 };
 
+const hasPoints = (pointsField, rows) => {
+  return rows.some(row => row[pointsField]);
+};
+
 const transformForDriverResultsHTML = (event, division) => {
   const divisionName = division.divisionName;
   const rows = event.results.driverResults.map((result, index) => {
@@ -339,6 +343,8 @@ const transformForDriverResultsHTML = (event, division) => {
     showTeam: leagueRef.hasTeams,
     showCar: leagueRef.hasCars || leagueRef.league.showCarNameAsTextInResults,
     showCarName: leagueRef.league.showCarNameAsTextInResults,
+    showPowerStagePoints: hasPoints("powerStagePoints", rows),
+    showStagePoints: hasPoints("stagePoints", rows),
     event,
     location: locations[event.location],
     divisionName

@@ -3,16 +3,16 @@ const initialState = {
   websiteName: "jrc-results",
   subfolderName: "themed",
   showLivePoints: false,
-  showCarNameAsTextInStandings: true,
-  showCarNameAsTextInResults: true,
-  useCarAsTeam: true,
+  // showCarNameAsTextInStandings: true,
+  // showCarNameAsTextInResults: true,
+  useCarAsTeam: false,
   disableOverall: true,
   teamPointsForPowerstage: true,
   divisions: {
     wrc: {
-      divisionName: "wrc",
-      displayName: "WRC 2008",
-      clubs: [{ clubId: "256173", championshipIds: ["396882"] }],
+      divisionName: "jwrc",
+      displayName: "JWRC",
+      clubs: [{ clubId: "256173", championshipIds: ["432382"] }],
       events: [],
       points: {
         powerStage: [],
@@ -42,9 +42,10 @@ const initialState = {
           1,
           1,
           1
-        ]
+        ],
+        stage: [1]
       },
-      cars: ["Citroën C4 Rally", "SUBARU Impreza", "Ford Focus RS Rally 2007"]
+      cars: ["Ford Fiesta R2"]
       // outputSheetId: "1C3fU9y1236wFmPuKcui4CEXBuSsUANH6OJ0BpQIasTc"
     }
   }

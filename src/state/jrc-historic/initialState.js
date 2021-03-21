@@ -9,7 +9,7 @@ const initialState = {
       divisionName: "historic",
       displayName: "JRC Historic",
       disableCarValidation: true,
-      clubs: [{ clubId: "192069", championshipIds: ["395317"] }],
+      clubs: [{ clubId: "192069", championshipIds: ["432373"] }],
       events: [],
       points: {
         powerStage: [],
@@ -41,18 +41,7 @@ const initialState = {
           1
         ]
       },
-      manualResults: [
-        {
-          eventIndex: 1,
-          results: [
-            {
-              name: "ERIKSSON Torbjörn",
-              stageTime: "03:34.008",
-              totalTime: "22:12.500"
-            }
-          ]
-        }
-      ]
+      manualResults: []
     }
   }
 };
