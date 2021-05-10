@@ -58,7 +58,7 @@ function calculateBudget(team, event, previousEvent, prices) {
       if (week.location !== previousEvent.location) return;
       let count = 0;
       week.drivers.forEach(driver => {
-        if (driver === undefined) {
+        if (!driver) {
           count += 0;
         } else {
           if (!prices[driver]) {
