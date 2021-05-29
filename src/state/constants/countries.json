@@ -523,6 +523,10 @@
 	  "code": "lux",
 	  "name": "Luxembourg"
 	},
+	"eLngLuxembourgish": {
+		"code": "lux",
+		"name": "Luxembourg"
+	},
 	"eLngMacanese": {
 	  "code": "mac",
 	  "name": "Macao"
