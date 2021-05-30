@@ -3,9 +3,10 @@
 
 const initialState = {
   pointsForDNF: false,
-  websiteName: "jrc-results",
+  // websiteName: "jrc-results",
   showLivePoints: true,
   showLivePointsDaysRemaining: 4,
+  dropLowestScoringRoundsNumber: 1,
   divisions: {
     jrc1: {
       displayName: "JRC",
