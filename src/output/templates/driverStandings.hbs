@@ -46,6 +46,9 @@
 
                             {{/each}}
                             <th>Points</th>
+                            {{#if showPointsAfterDropRounds}}
+                                <th>Adjusted</th>
+                            {{/if}}
                         </tr>
                     </thead>
                     <tbody>
@@ -93,6 +96,9 @@
                             </td>
                             {{/with}}{{/each}}
                             <td class="bold">{{this.standing.totalPoints}}</td>
+                            {{#if ../showPointsAfterDropRounds}}
+                                <td class="bold">{{this.standing.totalPointsAfterDropRounds}}</td>
+                            {{/if}}
                         </tr>
                         {{/each}}
                     </tbody>

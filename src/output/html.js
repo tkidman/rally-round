@@ -308,7 +308,9 @@ const transformForHTML = (division, type) => {
     showCarName: leagueRef.league.showCarNameAsTextInStandings,
     title: division.displayName || division.divisionName,
     logo: division.logo || "JRC.png",
-    divisionName: division.divisionName
+    divisionName: division.divisionName,
+    showPointsAfterDropRounds:
+      leagueRef.league.dropLowestScoringRoundsNumber > 0
   };
 };
 

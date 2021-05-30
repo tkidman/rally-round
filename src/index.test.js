@@ -8,8 +8,9 @@ const leaderboard = require("./__fixtures__/leaderboard");
 const { init } = require("./state/league");
 
 describe("calculates event results", () => {
+  let leagueRef;
   beforeEach(async () => {
-    await init();
+    leagueRef = await init();
   });
 
   test("returns results for drivers", () => {
@@ -213,12 +214,10 @@ describe("calculates event results", () => {
         driverStandings: [
           {
             name: "satchmo",
-            totalPoints: 15,
             currentPosition: 1
           },
           {
             name: "zisekoz",
-            totalPoints: 10,
             currentPosition: 2
           }
         ],
@@ -234,15 +233,38 @@ describe("calculates event results", () => {
             currentPosition: 2
           }
         ]
+      },
+      results: {
+        driverResults: [
+          {
+            name: "zisekoz",
+            totalPoints: 10
+          },
+          {
+            name: "satchmo",
+            totalPoints: 15
+          }
+        ],
+        teamResults: [
+          {
+            name: "Live and Let DNF",
+            totalPoints: 10
+          },
+          {
+            name: "Dammit Sammir!",
+            totalPoints: 8
+          }
+        ]
       }
     };
-    calculateEventStandings(event, previousEvent);
+    calculateEventStandings(event, [previousEvent]);
     expect(event.standings).toMatchObject({
       driverStandings: [
         {
           currentPosition: 1,
           name: "zisekoz",
           totalPoints: 25,
+          totalPointsAfterDropRounds: 25,
           positionChange: 1,
           previousPosition: 2
         },
@@ -250,6 +272,7 @@ describe("calculates event results", () => {
           currentPosition: 2,
           name: "satchmo",
           totalPoints: 23,
+          totalPointsAfterDropRounds: 23,
           positionChange: -1,
           previousPosition: 1
         }
@@ -259,6 +282,7 @@ describe("calculates event results", () => {
           currentPosition: 1,
           name: "Live and Let DNF",
           totalPoints: 20,
+          totalPointsAfterDropRounds: 20,
           positionChange: 0,
           previousPosition: 1
         },
@@ -266,11 +290,53 @@ describe("calculates event results", () => {
           currentPosition: 2,
           name: "Dammit Sammir!",
           totalPoints: 16,
+          totalPointsAfterDropRounds: 16,
           positionChange: 0,
           previousPosition: 2
         }
       ]
     });
+    leagueRef.league.dropLowestScoringRoundsNumber = 1;
+    calculateEventStandings(event, [previousEvent]);
+    expect(event.standings).toMatchObject({
+      driverStandings: [
+        {
+          currentPosition: 1,
+          name: "zisekoz",
+          totalPoints: 25,
+          totalPointsAfterDropRounds: 15,
+          positionChange: 1,
+          previousPosition: 2
+        },
+        {
+          currentPosition: 2,
+          name: "satchmo",
+          totalPoints: 23,
+          totalPointsAfterDropRounds: 15,
+          positionChange: -1,
+          previousPosition: 1
+        }
+      ],
+      teamStandings: [
+        {
+          currentPosition: 1,
+          name: "Live and Let DNF",
+          totalPoints: 20,
+          totalPointsAfterDropRounds: 10,
+          positionChange: 0,
+          previousPosition: 1
+        },
+        {
+          currentPosition: 2,
+          name: "Dammit Sammir!",
+          totalPoints: 16,
+          totalPointsAfterDropRounds: 8,
+          positionChange: 0,
+          previousPosition: 2
+        }
+      ]
+    });
+    leagueRef.league.dropLowestScoringRoundsNumber = 0;
   });
 
   test("calculates standings with no previous event", () => {
