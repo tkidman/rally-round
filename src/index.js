@@ -142,7 +142,7 @@ const setManualResults = ({
           entry => entry.name === manualResult.name
         );
         if (existingResult) {
-          Object.assign(existingResult, manualResult, defaultEntry);
+          Object.assign(existingResult, defaultEntry, manualResult);
         } else {
           const firstStageResult = firstStageResultsByDriver[manualResult.name];
           if (!firstStageResult) {
@@ -152,8 +152,8 @@ const setManualResults = ({
           } else {
             entries.push({
               ...firstStageResult.entry,
-              ...manualResult,
-              ...defaultEntry
+              ...defaultEntry,
+              ...manualResult
             });
           }
         }

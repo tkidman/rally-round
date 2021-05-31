@@ -83,7 +83,19 @@ const initialState = {
         "SUBARU Impreza (2001)",
         "SUBARU Impreza S4 Rally"
       ],
-      outputSheetId: "1hrpLvoXjZVSjiIWGr1JVTxfAFM-Se83mFntaTcYYY1E"
+      outputSheetId: "1hrpLvoXjZVSjiIWGr1JVTxfAFM-Se83mFntaTcYYY1E",
+      manualResults: [
+        {
+          eventIndex: 0,
+          results: [
+            {
+              name: "furtif543",
+              stageTime: "15:00.000",
+              isDnfEntry: true
+            }
+          ]
+        }
+      ]
       // promotionDoubleZone: 1,
       // promotionZone: 7,
       // relegationZone: 8
