@@ -75,7 +75,7 @@
 			<div class="flexBox">
 				<div class="w3-card-4">
 					<header class="w3-container w3-blue">
-						<h1>Nonko, is this roster ok??</h1>
+						<h1>Pynklu, is this roster ok??</h1>
 					</header>
 					<div class="w3-container w3-light-grey">
 						<div class="w3-container">
@@ -202,10 +202,16 @@
 
 		function copyDiscordText(){
 			var discordInput = document.getElementById('discordString');
-			discordInput.select();
-			discordInput.setSelectionRange(0, 99999);
-			document.execCommand("copy");
-			alert("Discord message copied to clipboard: CTRL+V in #fantasy-jrc. \n" + "If it doesn't work, copy this: \n\n" + discordInput.value);
+			//discordInput.select();
+			//discordInput.setSelectionRange(0, 99999);
+			//document.execCommand("copy");
+			//alert("Discord message copied to clipboard: CTRL+V in #fantasy-jrc. \n" + "If it doesn't work, copy this: \n\n" + discordInput.value);
+			
+			navigator.clipboard.writeText(discordInput.value).then(function() {
+					alert("Discord message copied to clipboard: CTRL+V in #fantasy-jrc. \n" + "If it doesn't work, copy this: \n\n" + discordInput.value);
+				}, function() {
+					console.log("failed to copy")
+			});
 		}
 		/**
 			CALCULATOR

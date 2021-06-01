@@ -1,4 +1,4 @@
-// const { JRC_CALCULATIONS } = require("../../fantasy/fantasyFormulas");
+const { JRC_CALCULATIONS } = require("../../fantasy/fantasyFormulas");
 // const { privateer } = require("../../shared");
 
 const initialState = {
@@ -14,7 +14,7 @@ const initialState = {
       clubs: [
         {
           clubId: "180867",
-          championshipIds: ["472126"],
+          championshipIds: ["472126", "475504"],
           includeNextChampionships: true
         }
       ],
@@ -41,7 +41,7 @@ const initialState = {
       clubs: [
         {
           clubId: "244734",
-          championshipIds: ["472134"],
+          championshipIds: ["472134", "475584"],
           includeNextChampionships: true
         }
       ],
@@ -68,7 +68,7 @@ const initialState = {
       clubs: [
         {
           clubId: "330674",
-          championshipIds: ["472137"],
+          championshipIds: ["472137", "475585"],
           includeNextChampionships: true
         }
       ],
@@ -171,12 +171,12 @@ const initialState = {
       // promotionZone: 6
     }
   },
-  // fantasy: {
-  //   calculators: JRC_CALCULATIONS,
-  //   teams: [],
-  //   driverStandings: {},
-  //   sheetId: "1ifywqh1xfyVjpUqiG1zODpXupbyHwIzVsZCmOvcHtmg"
-  // },
+  fantasy: {
+    calculators: JRC_CALCULATIONS,
+    teams: [],
+    driverStandings: {},
+    sheetId: "1ifywqh1xfyVjpUqiG1zODpXupbyHwIzVsZCmOvcHtmg"
+  },
   standingsOutputSheetId: "1iLIPjB2fsi3HI5S5CgrvnkEzrdA6fT71m_9zmtL19VI"
 };
 

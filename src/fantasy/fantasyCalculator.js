@@ -37,6 +37,7 @@ function calculateTeamPoints(team, event, lookuptable) {
   team.roster.forEach(week => {
     if (week.location !== event.location) return;
     var score = week.drivers.reduce((val, driver) => {
+      if(!driver) return val;
       var driverPoints = lookuptable[driver];
       driverPoints = driverPoints ? driverPoints : -3;
       if (week.captain === driver) {
@@ -52,7 +53,7 @@ function calculateTeamPoints(team, event, lookuptable) {
 }
 function calculateBudget(team, event, previousEvent, prices) {
   if (!previousEvent) {
-    team.budget.push(13);
+    team.budget.push(11);
   } else {
     team.roster.forEach(week => {
       if (week.location !== previousEvent.location) return;
@@ -69,8 +70,8 @@ function calculateBudget(team, event, previousEvent, prices) {
         }
       });
       let prev_budget = team.budget[team.budget.length - 1];
-      let budget = count < 13 ? 13 : count;
-      budget = budget > 17 ? 17 : budget;
+      let budget = count < 11 ? 11 : count;
+      budget = budget > 15 ? 15 : budget;
       if (budget - prev_budget > 1) {
         budget = prev_budget + 1;
       }
