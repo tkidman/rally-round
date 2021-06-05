@@ -47,7 +47,7 @@
                             {{/each}}
                             <th>Points</th>
                             {{#if showPointsAfterDropRounds}}
-                                <th>Adjusted</th>
+                                <th>ADR*</th>
                             {{/if}}
                         </tr>
                     </thead>
@@ -107,7 +107,12 @@
                 <div style="margin:0 auto; text-align:center;">
                     <p>last updated at: {{lastUpdatedAt}}</p>
                 </div>
-            </div>
+                {{#if showPointsAfterDropRounds}}
+                    <div style="margin:0 auto; text-align:center;">
+                        <p>*total points after lowest scoring round removed (After Dropped Round)</p>
+                    </div>
+                {{/if}}
+    </div>
         </div>
     </div>
 
