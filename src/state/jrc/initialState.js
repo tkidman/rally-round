@@ -3,7 +3,7 @@ const { JRC_CALCULATIONS } = require("../../fantasy/fantasyFormulas");
 
 const initialState = {
   pointsForDNF: false,
-  // websiteName: "jrc-results",
+  websiteName: "jrc-results",
   showLivePoints: true,
   showLivePointsDaysRemaining: 4,
   dropLowestScoringRoundsNumber: 1,
@@ -117,7 +117,18 @@ const initialState = {
         powerStage: [5, 4, 3, 2, 1],
         overall: [30, 24, 21, 19, 17, 15, 13, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
       },
-      manualResults: [],
+      manualResults: [
+        {
+          eventIndex: 1,
+          results: [
+            {
+              name: "Techo",
+              stageTime: "08:56.078",
+              totalTime: "57:52.664"
+            }
+          ]
+        }
+      ],
       cars: [
         "Citroën C3 R5",
         "Ford Fiesta R5",
