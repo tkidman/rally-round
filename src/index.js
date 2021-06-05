@@ -599,8 +599,10 @@ const calculateOverall = processedDivisions => {
     const entries = event.results.driverResults.map(result => result.entry);
     recalculateDiffsForEntries(entries, "total");
     recalculateDiffsForEntries(entries, "stage");
-    const previousEvent = index > 0 ? overall.events[index - 1] : null;
-    calculateEventStandings(event, previousEvent);
+    // const previousEvent = index > 0 ? overall.events[index - 1] : null;
+
+    const previousEvents = index > 0 ? overall.events.slice(0, index) : [];
+    calculateEventStandings(event, previousEvents);
   });
   return overall;
 };
