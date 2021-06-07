@@ -6,7 +6,7 @@ const initialState = {
   websiteName: "jrc-results",
   showLivePoints: true,
   showLivePointsDaysRemaining: 4,
-  dropLowestScoringRoundsNumber: 1,
+  // dropLowestScoringRoundsNumber: 1,
   divisions: {
     jrc1: {
       displayName: "JRC",
