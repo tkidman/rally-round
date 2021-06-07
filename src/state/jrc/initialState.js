@@ -32,7 +32,18 @@ const initialState = {
       ],
       fantasy: true,
       outputSheetId: "1P-0CJ4rm7xBaMsan0yMcFKwDIWkqjIvYWHNrjgFDixc",
-      manualResults: []
+      manualResults: [
+        {
+          eventIndex: 1,
+          results: [
+            {
+              name: "Tylacto",
+              stageTime: "08:08.349",
+              totalTime: "47:07.006"
+            }
+          ]
+        }
+      ]
       // relegationZone: 6
     },
     jrc2: {
