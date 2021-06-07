@@ -37,7 +37,7 @@ function calculateTeamPoints(team, event, lookuptable) {
   team.roster.forEach(week => {
     if (week.location !== event.location) return;
     var score = week.drivers.reduce((val, driver) => {
-      if(!driver) return val;
+      if (!driver) return val;
       var driverPoints = lookuptable[driver];
       driverPoints = driverPoints ? driverPoints : -3;
       if (week.captain === driver) {
