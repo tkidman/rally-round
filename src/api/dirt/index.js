@@ -245,7 +245,9 @@ const fetchEventResults = async ({
         headers: { Cookie: cookie.trim(), "RaceNet.XSRFH": xsrfh.trim() },
         data: payload
       });
-      debug(`event results retrieved: ${eventId}`);
+      debug(
+        `event results retrieved, event id: ${eventId}, stage id: ${stageId}`
+      );
       // only cache finished events
       if (eventStatus === eventStatuses.finished) {
         fs.writeFileSync(

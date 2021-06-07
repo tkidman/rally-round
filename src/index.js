@@ -9,9 +9,11 @@ const { sortBy, keyBy } = require("lodash");
 const { cachePath } = require("./shared");
 const fs = require("fs");
 const { createDNFResult } = require("./shared");
-const { cloneDeep } = require("lodash");
+const { cloneDeep, last } = require("lodash");
 const { recalculateDiffsForEntries } = require("./shared");
 const vehicles = require("./state/constants/vehicles.json");
+const { map } = require("lodash");
+const { sumBy } = require("lodash");
 const { recalculateDiffs } = require("./shared");
 
 const { init, leagueRef } = require("./state/league");
@@ -359,29 +361,61 @@ const calculateEventResults = ({
   return { driverResults, teamResults };
 };
 
-const calculateStandings = (results, previousStandings) => {
+const removeLowestResults = (allResultsForName, dropRounds) => {
+  if (dropRounds) {
+    const sortedResultsForName = [...allResultsForName].sort(
+      (a, b) => a.totalPoints - b.totalPoints
+    );
+    return sortedResultsForName.slice(dropRounds);
+  }
+  return allResultsForName;
+};
+
+const calculateStandings = ({
+  results,
+  previousStandings,
+  previousEvents,
+  resultType
+}) => {
   const standings = results.map(result => {
     const standing = {
       name: result.name,
-      totalPoints: result.totalPoints,
       previousPosition: null,
       divisionName: result.divisionName
     };
+    const previousResultsForName = map(previousEvents, event => {
+      return event.results[resultType].find(
+        previousResult => previousResult.name === result.name
+      );
+    });
+    const allResultsForName = [...previousResultsForName, result];
+    const bestResultsForName = removeLowestResults(
+      allResultsForName,
+      leagueRef.league.dropLowestScoringRoundsNumber
+    );
+    standing.totalPoints = sumBy(
+      allResultsForName,
+      result => result.totalPoints
+    );
+    standing.totalPointsAfterDropRounds = sumBy(
+      bestResultsForName,
+      result => result.totalPoints
+    );
     if (previousStandings) {
       const previousStanding = previousStandings.find(
         standing => standing.name === result.name
       );
       if (previousStanding) {
         standing.previousPosition = previousStanding.currentPosition;
-        standing.totalPoints =
-          previousStanding.totalPoints + result.totalPoints;
       }
     }
     return standing;
   });
   const sortedStandings = sortBy(
     standings,
-    standing => 0 - standing.totalPoints
+    standing =>
+      // sort by totalPointsAfterDropRounds first then by totalPoints if totalPointsAfterDropRounds equal
+      0 - standing.totalPointsAfterDropRounds * 1000000 - standing.totalPoints
   );
 
   for (let i = 0; i < sortedStandings.length; i++) {
@@ -401,30 +435,34 @@ const calculateStandings = (results, previousStandings) => {
   return sortedStandings;
 };
 
-const calculateEventStandings = (event, previousEvent) => {
+const calculateEventStandings = (event, previousEvents) => {
+  const previousEvent = last(previousEvents);
   const previousDriverStandings = previousEvent
     ? previousEvent.standings.driverStandings
     : null;
-  const driverStandings = calculateStandings(
-    event.results.driverResults,
-    previousDriverStandings,
-    event.location
-  );
+  const driverStandings = calculateStandings({
+    results: event.results.driverResults,
+    previousStandings: previousDriverStandings,
+    previousEvents,
+    resultType: "driverResults"
+  });
 
   const previousTeamStandings = previousEvent
     ? previousEvent.standings.teamStandings
     : null;
-  const teamStandings = calculateStandings(
-    event.results.teamResults,
-    previousTeamStandings
-  );
+  const teamStandings = calculateStandings({
+    results: event.results.teamResults,
+    previousStandings: previousTeamStandings,
+    previousEvents,
+    resultType: "teamResults"
+  });
   event.standings = { driverStandings, teamStandings };
 };
 
 const processEvent = ({
   divisionName,
   event,
-  previousEvent,
+  previousEvents,
   drivers,
   eventIndex
 }) => {
@@ -434,11 +472,11 @@ const processEvent = ({
     drivers,
     eventIndex
   });
-  calculateEventStandings(event, previousEvent);
+  calculateEventStandings(event, previousEvents);
   if (leagueRef.league.divisions[divisionName].fantasy) {
     calculateFantasyStandings(
       event,
-      previousEvent,
+      last(previousEvents),
       leagueRef.league,
       divisionName
     );
@@ -492,13 +530,13 @@ const loadDriversAcrossAllEvents = events => {
 };
 
 const processEvents = (events, divisionName) => {
-  let previousEvent = null;
   const drivers = loadDriversAcrossAllEvents(events);
+  const previousEvents = [];
   for (let eventIndex = 0; eventIndex < events.length; eventIndex++) {
     const event = events[eventIndex];
     debug(`processing ${divisionName} ${event.location}`);
-    processEvent({ divisionName, event, previousEvent, drivers, eventIndex });
-    previousEvent = event;
+    processEvent({ divisionName, event, previousEvents, drivers, eventIndex });
+    previousEvents.push(event);
   }
 };
 
@@ -561,8 +599,10 @@ const calculateOverall = processedDivisions => {
     const entries = event.results.driverResults.map(result => result.entry);
     recalculateDiffsForEntries(entries, "total");
     recalculateDiffsForEntries(entries, "stage");
-    const previousEvent = index > 0 ? overall.events[index - 1] : null;
-    calculateEventStandings(event, previousEvent);
+    // const previousEvent = index > 0 ? overall.events[index - 1] : null;
+
+    const previousEvents = index > 0 ? overall.events.slice(0, index) : [];
+    calculateEventStandings(event, previousEvents);
   });
   return overall;
 };

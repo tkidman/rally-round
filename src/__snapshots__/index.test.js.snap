@@ -98,6 +98,7 @@ Object {
             "positionChange": null,
             "previousPosition": null,
             "totalPoints": 120,
+            "totalPointsAfterDropRounds": 120,
           },
           Object {
             "currentPosition": 2,
@@ -106,6 +107,7 @@ Object {
             "positionChange": null,
             "previousPosition": null,
             "totalPoints": 89,
+            "totalPointsAfterDropRounds": 89,
           },
           Object {
             "currentPosition": 3,
@@ -114,6 +116,7 @@ Object {
             "positionChange": null,
             "previousPosition": null,
             "totalPoints": 0,
+            "totalPointsAfterDropRounds": 0,
           },
         ],
         "teamStandings": Array [
@@ -124,6 +127,7 @@ Object {
             "positionChange": null,
             "previousPosition": null,
             "totalPoints": 290,
+            "totalPointsAfterDropRounds": 290,
           },
           Object {
             "currentPosition": 2,
@@ -132,6 +136,7 @@ Object {
             "positionChange": null,
             "previousPosition": null,
             "totalPoints": 164,
+            "totalPointsAfterDropRounds": 164,
           },
         ],
       },

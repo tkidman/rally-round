@@ -6,6 +6,7 @@ const initialState = {
   websiteName: "jrc-results",
   showLivePoints: true,
   showLivePointsDaysRemaining: 4,
+  // dropLowestScoringRoundsNumber: 1,
   divisions: {
     jrc1: {
       displayName: "JRC",
@@ -31,7 +32,18 @@ const initialState = {
       ],
       fantasy: true,
       outputSheetId: "1P-0CJ4rm7xBaMsan0yMcFKwDIWkqjIvYWHNrjgFDixc",
-      manualResults: []
+      manualResults: [
+        {
+          eventIndex: 1,
+          results: [
+            {
+              name: "Tylacto",
+              stageTime: "08:08.349",
+              totalTime: "47:07.006"
+            }
+          ]
+        }
+      ]
       // relegationZone: 6
     },
     jrc2: {
@@ -116,7 +128,18 @@ const initialState = {
         powerStage: [5, 4, 3, 2, 1],
         overall: [30, 24, 21, 19, 17, 15, 13, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
       },
-      manualResults: [],
+      manualResults: [
+        {
+          eventIndex: 1,
+          results: [
+            {
+              name: "Techo",
+              stageTime: "08:56.078",
+              totalTime: "57:52.664"
+            }
+          ]
+        }
+      ],
       cars: [
         "Citroën C3 R5",
         "Ford Fiesta R5",

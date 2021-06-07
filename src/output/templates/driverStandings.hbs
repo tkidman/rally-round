@@ -46,6 +46,9 @@
 
                             {{/each}}
                             <th>Points</th>
+                            {{#if showPointsAfterDropRounds}}
+                                <th>ADR*</th>
+                            {{/if}}
                         </tr>
                     </thead>
                     <tbody>
@@ -93,6 +96,9 @@
                             </td>
                             {{/with}}{{/each}}
                             <td class="bold">{{this.standing.totalPoints}}</td>
+                            {{#if ../showPointsAfterDropRounds}}
+                                <td class="bold">{{this.standing.totalPointsAfterDropRounds}}</td>
+                            {{/if}}
                         </tr>
                         {{/each}}
                     </tbody>
@@ -101,7 +107,12 @@
                 <div style="margin:0 auto; text-align:center;">
                     <p>last updated at: {{lastUpdatedAt}}</p>
                 </div>
-            </div>
+                {{#if showPointsAfterDropRounds}}
+                    <div style="margin:0 auto; text-align:center;">
+                        <p>*total points after lowest scoring round removed (After Dropped Round)</p>
+                    </div>
+                {{/if}}
+    </div>
         </div>
     </div>
 
