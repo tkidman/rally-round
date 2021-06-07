@@ -76,6 +76,7 @@
 				<div class="w3-card-4">
 					<header class="w3-container w3-blue">
 						<h1>Pynklu, is this roster ok??</h1>
+						<h4 id="teamNameHeader"></h4>
 					</header>
 					<div class="w3-container w3-light-grey">
 						<div class="w3-container">
@@ -178,6 +179,8 @@
 		var topNav = document.getElementsByClassName("w3-top")[0];
 		topNav.appendChild(teamDiv);
 
+		document.getElementById("teamNameHeader").innerHTML = document.querySelector('.teamContainer:not(.collapsed) .currentTeam').innerHTML;
+
 		function openNav() {
 			var x = document.getElementById("mobileNav");
 			if (x.className.indexOf("w3-show") == -1) {
@@ -198,6 +201,8 @@
 			}
 			prev.className += " collapsed";
 			prev = x;
+
+			document.getElementById("teamNameHeader").innerHTML = document.querySelector('.teamContainer:not(.collapsed) .currentTeam').innerHTML;
 		}
 
 		function copyDiscordText(){
