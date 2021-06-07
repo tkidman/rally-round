@@ -11,9 +11,15 @@ const initialState = {
       clubs: [
         {
           clubId: "353757",
-          championshipIds: ["432150"],
+          championshipIds: ["472591"],
           includeNextChampionships: true
         }
+      ],
+      cars: [
+        "Ford Focus RS Rally 2001",
+        "Peugeot 206 Rally",
+        "SUBARU Impreza (2001)",
+        "SUBARU Impreza S4 Rally"
       ],
       events: [],
       points: {
