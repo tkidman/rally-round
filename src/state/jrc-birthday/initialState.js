@@ -1,13 +1,16 @@
 const initialState = {
   pointsForDNF: false,
-  // websiteName: "jrc-results",
+  websiteName: "jrc-results",
   subfolderName: "birthday",
   showLivePoints: false,
+  showCarsAlways: true,
   showCarNameAsTextInStandings: true,
   showCarNameAsTextInResults: true,
   useCarAsTeam: false,
   disableOverall: true,
   teamPointsForPowerstage: false,
+  backgroundStyle:
+    "background-image: url('./assets/birthday.jpg'); background-size: cover; background-repeat: no-repeat; background-attachment: fixed;",
   divisions: {
     combined: {
       divisionName: "R5R2",

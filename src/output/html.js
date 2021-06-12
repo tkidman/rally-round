@@ -117,7 +117,8 @@ const writeFantasyHTML = (fantasyResults, links) => {
   const rosterData = {
     teams: data.teams,
     navigation: roster_nav,
-    prices: data.prices
+    prices: data.prices,
+    backgroundStyle: leagueRef.league.backgroundStyle
   };
 
   fs.writeFileSync(
@@ -191,7 +192,8 @@ const getNavigationHTML = (
 
 const writeHomeHTML = links => {
   const data = {
-    navigation: getNavigationHTML("", "", links, null)
+    navigation: getNavigationHTML("", "", links, null),
+    backgroundStyle: leagueRef.league.backgroundStyle
   };
   const homeTemplateFile = `${templatePath}/home.hbs`;
   if (!fs.existsSync(homeTemplateFile)) {
@@ -304,13 +306,14 @@ const transformForHTML = (division, type) => {
     headerLocations,
     rows,
     showTeam: leagueRef.hasTeams,
-    showCar: leagueRef.hasCars,
+    showCar: leagueRef.hasCars || leagueRef.league.showCarsAlways,
     showCarName: leagueRef.league.showCarNameAsTextInStandings,
     title: division.displayName || division.divisionName,
     logo: division.logo || "JRC.png",
     divisionName: division.divisionName,
     showPointsAfterDropRounds:
-      leagueRef.league.dropLowestScoringRoundsNumber > 0
+      leagueRef.league.dropLowestScoringRoundsNumber > 0,
+    backgroundStyle: leagueRef.league.backgroundStyle
   };
 };
 
@@ -349,7 +352,8 @@ const transformForDriverResultsHTML = (event, division) => {
     showStagePoints: hasPoints("stagePoints", rows),
     event,
     location: locations[event.location],
-    divisionName
+    divisionName,
+    backgroundStyle: leagueRef.league.backgroundStyle
     // stages: rows[0].stageTimes
   };
 };

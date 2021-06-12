@@ -8,7 +8,7 @@
     <link rel="icon" href="./assets/JRC.png">
 </head>
 
-<body>
+<body style="{{this.backgroundStyle}}">
     {{{navigation}}}
     <div id="container">
         <div id="flexContainer">
@@ -135,9 +135,11 @@
     <!--
         BACKGROUND ANIMATION
     -->
-    <div id="particles-js"></div>
-    <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="./assets/particleConfig.js"></script>
+    {{#unless this.backgroundStyle}}
+        <div id="particles-js"></div>
+        <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+        <script src="./assets/particleConfig.js"></script>
+    {{/unless}}
 </body>
 
 </html>
