@@ -131,6 +131,10 @@
 		"class": "groupB",
 		"brand": "mg"
 	},
+	"Opel Manta 400": {
+		"class": "groupBRWD",
+		"brand": "Opel"
+	},
 	"BMW M2 Competition": {
 		"class": "RGT",
 		"brand": "BMW"

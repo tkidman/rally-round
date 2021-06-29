@@ -3,16 +3,18 @@ const initialState = {
   websiteName: "jrc-results",
   subfolderName: "themed",
   showLivePoints: false,
-  // showCarNameAsTextInStandings: true,
-  // showCarNameAsTextInResults: true,
+  showCarNameAsTextInStandings: true,
+  showCarNameAsTextInResults: true,
   useCarAsTeam: false,
   disableOverall: true,
   teamPointsForPowerstage: true,
+  backgroundStyle:
+    "background-image: linear-gradient(315deg, #eec0c6 0%, #7ee8fa 74%); background-size: cover; background-repeat: no-repeat; background-attachment: fixed;",
   divisions: {
-    wrc: {
-      divisionName: "jwrc",
-      displayName: "JWRC",
-      clubs: [{ clubId: "256173", championshipIds: ["432382"] }],
+    vatanen: {
+      divisionName: "vatanen",
+      displayName: "Ari Vatanen",
+      clubs: [{ clubId: "256173", championshipIds: ["483002"] }],
       events: [],
       points: {
         powerStage: [],
@@ -52,13 +54,18 @@ const initialState = {
           2,
           1,
           1
-        ],
-        stage: [1]
+        ]
+        // stage: [1]
       },
-      cars: ["Ford Fiesta R2"]
+      cars: [
+        "Ford Escort Mk II",
+        "Opel Manta 400",
+        "Peugeot 205 T16 Evo 2",
+        "BMW E30 M3 Evo Rally",
+        "Subaru Legacy RS"
+      ]
       // outputSheetId: "1C3fU9y1236wFmPuKcui4CEXBuSsUANH6OJ0BpQIasTc"
     }
   }
 };
-
 module.exports = initialState;
