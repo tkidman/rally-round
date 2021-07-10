@@ -27,7 +27,10 @@ const initialState = {
             }
           ]
         }
-      ]
+      ],
+      promotionRelegation: {
+        promotionZone: 1
+      }
     }
   },
   teamOverride: {

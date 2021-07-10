@@ -12,6 +12,7 @@ const { createDNFResult } = require("./shared");
 const { cloneDeep, last } = require("lodash");
 const { recalculateDiffsForEntries } = require("./shared");
 const vehicles = require("./state/constants/vehicles.json");
+const { resultTypes } = require("./shared");
 const { map } = require("lodash");
 const { sumBy } = require("lodash");
 const { recalculateDiffs } = require("./shared");
@@ -362,8 +363,15 @@ const calculateEventResults = ({
 };
 
 const removeLowestResults = (allResultsForName, dropRounds) => {
+  let results = [...allResultsForName];
   if (dropRounds) {
-    const sortedResultsForName = [...allResultsForName].sort(
+    if (leagueRef.league.showLivePoints) {
+      const result = results[results.length - 1];
+      if (result.entry && result.entry.isDnsEntry) {
+        results.pop();
+      }
+    }
+    const sortedResultsForName = [...results].sort(
       (a, b) => a.totalPoints - b.totalPoints
     );
     return sortedResultsForName.slice(dropRounds);
@@ -371,11 +379,73 @@ const removeLowestResults = (allResultsForName, dropRounds) => {
   return allResultsForName;
 };
 
+const isDnsPenalty = allResultsForDriver => {
+  const firstStartedEventIndex = allResultsForDriver.findIndex(
+    result => !result.entry.isDnsEntry
+  );
+  const actualResults = allResultsForDriver.slice(firstStartedEventIndex);
+  if (
+    leagueRef.league.showLivePoints &&
+    actualResults[actualResults.length - 1].entry.isDnsEntry
+  ) {
+    actualResults.pop();
+  }
+  const dnsResults = actualResults.filter(result => result.entry.isDnsEntry);
+  let dnsResultCount = dnsResults.length;
+  return dnsResultCount * 2 >= actualResults.length;
+};
+
+const calculatePromotionRelegation = ({
+  standing,
+  division,
+  standingIndexPlusOne,
+  numDrivers
+}) => {
+  const promotionDoubleZone =
+    division.promotionRelegation.promotionDoubleZone || 0;
+  const { promotionZone, relegationZone } = division.promotionRelegation;
+
+  if (promotionDoubleZone && standingIndexPlusOne <= promotionDoubleZone) {
+    standing.promotionRelegation = 2;
+  } else if (
+    promotionZone &&
+    standingIndexPlusOne <= promotionZone + promotionDoubleZone
+  ) {
+    standing.promotionRelegation = 1;
+  } else if (
+    relegationZone &&
+    numDrivers - relegationZone < standingIndexPlusOne
+  ) {
+    standing.promotionRelegation = -1;
+  }
+};
+
+const calculatePromotionRelegations = (standings, divisionName) => {
+  if (divisionName !== "overall") {
+    const division = leagueRef.league.divisions[divisionName];
+    if (division.promotionRelegation) {
+      const nonDnsPenaltyStandings = standings.filter(
+        standing => !standing.dnsPenalty
+      );
+
+      nonDnsPenaltyStandings.forEach((standing, standingIndex) =>
+        calculatePromotionRelegation({
+          standing,
+          division,
+          standingIndexPlusOne: standingIndex + 1,
+          numDrivers: nonDnsPenaltyStandings.length
+        })
+      );
+    }
+  }
+};
+
 const calculateStandings = ({
   results,
   previousStandings,
   previousEvents,
-  resultType
+  resultType,
+  divisionName
 }) => {
   const standings = results.map(result => {
     const standing = {
@@ -408,6 +478,13 @@ const calculateStandings = ({
       if (previousStanding) {
         standing.previousPosition = previousStanding.currentPosition;
       }
+      if (
+        resultType === resultTypes.driver &&
+        leagueRef.league.enableDnsPenalty &&
+        divisionName !== "overall"
+      ) {
+        standing.dnsPenalty = isDnsPenalty(allResultsForName);
+      }
     }
     return standing;
   });
@@ -424,6 +501,7 @@ const calculateStandings = ({
       i !== 0 &&
       standing.totalPoints === sortedStandings[i - 1].totalPoints
     ) {
+      // set current position to the same number if points are equal between drivers / teams
       standing.currentPosition = sortedStandings[i - 1].currentPosition;
     } else {
       standing.currentPosition = i + 1;
@@ -432,10 +510,13 @@ const calculateStandings = ({
       ? standing.previousPosition - standing.currentPosition
       : null;
   }
+  if (resultType === resultTypes.driver) {
+    calculatePromotionRelegations(sortedStandings, divisionName);
+  }
   return sortedStandings;
 };
 
-const calculateEventStandings = (event, previousEvents) => {
+const calculateEventStandings = (event, previousEvents, divisionName) => {
   const previousEvent = last(previousEvents);
   const previousDriverStandings = previousEvent
     ? previousEvent.standings.driverStandings
@@ -444,7 +525,8 @@ const calculateEventStandings = (event, previousEvents) => {
     results: event.results.driverResults,
     previousStandings: previousDriverStandings,
     previousEvents,
-    resultType: "driverResults"
+    resultType: "driverResults",
+    divisionName
   });
 
   const previousTeamStandings = previousEvent
@@ -454,7 +536,8 @@ const calculateEventStandings = (event, previousEvents) => {
     results: event.results.teamResults,
     previousStandings: previousTeamStandings,
     previousEvents,
-    resultType: "teamResults"
+    resultType: "teamResults",
+    divisionName
   });
   event.standings = { driverStandings, teamStandings };
 };
@@ -472,7 +555,7 @@ const processEvent = ({
     drivers,
     eventIndex
   });
-  calculateEventStandings(event, previousEvents);
+  calculateEventStandings(event, previousEvents, divisionName);
   if (leagueRef.league.divisions[divisionName].fantasy) {
     calculateFantasyStandings(
       event,
@@ -544,7 +627,7 @@ const calculateOverall = processedDivisions => {
   const overall = {
     events: [],
     divisionName: "overall",
-    divisionDisplayName: "Overall"
+    displayName: "Overall"
   };
   Object.keys(processedDivisions).forEach(divisionName => {
     const division = processedDivisions[divisionName];
@@ -602,7 +685,7 @@ const calculateOverall = processedDivisions => {
     // const previousEvent = index > 0 ? overall.events[index - 1] : null;
 
     const previousEvents = index > 0 ? overall.events.slice(0, index) : [];
-    calculateEventStandings(event, previousEvents);
+    calculateEventStandings(event, previousEvents, overall.divisionName);
   });
   return overall;
 };
@@ -655,5 +738,8 @@ module.exports = {
   sortTeamResults,
   processEvent,
   calculateEventStandings,
-  calculateOverall
+  calculateOverall,
+  isDnsPenalty,
+  calculatePromotionRelegation,
+  calculatePromotionRelegations
 };

@@ -1,6 +1,6 @@
 process.env.DEBUG = "tkidman:*";
-if(process.argv.length < 3) {
-  require('dotenv').config();
+if (process.argv.length < 3) {
+  require("dotenv").config();
 }
 if (process.argv[2] && process.argv[3]) {
   process.env.DIRT_USERNAME = process.argv[2];

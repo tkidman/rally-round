@@ -21,6 +21,7 @@ const colours = {
   red: "#ffb4b4",
   green: "#ccffc8",
   gold: "#ffd74e",
+  grey: "#dcdcdc",
   default: ""
 };
 
@@ -236,26 +237,20 @@ const writeStandingsHTML = (division, type, links) => {
   }
 };
 
-const getStandingColour = (division, standingIndexPlusOne, numDrivers) => {
-  let colour = colours.default;
-  const promotionDoubleZone = division.promotionDoubleZone || 0;
-  if (
-    promotionDoubleZone &&
-    standingIndexPlusOne <= division.promotionDoubleZone
-  ) {
-    colour = colours.gold;
-  } else if (
-    division.promotionZone &&
-    standingIndexPlusOne <= division.promotionZone + promotionDoubleZone
-  ) {
-    colour = colours.green;
-  } else if (
-    division.relegationZone &&
-    numDrivers - division.relegationZone < standingIndexPlusOne
-  ) {
-    colour = colours.red;
+const getStandingColour = standing => {
+  if (standing.dnsPenalty) {
+    return colours.grey;
   }
-  return colour;
+  if (standing.promotionRelegation === 2) {
+    return colours.gold;
+  }
+  if (standing.promotionRelegation === 1) {
+    return colours.green;
+  }
+  if (standing.promotionRelegation === -1) {
+    return colours.red;
+  }
+  return colours.default;
 };
 
 const transformForHTML = (division, type) => {
@@ -284,11 +279,7 @@ const transformForHTML = (division, type) => {
     const divisionDisplayName =
       standingDivision &&
       (standingDivision.displayName || standingDivision.divisionName);
-    const colour = getStandingColour(
-      division,
-      standingIndex + 1,
-      lastEventStandings.length
-    );
+    const colour = getStandingColour(standing);
     const row = {
       results,
       standing,

@@ -21,6 +21,11 @@ const eventStatuses = {
   finished: "Finished"
 };
 
+const resultTypes = {
+  driver: "driverResults",
+  team: "teamResults"
+};
+
 const dnfFactor = 100000000;
 
 const getDuration = durationString => {
@@ -111,6 +116,7 @@ module.exports = {
   privateer,
   club,
   eventStatuses,
+  resultTypes,
   orderEntriesBy,
   orderResultsBy,
   getDuration,

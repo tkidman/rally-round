@@ -5,6 +5,9 @@ const {
   calculateOverall
 } = require("./index");
 const leaderboard = require("./__fixtures__/leaderboard");
+const { calculatePromotionRelegations } = require("./index");
+const { calculatePromotionRelegation } = require("./index");
+const { isDnsPenalty } = require("./index");
 const { init } = require("./state/league");
 
 describe("calculates event results", () => {
@@ -257,7 +260,7 @@ describe("calculates event results", () => {
         ]
       }
     };
-    calculateEventStandings(event, [previousEvent]);
+    calculateEventStandings(event, [previousEvent], "pro");
     expect(event.standings).toMatchObject({
       driverStandings: [
         {
@@ -297,7 +300,7 @@ describe("calculates event results", () => {
       ]
     });
     leagueRef.league.dropLowestScoringRoundsNumber = 1;
-    calculateEventStandings(event, [previousEvent]);
+    calculateEventStandings(event, [previousEvent], "pro");
     expect(event.standings).toMatchObject({
       driverStandings: [
         {
@@ -364,7 +367,7 @@ describe("calculates event results", () => {
         ]
       }
     };
-    calculateEventStandings(event);
+    calculateEventStandings(event, null, "pro");
     expect(event.standings.driverStandings).toMatchObject([
       {
         currentPosition: 1,
@@ -386,5 +389,130 @@ describe("calculates event results", () => {
   it("calculates overall results", () => {
     const preOverallResults = require("./__fixtures__/preOverallLeague.json");
     expect(calculateOverall(preOverallResults.divisions)).toMatchSnapshot();
+  });
+
+  describe("isDnsPenalty", () => {
+    it("returns true when 1 DNS from 2 events", () => {
+      const allResultsForDriver = [
+        { entry: { isDnsEntry: true } },
+        { entry: { isDnsEntry: false } },
+        { entry: { isDnsEntry: true } },
+        // ignored because showLivePoints = true
+        { entry: { isDnsEntry: true } }
+      ];
+      expect(isDnsPenalty(allResultsForDriver)).toBeTruthy();
+    });
+
+    it("returns false when 1 DNS from 3 events", () => {
+      const allResultsForDriver = [
+        { entry: { isDnsEntry: false } },
+        { entry: { isDnsEntry: false } },
+        { entry: { isDnsEntry: true } },
+        // ignored because showLivePoints = true
+        { entry: { isDnsEntry: true } }
+      ];
+      expect(isDnsPenalty(allResultsForDriver)).toBeFalsy();
+    });
+
+    it("returns true when 2 DNS from 4 events", () => {
+      const allResultsForDriver = [
+        { entry: { isDnsEntry: true } },
+        { entry: { isDnsEntry: true } },
+        { entry: { isDnsEntry: true } },
+        { entry: { isDnsEntry: false } },
+        { entry: { isDnsEntry: true } },
+        { entry: { isDnsEntry: true } },
+        { entry: { isDnsEntry: false } }
+      ];
+      expect(isDnsPenalty(allResultsForDriver)).toBeTruthy();
+    });
+  });
+
+  describe("calculatePromotionRelegation", () => {
+    const createParams = (division, standingIndexPlusOne, numDrivers) => {
+      return {
+        standing: {},
+        division,
+        standingIndexPlusOne,
+        numDrivers
+      };
+    };
+
+    const division = {
+      promotionRelegation: {
+        promotionDoubleZone: 2,
+        promotionZone: 3,
+        relegationZone: 3
+      }
+    };
+
+    it("returns -1 when standing is in relegation zone", () => {
+      const params = createParams(division, 18, 20);
+      calculatePromotionRelegation(params);
+      expect(params.standing.promotionRelegation).toEqual(-1);
+    });
+
+    it("returns undefined when standing is not in relegation zone or promotion zone", () => {
+      let params = createParams(division, 17, 20);
+      calculatePromotionRelegation(params);
+      expect(params.standing.promotionRelegation).toBeUndefined();
+
+      params = createParams(division, 6, 20);
+      calculatePromotionRelegation(params);
+      expect(params.standing.promotionRelegation).toBeUndefined();
+    });
+
+    it("returns 2 when standing is in promotion double zone", () => {
+      const params = createParams(division, 2, 20);
+      calculatePromotionRelegation(params);
+      expect(params.standing.promotionRelegation).toEqual(2);
+    });
+
+    it("returns 1 when standing is in promotion zone", () => {
+      let params = createParams(division, 3, 20);
+      calculatePromotionRelegation(params);
+      expect(params.standing.promotionRelegation).toEqual(1);
+
+      params = createParams(division, 5, 20);
+      calculatePromotionRelegation(params);
+      expect(params.standing.promotionRelegation).toEqual(1);
+    });
+
+    it("returns green when standing is in promotion zone with no double promotion zone", () => {
+      const params = createParams(
+        {
+          promotionRelegation: {
+            promotionZone: 3
+          }
+        },
+        3,
+        20
+      );
+      calculatePromotionRelegation(params);
+      expect(params.standing.promotionRelegation).toEqual(1);
+    });
+  });
+
+  describe("calculatePromotionRelegations", () => {
+    it("calculates only on standings with no dnsPenalty", () => {
+      const standings = [
+        { dnsPenalty: true },
+        { dnsPenalty: false },
+        { dnsPenalty: false }
+      ];
+      calculatePromotionRelegations(standings, "pro");
+      expect(standings).toEqual([
+        {
+          dnsPenalty: true
+        },
+        {
+          dnsPenalty: false,
+          promotionRelegation: 1
+        },
+        {
+          dnsPenalty: false
+        }
+      ]);
+    });
   });
 });

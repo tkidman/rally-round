@@ -6,7 +6,8 @@ const initialState = {
   websiteName: "jrc-results",
   showLivePoints: true,
   showLivePointsDaysRemaining: 4,
-  // dropLowestScoringRoundsNumber: 1,
+  enableDnsPenalty: true,
+  dropLowestScoringRoundsNumber: 1,
   divisions: {
     jrc1: {
       displayName: "JRC",
@@ -43,8 +44,10 @@ const initialState = {
             }
           ]
         }
-      ]
-      // relegationZone: 6
+      ],
+      promotionRelegation: {
+        relegationZone: 6
+      }
     },
     jrc2: {
       displayName: "JRC2",
@@ -69,9 +72,11 @@ const initialState = {
         "Ford Escort RS Cosworth"
       ],
       outputSheetId: "1WaBmoqfRtXO8CEGhnE2g1b93F5o2Kjh7Nx3vi13U5Tg",
-      manualResults: []
-      // promotionZone: 7,
-      // relegationZone: 8
+      manualResults: [],
+      promotionRelegation: {
+        promotionZone: 7,
+        relegationZone: 7
+      }
     },
     jrc3: {
       displayName: "JRC3",
@@ -107,10 +112,11 @@ const initialState = {
             }
           ]
         }
-      ]
-      // promotionDoubleZone: 1,
-      // promotionZone: 7,
-      // relegationZone: 8
+      ],
+      promotionRelegation: {
+        promotionZone: 8,
+        relegationZone: 8
+      }
     },
     jrc4: {
       displayName: "JRC4",
@@ -140,6 +146,11 @@ const initialState = {
           ]
         }
       ],
+      promotionRelegation: {
+        promotionDoubleZone: 1,
+        promotionZone: 7,
+        relegationZone: 8
+      },
       cars: [
         "Citroën C3 R5",
         "Ford Fiesta R5",
@@ -149,9 +160,6 @@ const initialState = {
         "ŠKODA Fabia R5",
         "Volkswagen Polo GTI R5"
       ]
-      // promotionDoubleZone: 1,
-      // promotionZone: 6,
-      // relegationZone: 8
     },
     jrc5: {
       displayName: "JRC5",
@@ -169,9 +177,12 @@ const initialState = {
         powerStage: [5, 4, 3, 2, 1],
         overall: [30, 24, 21, 19, 17, 15, 13, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
       },
-      cars: ["Opel Adam R2", "Peugeot 208 R2"]
-      // promotionDoubleZone: 1,
-      // promotionZone: 6
+      cars: ["Opel Adam R2", "Peugeot 208 R2"],
+      promotionRelegation: {
+        promotionDoubleZone: 1,
+        promotionZone: 7,
+        relegationZone: 8
+      }
     },
     jrc6: {
       displayName: "JRC6",
@@ -189,9 +200,11 @@ const initialState = {
         powerStage: [5, 4, 3, 2, 1],
         overall: [30, 24, 21, 19, 17, 15, 13, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
       },
-      cars: ["Peugeot 205 GTI", "Volkswagen Golf GTI 16V"]
-      // promotionDoubleZone: 1,
-      // promotionZone: 6
+      cars: ["Peugeot 205 GTI", "Volkswagen Golf GTI 16V"],
+      promotionRelegation: {
+        promotionDoubleZone: 1,
+        promotionZone: 8
+      }
     }
   },
   fantasy: {

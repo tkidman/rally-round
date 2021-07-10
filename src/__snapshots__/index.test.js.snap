@@ -2,7 +2,7 @@
 
 exports[`calculates event results calculates overall results 1`] = `
 Object {
-  "divisionDisplayName": "Overall",
+  "displayName": "Overall",
   "divisionName": "overall",
   "events": Array [
     Object {
