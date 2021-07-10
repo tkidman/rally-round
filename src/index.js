@@ -365,7 +365,7 @@ const calculateEventResults = ({
 const removeLowestResults = (allResultsForName, dropRounds) => {
   let results = [...allResultsForName];
   if (dropRounds) {
-    if (leagueRef.league.showLivePoints) {
+    if (leagueRef.showLivePoints()) {
       const result = results[results.length - 1];
       if (result.entry && result.entry.isDnsEntry) {
         results.pop();
@@ -385,14 +385,13 @@ const isDnsPenalty = allResultsForDriver => {
   );
   const actualResults = allResultsForDriver.slice(firstStartedEventIndex);
   if (
-    leagueRef.league.showLivePoints &&
+    leagueRef.showLivePoints() &&
     actualResults[actualResults.length - 1].entry.isDnsEntry
   ) {
     actualResults.pop();
   }
   const dnsResults = actualResults.filter(result => result.entry.isDnsEntry);
-  let dnsResultCount = dnsResults.length;
-  return dnsResultCount * 2 >= actualResults.length;
+  return dnsResults.length * 2 >= actualResults.length;
 };
 
 const calculatePromotionRelegation = ({
