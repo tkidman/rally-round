@@ -147,7 +147,7 @@ const setManualResults = ({
         if (existingResult) {
           Object.assign(existingResult, defaultEntry, manualResult);
         } else {
-          const firstStageResult = firstStageResultsByDriver[manualResult.name];
+          let firstStageResult = firstStageResultsByDriver[manualResult.name];
           if (manualResult.firstStageResult) {
             firstStageResult = manualResult.firstStageResult;
             firstStageResultsByDriver[manualResult.name] = firstStageResult;
