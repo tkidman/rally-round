@@ -148,6 +148,10 @@ const setManualResults = ({
           Object.assign(existingResult, defaultEntry, manualResult);
         } else {
           const firstStageResult = firstStageResultsByDriver[manualResult.name];
+          if (manualResult.firstStageResult) {
+            firstStageResult = manualResult.firstStageResult;
+            firstStageResultsByDriver[manualResult.name] = firstStageResult;
+          }
           if (!firstStageResult) {
             debug(
               `unable to find first stage result for manual result for driver ${manualResult.name}`
