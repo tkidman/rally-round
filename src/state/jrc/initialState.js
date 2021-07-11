@@ -149,10 +149,9 @@ const initialState = {
           eventIndex: 5,
           results: [
             {
-              name: "Agersi",
+              name: "Agersi - 420LegalizeIt",
               stageTime: "03:42.527",
-              totalTime: "41:36.926",
-              firstStageResult: "02:52.693"
+              totalTime: "41:36.926"
             }
           ]
         }

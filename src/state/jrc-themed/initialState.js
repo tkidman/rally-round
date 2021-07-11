@@ -3,7 +3,7 @@ const initialState = {
   websiteName: "jrc-results",
   subfolderName: "themed",
   showLivePoints: false,
-  showCarNameAsTextInStandings: true,
+  showCarNameAsTextInStandings: false,
   showCarNameAsTextInResults: true,
   useCarAsTeam: false,
   disableOverall: true,

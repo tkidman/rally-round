@@ -147,14 +147,10 @@ const setManualResults = ({
         if (existingResult) {
           Object.assign(existingResult, defaultEntry, manualResult);
         } else {
-          let firstStageResult = firstStageResultsByDriver[manualResult.name];
-          if (manualResult.firstStageResult) {
-            firstStageResult = manualResult.firstStageResult;
-            firstStageResultsByDriver[manualResult.name] = firstStageResult;
-          }
+          const firstStageResult = firstStageResultsByDriver[manualResult.name];
           if (!firstStageResult) {
             debug(
-              `unable to find first stage result for manual result for driver ${manualResult.name}`
+              `unable to find first stage result for manual result for driver ${manualResult.name} - make sure the name in the manual result matches what is returned from racenet`
             );
           } else {
             entries.push({
