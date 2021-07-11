@@ -151,7 +151,8 @@ const initialState = {
             {
               name: "Agersi",
               stageTime: "03:42.527",
-              totalTime: "41:36.926"
+              totalTime: "41:36.926",
+              firstStageResult: "02:52.693"
             }
           ]
         }
