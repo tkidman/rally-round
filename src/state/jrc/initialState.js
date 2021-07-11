@@ -144,6 +144,16 @@ const initialState = {
               totalTime: "57:52.664"
             }
           ]
+        },
+        {
+          eventIndex: 5,
+          results: [
+            {
+              name: "Agersi",
+              stageTime: "03:42.527",
+              totalTime: "41:36.926"
+            }
+          ]
         }
       ],
       promotionRelegation: {
