@@ -487,12 +487,14 @@ const calculateStandings = ({
     }
     return standing;
   });
-  const sortedStandings = sortBy(
-    standings,
-    standing =>
-      // sort by totalPointsAfterDropRounds first then by totalPoints if totalPointsAfterDropRounds equal
-      0 - standing.totalPointsAfterDropRounds * 1000000 - standing.totalPoints
-  );
+  const sortedStandings = sortBy(standings, standing => {
+    const dropRoundSortModifier =
+      resultType === resultTypes.driver
+        ? standing.totalPointsAfterDropRounds * 1000000
+        : 0;
+    // sort by totalPointsAfterDropRounds first then by totalPoints if totalPointsAfterDropRounds equal
+    return 0 - dropRoundSortModifier - standing.totalPoints;
+  });
 
   for (let i = 0; i < sortedStandings.length; i++) {
     const standing = sortedStandings[i];
