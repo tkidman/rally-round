@@ -3,11 +3,12 @@ const initialState = {
   websiteName: "jrc-results",
   subfolderName: "endurance",
   showLivePoints: false,
+  showCarNameAsTextInResults: true,
   divisions: {
     endurance: {
       divisionName: "endurance",
       displayName: "JRC Endurance",
-      disableCarValidation: true,
+      disableSameCarValidation: true,
       clubs: [
         {
           clubId: "353757",
@@ -15,12 +16,12 @@ const initialState = {
           includeNextChampionships: true
         }
       ],
-      cars: [
-        "Ford Focus RS Rally 2001",
-        "Peugeot 206 Rally",
-        "SUBARU Impreza (2001)",
-        "SUBARU Impreza S4 Rally"
-      ],
+      // cars: [
+      //   "Ford Focus RS Rally 2001",
+      //   "Peugeot 206 Rally",
+      //   "SUBARU Impreza (2001)",
+      //   "SUBARU Impreza S4 Rally"
+      // ],
       events: [],
       points: {
         powerStage: [6, 5, 4, 3, 2, 1],

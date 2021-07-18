@@ -8,7 +8,7 @@ const initialState = {
     historic: {
       divisionName: "historic",
       displayName: "JRC Historic",
-      disableCarValidation: true,
+      disableSameCarValidation: true,
       clubs: [{ clubId: "192069", championshipIds: ["462787"] }],
       events: [],
       points: {

@@ -297,8 +297,12 @@ const transformForHTML = (division, type) => {
     headerLocations,
     rows,
     showTeam: leagueRef.hasTeams,
-    showCar: leagueRef.hasCars || leagueRef.league.showCarsAlways,
-    showCarName: leagueRef.league.showCarNameAsTextInStandings,
+    showCar:
+      !leagueRef.league.hideCarColumnInStandings &&
+      (leagueRef.hasCars || leagueRef.league.showCarsAlways),
+    showCarName:
+      !leagueRef.league.hideCarColumnInStandings &&
+      leagueRef.league.showCarNameAsTextInStandings,
     title: division.displayName || division.divisionName,
     logo: division.logo || "JRC.png",
     divisionName: division.divisionName,

@@ -102,7 +102,7 @@ const setDnfIfIncorrectCar = (event, entries, divisionName) => {
     const driver = leagueRef.getDriver(entry.name);
     const division = leagueRef.league.divisions[divisionName];
     if (
-      !division.disableCarValidation &&
+      !division.disableSameCarValidation &&
       driver &&
       driver.car &&
       driver.car !== entry.vehicleName

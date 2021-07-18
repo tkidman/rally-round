@@ -10,7 +10,7 @@ const initialState = {
     modern: {
       divisionName: "modern",
       displayName: "JRC Modern",
-      disableCarValidation: true,
+      disableSameCarValidation: true,
       clubs: [{ clubId: "387957", championshipIds: ["482738"] }],
       events: [],
       points: {

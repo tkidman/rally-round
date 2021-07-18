@@ -3,7 +3,7 @@ const initialState = {
   websiteName: "jrc-results",
   subfolderName: "themed",
   showLivePoints: false,
-  showCarNameAsTextInStandings: false,
+  hideCarColumnInStandings: true,
   showCarNameAsTextInResults: true,
   useCarAsTeam: false,
   disableOverall: true,
@@ -14,6 +14,7 @@ const initialState = {
     vatanen: {
       divisionName: "vatanen",
       displayName: "Ari Vatanen",
+      disableSameCarValidation: true,
       clubs: [{ clubId: "256173", championshipIds: ["483002"] }],
       events: [],
       points: {
