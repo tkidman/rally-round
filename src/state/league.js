@@ -145,6 +145,7 @@ const init = async () => {
   leagueRef.divisions = league.divisions;
   leagueRef.addDriver = addDriver;
   leagueRef.drivers = drivers;
+  leagueRef.getDriverNames = getDriverNames;
   leagueRef.missingDrivers = missingDrivers;
   leagueRef.hasTeams = !!driverColumns.teamId || league.useCarAsTeam;
   leagueRef.hasCars = !!driverColumns.car;
@@ -182,6 +183,15 @@ const getDriver = name => {
     driver = drivers.driversByName3[upperName];
   }
   return driver;
+};
+
+const getDriverNames = name => {
+  const driver = getDriver(name);
+  return [
+    driver[driverFieldNames.name],
+    driver[driverFieldNames.raceNetName],
+    driver[driverFieldNames.name3]
+  ].filter(name => !!name);
 };
 
 const getDriversByDivision = division => {

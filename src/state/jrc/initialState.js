@@ -111,6 +111,16 @@ const initialState = {
               isDnfEntry: true
             }
           ]
+        },
+        {
+          eventIndex: 6,
+          results: [
+            {
+              name: "Greebo62",
+              stageTime: "04:03.377",
+              totalTime: "47:53.609"
+            }
+          ]
         }
       ],
       promotionRelegation: {
@@ -149,7 +159,7 @@ const initialState = {
           eventIndex: 5,
           results: [
             {
-              name: "Agersi - 420LegalizeIt",
+              name: "Agersi",
               stageTime: "03:42.527",
               totalTime: "41:36.926"
             }

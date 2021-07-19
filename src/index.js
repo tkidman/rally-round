@@ -139,24 +139,28 @@ const setManualResults = ({
       eventManualResults => eventManualResults.eventIndex === eventIndex
     );
     if (eventManualResults) {
-      eventManualResults.results.forEach(manualResult => {
-        debug(`applying manual result for ${manualResult.name}`);
-        const existingResult = entries.find(
-          entry => entry.name === manualResult.name
+      eventManualResults.results.forEach(manualEntry => {
+        debug(`applying manual result for ${manualEntry.name}`);
+        const driverNames = leagueRef.getDriverNames(manualEntry.name);
+        const existingEntry = entries.find(entry =>
+          driverNames.includes(entry.name)
         );
-        if (existingResult) {
-          Object.assign(existingResult, defaultEntry, manualResult);
+        if (existingEntry) {
+          Object.assign(existingEntry, defaultEntry, manualEntry, {
+            name: existingEntry.name
+          });
         } else {
-          const firstStageResult = firstStageResultsByDriver[manualResult.name];
+          const firstStageResult = firstStageResultsByDriver[manualEntry.name];
           if (!firstStageResult) {
             debug(
-              `unable to find first stage result for manual result for driver ${manualResult.name} - make sure the name in the manual result matches what is returned from racenet`
+              `unable to find first stage result for manual result for driver ${manualEntry.name} - make sure the name in the manual result matches what is returned from racenet`
             );
           } else {
             entries.push({
               ...firstStageResult.entry,
               ...defaultEntry,
-              ...manualResult
+              ...manualEntry,
+              name: firstStageResult.entry.name
             });
           }
         }
