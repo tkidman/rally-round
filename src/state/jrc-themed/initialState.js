@@ -63,7 +63,7 @@ const initialState = {
         "Opel Manta 400",
         "Peugeot 205 T16 Evo 2",
         "BMW E30 M3 Evo Rally",
-        "Subaru Legacy RS"
+        "SUBARU Legacy RS"
       ]
       // outputSheetId: "1C3fU9y1236wFmPuKcui4CEXBuSsUANH6OJ0BpQIasTc"
     }
