@@ -43,6 +43,15 @@ const initialState = {
               totalTime: "47:07.006"
             }
           ]
+        },
+        {
+          eventIndex: 7,
+          results: [
+            {
+              name: "Puki2579",
+              totalTime: "37:29.449"
+            }
+          ]
         }
       ],
       promotionRelegation: {

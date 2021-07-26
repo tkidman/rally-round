@@ -89,7 +89,7 @@ const getSummedTotalTime = (entry1, entry2) => {
   const entry1Duration = getDuration(entry1.totalTime);
   const entry2Duration = getDuration(entry2.totalTime);
   const summedDuration = entry1Duration.add(entry2Duration);
-  return moment.utc(summedDuration.as("milliseconds")).format("HH:mm:ss.SSS");
+  return formatDuration(summedDuration);
 };
 
 const createDNFResult = (driverName, isDnsEntry) => {
@@ -105,6 +105,10 @@ const createDNFResult = (driverName, isDnsEntry) => {
       totalDiff: "N/A"
     }
   };
+};
+
+const formatDuration = duration => {
+  return moment.utc(duration.as("milliseconds")).format("HH:mm:ss.SSS");
 };
 
 module.exports = {
@@ -123,5 +127,6 @@ module.exports = {
   recalculateDiffsForEntries,
   recalculateDiffs,
   createDNFResult,
-  getSummedTotalTime
+  getSummedTotalTime,
+  formatDuration
 };
