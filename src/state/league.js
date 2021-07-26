@@ -152,7 +152,7 @@ const init = async () => {
   leagueRef.includeOverall =
     Object.keys(league.divisions).length > 1 && !league.disableOverall;
   leagueRef.showLivePoints = () => {
-    if (league.showLivePoints) {
+    if (league.showLivePoints && leagueRef.endTime) {
       if (league.showLivePointsDaysRemaining) {
         const daysTillEventEnd = moment
           .duration(moment(leagueRef.endTime).diff(moment()))

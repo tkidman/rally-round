@@ -5,6 +5,7 @@ const {
   calculateOverall
 } = require("./index");
 const leaderboard = require("./__fixtures__/leaderboard");
+const moment = require("moment");
 const { calculatePromotionRelegations } = require("./index");
 const { calculatePromotionRelegation } = require("./index");
 const { isDnsPenalty } = require("./index");
@@ -14,6 +15,7 @@ describe("calculates event results", () => {
   let leagueRef;
   beforeEach(async () => {
     leagueRef = await init();
+    leagueRef.endTime = moment();
   });
 
   test("returns results for drivers", () => {
