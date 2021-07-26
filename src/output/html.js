@@ -14,7 +14,7 @@ const {
 const { outputPath, templatePath } = require("../shared");
 const { processFantasyResults } = require("../fantasy/fantasyCalculator");
 const locations = require("../state/constants/locations.json");
-const { eventStatuses } = require("../shared");
+// const { eventStatuses } = require("../shared");
 const resultColours = ["#76FF6A", "#faff5d", "#ffe300", "#ff5858"];
 
 const colours = {
@@ -258,7 +258,8 @@ const transformForHTML = (division, type) => {
   const headerLocations = getHeaderLocations(events);
   let lastEvent = events[events.length - 1];
   if (
-    lastEvent.eventStatus !== eventStatuses.finished &&
+    // lastEvent.eventStatus !== eventStatuses.finished &&
+    leagueRef.endTime &&
     !leagueRef.showLivePoints() &&
     events.length > 1
   ) {
