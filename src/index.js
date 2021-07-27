@@ -504,7 +504,9 @@ const calculateStandings = ({
     const standing = sortedStandings[i];
     if (
       i !== 0 &&
-      standing.totalPoints === sortedStandings[i - 1].totalPoints
+      standing.totalPoints === sortedStandings[i - 1].totalPoints &&
+      standing.totalPointsAfterDropRounds ===
+        sortedStandings[i - 1].totalPointsAfterDropRounds
     ) {
       // set current position to the same number if points are equal between drivers / teams
       standing.currentPosition = sortedStandings[i - 1].currentPosition;
