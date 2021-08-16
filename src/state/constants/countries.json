@@ -435,6 +435,10 @@
 	  "code": "irl",
 	  "name": "Ireland"
 	},
+	"eLngNorthernIrish": {
+		"code": "shn",
+		"name": "Northern Ireland"
+	},
 	"eLngManx": {
 	  "code": "imn",
 	  "name": "Isle of Man"

@@ -4,18 +4,18 @@ const initialState = {
   subfolderName: "themed",
   showLivePoints: false,
   hideCarColumnInStandings: true,
-  showCarNameAsTextInResults: true,
-  useCarAsTeam: false,
+  showCarNameAsTextInResults: false,
+  useCarAsTeam: true,
   disableOverall: true,
-  teamPointsForPowerstage: true,
+  teamPointsForPowerstage: false,
   backgroundStyle:
     "background-image: linear-gradient(315deg, #eec0c6 0%, #7ee8fa 74%); background-size: cover; background-repeat: no-repeat; background-attachment: fixed;",
   divisions: {
     vatanen: {
-      divisionName: "vatanen",
-      displayName: "Ari Vatanen",
-      disableSameCarValidation: true,
-      clubs: [{ clubId: "256173", championshipIds: ["483002"] }],
+      divisionName: "WRC2",
+      displayName: "WRC2",
+      disableSameCarValidation: false,
+      clubs: [{ clubId: "256173", championshipIds: ["501653"] }],
       events: [],
       points: {
         powerStage: [],
@@ -59,11 +59,12 @@ const initialState = {
         // stage: [1]
       },
       cars: [
-        "Ford Escort Mk II",
-        "Opel Manta 400",
-        "Peugeot 205 T16 Evo 2",
-        "BMW E30 M3 Evo Rally",
-        "SUBARU Legacy RS"
+        "Ford Fiesta R5",
+        "ŠKODA Fabia R5",
+        "Mitsubishi Space Star R5",
+        "Citroën C3 R5",
+        "Volkswagen Polo GTI R5",
+        "Peugeot 208 T16 R5"
       ]
       // outputSheetId: "1C3fU9y1236wFmPuKcui4CEXBuSsUANH6OJ0BpQIasTc"
     }
