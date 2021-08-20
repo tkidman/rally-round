@@ -2,6 +2,7 @@ const initialState = {
   showLivePoints: true,
   divisions: {
     pro: {
+      divisionName: "pro",
       maxDriversScoringPointsForTeam: 1,
       events: [
         {
@@ -30,6 +31,10 @@ const initialState = {
       ],
       promotionRelegation: {
         promotionZone: 1
+      },
+      filterEntries: {
+        matchDivision: true,
+        removeDrivers: ["BrothersChris"]
       }
     }
   },

@@ -1,7 +1,7 @@
 // util for calculating ad hoc durations for plugging into manual results
 const debug = require("debug")("tkidman:durationCalculator");
 
-const { formatDuration, getDuration } = require("./shared");
+const { formatDuration, getDuration } = require("./src/shared");
 const durationCalculator = () => {
   const duration1 = getDuration("49:11.541");
   // short stage 15 minutes, long stage 30 minutes

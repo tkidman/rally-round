@@ -9,7 +9,7 @@ const { sortBy, keyBy } = require("lodash");
 const { cachePath } = require("./shared");
 const fs = require("fs");
 const { createDNFResult } = require("./shared");
-const { cloneDeep, last } = require("lodash");
+const { cloneDeep, last, get } = require("lodash");
 const { recalculateDiffsForEntries } = require("./shared");
 const vehicles = require("./state/constants/vehicles.json");
 const { resultTypes } = require("./shared");
@@ -241,6 +241,37 @@ const getResultTeamId = (eventIndex, driver) => {
   return driver.teamId;
 };
 
+const shouldFilterDriver = (division, driverName) => {
+  const driver = leagueRef.getDriver(driverName);
+  const removeDrivers = get(division, "filterEntries.removeDrivers", []);
+  const removeDriverByName = removeDrivers.find(removeDriverName => {
+    return leagueRef.getDriver(removeDriverName) === driver;
+  });
+  const removeDriverByDivision =
+    get(division, "filterEntries.matchDivision", false) &&
+    driver.division !== division.divisionName;
+  return removeDriverByName || removeDriverByDivision;
+};
+
+const filterStage = ({ stage, division }) => {
+  stage.entries = stage.entries.filter(entry => {
+    return !shouldFilterDriver(division, entry.name);
+  });
+};
+
+const filterRacenetLeaderboardStages = ({ event, drivers, divisionName }) => {
+  const division = leagueRef.divisions[divisionName];
+  if (division.filterEntries) {
+    event.racenetLeaderboardStages.forEach(stage => {
+      filterStage({
+        stage,
+        division,
+        drivers
+      });
+    });
+  }
+};
+
 const calculateEventResults = ({
   event,
   divisionName,
@@ -253,6 +284,7 @@ const calculateEventResults = ({
   );
 
   // alert! mutations to the racenetLeaderboard entries occur here, and should only occur here
+  filterRacenetLeaderboardStages({ event, drivers, divisionName });
   const lastStageEntries =
     event.racenetLeaderboardStages[event.racenetLeaderboardStages.length - 1]
       .entries;
@@ -581,6 +613,10 @@ const loadEventDriver = (entry, drivers, divisionName) => {
     driver = { name: entry.name };
     leagueRef.addDriver(driver);
     leagueRef.missingDrivers[entry.name] = driver;
+  }
+
+  if (division.filter && shouldFilterDriver(division, entry.name)) {
+    return;
   }
   driver.nationality = entry.nationality;
   if (
