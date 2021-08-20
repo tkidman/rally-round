@@ -53,7 +53,7 @@ function calculateTeamPoints(team, event, lookuptable) {
 }
 function calculateBudget(team, event, previousEvent, prices) {
   if (!previousEvent) {
-    team.budget.push(11);
+    team.budget.push(10);
   } else {
     team.roster.forEach(week => {
       if (week.location !== previousEvent.location) return;
@@ -70,7 +70,7 @@ function calculateBudget(team, event, previousEvent, prices) {
         }
       });
       let prev_budget = team.budget[team.budget.length - 1];
-      let budget = count < 11 ? 11 : count;
+      let budget = count < 10 ? 10 : count;
       budget = budget > 15 ? 15 : budget;
       if (budget - prev_budget > 1) {
         budget = prev_budget + 1;

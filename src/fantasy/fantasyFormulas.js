@@ -26,13 +26,20 @@ const calculateStandingPoints = resultsByDriver => {
   for (let i = 0; i < 30; i++) {
     var result = resultsByDriver[i];
     if (result.entry.isDnfEntry || result.entry.isDnsEntry) continue;
-    addPointsToResult(result, 30 - i);
+    addPointsToResult(result, 25 - i);
   }
   // Object.values(resultsByDriver).forEach(result => {
   //   var points = result["overallPoints"];
   //   addPointsToResult(result, points ? points : 0);
   // });
 };
+
+const calculateCarPoints = resultsByDriver => {
+  Object.values(resultsByDriver).forEach(result => {
+    var points = (result["vehicleName"] == "SUBARU WRX STI NR4") ? 3 : 0;
+    addPointsToResult(result, points);
+  });
+}
 
 const calculateDNFPoints = resultsByDriver => {
   Object.values(resultsByDriver).forEach(result => {
@@ -62,7 +69,8 @@ const JRC_CALCULATIONS = [
   calculatePowerStagePoints,
   calculateStandingPoints,
   calculateDNFPoints,
-  calculatePodiumStreak
+  calculatePodiumStreak,
+  calculateCarPoints
 ];
 module.exports = {
   JRC_CALCULATIONS
