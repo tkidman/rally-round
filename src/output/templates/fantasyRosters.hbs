@@ -21,13 +21,14 @@
 	{{{navigation}}}
 
 	<div id="teamNav" class="w3-bar w3-light-grey secondaryNav">
+	<select id="teamSelect" onChange="selectChange(this)" style="font-size: 2em;width: 100%;text-align: center;font-family: 'Comic Sans Ms'">
 		{{#each teams}}
-		<button onclick="openAccordion('{{name}}Section')" class="w3-button"
-			style="overflow:initial; font-weight:bold; padding:0.1em;">
-			{{name}}
-		</button>
+			<option value='{{name}}Section'>{{name}} ({{drivers}})</option>
 		{{/each}}
+	</select>
 	</div>
+
+
 
 	<div id="container">
 		{{#each teams}}{{#with this}}
@@ -36,7 +37,7 @@
 				style="margin: 0 auto; display: table;">
 				<span style="display:none;" class="currentBudget">{{budget}}</span>
 				<span style="display:none;" class="currentTeam">{{name}}</span>
-				<h2>{{drivers}}'s {{name}}</h2>
+				{{!-- <h2>{{drivers}}'s {{name}}</h2> --}}
 				<table>
 					<thead>
 						<tr>
@@ -127,13 +128,13 @@
 						<tr>
 							<th>Driver</th>
 							<th><img src="./assets/country-flags/mco.png" /></th>
-							<th><img src="./assets/country-flags/fin.png" /></th>
-							<th><img src="./assets/country-flags/arg.png" /></th>
-                            <th><img src="./assets/country-flags/grc.png" /></th>
-                            <th><img src="./assets/country-flags/esp.png" /></th>
-                            <th><img src="./assets/country-flags/welsh.png" /></th>
-                            <th><img src="./assets/country-flags/scot.png" /></th>
-                            <th><img src="./assets/country-flags/swe.png" /></th>
+							{{!-- <th><img src="./assets/country-flags/swe.png" /></th>
+							<th><img src="./assets/country-flags/usa.png" /></th>
+                            <th><img src="./assets/country-flags/arg.png" /></th>
+                            <th><img src="./assets/country-flags/pol.png" /></th>
+                            <th><img src="./assets/country-flags/deu.png" /></th>
+                            <th><img src="./assets/country-flags/nzl.png" /></th>
+                            <th><img src="./assets/country-flags/aus.png" /></th> --}}
 						</tr>
 					</thead>
 					<tbody>
@@ -167,6 +168,11 @@
         DROPDOWN
     -->
 	<script>
+		function selectChange(elem){
+			var val = elem.value;
+			openAccordion(val);
+		}
+
 		var teams = {}
 		{{#each teams}}{{#with this}}
 			teams['{{name}}']  = {

@@ -209,8 +209,9 @@ const initialState = {
       //   promotionZone: 7,
       //   relegationZone: 8
       // },
-      cars: ["Mitsubishi Lancer Evolution X", "SUBARU WRX STI NR4"]
-    },
+      cars: ["Mitsubishi Lancer Evolution X", "SUBARU WRX STI NR4"],
+      fantasy: true,
+    } ,
     jrc5: {
       displayName: "JRC5",
       divisionName: "jrc5",
@@ -256,12 +257,12 @@ const initialState = {
       // }
     }
   },
-  // fantasy: {
-  //   calculators: JRC_CALCULATIONS,
-  //   teams: [],
-  //   driverStandings: {},
-  //   sheetId: "1ifywqh1xfyVjpUqiG1zODpXupbyHwIzVsZCmOvcHtmg"
-  // },
+  fantasy: {
+    calculators: JRC_CALCULATIONS,
+    teams: [],
+    driverStandings: {},
+    sheetId: "1ifywqh1xfyVjpUqiG1zODpXupbyHwIzVsZCmOvcHtmg"
+  },
   standingsOutputSheetId: "1iLIPjB2fsi3HI5S5CgrvnkEzrdA6fT71m_9zmtL19VI"
 };
 
