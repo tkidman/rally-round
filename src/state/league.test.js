@@ -3,7 +3,7 @@ const { leagueRef, init } = require("./league");
 
 const driver = {
   car: "Alpine Renault A110 1600 S",
-  division: "Amateur",
+  division: "pro",
   id: "SPOOKEX *-*",
   name: "Spookex *-*",
   raceNetName: "Spookex",

@@ -37,10 +37,10 @@ const calculateStandingPoints = resultsByDriver => {
 
 const calculateCarPoints = resultsByDriver => {
   Object.values(resultsByDriver).forEach(result => {
-    var points = (result.entry["vehicleName"] == "SUBARU WRX STI NR4") ? 3 : 0;
+    var points = result.entry["vehicleName"] == "SUBARU WRX STI NR4" ? 3 : 0;
     addPointsToResult(result, points);
   });
-}
+};
 
 const calculateDNFPoints = resultsByDriver => {
   Object.values(resultsByDriver).forEach(result => {

@@ -59,7 +59,10 @@ const initialState = {
       ],
       // fantasy: true,
       outputSheetId: "1P-0CJ4rm7xBaMsan0yMcFKwDIWkqjIvYWHNrjgFDixc",
-      manualResults: []
+      manualResults: [],
+      filterEntries: {
+        matchDivision: true
+      }
       // promotionRelegation: {
       //   relegationZone: 6
       // }
@@ -110,7 +113,10 @@ const initialState = {
         "Peugeot 208 T16 R5"
       ],
       outputSheetId: "1WaBmoqfRtXO8CEGhnE2g1b93F5o2Kjh7Nx3vi13U5Tg",
-      manualResults: []
+      manualResults: [],
+      filterEntries: {
+        matchDivision: true
+      }
       // promotionRelegation: {
       //   promotionZone: 7,
       //   relegationZone: 7
@@ -210,8 +216,8 @@ const initialState = {
       //   relegationZone: 8
       // },
       cars: ["Mitsubishi Lancer Evolution X", "SUBARU WRX STI NR4"],
-      fantasy: true,
-    } ,
+      fantasy: true
+    },
     jrc5: {
       displayName: "JRC5",
       divisionName: "jrc5",

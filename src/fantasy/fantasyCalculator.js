@@ -39,8 +39,10 @@ function calculateTeamPoints(team, event, lookuptable) {
     var score = week.drivers.reduce((val, driver) => {
       if (!driver) return val;
       var driverPoints = lookuptable[driver];
-      if(driverPoints == undefined){
-        debug(`unable to find fantasy score for ${driver} for team ${team.name}`);
+      if (driverPoints == undefined) {
+        debug(
+          `unable to find fantasy score for ${driver} for team ${team.name}`
+        );
       }
       driverPoints = driverPoints ? driverPoints : -3;
       if (week.captain === driver) {

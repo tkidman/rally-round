@@ -615,7 +615,7 @@ const loadEventDriver = (entry, drivers, divisionName) => {
     leagueRef.missingDrivers[entry.name] = driver;
   }
 
-  if (division.filter && shouldFilterDriver(division, entry.name)) {
+  if (division.filterEntries && shouldFilterDriver(division, entry.name)) {
     return;
   }
   driver.nationality = entry.nationality;
