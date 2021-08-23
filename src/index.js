@@ -150,7 +150,8 @@ const setManualResults = ({
             name: existingEntry.name
           });
         } else {
-          const firstStageResult = firstStageResultsByDriver[manualEntry.name];
+          const driver = leagueRef.getDriver(manualEntry.name);
+          const firstStageResult = firstStageResultsByDriver[driver.name];
           if (!firstStageResult) {
             debug(
               `unable to find first stage result for manual result for driver ${manualEntry.name} - make sure the name in the manual result matches what is returned from racenet`

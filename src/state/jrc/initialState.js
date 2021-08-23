@@ -166,7 +166,17 @@ const initialState = {
         "SUBARU Impreza S4 Rally"
       ],
       outputSheetId: "1hrpLvoXjZVSjiIWGr1JVTxfAFM-Se83mFntaTcYYY1E",
-      manualResults: []
+      manualResults: [
+        {
+          eventIndex: 0,
+          results: [
+            {
+              name: "Revi ★",
+              totalTime: "49:02.697"
+            }
+          ]
+        }
+      ]
       // promotionRelegation: {
       //   promotionZone: 8,
       //   relegationZone: 8
