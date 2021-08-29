@@ -258,6 +258,7 @@ const filterStage = ({ stage, division }) => {
   stage.entries = stage.entries.filter(entry => {
     return !shouldFilterDriver(division, entry.name);
   });
+  recalculateDiffs(stage.entries);
 };
 
 const filterRacenetLeaderboardStages = ({ event, drivers, divisionName }) => {
