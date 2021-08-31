@@ -113,7 +113,17 @@ const initialState = {
         "Peugeot 208 T16 R5"
       ],
       outputSheetId: "1WaBmoqfRtXO8CEGhnE2g1b93F5o2Kjh7Nx3vi13U5Tg",
-      manualResults: [],
+      manualResults: [
+        {
+          eventIndex: 1,
+          results: [
+            {
+              name: "Chaosinterface",
+              totalTime: "41:52.095"
+            }
+          ]
+        }
+      ],
       filterEntries: {
         matchDivision: true
       }
