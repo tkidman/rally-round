@@ -59,7 +59,17 @@ const initialState = {
       ],
       // fantasy: true,
       outputSheetId: "1P-0CJ4rm7xBaMsan0yMcFKwDIWkqjIvYWHNrjgFDixc",
-      manualResults: [],
+      manualResults: [
+        {
+          eventIndex: 2,
+          results: [
+            {
+              name: "BrothersChris",
+              totalTime: "40:55.887"
+            }
+          ]
+        }
+      ],
       filterEntries: {
         matchDivision: true
       }
