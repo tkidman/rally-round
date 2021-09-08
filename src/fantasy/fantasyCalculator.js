@@ -1,7 +1,7 @@
 const debug = require("debug")("tkidman:fantasy:fantasyCalculator");
 
 const { createDNFResult } = require("../shared");
-const { getDriversByDivision } = require("../state/league");
+const { getDriversByDivision, leagueRef } = require("../state/league");
 let eventList = [];
 
 function addDnsDrivers(driverResults, division) {
@@ -9,8 +9,13 @@ function addDnsDrivers(driverResults, division) {
     dict[result.name] = true;
     return dict;
   }, {});
-  getDriversByDivision(division).forEach(driver => {
-    if (driver.name in lookupTable) return;
+  const missingDrivers = getDriversByDivision(division).filter(driver => {
+    const isDriverNameInLookupTable = leagueRef
+      .getDriverNames(driver.name)
+      .some(name => lookupTable[name]);
+    return !isDriverNameInLookupTable;
+  });
+  missingDrivers.forEach(driver => {
     driverResults.push({
       ...createDNFResult(driver.name, true),
       divisionName: division,
@@ -22,6 +27,7 @@ function addDnsDrivers(driverResults, division) {
     });
   });
 }
+
 function removeDoubleCaptains(teams) {
   teams.forEach(team => {
     let captains = [];
