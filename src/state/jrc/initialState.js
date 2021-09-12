@@ -68,6 +68,15 @@ const initialState = {
               totalTime: "40:55.887"
             }
           ]
+        },
+        {
+          eventIndex: 3,
+          results: [
+            {
+              name: "satchmo",
+              totalTime: "41:05.083"
+            }
+          ]
         }
       ],
       filterEntries: {
