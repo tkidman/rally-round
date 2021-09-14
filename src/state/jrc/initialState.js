@@ -75,6 +75,10 @@ const initialState = {
             {
               name: "satchmo",
               totalTime: "41:05.083"
+            },
+            {
+              name: "typecastwookiee",
+              totalTime: "38:09.686"
             }
           ]
         }
