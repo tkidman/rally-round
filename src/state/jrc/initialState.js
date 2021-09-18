@@ -7,8 +7,8 @@ const initialState = {
   websiteName: "jrc-results",
   showLivePoints: true,
   showLivePointsDaysRemaining: 4,
-  // enableDnsPenalty: true,
-  // dropLowestScoringRoundsNumber: 1,
+  enableDnsPenalty: true,
+  dropLowestScoringRoundsNumber: 1,
   backgroundStyle:
     "background-image: linear-gradient(to left, #2c3e50, #fd746c); background-size: cover; background-repeat: no-repeat; background-attachment: fixed;",
   divisions: {
@@ -85,10 +85,10 @@ const initialState = {
       ],
       filterEntries: {
         matchDivision: true
+      },
+      promotionRelegation: {
+        relegationZone: 6
       }
-      // promotionRelegation: {
-      //   relegationZone: 6
-      // }
     },
     jrc2: {
       displayName: "JRC2",
@@ -149,11 +149,11 @@ const initialState = {
       ],
       filterEntries: {
         matchDivision: true
+      },
+      promotionRelegation: {
+        promotionZone: 7,
+        relegationZone: 7
       }
-      // promotionRelegation: {
-      //   promotionZone: 7,
-      //   relegationZone: 7
-      // }
     },
     jrc3: {
       displayName: "JRC3",
@@ -209,11 +209,11 @@ const initialState = {
             }
           ]
         }
-      ]
-      // promotionRelegation: {
-      //   promotionZone: 8,
-      //   relegationZone: 8
-      // }
+      ],
+      promotionRelegation: {
+        promotionZone: 8,
+        relegationZone: 8
+      }
     },
     jrc4: {
       displayName: "JRC4",
@@ -253,11 +253,11 @@ const initialState = {
         ]
       },
       manualResults: [],
-      // promotionRelegation: {
-      //   promotionDoubleZone: 1,
-      //   promotionZone: 7,
-      //   relegationZone: 8
-      // },
+      promotionRelegation: {
+        promotionDoubleZone: 1,
+        promotionZone: 7,
+        relegationZone: 8
+      },
       cars: ["Mitsubishi Lancer Evolution X", "SUBARU WRX STI NR4"],
       fantasy: true
     },
@@ -298,12 +298,11 @@ const initialState = {
           1
         ]
       },
-      cars: ["Opel Adam R2", "Peugeot 208 R2"]
-      // promotionRelegation: {
-      //   promotionDoubleZone: 1,
-      //   promotionZone: 7,
-      //   relegationZone: 8
-      // }
+      cars: ["Opel Adam R2", "Peugeot 208 R2"],
+      promotionRelegation: {
+        promotionDoubleZone: 1,
+        promotionZone: 7
+      }
     }
   },
   fantasy: {
