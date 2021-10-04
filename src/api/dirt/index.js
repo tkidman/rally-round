@@ -65,6 +65,7 @@ const login = async resolve => {
   await page.waitForNavigation();
 
   await page.click(USERNAME_SELECTOR);
+  debug(username);
   await page.keyboard.type(username);
 
   await page.click(PASSWORD_SELECTOR);

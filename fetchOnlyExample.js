@@ -1,3 +1,4 @@
+require("dotenv").config();
 const { fetchEvents } = require("./src/fetch");
 const fs = require("fs");
 const { checkOutputDirs } = require("./src/output/output");
@@ -24,7 +25,9 @@ const doFetch = async () => {
   fs.writeFileSync("example.json", JSON.stringify(events, null, 2));
 };
 
-// make sure your racenet DIRT_USERNAME & DIRT_PASSWORD are available on the process.env environment
-// set env var DEBUG=tkidman:* to get logs
-// run `DEBUG=tkidman:* node fetchOnlyExample.js`
+// create a file called `.env` containing
+// `DIRT_USERNAME="your racenet username / email"`
+// `DIRT_PASSWORD="your racenet password"`
+// `DEBUG="tkidman:*"`
+// run `node fetchOnlyExample.js`
 doFetch();
