@@ -10,7 +10,12 @@ const { fetchRecentResults } = require("./api/dirt");
 const { leagueRef } = require("./state/league");
 const debug = require("debug")("tkidman:dirt2-results:fetch");
 
-const fetchEventsForClub = async (club, division, divisionName) => {
+const fetchEventsForClub = async ({
+  club,
+  division,
+  divisionName,
+  getAllResults
+}) => {
   const recentResults = await fetchRecentResults(club.clubId);
   const championships = await fetchChampionships(club.clubId);
   getEventEndTime(championships);
@@ -21,10 +26,7 @@ const fetchEventsForClub = async (club, division, divisionName) => {
     divisionName,
     club
   });
-  const events = await fetchEventsFromKeys(
-    eventKeys,
-    leagueRef.league.getAllResults || division.points.stage
-  );
+  const events = await fetchEventsFromKeys(eventKeys, getAllResults);
 
   if (club.cachedEvent) {
     const racenetLeaderboardStages = [];
@@ -109,11 +111,16 @@ const appendResultsToPreviousEvent = (
   });
 };
 
-const fetchEvents = async (division, divisionName) => {
+const fetchEvents = async (division, divisionName, getAllResults) => {
   const mergedEvents = [];
   for (let club of division.clubs) {
     debug(`fetching event for club ${club.clubId}`);
-    const events = await fetchEventsForClub(club, division, divisionName);
+    const events = await fetchEventsForClub({
+      club,
+      division,
+      divisionName,
+      getAllResults
+    });
     if (club.appendToEventIndex === 0 || club.appendToEventIndex > 0) {
       appendResultsToPreviousEvent(events, mergedEvents, club);
     } else if (mergedEvents.length === 0) {

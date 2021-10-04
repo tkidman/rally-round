@@ -762,7 +762,13 @@ const processAllDivisions = async () => {
     await loadCache();
     for (const divisionName of Object.keys(divisions)) {
       const division = divisions[divisionName];
-      division.events = await fetchEvents(division, divisionName);
+      const getAllResults =
+        leagueRef.league.getAllResults || division.points.stage;
+      division.events = await fetchEvents(
+        division,
+        divisionName,
+        getAllResults
+      );
       processEvents(division.events, divisionName);
     }
     if (leagueRef.includeOverall) {
