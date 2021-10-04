@@ -3,7 +3,7 @@ const initialState = {
   websiteName: "jrc-results",
   subfolderName: "themed",
   showLivePoints: false,
-  hideCarColumnInStandings: true,
+  hideCarColumnInStandings: false,
   showCarNameAsTextInResults: false,
   useCarAsTeam: true,
   disableOverall: true,
@@ -11,11 +11,14 @@ const initialState = {
   backgroundStyle:
     "background-image: linear-gradient(315deg, #eec0c6 0%, #7ee8fa 74%); background-size: cover; background-repeat: no-repeat; background-attachment: fixed;",
   divisions: {
-    vatanen: {
-      divisionName: "WRC2",
-      displayName: "WRC2",
+    wrc2001: {
+      divisionName: "wrc2001",
+      displayName: "WRC 2001",
       disableSameCarValidation: false,
-      clubs: [{ clubId: "256173", championshipIds: ["501653"] }],
+      clubs: [
+        { clubId: "256173", championshipIds: ["522063"] },
+        { clubId: "360961", championshipIds: ["522057"] }
+      ],
       events: [],
       points: {
         powerStage: [],
@@ -59,12 +62,10 @@ const initialState = {
         // stage: [1]
       },
       cars: [
-        "Ford Fiesta R5",
-        "ŠKODA Fabia R5",
-        "Mitsubishi Space Star R5",
-        "Citroën C3 R5",
-        "Volkswagen Polo GTI R5",
-        "Peugeot 208 T16 R5"
+        "Mitsubishi Lancer Evolution VI",
+        "Ford Focus RS Rally 2001",
+        "Peugeot 206 Rally",
+        "SUBARU Impreza (2001)"
       ]
       // outputSheetId: "1C3fU9y1236wFmPuKcui4CEXBuSsUANH6OJ0BpQIasTc"
     }
