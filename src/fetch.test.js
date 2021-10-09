@@ -33,9 +33,55 @@ describe("fetch", () => {
         challengeId: "65933",
         divisionName: "pro",
         eventId: "66384",
-        location: "ŁĘCZNA COUNTY",
+        eventStatus: "Finished",
         lastStageId: 4,
-        eventStatus: "Finished"
+        location: "ŁĘCZNA COUNTY",
+        racenetChampionship: {
+          events: [
+            {
+              countryId: "ePoland",
+              countryName: "POLAND",
+              entryWindow: {
+                close: "2020-05-11T09:00:00Z",
+                end: "2020-05-11T09:00:00Z",
+                open: "2020-05-04T19:15:00Z",
+                start: "2020-05-04T19:15:00Z"
+              },
+              eventStatus: "Finished",
+              eventTime: "",
+              firstStageConditions: "eMiddayDry",
+              firstStageRouteId: "ePolandRally02Route5",
+              hasParticipated: false,
+              id: "65933",
+              isDlc: true,
+              locationId: "ePoland",
+              locationName: "ŁĘCZNA COUNTY",
+              vehicleClass: "eRallyUpTo20004wdCaps"
+            },
+            {
+              countryId: "aus",
+              countryName: "aus",
+              entryWindow: {
+                close: "2020-05-11T09:00:00Z",
+                end: "2020-05-11T09:00:00Z",
+                open: "2020-05-04T19:15:00Z",
+                start: "2020-05-04T19:15:00Z"
+              },
+              eventStatus: "Next",
+              eventTime: "",
+              firstStageConditions: "eMiddayDry",
+              firstStageRouteId: "eAusRally02Route5",
+              hasParticipated: false,
+              id: "65934",
+              isDlc: true,
+              locationId: "aus",
+              locationName: "aus",
+              vehicleClass: "eRallyUpTo20004wdCaps"
+            }
+          ],
+          id: "65933",
+          name: "Blueline H-Class Championship"
+        }
       }
     ]);
   });
@@ -54,7 +100,7 @@ describe("fetch", () => {
         includeNextChampionships: true
       }
     });
-    expect(eventKeys).toEqual([
+    expect(eventKeys).toMatchObject([
       {
         challengeId: "65933",
         divisionName: "pro",

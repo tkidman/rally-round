@@ -218,7 +218,8 @@ const getEventKeysFromRecentResults = ({
             location: event.locationName,
             divisionName: divisionName,
             eventStatus: event.eventStatus,
-            ...lastStageIds
+            ...lastStageIds,
+            racenetChampionship: championship
           });
         }
         return eventResultKeys;
