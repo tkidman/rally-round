@@ -8,6 +8,7 @@ const initialState = {
   showLivePoints: true,
   showLivePointsDaysRemaining: 4,
   enableDnsPenalty: true,
+  dnsPenaltyFromFirstRound: true,
   dropLowestScoringRoundsNumber: 1,
   backgroundStyle:
     "background-image: linear-gradient(to left, #2c3e50, #fd746c); background-size: cover; background-repeat: no-repeat; background-attachment: fixed;",

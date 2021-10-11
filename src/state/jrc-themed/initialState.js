@@ -15,9 +15,25 @@ const initialState = {
       divisionName: "wrc2001",
       displayName: "WRC 2001",
       disableSameCarValidation: false,
+      maxDriversScoringPointsForTeam: 4,
+      filterEntries: true,
       clubs: [
         { clubId: "256173", championshipIds: ["522063"] },
         { clubId: "360961", championshipIds: ["522057"] }
+      ],
+      manualResults: [
+        {
+          eventIndex: 0,
+          results: [
+            {
+              name: "Irish_Fox74",
+              stageTime: "03:37.627",
+              totalTime: "21:11.599",
+              isDnfEntry: false,
+              vehicleName: "Mitsubishi Lancer Evolution VI"
+            }
+          ]
+        }
       ],
       events: [],
       points: {

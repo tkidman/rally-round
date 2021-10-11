@@ -254,9 +254,33 @@ const shouldFilterDriver = (division, driverName) => {
   return removeDriverByName || removeDriverByDivision;
 };
 
+const isDuplicateEntryNotFirstCarDriven = (entryCountByDriver, entry) => {
+  const duplicateEntryNotFirstCarDriven =
+    entryCountByDriver[entry.name] > 1 &&
+    leagueRef.getDriver(entry.name).firstCarDriven !== entry.vehicleName;
+  if (duplicateEntryNotFirstCarDriven) {
+    debug(`Filtering duplicate entry for ${entry.name}`);
+  }
+  return duplicateEntryNotFirstCarDriven;
+};
 const filterStage = ({ stage, division }) => {
+  // can get duplicate entries if a division is 2 clubs combined
+  const entryCountByDriver = stage.entries.reduce(
+    (entryCountByDriver, entry) => {
+      if (!entryCountByDriver[entry.name]) {
+        entryCountByDriver[entry.name] = 0;
+      }
+      entryCountByDriver[entry.name]++;
+      return entryCountByDriver;
+    },
+    {}
+  );
+
   stage.entries = stage.entries.filter(entry => {
-    return !shouldFilterDriver(division, entry.name);
+    return (
+      !shouldFilterDriver(division, entry.name) &&
+      !isDuplicateEntryNotFirstCarDriven(entryCountByDriver, entry)
+    );
   });
   recalculateDiffs(stage.entries);
 };
@@ -421,7 +445,10 @@ const isDnsPenalty = allResultsForDriver => {
   const firstStartedEventIndex = allResultsForDriver.findIndex(
     result => !result.entry.isDnsEntry
   );
-  const actualResults = allResultsForDriver.slice(firstStartedEventIndex);
+  const firstEventIndex = leagueRef.league.dnsPenaltyFromFirstRound
+    ? 0
+    : firstStartedEventIndex;
+  const actualResults = allResultsForDriver.slice(firstEventIndex);
   if (
     leagueRef.showLivePoints() &&
     actualResults[actualResults.length - 1].entry.isDnsEntry
