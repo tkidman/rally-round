@@ -12,6 +12,7 @@ const { createDNFResult } = require("./shared");
 const { cloneDeep, last, get } = require("lodash");
 const { recalculateDiffsForEntries } = require("./shared");
 const vehicles = require("./state/constants/vehicles.json");
+const { addSeconds } = require("./shared");
 const { resultTypes } = require("./shared");
 const { map } = require("lodash");
 const { sumBy } = require("lodash");
@@ -96,9 +97,25 @@ const sortTeamResults = teamResultsById => {
   return teamResults.reverse();
 };
 
-const setDnfIfIncorrectCar = (event, entries, divisionName) => {
+const applyIncorrectCarPenalty = entry => {
+  if (leagueRef.league.incorrectCarTimePenaltySeconds) {
+    entry.totalTime = addSeconds(
+      entry.totalTime,
+      leagueRef.league.incorrectCarTimePenaltySeconds
+    );
+    entry.stageTime = addSeconds(
+      entry.stageTime,
+      leagueRef.league.incorrectCarTimePenaltySeconds
+    );
+    entry.penaltyReason = "Wrong car choice";
+  } else {
+    entry.isDnfEntry = true;
+    entry.disqualificationReason = "Wrong car choice";
+  }
+};
+const applyPenaltyIfIncorrectCar = (event, lastStageEntries, divisionName) => {
   // validate correct car usage
-  entries.forEach(entry => {
+  lastStageEntries.forEach(entry => {
     const driver = leagueRef.getDriver(entry.name);
     const division = leagueRef.league.divisions[divisionName];
     if (
@@ -108,17 +125,15 @@ const setDnfIfIncorrectCar = (event, entries, divisionName) => {
       driver.car !== entry.vehicleName
     ) {
       debug(
-        `driver ${entry.name} used wrong car ${entry.vehicleName}, should have used ${driver.car}. Setting to dnf`
+        `driver ${entry.name} used wrong car ${entry.vehicleName}, should have used ${driver.car}. Applying incorrect car penalty`
       );
-      entry.isDnfEntry = true;
-      entry.disqualificationReason = "Wrong car choice";
+      applyIncorrectCarPenalty(entry);
     }
     if (division.cars && !division.cars.includes(entry.vehicleName)) {
       debug(
-        `driver ${entry.name} used wrong car ${entry.vehicleName}, should have used one of ${division.cars}. Setting to dnf`
+        `driver ${entry.name} used wrong car ${entry.vehicleName}, should have used one of ${division.cars}. Applying incorrect car penalty`
       );
-      entry.isDnfEntry = true;
-      entry.disqualificationReason = "Wrong car choice";
+      applyIncorrectCarPenalty(entry);
     }
   });
 };
@@ -320,7 +335,7 @@ const calculateEventResults = ({
     divisionName,
     firstStageResultsByDriver
   });
-  setDnfIfIncorrectCar(event, lastStageEntries, divisionName);
+  applyPenaltyIfIncorrectCar(event, lastStageEntries, divisionName);
   // TODO validate correct class
   const resultsByDriver = getResultsByDriver(lastStageEntries, divisionName);
 

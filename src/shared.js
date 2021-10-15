@@ -93,6 +93,11 @@ const getSummedTotalTime = (entry1, entry2) => {
   return formatDuration(summedDuration);
 };
 
+const addSeconds = (entryTime, numSeconds) => {
+  const duration = getDuration(entryTime).add(numSeconds, "seconds");
+  return formatDuration(duration);
+};
+
 const createDNFResult = (driverName, isDnsEntry) => {
   return {
     name: driverName,
@@ -134,5 +139,6 @@ module.exports = {
   createDNFResult,
   getSummedTotalTime,
   formatDuration,
-  getCountry
+  getCountry,
+  addSeconds
 };

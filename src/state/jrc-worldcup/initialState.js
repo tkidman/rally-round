@@ -10,6 +10,7 @@ const initialState = {
   useNationalityAsTeam: true,
   disableOverall: true,
   teamPointsForPowerstage: false,
+  incorrectCarTimePenaltySeconds: 120,
   backgroundStyle:
     "background-image: linear-gradient(#2193b0, #6dd5ed); background-size: cover; background-repeat: no-repeat; background-attachment: fixed;",
   divisions: {
@@ -17,6 +18,7 @@ const initialState = {
       divisionName: "worldCup",
       displayName: "JRC World Cup",
       disableSameCarValidation: true,
+      maxDriversScoringPointsForTeam: 3,
       // clubs: [{ clubId: "397779", championshipIds: ["???"] }],
       clubs: [{ clubId: "192069", championshipIds: ["521161"] }],
       events: [],
@@ -60,7 +62,15 @@ const initialState = {
           1
         ]
       },
-      manualResults: []
+      manualResults: [],
+      cars: [
+        "Ford Fiesta R5",
+        "ŠKODA Fabia R5",
+        "Mitsubishi Space Star R5",
+        "Citroën C3 R5",
+        "Volkswagen Polo GTI R5",
+        "Peugeot 208 T16 R5"
+      ]
     }
   }
 };
