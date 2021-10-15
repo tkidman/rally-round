@@ -49,11 +49,19 @@
                                         class="arrow down"></i>&nbsp;{{standing.positionChange}}</span>
                                 {{/if}}
                             </td>
-                            <td>
-                                <img src="./assets/teams/{{standing.name}}.png"
-                                    style="max-width:2em; max-height:2em;" />
-                            </td>
-                            <td class="text-left bold">{{standing.name}}</td>
+                            {{#if ../useNationalityAsTeam}}
+                                <td>
+                                    <img src="./assets/country-flags/{{country.code}}.png"
+                                        style="max-width:2em; max-height:2em;" />
+                                </td>
+                                <td class="text-left bold">{{country.name}}</td>
+                            {{else}}
+                                <td>
+                                    <img src="./assets/teams/{{standing.name}}.png"
+                                        style="max-width:2em; max-height:2em;" />
+                                </td>
+                                <td class="text-left bold">{{standing.name}}</td>
+                            {{/if}}
                             {{#each results}}{{#with this}}
                             <td>
                                 {{pointsDisplay}}

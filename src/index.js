@@ -647,16 +647,23 @@ const loadEventDriver = (entry, drivers, divisionName) => {
   if (division.filterEntries && shouldFilterDriver(division, entry.name)) {
     return;
   }
-  driver.nationality = entry.nationality;
+  if (!driver.nationality) {
+    driver.nationality = entry.nationality;
+  }
   if (
     !driver.firstCarDriven &&
     (!division.cars || division.cars.includes(entry.vehicleName))
   ) {
     driver.firstCarDriven = entry.vehicleName;
   }
-  if (!driver.teamId && leagueRef.league.useCarAsTeam) {
-    if (driver.firstCarDriven) {
-      driver.teamId = vehicles[driver.firstCarDriven].brand;
+  if (!driver.teamId) {
+    if (leagueRef.league.useCarAsTeam) {
+      if (driver.firstCarDriven) {
+        driver.teamId = vehicles[driver.firstCarDriven].brand;
+      }
+    }
+    if (leagueRef.league.useNationalityAsTeam) {
+      driver.teamId = driver.nationality;
     }
   }
   if (!driver.car) {

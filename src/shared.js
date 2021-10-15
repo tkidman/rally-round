@@ -1,4 +1,5 @@
 const moment = require("moment");
+const countries = require("./state/constants/countries.json");
 
 const hiddenPath = "./hidden";
 const club = process.env.CLUB || "test";
@@ -111,6 +112,10 @@ const formatDuration = duration => {
   return moment.utc(duration.as("milliseconds")).format("HH:mm:ss.SSS");
 };
 
+const getCountry = nationality => {
+  return countries[nationality] || countries.eLngRestOfWorld;
+};
+
 module.exports = {
   outputPath,
   cachePath,
@@ -128,5 +133,6 @@ module.exports = {
   recalculateDiffs,
   createDNFResult,
   getSummedTotalTime,
-  formatDuration
+  formatDuration,
+  getCountry
 };

@@ -42,7 +42,9 @@ const transformDriverRows = driverRows => {
         [driverFieldNames.teamId]: team,
         [driverFieldNames.division]:
           row[driverColumns[driverFieldNames.division]],
-        [driverFieldNames.car]: row[driverColumns[driverFieldNames.car]]
+        [driverFieldNames.car]: row[driverColumns[driverFieldNames.car]],
+        [driverFieldNames.nationality]:
+          row[driverColumns[driverFieldNames.nationality]]
       };
     } else {
       debug(
@@ -147,7 +149,10 @@ const init = async () => {
   leagueRef.drivers = drivers;
   leagueRef.getDriverNames = getDriverNames;
   leagueRef.missingDrivers = missingDrivers;
-  leagueRef.hasTeams = !!driverColumns.teamId || league.useCarAsTeam;
+  leagueRef.hasTeams =
+    !!driverColumns.teamId ||
+    league.useCarAsTeam ||
+    league.useNationalityAsTeam;
   leagueRef.hasCars = !!driverColumns.car;
   leagueRef.includeOverall =
     Object.keys(league.divisions).length > 1 && !league.disableOverall;

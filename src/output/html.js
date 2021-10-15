@@ -14,6 +14,7 @@ const {
 const { outputPath, templatePath } = require("../shared");
 const { processFantasyResults } = require("../fantasy/fantasyCalculator");
 const locations = require("../state/constants/locations.json");
+const { getCountry } = require("../shared");
 // const { eventStatuses } = require("../shared");
 const resultColours = ["#76FF6A", "#faff5d", "#ffe300", "#ff5858"];
 
@@ -210,7 +211,7 @@ const writeHomeHTML = links => {
 };
 
 const writeStandingsHTML = (division, type, links) => {
-  const data = transformForHTML(division, type);
+  const data = transformForStandingsHTML(division, type);
   data.overall = division.divisionName === "overall";
   data.navigation = getNavigationHTML(
     division.divisionName,
@@ -253,16 +254,11 @@ const getStandingColour = standing => {
   return colours.default;
 };
 
-const transformForHTML = (division, type) => {
+const transformForStandingsHTML = (division, type) => {
   const events = division.events;
   const headerLocations = getHeaderLocations(events);
   let lastEvent = events[events.length - 1];
-  if (
-    // lastEvent.eventStatus !== eventStatuses.finished &&
-    leagueRef.endTime &&
-    !leagueRef.showLivePoints() &&
-    events.length > 1
-  ) {
+  if (leagueRef.endTime && !leagueRef.showLivePoints() && events.length > 1) {
     lastEvent = events[events.length - 2];
   }
   const lastEventStandings = lastEvent.standings[`${type}Standings`];
@@ -291,13 +287,15 @@ const transformForHTML = (division, type) => {
     if (type === "driver") {
       const { driver, country, carBrand } = getDriverData(standing.name);
       return { ...row, car: carBrand, driver, country };
+    } else {
+      return { ...row, country: getCountry(standing.name) };
     }
-    return row;
   });
   return {
     headerLocations,
     rows,
     showTeam: leagueRef.hasTeams,
+    useNationalityAsTeam: leagueRef.league.useNationalityAsTeam,
     showCar:
       !leagueRef.league.hideCarColumnInStandings &&
       (leagueRef.hasCars || leagueRef.league.showCarsAlways),
@@ -341,7 +339,7 @@ const transformForDriverResultsHTML = (event, division) => {
     rows,
     title: division.displayName || divisionName,
     logo: division.logo || "JRC.png",
-    showTeam: leagueRef.hasTeams,
+    showTeam: leagueRef.hasTeams && !leagueRef.league.useNationalityAsTeam,
     showCar: leagueRef.hasCars || leagueRef.league.showCarNameAsTextInResults,
     showCarName: leagueRef.league.showCarNameAsTextInResults,
     showPowerStagePoints: hasPoints("powerStagePoints", rows),
