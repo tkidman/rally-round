@@ -9,7 +9,7 @@ const { writeSheetsForDivision } = require("./spreadsheet");
 const { writeHTMLOutputForDivision } = require("./html");
 const { writePlacementOutput } = require("./html");
 const { writeFantasyHTML } = require("./html");
-const { writeHomeHTML } = require("./html");
+const { writeHomeHTML, writeErrorHTML } = require("./html");
 
 const addLinks = (links, name, type, displayName) => {
   const linkDisplay = displayName || name;
@@ -69,6 +69,7 @@ const writeOutput = async () => {
   const links = getHtmlLinks();
   if (!league.subfolderName) {
     writeHomeHTML(links);
+    writeErrorHTML(links);
   }
   for (let divisionName of Object.keys(league.divisions)) {
     const division = league.divisions[divisionName];

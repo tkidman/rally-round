@@ -210,6 +210,24 @@ const writeHomeHTML = links => {
   fs.writeFileSync(`./${outputPath}/website/index.html`, out);
 };
 
+const writeErrorHTML = links => {
+  const data = {
+    navigation: getNavigationHTML("", "", links, null),
+    backgroundStyle: leagueRef.league.backgroundStyle
+  };
+  const templateFile = `${templatePath}/error.hbs`;
+  if (!fs.existsSync(templateFile)) {
+    debug("no template found, returning");
+    return;
+  }
+  const _t = fs.readFileSync(templateFile).toString();
+
+  const template = Handlebars.compile(_t);
+  const out = template(data);
+
+  fs.writeFileSync(`./${outputPath}/website/error.html`, out);
+};
+
 const writeStandingsHTML = (division, type, links) => {
   const data = transformForStandingsHTML(division, type);
   data.overall = division.divisionName === "overall";
@@ -397,6 +415,7 @@ const writeHTMLOutputForDivision = (division, links) => {
 
 module.exports = {
   writeHomeHTML,
+  writeErrorHTML,
   writeFantasyHTML,
   writePlacementOutput,
   writeHTMLOutputForDivision,
