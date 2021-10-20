@@ -291,10 +291,13 @@ const transformForStandingsHTML = (division, type) => {
       return { ...row, country: getCountry(standing.name) };
     }
   });
+  const driverStandingsNationalityAsTeam =
+    type === "driver" && leagueRef.league.useNationalityAsTeam;
   return {
     headerLocations,
     rows,
-    showTeam: leagueRef.hasTeams,
+    // don't show team for driver standings when we're using nationality as team, we already show the nationality column
+    showTeam: leagueRef.hasTeams && !driverStandingsNationalityAsTeam,
     useNationalityAsTeam: leagueRef.league.useNationalityAsTeam,
     showCar:
       !leagueRef.league.hideCarColumnInStandings &&
@@ -347,7 +350,10 @@ const transformForDriverResultsHTML = (event, division) => {
     event,
     location: locations[event.location],
     divisionName,
-    backgroundStyle: leagueRef.league.backgroundStyle
+    backgroundStyle: leagueRef.league.backgroundStyle,
+    incorrectCarTimePenaltySeconds:
+      leagueRef.league.incorrectCarTimePenaltySeconds,
+    incorrectCarTimePenalty: !!leagueRef.league.incorrectCarTimePenaltySeconds
     // stages: rows[0].stageTimes
   };
 };

@@ -76,9 +76,9 @@
                                 </td>
                             {{/if}}
                         {{/if}}
-                        <td>{{this.entry.stageTime}}</td>
+                        <td>{{this.entry.stageTime}}{{#if this.entry.penaltyReason}}*{{/if}}</td>
                         <td>{{this.entry.stageDiff}}</td>
-                        <td>{{this.entry.totalTime}}</td>
+                        <td>{{this.entry.totalTime}}{{#if this.entry.penaltyReason}}*{{/if}}</td>
                         <td>{{this.entry.totalDiff}}</td>
                         {{#if ../showStagePoints}}
                             <td>{{this.stagePoints}}</td>
@@ -96,6 +96,11 @@
             <div style="margin:0 auto; text-align:center;">
                 <p>last updated at: {{lastUpdatedAt}}</p>
             </div>
+            {{#if incorrectCarTimePenaltySeconds}}
+                <div style="margin:0 auto; text-align:center;">
+                    <p>*{{incorrectCarTimePenaltySeconds}} second penalty applied for incorrect car choice</p>
+                </div>
+            {{/if}}
         </div>
     </div>
 </div>

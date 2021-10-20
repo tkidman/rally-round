@@ -372,6 +372,10 @@ const calculateEventResults = ({
       }
     });
   });
+
+  event.racenetLeaderboardStages.forEach(stage => {
+    recalculateDiffs(stage.entries);
+  });
   // end alert
 
   if (leagueRef.league.getAllResults)

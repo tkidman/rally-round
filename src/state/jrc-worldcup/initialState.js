@@ -1,7 +1,7 @@
 const initialState = {
   pointsForDNF: false,
   // websiteName: "jrc-results",
-  subfolderName: "worldcup",
+  // subfolderName: "worldcup",
   showLivePoints: true,
   showLivePointsDaysRemaining: 4,
   showCarNameAsTextInResults: true,
@@ -19,48 +19,11 @@ const initialState = {
       displayName: "JRC World Cup",
       disableSameCarValidation: true,
       maxDriversScoringPointsForTeam: 3,
-      // clubs: [{ clubId: "397779", championshipIds: ["???"] }],
-      clubs: [{ clubId: "192069", championshipIds: ["521161"] }],
+      clubs: [{ clubId: "397779", championshipIds: ["529964"] }],
       events: [],
       points: {
-        powerStage: [5, 4, 3, 2, 1],
-        overall: [
-          44,
-          40,
-          37,
-          34,
-          32,
-          30,
-          28,
-          27,
-          26,
-          25,
-          24,
-          23,
-          22,
-          21,
-          20,
-          19,
-          18,
-          17,
-          16,
-          15,
-          14,
-          13,
-          12,
-          11,
-          10,
-          9,
-          8,
-          7,
-          6,
-          5,
-          4,
-          3,
-          2,
-          1,
-          1
-        ]
+        powerStage: [],
+        overall: []
       },
       manualResults: [],
       cars: [
@@ -69,7 +32,13 @@ const initialState = {
         "Mitsubishi Space Star R5",
         "Citroën C3 R5",
         "Volkswagen Polo GTI R5",
-        "Peugeot 208 T16 R5"
+        "Peugeot 208 T16 R5",
+        "Aston Martin V8 Vantage GT4",
+        "Ford Mustang GT4",
+        "Porsche 911 RGT Rally Spec",
+        "Chevrolet Camaro GT4.R",
+        "Opel Adam R2",
+        "Peugeot 208 R2"
       ]
     }
   }
