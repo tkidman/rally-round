@@ -21,10 +21,6 @@ const initialState = {
       maxDriversScoringPointsForTeam: 3,
       clubs: [{ clubId: "397779", championshipIds: ["529964"] }],
       events: [],
-      points: {
-        powerStage: [],
-        overall: []
-      },
       manualResults: [],
       cars: [
         "Ford Fiesta R5",
@@ -39,7 +35,62 @@ const initialState = {
         "Chevrolet Camaro GT4.R",
         "Opel Adam R2",
         "Peugeot 208 R2"
-      ]
+      ],
+      points: {
+        powerStage: [5, 4, 3, 2, 1],
+        overall: [
+          80,
+          74,
+          69,
+          65,
+          61,
+          58,
+          55,
+          52,
+          49,
+          47,
+          45,
+          43,
+          41,
+          39,
+          37,
+          35,
+          34,
+          33,
+          32,
+          31,
+          30,
+          29,
+          28,
+          27,
+          26,
+          25,
+          24,
+          23,
+          22,
+          21,
+          20,
+          19,
+          18,
+          17,
+          16,
+          15,
+          14,
+          13,
+          12,
+          11,
+          10,
+          9,
+          8,
+          7,
+          6,
+          5,
+          4,
+          3,
+          2,
+          1
+        ]
+      }
     }
   }
 };
