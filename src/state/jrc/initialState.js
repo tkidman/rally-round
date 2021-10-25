@@ -21,7 +21,19 @@ const initialState = {
       maxDriversScoringPointsForTeam: 3,
       clubs: [{ clubId: "397779", championshipIds: ["529964"] }],
       events: [],
-      manualResults: [],
+      manualResults: [
+        {
+          eventIndex: 0,
+          results: [
+            {
+              name: "valuson",
+              stageTime: "08:50.929",
+              totalTime: "56:09.257",
+              isDnfEntry: false
+            }
+          ]
+        }
+      ],
       cars: [
         "Ford Fiesta R5",
         "ŠKODA Fabia R5",
