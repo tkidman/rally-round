@@ -19,7 +19,7 @@ const initialState = {
       displayName: "JRC World Cup",
       disableSameCarValidation: true,
       maxDriversScoringPointsForTeam: 3,
-      clubs: [{ clubId: "397779", championshipIds: ["529964"] }],
+      clubs: [{ clubId: "397779", championshipIds: ["529964"], includeNextChampionships: true }],
       events: [],
       manualResults: [
         {
