@@ -407,6 +407,10 @@
 	  "code": "hkg",
 	  "name": "Hong Kong"
 	},
+	"eLngHongKonger": {
+		"code": "hkg",
+		"name": "Hong Kong"
+	},
 	"eLngHungarian": {
 	  "code": "hun",
 	  "name": "Hungary"
@@ -947,9 +951,13 @@
 	  "code": "are",
 	  "name": "United Arab Emirates"
 	},
+	"eLngEmirian": {
+		"code": "are",
+		"name": "United Arab Emirates"
+	},
 	"eLngBritish": {
 	  "code": "gbr",
-	  "name": "United Kingdom of Great Britain and Northern Ireland"
+	  "name": "Great Britain"
 	},
 	"eLngAmerican": {
 	  "code": "usa",
