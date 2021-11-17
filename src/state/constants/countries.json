@@ -440,7 +440,7 @@
 	  "name": "Ireland"
 	},
 	"eLngNorthernIrish": {
-		"code": "shn",
+		"code": "nre",
 		"name": "Northern Ireland"
 	},
 	"eLngManx": {
@@ -957,7 +957,7 @@
 	},
 	"eLngBritish": {
 	  "code": "gbr",
-	  "name": "England"
+	  "name": "United Kingdom"
 	},
 	"eLngAmerican": {
 	  "code": "usa",
