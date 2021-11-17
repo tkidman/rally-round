@@ -38,6 +38,17 @@ const initialState = {
               isDnfEntry: false
             }
           ]
+        },
+        {
+          eventIndex: 3,
+          results: [
+            {
+              name: "Mike Dee",
+              stageTime: "03:21.378",
+              totalTime: "40:38.292",
+              isDnfEntry: false
+            }
+          ]
         }
       ],
       cars: [
