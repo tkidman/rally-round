@@ -4,37 +4,26 @@ const initialState = {
   subfolderName: "themed",
   showLivePoints: false,
   hideCarColumnInStandings: true,
-  showCarNameAsTextInResults: false,
-  useCarAsTeam: true,
+  showCarNameAsTextInResults: true,
+  useCarAsTeam: false,
+  useCarClassAsTeam: true,
   disableOverall: true,
   teamPointsForPowerstage: false,
   backgroundStyle:
     "background-image: linear-gradient(315deg, #eec0c6 0%, #7ee8fa 74%); background-size: cover; background-repeat: no-repeat; background-attachment: fixed;",
   divisions: {
-    wrc2001: {
-      divisionName: "wrc2001",
-      displayName: "WRC 2001",
-      disableSameCarValidation: false,
+    fwdvsrwd: {
+      divisionName: "fwdvsrwd",
+      displayName: "FWD vs RWD",
+      disableSameCarValidation: true,
+      enableSameCarClassValidation: true,
       maxDriversScoringPointsForTeam: 4,
       filterEntries: true,
       clubs: [
-        { clubId: "256173", championshipIds: ["522063"] },
-        { clubId: "360961", championshipIds: ["522057"] }
+        { clubId: "256173", championshipIds: ["542137"] },
+        { clubId: "360961", championshipIds: ["542131"] }
       ],
-      manualResults: [
-        {
-          eventIndex: 0,
-          results: [
-            {
-              name: "Irish_Fox74",
-              stageTime: "03:37.627",
-              totalTime: "21:11.599",
-              isDnfEntry: false,
-              vehicleName: "Mitsubishi Lancer Evolution VI"
-            }
-          ]
-        }
-      ],
+      manualResults: [],
       events: [],
       points: {
         powerStage: [],
@@ -73,16 +62,63 @@ const initialState = {
           3,
           2,
           1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
           1
         ]
         // stage: [1]
-      },
-      cars: [
-        "Mitsubishi Lancer Evolution VI",
-        "Ford Focus RS Rally 2001",
-        "Peugeot 206 Rally",
-        "SUBARU Impreza (2001)"
-      ]
+      }
+      // cars: []
       // outputSheetId: "1C3fU9y1236wFmPuKcui4CEXBuSsUANH6OJ0BpQIasTc"
     }
   }

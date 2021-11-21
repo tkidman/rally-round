@@ -118,16 +118,30 @@ const applyPenaltyIfIncorrectCar = (event, lastStageEntries, divisionName) => {
   lastStageEntries.forEach(entry => {
     const driver = leagueRef.getDriver(entry.name);
     const division = leagueRef.league.divisions[divisionName];
-    if (
-      !division.disableSameCarValidation &&
-      driver &&
-      driver.car &&
-      driver.car !== entry.vehicleName
-    ) {
-      debug(
-        `driver ${entry.name} used wrong car ${entry.vehicleName}, should have used ${driver.car}. Applying incorrect car penalty`
-      );
-      applyIncorrectCarPenalty(entry);
+    const driverCar = get(driver, "car");
+    if (driverCar) {
+      if (
+        !division.disableSameCarValidation &&
+        driver.car !== entry.vehicleName
+      ) {
+        debug(
+          `driver ${entry.name} used wrong car ${entry.vehicleName}, should have used ${driver.car}. Applying incorrect car penalty`
+        );
+        applyIncorrectCarPenalty(entry);
+      }
+      if (
+        division.enableSameCarClassValidation &&
+        vehicles[driver.car].class !== vehicles[entry.vehicleName].class
+      ) {
+        debug(
+          `driver ${entry.name} used wrong car class ${
+            vehicles[entry.vehicleName].class
+          }, should have used ${
+            vehicles[driver.car].class
+          }. Applying incorrect car penalty`
+        );
+        applyIncorrectCarPenalty(entry);
+      }
     }
     if (division.cars && !division.cars.includes(entry.vehicleName)) {
       debug(
@@ -680,9 +694,12 @@ const loadEventDriver = (entry, drivers, divisionName) => {
       if (driver.firstCarDriven) {
         driver.teamId = vehicles[driver.firstCarDriven].brand;
       }
-    }
-    if (leagueRef.league.useNationalityAsTeam) {
+    } else if (leagueRef.league.useNationalityAsTeam) {
       driver.teamId = driver.nationality;
+    } else if (leagueRef.league.useCarClassAsTeam) {
+      if (driver.firstCarDriven) {
+        driver.teamId = vehicles[driver.firstCarDriven].class;
+      }
     }
   }
   if (!driver.car) {

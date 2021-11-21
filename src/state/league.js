@@ -152,6 +152,7 @@ const init = async () => {
   leagueRef.hasTeams =
     !!driverColumns.teamId ||
     league.useCarAsTeam ||
+    league.useCarClassAsTeam ||
     league.useNationalityAsTeam;
   leagueRef.hasCars = !!driverColumns.car;
   leagueRef.includeOverall =
