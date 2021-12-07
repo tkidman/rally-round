@@ -10,6 +10,7 @@ const initialState = {
   useNationalityAsTeam: true,
   disableOverall: true,
   teamPointsForPowerstage: false,
+  dropLowestScoringRoundsNumber: 1,
   incorrectCarTimePenaltySeconds: 120,
   backgroundStyle:
     "background-image: linear-gradient(#2193b0, #6dd5ed); background-size: cover; background-repeat: no-repeat; background-attachment: fixed;",
