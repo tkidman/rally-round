@@ -1,15 +1,15 @@
 const {
   name,
   raceNetName,
-  name3,
-  car
+  name3
+  // car
 } = require("../constants/driverFieldNames");
 
 const driverColumns = {
   [name]: "Driver",
   [raceNetName]: "Name2",
-  [name3]: "Name3",
-  [car]: "Car"
+  [name3]: "Name3"
+  // [car]: "Car"
 };
 
 const sheetsConfig = {
