@@ -22,7 +22,7 @@ const { init, leagueRef } = require("./state/league");
 const { writeOutput, checkOutputDirs } = require("./output/output");
 const { getTotalPoints } = require("./shared");
 const { calculateFantasyStandings } = require("./fantasy/fantasyCalculator");
-const { fetchEvents } = require("./fetch");
+const { fetchEvents } = require("./fetch/fetch");
 
 const updatePoints = (resultsByDriver, orderedEntries, points, pointsField) => {
   for (let i = 0; i < points.length; i++) {
