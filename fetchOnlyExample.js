@@ -1,5 +1,5 @@
 require("dotenv").config();
-const { fetchEvents } = require("./src/fetch");
+const { fetchEvents } = require("./src/fetch/fetch");
 const fs = require("fs");
 const { checkOutputDirs } = require("./src/output/output");
 
