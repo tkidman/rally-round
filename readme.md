@@ -90,3 +90,11 @@ You can also pull driver information directly from a google sheet. You need to h
 * Define required car per event
 * Support multiple driver cars (to support division promotions mid season)
 * DNF counter
+
+RBR support
+* cache rbr results - testing
+* country codes
+* vehicle config (maybe just text for a while)
+* location flags?
+* update with generic variable names
+* rename repo
