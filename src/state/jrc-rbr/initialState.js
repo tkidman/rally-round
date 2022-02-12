@@ -1,15 +1,16 @@
 const initialState = {
   pointsForDNF: false,
-  // websiteName: "jrc-results",
+  websiteName: "jrc-results",
   subfolderName: "rbr",
   showLivePoints: true,
   showLivePointsDaysRemaining: 4,
-  hideCarColumnInStandings: false,
+  hideCarColumnInStandings: true,
   showCarNameAsTextInResults: true,
+  nullTeamIsPrivateer: true,
   // useCarAsTeam: false,
   // useCarClassAsTeam: true,
   disableOverall: true,
-  // teamPointsForPowerstage: false,
+  teamPointsForPowerstage: true,
   isRBR: true,
   backgroundStyle:
     "background-image: linear-gradient(315deg, #eec0c6 0%, #7ee8fa 74%); background-size: cover; background-repeat: no-repeat; background-attachment: fixed;",
@@ -19,7 +20,7 @@ const initialState = {
       displayName: "RBR Season 1",
       disableSameCarValidation: false,
       // enableSameCarClassValidation: true,
-      // maxDriversScoringPointsForTeam: 4,
+      maxDriversScoringPointsForTeam: 2,
       // filterEntries: true,
       rbr: {
         rallies: [
@@ -42,15 +43,15 @@ const initialState = {
       manualResults: [],
       events: [],
       points: {
-        powerStage: [],
+        powerStage: [5, 4, 3, 2, 1],
         overall: [
           30,
-          27,
-          25,
+          24,
           21,
-          19,
+          18,
           16,
           15,
+          14,
           13,
           12,
           11,
