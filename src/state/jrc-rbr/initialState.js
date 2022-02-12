@@ -1,6 +1,6 @@
 const initialState = {
   pointsForDNF: false,
-  websiteName: "jrc-results",
+  // websiteName: "jrc-results",
   subfolderName: "rbr",
   showLivePoints: true,
   showLivePointsDaysRemaining: 4,
@@ -27,13 +27,15 @@ const initialState = {
             rbrRallyId: 40706,
             endTime: "2022-01-31 00:59",
             locationName: "Monte Carlo",
-            locationFlag: ""
+            locationFlag: "MC",
+            numStages: 8
           },
           {
             rbrRallyId: 41156,
             endTime: "2022-02-14 12:59",
             locationName: "Arctic Nordic",
-            locationFlag: ""
+            locationFlag: "SE",
+            numStages: 10
           }
         ]
       },
@@ -41,7 +43,28 @@ const initialState = {
       events: [],
       points: {
         powerStage: [],
-        overall: [25, 20, 16, 13, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+        overall: [
+          30,
+          27,
+          25,
+          21,
+          19,
+          16,
+          15,
+          13,
+          12,
+          11,
+          10,
+          9,
+          8,
+          7,
+          6,
+          5,
+          4,
+          3,
+          2,
+          1
+        ]
         // stage: [1]
       }
       // cars: ["Peugeot 205 GTI"]

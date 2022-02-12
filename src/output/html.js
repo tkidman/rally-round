@@ -7,14 +7,13 @@ const debug = require("debug")("tkidman:dirt2-results:output:html");
 const { leagueRef } = require("../state/league");
 const {
   getDriverData,
-  getActiveCountry,
   getHeaderLocations,
-  getAllResults
+  getAllResults,
+  getLocationCountryCode,
+  getLocation
 } = require("./shared");
 const { outputPath, templatePath } = require("../shared");
 const { processFantasyResults } = require("../fantasy/fantasyCalculator");
-const locations = require("../state/constants/locations.json");
-const { getCountry } = require("../shared");
 // const { eventStatuses } = require("../shared");
 const resultColours = ["#76FF6A", "#faff5d", "#ffe300", "#ff5858"];
 
@@ -30,7 +29,7 @@ const compiled_navigation = null;
 
 const writePlacementResultsHTML = (event, division, links) => {
   const data = transformForDriverResultsHTML(event, division);
-  const location = locations[event.location];
+  const locationCountryCode = getLocationCountryCode(event);
   data.overall = division.divisionName === "overall";
 
   const divisionName = data.overall
@@ -53,7 +52,7 @@ const writePlacementResultsHTML = (event, division, links) => {
   const out = template(data);
 
   fs.writeFileSync(
-    `./${outputPath}/website/${location.countryCode}-${divisionName}-driver-results.html`,
+    `./${outputPath}/website/${locationCountryCode}-${divisionName}-driver-results.html`,
     out
   );
 };
@@ -188,7 +187,7 @@ const getNavigationHTML = (
     links,
     secondary: headerLocations,
     endTime: leagueRef.endTime,
-    activeCountry: getActiveCountry()
+    activeCountry: leagueRef.activeCountryCode
   });
 };
 
@@ -306,7 +305,7 @@ const transformForStandingsHTML = (division, type) => {
       const { driver, country, carBrand } = getDriverData(standing.name);
       return { ...row, car: carBrand, driver, country };
     } else {
-      return { ...row, country: getCountry(standing.name) };
+      return { ...row };
     }
   });
   const driverStandingsNationalityAsTeam =
@@ -366,7 +365,7 @@ const transformForDriverResultsHTML = (event, division) => {
     showPowerStagePoints: hasPoints("powerStagePoints", rows),
     showStagePoints: hasPoints("stagePoints", rows),
     event,
-    location: locations[event.location],
+    location: getLocation(event),
     divisionName,
     backgroundStyle: leagueRef.league.backgroundStyle,
     incorrectCarTimePenaltySeconds:
@@ -378,7 +377,7 @@ const transformForDriverResultsHTML = (event, division) => {
 
 const writeDriverResultsHTML = (event, division, links) => {
   const data = transformForDriverResultsHTML(event, division);
-  const location = locations[event.location];
+  const locationCountryCode = getLocationCountryCode(event);
   data.overall = division.divisionName === "overall";
 
   data.navigation = getNavigationHTML(division.divisionName, "driver", links);
@@ -398,7 +397,7 @@ const writeDriverResultsHTML = (event, division, links) => {
   const out = template(data);
 
   fs.writeFileSync(
-    `./${outputPath}/website/${division.divisionName}-${location.countryCode}-driver-results.html`,
+    `./${outputPath}/website/${division.divisionName}-${locationCountryCode}-driver-results.html`,
     out
   );
 };

@@ -1,10 +1,11 @@
 const {
   formatDuration,
   getDuration,
-  recalculateDiffs
+  recalculateDiffs,
+  getCountryByAlpha2Code,
+  eventStatuses
 } = require("../../shared");
 const Papa = require("papaparse");
-const { maxBy } = require("lodash");
 const moment = require("moment-timezone");
 const { leagueRef } = require("../../state/league");
 const { fetchResults } = require("../../api/rbr/rbrApi");
@@ -16,8 +17,10 @@ const processCsv = (eventResultsCsv, event) => {
   });
   // convert into racenetLeaderboardStages -> entries (per stage)
   const resultRows = results.data;
-  const numStages = parseInt(maxBy(resultRows, "stage_no").stage_no);
-  const racenetLeaderboardStages = Array.from(Array(numStages), () => []);
+  const numStages = event.numStages;
+  const racenetLeaderboardStages = Array.from(Array(numStages), () => ({
+    entries: []
+  }));
   resultRows.forEach(row => {
     const stageDuration = moment.duration(parseFloat(row.time3), "seconds");
     const commonResult = {
@@ -25,22 +28,22 @@ const processCsv = (eventResultsCsv, event) => {
       isDnfEntry: false,
       vehicleName: row.car,
       vehicleClass: row.car_group,
-      countryCode: row.nationality,
+      nationality: row.nationality,
       comment: row.comment,
       stageTime: formatDuration(stageDuration)
     };
     const stageIndex = row.stage_no - 1;
-    racenetLeaderboardStages[stageIndex].push(commonResult);
+    racenetLeaderboardStages[stageIndex].entries.push(commonResult);
   });
 
   // calc total time
   for (let i = 0; i < numStages; i++) {
-    const stageResults = racenetLeaderboardStages[i];
+    const stageResults = racenetLeaderboardStages[i].entries;
     stageResults.forEach(result => {
       if (i === 0) {
         result.totalTime = result.stageTime;
       } else {
-        const previousResult = racenetLeaderboardStages[i - 1].find(
+        const previousResult = racenetLeaderboardStages[i - 1].entries.find(
           prevResult => prevResult.name === result.name
         );
         result.totalTime = formatDuration(
@@ -57,37 +60,53 @@ const processCsv = (eventResultsCsv, event) => {
     ...event
   };
 };
+
 const fetchEvent = async event => {
-  const eventResultsCsv = await fetchResults(event.rbrRallyId);
-  return processCsv(eventResultsCsv, event);
+  const eventFinished = isFinished(event);
+  const eventResultsCsv = await fetchResults(
+    event.rbrRallyId,
+    isFinished(event)
+  );
+  const processedEvent = processCsv(eventResultsCsv, event);
+  if (eventFinished) {
+    processedEvent.eventStatus = eventStatuses.finished;
+  }
+  return processedEvent;
 };
 
 const isFinished = rally => {
   const rallyEndTime = moment.tz(rally.endTime, "CET");
-  return rallyEndTime.before(moment());
+  return rallyEndTime.isBefore(moment());
 };
 
-const setCurrentEventEndTime = ({ division }) => {
+const getActiveEvent = ({ division }) => {
   const activeEvent = division.rbr.rallies.find(rally => {
     const rallyEndTime = moment.tz(rally.endTime, "CET");
-    return rallyEndTime.after(moment());
+    return rallyEndTime.isAfter(moment());
   });
+  return activeEvent;
+};
 
+const setCurrentEventEndTime = activeEvent => {
   if (activeEvent) {
     leagueRef.endTime = moment
       .tz(activeEvent.endTime, "CET")
       .utc()
       .toISOString();
-    leagueRef.activeCountry = activeEvent.locationName;
+    leagueRef.activeCountryCode = getCountryByAlpha2Code(
+      activeEvent.locationFlag
+    ).code;
   }
 };
 
-const fetchRBREvents = async ({ division, divisionName }) => {
-  setCurrentEventEndTime({ division });
+const fetchRBREvents = async ({ division }) => {
+  const activeEvent = getActiveEvent({ division });
+  activeEvent.eventStatus = eventStatuses.active;
+  setCurrentEventEndTime(activeEvent);
   const events = [];
   const rallies = division.rbr.rallies;
-  for (const rally in rallies) {
-    const fetchedEvent = await fetchEvent(rally, isFinished(rally));
+  for (const rally of rallies) {
+    const fetchedEvent = await fetchEvent(rally);
     events.push(fetchedEvent);
   }
   return events;

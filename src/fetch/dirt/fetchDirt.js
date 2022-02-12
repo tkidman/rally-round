@@ -13,6 +13,7 @@ const {
   recalculateDiffs
 } = require("../../shared");
 const { leagueRef } = require("../../state/league");
+const locations = require("../../state/constants/locations.json");
 
 const fetchEventsForClub = async ({
   club,
@@ -62,7 +63,7 @@ const getEventEndTime = championships => {
     );
     if (activeEvent) {
       leagueRef.endTime = activeEvent.entryWindow.end;
-      leagueRef.activeCountry = activeEvent.locationName;
+      leagueRef.activeCountryCode = locations[activeEvent.location].countryCode;
     }
   }
 };
