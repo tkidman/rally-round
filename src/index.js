@@ -700,6 +700,8 @@ const loadEventDriver = (entry, drivers, divisionName) => {
       if (driver.firstCarDriven) {
         driver.teamId = vehicles[driver.firstCarDriven].class;
       }
+    } else if (leagueRef.league.nullTeamIsPrivateer) {
+      driver.teamId = privateer;
     }
   }
   if (!driver.car) {
@@ -732,7 +734,7 @@ const processEvents = (events, divisionName) => {
   const previousEvents = [];
   for (let eventIndex = 0; eventIndex < events.length; eventIndex++) {
     const event = events[eventIndex];
-    debug(`processing ${divisionName} ${event.location}`);
+    debug(`processing ${divisionName} ${event.location || event.locationName}`);
     processEvent({ divisionName, event, previousEvents, drivers, eventIndex });
     previousEvents.push(event);
   }

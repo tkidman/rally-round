@@ -63,7 +63,8 @@ const getEventEndTime = championships => {
     );
     if (activeEvent) {
       leagueRef.endTime = activeEvent.entryWindow.end;
-      leagueRef.activeCountryCode = locations[activeEvent.location].countryCode;
+      leagueRef.activeCountryCode =
+        locations[activeEvent.locationName].countryCode;
     }
   }
 };
