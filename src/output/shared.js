@@ -1,7 +1,7 @@
 const { leagueRef } = require("../state/league");
 const locations = require("../state/constants/locations.json");
-const countries = require("../state/constants/countries.json");
 const vehicles = require("../state/constants/vehicles.json");
+const { getCountryForDriver, getCountryByAlpha2Code } = require("../shared");
 const debug = require("debug")("tkidman:dirt2-results:output:shared");
 
 const getAllResults = (name, events, type) => {
@@ -12,7 +12,7 @@ const getAllResults = (name, events, type) => {
 
 const getHeaderLocations = events => {
   const headerLocations = events.reduce((headerLocations, event) => {
-    headerLocations.push(locations[event.location].countryCode);
+    headerLocations.push(getLocationCountryCode(event));
     return headerLocations;
   }, []);
   return headerLocations;
@@ -40,11 +40,7 @@ const getTeamStandingData = (standing, events) => {
 
 const getDriverData = driverName => {
   const driver = leagueRef.getDriver(driverName);
-  let country = countries[driver.nationality];
-  if (!country) {
-    debug(`no country found for ${driver.nationality} ${driver.name}`);
-    country = countries["eLngRestOfWorld"];
-  }
+  let country = getCountryForDriver(driver);
   const car = vehicles[driver.car];
   let carBrand;
   if (!car) {
@@ -62,16 +58,29 @@ const getDriverData = driverName => {
   };
 };
 
-const getActiveCountry = () => {
-  if (leagueRef.activeCountry)
-    return locations[leagueRef.activeCountry].countryCode;
+const getLocationCountryCode = event => {
+  if (event.location) {
+    return locations[event.location].countryCode;
+  }
+  return getCountryByAlpha2Code(event.locationFlag).code;
+};
+
+const getLocation = event => {
+  if (event.location) {
+    return locations[event.location];
+  }
+  return {
+    countryName: event.locationName,
+    countryCode: getLocationCountryCode(event)
+  };
 };
 
 module.exports = {
   getAllResults,
   getHeaderLocations,
-  getActiveCountry,
   getDriverStandingData,
   getTeamStandingData,
-  getDriverData
+  getDriverData,
+  getLocationCountryCode,
+  getLocation
 };

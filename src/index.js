@@ -839,6 +839,7 @@ const processAllDivisions = async () => {
         divisionName,
         getAllResults
       );
+      division.events.forEach(event => (event.divisionName = divisionName));
       processEvents(division.events, divisionName);
     }
     if (leagueRef.includeOverall) {

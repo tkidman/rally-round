@@ -12,1003 +12,1995 @@
 		"name": "Wales"
 	},
 	"eLngAfghan": {
-	  "code": "afg",
-	  "name": "Afghanistan"
+		"code": "afg",
+		"name": "Afghanistan",
+		"alpha2Code": "AF",
+		"numCode": "4",
+		"shortName": "Afghanistan",
+		"nationality": "Afghan"
 	},
 	"eLngÅlandIsland": {
-	  "code": "ala",
-	  "name": "Åland Islands"
+		"code": "ala",
+		"name": "Åland Islands",
+		"alpha2Code": "AX",
+		"numCode": "248",
+		"shortName": "Åland Islands",
+		"nationality": "Åland Island"
 	},
 	"eLngAlbanian": {
-	  "code": "alb",
-	  "name": "Albania"
+		"code": "alb",
+		"name": "Albania",
+		"alpha2Code": "AL",
+		"numCode": "8",
+		"shortName": "Albania",
+		"nationality": "Albanian"
 	},
 	"eLngAlgerian": {
-	  "code": "dza",
-	  "name": "Algeria"
+		"code": "dza",
+		"name": "Algeria",
+		"alpha2Code": "DZ",
+		"numCode": "12",
+		"shortName": "Algeria",
+		"nationality": "Algerian"
 	},
 	"eLngAmericanSamoan": {
-	  "code": "asm",
-	  "name": "American Samoa"
+		"code": "asm",
+		"name": "American Samoa",
+		"alpha2Code": "AS",
+		"numCode": "16",
+		"shortName": "American Samoa",
+		"nationality": "American Samoan"
 	},
 	"eLngAndorran": {
-	  "code": "and",
-	  "name": "Andorra"
+		"code": "and",
+		"name": "Andorra",
+		"alpha2Code": "AD",
+		"numCode": "20",
+		"shortName": "Andorra",
+		"nationality": "Andorran"
 	},
 	"eLngAngolan": {
-	  "code": "ago",
-	  "name": "Angola"
+		"code": "ago",
+		"name": "Angola",
+		"alpha2Code": "AO",
+		"numCode": "24",
+		"shortName": "Angola",
+		"nationality": "Angolan"
 	},
 	"eLngAnguillan": {
-	  "code": "aia",
-	  "name": "Anguilla"
+		"code": "aia",
+		"name": "Anguilla",
+		"alpha2Code": "AI",
+		"numCode": "660",
+		"shortName": "Anguilla",
+		"nationality": "Anguillan"
 	},
 	"eLngAntarctic": {
-	  "code": "ata",
-	  "name": "Antarctica"
+		"code": "ata",
+		"name": "Antarctica",
+		"alpha2Code": "AQ",
+		"numCode": "10",
+		"shortName": "Antarctica",
+		"nationality": "Antarctic"
 	},
 	"eLngAntiguanorBarbudan": {
-	  "code": "atg",
-	  "name": "Antigua and Barbuda"
+		"code": "atg",
+		"name": "Antigua and Barbuda",
+		"alpha2Code": "AG",
+		"numCode": "28",
+		"shortName": "Antigua and Barbuda",
+		"nationality": "Antiguan or Barbudan"
 	},
 	"eLngArgentine": {
-	  "code": "arg",
-	  "name": "Argentina"
+		"code": "arg",
+		"name": "Argentina",
+		"alpha2Code": "AR",
+		"numCode": "32",
+		"shortName": "Argentina",
+		"nationality": "Argentine"
 	},
 	"eLngArgentinian": {
 		"code": "arg",
-		"name": "Argentina"
+		"name": "Argentina",
+		"alpha2Code": "AR",
+		"numCode": "32",
+		"shortName": "Argentina",
+		"nationality": "Argentine"
 	},
 	"eLngArmenian": {
-	  "code": "arm",
-	  "name": "Armenia"
+		"code": "arm",
+		"name": "Armenia",
+		"alpha2Code": "AM",
+		"numCode": "51",
+		"shortName": "Armenia",
+		"nationality": "Armenian"
 	},
 	"eLngAruban": {
-	  "code": "abw",
-	  "name": "Aruba"
+		"code": "abw",
+		"name": "Aruba",
+		"alpha2Code": "AW",
+		"numCode": "533",
+		"shortName": "Aruba",
+		"nationality": "Aruban"
 	},
 	"eLngAustralian": {
-	  "code": "aus",
-	  "name": "Australia"
+		"code": "aus",
+		"name": "Australia",
+		"alpha2Code": "AU",
+		"numCode": "36",
+		"shortName": "Australia",
+		"nationality": "Australian"
 	},
 	"eLngAustrian": {
-	  "code": "aut",
-	  "name": "Austria"
+		"code": "aut",
+		"name": "Austria",
+		"alpha2Code": "AT",
+		"numCode": "40",
+		"shortName": "Austria",
+		"nationality": "Austrian"
 	},
 	"eLngAzerbaijani": {
-	  "code": "aze",
-	  "name": "Azerbaijan"
+		"code": "aze",
+		"name": "Azerbaijan",
+		"alpha2Code": "AZ",
+		"numCode": "31",
+		"shortName": "Azerbaijan",
+		"nationality": "Azerbaijani, Azeri"
 	},
 	"eLngBahamian": {
-	  "code": "bhs",
-	  "name": "Bahamas"
+		"code": "bhs",
+		"name": "Bahamas",
+		"alpha2Code": "BS",
+		"numCode": "44",
+		"shortName": "Bahamas",
+		"nationality": "Bahamian"
 	},
 	"eLngBahraini": {
-	  "code": "bhr",
-	  "name": "Bahrain"
+		"code": "bhr",
+		"name": "Bahrain",
+		"alpha2Code": "BH",
+		"numCode": "48",
+		"shortName": "Bahrain",
+		"nationality": "Bahraini"
 	},
 	"eLngBangladeshi": {
-	  "code": "bgd",
-	  "name": "Bangladesh"
+		"code": "bgd",
+		"name": "Bangladesh",
+		"alpha2Code": "BD",
+		"numCode": "50",
+		"shortName": "Bangladesh",
+		"nationality": "Bangladeshi"
 	},
 	"eLngBarbadian": {
-	  "code": "brb",
-	  "name": "Barbados"
+		"code": "brb",
+		"name": "Barbados",
+		"alpha2Code": "BB",
+		"numCode": "52",
+		"shortName": "Barbados",
+		"nationality": "Barbadian"
 	},
 	"eLngBelarusian": {
-	  "code": "blr",
-	  "name": "Belarus"
+		"code": "blr",
+		"name": "Belarus",
+		"alpha2Code": "BY",
+		"numCode": "112",
+		"shortName": "Belarus",
+		"nationality": "Belarusian"
 	},
 	"eLngBelgian": {
-	  "code": "bel",
-	  "name": "Belgium"
+		"code": "bel",
+		"name": "Belgium",
+		"alpha2Code": "BE",
+		"numCode": "56",
+		"shortName": "Belgium",
+		"nationality": "Belgian"
 	},
 	"eLngBelizean": {
-	  "code": "blz",
-	  "name": "Belize"
+		"code": "blz",
+		"name": "Belize",
+		"alpha2Code": "BZ",
+		"numCode": "84",
+		"shortName": "Belize",
+		"nationality": "Belizean"
 	},
 	"eLngBeninese": {
-	  "code": "ben",
-	  "name": "Benin"
+		"code": "ben",
+		"name": "Benin",
+		"alpha2Code": "BJ",
+		"numCode": "204",
+		"shortName": "Benin",
+		"nationality": "Beninese, Beninois"
 	},
 	"eLngBermudian": {
-	  "code": "bmu",
-	  "name": "Bermuda"
+		"code": "bmu",
+		"name": "Bermuda",
+		"alpha2Code": "BM",
+		"numCode": "60",
+		"shortName": "Bermuda",
+		"nationality": "Bermudian, Bermudan"
 	},
 	"eLngBhutanese": {
-	  "code": "btn",
-	  "name": "Bhutan"
+		"code": "btn",
+		"name": "Bhutan",
+		"alpha2Code": "BT",
+		"numCode": "64",
+		"shortName": "Bhutan",
+		"nationality": "Bhutanese"
 	},
 	"eLngBolivian": {
-	  "code": "bol",
-	  "name": "Bolivia (Plurinational State of)"
+		"code": "bol",
+		"name": "Bolivia (Plurinational State of)",
+		"alpha2Code": "BO",
+		"numCode": "68",
+		"shortName": "Bolivia (Plurinational State of)",
+		"nationality": "Bolivian"
 	},
 	"eLngBonaire": {
-	  "code": "bes",
-	  "name": "Bonaire, Sint Eustatius and Saba"
+		"code": "bes",
+		"name": "Bonaire, Sint Eustatius and Saba",
+		"alpha2Code": "BQ",
+		"numCode": "535",
+		"shortName": "Bonaire, Sint Eustatius and Saba",
+		"nationality": "Bonaire"
 	},
 	"eLngBosnianorHerzegovinian": {
-	  "code": "bih",
-	  "name": "Bosnia and Herzegovina"
+		"code": "bih",
+		"name": "Bosnia and Herzegovina",
+		"alpha2Code": "BA",
+		"numCode": "70",
+		"shortName": "Bosnia and Herzegovina",
+		"nationality": "Bosnian or Herzegovinian"
 	},
 	"eLngMotswana": {
-	  "code": "bwa",
-	  "name": "Botswana"
+		"code": "bwa",
+		"name": "Botswana",
+		"alpha2Code": "BW",
+		"numCode": "72",
+		"shortName": "Botswana",
+		"nationality": "Motswana, Botswanan"
 	},
 	"eLngBouvetIsland": {
-	  "code": "bvt",
-	  "name": "Bouvet Island"
+		"code": "bvt",
+		"name": "Bouvet Island",
+		"alpha2Code": "BV",
+		"numCode": "74",
+		"shortName": "Bouvet Island",
+		"nationality": "Bouvet Island"
 	},
 	"eLngBrazilian": {
-	  "code": "bra",
-	  "name": "Brazil"
+		"code": "bra",
+		"name": "Brazil",
+		"alpha2Code": "BR",
+		"numCode": "76",
+		"shortName": "Brazil",
+		"nationality": "Brazilian"
 	},
 	"eLngBIOT": {
-	  "code": "iot",
-	  "name": "British Indian Ocean Territory"
+		"code": "iot",
+		"name": "British Indian Ocean Territory",
+		"alpha2Code": "IO",
+		"numCode": "86",
+		"shortName": "British Indian Ocean Territory",
+		"nationality": "BIOT"
 	},
 	"eLngBruneian": {
-	  "code": "brn",
-	  "name": "Brunei Darussalam"
+		"code": "brn",
+		"name": "Brunei Darussalam",
+		"alpha2Code": "BN",
+		"numCode": "96",
+		"shortName": "Brunei Darussalam",
+		"nationality": "Bruneian"
 	},
 	"eLngBulgarian": {
-	  "code": "bgr",
-	  "name": "Bulgaria"
+		"code": "bgr",
+		"name": "Bulgaria",
+		"alpha2Code": "BG",
+		"numCode": "100",
+		"shortName": "Bulgaria",
+		"nationality": "Bulgarian"
 	},
 	"eLngBurkinabé": {
-	  "code": "bfa",
-	  "name": "Burkina Faso"
+		"code": "bfa",
+		"name": "Burkina Faso",
+		"alpha2Code": "BF",
+		"numCode": "854",
+		"shortName": "Burkina Faso",
+		"nationality": "Burkinabé"
 	},
 	"eLngBurundian": {
-	  "code": "bdi",
-	  "name": "Burundi"
+		"code": "bdi",
+		"name": "Burundi",
+		"alpha2Code": "BI",
+		"numCode": "108",
+		"shortName": "Burundi",
+		"nationality": "Burundian"
 	},
 	"eLngCaboVerdean": {
-	  "code": "cpv",
-	  "name": "Cabo Verde"
+		"code": "cpv",
+		"name": "Cabo Verde",
+		"alpha2Code": "CV",
+		"numCode": "132",
+		"shortName": "Cabo Verde",
+		"nationality": "Cabo Verdean"
 	},
 	"eLngCambodian": {
-	  "code": "khm",
-	  "name": "Cambodia"
+		"code": "khm",
+		"name": "Cambodia",
+		"alpha2Code": "KH",
+		"numCode": "116",
+		"shortName": "Cambodia",
+		"nationality": "Cambodian"
 	},
 	"eLngCameroonian": {
-	  "code": "cmr",
-	  "name": "Cameroon"
+		"code": "cmr",
+		"name": "Cameroon",
+		"alpha2Code": "CM",
+		"numCode": "120",
+		"shortName": "Cameroon",
+		"nationality": "Cameroonian"
 	},
 	"eLngCanadian": {
-	  "code": "can",
-	  "name": "Canada"
+		"code": "can",
+		"name": "Canada",
+		"alpha2Code": "CA",
+		"numCode": "124",
+		"shortName": "Canada",
+		"nationality": "Canadian"
 	},
 	"eLngCaymanian": {
-	  "code": "cym",
-	  "name": "Cayman Islands"
+		"code": "cym",
+		"name": "Cayman Islands",
+		"alpha2Code": "KY",
+		"numCode": "136",
+		"shortName": "Cayman Islands",
+		"nationality": "Caymanian"
 	},
 	"eLngCentralAfrican": {
-	  "code": "caf",
-	  "name": "Central African Republic"
+		"code": "caf",
+		"name": "Central African Republic",
+		"alpha2Code": "CF",
+		"numCode": "140",
+		"shortName": "Central African Republic",
+		"nationality": "Central African"
 	},
 	"eLngChadian": {
-	  "code": "tcd",
-	  "name": "Chad"
+		"code": "tcd",
+		"name": "Chad",
+		"alpha2Code": "TD",
+		"numCode": "148",
+		"shortName": "Chad",
+		"nationality": "Chadian"
 	},
 	"eLngChilean": {
-	  "code": "chl",
-	  "name": "Chile"
+		"code": "chl",
+		"name": "Chile",
+		"alpha2Code": "CL",
+		"numCode": "152",
+		"shortName": "Chile",
+		"nationality": "Chilean"
 	},
 	"eLngChinese": {
-	  "code": "twn",
-	  "name": "Taiwan, Province of China"
+		"code": "twn",
+		"name": "Taiwan, Province of China",
+		"alpha2Code": "TW",
+		"numCode": "158",
+		"shortName": "Taiwan, Province of China",
+		"nationality": "Chinese, Taiwanese"
 	},
 	"eLngChristmasIsland": {
-	  "code": "cxr",
-	  "name": "Christmas Island"
+		"code": "cxr",
+		"name": "Christmas Island",
+		"alpha2Code": "CX",
+		"numCode": "162",
+		"shortName": "Christmas Island",
+		"nationality": "Christmas Island"
 	},
 	"eLngCocosIsland": {
-	  "code": "cck",
-	  "name": "Cocos (Keeling) Islands"
+		"code": "cck",
+		"name": "Cocos (Keeling) Islands",
+		"alpha2Code": "CC",
+		"numCode": "166",
+		"shortName": "Cocos (Keeling) Islands",
+		"nationality": "Cocos Island"
 	},
 	"eLngColombian": {
-	  "code": "col",
-	  "name": "Colombia"
+		"code": "col",
+		"name": "Colombia",
+		"alpha2Code": "CO",
+		"numCode": "170",
+		"shortName": "Colombia",
+		"nationality": "Colombian"
 	},
 	"eLngComoran": {
-	  "code": "com",
-	  "name": "Comoros"
+		"code": "com",
+		"name": "Comoros",
+		"alpha2Code": "KM",
+		"numCode": "174",
+		"shortName": "Comoros",
+		"nationality": "Comoran, Comorian"
 	},
 	"eLngCongolese": {
-	  "code": "cog",
-	  "name": "Congo (Republic of the)"
+		"code": "cog",
+		"name": "Congo (Republic of the)",
+		"alpha2Code": "CG",
+		"numCode": "178",
+		"shortName": "Congo (Republic of the)",
+		"nationality": "Congolese"
 	},
 	"eLngCookIsland": {
-	  "code": "cok",
-	  "name": "Cook Islands"
+		"code": "cok",
+		"name": "Cook Islands",
+		"alpha2Code": "CK",
+		"numCode": "184",
+		"shortName": "Cook Islands",
+		"nationality": "Cook Island"
 	},
 	"eLngCostaRican": {
-	  "code": "cri",
-	  "name": "Costa Rica"
+		"code": "cri",
+		"name": "Costa Rica",
+		"alpha2Code": "CR",
+		"numCode": "188",
+		"shortName": "Costa Rica",
+		"nationality": "Costa Rican"
 	},
 	"eLngIvorian": {
-	  "code": "civ",
-	  "name": "Côte d'Ivoire"
+		"code": "civ",
+		"name": "Côte d'Ivoire",
+		"alpha2Code": "CI",
+		"numCode": "384",
+		"shortName": "Côte d'Ivoire",
+		"nationality": "Ivorian"
 	},
 	"eLngCroatian": {
-	  "code": "hrv",
-	  "name": "Croatia"
+		"code": "hrv",
+		"name": "Croatia",
+		"alpha2Code": "HR",
+		"numCode": "191",
+		"shortName": "Croatia",
+		"nationality": "Croatian"
 	},
 	"eLngCuban": {
-	  "code": "cub",
-	  "name": "Cuba"
+		"code": "cub",
+		"name": "Cuba",
+		"alpha2Code": "CU",
+		"numCode": "192",
+		"shortName": "Cuba",
+		"nationality": "Cuban"
 	},
 	"eLngCuraçaoan": {
-	  "code": "cuw",
-	  "name": "Curaçao"
+		"code": "cuw",
+		"name": "Curaçao",
+		"alpha2Code": "CW",
+		"numCode": "531",
+		"shortName": "Curaçao",
+		"nationality": "Curaçaoan"
 	},
 	"eLngCypriot": {
-	  "code": "cyp",
-	  "name": "Cyprus"
+		"code": "cyp",
+		"name": "Cyprus",
+		"alpha2Code": "CY",
+		"numCode": "196",
+		"shortName": "Cyprus",
+		"nationality": "Cypriot"
 	},
 	"eLngCzech": {
-	  "code": "cze",
-	  "name": "Czech Republic"
+		"code": "cze",
+		"name": "Czech Republic",
+		"alpha2Code": "CZ",
+		"numCode": "203",
+		"shortName": "Czech Republic",
+		"nationality": "Czech"
 	},
 	"eLngDanish": {
-	  "code": "dnk",
-	  "name": "Denmark"
+		"code": "dnk",
+		"name": "Denmark",
+		"alpha2Code": "DK",
+		"numCode": "208",
+		"shortName": "Denmark",
+		"nationality": "Danish"
 	},
 	"eLngDjiboutian": {
-	  "code": "dji",
-	  "name": "Djibouti"
+		"code": "dji",
+		"name": "Djibouti",
+		"alpha2Code": "DJ",
+		"numCode": "262",
+		"shortName": "Djibouti",
+		"nationality": "Djiboutian"
 	},
 	"eLngDominican": {
-	  "code": "dom",
-	  "name": "Dominican Republic"
+		"code": "dom",
+		"name": "Dominican Republic",
+		"alpha2Code": "DO",
+		"numCode": "214",
+		"shortName": "Dominican Republic",
+		"nationality": "Dominican"
 	},
 	"eLngEcuadorian": {
-	  "code": "ecu",
-	  "name": "Ecuador"
+		"code": "ecu",
+		"name": "Ecuador",
+		"alpha2Code": "EC",
+		"numCode": "218",
+		"shortName": "Ecuador",
+		"nationality": "Ecuadorian"
 	},
 	"eLngEgyptian": {
-	  "code": "egy",
-	  "name": "Egypt"
+		"code": "egy",
+		"name": "Egypt",
+		"alpha2Code": "EG",
+		"numCode": "818",
+		"shortName": "Egypt",
+		"nationality": "Egyptian"
 	},
 	"eLngSalvadoran": {
-	  "code": "slv",
-	  "name": "El Salvador"
+		"code": "slv",
+		"name": "El Salvador",
+		"alpha2Code": "SV",
+		"numCode": "222",
+		"shortName": "El Salvador",
+		"nationality": "Salvadoran"
 	},
 	"eLngEquatorialGuinean": {
-	  "code": "gnq",
-	  "name": "Equatorial Guinea"
+		"code": "gnq",
+		"name": "Equatorial Guinea",
+		"alpha2Code": "GQ",
+		"numCode": "226",
+		"shortName": "Equatorial Guinea",
+		"nationality": "Equatorial Guinean, Equatoguinean"
 	},
 	"eLngEritrean": {
-	  "code": "eri",
-	  "name": "Eritrea"
+		"code": "eri",
+		"name": "Eritrea",
+		"alpha2Code": "ER",
+		"numCode": "232",
+		"shortName": "Eritrea",
+		"nationality": "Eritrean"
 	},
 	"eLngEstonian": {
-	  "code": "est",
-	  "name": "Estonia"
+		"code": "est",
+		"name": "Estonia",
+		"alpha2Code": "EE",
+		"numCode": "233",
+		"shortName": "Estonia",
+		"nationality": "Estonian"
 	},
 	"eLngEthiopian": {
-	  "code": "eth",
-	  "name": "Ethiopia"
+		"code": "eth",
+		"name": "Ethiopia",
+		"alpha2Code": "ET",
+		"numCode": "231",
+		"shortName": "Ethiopia",
+		"nationality": "Ethiopian"
 	},
 	"eLngFalklandIsland": {
-	  "code": "flk",
-	  "name": "Falkland Islands (Malvinas)"
+		"code": "flk",
+		"name": "Falkland Islands (Malvinas)",
+		"alpha2Code": "FK",
+		"numCode": "238",
+		"shortName": "Falkland Islands (Malvinas)",
+		"nationality": "Falkland Island"
 	},
 	"eLngFaroese": {
-	  "code": "fro",
-	  "name": "Faroe Islands"
+		"code": "fro",
+		"name": "Faroe Islands",
+		"alpha2Code": "FO",
+		"numCode": "234",
+		"shortName": "Faroe Islands",
+		"nationality": "Faroese"
 	},
 	"eLngFijian": {
-	  "code": "fji",
-	  "name": "Fiji"
+		"code": "fji",
+		"name": "Fiji",
+		"alpha2Code": "FJ",
+		"numCode": "242",
+		"shortName": "Fiji",
+		"nationality": "Fijian"
 	},
 	"eLngFinnish": {
-	  "code": "fin",
-	  "name": "Finland"
+		"code": "fin",
+		"name": "Finland",
+		"alpha2Code": "FI",
+		"numCode": "246",
+		"shortName": "Finland",
+		"nationality": "Finnish"
 	},
 	"eLngFrench": {
-	  "code": "fra",
-	  "name": "France"
+		"code": "fra",
+		"name": "France",
+		"alpha2Code": "FR",
+		"numCode": "250",
+		"shortName": "France",
+		"nationality": "French"
 	},
 	"eLngFrenchGuianese": {
-	  "code": "guf",
-	  "name": "French Guiana"
+		"code": "guf",
+		"name": "French Guiana",
+		"alpha2Code": "GF",
+		"numCode": "254",
+		"shortName": "French Guiana",
+		"nationality": "French Guianese"
 	},
 	"eLngFrenchPolynesian": {
-	  "code": "pyf",
-	  "name": "French Polynesia"
+		"code": "pyf",
+		"name": "French Polynesia",
+		"alpha2Code": "PF",
+		"numCode": "258",
+		"shortName": "French Polynesia",
+		"nationality": "French Polynesian"
 	},
 	"eLngFrenchSouthernTerritories": {
-	  "code": "atf",
-	  "name": "French Southern Territories"
+		"code": "atf",
+		"name": "French Southern Territories",
+		"alpha2Code": "TF",
+		"numCode": "260",
+		"shortName": "French Southern Territories",
+		"nationality": "French Southern Territories"
 	},
 	"eLngGabonese": {
-	  "code": "gab",
-	  "name": "Gabon"
+		"code": "gab",
+		"name": "Gabon",
+		"alpha2Code": "GA",
+		"numCode": "266",
+		"shortName": "Gabon",
+		"nationality": "Gabonese"
 	},
 	"eLngGambian": {
-	  "code": "gmb",
-	  "name": "Gambia"
+		"code": "gmb",
+		"name": "Gambia",
+		"alpha2Code": "GM",
+		"numCode": "270",
+		"shortName": "Gambia",
+		"nationality": "Gambian"
 	},
 	"eLngGeorgian": {
-	  "code": "geo",
-	  "name": "Georgia"
+		"code": "geo",
+		"name": "Georgia",
+		"alpha2Code": "GE",
+		"numCode": "268",
+		"shortName": "Georgia",
+		"nationality": "Georgian"
 	},
 	"eLngGerman": {
-	  "code": "deu",
-	  "name": "Germany"
+		"code": "deu",
+		"name": "Germany",
+		"alpha2Code": "DE",
+		"numCode": "276",
+		"shortName": "Germany",
+		"nationality": "German"
 	},
 	"eLngGhanaian": {
-	  "code": "gha",
-	  "name": "Ghana"
+		"code": "gha",
+		"name": "Ghana",
+		"alpha2Code": "GH",
+		"numCode": "288",
+		"shortName": "Ghana",
+		"nationality": "Ghanaian"
 	},
 	"eLngGibraltar": {
-	  "code": "gib",
-	  "name": "Gibraltar"
+		"code": "gib",
+		"name": "Gibraltar",
+		"alpha2Code": "GI",
+		"numCode": "292",
+		"shortName": "Gibraltar",
+		"nationality": "Gibraltar"
 	},
 	"eLngGreek": {
-	  "code": "grc",
-	  "name": "Greece"
+		"code": "grc",
+		"name": "Greece",
+		"alpha2Code": "GR",
+		"numCode": "300",
+		"shortName": "Greece",
+		"nationality": "Greek, Hellenic"
 	},
 	"eLngGreenlandic": {
-	  "code": "grl",
-	  "name": "Greenland"
+		"code": "grl",
+		"name": "Greenland",
+		"alpha2Code": "GL",
+		"numCode": "304",
+		"shortName": "Greenland",
+		"nationality": "Greenlandic"
 	},
 	"eLngGrenadian": {
-	  "code": "grd",
-	  "name": "Grenada"
+		"code": "grd",
+		"name": "Grenada",
+		"alpha2Code": "GD",
+		"numCode": "308",
+		"shortName": "Grenada",
+		"nationality": "Grenadian"
 	},
 	"eLngGuadeloupe": {
-	  "code": "glp",
-	  "name": "Guadeloupe"
+		"code": "glp",
+		"name": "Guadeloupe",
+		"alpha2Code": "GP",
+		"numCode": "312",
+		"shortName": "Guadeloupe",
+		"nationality": "Guadeloupe"
 	},
 	"eLngGuamanian": {
-	  "code": "gum",
-	  "name": "Guam"
+		"code": "gum",
+		"name": "Guam",
+		"alpha2Code": "GU",
+		"numCode": "316",
+		"shortName": "Guam",
+		"nationality": "Guamanian, Guambat"
 	},
 	"eLngGuatemalan": {
-	  "code": "gtm",
-	  "name": "Guatemala"
+		"code": "gtm",
+		"name": "Guatemala",
+		"alpha2Code": "GT",
+		"numCode": "320",
+		"shortName": "Guatemala",
+		"nationality": "Guatemalan"
 	},
 	"eLngChannelIsland": {
-	  "code": "jey",
-	  "name": "Jersey"
+		"code": "jey",
+		"name": "Jersey",
+		"alpha2Code": "JE",
+		"numCode": "832",
+		"shortName": "Jersey",
+		"nationality": "Channel Island"
 	},
 	"eLngGuinean": {
-	  "code": "gin",
-	  "name": "Guinea"
+		"code": "gin",
+		"name": "Guinea",
+		"alpha2Code": "GN",
+		"numCode": "324",
+		"shortName": "Guinea",
+		"nationality": "Guinean"
 	},
 	"eLngBissau-Guinean": {
-	  "code": "gnb",
-	  "name": "Guinea-Bissau"
+		"code": "gnb",
+		"name": "Guinea-Bissau",
+		"alpha2Code": "GW",
+		"numCode": "624",
+		"shortName": "Guinea-Bissau",
+		"nationality": "Bissau-Guinean"
 	},
 	"eLngGuyanese": {
-	  "code": "guy",
-	  "name": "Guyana"
+		"code": "guy",
+		"name": "Guyana",
+		"alpha2Code": "GY",
+		"numCode": "328",
+		"shortName": "Guyana",
+		"nationality": "Guyanese"
 	},
 	"eLngHaitian": {
-	  "code": "hti",
-	  "name": "Haiti"
+		"code": "hti",
+		"name": "Haiti",
+		"alpha2Code": "HT",
+		"numCode": "332",
+		"shortName": "Haiti",
+		"nationality": "Haitian"
 	},
 	"eLngHeardIslandorMcDonaldIslands": {
-	  "code": "hmd",
-	  "name": "Heard Island and McDonald Islands"
+		"code": "hmd",
+		"name": "Heard Island and McDonald Islands",
+		"alpha2Code": "HM",
+		"numCode": "334",
+		"shortName": "Heard Island and McDonald Islands",
+		"nationality": "Heard Island or McDonald Islands"
 	},
 	"eLngVatican": {
-	  "code": "vat",
-	  "name": "Vatican City State"
+		"code": "vat",
+		"name": "Vatican City State",
+		"alpha2Code": "VA",
+		"numCode": "336",
+		"shortName": "Vatican City State",
+		"nationality": "Vatican"
 	},
 	"eLngHonduran": {
-	  "code": "hnd",
-	  "name": "Honduras"
+		"code": "hnd",
+		"name": "Honduras",
+		"alpha2Code": "HN",
+		"numCode": "340",
+		"shortName": "Honduras",
+		"nationality": "Honduran"
 	},
 	"eLngHongKong": {
-	  "code": "hkg",
-	  "name": "Hong Kong"
+		"code": "hkg",
+		"name": "Hong Kong",
+		"alpha2Code": "HK",
+		"numCode": "344",
+		"shortName": "Hong Kong",
+		"nationality": "Hong Kong, Hong Kongese"
 	},
 	"eLngHongKonger": {
 		"code": "hkg",
-		"name": "Hong Kong"
+		"name": "Hong Kong",
+		"alpha2Code": "HK",
+		"numCode": "344",
+		"shortName": "Hong Kong",
+		"nationality": "Hong Kong, Hong Kongese"
 	},
 	"eLngHungarian": {
-	  "code": "hun",
-	  "name": "Hungary"
+		"code": "hun",
+		"name": "Hungary",
+		"alpha2Code": "HU",
+		"numCode": "348",
+		"shortName": "Hungary",
+		"nationality": "Hungarian, Magyar"
 	},
 	"eLngIcelandic": {
-	  "code": "isl",
-	  "name": "Iceland"
+		"code": "isl",
+		"name": "Iceland",
+		"alpha2Code": "IS",
+		"numCode": "352",
+		"shortName": "Iceland",
+		"nationality": "Icelandic"
 	},
 	"eLngIndian": {
-	  "code": "ind",
-	  "name": "India"
+		"code": "ind",
+		"name": "India",
+		"alpha2Code": "IN",
+		"numCode": "356",
+		"shortName": "India",
+		"nationality": "Indian"
 	},
 	"eLngIndonesian": {
-	  "code": "idn",
-	  "name": "Indonesia"
+		"code": "idn",
+		"name": "Indonesia",
+		"alpha2Code": "ID",
+		"numCode": "360",
+		"shortName": "Indonesia",
+		"nationality": "Indonesian"
 	},
 	"eLngIranian": {
-	  "code": "irn",
-	  "name": "Iran"
+		"code": "irn",
+		"name": "Iran",
+		"alpha2Code": "IR",
+		"numCode": "364",
+		"shortName": "Iran",
+		"nationality": "Iranian, Persian"
 	},
 	"eLngIraqi": {
-	  "code": "irq",
-	  "name": "Iraq"
+		"code": "irq",
+		"name": "Iraq",
+		"alpha2Code": "IQ",
+		"numCode": "368",
+		"shortName": "Iraq",
+		"nationality": "Iraqi"
 	},
 	"eLngIrish": {
-	  "code": "irl",
-	  "name": "Ireland"
+		"code": "irl",
+		"name": "Ireland",
+		"alpha2Code": "IE",
+		"numCode": "372",
+		"shortName": "Ireland",
+		"nationality": "Irish"
 	},
 	"eLngNorthernIrish": {
 		"code": "nre",
 		"name": "Northern Ireland"
 	},
 	"eLngManx": {
-	  "code": "imn",
-	  "name": "Isle of Man"
+		"code": "imn",
+		"name": "Isle of Man",
+		"alpha2Code": "IM",
+		"numCode": "833",
+		"shortName": "Isle of Man",
+		"nationality": "Manx"
 	},
 	"eLngIsraeli": {
-	  "code": "isr",
-	  "name": "Israel"
+		"code": "isr",
+		"name": "Israel",
+		"alpha2Code": "IL",
+		"numCode": "376",
+		"shortName": "Israel",
+		"nationality": "Israeli"
 	},
 	"eLngItalian": {
-	  "code": "ita",
-	  "name": "Italy"
+		"code": "ita",
+		"name": "Italy",
+		"alpha2Code": "IT",
+		"numCode": "380",
+		"shortName": "Italy",
+		"nationality": "Italian"
 	},
 	"eLngJamaican": {
-	  "code": "jam",
-	  "name": "Jamaica"
+		"code": "jam",
+		"name": "Jamaica",
+		"alpha2Code": "JM",
+		"numCode": "388",
+		"shortName": "Jamaica",
+		"nationality": "Jamaican"
 	},
 	"eLngJapanese": {
-	  "code": "jpn",
-	  "name": "Japan"
+		"code": "jpn",
+		"name": "Japan",
+		"alpha2Code": "JP",
+		"numCode": "392",
+		"shortName": "Japan",
+		"nationality": "Japanese"
 	},
 	"eLngJordanian": {
-	  "code": "jor",
-	  "name": "Jordan"
+		"code": "jor",
+		"name": "Jordan",
+		"alpha2Code": "JO",
+		"numCode": "400",
+		"shortName": "Jordan",
+		"nationality": "Jordanian"
 	},
 	"eLngKazakhstani": {
-	  "code": "kaz",
-	  "name": "Kazakhstan"
+		"code": "kaz",
+		"name": "Kazakhstan",
+		"alpha2Code": "KZ",
+		"numCode": "398",
+		"shortName": "Kazakhstan",
+		"nationality": "Kazakhstani, Kazakh"
 	},
 	"eLngKenyan": {
-	  "code": "ken",
-	  "name": "Kenya"
+		"code": "ken",
+		"name": "Kenya",
+		"alpha2Code": "KE",
+		"numCode": "404",
+		"shortName": "Kenya",
+		"nationality": "Kenyan"
 	},
 	"eLngI-Kiribati": {
-	  "code": "kir",
-	  "name": "Kiribati"
+		"code": "kir",
+		"name": "Kiribati",
+		"alpha2Code": "KI",
+		"numCode": "296",
+		"shortName": "Kiribati",
+		"nationality": "I-Kiribati"
 	},
 	"eLngNorthKorean": {
-	  "code": "prk",
-	  "name": "Korea (Democratic People's Republic of)"
+		"code": "prk",
+		"name": "Korea (Democratic People's Republic of)",
+		"alpha2Code": "KP",
+		"numCode": "408",
+		"shortName": "Korea (Democratic People's Republic of)",
+		"nationality": "North Korean"
 	},
 	"eLngSouthKorean": {
-	  "code": "kor",
-	  "name": "Korea (Republic of)"
+		"code": "kor",
+		"name": "Korea (Republic of)",
+		"alpha2Code": "KR",
+		"numCode": "410",
+		"shortName": "Korea (Republic of)",
+		"nationality": "South Korean"
 	},
 	"eLngKuwaiti": {
-	  "code": "kwt",
-	  "name": "Kuwait"
+		"code": "kwt",
+		"name": "Kuwait",
+		"alpha2Code": "KW",
+		"numCode": "414",
+		"shortName": "Kuwait",
+		"nationality": "Kuwaiti"
 	},
 	"eLngKyrgyzstani": {
-	  "code": "kgz",
-	  "name": "Kyrgyzstan"
+		"code": "kgz",
+		"name": "Kyrgyzstan",
+		"alpha2Code": "KG",
+		"numCode": "417",
+		"shortName": "Kyrgyzstan",
+		"nationality": "Kyrgyzstani, Kyrgyz, Kirgiz, Kirghiz"
 	},
 	"eLngLao": {
-	  "code": "lao",
-	  "name": "Lao People's Democratic Republic"
+		"code": "lao",
+		"name": "Lao People's Democratic Republic",
+		"alpha2Code": "LA",
+		"numCode": "418",
+		"shortName": "Lao People's Democratic Republic",
+		"nationality": "Lao, Laotian"
 	},
 	"eLngLatvian": {
-	  "code": "lva",
-	  "name": "Latvia"
+		"code": "lva",
+		"name": "Latvia",
+		"alpha2Code": "LV",
+		"numCode": "428",
+		"shortName": "Latvia",
+		"nationality": "Latvian"
 	},
 	"eLngLebanese": {
-	  "code": "lbn",
-	  "name": "Lebanon"
+		"code": "lbn",
+		"name": "Lebanon",
+		"alpha2Code": "LB",
+		"numCode": "422",
+		"shortName": "Lebanon",
+		"nationality": "Lebanese"
 	},
 	"eLngBasotho": {
-	  "code": "lso",
-	  "name": "Lesotho"
+		"code": "lso",
+		"name": "Lesotho",
+		"alpha2Code": "LS",
+		"numCode": "426",
+		"shortName": "Lesotho",
+		"nationality": "Basotho"
 	},
 	"eLngLiberian": {
-	  "code": "lbr",
-	  "name": "Liberia"
+		"code": "lbr",
+		"name": "Liberia",
+		"alpha2Code": "LR",
+		"numCode": "430",
+		"shortName": "Liberia",
+		"nationality": "Liberian"
 	},
 	"eLngLibyan": {
-	  "code": "lby",
-	  "name": "Libya"
+		"code": "lby",
+		"name": "Libya",
+		"alpha2Code": "LY",
+		"numCode": "434",
+		"shortName": "Libya",
+		"nationality": "Libyan"
 	},
 	"eLngLiechtenstein": {
-	  "code": "lie",
-	  "name": "Liechtenstein"
+		"code": "lie",
+		"name": "Liechtenstein",
+		"alpha2Code": "LI",
+		"numCode": "438",
+		"shortName": "Liechtenstein",
+		"nationality": "Liechtenstein"
 	},
 	"eLngLithuanian": {
-	  "code": "ltu",
-	  "name": "Lithuania"
+		"code": "ltu",
+		"name": "Lithuania",
+		"alpha2Code": "LT",
+		"numCode": "440",
+		"shortName": "Lithuania",
+		"nationality": "Lithuanian"
 	},
 	"eLngLuxembourg": {
-	  "code": "lux",
-	  "name": "Luxembourg"
+		"code": "lux",
+		"name": "Luxembourg",
+		"alpha2Code": "LU",
+		"numCode": "442",
+		"shortName": "Luxembourg",
+		"nationality": "Luxembourg, Luxembourgish"
 	},
 	"eLngLuxembourgish": {
 		"code": "lux",
-		"name": "Luxembourg"
+		"name": "Luxembourg",
+		"alpha2Code": "LU",
+		"numCode": "442",
+		"shortName": "Luxembourg",
+		"nationality": "Luxembourg, Luxembourgish"
 	},
 	"eLngMacanese": {
-	  "code": "mac",
-	  "name": "Macao"
+		"code": "mac",
+		"name": "Macao",
+		"alpha2Code": "MO",
+		"numCode": "446",
+		"shortName": "Macao",
+		"nationality": "Macanese, Chinese"
 	},
 	"eLngMacedonian": {
-	  "code": "mkd",
-	  "name": "Macedonia (the former Yugoslav Republic of)"
+		"code": "mkd",
+		"name": "Macedonia (the former Yugoslav Republic of)",
+		"alpha2Code": "MK",
+		"numCode": "807",
+		"shortName": "Macedonia (the former Yugoslav Republic of)",
+		"nationality": "Macedonian"
 	},
 	"eLngMalagasy": {
-	  "code": "mdg",
-	  "name": "Madagascar"
+		"code": "mdg",
+		"name": "Madagascar",
+		"alpha2Code": "MG",
+		"numCode": "450",
+		"shortName": "Madagascar",
+		"nationality": "Malagasy"
 	},
 	"eLngMalawian": {
-	  "code": "mwi",
-	  "name": "Malawi"
+		"code": "mwi",
+		"name": "Malawi",
+		"alpha2Code": "MW",
+		"numCode": "454",
+		"shortName": "Malawi",
+		"nationality": "Malawian"
 	},
 	"eLngMalaysian": {
-	  "code": "mys",
-	  "name": "Malaysia"
+		"code": "mys",
+		"name": "Malaysia",
+		"alpha2Code": "MY",
+		"numCode": "458",
+		"shortName": "Malaysia",
+		"nationality": "Malaysian"
 	},
 	"eLngMaldivian": {
-	  "code": "mdv",
-	  "name": "Maldives"
+		"code": "mdv",
+		"name": "Maldives",
+		"alpha2Code": "MV",
+		"numCode": "462",
+		"shortName": "Maldives",
+		"nationality": "Maldivian"
 	},
 	"eLngMalian": {
-	  "code": "mli",
-	  "name": "Mali"
+		"code": "mli",
+		"name": "Mali",
+		"alpha2Code": "ML",
+		"numCode": "466",
+		"shortName": "Mali",
+		"nationality": "Malian, Malinese"
 	},
 	"eLngMaltese": {
-	  "code": "mlt",
-	  "name": "Malta"
+		"code": "mlt",
+		"name": "Malta",
+		"alpha2Code": "MT",
+		"numCode": "470",
+		"shortName": "Malta",
+		"nationality": "Maltese"
 	},
 	"eLngMarshallese": {
-	  "code": "mhl",
-	  "name": "Marshall Islands"
+		"code": "mhl",
+		"name": "Marshall Islands",
+		"alpha2Code": "MH",
+		"numCode": "584",
+		"shortName": "Marshall Islands",
+		"nationality": "Marshallese"
 	},
 	"eLngMartiniquais": {
-	  "code": "mtq",
-	  "name": "Martinique"
+		"code": "mtq",
+		"name": "Martinique",
+		"alpha2Code": "MQ",
+		"numCode": "474",
+		"shortName": "Martinique",
+		"nationality": "Martiniquais, Martinican"
 	},
 	"eLngMauritanian": {
-	  "code": "mrt",
-	  "name": "Mauritania"
+		"code": "mrt",
+		"name": "Mauritania",
+		"alpha2Code": "MR",
+		"numCode": "478",
+		"shortName": "Mauritania",
+		"nationality": "Mauritanian"
 	},
 	"eLngMauritian": {
-	  "code": "mus",
-	  "name": "Mauritius"
+		"code": "mus",
+		"name": "Mauritius",
+		"alpha2Code": "MU",
+		"numCode": "480",
+		"shortName": "Mauritius",
+		"nationality": "Mauritian"
 	},
 	"eLngMahoran": {
-	  "code": "myt",
-	  "name": "Mayotte"
+		"code": "myt",
+		"name": "Mayotte",
+		"alpha2Code": "YT",
+		"numCode": "175",
+		"shortName": "Mayotte",
+		"nationality": "Mahoran"
 	},
 	"eLngMexican": {
-	  "code": "mex",
-	  "name": "Mexico"
+		"code": "mex",
+		"name": "Mexico",
+		"alpha2Code": "MX",
+		"numCode": "484",
+		"shortName": "Mexico",
+		"nationality": "Mexican"
 	},
 	"eLngMicronesian": {
-	  "code": "fsm",
-	  "name": "Micronesia (Federated States of)"
+		"code": "fsm",
+		"name": "Micronesia (Federated States of)",
+		"alpha2Code": "FM",
+		"numCode": "583",
+		"shortName": "Micronesia (Federated States of)",
+		"nationality": "Micronesian"
 	},
 	"eLngMoldovan": {
-	  "code": "mda",
-	  "name": "Moldova (Republic of)"
+		"code": "mda",
+		"name": "Moldova (Republic of)",
+		"alpha2Code": "MD",
+		"numCode": "498",
+		"shortName": "Moldova (Republic of)",
+		"nationality": "Moldovan"
 	},
 	"eLngMonégasque": {
-	  "code": "mco",
-	  "name": "Monaco"
+		"code": "mco",
+		"name": "Monaco",
+		"alpha2Code": "MC",
+		"numCode": "492",
+		"shortName": "Monaco",
+		"nationality": "Monégasque, Monacan"
 	},
 	"eLngMongolian": {
-	  "code": "mng",
-	  "name": "Mongolia"
+		"code": "mng",
+		"name": "Mongolia",
+		"alpha2Code": "MN",
+		"numCode": "496",
+		"shortName": "Mongolia",
+		"nationality": "Mongolian"
 	},
 	"eLngMontenegrin": {
-	  "code": "mne",
-	  "name": "Montenegro"
+		"code": "mne",
+		"name": "Montenegro",
+		"alpha2Code": "ME",
+		"numCode": "499",
+		"shortName": "Montenegro",
+		"nationality": "Montenegrin"
 	},
 	"eLngMontserratian": {
-	  "code": "msr",
-	  "name": "Montserrat"
+		"code": "msr",
+		"name": "Montserrat",
+		"alpha2Code": "MS",
+		"numCode": "500",
+		"shortName": "Montserrat",
+		"nationality": "Montserratian"
 	},
 	"eLngMoroccan": {
-	  "code": "mar",
-	  "name": "Morocco"
+		"code": "mar",
+		"name": "Morocco",
+		"alpha2Code": "MA",
+		"numCode": "504",
+		"shortName": "Morocco",
+		"nationality": "Moroccan"
 	},
 	"eLngMozambican": {
-	  "code": "moz",
-	  "name": "Mozambique"
+		"code": "moz",
+		"name": "Mozambique",
+		"alpha2Code": "MZ",
+		"numCode": "508",
+		"shortName": "Mozambique",
+		"nationality": "Mozambican"
 	},
 	"eLngBurmese": {
-	  "code": "mmr",
-	  "name": "Myanmar"
+		"code": "mmr",
+		"name": "Myanmar",
+		"alpha2Code": "MM",
+		"numCode": "104",
+		"shortName": "Myanmar",
+		"nationality": "Burmese"
 	},
 	"eLngNamibian": {
-	  "code": "nam",
-	  "name": "Namibia"
+		"code": "nam",
+		"name": "Namibia",
+		"alpha2Code": "NA",
+		"numCode": "516",
+		"shortName": "Namibia",
+		"nationality": "Namibian"
 	},
 	"eLngNauruan": {
-	  "code": "nru",
-	  "name": "Nauru"
+		"code": "nru",
+		"name": "Nauru",
+		"alpha2Code": "NR",
+		"numCode": "520",
+		"shortName": "Nauru",
+		"nationality": "Nauruan"
 	},
 	"eLngNepali": {
-	  "code": "npl",
-	  "name": "Nepal"
+		"code": "npl",
+		"name": "Nepal",
+		"alpha2Code": "NP",
+		"numCode": "524",
+		"shortName": "Nepal",
+		"nationality": "Nepali, Nepalese"
 	},
 	"eLngDutch": {
-	  "code": "nld",
-	  "name": "Netherlands"
+		"code": "nld",
+		"name": "Netherlands",
+		"alpha2Code": "NL",
+		"numCode": "528",
+		"shortName": "Netherlands",
+		"nationality": "Dutch"
 	},
 	"eLngNewCaledonian": {
-	  "code": "ncl",
-	  "name": "New Caledonia"
+		"code": "ncl",
+		"name": "New Caledonia",
+		"alpha2Code": "NC",
+		"numCode": "540",
+		"shortName": "New Caledonia",
+		"nationality": "New Caledonian"
 	},
 	"eLngNewZealander": {
-	  "code": "nzl",
-	  "name": "New Zealand"
+		"code": "nzl",
+		"name": "New Zealand",
+		"alpha2Code": "NZ",
+		"numCode": "554",
+		"shortName": "New Zealand",
+		"nationality": "New Zealand, NZ"
 	},
 	"eLngNicaraguan": {
-	  "code": "nic",
-	  "name": "Nicaragua"
+		"code": "nic",
+		"name": "Nicaragua",
+		"alpha2Code": "NI",
+		"numCode": "558",
+		"shortName": "Nicaragua",
+		"nationality": "Nicaraguan"
 	},
 	"eLngNigerien": {
-	  "code": "ner",
-	  "name": "Niger"
+		"code": "ner",
+		"name": "Niger",
+		"alpha2Code": "NE",
+		"numCode": "562",
+		"shortName": "Niger",
+		"nationality": "Nigerien"
 	},
 	"eLngNigerian": {
-	  "code": "nga",
-	  "name": "Nigeria"
+		"code": "nga",
+		"name": "Nigeria",
+		"alpha2Code": "NG",
+		"numCode": "566",
+		"shortName": "Nigeria",
+		"nationality": "Nigerian"
 	},
 	"eLngNiuean": {
-	  "code": "niu",
-	  "name": "Niue"
+		"code": "niu",
+		"name": "Niue",
+		"alpha2Code": "NU",
+		"numCode": "570",
+		"shortName": "Niue",
+		"nationality": "Niuean"
 	},
 	"eLngNorfolkIsland": {
-	  "code": "nfk",
-	  "name": "Norfolk Island"
+		"code": "nfk",
+		"name": "Norfolk Island",
+		"alpha2Code": "NF",
+		"numCode": "574",
+		"shortName": "Norfolk Island",
+		"nationality": "Norfolk Island"
 	},
 	"eLngNorthernMarianan": {
-	  "code": "mnp",
-	  "name": "Northern Mariana Islands"
+		"code": "mnp",
+		"name": "Northern Mariana Islands",
+		"alpha2Code": "MP",
+		"numCode": "580",
+		"shortName": "Northern Mariana Islands",
+		"nationality": "Northern Marianan"
 	},
 	"eLngNorwegian": {
-	  "code": "nor",
-	  "name": "Norway"
+		"code": "nor",
+		"name": "Norway",
+		"alpha2Code": "NO",
+		"numCode": "578",
+		"shortName": "Norway",
+		"nationality": "Norwegian"
 	},
 	"eLngOmani": {
-	  "code": "omn",
-	  "name": "Oman"
+		"code": "omn",
+		"name": "Oman",
+		"alpha2Code": "OM",
+		"numCode": "512",
+		"shortName": "Oman",
+		"nationality": "Omani"
 	},
 	"eLngPakistani": {
-	  "code": "pak",
-	  "name": "Pakistan"
+		"code": "pak",
+		"name": "Pakistan",
+		"alpha2Code": "PK",
+		"numCode": "586",
+		"shortName": "Pakistan",
+		"nationality": "Pakistani"
 	},
 	"eLngPalauan": {
-	  "code": "plw",
-	  "name": "Palau"
+		"code": "plw",
+		"name": "Palau",
+		"alpha2Code": "PW",
+		"numCode": "585",
+		"shortName": "Palau",
+		"nationality": "Palauan"
 	},
 	"eLngPalestinian": {
-	  "code": "pse",
-	  "name": "Palestine, State of"
+		"code": "pse",
+		"name": "Palestine, State of",
+		"alpha2Code": "PS",
+		"numCode": "275",
+		"shortName": "Palestine, State of",
+		"nationality": "Palestinian"
 	},
 	"eLngPanamanian": {
-	  "code": "pan",
-	  "name": "Panama"
+		"code": "pan",
+		"name": "Panama",
+		"alpha2Code": "PA",
+		"numCode": "591",
+		"shortName": "Panama",
+		"nationality": "Panamanian"
 	},
 	"eLngPapuaNewGuinean": {
-	  "code": "png",
-	  "name": "Papua New Guinea"
+		"code": "png",
+		"name": "Papua New Guinea",
+		"alpha2Code": "PG",
+		"numCode": "598",
+		"shortName": "Papua New Guinea",
+		"nationality": "Papua New Guinean, Papuan"
 	},
 	"eLngParaguayan": {
-	  "code": "pry",
-	  "name": "Paraguay"
+		"code": "pry",
+		"name": "Paraguay",
+		"alpha2Code": "PY",
+		"numCode": "600",
+		"shortName": "Paraguay",
+		"nationality": "Paraguayan"
 	},
 	"eLngPeruvian": {
-	  "code": "per",
-	  "name": "Peru"
+		"code": "per",
+		"name": "Peru",
+		"alpha2Code": "PE",
+		"numCode": "604",
+		"shortName": "Peru",
+		"nationality": "Peruvian"
 	},
 	"eLngPhilippine": {
-	  "code": "phl",
-	  "name": "Philippines"
+		"code": "phl",
+		"name": "Philippines",
+		"alpha2Code": "PH",
+		"numCode": "608",
+		"shortName": "Philippines",
+		"nationality": "Philippine, Filipino"
 	},
 	"eLngPitcairnIsland": {
-	  "code": "pcn",
-	  "name": "Pitcairn"
+		"code": "pcn",
+		"name": "Pitcairn",
+		"alpha2Code": "PN",
+		"numCode": "612",
+		"shortName": "Pitcairn",
+		"nationality": "Pitcairn Island"
 	},
 	"eLngPolish": {
-	  "code": "pol",
-	  "name": "Poland"
+		"code": "pol",
+		"name": "Poland",
+		"alpha2Code": "PL",
+		"numCode": "616",
+		"shortName": "Poland",
+		"nationality": "Polish"
 	},
 	"eLngPortuguese": {
-	  "code": "prt",
-	  "name": "Portugal"
+		"code": "prt",
+		"name": "Portugal",
+		"alpha2Code": "PT",
+		"numCode": "620",
+		"shortName": "Portugal",
+		"nationality": "Portuguese"
 	},
 	"eLngPuertoRican": {
-	  "code": "pri",
-	  "name": "Puerto Rico"
+		"code": "pri",
+		"name": "Puerto Rico",
+		"alpha2Code": "PR",
+		"numCode": "630",
+		"shortName": "Puerto Rico",
+		"nationality": "Puerto Rican"
 	},
 	"eLngQatari": {
-	  "code": "qat",
-	  "name": "Qatar"
+		"code": "qat",
+		"name": "Qatar",
+		"alpha2Code": "QA",
+		"numCode": "634",
+		"shortName": "Qatar",
+		"nationality": "Qatari"
 	},
 	"eLngRéunionese": {
-	  "code": "reu",
-	  "name": "Réunion"
+		"code": "reu",
+		"name": "Réunion",
+		"alpha2Code": "RE",
+		"numCode": "638",
+		"shortName": "Réunion",
+		"nationality": "Réunionese, Réunionnais"
 	},
 	"eLngRestOfWorld": {
 		"code": "row",
 		"name": "Rest of World"
 	},
 	"eLngRomanian": {
-	  "code": "rou",
-	  "name": "Romania"
+		"code": "rou",
+		"name": "Romania",
+		"alpha2Code": "RO",
+		"numCode": "642",
+		"shortName": "Romania",
+		"nationality": "Romanian"
 	},
 	"eLngRussian": {
-	  "code": "rus",
-	  "name": "Russian Federation"
+		"code": "rus",
+		"name": "Russian Federation",
+		"alpha2Code": "RU",
+		"numCode": "643",
+		"shortName": "Russian Federation",
+		"nationality": "Russian"
 	},
 	"eLngRwandan": {
-	  "code": "rwa",
-	  "name": "Rwanda"
+		"code": "rwa",
+		"name": "Rwanda",
+		"alpha2Code": "RW",
+		"numCode": "646",
+		"shortName": "Rwanda",
+		"nationality": "Rwandan"
 	},
 	"eLngBarthélemois": {
-	  "code": "blm",
-	  "name": "Saint Barthélemy"
+		"code": "blm",
+		"name": "Saint Barthélemy",
+		"alpha2Code": "BL",
+		"numCode": "652",
+		"shortName": "Saint Barthélemy",
+		"nationality": "Barthélemois"
 	},
 	"eLngSaintHelenian": {
-	  "code": "shn",
-	  "name": "Saint Helena, Ascension and Tristan da Cunha"
+		"code": "shn",
+		"name": "Saint Helena, Ascension and Tristan da Cunha",
+		"alpha2Code": "SH",
+		"numCode": "654",
+		"shortName": "Saint Helena, Ascension and Tristan da Cunha",
+		"nationality": "Saint Helenian"
 	},
 	"eLngKittitianorNevisian": {
-	  "code": "kna",
-	  "name": "Saint Kitts and Nevis"
+		"code": "kna",
+		"name": "Saint Kitts and Nevis",
+		"alpha2Code": "KN",
+		"numCode": "659",
+		"shortName": "Saint Kitts and Nevis",
+		"nationality": "Kittitian or Nevisian"
 	},
 	"eLngSaintLucian": {
-	  "code": "lca",
-	  "name": "Saint Lucia"
+		"code": "lca",
+		"name": "Saint Lucia",
+		"alpha2Code": "LC",
+		"numCode": "662",
+		"shortName": "Saint Lucia",
+		"nationality": "Saint Lucian"
 	},
 	"eLngSaint-Martinoise": {
-	  "code": "maf",
-	  "name": "Saint Martin (French part)"
+		"code": "maf",
+		"name": "Saint Martin (French part)",
+		"alpha2Code": "MF",
+		"numCode": "663",
+		"shortName": "Saint Martin (French part)",
+		"nationality": "Saint-Martinoise"
 	},
 	"eLngSaint-PierraisorMiquelonnais": {
-	  "code": "spm",
-	  "name": "Saint Pierre and Miquelon"
+		"code": "spm",
+		"name": "Saint Pierre and Miquelon",
+		"alpha2Code": "PM",
+		"numCode": "666",
+		"shortName": "Saint Pierre and Miquelon",
+		"nationality": "Saint-Pierrais or Miquelonnais"
 	},
 	"eLngSaintVincentian": {
-	  "code": "vct",
-	  "name": "Saint Vincent and the Grenadines"
+		"code": "vct",
+		"name": "Saint Vincent and the Grenadines",
+		"alpha2Code": "VC",
+		"numCode": "670",
+		"shortName": "Saint Vincent and the Grenadines",
+		"nationality": "Saint Vincentian, Vincentian"
 	},
 	"eLngSamoan": {
-	  "code": "wsm",
-	  "name": "Samoa"
+		"code": "wsm",
+		"name": "Samoa",
+		"alpha2Code": "WS",
+		"numCode": "882",
+		"shortName": "Samoa",
+		"nationality": "Samoan"
 	},
 	"eLngSammarinese": {
-	  "code": "smr",
-	  "name": "San Marino"
+		"code": "smr",
+		"name": "San Marino",
+		"alpha2Code": "SM",
+		"numCode": "674",
+		"shortName": "San Marino",
+		"nationality": "Sammarinese"
 	},
 	"eLngSãoToméan": {
-	  "code": "stp",
-	  "name": "Sao Tome and Principe"
+		"code": "stp",
+		"name": "Sao Tome and Principe",
+		"alpha2Code": "ST",
+		"numCode": "678",
+		"shortName": "Sao Tome and Principe",
+		"nationality": "São Toméan"
 	},
 	"eLngSaudi": {
-	  "code": "sau",
-	  "name": "Saudi Arabia"
+		"code": "sau",
+		"name": "Saudi Arabia",
+		"alpha2Code": "SA",
+		"numCode": "682",
+		"shortName": "Saudi Arabia",
+		"nationality": "Saudi, Saudi Arabian"
 	},
 	"eLngSenegalese": {
-	  "code": "sen",
-	  "name": "Senegal"
+		"code": "sen",
+		"name": "Senegal",
+		"alpha2Code": "SN",
+		"numCode": "686",
+		"shortName": "Senegal",
+		"nationality": "Senegalese"
 	},
 	"eLngSerbian": {
-	  "code": "srb",
-	  "name": "Serbia"
+		"code": "srb",
+		"name": "Serbia",
+		"alpha2Code": "RS",
+		"numCode": "688",
+		"shortName": "Serbia",
+		"nationality": "Serbian"
 	},
 	"eLngSeychellois": {
-	  "code": "syc",
-	  "name": "Seychelles"
+		"code": "syc",
+		"name": "Seychelles",
+		"alpha2Code": "SC",
+		"numCode": "690",
+		"shortName": "Seychelles",
+		"nationality": "Seychellois"
 	},
 	"eLngSierraLeonean": {
-	  "code": "sle",
-	  "name": "Sierra Leone"
+		"code": "sle",
+		"name": "Sierra Leone",
+		"alpha2Code": "SL",
+		"numCode": "694",
+		"shortName": "Sierra Leone",
+		"nationality": "Sierra Leonean"
 	},
 	"eLngSingaporean": {
-	  "code": "sgp",
-	  "name": "Singapore"
+		"code": "sgp",
+		"name": "Singapore",
+		"alpha2Code": "SG",
+		"numCode": "702",
+		"shortName": "Singapore",
+		"nationality": "Singaporean"
 	},
 	"eLngSintMaarten": {
-	  "code": "sxm",
-	  "name": "Sint Maarten (Dutch part)"
+		"code": "sxm",
+		"name": "Sint Maarten (Dutch part)",
+		"alpha2Code": "SX",
+		"numCode": "534",
+		"shortName": "Sint Maarten (Dutch part)",
+		"nationality": "Sint Maarten"
 	},
 	"eLngSlovak": {
-	  "code": "svk",
-	  "name": "Slovakia"
+		"code": "svk",
+		"name": "Slovakia",
+		"alpha2Code": "SK",
+		"numCode": "703",
+		"shortName": "Slovakia",
+		"nationality": "Slovak"
 	},
 	"eLngSlovenian": {
-	  "code": "svn",
-	  "name": "Slovenia"
+		"code": "svn",
+		"name": "Slovenia",
+		"alpha2Code": "SI",
+		"numCode": "705",
+		"shortName": "Slovenia",
+		"nationality": "Slovenian, Slovene"
 	},
 	"eLngSolomonIsland": {
-	  "code": "slb",
-	  "name": "Solomon Islands"
+		"code": "slb",
+		"name": "Solomon Islands",
+		"alpha2Code": "SB",
+		"numCode": "90",
+		"shortName": "Solomon Islands",
+		"nationality": "Solomon Island"
 	},
 	"eLngSomali": {
-	  "code": "som",
-	  "name": "Somalia"
+		"code": "som",
+		"name": "Somalia",
+		"alpha2Code": "SO",
+		"numCode": "706",
+		"shortName": "Somalia",
+		"nationality": "Somali, Somalian"
 	},
 	"eLngSouthAfrican": {
-	  "code": "zaf",
-	  "name": "South Africa"
+		"code": "zaf",
+		"name": "South Africa",
+		"alpha2Code": "ZA",
+		"numCode": "710",
+		"shortName": "South Africa",
+		"nationality": "South African"
 	},
 	"eLngSouthGeorgiaorSouthSandwichIslands": {
-	  "code": "sgs",
-	  "name": "South Georgia and the South Sandwich Islands"
+		"code": "sgs",
+		"name": "South Georgia and the South Sandwich Islands",
+		"alpha2Code": "GS",
+		"numCode": "239",
+		"shortName": "South Georgia and the South Sandwich Islands",
+		"nationality": "South Georgia or South Sandwich Islands"
 	},
 	"eLngSouthSudanese": {
-	  "code": "ssd",
-	  "name": "South Sudan"
+		"code": "ssd",
+		"name": "South Sudan",
+		"alpha2Code": "SS",
+		"numCode": "728",
+		"shortName": "South Sudan",
+		"nationality": "South Sudanese"
 	},
 	"eLngSpanish": {
-	  "code": "esp",
-	  "name": "Spain"
+		"code": "esp",
+		"name": "Spain",
+		"alpha2Code": "ES",
+		"numCode": "724",
+		"shortName": "Spain",
+		"nationality": "Spanish"
 	},
 	"eLngSriLankan": {
-	  "code": "lka",
-	  "name": "Sri Lanka"
+		"code": "lka",
+		"name": "Sri Lanka",
+		"alpha2Code": "LK",
+		"numCode": "144",
+		"shortName": "Sri Lanka",
+		"nationality": "Sri Lankan"
 	},
 	"eLngSudanese": {
-	  "code": "sdn",
-	  "name": "Sudan"
+		"code": "sdn",
+		"name": "Sudan",
+		"alpha2Code": "SD",
+		"numCode": "729",
+		"shortName": "Sudan",
+		"nationality": "Sudanese"
 	},
 	"eLngSurinamese": {
-	  "code": "sur",
-	  "name": "Suriname"
+		"code": "sur",
+		"name": "Suriname",
+		"alpha2Code": "SR",
+		"numCode": "740",
+		"shortName": "Suriname",
+		"nationality": "Surinamese"
 	},
 	"eLngSvalbard": {
-	  "code": "sjm",
-	  "name": "Svalbard and Jan Mayen"
+		"code": "sjm",
+		"name": "Svalbard and Jan Mayen",
+		"alpha2Code": "SJ",
+		"numCode": "744",
+		"shortName": "Svalbard and Jan Mayen",
+		"nationality": "Svalbard"
 	},
 	"eLngSwazi": {
-	  "code": "swz",
-	  "name": "Swaziland"
+		"code": "swz",
+		"name": "Swaziland",
+		"alpha2Code": "SZ",
+		"numCode": "748",
+		"shortName": "Swaziland",
+		"nationality": "Swazi"
 	},
 	"eLngSwedish": {
-	  "code": "swe",
-	  "name": "Sweden"
+		"code": "swe",
+		"name": "Sweden",
+		"alpha2Code": "SE",
+		"numCode": "752",
+		"shortName": "Sweden",
+		"nationality": "Swedish"
 	},
 	"eLngSwiss": {
-	  "code": "che",
-	  "name": "Switzerland"
+		"code": "che",
+		"name": "Switzerland",
+		"alpha2Code": "CH",
+		"numCode": "756",
+		"shortName": "Switzerland",
+		"nationality": "Swiss"
 	},
 	"eLngSyrian": {
-	  "code": "syr",
-	  "name": "Syrian Arab Republic"
+		"code": "syr",
+		"name": "Syrian Arab Republic",
+		"alpha2Code": "SY",
+		"numCode": "760",
+		"shortName": "Syrian Arab Republic",
+		"nationality": "Syrian"
 	},
 	"eLngTajikistani": {
-	  "code": "tjk",
-	  "name": "Tajikistan"
+		"code": "tjk",
+		"name": "Tajikistan",
+		"alpha2Code": "TJ",
+		"numCode": "762",
+		"shortName": "Tajikistan",
+		"nationality": "Tajikistani"
 	},
 	"eLngTanzanian": {
-	  "code": "tza",
-	  "name": "Tanzania, United Republic of"
+		"code": "tza",
+		"name": "Tanzania, United Republic of",
+		"alpha2Code": "TZ",
+		"numCode": "834",
+		"shortName": "Tanzania, United Republic of",
+		"nationality": "Tanzanian"
 	},
 	"eLngThai": {
-	  "code": "tha",
-	  "name": "Thailand"
+		"code": "tha",
+		"name": "Thailand",
+		"alpha2Code": "TH",
+		"numCode": "764",
+		"shortName": "Thailand",
+		"nationality": "Thai"
 	},
 	"eLngTimorese": {
-	  "code": "tls",
-	  "name": "Timor-Leste"
+		"code": "tls",
+		"name": "Timor-Leste",
+		"alpha2Code": "TL",
+		"numCode": "626",
+		"shortName": "Timor-Leste",
+		"nationality": "Timorese"
 	},
 	"eLngTogolese": {
-	  "code": "tgo",
-	  "name": "Togo"
+		"code": "tgo",
+		"name": "Togo",
+		"alpha2Code": "TG",
+		"numCode": "768",
+		"shortName": "Togo",
+		"nationality": "Togolese"
 	},
 	"eLngTokelauan": {
-	  "code": "tkl",
-	  "name": "Tokelau"
+		"code": "tkl",
+		"name": "Tokelau",
+		"alpha2Code": "TK",
+		"numCode": "772",
+		"shortName": "Tokelau",
+		"nationality": "Tokelauan"
 	},
 	"eLngTongan": {
-	  "code": "ton",
-	  "name": "Tonga"
+		"code": "ton",
+		"name": "Tonga",
+		"alpha2Code": "TO",
+		"numCode": "776",
+		"shortName": "Tonga",
+		"nationality": "Tongan"
 	},
 	"eLngTrinidadianorTobagonian": {
-	  "code": "tto",
-	  "name": "Trinidad and Tobago"
+		"code": "tto",
+		"name": "Trinidad and Tobago",
+		"alpha2Code": "TT",
+		"numCode": "780",
+		"shortName": "Trinidad and Tobago",
+		"nationality": "Trinidadian or Tobagonian"
 	},
 	"eLngTunisian": {
-	  "code": "tun",
-	  "name": "Tunisia"
+		"code": "tun",
+		"name": "Tunisia",
+		"alpha2Code": "TN",
+		"numCode": "788",
+		"shortName": "Tunisia",
+		"nationality": "Tunisian"
 	},
 	"eLngTurkish": {
-	  "code": "tur",
-	  "name": "Turkey"
+		"code": "tur",
+		"name": "Turkey",
+		"alpha2Code": "TR",
+		"numCode": "792",
+		"shortName": "Turkey",
+		"nationality": "Turkish"
 	},
 	"eLngTurkmen": {
-	  "code": "tkm",
-	  "name": "Turkmenistan"
+		"code": "tkm",
+		"name": "Turkmenistan",
+		"alpha2Code": "TM",
+		"numCode": "795",
+		"shortName": "Turkmenistan",
+		"nationality": "Turkmen"
 	},
 	"eLngTurksandCaicosIsland": {
-	  "code": "tca",
-	  "name": "Turks and Caicos Islands"
+		"code": "tca",
+		"name": "Turks and Caicos Islands",
+		"alpha2Code": "TC",
+		"numCode": "796",
+		"shortName": "Turks and Caicos Islands",
+		"nationality": "Turks and Caicos Island"
 	},
 	"eLngTuvaluan": {
-	  "code": "tuv",
-	  "name": "Tuvalu"
+		"code": "tuv",
+		"name": "Tuvalu",
+		"alpha2Code": "TV",
+		"numCode": "798",
+		"shortName": "Tuvalu",
+		"nationality": "Tuvaluan"
 	},
 	"eLngUgandan": {
-	  "code": "uga",
-	  "name": "Uganda"
+		"code": "uga",
+		"name": "Uganda",
+		"alpha2Code": "UG",
+		"numCode": "800",
+		"shortName": "Uganda",
+		"nationality": "Ugandan"
 	},
 	"eLngUkranian": {
-	  "code": "ukr",
-	  "name": "Ukraine"
+		"code": "ukr",
+		"name": "Ukraine",
+		"alpha2Code": "UA",
+		"numCode": "804",
+		"shortName": "Ukraine",
+		"nationality": "Ukrainian"
 	},
 	"eLngEmirati": {
-	  "code": "are",
-	  "name": "United Arab Emirates"
+		"code": "are",
+		"name": "United Arab Emirates",
+		"alpha2Code": "AE",
+		"numCode": "784",
+		"shortName": "United Arab Emirates",
+		"nationality": "Emirati, Emirian, Emiri"
 	},
 	"eLngEmirian": {
 		"code": "are",
-		"name": "United Arab Emirates"
+		"name": "United Arab Emirates",
+		"alpha2Code": "AE",
+		"numCode": "784",
+		"shortName": "United Arab Emirates",
+		"nationality": "Emirati, Emirian, Emiri"
 	},
 	"eLngBritish": {
-	  "code": "gbr",
-	  "name": "United Kingdom"
+		"code": "gbr",
+		"name": "United Kingdom",
+		"alpha2Code": "GB",
+		"numCode": "826",
+		"shortName": "United Kingdom of Great Britain and Northern Ireland",
+		"nationality": "British, UK"
 	},
 	"eLngAmerican": {
-	  "code": "usa",
-	  "name": "United States of America"
+		"code": "usa",
+		"name": "United States of America",
+		"alpha2Code": "US",
+		"numCode": "840",
+		"shortName": "United States of America",
+		"nationality": "American"
 	},
 	"eLngUruguayan": {
-	  "code": "ury",
-	  "name": "Uruguay"
+		"code": "ury",
+		"name": "Uruguay",
+		"alpha2Code": "UY",
+		"numCode": "858",
+		"shortName": "Uruguay",
+		"nationality": "Uruguayan"
 	},
 	"eLngUzbekistani": {
-	  "code": "uzb",
-	  "name": "Uzbekistan"
+		"code": "uzb",
+		"name": "Uzbekistan",
+		"alpha2Code": "UZ",
+		"numCode": "860",
+		"shortName": "Uzbekistan",
+		"nationality": "Uzbekistani, Uzbek"
 	},
 	"eLngNi-Vanuatu": {
-	  "code": "vut",
-	  "name": "Vanuatu"
+		"code": "vut",
+		"name": "Vanuatu",
+		"alpha2Code": "VU",
+		"numCode": "548",
+		"shortName": "Vanuatu",
+		"nationality": "Ni-Vanuatu, Vanuatuan"
 	},
 	"eLngVenezuelan": {
-	  "code": "ven",
-	  "name": "Venezuela (Bolivarian Republic of)"
+		"code": "ven",
+		"name": "Venezuela (Bolivarian Republic of)",
+		"alpha2Code": "VE",
+		"numCode": "862",
+		"shortName": "Venezuela (Bolivarian Republic of)",
+		"nationality": "Venezuelan"
 	},
 	"eLngVietnamese": {
-	  "code": "vnm",
-	  "name": "Vietnam"
+		"code": "vnm",
+		"name": "Vietnam",
+		"alpha2Code": "VN",
+		"numCode": "704",
+		"shortName": "Vietnam",
+		"nationality": "Vietnamese"
 	},
 	"eLngBritishVirginIsland": {
-	  "code": "vgb",
-	  "name": "Virgin Islands (British)"
+		"code": "vgb",
+		"name": "Virgin Islands (British)",
+		"alpha2Code": "VG",
+		"numCode": "92",
+		"shortName": "Virgin Islands (British)",
+		"nationality": "British Virgin Island"
 	},
 	"eLngU.S.VirginIsland": {
-	  "code": "vir",
-	  "name": "Virgin Islands (U.S.)"
+		"code": "vir",
+		"name": "Virgin Islands (U.S.)",
+		"alpha2Code": "VI",
+		"numCode": "850",
+		"shortName": "Virgin Islands (U.S.)",
+		"nationality": "U.S. Virgin Island"
 	},
 	"eLngWallisandFutuna": {
-	  "code": "wlf",
-	  "name": "Wallis and Futuna"
+		"code": "wlf",
+		"name": "Wallis and Futuna",
+		"alpha2Code": "WF",
+		"numCode": "876",
+		"shortName": "Wallis and Futuna",
+		"nationality": "Wallis and Futuna, Wallisian or Futunan"
 	},
 	"eLngSahrawi": {
-	  "code": "esh",
-	  "name": "Western Sahara"
+		"code": "esh",
+		"name": "Western Sahara",
+		"alpha2Code": "EH",
+		"numCode": "732",
+		"shortName": "Western Sahara",
+		"nationality": "Sahrawi, Sahrawian, Sahraouian"
 	},
 	"eLngYemeni": {
-	  "code": "yem",
-	  "name": "Yemen"
+		"code": "yem",
+		"name": "Yemen",
+		"alpha2Code": "YE",
+		"numCode": "887",
+		"shortName": "Yemen",
+		"nationality": "Yemeni"
 	},
 	"eLngZambian": {
-	  "code": "zmb",
-	  "name": "Zambia"
+		"code": "zmb",
+		"name": "Zambia",
+		"alpha2Code": "ZM",
+		"numCode": "894",
+		"shortName": "Zambia",
+		"nationality": "Zambian"
 	},
 	"eLngZimbabwean": {
-	  "code": "zwe",
-	  "name": "Zimbabwe"
+		"code": "zwe",
+		"name": "Zimbabwe",
+		"alpha2Code": "ZW",
+		"numCode": "716",
+		"shortName": "Zimbabwe",
+		"nationality": "Zimbabwean"
 	}
-  }
+}

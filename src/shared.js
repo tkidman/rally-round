@@ -1,5 +1,7 @@
+const debug = require("debug")("tkidman:dirt2-results:shared");
 const moment = require("moment");
 const countries = require("./state/constants/countries.json");
+const { keyBy } = require("lodash");
 
 const hiddenPath = "./hidden";
 const club = process.env.CLUB || "test";
@@ -8,6 +10,8 @@ const cachePath = `${hiddenPath}/cache/${club}`;
 const templatePath = `./src/output/templates`;
 
 const privateer = "privateer";
+
+const countriesByAlpha2Code = keyBy(Object.values(countries), "alpha2Code");
 
 const getTotalPoints = result => {
   let totalPoints = 0;
@@ -117,9 +121,21 @@ const formatDuration = duration => {
   return moment.utc(duration.as("milliseconds")).format("HH:mm:ss.SSS");
 };
 
-const getCountry = nationality => {
-  return countries[nationality] || countries.eLngRestOfWorld;
+const getCountryForDriver = driver => {
+  if (
+    !countries[driver.nationality] &&
+    !countriesByAlpha2Code[driver.nationality]
+  ) {
+    debug(`no country found for driver: ${JSON.stringify(driver)}`);
+  }
+  return (
+    countries[driver.nationality] ||
+    countriesByAlpha2Code[driver.nationality] ||
+    countries.eLngRestOfWorld
+  );
 };
+
+const getCountryByAlpha2Code = alpha2Code => countriesByAlpha2Code[alpha2Code];
 
 module.exports = {
   outputPath,
@@ -139,6 +155,7 @@ module.exports = {
   createDNFResult,
   getSummedTotalTime,
   formatDuration,
-  getCountry,
+  getCountryForDriver,
+  getCountryByAlpha2Code,
   addSeconds
 };

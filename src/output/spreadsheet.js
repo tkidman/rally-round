@@ -2,13 +2,12 @@ const fs = require("fs");
 const Papa = require("papaparse");
 
 const { outputPath } = require("../shared");
-const { getTeamStandingData } = require("./shared");
+const { getTeamStandingData, getLocationCountryCode } = require("./shared");
 const { getDriverStandingData } = require("./shared");
 const { getHeaderLocations } = require("./shared");
 const { getDriverData } = require("./shared");
 const { updateResultsSheet } = require("../api/sheets/sheets");
 const { leagueRef } = require("../state/league");
-const locations = require("../state/constants/locations.json");
 
 const transformForDriverResultsSheet = event => {
   const header = [
@@ -63,7 +62,7 @@ const isGoogleSheetsEnabled = sheetId => {
 
 const writeDriverResultsSheet = async (event, division) => {
   const rows = transformForDriverResultsSheet(event);
-  const { countryCode } = locations[event.location];
+  const { countryCode } = getLocationCountryCode(event);
 
   const { divisionName, outputSheetId } = division;
   if (isGoogleSheetsEnabled(division.outputSheetId)) {
