@@ -4,9 +4,10 @@ const { JRC_CALCULATIONS } = require("../../fantasy/fantasyFormulas");
 
 const initialState = {
   pointsForDNF: false,
-  // websiteName: "jrc-results",
+  websiteName: "jrc-results",
   showLivePoints: true,
   showLivePointsDaysRemaining: 4,
+  nullTeamIsPrivateer: true,
   // enableDnsPenalty: true,
   // dnsPenaltyFromFirstRound: true,
   // dropLowestScoringRoundsNumber: 1,
@@ -28,7 +29,7 @@ const initialState = {
       clubs: [
         {
           clubId: "180867",
-          championshipIds: [],
+          championshipIds: ["585786"],
           includeNextChampionships: true
         }
       ],
@@ -80,8 +81,8 @@ const initialState = {
       maxDriversScoringPointsForTeam: 2,
       clubs: [
         {
-          clubId: "180867",
-          championshipIds: [],
+          clubId: "244734",
+          championshipIds: ["585492"],
           includeNextChampionships: true
         }
       ],
@@ -134,7 +135,7 @@ const initialState = {
       clubs: [
         {
           clubId: "330674",
-          championshipIds: [],
+          championshipIds: ["585477"],
           includeNextChampionships: true
         }
       ],
@@ -185,7 +186,7 @@ const initialState = {
       clubs: [
         {
           clubId: "342117",
-          championshipIds: [],
+          championshipIds: ["585507"],
           includeNextChampionships: true
         }
       ],

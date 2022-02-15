@@ -37,6 +37,13 @@ const initialState = {
             locationName: "Arctic Nordic",
             locationFlag: "SE",
             numStages: 10
+          },
+          {
+            rbrRallyId: 41536,
+            endTime: "2022-02-28 12:59",
+            locationName: "Safari Rally Africa",
+            locationFlag: "KE",
+            numStages: 8
           }
         ]
       },
