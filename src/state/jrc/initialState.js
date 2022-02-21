@@ -2,6 +2,62 @@
 const { JRC_CALCULATIONS } = require("../../fantasy/fantasyFormulas");
 // const { privateer } = require("../../shared");
 
+const points = {
+  powerStage: [5, 4, 3, 2, 1],
+  overall: [
+    40,
+    34,
+    31,
+    29,
+    27,
+    25,
+    23,
+    21,
+    19,
+    17,
+    15,
+    14,
+    13,
+    12,
+    11,
+    10,
+    9,
+    8,
+    7,
+    6,
+    5,
+    4,
+    3,
+    2,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+  ]
+};
+
 const initialState = {
   pointsForDNF: false,
   websiteName: "jrc-results",
@@ -34,31 +90,7 @@ const initialState = {
         }
       ],
       events: [],
-      points: {
-        powerStage: [5, 4, 3, 2, 1],
-        overall: [
-          30,
-          24,
-          21,
-          19,
-          17,
-          15,
-          14,
-          13,
-          12,
-          11,
-          10,
-          9,
-          8,
-          7,
-          6,
-          5,
-          4,
-          3,
-          2,
-          1
-        ]
-      },
+      points,
       cars: [
         "SUBARU Legacy RS",
         "SUBARU Impreza 1995",
@@ -87,31 +119,7 @@ const initialState = {
         }
       ],
       events: [],
-      points: {
-        powerStage: [5, 4, 3, 2, 1],
-        overall: [
-          30,
-          24,
-          21,
-          19,
-          17,
-          15,
-          14,
-          13,
-          12,
-          11,
-          10,
-          9,
-          8,
-          7,
-          6,
-          5,
-          4,
-          3,
-          2,
-          1
-        ]
-      },
+      points,
       cars: [
         "Ford Focus RS Rally 2001",
         "Peugeot 206 Rally",
@@ -140,31 +148,7 @@ const initialState = {
         }
       ],
       events: [],
-      points: {
-        powerStage: [5, 4, 3, 2, 1],
-        overall: [
-          30,
-          24,
-          21,
-          19,
-          17,
-          15,
-          14,
-          13,
-          12,
-          11,
-          10,
-          9,
-          8,
-          7,
-          6,
-          5,
-          4,
-          3,
-          2,
-          1
-        ]
-      },
+      points,
       cars: [
         "Ford Fiesta R5",
         "ŠKODA Fabia R5",
@@ -191,31 +175,7 @@ const initialState = {
         }
       ],
       events: [],
-      points: {
-        powerStage: [5, 4, 3, 2, 1],
-        overall: [
-          30,
-          24,
-          21,
-          19,
-          17,
-          15,
-          14,
-          13,
-          12,
-          11,
-          10,
-          9,
-          8,
-          7,
-          6,
-          5,
-          4,
-          3,
-          2,
-          1
-        ]
-      },
+      points,
       manualResults: [],
       // promotionRelegation: {
       //   promotionDoubleZone: 1,
