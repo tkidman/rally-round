@@ -7,7 +7,7 @@ const initialState = {
   websiteName: "jrc-results",
   showLivePoints: true,
   showLivePointsDaysRemaining: 4,
-  nullTeamIsPrivateer: true,
+  nullTeamIsPrivateer: false,
   // enableDnsPenalty: true,
   // dnsPenaltyFromFirstRound: true,
   // dropLowestScoringRoundsNumber: 1,
