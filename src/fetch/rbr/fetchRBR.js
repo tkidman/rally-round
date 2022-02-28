@@ -101,8 +101,10 @@ const setCurrentEventEndTime = activeEvent => {
 
 const fetchRBREvents = async ({ division }) => {
   const activeEvent = getActiveEvent({ division });
-  activeEvent.eventStatus = eventStatuses.active;
-  setCurrentEventEndTime(activeEvent);
+  if (activeEvent) {
+    activeEvent.eventStatus = eventStatuses.active;
+    setCurrentEventEndTime(activeEvent);
+  }
   const events = [];
   const rallies = division.rbr.rallies;
   for (const rally of rallies) {
