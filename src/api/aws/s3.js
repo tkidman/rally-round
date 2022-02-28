@@ -83,9 +83,15 @@ const uploadHTML = async (directory, bucket, subfolderName) => {
   debug(`uploaded ${htmlFiles.length} files to s3`);
 };
 
-const uploadCache = async (directory, bucket, subfolderName) => {
+const uploadCache = async ({
+  directory,
+  bucket,
+  subfolderName,
+  fileType,
+  contentType
+}) => {
   const files = fs.readdirSync(directory);
-  const cacheFiles = files.filter(file => file.endsWith(".json"));
+  const cacheFiles = files.filter(file => file.endsWith(fileType));
   const promises = cacheFiles.map(file => {
     const key = subfolderName
       ? `${subfolderName}/cache/${file}`
@@ -94,7 +100,7 @@ const uploadCache = async (directory, bucket, subfolderName) => {
       file: `${directory}/${file}`,
       key,
       bucket,
-      contentType: "application/json"
+      contentType
     });
   });
   await Promise.all(promises);
@@ -103,7 +109,21 @@ const uploadCache = async (directory, bucket, subfolderName) => {
 
 const upload = async (bucket, subfolderName) => {
   await uploadHTML(`./${outputPath}/website`, bucket, subfolderName);
-  await uploadCache(`./${cachePath}`, bucket, subfolderName);
+  await uploadCache({
+    directory: `./${cachePath}`,
+    bucket,
+    subfolderName,
+    fileType: ".json",
+    contentType: "application/json"
+  });
+
+  await uploadCache({
+    directory: `./${cachePath}`,
+    bucket,
+    subfolderName,
+    fileType: ".csv",
+    contentType: "text/csv"
+  });
 };
 
 const downloadFiles = async (bucket, keys) => {
