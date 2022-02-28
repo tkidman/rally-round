@@ -44,6 +44,13 @@ const initialState = {
             locationName: "Safari Rally Africa",
             locationFlag: "KE",
             numStages: 8
+          },
+          {
+            rbrRallyId: 42024,
+            endTime: "2022-03-06 12:59",
+            locationName: "Rally Czechia",
+            locationFlag: "CZ",
+            numStages: 10
           }
         ]
       },
