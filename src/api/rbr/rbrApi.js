@@ -14,13 +14,14 @@ const loadFromCache = cacheFileName => {
 
 const fetchResults = async (rallyId, eventFinished) => {
   const cacheFileName = `${cachePath}/${rallyId}.csv`;
-  const cacheFile = loadFromCache(cacheFileName);
+  if (eventFinished) {
+    const cacheFile = loadFromCache(cacheFileName);
 
-  if (cacheFile) {
-    debug(`cached event results retrieved: ${cacheFileName}`);
-    return cacheFile;
+    if (cacheFile) {
+      debug(`cached event results retrieved: ${cacheFileName}`);
+      return cacheFile;
+    }
   }
-
   const response = await axios.get(
     `https://rallysimfans.hu/rbr/csv_export_beta.php?rally_id=${rallyId}&ngp_enable=6`,
     { responseType: "blob" }

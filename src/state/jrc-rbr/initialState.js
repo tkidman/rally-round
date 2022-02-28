@@ -47,7 +47,7 @@ const initialState = {
           },
           {
             rbrRallyId: 42024,
-            endTime: "2022-03-06 12:59",
+            endTime: "2022-03-07 12:59",
             locationName: "Rally Czechia",
             locationFlag: "CZ",
             numStages: 10
