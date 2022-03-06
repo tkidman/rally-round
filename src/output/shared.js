@@ -12,12 +12,18 @@ const getAllResults = (name, events, type) => {
 
 const getHeaderLocations = events => {
   const headerLocations = events.reduce((headerLocations, event) => {
-    headerLocations.push(getLocationCountryCode(event));
+    headerLocations.push({
+      eventId: event.eventId,
+      locationCode: getLocationCountryCode(event)
+    });
     return headerLocations;
   }, []);
   return headerLocations;
 };
 
+const getHeaderLocationCodes = events => {
+  return getHeaderLocations(events).map(location => location.locationCode);
+};
 const getDriverStandingData = (standing, events) => {
   const results = getAllResults(standing.name, events, "driver");
   const resultsTotalPoints = results.map(result => result.totalPoints);
@@ -82,5 +88,6 @@ module.exports = {
   getTeamStandingData,
   getDriverData,
   getLocationCountryCode,
-  getLocation
+  getLocation,
+  getHeaderLocationCodes
 };

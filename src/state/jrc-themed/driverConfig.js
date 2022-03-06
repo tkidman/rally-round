@@ -13,8 +13,8 @@ const driverColumns = {
 };
 
 const sheetsConfig = {
-  // sheetId: "1kWouazyd-eLiKmpVdmt8pF1X_A6KjBklzIGimM74Fqo",
-  // tabName: "Sheet1"
+  sheetId: "1OI4FMjDhm1kE3Ie4c6p-l23UXj28LSGarBVsNC6B19E",
+  tabName: "All tiers"
 };
 
 module.exports = { driverColumns, sheetsConfig };

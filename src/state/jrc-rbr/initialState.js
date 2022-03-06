@@ -25,28 +25,28 @@ const initialState = {
       rbr: {
         rallies: [
           {
-            rbrRallyId: 40706,
+            eventId: 40706,
             endTime: "2022-01-31 00:59",
             locationName: "Monte Carlo",
             locationFlag: "MC",
             numStages: 8
           },
           {
-            rbrRallyId: 41156,
+            eventId: 41156,
             endTime: "2022-02-14 12:59",
             locationName: "Arctic Nordic",
             locationFlag: "SE",
             numStages: 10
           },
           {
-            rbrRallyId: 41536,
+            eventId: 41536,
             endTime: "2022-02-28 12:59",
             locationName: "Safari Rally Africa",
             locationFlag: "KE",
             numStages: 8
           },
           {
-            rbrRallyId: 42024,
+            eventId: 42024,
             endTime: "2022-03-14 12:59",
             locationName: "Rally Czechia",
             locationFlag: "CZ",

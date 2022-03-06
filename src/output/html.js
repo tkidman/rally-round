@@ -377,7 +377,6 @@ const transformForDriverResultsHTML = (event, division) => {
 
 const writeDriverResultsHTML = (event, division, links) => {
   const data = transformForDriverResultsHTML(event, division);
-  const locationCountryCode = getLocationCountryCode(event);
   data.overall = division.divisionName === "overall";
 
   data.navigation = getNavigationHTML(division.divisionName, "driver", links);
@@ -397,7 +396,7 @@ const writeDriverResultsHTML = (event, division, links) => {
   const out = template(data);
 
   fs.writeFileSync(
-    `./${outputPath}/website/${division.divisionName}-${locationCountryCode}-driver-results.html`,
+    `./${outputPath}/website/${division.divisionName}-${event.eventId}-driver-results.html`,
     out
   );
 };

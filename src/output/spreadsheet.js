@@ -4,7 +4,7 @@ const Papa = require("papaparse");
 const { outputPath } = require("../shared");
 const { getTeamStandingData, getLocationCountryCode } = require("./shared");
 const { getDriverStandingData } = require("./shared");
-const { getHeaderLocations } = require("./shared");
+const { getHeaderLocationCodes } = require("./shared");
 const { getDriverData } = require("./shared");
 const { updateResultsSheet } = require("../api/sheets/sheets");
 const { leagueRef } = require("../state/league");
@@ -72,7 +72,7 @@ const writeDriverResultsSheet = async (event, division) => {
 };
 
 const transformForDriverStandingsSheets = events => {
-  const headerLocations = getHeaderLocations(events);
+  const headerLocations = getHeaderLocationCodes(events);
   const header = [
     "Pos",
     "'+/-",
@@ -110,7 +110,7 @@ const transformForDriverStandingsSheets = events => {
 };
 
 const transformForTeamStandingsSheets = events => {
-  const headerLocations = getHeaderLocations(events);
+  const headerLocations = getHeaderLocationCodes(events);
   const header = ["Pos", "'+/-", "Team", ...headerLocations, "Points"];
   const lastEvent = events[events.length - 1];
   const rows = lastEvent.standings.teamStandings.map(standing => {

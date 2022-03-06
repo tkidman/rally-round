@@ -10,7 +10,6 @@ describe("fetchRbr", () => {
       );
 
       const results = processCsv(eventResultsCsv, {
-        rbrRallyId: 40706,
         eventId: 40706,
         numStages: 2
       });
@@ -62,8 +61,7 @@ describe("fetchRbr", () => {
               }
             ]
           }
-        ],
-        rbrRallyId: 40706
+        ]
       });
     });
   });

@@ -92,9 +92,7 @@ You can also pull driver information directly from a google sheet. You need to h
 * DNF counter
 
 RBR support
-* cache rbr results - testing
-* country codes
 * vehicle config (maybe just text for a while)
-* location flags?
+* pull event data from website, only require event id to configure.
 * update with generic variable names
 * rename repo
