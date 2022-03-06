@@ -99,7 +99,17 @@ const initialState = {
       ],
       // fantasy: true,
       outputSheetId: "1P-0CJ4rm7xBaMsan0yMcFKwDIWkqjIvYWHNrjgFDixc",
-      manualResults: []
+      manualResults: [
+        {
+          eventIndex: 1,
+          results: [
+            {
+              name: "Irish_Fox74",
+              totalTime: "42:06.260"
+            }
+          ]
+        }
+      ]
       // filterEntries: {
       //   matchDivision: true
       // },
