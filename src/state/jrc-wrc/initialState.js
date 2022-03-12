@@ -1,57 +1,28 @@
 const initialState = {
   pointsForDNF: false,
   websiteName: "jrc-results",
-  subfolderName: "rbr",
+  subfolderName: "wrc",
   showLivePoints: true,
-  showLivePointsDaysRemaining: 7,
+  showLivePointsDaysRemaining: 3,
   hideCarColumnInStandings: true,
   showCarNameAsTextInResults: true,
   nullTeamIsPrivateer: true,
   // useCarAsTeam: false,
   // useCarClassAsTeam: true,
   disableOverall: true,
-  teamPointsForPowerstage: true,
+  teamPointsForPowerstage: false,
   backgroundStyle:
     "background-image: linear-gradient(315deg, #eec0c6 0%, #7ee8fa 74%); background-size: cover; background-repeat: no-repeat; background-attachment: fixed;",
   divisions: {
-    jrcRbr: {
-      divisionName: "rbrSeason1",
-      displayName: "RBR Season 1",
+    jrcWrc: {
+      divisionName: "wrcSeason1",
+      displayName: "WRC Season 1",
       disableSameCarValidation: false,
       // enableSameCarClassValidation: true,
       maxDriversScoringPointsForTeam: 2,
       // filterEntries: true,
-      rbr: {
-        rallies: [
-          {
-            eventId: 40706,
-            endTime: "2022-01-31 00:59",
-            locationName: "Monte Carlo",
-            locationFlag: "MC",
-            numStages: 8
-          },
-          {
-            eventId: 41156,
-            endTime: "2022-02-14 12:59",
-            locationName: "Arctic Nordic",
-            locationFlag: "SE",
-            numStages: 10
-          },
-          {
-            eventId: 41536,
-            endTime: "2022-02-28 12:59",
-            locationName: "Safari Rally Africa",
-            locationFlag: "KE",
-            numStages: 8
-          },
-          {
-            eventId: 42024,
-            endTime: "2022-03-14 12:59",
-            locationName: "Rally Czechia",
-            locationFlag: "CZ",
-            numStages: 10
-          }
-        ]
+      manual: {
+        sheetId: "15PKaf6DAPOHZERh3Fba75uDxuLFhWjVpXWM31K460BQ"
       },
       manualResults: [],
       events: [],

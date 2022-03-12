@@ -1,6 +1,7 @@
 const { google } = require("googleapis");
 const debug = require("debug")("tkidman:dirt2-results:sheets");
 const sheetId = "1M-JZAPJMp0ASihKi7z2kHMiL9BFi7PQlakvvl7pcal0";
+const inMemoryCache = {};
 
 const loadSheetAndTransform = async ({ sheetId, tabName }) => {
   const result = await loadSheet({ sheetId, tabName });
@@ -18,6 +19,9 @@ const loadSheetAndTransform = async ({ sheetId, tabName }) => {
 };
 
 const loadSheet = async ({ sheetId, tabName }) => {
+  if (inMemoryCache[`${sheetId}-${tabName}`]) {
+    return inMemoryCache[`${sheetId}-${tabName}`];
+  }
   const sheets = google.sheets({
     version: "v4"
   });
@@ -26,6 +30,7 @@ const loadSheet = async ({ sheetId, tabName }) => {
     auth: process.env.GOOGLE_SHEETS_API_KEY,
     range: tabName
   });
+  inMemoryCache[sheetId] = result;
   return result;
 };
 
