@@ -11,9 +11,9 @@ const getAllResults = (name, events, type) => {
 };
 
 const getHeaderLocations = events => {
-  const headerLocations = events.reduce((headerLocations, event) => {
+  const headerLocations = events.reduce((headerLocations, event, index) => {
     headerLocations.push({
-      eventId: event.eventId,
+      eventId: index,
       locationCode: getLocationCountryCode(event)
     });
     return headerLocations;

@@ -9,7 +9,6 @@ const {
   getDriverData,
   getHeaderLocations,
   getAllResults,
-  getLocationCountryCode,
   getLocation
 } = require("./shared");
 const { outputPath, templatePath } = require("../shared");
@@ -26,70 +25,6 @@ const colours = {
 };
 
 const compiled_navigation = null;
-
-const writePlacementResultsHTML = (event, division, links) => {
-  const data = transformForDriverResultsHTML(event, division);
-  const locationCountryCode = getLocationCountryCode(event);
-  data.overall = division.divisionName === "overall";
-
-  const divisionName = data.overall
-    ? "overall"
-    : division.divisionName.substring(0, 4).toUpperCase();
-  data.navigation = getNavigationHTML(event.location, divisionName, links);
-
-  data.lastUpdatedAt = moment()
-    .utc()
-    .format();
-
-  const templateFile = `${templatePath}/placementEventResults.hbs`;
-  if (!fs.existsSync(templateFile)) {
-    debug("no standings html template found, returning");
-    return;
-  }
-  const _t = fs.readFileSync(templateFile).toString();
-
-  const template = Handlebars.compile(_t);
-  const out = template(data);
-
-  fs.writeFileSync(
-    `./${outputPath}/website/${locationCountryCode}-${divisionName}-driver-results.html`,
-    out
-  );
-};
-
-const writePlacementOutput = () => {
-  const { league } = leagueRef;
-
-  const links = Object.keys(league.divisions).reduce((links, divisionName) => {
-    let division = divisionName.substring(0, 4).toUpperCase();
-    if (divisionName === "jrc33") division = "overall";
-    if (Object.keys(links).indexOf(division) === -1) {
-      links[division] = ["grc", "usa", "nzl"].reduce((_l, loc) => {
-        _l.push({
-          link: loc,
-          href: `./${loc}-${division}-driver-results.html`,
-          active: false
-        });
-        return _l;
-      }, []);
-    }
-    return links;
-  }, {});
-
-  Object.keys(league.divisions).forEach(divisionName => {
-    const division = league.divisions[divisionName];
-    const divisionEvents = division.events;
-    divisionEvents.forEach(event =>
-      writePlacementResultsHTML(event, division, links)
-    );
-  });
-  if (league.overall) {
-    const overallEvents = league.overall.events;
-    overallEvents.forEach(event =>
-      writePlacementResultsHTML(event, league.overall, links)
-    );
-  }
-};
 
 const writeFantasyHTML = (fantasyResults, links) => {
   const data = processFantasyResults(fantasyResults);
@@ -375,7 +310,7 @@ const transformForDriverResultsHTML = (event, division) => {
   };
 };
 
-const writeDriverResultsHTML = (event, division, links) => {
+const writeDriverResultsHTML = (event, division, links, eventIndex) => {
   const data = transformForDriverResultsHTML(event, division);
   data.overall = division.divisionName === "overall";
 
@@ -396,7 +331,7 @@ const writeDriverResultsHTML = (event, division, links) => {
   const out = template(data);
 
   fs.writeFileSync(
-    `./${outputPath}/website/${division.divisionName}-${event.eventId}-driver-results.html`,
+    `./${outputPath}/website/${division.divisionName}-${eventIndex}-driver-results.html`,
     out
   );
 };
@@ -406,8 +341,8 @@ const writeHTMLOutputForDivision = (division, links) => {
   if (leagueRef.hasTeams) {
     writeStandingsHTML(division, "team", links);
   }
-  division.events.forEach(event =>
-    writeDriverResultsHTML(event, division, links)
+  division.events.forEach((event, eventIndex) =>
+    writeDriverResultsHTML(event, division, links, eventIndex)
   );
 };
 
@@ -415,7 +350,6 @@ module.exports = {
   writeHomeHTML,
   writeErrorHTML,
   writeFantasyHTML,
-  writePlacementOutput,
   writeHTMLOutputForDivision,
   colours,
   // tests
