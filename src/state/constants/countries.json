@@ -1465,7 +1465,8 @@
 	},
 	"eLngRestOfWorld": {
 		"code": "row",
-		"name": "Rest of World"
+		"name": "Rest of World",
+		"alpha2Code": "RX"
 	},
 	"eLngRomanian": {
 		"code": "rou",

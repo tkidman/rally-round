@@ -186,7 +186,18 @@ const initialState = {
       ],
       events: [],
       points,
-      manualResults: [],
+      manualResults: [
+        {
+          eventIndex: 4,
+          results: [
+            {
+              name: "BuckyMcBuckster",
+              stageTime: "06:50.366",
+              totalTime: "00:46:08.907"
+            }
+          ]
+        }
+      ],
       // promotionRelegation: {
       //   promotionDoubleZone: 1,
       //   promotionZone: 7,

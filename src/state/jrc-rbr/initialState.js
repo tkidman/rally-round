@@ -50,6 +50,13 @@ const initialState = {
             locationName: "Rally Czechia",
             locationFlag: "CZ",
             numStages: 10
+          },
+          {
+            eventId: 42449,
+            endTime: "2022-03-28 12:59",
+            locationName: "SSS Rally",
+            locationFlag: "RX",
+            numStages: 13
           }
         ]
       },
