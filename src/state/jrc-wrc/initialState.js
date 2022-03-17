@@ -10,7 +10,7 @@ const initialState = {
   // useCarAsTeam: false,
   // useCarClassAsTeam: true,
   disableOverall: true,
-  teamPointsForPowerstage: true,
+  teamPointsForPowerstage: false,
   backgroundStyle:
     "background-image: linear-gradient(315deg, #eec0c6 0%, #7ee8fa 74%); background-size: cover; background-repeat: no-repeat; background-attachment: fixed;",
   divisions: {
