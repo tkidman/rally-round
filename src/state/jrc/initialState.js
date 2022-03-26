@@ -109,13 +109,13 @@ const initialState = {
             }
           ]
         }
-      ]
+      ],
       // filterEntries: {
       //   matchDivision: true
       // },
-      // promotionRelegation: {
-      //   relegationZone: 6
-      // }
+      promotionRelegation: {
+        relegationZone: 7
+      }
     },
     jrc2: {
       displayName: "JRC2",
@@ -137,14 +137,14 @@ const initialState = {
         "SUBARU Impreza S4 Rally"
       ],
       outputSheetId: "1WaBmoqfRtXO8CEGhnE2g1b93F5o2Kjh7Nx3vi13U5Tg",
-      manualResults: []
+      manualResults: [],
       // filterEntries: {
       //   matchDivision: true
       // },
-      // promotionRelegation: {
-      //   promotionZone: 7,
-      //   relegationZone: 7
-      // }
+      promotionRelegation: {
+        promotionZone: 8,
+        relegationZone: 8
+      }
     },
     jrc3: {
       displayName: "JRC3",
@@ -167,11 +167,12 @@ const initialState = {
         "Volkswagen Polo GTI R5",
         "Peugeot 208 T16 R5"
       ],
-      manualResults: []
-      // promotionRelegation: {
-      //   promotionZone: 8,
-      //   relegationZone: 8
-      // }
+      manualResults: [],
+      promotionRelegation: {
+        promotionDoubleZone: 1,
+        promotionZone: 7,
+        relegationZone: 8
+      }
     },
     jrc4: {
       displayName: "JRC4",
@@ -198,11 +199,10 @@ const initialState = {
           ]
         }
       ],
-      // promotionRelegation: {
-      //   promotionDoubleZone: 1,
-      //   promotionZone: 7,
-      //   relegationZone: 8
-      // },
+      promotionRelegation: {
+        promotionDoubleZone: 1,
+        promotionZone: 9
+      },
       cars: ["Opel Adam R2", "Peugeot 208 R2"]
       // fantasy: true
     }
