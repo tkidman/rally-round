@@ -20,10 +20,9 @@ describe("fetchRbr", () => {
           {
             entries: [
               {
-                comment: "",
-                nationality: "NZ",
                 isDnfEntry: false,
                 name: "Puki2579",
+                nationality: "NZ",
                 stageDiff: "--",
                 stageTime: "00:06:07.491",
                 totalDiff: "--",
@@ -32,10 +31,9 @@ describe("fetchRbr", () => {
                 vehicleName: "Abarth Grande Punto S2000"
               },
               {
-                comment: "",
-                nationality: "AU",
                 isDnfEntry: false,
                 name: "satchmo",
+                nationality: "AU",
                 stageDiff: "+00:00:09.275",
                 stageTime: "00:06:16.766",
                 totalDiff: "+00:00:09.275",
@@ -48,10 +46,9 @@ describe("fetchRbr", () => {
           {
             entries: [
               {
-                comment: "Rolled it",
-                nationality: "NZ",
                 isDnfEntry: false,
                 name: "Puki2579",
+                nationality: "NZ",
                 stageDiff: "--",
                 stageTime: "00:10:46.324",
                 totalDiff: "--",

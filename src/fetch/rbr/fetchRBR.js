@@ -10,8 +10,21 @@ const moment = require("moment-timezone");
 const { leagueRef } = require("../../state/league");
 const { fetchResults } = require("../../api/rbr/rbrApi");
 
+// sometimes comments can contain invalid values leading to an invalid csv
+const stripComments = eventResultsCsv => {
+  const lines = eventResultsCsv.split("\n");
+  const newLines = lines.map(line => {
+    const columns = line.split(";");
+    // comment column is the last column (13th), just use the first 12 columns
+    const newColumns = columns.slice(0, 12);
+    return newColumns.join(";");
+  });
+  return newLines.join("\n");
+};
+
 const processCsv = (eventResultsCsv, event) => {
-  const results = Papa.parse(eventResultsCsv, {
+  const strippedEventsResultCsv = stripComments(eventResultsCsv);
+  const results = Papa.parse(strippedEventsResultCsv, {
     header: true,
     skipEmptyLines: true
   });
