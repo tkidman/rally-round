@@ -41,7 +41,7 @@ describe("fetchManual", () => {
         eventId: "1",
         eventStatus: "Finished",
         locationFlag: "AU",
-        racenetLeaderboardStages: [
+        leaderboadStages: [
           {
             entries: [
               {
@@ -69,7 +69,7 @@ describe("fetchManual", () => {
         eventId: "2",
         eventStatus: "Finished",
         locationFlag: "FI",
-        racenetLeaderboardStages: [
+        leaderboadStages: [
           {
             entries: [
               {

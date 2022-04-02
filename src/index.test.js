@@ -119,7 +119,7 @@ describe("calculates event results", () => {
     ];
     const driverResults = calculateEventResults({
       event: {
-        racenetLeaderboardStages: [leaderboard, leaderboard],
+        leaderboadStages: [leaderboard, leaderboard],
         eventId: "221955"
       },
       drivers: {},
@@ -156,7 +156,7 @@ describe("calculates event results", () => {
     expect(
       calculateEventResults({
         event: {
-          racenetLeaderboardStages: [leaderboard, leaderboard]
+          leaderboadStages: [leaderboard, leaderboard]
         },
         drivers: {},
         divisionName: "pro"

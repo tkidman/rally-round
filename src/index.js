@@ -215,12 +215,9 @@ const getResultsByDriver = entries => {
   return resultsByDriver;
 };
 
-const addStageTimesToResultsByDriver = (
-  resultsByDriver,
-  racenetLeaderboardStages
-) => {
-  racenetLeaderboardStages.forEach(racenetLeaderboard => {
-    racenetLeaderboard.entries.forEach(driverTime => {
+const addStageTimesToResultsByDriver = (resultsByDriver, leaderboadStages) => {
+  leaderboadStages.forEach(leadboardStage => {
+    leadboardStage.entries.forEach(driverTime => {
       const driver = resultsByDriver[driverTime.name];
       if (!driver) return;
       if (!driver.stageTimes) driver.stageTimes = [];
@@ -314,10 +311,10 @@ const filterStage = ({ stage, division }) => {
   recalculateDiffs(stage.entries);
 };
 
-const filterRacenetLeaderboardStages = ({ event, drivers, divisionName }) => {
+const filterleaderboadStages = ({ event, drivers, divisionName }) => {
   const division = leagueRef.divisions[divisionName];
   if (division.filterEntries) {
-    event.racenetLeaderboardStages.forEach(stage => {
+    event.leaderboadStages.forEach(stage => {
       filterStage({
         stage,
         division,
@@ -334,15 +331,14 @@ const calculateEventResults = ({
   eventIndex
 }) => {
   const firstStageResultsByDriver = getResultsByDriver(
-    event.racenetLeaderboardStages[0].entries,
+    event.leaderboadStages[0].entries,
     divisionName
   );
 
   // alert! mutations to the racenetLeaderboard entries occur here, and should only occur here
-  filterRacenetLeaderboardStages({ event, drivers, divisionName });
+  filterleaderboadStages({ event, drivers, divisionName });
   const lastStageEntries =
-    event.racenetLeaderboardStages[event.racenetLeaderboardStages.length - 1]
-      .entries;
+    event.leaderboadStages[event.leaderboadStages.length - 1].entries;
   setManualResults({
     eventIndex,
     entries: lastStageEntries,
@@ -369,7 +365,7 @@ const calculateEventResults = ({
   });
 
   // cascade DNF results for appended events
-  event.racenetLeaderboardStages.forEach(stage => {
+  event.leaderboadStages.forEach(stage => {
     stage.entries.forEach(entry => {
       const driver = leagueRef.getDriver(entry.name);
       if (
@@ -387,16 +383,13 @@ const calculateEventResults = ({
     });
   });
 
-  event.racenetLeaderboardStages.forEach(stage => {
+  event.leaderboadStages.forEach(stage => {
     recalculateDiffs(stage.entries);
   });
   // end alert
 
   if (leagueRef.league.getAllResults)
-    addStageTimesToResultsByDriver(
-      resultsByDriver,
-      event.racenetLeaderboardStages
-    );
+    addStageTimesToResultsByDriver(resultsByDriver, event.leaderboadStages);
 
   // dnf entries are sorted below non-dnf entries
   const powerStageEntries = orderEntriesBy(lastStageEntries, "stageTime");
@@ -419,7 +412,7 @@ const calculateEventResults = ({
       "overallPoints"
     );
     if (division.points.stage) {
-      event.racenetLeaderboardStages.forEach(stage => {
+      event.leaderboadStages.forEach(stage => {
         const stageEntries = orderEntriesBy(stage.entries, "stageTime");
         updatePoints(
           resultsByDriver,
@@ -711,14 +704,14 @@ const loadEventDriver = (entry, drivers, divisionName) => {
 };
 
 const loadEventDrivers = (drivers, event) => {
-  event.racenetLeaderboardStages[0].entries.forEach(entry => {
+  event.leaderboadStages[0].entries.forEach(entry => {
     loadEventDriver(entry, drivers, event.divisionName);
   });
-  event.racenetLeaderboardStages[
-    event.racenetLeaderboardStages.length - 1
-  ].entries.forEach(entry => {
-    loadEventDriver(entry, drivers, event.divisionName);
-  });
+  event.leaderboadStages[event.leaderboadStages.length - 1].entries.forEach(
+    entry => {
+      loadEventDriver(entry, drivers, event.divisionName);
+    }
+  );
   return drivers;
 };
 

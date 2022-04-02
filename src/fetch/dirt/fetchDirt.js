@@ -34,19 +34,19 @@ const fetchEventsForClub = async ({
   const events = await fetchEventsFromKeys(eventKeys, getAllResults);
 
   if (club.cachedEvent) {
-    const racenetLeaderboardStages = [];
+    const leaderboadStages = [];
     club.cachedEvent.files.forEach(fileName => {
       const leaderboard = JSON.parse(
         fs.readFileSync(`${cachePath}/${fileName}`, "utf8")
       );
-      racenetLeaderboardStages.push(leaderboard);
+      leaderboadStages.push(leaderboard);
     });
     const cachedEvent = {
       eventId: club.cachedEvent.eventId,
       divisionName,
       location: club.cachedEvent.location,
       eventStatus: eventStatuses.finished,
-      racenetLeaderboardStages
+      leaderboadStages
     };
     events.splice(club.cachedEvent.index, 0, cachedEvent);
   }
@@ -144,19 +144,19 @@ const getLastStageIds = ({ challengeId, championshipId, recentResults }) => {
 const fetchEventsFromKeys = async (eventKeys, getAllResults) => {
   const events = [];
   for (const key of eventKeys) {
-    const racenetLeaderboardStages = [];
+    const leaderboadStages = [];
     for (let i = 0; i <= key.lastStageId; i++) {
       if (getAllResults || i === 0 || i === key.lastStageId) {
         let racenetLeaderboard = await fetchEventResults({
           ...key,
           stageId: i
         });
-        racenetLeaderboardStages.push(racenetLeaderboard);
+        leaderboadStages.push(racenetLeaderboard);
       }
     }
     events.push({
       ...key,
-      racenetLeaderboardStages
+      leaderboadStages
     });
   }
   return events;
@@ -166,15 +166,15 @@ const mergeEvent = (mergedEvent, event) => {
   if (mergedEvent.location !== event.location) {
     throw new Error("multiclass championship but events do not line up.");
   }
-  for (let i = 0; i < event.racenetLeaderboardStages.length; i++) {
-    mergedEvent.racenetLeaderboardStages[i].entries.push(
-      ...event.racenetLeaderboardStages[i].entries
+  for (let i = 0; i < event.leaderboadStages.length; i++) {
+    mergedEvent.leaderboadStages[i].entries.push(
+      ...event.leaderboadStages[i].entries
     );
   }
 };
 
 const recalculateEventDiffs = event => {
-  event.racenetLeaderboardStages.forEach(stage => {
+  event.leaderboadStages.forEach(stage => {
     recalculateDiffs(stage.entries);
   });
 };
@@ -216,11 +216,11 @@ const appendResultsToPreviousEvent = (
   }
   const event = mergedEvents[club.appendToEventIndex];
   const lastStageBeforeAppend =
-    event.racenetLeaderboardStages[event.racenetLeaderboardStages.length - 1];
+    event.leaderboadStages[event.leaderboadStages.length - 1];
   const eventToAppend = eventToAppendArray[0];
-  eventToAppend.racenetLeaderboardStages.forEach(stage => {
+  eventToAppend.leaderboadStages.forEach(stage => {
     const adjustedStage = adjustAppendStageTimes(stage, lastStageBeforeAppend);
-    event.racenetLeaderboardStages.push(adjustedStage);
+    event.leaderboadStages.push(adjustedStage);
   });
 };
 

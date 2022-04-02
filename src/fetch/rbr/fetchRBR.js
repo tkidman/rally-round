@@ -28,10 +28,10 @@ const processCsv = (eventResultsCsv, event) => {
     header: true,
     skipEmptyLines: true
   });
-  // convert into racenetLeaderboardStages -> entries (per stage)
+  // convert into leaderboadStages -> entries (per stage)
   const resultRows = results.data;
   const numStages = event.numStages;
-  const racenetLeaderboardStages = Array.from(Array(numStages), () => ({
+  const leaderboadStages = Array.from(Array(numStages), () => ({
     entries: []
   }));
   resultRows.forEach(row => {
@@ -46,17 +46,17 @@ const processCsv = (eventResultsCsv, event) => {
       stageTime: formatDuration(stageDuration)
     };
     const stageIndex = row.stage_no - 1;
-    racenetLeaderboardStages[stageIndex].entries.push(commonResult);
+    leaderboadStages[stageIndex].entries.push(commonResult);
   });
 
   // calc total time
   for (let i = 0; i < numStages; i++) {
-    const stageResults = racenetLeaderboardStages[i].entries;
+    const stageResults = leaderboadStages[i].entries;
     stageResults.forEach(result => {
       if (i === 0) {
         result.totalTime = result.stageTime;
       } else {
-        const previousResult = racenetLeaderboardStages[i - 1].entries.find(
+        const previousResult = leaderboadStages[i - 1].entries.find(
           prevResult => prevResult.name === result.name
         );
         result.totalTime = formatDuration(
@@ -69,7 +69,7 @@ const processCsv = (eventResultsCsv, event) => {
     recalculateDiffs(stageResults);
   }
   return {
-    racenetLeaderboardStages,
+    leaderboadStages,
     ...event
   };
 };
