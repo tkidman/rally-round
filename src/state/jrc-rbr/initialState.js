@@ -57,6 +57,13 @@ const initialState = {
             locationName: "SSS Rally",
             locationFlag: "RX",
             numStages: 13
+          },
+          {
+            eventId: 42799,
+            endTime: "2022-04-11 12:59",
+            locationName: "Rally New Zealand",
+            locationFlag: "NZ",
+            numStages: 11
           }
         ]
       },
