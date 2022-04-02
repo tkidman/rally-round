@@ -1,6 +1,11 @@
-# Dirt Rally 2.0 results
+# Rally Round
 
-Does your league do wild crazy things not supported by the basic Dirt Rally 2.0 league implementation, like teams and powerstages? This utility is here to help.
+* Scores results across virtual rally events into championships
+* Can pull results from Dirt Rally 2.0 APIs, RichardBurnsRally hu plugin events, and manually entered results via Google Sheets
+* Supports teams and tiers / divisions
+* Configurable points and powerstage points
+* Writes output as html & csv, and integrates with AWS S3 to publish the html.
+* Output looks like this: http://jrc-results.s3-website-ap-southeast-2.amazonaws.com/index.html
 
 ## Setup
 
