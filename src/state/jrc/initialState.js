@@ -60,7 +60,7 @@ const points = {
 
 const initialState = {
   pointsForDNF: false,
-  // websiteName: "jrc-results",
+  websiteName: "jrc-results",
   showLivePoints: true,
   showLivePointsDaysRemaining: 4,
   nullTeamIsPrivateer: false,
