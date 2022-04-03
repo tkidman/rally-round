@@ -199,6 +199,16 @@ const initialState = {
               totalTime: "00:46:08.907"
             }
           ]
+        },
+        {
+          eventIndex: 6,
+          results: [
+            {
+              name: "rallylad",
+              stageTime: "04:06.589",
+              totalTime: "00:52:47.799"
+            }
+          ]
         }
       ],
       promotionRelegation: {
