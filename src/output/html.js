@@ -54,7 +54,8 @@ const writeFantasyHTML = (fantasyResults, links) => {
     teams: data.teams,
     navigation: roster_nav,
     prices: data.prices,
-    backgroundStyle: leagueRef.league.backgroundStyle
+    backgroundStyle: leagueRef.league.backgroundStyle,
+    logo: leagueRef.league.logo
   };
 
   fs.writeFileSync(
@@ -122,14 +123,17 @@ const getNavigationHTML = (
     links,
     secondary: headerLocations,
     endTime: leagueRef.endTime,
-    activeCountry: leagueRef.activeCountryCode
+    activeCountry: leagueRef.activeCountryCode,
+    logo: leagueRef.league.logo,
+    siteTitlePrefix: leagueRef.league.siteTitlePrefix
   });
 };
 
 const writeHomeHTML = links => {
   const data = {
     navigation: getNavigationHTML("", "", links, null),
-    backgroundStyle: leagueRef.league.backgroundStyle
+    backgroundStyle: leagueRef.league.backgroundStyle,
+    logo: leagueRef.league.logo
   };
   const homeTemplateFile = `${templatePath}/home.hbs`;
   if (!fs.existsSync(homeTemplateFile)) {
@@ -147,7 +151,8 @@ const writeHomeHTML = links => {
 const writeErrorHTML = links => {
   const data = {
     navigation: getNavigationHTML("", "", links, null),
-    backgroundStyle: leagueRef.league.backgroundStyle
+    backgroundStyle: leagueRef.league.backgroundStyle,
+    logo: leagueRef.league.logo
   };
   const templateFile = `${templatePath}/error.hbs`;
   if (!fs.existsSync(templateFile)) {
@@ -258,11 +263,11 @@ const transformForStandingsHTML = (division, type) => {
       !leagueRef.league.hideCarColumnInStandings &&
       leagueRef.league.showCarNameAsTextInStandings,
     title: division.displayName || division.divisionName,
-    logo: division.logo || "JRC.png",
     divisionName: division.divisionName,
     showPointsAfterDropRounds:
       leagueRef.league.dropLowestScoringRoundsNumber > 0,
-    backgroundStyle: leagueRef.league.backgroundStyle
+    backgroundStyle: leagueRef.league.backgroundStyle,
+    logo: leagueRef.league.logo
   };
 };
 
@@ -293,7 +298,6 @@ const transformForDriverResultsHTML = (event, division) => {
   return {
     rows,
     title: division.displayName || divisionName,
-    logo: division.logo || "JRC.png",
     showTeam: leagueRef.hasTeams && !leagueRef.league.useNationalityAsTeam,
     showCar: leagueRef.hasCars || leagueRef.league.showCarNameAsTextInResults,
     showCarName: leagueRef.league.showCarNameAsTextInResults,
@@ -305,7 +309,8 @@ const transformForDriverResultsHTML = (event, division) => {
     backgroundStyle: leagueRef.league.backgroundStyle,
     incorrectCarTimePenaltySeconds:
       leagueRef.league.incorrectCarTimePenaltySeconds,
-    incorrectCarTimePenalty: !!leagueRef.league.incorrectCarTimePenaltySeconds
+    incorrectCarTimePenalty: !!leagueRef.league.incorrectCarTimePenaltySeconds,
+    logo: leagueRef.league.logo
     // stages: rows[0].stageTimes
   };
 };

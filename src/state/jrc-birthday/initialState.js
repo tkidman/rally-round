@@ -11,6 +11,8 @@ const initialState = {
   teamPointsForPowerstage: false,
   backgroundStyle:
     "background-image: url('./assets/birthday.jpg'); background-size: cover; background-repeat: no-repeat; background-attachment: fixed;",
+  logo: "JRC.png",
+  siteTitlePrefix: "JRC",
   divisions: {
     combined: {
       divisionName: "R5R2",

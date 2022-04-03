@@ -67,7 +67,7 @@ const writeOutput = async () => {
     return true;
   }
   const links = getHtmlLinks();
-  if (!league.subfolderName) {
+  if (!league.subfolderName && !league.useStandingsForHome) {
     writeHomeHTML(links);
     writeErrorHTML(links);
   }

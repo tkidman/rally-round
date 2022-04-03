@@ -101,3 +101,10 @@ RBR support
 * pull event data from website, only require event id to configure.
 * update with generic variable names
 * rename repo
+
+* knapsack problem for drop rounds
+* double points for endurance rounds
+* double points for non superrally 
+* Team as text only
+* Better debugging for manual results
+* Better debugging generally

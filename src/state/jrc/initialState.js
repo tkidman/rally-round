@@ -77,6 +77,8 @@ const initialState = {
   // incorrectCarTimePenaltySeconds: 120,
   backgroundStyle:
     "background-image: linear-gradient(to left, #2c3e50, #fd746c); background-size: cover; background-repeat: no-repeat; background-attachment: fixed;",
+  logo: "JRC.png",
+  siteTitlePrefix: "JRC",
   divisions: {
     jrc1: {
       displayName: "JRC",

@@ -4,6 +4,8 @@ const initialState = {
   subfolderName: "endurance",
   showLivePoints: false,
   showCarNameAsTextInResults: true,
+  logo: "JRC.png",
+  siteTitlePrefix: "JRC",
   divisions: {
     endurance: {
       divisionName: "endurance",
