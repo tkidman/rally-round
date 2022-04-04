@@ -86,25 +86,18 @@ You can also pull driver information directly from a google sheet. You need to h
 * Recalculate diffs in overall and show in overall results ✓
 * Relegation zone colours ✓
 * Show car used by missing drivers ✓
-* Show car used in driver results for multi class championships
-* Shared assets across sub-sites
-* Order 0 points above DNFs
+* Show car used in driver results for multi class championships ✓
 * Toggle for live / actual points
 * enable cloudfront
-* get a cheap domain jrc.xyz?
-* Define required car per event
-* Support multiple driver cars (to support division promotions mid season)
-* DNF counter
+* Better logging for manual events parsing
+* Better logging generally
 
 RBR support
 * vehicle config (maybe just text for a while)
 * pull event data from website, only require event id to configure.
-* update with generic variable names
-* rename repo
 
+RSC support
 * knapsack problem for drop rounds
 * double points for endurance rounds
 * double points for non superrally 
 * Team as text only
-* Better debugging for manual results
-* Better debugging generally
