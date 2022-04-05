@@ -1,4 +1,5 @@
 const { getCountryByAlpha2Code, eventStatuses } = require("../../shared");
+const debug = require("debug")("tkidman:fetchManual");
 const moment = require("moment-timezone");
 const { leagueRef } = require("../../state/league");
 const { loadSheetAndTransform } = require("../../api/sheets/sheets");
@@ -35,7 +36,16 @@ const populateManualEvents = resultRows => {
           : null
       };
     }
-    const driver = leagueRef.getDriver(row.Driver);
+    let driver = leagueRef.getDriver(row.Driver);
+    if (!driver) {
+      debug(`unable to find driver details for ${row.Driver}, using defaults`);
+      driver = {
+        name: row.Driver,
+        car: "Unknown",
+        nationality: "RX"
+      };
+      leagueRef.addDriver(driver);
+    }
     const entry = {
       name: row.Driver,
       isDnfEntry: !!row.DNF,

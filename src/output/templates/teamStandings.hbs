@@ -28,7 +28,7 @@
                             <th></th>
                             <th>Team</th>
                             {{#each headerLocations}}
-                            <th><img src="./assets/country-flags/{{this.locationCode}}.png" /></th>
+                            <th><img src="./assets/country-flags/{{this.locationCode}}.png"  alt="{{this.locationCode}}"/></th>
                             {{/each}}
                             <th>Points</th>
                         </tr>
@@ -52,13 +52,13 @@
                             {{#if ../useNationalityAsTeam}}
                                 <td>
                                     <img src="./assets/country-flags/{{country.code}}.png"
-                                        style="max-width:2em; max-height:2em;" />
+                                        style="max-width:2em; max-height:2em;" alt="{{country.code}}"/>
                                 </td>
                                 <td class="text-left bold">{{country.name}}</td>
                             {{else}}
                                 <td>
                                     <img src="./assets/teams/{{standing.name}}.png"
-                                        style="max-width:2em; max-height:2em;" />
+                                        style="max-width:2em; max-height:2em;"  alt="{{standing.name}}"/>
                                 </td>
                                 <td class="text-left bold">{{standing.name}}</td>
                             {{/if}}

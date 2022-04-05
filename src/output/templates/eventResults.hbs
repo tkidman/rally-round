@@ -54,7 +54,7 @@
                     <tr>
                         <td>{{this.position}}</td>
                         <td>
-                            <img src="./assets/country-flags/{{this.country.code}}.png" style="max-width:1.5em; max-height:1.5em;" />
+                            <img src="./assets/country-flags/{{this.country.code}}.png" style="max-width:1.5em; max-height:1.5em;" alt="{{this.country.code}}" title="{{this.country.code}}"/>
                         </td>
                         <td class="text-left bold">{{this.driver.name}}</td>
                         {{#if ../overall}}
@@ -62,7 +62,7 @@
                         {{/if}}
                         {{#if ../showTeam}}
                             <td>
-                                <img src="./assets/teams/{{this.teamId}}.png" style="max-width:2em; max-height:2em;" />
+                                <img src="./assets/teams/{{this.teamId}}.png" style="max-width:2em; max-height:2em;" alt="{{this.teamId}}" title="{{this.teamId}}"/>
                             </td>
                         {{/if}}
                         {{#if ../showCar}}
@@ -72,7 +72,7 @@
                                 </td>
                             {{else}}
                                 <td>
-                                    <img src="./assets/cars/{{this.car}}.png" style="max-width:2em; max-height:2em;" />
+                                    <img src="./assets/cars/{{this.car}}.png" style="max-width:2em; max-height:2em;" alt="{{this.car}}" title="{{this.car}}"/>
                                 </td>
                             {{/if}}
                         {{/if}}

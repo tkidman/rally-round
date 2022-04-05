@@ -17,14 +17,14 @@ const initialState = {
   siteTitlePrefix: "JRC",
   divisions: {
     jrcWrc: {
-      divisionName: "wrcSeason1",
-      displayName: "WRC Season 1",
+      divisionName: "wrcSeason2",
+      displayName: "WRC Season 2",
       disableSameCarValidation: false,
       // enableSameCarClassValidation: true,
       maxDriversScoringPointsForTeam: 2,
       // filterEntries: true,
       manual: {
-        sheetId: "15PKaf6DAPOHZERh3Fba75uDxuLFhWjVpXWM31K460BQ"
+        sheetId: "1XLdvxPe9bCZybKWb9nPTCn7kItN-7Xfwtt9LF_KLLNw"
       },
       manualResults: [],
       events: [],
