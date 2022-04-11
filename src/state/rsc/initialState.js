@@ -27,11 +27,11 @@ const initialState = {
       rbr: {
         rallies: [
           {
-            eventId: 42799,
-            endTime: "2022-04-11 12:59",
-            locationName: "Rally New Zealand",
-            locationFlag: "NZ",
-            numStages: 11
+            eventId: 43066,
+            endTime: "2022-04-25 12:00",
+            locationName: "Rally GB",
+            locationFlag: "GB",
+            numStages: 20
           }
         ]
       },
