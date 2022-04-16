@@ -31,7 +31,12 @@
                                 <th>Div</th>
                             {{/if}}
                             {{#if showTeam}}
-                            <th>Team</th>
+                                {{#unless hideTeamLogoColumn}}
+                                    <th>Team</th>
+                                {{/unless}}
+                                {{#if showTeamNameTextColumn}}
+                                    <th>Team Name</th>
+                                {{/if}}
                             {{/if}}
                             {{#if showCar}}
                             <th>Car</th>
@@ -76,9 +81,14 @@
                                 <td>{{this.divisionDisplayName}}</td>
                             {{/if}}
                             {{#if ../showTeam}}
-                                <td>
-                                    <img src="./assets/teams/{{this.driver.teamId}}.png" style="max-width:2em; max-height:2em;" alt="{{this.driver.teamId}}" title="{{this.driver.teamId}}"/>
-                                </td>
+                                {{#unless ../hideTeamLogoColumn}}
+                                    <td>
+                                        <img src="./assets/teams/{{this.driver.teamId}}.png" style="max-width:2em; max-height:2em;" alt="{{this.driver.teamId}}" title="{{this.driver.teamId}}"/>
+                                    </td>
+                                {{/unless}}
+                                {{#if ../showTeamNameTextColumn}}
+                                    <td class="text-left">{{this.driver.teamId}}</td>
+                                {{/if}}
                             {{/if}}
                             {{#if ../showCar}}
                                 {{#if ../showCarName}}

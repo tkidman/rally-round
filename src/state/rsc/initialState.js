@@ -10,6 +10,8 @@ const initialState = {
   nullTeamIsPrivateer: true,
   // useCarAsTeam: false,
   // useCarClassAsTeam: true,
+  showTeamNameTextColumn: true,
+  hideTeamLogoColumn: true,
   disableOverall: true,
   teamPointsForPowerstage: false,
   backgroundStyle:

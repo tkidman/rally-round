@@ -25,8 +25,10 @@
                         <tr>
                             <th></th>
                             <th></th>
-                            <th></th>
-                            <th>Team</th>
+                            {{#unless hideTeamLogoColumn}}
+                                <th></th>
+                            {{/unless}}
+                            <th>Team Name</th>
                             {{#each headerLocations}}
                             <th><img src="./assets/country-flags/{{this.locationCode}}.png"  alt="{{this.locationCode}}"/></th>
                             {{/each}}
@@ -50,16 +52,20 @@
                                 {{/if}}
                             </td>
                             {{#if ../useNationalityAsTeam}}
-                                <td>
-                                    <img src="./assets/country-flags/{{country.code}}.png"
-                                        style="max-width:2em; max-height:2em;" alt="{{country.code}}"/>
-                                </td>
+                                {{#unless ../hideTeamLogoColumn}}
+                                    <td>
+                                        <img src="./assets/country-flags/{{country.code}}.png"
+                                            style="max-width:2em; max-height:2em;" alt="{{country.code}}"/>
+                                    </td>
+                                {{/unless}}
                                 <td class="text-left bold">{{country.name}}</td>
                             {{else}}
-                                <td>
-                                    <img src="./assets/teams/{{standing.name}}.png"
-                                        style="max-width:2em; max-height:2em;"  alt="{{standing.name}}"/>
-                                </td>
+                                {{#unless ../hideTeamLogoColumn}}
+                                    <td>
+                                        <img src="./assets/teams/{{standing.name}}.png"
+                                            style="max-width:2em; max-height:2em;"  alt="{{standing.name}}"/>
+                                    </td>
+                                {{/unless}}
                                 <td class="text-left bold">{{standing.name}}</td>
                             {{/if}}
                             {{#each results}}{{#with this}}

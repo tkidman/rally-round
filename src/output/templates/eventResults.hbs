@@ -30,7 +30,12 @@
                         <th>Div</th>
                     {{/if}}
                     {{#if showTeam}}
-                        <th>Team</th>
+                        {{#unless hideTeamLogoColumn}}
+                            <th>Team</th>
+                        {{/unless}}
+                        {{#if showTeamNameTextColumn}}
+                            <th>Team Name</th>
+                        {{/if}}
                     {{/if}}
                     {{#if showCar}}
                         <th>Car</th>
@@ -61,10 +66,15 @@
                             <td>{{this.divisionDisplayName}}</td>
                         {{/if}}
                         {{#if ../showTeam}}
-                            <td>
-                                <img src="./assets/teams/{{this.teamId}}.png" style="max-width:2em; max-height:2em;" alt="{{this.teamId}}" title="{{this.teamId}}"/>
-                            </td>
-                        {{/if}}
+                            {{#unless ../hideTeamLogoColumn}}
+                                <td>
+                                    <img src="./assets/teams/{{this.teamId}}.png" style="max-width:2em; max-height:2em;" alt="{{this.teamId}}" title="{{this.teamId}}"/>
+                                </td>
+                            {{/unless}}
+                            {{#if ../showTeamNameTextColumn}}
+                                <td class="text-left">{{this.teamId}}</td>
+                            {{/if}}
+                       {{/if}}
                         {{#if ../showCar}}
                             {{#if ../showCarName}}
                                 <td class="text-left">

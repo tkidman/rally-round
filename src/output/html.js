@@ -267,7 +267,9 @@ const transformForStandingsHTML = (division, type) => {
     showPointsAfterDropRounds:
       leagueRef.league.dropLowestScoringRoundsNumber > 0,
     backgroundStyle: leagueRef.league.backgroundStyle,
-    logo: leagueRef.league.logo
+    logo: leagueRef.league.logo,
+    showTeamNameTextColumn: leagueRef.league.showTeamNameTextColumn,
+    hideTeamLogoColumn: leagueRef.league.hideTeamLogoColumn
   };
 };
 
@@ -310,8 +312,8 @@ const transformForDriverResultsHTML = (event, division) => {
     incorrectCarTimePenaltySeconds:
       leagueRef.league.incorrectCarTimePenaltySeconds,
     incorrectCarTimePenalty: !!leagueRef.league.incorrectCarTimePenaltySeconds,
-    logo: leagueRef.league.logo
-    // stages: rows[0].stageTimes
+    logo: leagueRef.league.logo,
+    hideTeamLogoColumn: leagueRef.league.hideTeamLogoColumn
   };
 };
 
