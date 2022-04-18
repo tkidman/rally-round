@@ -3,7 +3,7 @@ const initialState = {
   websiteName: "rsc-results",
   useStandingsForHome: true,
   // subfolderName: "rbr",
-  showLivePoints: true,
+  showLivePoints: false,
   showLivePointsDaysRemaining: 4,
   hideCarColumnInStandings: true,
   showCarNameAsTextInResults: true,
