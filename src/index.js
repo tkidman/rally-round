@@ -24,19 +24,30 @@ const { getTotalPoints } = require("./shared");
 const { calculateFantasyStandings } = require("./fantasy/fantasyCalculator");
 const { fetchEvents } = require("./fetch/fetch");
 
-const updatePoints = (resultsByDriver, orderedEntries, points, pointsField) => {
+const updatePoints = ({
+  resultsByDriver,
+  orderedEntries,
+  points,
+  pointsField,
+  event
+}) => {
   for (let i = 0; i < points.length; i++) {
     if (orderedEntries.length > i) {
       const entry = orderedEntries[i];
       const driver = leagueRef.getDriver(entry.name);
       if (!entry.isDnfEntry || leagueRef.league.pointsForDNF) {
         let newPoints = points[i];
+
         if (
           leagueRef.league.noSuperRallyPointsMultiplier &&
           !entry.superRally &&
           pointsField === "overallPoints"
         ) {
           newPoints *= leagueRef.league.noSuperRallyPointsMultiplier;
+        }
+
+        if (event.enduranceRoundMultiplier && pointsField === "overallPoints") {
+          newPoints *= event.enduranceRoundMultiplier;
         }
         if (resultsByDriver[driver.name][pointsField]) {
           newPoints += resultsByDriver[driver.name][pointsField];
@@ -406,27 +417,30 @@ const calculateEventResults = ({
     event.eventStatus === eventStatuses.finished ||
     leagueRef.showLivePoints()
   ) {
-    updatePoints(
+    updatePoints({
       resultsByDriver,
-      powerStageEntries,
-      division.points.powerStage,
-      "powerStagePoints"
-    );
-    updatePoints(
+      orderedEntries: powerStageEntries,
+      points: division.points.powerStage,
+      pointsField: "powerStagePoints",
+      event
+    });
+    updatePoints({
       resultsByDriver,
-      totalEntries,
-      division.points.overall,
-      "overallPoints"
-    );
+      orderedEntries: totalEntries,
+      points: division.points.overall,
+      pointsField: "overallPoints",
+      event
+    });
     if (division.points.stage) {
       event.leaderboadStages.forEach(stage => {
         const stageEntries = orderEntriesBy(stage.entries, "stageTime");
-        updatePoints(
+        updatePoints({
           resultsByDriver,
-          stageEntries,
-          division.points.stage,
-          "stagePoints"
-        );
+          orderedEntries: stageEntries,
+          points: division.points.stage,
+          pointsField: "stagePoints",
+          event
+        });
       });
     }
   }

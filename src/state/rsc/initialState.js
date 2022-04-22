@@ -1,6 +1,6 @@
 const initialState = {
   pointsForDNF: false,
-  websiteName: "rsc-results",
+  // websiteName: "rsc-results",
   useStandingsForHome: true,
   // subfolderName: "rbr",
   showLivePoints: true,
@@ -35,7 +35,8 @@ const initialState = {
             endTime: "2022-04-25 12:00",
             locationName: "Rally GB",
             locationFlag: "GB",
-            numStages: 20
+            numStages: 20,
+            enduranceRoundMultiplier: 2
           }
         ]
       },
