@@ -142,7 +142,7 @@ const max = (a, b) => {
 };
 
 // knapsack problem!! https://www.geeksforgeeks.org/0-1-knapsack-problem-dp-10/
-const knapSack = (W, wt, val, n) => {
+const knapsack = (W, wt, val, n) => {
   let i, w;
   let K = new Array(n + 1);
 
@@ -182,5 +182,5 @@ module.exports = {
   getCountryForDriver,
   getCountryByAlpha2Code,
   addSeconds,
-  knapSack
+  knapsack
 };
