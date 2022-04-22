@@ -1,6 +1,6 @@
 const initialState = {
   pointsForDNF: false,
-  // websiteName: "rsc-results",
+  websiteName: "rsc-results",
   useStandingsForHome: true,
   // subfolderName: "rbr",
   showLivePoints: true,
