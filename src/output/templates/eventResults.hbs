@@ -44,6 +44,9 @@
                     <td>Diff</td>
                     <td>Total</td>
                     <td>Diff</td>
+                    {{#if showSuperRallyColumn}}
+                        <td>SR</td>
+                    {{/if}}
                     {{#if showStagePoints}}
                         <td>Stage Points</td>
                     {{/if}}
@@ -90,6 +93,11 @@
                         <td>{{this.entry.stageDiff}}</td>
                         <td>{{this.entry.totalTime}}{{#if this.entry.penaltyReason}}*{{/if}}</td>
                         <td>{{this.entry.totalDiff}}</td>
+                        {{#if ../showSuperRallyColumn}}
+                            <td>
+                                {{this.entry.superRally}}
+                            </td>
+                        {{/if}}
                         {{#if ../showStagePoints}}
                             <td>{{this.stagePoints}}</td>
                         {{/if}}

@@ -31,6 +31,13 @@ const updatePoints = (resultsByDriver, orderedEntries, points, pointsField) => {
       const driver = leagueRef.getDriver(entry.name);
       if (!entry.isDnfEntry || leagueRef.league.pointsForDNF) {
         let newPoints = points[i];
+        if (
+          leagueRef.league.noSuperRallyPointsMultiplier &&
+          !entry.superRally &&
+          pointsField === "overallPoints"
+        ) {
+          newPoints *= leagueRef.league.noSuperRallyPointsMultiplier;
+        }
         if (resultsByDriver[driver.name][pointsField]) {
           newPoints += resultsByDriver[driver.name][pointsField];
         }

@@ -8,7 +8,8 @@ const {
 const Papa = require("papaparse");
 const moment = require("moment-timezone");
 const { leagueRef } = require("../../state/league");
-const { fetchResults } = require("../../api/rbr/rbrApi");
+const { fetchResults, fetchStandings } = require("../../api/rbr/rbrApi");
+const { keyBy } = require("lodash");
 
 // sometimes comments can contain invalid values leading to an invalid csv
 const stripComments = eventResultsCsv => {
@@ -22,13 +23,20 @@ const stripComments = eventResultsCsv => {
   return newLines.join("\n");
 };
 
-const processCsv = (eventResultsCsv, event) => {
+const processCsv = (eventResultsCsv, eventStandingsCsv, event) => {
+  const standings = Papa.parse(eventStandingsCsv, {
+    header: true,
+    skipEmptyLines: true
+  }).data;
+
+  const standingsByUserName = keyBy(standings, "user_name");
   const strippedEventsResultCsv = stripComments(eventResultsCsv);
+
   const results = Papa.parse(strippedEventsResultCsv, {
     header: true,
     skipEmptyLines: true
   });
-  // convert into leaderboadStages -> entries (per stage)
+  // convert into leaderboardStages -> entries (per stage)
   const resultRows = results.data;
   const numStages = event.numStages;
   const leaderboadStages = Array.from(Array(numStages), () => ({
@@ -36,6 +44,9 @@ const processCsv = (eventResultsCsv, event) => {
   }));
   resultRows.forEach(row => {
     const stageDuration = moment.duration(parseFloat(row.time3), "seconds");
+    const superRally = standingsByUserName[row.user]
+      ? Number(standingsByUserName[row.user].super_rally)
+      : null;
     const commonResult = {
       name: row.user,
       isDnfEntry: false,
@@ -43,7 +54,8 @@ const processCsv = (eventResultsCsv, event) => {
       vehicleClass: row.car_group,
       nationality: row.nationality,
       comment: row.comment,
-      stageTime: formatDuration(stageDuration)
+      stageTime: formatDuration(stageDuration),
+      superRally
     };
     const stageIndex = row.stage_no - 1;
     leaderboadStages[stageIndex].entries.push(commonResult);
@@ -77,7 +89,11 @@ const processCsv = (eventResultsCsv, event) => {
 const fetchEvent = async event => {
   const eventFinished = isFinished(event);
   const eventResultsCsv = await fetchResults(event.eventId, isFinished(event));
-  const processedEvent = processCsv(eventResultsCsv, event);
+  const eventStandingsCsv = await fetchStandings(
+    event.eventId,
+    isFinished(event)
+  );
+  const processedEvent = processCsv(eventResultsCsv, eventStandingsCsv, event);
   if (eventFinished) {
     processedEvent.eventStatus = eventStatuses.finished;
   }

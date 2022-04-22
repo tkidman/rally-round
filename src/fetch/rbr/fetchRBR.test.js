@@ -9,7 +9,11 @@ describe("fetchRbr", () => {
         "utf8"
       );
 
-      const results = processCsv(eventResultsCsv, {
+      const eventStandingsCsv = fs.readFileSync(
+        `src/fetch/rbr/__fixtures__/40706_standings.csv`,
+        "utf8"
+      );
+      const results = processCsv(eventResultsCsv, eventStandingsCsv, {
         eventId: 40706,
         numStages: 2
       });
@@ -28,7 +32,8 @@ describe("fetchRbr", () => {
                 totalDiff: "--",
                 totalTime: "00:06:07.491",
                 vehicleClass: "Super 2000",
-                vehicleName: "Abarth Grande Punto S2000"
+                vehicleName: "Abarth Grande Punto S2000",
+                superRally: 0
               },
               {
                 isDnfEntry: false,
@@ -39,7 +44,8 @@ describe("fetchRbr", () => {
                 totalDiff: "+00:00:09.275",
                 totalTime: "00:06:16.766",
                 vehicleClass: "Super 2000",
-                vehicleName: "Peugeot 207 S2000 Evolution Plus"
+                vehicleName: "Peugeot 207 S2000 Evolution Plus",
+                superRally: 2
               }
             ]
           },
@@ -54,7 +60,8 @@ describe("fetchRbr", () => {
                 totalDiff: "--",
                 totalTime: "00:16:53.815",
                 vehicleClass: "Super 2000",
-                vehicleName: "Abarth Grande Punto S2000"
+                vehicleName: "Abarth Grande Punto S2000",
+                superRally: 0
               }
             ]
           }

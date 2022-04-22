@@ -313,7 +313,8 @@ const transformForDriverResultsHTML = (event, division) => {
       leagueRef.league.incorrectCarTimePenaltySeconds,
     incorrectCarTimePenalty: !!leagueRef.league.incorrectCarTimePenaltySeconds,
     logo: leagueRef.league.logo,
-    hideTeamLogoColumn: leagueRef.league.hideTeamLogoColumn
+    hideTeamLogoColumn: leagueRef.league.hideTeamLogoColumn,
+    showSuperRallyColumn: leagueRef.league.showSuperRallyColumn
   };
 };
 
