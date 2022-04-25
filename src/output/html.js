@@ -314,7 +314,10 @@ const transformForDriverResultsHTML = (event, division) => {
     incorrectCarTimePenalty: !!leagueRef.league.incorrectCarTimePenaltySeconds,
     logo: leagueRef.league.logo,
     hideTeamLogoColumn: leagueRef.league.hideTeamLogoColumn,
-    showSuperRallyColumn: leagueRef.league.showSuperRallyColumn
+    showSuperRallyColumn: leagueRef.league.showSuperRallyColumn,
+    fullResultsLink: division.rbr
+      ? `https://rallysimfans.hu/rbr/rally_online.php?centerbox=rally_results.php&rally_id=${event.eventId}`
+      : null
   };
 };
 

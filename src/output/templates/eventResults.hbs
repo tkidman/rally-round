@@ -124,6 +124,11 @@
                     <p>endurance round: points multiplied by {{event.enduranceRoundMultiplier}}</p>
                 </div>
             {{/if}}
+            {{#if fullResultsLink}}
+                <div style="margin:0 auto; text-align:center;">
+                    <a href="{{fullResultsLink}}" target="_none">full results</a>
+                </div>
+            {{/if}}
         </div>
     </div>
 </div>
