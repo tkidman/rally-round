@@ -2003,5 +2003,10 @@
 		"numCode": "716",
 		"shortName": "Zimbabwe",
 		"nationality": "Zimbabwean"
+	},
+	"eLngNorthWest": {
+		"code": "nwx",
+		"name": "North West",
+		"alpha2Code": "NX"
 	}
 }

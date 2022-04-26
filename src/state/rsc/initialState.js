@@ -37,6 +37,13 @@ const initialState = {
             locationFlag: "GB",
             numStages: 20,
             enduranceRoundMultiplier: 2
+          },
+          {
+            eventId: 43383,
+            endTime: "2022-05-02 12:00",
+            locationName: "North West Stages",
+            locationFlag: "NX",
+            numStages: 7
           }
         ]
       },
