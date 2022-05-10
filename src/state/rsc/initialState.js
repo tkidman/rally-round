@@ -51,6 +51,13 @@ const initialState = {
             locationName: "Rally Papua New Guinea",
             locationFlag: "PG",
             numStages: 8
+          },
+          {
+            eventId: 43759,
+            endTime: "2022-05-16 12:00",
+            locationName: "Rally Sweden",
+            locationFlag: "SE",
+            numStages: 7
           }
         ]
       },
