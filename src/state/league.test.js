@@ -1,5 +1,5 @@
 const moment = require("moment");
-const { leagueRef, init } = require("./league");
+const { leagueRef, init, getTeamIds } = require("./league");
 
 const driver = {
   car: "Alpine Renault A110 1600 S",
@@ -56,5 +56,16 @@ describe("league", () => {
       leagueRef.league.showLivePointsDaysRemaining = null;
       expect(leagueRef.showLivePoints()).toBeTruthy();
     });
+  });
+
+  test("getTeamIds", () => {
+    const teamIds = getTeamIds();
+    expect(teamIds).toEqual([
+      "Time Penalty Boys",
+      "Unlimited Pedal Works",
+      "Ditch Dusters",
+      "Flat Out Racing",
+      "Full Send"
+    ]);
   });
 });

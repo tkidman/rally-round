@@ -4,7 +4,7 @@ const { orderEntriesBy } = require("./shared");
 const debug = require("debug")("tkidman:dirt2-results");
 const { eventStatuses } = require("./shared");
 const { privateer } = require("./shared");
-const { printMissingDrivers } = require("./state/league");
+const { printMissingDrivers, getTeamIds } = require("./state/league");
 const { sortBy, keyBy } = require("lodash");
 const { cachePath } = require("./shared");
 const fs = require("fs");
@@ -69,6 +69,7 @@ const calculateTeamResults = (
   const sortedDriverResults = [...driverResults].sort(
     (a, b) => b[pointsField] - a[pointsField]
   );
+  const teamIds = getTeamIds();
   const teamResults = sortedDriverResults.reduce((teamResults, result) => {
     const driver = leagueRef.getDriver(result.name);
     if (driver) {
@@ -104,6 +105,16 @@ const calculateTeamResults = (
     }
     return teamResults;
   }, {});
+  teamIds.forEach(teamId => {
+    if (!teamResults[teamId]) {
+      // add missing result for teams added after the championship has started
+      teamResults[teamId] = {
+        name: teamId,
+        totalPoints: 0,
+        driverResultsCounted: 0
+      };
+    }
+  });
   return teamResults;
 };
 

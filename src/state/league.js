@@ -209,6 +209,11 @@ const getDriversByDivision = division => {
   });
 };
 
+const getTeamIds = () => {
+  const teamIdsObj = keyBy(drivers.driversById, driver => driver.teamId);
+  return Object.keys(teamIdsObj);
+};
+
 const printMissingDrivers = () => {
   debug(`missing drivers:`);
   Object.values(missingDrivers).forEach(driver => {
@@ -220,5 +225,6 @@ module.exports = {
   init,
   leagueRef,
   getDriversByDivision,
+  getTeamIds,
   printMissingDrivers
 };

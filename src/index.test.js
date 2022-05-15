@@ -141,6 +141,20 @@ describe("calculates event results", () => {
       {
         divisionName: "pro",
         driverResultsCounted: 0,
+        name: "Full Send",
+        pointsDisplay: 0,
+        totalPoints: 0
+      },
+      {
+        divisionName: "pro",
+        driverResultsCounted: 0,
+        name: "Flat Out Racing",
+        pointsDisplay: 0,
+        totalPoints: 0
+      },
+      {
+        divisionName: "pro",
+        driverResultsCounted: 0,
         name: "Ditch Dusters",
         pointsDisplay: 0,
         totalPoints: 0

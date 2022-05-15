@@ -20,6 +20,9 @@ const initialState = {
     "background-image: linear-gradient(315deg, #ffffff 0%, #d7e1ec 74%); background-size: cover; background-repeat: no-repeat; background-attachment: fixed;",
   logo: "rsc-guy.png",
   siteTitlePrefix: "RSC",
+  teamOverride: {
+    Hawk24: ["privateer", "privateer", "privateer"]
+  },
   divisions: {
     rsc: {
       divisionName: "rsc",
