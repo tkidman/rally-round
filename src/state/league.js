@@ -2,7 +2,7 @@ const { keyBy } = require("lodash");
 const Papa = require("papaparse");
 const fs = require("fs");
 const debug = require("debug")("tkidman:dirt2-results:state");
-const { club } = require("../shared");
+const { club, privateer } = require("../shared");
 const league = require(`./${club}/initialState`);
 const { driverColumns, sheetsConfig } = require(`./${club}/driverConfig`);
 const driverFieldNames = require("./constants/driverFieldNames");
@@ -211,6 +211,7 @@ const getDriversByDivision = division => {
 
 const getTeamIds = () => {
   const teamIdsObj = keyBy(drivers.driversById, driver => driver.teamId);
+  delete teamIdsObj[privateer];
   return Object.keys(teamIdsObj);
 };
 
