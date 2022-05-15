@@ -6,6 +6,10 @@ const initialState = {
   showLivePoints: true,
   showLivePointsDaysRemaining: 4,
   noSuperRallyPointsMultiplier: 2,
+  dropLowestScoringRoundsNumber: 3,
+  afterDropRoundMessage:
+    "*After Dropped Rounds: total points after 3 lowest scoring rounds removed - endurance rounds counts as 2",
+  sortByDropRoundPoints: false,
   showSuperRallyColumn: true,
   hideCarColumnInStandings: true,
   showCarNameAsTextInResults: true,

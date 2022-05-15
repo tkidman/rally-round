@@ -1,11 +1,11 @@
 const { downloadCache } = require("./api/aws/s3");
-const { orderResultsBy } = require("./shared");
+const { orderResultsBy, knapsack } = require("./shared");
 const { orderEntriesBy } = require("./shared");
 const debug = require("debug")("tkidman:dirt2-results");
 const { eventStatuses } = require("./shared");
 const { privateer } = require("./shared");
 const { printMissingDrivers, getTeamIds } = require("./state/league");
-const { sortBy, keyBy } = require("lodash");
+const { sortBy, keyBy, sum } = require("lodash");
 const { cachePath } = require("./shared");
 const fs = require("fs");
 const { createDNFResult } = require("./shared");
@@ -482,21 +482,34 @@ const calculateEventResults = ({
   return { driverResults, teamResults };
 };
 
-const removeLowestResults = (allResultsForName, dropRounds) => {
-  let results = [...allResultsForName];
+const calculateTotalPointsAfterDropRounds = ({
+  allResultsForName,
+  totalPoints,
+  events,
+  dropRounds,
+  showLivePoints
+}) => {
+  const results = [...allResultsForName];
   if (dropRounds) {
-    if (leagueRef.showLivePoints()) {
+    if (showLivePoints) {
       const result = results[results.length - 1];
       if (result.entry && result.entry.isDnsEntry) {
         results.pop();
       }
     }
-    const sortedResultsForName = [...results].sort(
-      (a, b) => a.totalPoints - b.totalPoints
+    const points = results.map(result => result.totalPoints);
+    const roundWeights = events
+      .map(event => event.enduranceRoundMultiplier || 1)
+      .slice(0, points.length);
+    const allowedRoundsWeight = Math.max(sum(roundWeights) - dropRounds, 0);
+    const pointsAfterDropRounds = knapsack(
+      allowedRoundsWeight,
+      roundWeights,
+      points
     );
-    return sortedResultsForName.slice(dropRounds);
+    return pointsAfterDropRounds;
   }
-  return allResultsForName;
+  return totalPoints;
 };
 
 const isDnsPenalty = allResultsForDriver => {
@@ -567,7 +580,8 @@ const calculateStandings = ({
   previousStandings,
   previousEvents,
   resultType,
-  divisionName
+  divisionName,
+  currentEvent
 }) => {
   const standings = results.map(result => {
     const standing = {
@@ -581,18 +595,17 @@ const calculateStandings = ({
       );
     });
     const allResultsForName = [...previousResultsForName, result];
-    const bestResultsForName = removeLowestResults(
-      allResultsForName,
-      leagueRef.league.dropLowestScoringRoundsNumber
-    );
     standing.totalPoints = sumBy(
       allResultsForName,
       result => result.totalPoints
     );
-    standing.totalPointsAfterDropRounds = sumBy(
-      bestResultsForName,
-      result => result.totalPoints
-    );
+    standing.totalPointsAfterDropRounds = calculateTotalPointsAfterDropRounds({
+      allResultsForName,
+      totalPoints: standing.totalPoints,
+      events: [...(previousEvents || []), currentEvent],
+      dropRounds: leagueRef.league.dropLowestScoringRoundsNumber,
+      showLivePoints: leagueRef.showLivePoints()
+    });
     if (previousStandings) {
       const previousStanding = previousStandings.find(
         standing => standing.name === result.name
@@ -610,13 +623,22 @@ const calculateStandings = ({
     }
     return standing;
   });
+
   const sortedStandings = sortBy(standings, standing => {
-    const dropRoundSortModifier =
-      resultType === resultTypes.driver
-        ? standing.totalPointsAfterDropRounds * 1000000
-        : 0;
-    // sort by totalPointsAfterDropRounds first then by totalPoints if totalPointsAfterDropRounds equal
-    return 0 - dropRoundSortModifier - standing.totalPoints;
+    if (resultType === resultType.team) {
+      return 0 - standing.totalPoints;
+    }
+
+    if (leagueRef.league.sortByDropRoundPoints) {
+      const dropRoundSortModifier =
+        standing.totalPointsAfterDropRounds * 1000000;
+      // sort by totalPointsAfterDropRounds first then by totalPoints if totalPointsAfterDropRounds equal
+      return 0 - dropRoundSortModifier - standing.totalPoints;
+    }
+
+    const totalPointsSortModifier = standing.totalPoints * 1000000;
+    // sort by totalPoints first then by totalPointsAfterDropRounds if totalPoints are equal
+    return 0 - totalPointsSortModifier - standing.totalPointsAfterDropRounds;
   });
 
   for (let i = 0; i < sortedStandings.length; i++) {
@@ -652,7 +674,8 @@ const calculateEventStandings = (event, previousEvents, divisionName) => {
     previousStandings: previousDriverStandings,
     previousEvents,
     resultType: "driverResults",
-    divisionName
+    divisionName,
+    currentEvent: event
   });
 
   const previousTeamStandings = previousEvent
@@ -663,7 +686,8 @@ const calculateEventStandings = (event, previousEvents, divisionName) => {
     previousStandings: previousTeamStandings,
     previousEvents,
     resultType: "teamResults",
-    divisionName
+    divisionName,
+    currentEvent: event
   });
   event.standings = { driverStandings, teamStandings };
 };
@@ -890,5 +914,6 @@ module.exports = {
   calculateOverall,
   isDnsPenalty,
   calculatePromotionRelegation,
-  calculatePromotionRelegations
+  calculatePromotionRelegations,
+  calculateTotalPointsAfterDropRounds
 };

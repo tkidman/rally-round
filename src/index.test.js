@@ -2,7 +2,8 @@ const {
   calculateEventResults,
   sortTeamResults,
   calculateEventStandings,
-  calculateOverall
+  calculateOverall,
+  calculateTotalPointsAfterDropRounds
 } = require("./index");
 const leaderboard = require("./__fixtures__/leaderboard");
 const moment = require("moment");
@@ -529,6 +530,127 @@ describe("calculates event results", () => {
           dnsPenalty: false
         }
       ]);
+    });
+  });
+
+  describe("calculateTotalPointsAfterDropRounds", () => {
+    // this is also tested in 'calculates standings with previous standings'
+    it("calculates total points after drop rounds", () => {
+      const events = [
+        {
+          enduranceRoundMultiplier: 2
+        },
+        {},
+        {},
+        {}
+      ];
+      const allResultsForName = [
+        { totalPoints: 20 },
+        { totalPoints: 15 },
+        { totalPoints: 8 }
+      ];
+      const totalPoints = 43;
+      const dropRounds = 2;
+      const points = calculateTotalPointsAfterDropRounds({
+        allResultsForName,
+        totalPoints,
+        dropRounds,
+        events,
+        showLivePoints: false
+      });
+      expect(points).toEqual(23);
+    });
+
+    it("calculates total points after drop rounds all events complete", () => {
+      const events = [
+        {
+          enduranceRoundMultiplier: 2
+        },
+        {},
+        {},
+        {}
+      ];
+      const allResultsForName = [
+        { totalPoints: 20 },
+        { totalPoints: 15 },
+        { totalPoints: 8 },
+        { totalPoints: 9 }
+      ];
+      const totalPoints = 43;
+      const dropRounds = 2;
+      const points = calculateTotalPointsAfterDropRounds({
+        allResultsForName,
+        totalPoints,
+        dropRounds,
+        events,
+        showLivePoints: false
+      });
+      expect(points).toEqual(35);
+    });
+
+    it("works with only 1 event", () => {
+      const events = [
+        {
+          enduranceRoundMultiplier: 2
+        }
+      ];
+      const allResultsForName = [{ totalPoints: 4 }];
+      const totalPoints = 4;
+      const dropRounds = 4;
+      const points = calculateTotalPointsAfterDropRounds({
+        allResultsForName,
+        totalPoints,
+        dropRounds,
+        events,
+        showLivePoints: false
+      });
+      expect(points).toEqual(0);
+    });
+
+    it("works with live points and DNS result as only result", () => {
+      const events = [
+        {
+          enduranceRoundMultiplier: 2
+        }
+      ];
+      const allResultsForName = [{ entry: { isDnsEntry: true } }];
+      const totalPoints = 0;
+      const dropRounds = 4;
+      const points = calculateTotalPointsAfterDropRounds({
+        allResultsForName,
+        totalPoints,
+        dropRounds,
+        events,
+        showLivePoints: true
+      });
+      expect(points).toEqual(0);
+    });
+
+    it("works with live points and DNS result", () => {
+      const events = [
+        {
+          enduranceRoundMultiplier: 2
+        },
+        {},
+        {},
+        {}
+      ];
+      const allResultsForName = [
+        { totalPoints: 20 },
+        { totalPoints: 15 },
+        { totalPoints: 8 },
+        { entry: { isDnsEntry: true } }
+      ];
+      const totalPoints = 0;
+      const dropRounds = 2;
+      const points = calculateTotalPointsAfterDropRounds({
+        allResultsForName,
+        totalPoints,
+        dropRounds,
+        events,
+        showLivePoints: true
+      });
+      expect(points).toEqual(23);
     });
   });
 });

@@ -266,6 +266,9 @@ const transformForStandingsHTML = (division, type) => {
     divisionName: division.divisionName,
     showPointsAfterDropRounds:
       leagueRef.league.dropLowestScoringRoundsNumber > 0,
+    afterDropRoundMessage:
+      leagueRef.league.afterDropRoundMessage ||
+      "*After Drop Round: total points after lowest scoring round removed",
     backgroundStyle: leagueRef.league.backgroundStyle,
     logo: leagueRef.league.logo,
     showTeamNameTextColumn: leagueRef.league.showTeamNameTextColumn,
