@@ -71,7 +71,8 @@ const initialState = {
             endTime: "2022-05-30 12:00",
             locationName: "Rally Czechia",
             locationFlag: "CZ",
-            numStages: 19
+            numStages: 19,
+            enduranceRoundMultiplier: 2
           }
         ]
       },
