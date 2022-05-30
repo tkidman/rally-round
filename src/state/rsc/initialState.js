@@ -8,8 +8,8 @@ const initialState = {
   noSuperRallyPointsMultiplier: 2,
   dropLowestScoringRoundsNumber: 3,
   afterDropRoundMessage:
-    "*After Dropped Rounds: total points after 3 lowest scoring rounds removed - endurance rounds counts as 2",
-  sortByDropRoundPoints: false,
+    "*After Dropped Rounds: total points after 3 lowest scoring rounds removed - endurance rounds count as 2",
+  sortByDropRoundPoints: true,
   showSuperRallyColumn: true,
   hideCarColumnInStandings: true,
   showCarNameAsTextInResults: true,
@@ -73,10 +73,32 @@ const initialState = {
             locationFlag: "CZ",
             numStages: 19,
             enduranceRoundMultiplier: 2
+          },
+          {
+            eventId: 44262,
+            endTime: "2022-06-06 12:00",
+            locationName: "Sunriser 400 Forest Rally",
+            locationFlag: "US",
+            numStages: 9
           }
         ]
       },
-      manualResults: [],
+      manualResults: [
+        {
+          eventIndex: 4,
+          results: [
+            {
+              name: "satchmo",
+              totalTime: "01:37:14.719"
+            },
+            {
+              name: "ninko",
+              totalTime: "02:02:23.359",
+              superRally: 8
+            }
+          ]
+        }
+      ],
       events: [],
       points: {
         powerStage: [5, 4, 3, 2, 1],
