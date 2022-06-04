@@ -869,7 +869,9 @@
 	},
 	"eLngNorthernIrish": {
 		"code": "nre",
-		"name": "Northern Ireland"
+		"alpha2Code": "NY",
+		"name": "Northern Ireland",
+		"shortName": "Northern Ireland"
 	},
 	"eLngManx": {
 		"code": "imn",
