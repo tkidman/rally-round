@@ -68,7 +68,10 @@ const getLocationCountryCode = event => {
   if (event.location) {
     return locations[event.location].countryCode;
   }
-  return getCountryByAlpha2Code(event.locationFlag).code;
+  if (getCountryByAlpha2Code(event.locationFlag)) {
+    return getCountryByAlpha2Code(event.locationFlag).code;
+  }
+  return event.locationFlag;
 };
 
 const getLocation = event => {
