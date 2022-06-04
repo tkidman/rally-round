@@ -13,6 +13,8 @@ const privateer = "privateer";
 
 const countriesByAlpha2Code = keyBy(Object.values(countries), "alpha2Code");
 
+const countriesByCode = keyBy(Object.values(countries), "code");
+
 const getTotalPoints = result => {
   let totalPoints = 0;
   totalPoints += result.powerStagePoints ? result.powerStagePoints : 0;
@@ -124,13 +126,15 @@ const formatDuration = duration => {
 const getCountryForDriver = driver => {
   if (
     !countries[driver.nationality] &&
-    !countriesByAlpha2Code[driver.nationality]
+    !countriesByAlpha2Code[driver.nationality] &&
+    !countriesByCode[driver.nationality]
   ) {
     debug(`no country found for driver: ${JSON.stringify(driver)}`);
   }
   return (
     countries[driver.nationality] ||
     countriesByAlpha2Code[driver.nationality] ||
+    countriesByCode[driver.nationality] ||
     countries.eLngRestOfWorld
   );
 };
