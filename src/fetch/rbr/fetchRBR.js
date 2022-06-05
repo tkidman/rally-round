@@ -39,7 +39,7 @@ const processCsv = (eventResultsCsv, eventStandingsCsv, event) => {
   // convert into leaderboardStages -> entries (per stage)
   const resultRows = results.data;
   const numStages = event.numStages;
-  const leaderboadStages = Array.from(Array(numStages), () => ({
+  const leaderboardStages = Array.from(Array(numStages), () => ({
     entries: []
   }));
   resultRows.forEach(row => {
@@ -58,17 +58,17 @@ const processCsv = (eventResultsCsv, eventStandingsCsv, event) => {
       superRally
     };
     const stageIndex = row.stage_no - 1;
-    leaderboadStages[stageIndex].entries.push(commonResult);
+    leaderboardStages[stageIndex].entries.push(commonResult);
   });
 
   // calc total time
   for (let i = 0; i < numStages; i++) {
-    const stageResults = leaderboadStages[i].entries;
+    const stageResults = leaderboardStages[i].entries;
     stageResults.forEach(result => {
       if (i === 0) {
         result.totalTime = result.stageTime;
       } else {
-        const previousResult = leaderboadStages[i - 1].entries.find(
+        const previousResult = leaderboardStages[i - 1].entries.find(
           prevResult => prevResult.name === result.name
         );
         result.totalTime = formatDuration(
@@ -81,7 +81,7 @@ const processCsv = (eventResultsCsv, eventStandingsCsv, event) => {
     recalculateDiffs(stageResults);
   }
   return {
-    leaderboadStages,
+    leaderboardStages,
     ...event
   };
 };

@@ -20,7 +20,7 @@ describe("fetchRbr", () => {
       expect(results).toEqual({
         eventId: 40706,
         numStages: 2,
-        leaderboadStages: [
+        leaderboardStages: [
           {
             entries: [
               {

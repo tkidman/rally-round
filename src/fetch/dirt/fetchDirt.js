@@ -34,19 +34,19 @@ const fetchEventsForClub = async ({
   const events = await fetchEventsFromKeys(eventKeys, getAllResults);
 
   if (club.cachedEvent) {
-    const leaderboadStages = [];
+    const leaderboardStages = [];
     club.cachedEvent.files.forEach(fileName => {
       const leaderboard = JSON.parse(
         fs.readFileSync(`${cachePath}/${fileName}`, "utf8")
       );
-      leaderboadStages.push(leaderboard);
+      leaderboardStages.push(leaderboard);
     });
     const cachedEvent = {
       eventId: club.cachedEvent.eventId,
       divisionName,
       location: club.cachedEvent.location,
       eventStatus: eventStatuses.finished,
-      leaderboadStages
+      leaderboardStages
     };
     events.splice(club.cachedEvent.index, 0, cachedEvent);
   }
@@ -144,19 +144,19 @@ const getLastStageIds = ({ challengeId, championshipId, recentResults }) => {
 const fetchEventsFromKeys = async (eventKeys, getAllResults) => {
   const events = [];
   for (const key of eventKeys) {
-    const leaderboadStages = [];
+    const leaderboardStages = [];
     for (let i = 0; i <= key.lastStageId; i++) {
       if (getAllResults || i === 0 || i === key.lastStageId) {
         let racenetLeaderboard = await fetchEventResults({
           ...key,
           stageId: i
         });
-        leaderboadStages.push(racenetLeaderboard);
+        leaderboardStages.push(racenetLeaderboard);
       }
     }
     events.push({
       ...key,
-      leaderboadStages
+      leaderboardStages
     });
   }
   return events;
@@ -166,15 +166,15 @@ const mergeEvent = (mergedEvent, event) => {
   if (mergedEvent.location !== event.location) {
     throw new Error("multiclass championship but events do not line up.");
   }
-  for (let i = 0; i < event.leaderboadStages.length; i++) {
-    mergedEvent.leaderboadStages[i].entries.push(
-      ...event.leaderboadStages[i].entries
+  for (let i = 0; i < event.leaderboardStages.length; i++) {
+    mergedEvent.leaderboardStages[i].entries.push(
+      ...event.leaderboardStages[i].entries
     );
   }
 };
 
 const recalculateEventDiffs = event => {
-  event.leaderboadStages.forEach(stage => {
+  event.leaderboardStages.forEach(stage => {
     recalculateDiffs(stage.entries);
   });
 };
@@ -216,11 +216,11 @@ const appendResultsToPreviousEvent = (
   }
   const event = mergedEvents[club.appendToEventIndex];
   const lastStageBeforeAppend =
-    event.leaderboadStages[event.leaderboadStages.length - 1];
+    event.leaderboardStages[event.leaderboardStages.length - 1];
   const eventToAppend = eventToAppendArray[0];
-  eventToAppend.leaderboadStages.forEach(stage => {
+  eventToAppend.leaderboardStages.forEach(stage => {
     const adjustedStage = adjustAppendStageTimes(stage, lastStageBeforeAppend);
-    event.leaderboadStages.push(adjustedStage);
+    event.leaderboardStages.push(adjustedStage);
   });
 };
 

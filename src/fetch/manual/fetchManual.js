@@ -30,7 +30,7 @@ const populateManualEvents = resultRows => {
         endTime: row.EventEndTime,
         eventId,
         locationFlag: row.EventCountry,
-        leaderboadStages: [{ entries: [] }],
+        leaderboardStages: [{ entries: [] }],
         eventStatus: moment(row.EventEndTime).isBefore(moment())
           ? eventStatuses.finished
           : null
@@ -55,7 +55,7 @@ const populateManualEvents = resultRows => {
       stageTime: row.PSTime,
       totalTime: row.TotalTime
     };
-    eventsById[eventId].leaderboadStages[0].entries.push(entry);
+    eventsById[eventId].leaderboardStages[0].entries.push(entry);
   });
   const events = Object.values(eventsById);
 

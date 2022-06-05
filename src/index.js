@@ -244,8 +244,8 @@ const getResultsByDriver = entries => {
   return resultsByDriver;
 };
 
-const addStageTimesToResultsByDriver = (resultsByDriver, leaderboadStages) => {
-  leaderboadStages.forEach(leadboardStage => {
+const addStageTimesToResultsByDriver = (resultsByDriver, leaderboardStages) => {
+  leaderboardStages.forEach(leadboardStage => {
     leadboardStage.entries.forEach(driverTime => {
       const driver = resultsByDriver[driverTime.name];
       if (!driver) return;
@@ -340,10 +340,10 @@ const filterStage = ({ stage, division }) => {
   recalculateDiffs(stage.entries);
 };
 
-const filterleaderboadStages = ({ event, drivers, divisionName }) => {
+const filterLeaderboardStages = ({ event, drivers, divisionName }) => {
   const division = leagueRef.divisions[divisionName];
   if (division.filterEntries) {
-    event.leaderboadStages.forEach(stage => {
+    event.leaderboardStages.forEach(stage => {
       filterStage({
         stage,
         division,
@@ -360,14 +360,14 @@ const calculateEventResults = ({
   eventIndex
 }) => {
   const firstStageResultsByDriver = getResultsByDriver(
-    event.leaderboadStages[0].entries,
+    event.leaderboardStages[0].entries,
     divisionName
   );
 
   // alert! mutations to the racenetLeaderboard entries occur here, and should only occur here
-  filterleaderboadStages({ event, drivers, divisionName });
+  filterLeaderboardStages({ event, drivers, divisionName });
   const lastStageEntries =
-    event.leaderboadStages[event.leaderboadStages.length - 1].entries;
+    event.leaderboardStages[event.leaderboardStages.length - 1].entries;
   setManualResults({
     eventIndex,
     entries: lastStageEntries,
@@ -394,7 +394,7 @@ const calculateEventResults = ({
   });
 
   // cascade DNF results for appended events
-  event.leaderboadStages.forEach(stage => {
+  event.leaderboardStages.forEach(stage => {
     stage.entries.forEach(entry => {
       const driver = leagueRef.getDriver(entry.name);
       if (
@@ -412,13 +412,13 @@ const calculateEventResults = ({
     });
   });
 
-  event.leaderboadStages.forEach(stage => {
+  event.leaderboardStages.forEach(stage => {
     recalculateDiffs(stage.entries);
   });
   // end alert
 
   if (leagueRef.league.getAllResults)
-    addStageTimesToResultsByDriver(resultsByDriver, event.leaderboadStages);
+    addStageTimesToResultsByDriver(resultsByDriver, event.leaderboardStages);
 
   // dnf entries are sorted below non-dnf entries
   const powerStageEntries = orderEntriesBy(lastStageEntries, "stageTime");
@@ -443,7 +443,7 @@ const calculateEventResults = ({
       event
     });
     if (division.points.stage) {
-      event.leaderboadStages.forEach(stage => {
+      event.leaderboardStages.forEach(stage => {
         const stageEntries = orderEntriesBy(stage.entries, "stageTime");
         updatePoints({
           resultsByDriver,
@@ -760,10 +760,10 @@ const loadEventDriver = (entry, drivers, divisionName) => {
 };
 
 const loadEventDrivers = (drivers, event) => {
-  event.leaderboadStages[0].entries.forEach(entry => {
+  event.leaderboardStages[0].entries.forEach(entry => {
     loadEventDriver(entry, drivers, event.divisionName);
   });
-  event.leaderboadStages[event.leaderboadStages.length - 1].entries.forEach(
+  event.leaderboardStages[event.leaderboardStages.length - 1].entries.forEach(
     entry => {
       loadEventDriver(entry, drivers, event.divisionName);
     }

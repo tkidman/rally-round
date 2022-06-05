@@ -20,7 +20,7 @@ describe("fetchDirt", () => {
       { totalTime: "05:00.000", stageTime: "04:00.000" },
       { totalTime: "04:12.256", stageTime: "04:12.256" }
     ];
-    const event = { leaderboadStages: [{ entries }] };
+    const event = { leaderboardStages: [{ entries }] };
     recalculateEventDiffs(event);
     expect(entries[0].totalDiff).toEqual("+00:00:47.744");
     expect(entries[1].stageDiff).toEqual("+00:00:12.256");
@@ -155,7 +155,7 @@ describe("fetchDirt", () => {
       {
         lastStageId: 1,
         location: "Aus",
-        leaderboadStages: [
+        leaderboardStages: [
           {
             entries: [
               {
@@ -181,7 +181,7 @@ describe("fetchDirt", () => {
       {
         lastStageId: 2,
         location: "Swe",
-        leaderboadStages: [
+        leaderboardStages: [
           {
             entries: [
               {
@@ -214,7 +214,7 @@ describe("fetchDirt", () => {
       {
         lastStageId: 2,
         location: "Aus",
-        leaderboadStages: [
+        leaderboardStages: [
           {
             entries: [
               {
@@ -246,7 +246,7 @@ describe("fetchDirt", () => {
       {
         lastStageId: 2,
         location: "Aus",
-        leaderboadStages: [
+        leaderboardStages: [
           {
             entries: [
               {
@@ -283,7 +283,7 @@ describe("fetchDirt", () => {
       {
         lastStageId: 2,
         location: "Sweden",
-        leaderboadStages: [
+        leaderboardStages: [
           {
             entries: [
               {
@@ -307,7 +307,7 @@ describe("fetchDirt", () => {
       {
         lastStageId: 2,
         location: "USA",
-        leaderboadStages: [
+        leaderboardStages: [
           {
             entries: [
               {
@@ -338,7 +338,7 @@ describe("fetchDirt", () => {
         {
           lastStageId: 2,
           location: "Sweden",
-          leaderboadStages: [
+          leaderboardStages: [
             {
               entries: [
                 {
@@ -362,7 +362,7 @@ describe("fetchDirt", () => {
         {
           lastStageId: 2,
           location: "USA",
-          leaderboadStages: [
+          leaderboardStages: [
             {
               entries: [
                 {
