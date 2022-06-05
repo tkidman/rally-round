@@ -11,6 +11,7 @@ const { calculatePromotionRelegations } = require("./index");
 const { calculatePromotionRelegation } = require("./index");
 const { isDnsPenalty } = require("./index");
 const { init } = require("./state/league");
+const { resultTypes } = require("./shared");
 
 describe("calculates event results", () => {
   let leagueRef;
@@ -321,38 +322,39 @@ describe("calculates event results", () => {
     expect(event.standings).toMatchObject({
       driverStandings: [
         {
-          currentPosition: 1,
           name: "zisekoz",
+          previousPosition: 2,
           totalPoints: 25,
           totalPointsAfterDropRounds: 15,
+          currentPosition: 1,
           positionChange: 1,
-          previousPosition: 2
+          promotionRelegation: 1
         },
         {
-          currentPosition: 2,
           name: "satchmo",
+          previousPosition: 1,
           totalPoints: 23,
           totalPointsAfterDropRounds: 15,
-          positionChange: -1,
-          previousPosition: 1
+          currentPosition: 2,
+          positionChange: -1
         }
       ],
       teamStandings: [
         {
-          currentPosition: 1,
           name: "Live and Let DNF",
+          previousPosition: 1,
           totalPoints: 20,
-          totalPointsAfterDropRounds: 10,
-          positionChange: 0,
-          previousPosition: 1
+          totalPointsAfterDropRounds: 20,
+          currentPosition: 1,
+          positionChange: 0
         },
         {
-          currentPosition: 2,
           name: "Dammit Sammir!",
+          previousPosition: 2,
           totalPoints: 16,
-          totalPointsAfterDropRounds: 8,
-          positionChange: 0,
-          previousPosition: 2
+          totalPointsAfterDropRounds: 16,
+          currentPosition: 2,
+          positionChange: 0
         }
       ]
     });
@@ -556,7 +558,8 @@ describe("calculates event results", () => {
         totalPoints,
         dropRounds,
         events,
-        showLivePoints: false
+        showLivePoints: false,
+        resultType: resultTypes.driver
       });
       expect(points).toEqual(23);
     });
@@ -583,7 +586,8 @@ describe("calculates event results", () => {
         totalPoints,
         dropRounds,
         events,
-        showLivePoints: false
+        showLivePoints: false,
+        resultType: resultTypes.driver
       });
       expect(points).toEqual(35);
     });
@@ -602,7 +606,8 @@ describe("calculates event results", () => {
         totalPoints,
         dropRounds,
         events,
-        showLivePoints: false
+        showLivePoints: false,
+        resultType: resultTypes.driver
       });
       expect(points).toEqual(0);
     });
@@ -621,7 +626,8 @@ describe("calculates event results", () => {
         totalPoints,
         dropRounds,
         events,
-        showLivePoints: true
+        showLivePoints: true,
+        resultType: resultTypes.driver
       });
       expect(points).toEqual(0);
     });
@@ -648,7 +654,8 @@ describe("calculates event results", () => {
         totalPoints,
         dropRounds,
         events,
-        showLivePoints: true
+        showLivePoints: true,
+        resultType: resultTypes.driver
       });
       expect(points).toEqual(23);
     });

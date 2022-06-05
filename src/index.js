@@ -487,10 +487,11 @@ const calculateTotalPointsAfterDropRounds = ({
   totalPoints,
   events,
   dropRounds,
-  showLivePoints
+  showLivePoints,
+  resultType
 }) => {
   const results = [...allResultsForName];
-  if (dropRounds) {
+  if (dropRounds && resultType === resultTypes.driver) {
     if (showLivePoints) {
       const result = results[results.length - 1];
       if (result.entry && result.entry.isDnsEntry) {
@@ -604,7 +605,8 @@ const calculateStandings = ({
       totalPoints: standing.totalPoints,
       events: [...(previousEvents || []), currentEvent],
       dropRounds: leagueRef.league.dropLowestScoringRoundsNumber,
-      showLivePoints: leagueRef.showLivePoints()
+      showLivePoints: leagueRef.showLivePoints(),
+      resultType
     });
     if (previousStandings) {
       const previousStanding = previousStandings.find(
