@@ -62,8 +62,7 @@
                             {{else}}
                                 {{#unless ../hideTeamLogoColumn}}
                                     <td>
-                                        <img src="./assets/teams/{{standing.name}}.png"
-                                            style="max-width:2em; max-height:2em;"  alt="{{standing.name}}"/>
+                                        <img src="{{teamLogo}}" style="max-width:2em; max-height:2em;"  alt="{{standing.name}}" title="{{standing.name}}"/>
                                     </td>
                                 {{/unless}}
                                 <td class="text-left bold">{{standing.name}}</td>

@@ -211,6 +211,13 @@ const getStandingColour = standing => {
   return colours.default;
 };
 
+const getTeamLogo = teamId => {
+  if (fs.existsSync(`./assets/teams/${teamId}.png`)) {
+    return `./assets/teams/${teamId}.png`;
+  }
+  return `./assets/teams/unknown.png`;
+};
+
 const transformForStandingsHTML = (division, type) => {
   const events = division.events;
   const headerLocations = getHeaderLocations(events);
@@ -243,9 +250,15 @@ const transformForStandingsHTML = (division, type) => {
     };
     if (type === "driver") {
       const { driver, country, carBrand } = getDriverData(standing.name);
-      return { ...row, car: carBrand, driver, country };
+      return {
+        ...row,
+        car: carBrand,
+        driver,
+        country,
+        teamLogo: getTeamLogo(driver.teamId)
+      };
     } else {
-      return { ...row };
+      return { ...row, teamLogo: getTeamLogo(standing.name) };
     }
   });
   const driverStandingsNationalityAsTeam =
@@ -295,6 +308,7 @@ const transformForDriverResultsHTML = (event, division) => {
       position: index + 1,
       car: carBrand,
       driver,
+      teamLogo: getTeamLogo(driver.teamId),
       country,
       divisionDisplayName:
         resultDivision.displayName || resultDivision.divisionName

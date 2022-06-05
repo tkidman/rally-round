@@ -83,7 +83,7 @@
                             {{#if ../showTeam}}
                                 {{#unless ../hideTeamLogoColumn}}
                                     <td>
-                                        <img src="./assets/teams/{{this.driver.teamId}}.png" style="max-width:2em; max-height:2em;" alt="{{this.driver.teamId}}" title="{{this.driver.teamId}}"/>
+                                        <img src="{{this.teamLogo}}" style="max-width:2em; max-height:2em;" alt="{{this.driver.teamId}}" title="{{this.driver.teamId}}"/>
                                     </td>
                                 {{/unless}}
                                 {{#if ../showTeamNameTextColumn}}
