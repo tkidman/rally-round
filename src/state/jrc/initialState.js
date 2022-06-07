@@ -61,6 +61,7 @@ const points = {
 const initialState = {
   pointsForDNF: false,
   websiteName: "jrc-results",
+  useStandingsForHome: true,
   showLivePoints: true,
   showLivePointsDaysRemaining: 4,
   nullTeamIsPrivateer: false,
@@ -87,7 +88,36 @@ const initialState = {
       clubs: [
         {
           clubId: "180867",
-          championshipIds: ["585786"],
+          championshipIds: ["625004"],
+          includeNextChampionships: true
+        }
+      ],
+      events: [],
+      points,
+      cars: [
+        "Ford RS200",
+        "Peugeot 205 T16 Evo 2",
+        "Audi Sport quattro S1 E2",
+        "MG Metro 6R4"
+      ],
+      // fantasy: true,
+      // outputSheetId: "1P-0CJ4rm7xBaMsan0yMcFKwDIWkqjIvYWHNrjgFDixc",
+      manualResults: []
+      // filterEntries: {
+      //   matchDivision: true
+      // },
+      // promotionRelegation: {
+      //   relegationZone: 7
+      // }
+    },
+    jrc2: {
+      displayName: "JRC2",
+      divisionName: "jrc2",
+      maxDriversScoringPointsForTeam: 2,
+      clubs: [
+        {
+          clubId: "244734",
+          championshipIds: ["624974"],
           includeNextChampionships: true
         }
       ],
@@ -99,34 +129,24 @@ const initialState = {
         "Mitsubishi Lancer Evolution VI",
         "Ford Escort RS Cosworth"
       ],
-      // fantasy: true,
-      outputSheetId: "1P-0CJ4rm7xBaMsan0yMcFKwDIWkqjIvYWHNrjgFDixc",
-      manualResults: [
-        {
-          eventIndex: 1,
-          results: [
-            {
-              name: "Irish_Fox74",
-              totalTime: "42:06.260"
-            }
-          ]
-        }
-      ],
+      outputSheetId: "1WaBmoqfRtXO8CEGhnE2g1b93F5o2Kjh7Nx3vi13U5Tg",
+      manualResults: []
       // filterEntries: {
       //   matchDivision: true
       // },
-      promotionRelegation: {
-        relegationZone: 7
-      }
+      // promotionRelegation: {
+      //   promotionZone: 8,
+      //   relegationZone: 8
+      // }
     },
-    jrc2: {
-      displayName: "JRC2",
-      divisionName: "jrc2",
+    jrc3: {
+      displayName: "JRC3",
+      divisionName: "jrc3",
       maxDriversScoringPointsForTeam: 2,
       clubs: [
         {
-          clubId: "244734",
-          championshipIds: ["585492"],
+          clubId: "330674",
+          championshipIds: ["624994"],
           includeNextChampionships: true
         }
       ],
@@ -138,43 +158,12 @@ const initialState = {
         "SUBARU Impreza (2001)",
         "SUBARU Impreza S4 Rally"
       ],
-      outputSheetId: "1WaBmoqfRtXO8CEGhnE2g1b93F5o2Kjh7Nx3vi13U5Tg",
-      manualResults: [],
-      // filterEntries: {
-      //   matchDivision: true
-      // },
-      promotionRelegation: {
-        promotionZone: 8,
-        relegationZone: 8
-      }
-    },
-    jrc3: {
-      displayName: "JRC3",
-      divisionName: "jrc3",
-      maxDriversScoringPointsForTeam: 2,
-      clubs: [
-        {
-          clubId: "330674",
-          championshipIds: ["585477"],
-          includeNextChampionships: true
-        }
-      ],
-      events: [],
-      points,
-      cars: [
-        "Ford Fiesta R5",
-        "ŠKODA Fabia R5",
-        "Mitsubishi Space Star R5",
-        "Citroën C3 R5",
-        "Volkswagen Polo GTI R5",
-        "Peugeot 208 T16 R5"
-      ],
-      manualResults: [],
-      promotionRelegation: {
-        promotionDoubleZone: 1,
-        promotionZone: 7,
-        relegationZone: 8
-      }
+      manualResults: []
+      // promotionRelegation: {
+      //   promotionDoubleZone: 1,
+      //   promotionZone: 7,
+      //   relegationZone: 8
+      // }
     },
     jrc4: {
       displayName: "JRC4",
@@ -183,39 +172,25 @@ const initialState = {
       clubs: [
         {
           clubId: "342117",
-          championshipIds: ["585507"],
+          championshipIds: ["624997"],
           includeNextChampionships: true
         }
       ],
       events: [],
       points,
-      manualResults: [
-        {
-          eventIndex: 4,
-          results: [
-            {
-              name: "BuckyMcBuckster",
-              stageTime: "06:50.366",
-              totalTime: "00:46:08.907"
-            }
-          ]
-        },
-        {
-          eventIndex: 6,
-          results: [
-            {
-              name: "rallylad",
-              stageTime: "04:06.589",
-              totalTime: "00:52:47.799"
-            }
-          ]
-        }
-      ],
-      promotionRelegation: {
-        promotionDoubleZone: 1,
-        promotionZone: 9
-      },
-      cars: ["Opel Adam R2", "Peugeot 208 R2"]
+      manualResults: [],
+      // promotionRelegation: {
+      //   promotionDoubleZone: 1,
+      //   promotionZone: 9
+      // },
+      cars: [
+        "Ford Fiesta R5",
+        "ŠKODA Fabia R5",
+        "Mitsubishi Space Star R5",
+        "Citroën C3 R5",
+        "Volkswagen Polo GTI R5",
+        "Peugeot 208 T16 R5"
+      ]
       // fantasy: true
     }
   }

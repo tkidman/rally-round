@@ -56,45 +56,58 @@ const login = async resolve => {
       debug("cached credentials are invalid, regenerating");
     }
   }
-  const browser = await puppeteer.launch({ headless: true });
-  const page = await browser.newPage();
-  //page.on("console", msg => debug("PAGE LOG:", msg.text()));
+  try {
+    const browser = await puppeteer.launch({
+      headless: true,
+      args: [
+        "--no-sandbox",
+        "--disable-setuid-sandbox",
+        "--disable-dev-shm-usage",
+        "--single-process"
+      ]
+    });
+    const page = await browser.newPage();
+    //page.on("console", msg => debug("PAGE LOG:", msg.text()));
 
-  debug("going to https://accounts.codemasters.com");
-  await page.goto("https://accounts.codemasters.com/");
-  await page.waitForNavigation();
+    debug("going to https://accounts.codemasters.com");
+    await page.goto("https://accounts.codemasters.com/");
+    await page.waitForNavigation();
 
-  await page.click(USERNAME_SELECTOR);
-  debug(username);
-  await page.keyboard.type(username);
+    await page.click(USERNAME_SELECTOR);
+    debug(username);
+    await page.keyboard.type(username);
 
-  await page.click(PASSWORD_SELECTOR);
-  await page.keyboard.type(password);
+    await page.click(PASSWORD_SELECTOR);
+    await page.keyboard.type(password);
 
-  debug("logging in ...");
-  await page.click(LOGIN_BUTTON_SELECTOR);
-  debug("going to find-clubs page ...");
+    debug("logging in ...");
+    await page.click(LOGIN_BUTTON_SELECTOR);
+    debug("going to find-clubs page ...");
 
-  debug("extracting credentials ...");
+    debug("extracting credentials ...");
 
-  page.on("request", async request => {
-    if (request._url.includes("Search")) {
-      const cookies = await page.cookies();
-      const cookieHeader = cookies
-        .map(cookie => `${cookie.name}=${cookie.value}`)
-        .join("; ");
-      const creds = {
-        cookie: cookieHeader,
-        xsrfh: request._headers["racenet.xsrfh"]
-      };
-      fs.writeFileSync(cachedCredsFile, JSON.stringify(creds, null, 2));
-      debug("credentials retrieved, closing headless browser");
-      await page.close();
-      await browser.close();
-      resolve(creds);
-    }
-  });
-  await page.goto(`${dirtRally2Domain}/clubs/find-club/page/1`);
+    page.on("request", async request => {
+      if (request._url.includes("Search")) {
+        const cookies = await page.cookies();
+        const cookieHeader = cookies
+          .map(cookie => `${cookie.name}=${cookie.value}`)
+          .join("; ");
+        const creds = {
+          cookie: cookieHeader,
+          xsrfh: request._headers["racenet.xsrfh"]
+        };
+        fs.writeFileSync(cachedCredsFile, JSON.stringify(creds, null, 2));
+        debug("credentials retrieved, closing headless browser");
+        await page.close();
+        await browser.close();
+        resolve(creds);
+      }
+    });
+    await page.goto(`${dirtRally2Domain}/clubs/find-club/page/1`);
+  } catch (e) {
+    debug("puppeteer error", e);
+    throw e;
+  }
   //page.reload();
 };
 

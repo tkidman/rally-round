@@ -18,7 +18,7 @@ const leagueRef = {};
 const transformDriverRows = driverRows => {
   const driversById = driverRows.reduce((driversById, row) => {
     const nameValue = row[driverColumns[driverFieldNames.name]];
-    if (nameValue) {
+    if (nameValue && nameValue.trim().length > 0) {
       const driverNameValue = nameValue.trim();
       const id = driverNameValue.toUpperCase();
       let team = null;
@@ -32,6 +32,12 @@ const transformDriverRows = driverRows => {
         }
       } else {
         team = row[driverColumns[driverFieldNames.teamId]];
+        if (team && team.toLowerCase() === privateer) {
+          team = privateer;
+        }
+        if (!team || team.trim().length === 0) {
+          team = null;
+        }
       }
       driversById[id] = {
         id,
@@ -210,9 +216,16 @@ const getDriversByDivision = division => {
 };
 
 const getTeamIds = () => {
-  const teamIdsObj = keyBy(drivers.driversById, driver => driver.teamId);
-  delete teamIdsObj[privateer];
-  return Object.keys(teamIdsObj);
+  const teamsIds = Object.values(drivers.driversById).reduce(
+    (teamIdsObj, driver) => {
+      if (driver.teamId && driver.teamId !== privateer) {
+        teamIdsObj[driver.teamId] = driver.teamId;
+      }
+      return teamIdsObj;
+    },
+    {}
+  );
+  return Object.keys(teamsIds);
 };
 
 const printMissingDrivers = () => {
