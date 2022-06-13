@@ -215,6 +215,7 @@ const getTeamLogo = teamId => {
   if (fs.existsSync(`./assets/teams/${teamId}.png`)) {
     return `./assets/teams/${teamId}.png`;
   }
+  debug(`can't find logo for team id: ${teamId}`);
   return `./assets/teams/unknown.png`;
 };
 
