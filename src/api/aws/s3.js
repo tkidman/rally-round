@@ -3,6 +3,7 @@ const AWS = require("aws-sdk");
 const fs = require("fs");
 const debug = require("debug")("tkidman:dirt2-results:awsAPI");
 const { outputPath, cachePath } = require("../../shared");
+const { difference } = require("lodash");
 
 const IAM_USER_KEY = process.env.DIRT_AWS_ACCESS_KEY;
 const IAM_USER_SECRET = process.env.DIRT_AWS_SECRET_ACCESS_KEY;
@@ -107,7 +108,38 @@ const uploadCache = async ({
   debug(`uploaded ${cacheFiles.length} cache files to s3`);
 };
 
+const uploadTeamLogos = async (bucket, subfolderName) => {
+  const remoteTeamsFolder = subfolderName
+    ? `${subfolderName}/assets/teams`
+    : "assets/teams";
+  const remoteLogos = await listObjects(bucket, `${remoteTeamsFolder}`);
+  const remoteLogoNames = remoteLogos.Contents.map(s3File => {
+    const fileSplit = s3File.Key.split("/");
+    return fileSplit[fileSplit.length - 1];
+  }).filter(fileName => fileName.endsWith(".png"));
+  const localLogos = fs
+    .readdirSync("./assets/teams")
+    .filter(fileName => fileName.endsWith(".png"));
+  const missingLogos = difference(localLogos, remoteLogoNames);
+
+  const promises = missingLogos.map(file => {
+    const key = subfolderName
+      ? `${remoteTeamsFolder}/${file}`
+      : `assets/teams/${file}`;
+    return uploadToS3({
+      file: `./assets/teams/${file}`,
+      key,
+      bucket,
+      contentType: "image/png"
+    });
+  });
+  await Promise.all(promises);
+  debug(`uploaded ${promises.length} team logo files to s3`);
+};
+
 const upload = async (bucket, subfolderName) => {
+  await uploadTeamLogos(bucket, subfolderName);
+
   await uploadHTML(`./${outputPath}/website`, bucket, subfolderName);
   await uploadCache({
     directory: `./${cachePath}`,
