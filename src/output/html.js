@@ -54,7 +54,7 @@ const writeFantasyHTML = (fantasyResults, links) => {
     teams: data.teams,
     navigation: roster_nav,
     prices: data.prices,
-    backgroundStyle: leagueRef.league.backgroundStyle,
+    backgroundStyle: leagueRef.getBackgroundStyle(),
     logo: leagueRef.league.logo
   };
 
@@ -132,7 +132,7 @@ const getNavigationHTML = (
 const writeHomeHTML = links => {
   const data = {
     navigation: getNavigationHTML("", "", links, null),
-    backgroundStyle: leagueRef.league.backgroundStyle,
+    backgroundStyle: leagueRef.getBackgroundStyle(),
     logo: leagueRef.league.logo
   };
   const homeTemplateFile = `${templatePath}/home.hbs`;
@@ -151,7 +151,7 @@ const writeHomeHTML = links => {
 const writeErrorHTML = links => {
   const data = {
     navigation: getNavigationHTML("", "", links, null),
-    backgroundStyle: leagueRef.league.backgroundStyle,
+    backgroundStyle: leagueRef.getBackgroundStyle(),
     logo: leagueRef.league.logo
   };
   const templateFile = `${templatePath}/error.hbs`;
@@ -282,7 +282,7 @@ const transformForStandingsHTML = (division, type) => {
     afterDropRoundMessage:
       leagueRef.league.afterDropRoundMessage ||
       "*After Drop Round: total points after lowest scoring round removed",
-    backgroundStyle: leagueRef.league.backgroundStyle,
+    backgroundStyle: leagueRef.getBackgroundStyle(),
     logo: leagueRef.league.logo,
     showTeamNameTextColumn: leagueRef.league.showTeamNameTextColumn,
     hideTeamLogoColumn: leagueRef.league.hideTeamLogoColumn
@@ -325,7 +325,7 @@ const transformForDriverResultsHTML = (event, division) => {
     event,
     location: getLocation(event),
     divisionName,
-    backgroundStyle: leagueRef.league.backgroundStyle,
+    backgroundStyle: leagueRef.getBackgroundStyle(),
     incorrectCarTimePenaltySeconds:
       leagueRef.league.incorrectCarTimePenaltySeconds,
     incorrectCarTimePenalty: !!leagueRef.league.incorrectCarTimePenaltySeconds,
