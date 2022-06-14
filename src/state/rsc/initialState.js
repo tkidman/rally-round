@@ -80,6 +80,13 @@ const initialState = {
             locationName: "Sunriser 400 Forest Rally",
             locationFlag: "US",
             numStages: 9
+          },
+          {
+            eventId: 44548,
+            endTime: "2022-06-20 12:00",
+            locationName: "Rallye du Mont Blanc",
+            locationFlag: "MC",
+            numStages: 8
           }
         ]
       },
