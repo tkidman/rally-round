@@ -30,6 +30,9 @@ jobs:
       - name: jrc
         if: always()
         run: CLUB=jrc node --unhandled-rejections=strict ./runner.js
+      - name: jrc-birthday
+        if: always()
+        run: CLUB=jrc-birthday node --unhandled-rejections=strict ./runner.js
       - name: rsc
         if: always()
         run: CLUB=rsc node --unhandled-rejections=strict ./runner.js
