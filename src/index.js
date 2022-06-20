@@ -428,13 +428,15 @@ const calculateEventResults = ({
     event.eventStatus === eventStatuses.finished ||
     leagueRef.showLivePoints()
   ) {
-    updatePoints({
-      resultsByDriver,
-      orderedEntries: powerStageEntries,
-      points: division.points.powerStage,
-      pointsField: "powerStagePoints",
-      event
-    });
+    if (division.points.powerStage) {
+      updatePoints({
+        resultsByDriver,
+        orderedEntries: powerStageEntries,
+        points: division.points.powerStage,
+        pointsField: "powerStagePoints",
+        event
+      });
+    }
     updatePoints({
       resultsByDriver,
       orderedEntries: totalEntries,
