@@ -2,7 +2,8 @@ const initialState = {
   pointsForDNF: false,
   websiteName: "jrc-results",
   subfolderName: "historic",
-  showLivePoints: false,
+  showLivePoints: true,
+  showLivePointsDaysRemaining: 4,
   showCarNameAsTextInResults: true,
   backgroundStyle:
     "background-image: linear-gradient(#2193b0, #6dd5ed); background-size: cover; background-repeat: no-repeat; background-attachment: fixed;",
@@ -13,7 +14,7 @@ const initialState = {
       divisionName: "historic",
       displayName: "JRC Historic",
       disableSameCarValidation: true,
-      clubs: [{ clubId: "192069", championshipIds: ["604374"] }],
+      clubs: [{ clubId: "192069", championshipIds: ["629532"] }],
       events: [],
       points: {
         powerStage: [],
