@@ -39,4 +39,7 @@ jobs:
       - name: jrc-historic
         if: always()
         run: CLUB=jrc-historic node --unhandled-rejections=strict ./runner.js
+      - name: jrc-rbr
+        if: always()
+        run: CLUB=jrc-rbr node --unhandled-rejections=strict ./runner.js
 #      - run: CLUB=jrc-themed node --unhandled-rejections=strict ./runner.js

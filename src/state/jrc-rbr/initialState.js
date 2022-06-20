@@ -17,8 +17,8 @@ const initialState = {
   siteTitlePrefix: "JRC",
   divisions: {
     jrcRbr: {
-      divisionName: "rbrSeason1",
-      displayName: "RBR Season 1",
+      divisionName: "rbrSeason2",
+      displayName: "RBR Season 2",
       disableSameCarValidation: false,
       // enableSameCarClassValidation: true,
       maxDriversScoringPointsForTeam: 2,
@@ -26,46 +26,11 @@ const initialState = {
       rbr: {
         rallies: [
           {
-            eventId: 40706,
-            endTime: "2022-01-31 00:59",
-            locationName: "Monte Carlo",
+            eventId: 44820,
+            endTime: "2022-06-26 23:59",
+            locationName: "Rallye Monte-Cresto",
             locationFlag: "MC",
             numStages: 8
-          },
-          {
-            eventId: 41156,
-            endTime: "2022-02-14 12:59",
-            locationName: "Arctic Nordic",
-            locationFlag: "SE",
-            numStages: 10
-          },
-          {
-            eventId: 41536,
-            endTime: "2022-02-28 12:59",
-            locationName: "Safari Rally Africa",
-            locationFlag: "KE",
-            numStages: 8
-          },
-          {
-            eventId: 42024,
-            endTime: "2022-03-14 12:59",
-            locationName: "Rally Czechia",
-            locationFlag: "CZ",
-            numStages: 10
-          },
-          {
-            eventId: 42449,
-            endTime: "2022-03-28 12:59",
-            locationName: "SSS Rally",
-            locationFlag: "RX",
-            numStages: 13
-          },
-          {
-            eventId: 42799,
-            endTime: "2022-04-11 12:59",
-            locationName: "Rally New Zealand",
-            locationFlag: "NZ",
-            numStages: 11
           }
         ]
       },
