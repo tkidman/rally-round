@@ -87,6 +87,13 @@ const initialState = {
             locationName: "Rallye du Mont Blanc",
             locationFlag: "MC",
             numStages: 8
+          },
+          {
+            eventId: 44825,
+            endTime: "2022-06-27 14:00",
+            locationName: "Rally Slovakia",
+            locationFlag: "SK",
+            numStages: 8
           }
         ]
       },
