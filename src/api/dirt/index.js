@@ -106,6 +106,14 @@ const login = async resolve => {
     await page.goto(`${dirtRally2Domain}/clubs/find-club/page/1`);
   } catch (e) {
     debug("puppeteer error", e);
+    // see if the creds were saved correctly anyway
+    const cachedCreds = JSON.parse(fs.readFileSync(cachedCredsFile, "utf8"));
+    const response = await myClubs(cachedCreds);
+    if (response.status === 200) {
+      debug("puppeteer error but creds saved successfully, continuing");
+      resolve(cachedCreds);
+      return;
+    }
     throw e;
   }
   //page.reload();
