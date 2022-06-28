@@ -130,7 +130,17 @@ const initialState = {
         "Ford Escort RS Cosworth"
       ],
       outputSheetId: "1WaBmoqfRtXO8CEGhnE2g1b93F5o2Kjh7Nx3vi13U5Tg",
-      manualResults: []
+      manualResults: [
+        {
+          eventIndex: 2,
+          results: [
+            {
+              name: "kersna80",
+              totalTime: "40:17.447"
+            }
+          ]
+        }
+      ]
       // filterEntries: {
       //   matchDivision: true
       // },

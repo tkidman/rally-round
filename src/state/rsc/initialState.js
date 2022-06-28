@@ -94,6 +94,13 @@ const initialState = {
             locationName: "Rally Slovakia",
             locationFlag: "SK",
             numStages: 8
+          },
+          {
+            eventId: 44913,
+            endTime: "2022-07-04 12:00",
+            locationName: "Safari Rally",
+            locationFlag: "KE",
+            numStages: 7
           }
         ]
       },

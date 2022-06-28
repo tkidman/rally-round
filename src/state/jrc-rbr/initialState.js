@@ -27,7 +27,7 @@ const initialState = {
         rallies: [
           {
             eventId: 44820,
-            endTime: "2022-06-26 23:59",
+            endTime: "2022-07-03 23:59",
             locationName: "Rallye Monte-Cresto",
             locationFlag: "MC",
             numStages: 8

@@ -1,13 +1,19 @@
-const { name, teamId, car } = require("../constants/driverFieldNames");
+const {
+  name,
+  teamId,
+  car,
+  nationality
+} = require("../constants/driverFieldNames");
 
 const driverColumns = {
   [name]: "Driver",
   [teamId]: "Team",
-  [car]: "Car"
+  [car]: "Car",
+  [nationality]: "Country"
 };
 
 const sheetsConfig = {
-  sheetId: "1HtXGFM4Ho8w0bd5o5ic4h3P17sWwu2yVYS7zUqhSoUs",
+  sheetId: "1jn8N4UQEqdiAr7OzurcCq0Y-VAfjBJPO0i02D3T-2E8",
   tabName: "All tiers"
 };
 
