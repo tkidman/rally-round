@@ -2,14 +2,16 @@ const {
   name,
   teamId,
   car,
-  nationality
+  nationality,
+  name3
 } = require("../constants/driverFieldNames");
 
 const driverColumns = {
   [name]: "Driver",
   [teamId]: "Team",
   [car]: "Car",
-  [nationality]: "Country"
+  [nationality]: "Country",
+  [name3]: "Alt Name"
 };
 
 const sheetsConfig = {
