@@ -168,7 +168,18 @@ const initialState = {
         "SUBARU Impreza (2001)",
         "SUBARU Impreza S4 Rally"
       ],
-      manualResults: []
+      manualResults: [
+        {
+          eventIndex: 3,
+          results: [
+            {
+              name: "CokeCanTv",
+              totalTime: "01:09:11.419",
+              stageTime: "15:00.000"
+            }
+          ]
+        }
+      ]
       // promotionRelegation: {
       //   promotionDoubleZone: 1,
       //   promotionZone: 7,

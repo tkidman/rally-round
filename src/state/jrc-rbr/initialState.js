@@ -2,8 +2,8 @@ const initialState = {
   pointsForDNF: false,
   websiteName: "jrc-results",
   subfolderName: "rbr",
-  showLivePoints: false,
-  showLivePointsDaysRemaining: 3,
+  showLivePoints: true,
+  showLivePointsDaysRemaining: 7,
   hideCarColumnInStandings: true,
   showCarNameAsTextInResults: true,
   nullTeamIsPrivateer: true,
@@ -34,7 +34,7 @@ const initialState = {
           },
           {
             eventId: 45147,
-            endTime: "2022-07-11 12:59",
+            endTime: "2022-07-18 12:59",
             locationName: "Arctic Nordic Rally",
             locationFlag: "FI",
             numStages: 8

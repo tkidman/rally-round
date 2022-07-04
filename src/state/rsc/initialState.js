@@ -3,8 +3,8 @@ const initialState = {
   websiteName: "rsc-results",
   useStandingsForHome: true,
   // subfolderName: "rbr",
-  showLivePoints: false,
-  showLivePointsDaysRemaining: 4,
+  showLivePoints: true,
+  showLivePointsDaysRemaining: 7,
   noSuperRallyPointsMultiplier: 2,
   dropLowestScoringRoundsNumber: 3,
   afterDropRoundMessage:
@@ -104,7 +104,7 @@ const initialState = {
           },
           {
             eventId: 45154,
-            endTime: "2022-07-11 12:00",
+            endTime: "2022-07-18 12:00",
             locationName: "Rally Fennoscandia",
             locationFlag: "FS",
             numStages: 16,
