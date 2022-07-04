@@ -2009,5 +2009,10 @@
 		"code": "nwx",
 		"name": "North West",
 		"alpha2Code": "NX"
+	},
+	"eLngFennoscandia": {
+		"code": "fns",
+		"name": "Fennoscandia",
+		"alpha2Code": "FS"
 	}
 }

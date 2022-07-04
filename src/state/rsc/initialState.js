@@ -3,7 +3,7 @@ const initialState = {
   websiteName: "rsc-results",
   useStandingsForHome: true,
   // subfolderName: "rbr",
-  showLivePoints: true,
+  showLivePoints: false,
   showLivePointsDaysRemaining: 4,
   noSuperRallyPointsMultiplier: 2,
   dropLowestScoringRoundsNumber: 3,
@@ -101,6 +101,14 @@ const initialState = {
             locationName: "Safari Rally",
             locationFlag: "KE",
             numStages: 7
+          },
+          {
+            eventId: 45154,
+            endTime: "2022-07-11 12:00",
+            locationName: "Rally Fennoscandia",
+            locationFlag: "FS",
+            numStages: 16,
+            enduranceRoundMultiplier: 2
           }
         ]
       },

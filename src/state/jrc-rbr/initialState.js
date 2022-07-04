@@ -3,7 +3,7 @@ const initialState = {
   websiteName: "jrc-results",
   subfolderName: "rbr",
   showLivePoints: false,
-  showLivePointsDaysRemaining: 7,
+  showLivePointsDaysRemaining: 3,
   hideCarColumnInStandings: true,
   showCarNameAsTextInResults: true,
   nullTeamIsPrivateer: true,
@@ -31,6 +31,13 @@ const initialState = {
             locationName: "Rallye Monte-Cresto",
             locationFlag: "MC",
             numStages: 8
+          },
+          {
+            eventId: 45147,
+            endTime: "2022-07-11 12:59",
+            locationName: "Arctic Nordic Rally",
+            locationFlag: "FI",
+            numStages: 8
           }
         ]
       },
@@ -38,28 +45,7 @@ const initialState = {
       events: [],
       points: {
         powerStage: [5, 4, 3, 2, 1],
-        overall: [
-          30,
-          24,
-          21,
-          18,
-          16,
-          15,
-          14,
-          13,
-          12,
-          11,
-          10,
-          9,
-          8,
-          7,
-          6,
-          5,
-          4,
-          3,
-          2,
-          1
-        ]
+        overall: [24, 19, 16, 14, 12, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
         // stage: [1]
       }
       // cars: ["Peugeot 205 GTI"]
