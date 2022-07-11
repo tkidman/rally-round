@@ -1,3 +1,4 @@
+const { privateer } = require("../../shared");
 const initialState = {
   pointsForDNF: false,
   websiteName: "jrc-results",
@@ -51,6 +52,10 @@ const initialState = {
       // cars: ["Peugeot 205 GTI"]
       // outputSheetId: "1C3fU9y1236wFmPuKcui4CEXBuSsUANH6OJ0BpQIasTc"
     }
+  },
+  teamOverride: {
+    skullengaged: [privateer, "Turbo Drift"],
+    Wilberg: [privateer, "Turbo Drift"]
   }
 };
 module.exports = initialState;
