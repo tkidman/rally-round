@@ -102,13 +102,13 @@ const initialState = {
       ],
       // fantasy: true,
       // outputSheetId: "1P-0CJ4rm7xBaMsan0yMcFKwDIWkqjIvYWHNrjgFDixc",
-      manualResults: []
       // filterEntries: {
       //   matchDivision: true
       // },
-      // promotionRelegation: {
-      //   relegationZone: 7
-      // }
+      manualResults: [],
+      promotionRelegation: {
+        relegationZone: 7
+      }
     },
     jrc2: {
       displayName: "JRC2",
@@ -140,14 +140,14 @@ const initialState = {
             }
           ]
         }
-      ]
+      ],
+      promotionRelegation: {
+        promotionZone: 9,
+        relegationZone: 8
+      }
       // filterEntries: {
       //   matchDivision: true
       // },
-      // promotionRelegation: {
-      //   promotionZone: 8,
-      //   relegationZone: 8
-      // }
     },
     jrc3: {
       displayName: "JRC3",
@@ -179,12 +179,11 @@ const initialState = {
             }
           ]
         }
-      ]
-      // promotionRelegation: {
-      //   promotionDoubleZone: 1,
-      //   promotionZone: 7,
-      //   relegationZone: 8
-      // }
+      ],
+      promotionRelegation: {
+        promotionZone: 9,
+        relegationZone: 9
+      }
     },
     jrc4: {
       displayName: "JRC4",
@@ -200,10 +199,10 @@ const initialState = {
       events: [],
       points,
       manualResults: [],
-      // promotionRelegation: {
-      //   promotionDoubleZone: 1,
-      //   promotionZone: 9
-      // },
+      promotionRelegation: {
+        // promotionDoubleZone: 1,
+        promotionZone: 12
+      },
       cars: [
         "Ford Fiesta R5",
         "ŠKODA Fabia R5",
