@@ -74,6 +74,7 @@ const initialState = {
   // disableOverall: true,
   // teamPointsForPowerstage: false,
   dropLowestScoringRoundsNumber: 1,
+  sortByDropRoundPoints: true,
   // incorrectCarTimePenaltySeconds: 120,
   backgroundStyle:
     "background-image: linear-gradient(to left, #2c3e50, #fd746c); background-size: cover; background-repeat: no-repeat; background-attachment: fixed;",
