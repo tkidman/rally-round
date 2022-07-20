@@ -39,6 +39,13 @@ const initialState = {
             locationName: "Arctic Nordic Rally",
             locationFlag: "FI",
             numStages: 8
+          },
+          {
+            eventId: 45482,
+            endTime: "2022-08-01 12:59",
+            locationName: "Nordic Summer Rally",
+            locationFlag: "SE",
+            numStages: 8
           }
         ]
       },
