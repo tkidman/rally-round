@@ -105,7 +105,17 @@ const initialState = {
       // filterEntries: {
       //   matchDivision: true
       // },
-      manualResults: [],
+      manualResults: [
+        {
+          eventIndex: 6,
+          results: [
+            {
+              name: "BrothersChris",
+              totalTime: "43:55.828"
+            }
+          ]
+        }
+      ],
       promotionRelegation: {
         relegationZone: 7
       }
