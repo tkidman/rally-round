@@ -104,8 +104,48 @@ const initialState = {
       // outputSheetId: "1P-0CJ4rm7xBaMsan0yMcFKwDIWkqjIvYWHNrjgFDixc",
       // filterEntries: {
       //   matchDivision: true
-      // },
+      // }, TheBac0nat0or
       manualResults: [
+        {
+          eventIndex: 0,
+          results: [
+            {
+              name: "TheBac0nat0or",
+              totalTime: "47:43.981",
+              stageTime: "03:04.776"
+            }
+          ]
+        },
+        {
+          eventIndex: 3,
+          results: [
+            {
+              name: "TheBac0nat0or",
+              totalTime: "42:28.438",
+              stageTime: "03:24.594"
+            }
+          ]
+        },
+        {
+          eventIndex: 4,
+          results: [
+            {
+              name: "TheBac0nat0or",
+              totalTime: "42:11.472",
+              stageTime: "04:00.177"
+            }
+          ]
+        },
+        {
+          eventIndex: 5,
+          results: [
+            {
+              name: "TheBac0nat0or",
+              totalTime: "40:14.217",
+              stageTime: "04:27.963"
+            }
+          ]
+        },
         {
           eventIndex: 6,
           results: [
