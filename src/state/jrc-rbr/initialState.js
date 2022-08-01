@@ -62,7 +62,7 @@ const initialState = {
   },
   teamOverride: {
     skullengaged: [privateer, "Turbo Drift"],
-    Wilberg: [privateer, "Turbo Drift"],
+    Wiberg: [privateer, "Turbo Drift"],
     Ducce950: [privateer, privateer, "Turbo Drift"]
   }
 };
