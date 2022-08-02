@@ -8,6 +8,8 @@ const initialState = {
   hideCarColumnInStandings: true,
   showCarNameAsTextInResults: true,
   nullTeamIsPrivateer: true,
+  dropLowestScoringRoundsNumber: 1,
+  sortByDropRoundPoints: false,
   // useCarAsTeam: false,
   // useCarClassAsTeam: true,
   disableOverall: true,
@@ -46,6 +48,13 @@ const initialState = {
             locationName: "Nordic Summer Rally",
             locationFlag: "SE",
             numStages: 8
+          },
+          {
+            eventId: 45837,
+            endTime: "2022-08-15 12:59",
+            locationName: "Wales Rally GB",
+            locationFlag: "welsh",
+            numStages: 10
           }
         ]
       },

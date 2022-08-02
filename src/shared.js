@@ -123,6 +123,14 @@ const formatDuration = duration => {
   return moment.utc(duration.as("milliseconds")).format("HH:mm:ss.SSS");
 };
 
+const getCountryForAnyCode = code => {
+  return (
+    countries[code] ||
+    countriesByAlpha2Code[code] ||
+    countriesByCode[code] ||
+    countries.eLngRestOfWorld
+  );
+};
 const getCountryForDriver = driver => {
   if (
     !countries[driver.nationality] &&
@@ -131,12 +139,7 @@ const getCountryForDriver = driver => {
   ) {
     debug(`no country found for driver: ${JSON.stringify(driver)}`);
   }
-  return (
-    countries[driver.nationality] ||
-    countriesByAlpha2Code[driver.nationality] ||
-    countriesByCode[driver.nationality] ||
-    countries.eLngRestOfWorld
-  );
+  return getCountryForAnyCode(driver.nationality);
 };
 
 const getCountryByAlpha2Code = alpha2Code => countriesByAlpha2Code[alpha2Code];
@@ -188,6 +191,7 @@ module.exports = {
   formatDuration,
   getCountryForDriver,
   getCountryByAlpha2Code,
+  getCountryForAnyCode,
   addSeconds,
   knapsack
 };

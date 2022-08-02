@@ -1,4 +1,4 @@
-const { getCountryByAlpha2Code, eventStatuses } = require("../../shared");
+const { eventStatuses, getCountryForAnyCode } = require("../../shared");
 const debug = require("debug")("tkidman:fetchManual");
 const moment = require("moment-timezone");
 const { leagueRef } = require("../../state/league");
@@ -15,7 +15,7 @@ const getActiveEvent = events => {
 const setCurrentEventEndTime = activeEvent => {
   if (activeEvent) {
     leagueRef.endTime = activeEvent.endTime;
-    leagueRef.activeCountryCode = getCountryByAlpha2Code(
+    leagueRef.activeCountryCode = getCountryForAnyCode(
       activeEvent.locationFlag
     ).code;
   }

@@ -2,8 +2,8 @@ const {
   formatDuration,
   getDuration,
   recalculateDiffs,
-  getCountryByAlpha2Code,
-  eventStatuses
+  eventStatuses,
+  getCountryForAnyCode
 } = require("../../shared");
 const Papa = require("papaparse");
 const moment = require("moment-timezone");
@@ -119,7 +119,7 @@ const setCurrentEventEndTime = activeEvent => {
       .tz(activeEvent.endTime, "CET")
       .utc()
       .toISOString();
-    leagueRef.activeCountryCode = getCountryByAlpha2Code(
+    leagueRef.activeCountryCode = getCountryForAnyCode(
       activeEvent.locationFlag
     ).code;
   }
