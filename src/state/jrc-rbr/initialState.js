@@ -70,9 +70,11 @@ const initialState = {
     }
   },
   teamOverride: {
-    skullengaged: [privateer, "Turbo Drift"],
-    Wiberg: [privateer, "Turbo Drift"],
-    Ducce950: [privateer, privateer, "Turbo Drift"]
+    skullengaged: [privateer],
+    Wiberg: [privateer],
+    Ducce950: [privateer, privateer],
+    "Maximilian Maksy": [privateer, privateer, privateer],
+    dimitrisqwerty: [privateer, privateer, privateer]
   }
 };
 module.exports = initialState;
