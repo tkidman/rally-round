@@ -9,7 +9,7 @@ const initialState = {
   showCarNameAsTextInResults: true,
   nullTeamIsPrivateer: true,
   dropLowestScoringRoundsNumber: 1,
-  sortByDropRoundPoints: false,
+  sortByDropRoundPoints: true,
   // useCarAsTeam: false,
   // useCarClassAsTeam: true,
   disableOverall: true,
@@ -55,6 +55,13 @@ const initialState = {
             locationName: "Wales Rally GB",
             locationFlag: "welsh",
             numStages: 10
+          },
+          {
+            eventId: 46202,
+            endTime: "2022-08-29 13:59",
+            locationName: "Rallye de France",
+            locationFlag: "FR",
+            numStages: 9
           }
         ]
       },

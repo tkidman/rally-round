@@ -39,7 +39,7 @@ jobs:
 #      - name: jrc-birthday
 #        if: always()
 #        run: CLUB=jrc-birthday node --unhandled-rejections=strict ./runner.js
-#      - name: jrc-historic
-#        if: always()
-#        run: CLUB=jrc-historic node --unhandled-rejections=strict ./runner.js
+      - name: jrc-historic
+        if: always()
+        run: CLUB=jrc-historic node --unhandled-rejections=strict ./runner.js
 #      - run: CLUB=jrc-themed node --unhandled-rejections=strict ./runner.js
