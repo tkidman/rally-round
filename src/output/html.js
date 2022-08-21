@@ -11,7 +11,7 @@ const {
   getAllResults,
   getLocation
 } = require("./shared");
-const { outputPath, templatePath } = require("../shared");
+const { outputPath, templatePath, getCountryForAnyCode } = require("../shared");
 const { processFantasyResults } = require("../fantasy/fantasyCalculator");
 // const { eventStatuses } = require("../shared");
 const resultColours = ["#76FF6A", "#faff5d", "#ffe300", "#ff5858"];
@@ -259,7 +259,10 @@ const transformForStandingsHTML = (division, type) => {
         teamLogo: getTeamLogo(driver.teamId)
       };
     } else {
-      return { ...row, teamLogo: getTeamLogo(standing.name) };
+      const country = leagueRef.league.useNationalityAsTeam
+        ? getCountryForAnyCode(standing.name)
+        : null;
+      return { ...row, teamLogo: getTeamLogo(standing.name), country };
     }
   });
   const driverStandingsNationalityAsTeam =

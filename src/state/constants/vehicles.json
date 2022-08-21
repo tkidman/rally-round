@@ -186,5 +186,21 @@
 	"BMW E30 M3 Evo Rally": {
 		"class": "H3",
 		"brand": "bmw"
+	},
+	"Opel Ascona 400": {
+		"class": "H3",
+		"brand": "opel"
+	},
+	"Lancia Stratos": {
+		"class": "H3",
+		"brand": "lancia"
+	},
+	"Datsun 240Z": {
+		"class": "H3",
+		"brand": "datsun"
+	},
+	"Ford Sierra Cosworth RS500": {
+		"class": "H3",
+		"brand": "ford"
 	}
 }
