@@ -298,7 +298,9 @@ const hasPoints = (pointsField, rows) => {
 };
 
 const transformForDriverResultsHTML = (event, division) => {
+  const events = division.events;
   const divisionName = division.divisionName;
+  const headerLocations = getHeaderLocations(events);
   const rows = event.results.driverResults.map((result, index) => {
     const resultDivision = leagueRef.divisions[result.divisionName];
     const { driver, country, carBrand } = getDriverData(result.name);
@@ -319,6 +321,7 @@ const transformForDriverResultsHTML = (event, division) => {
     };
   });
   return {
+    headerLocations,
     rows,
     title: division.displayName || divisionName,
     showTeam: leagueRef.hasTeams && !leagueRef.league.useNationalityAsTeam,
@@ -346,7 +349,12 @@ const writeDriverResultsHTML = (event, division, links, eventIndex) => {
   const data = transformForDriverResultsHTML(event, division);
   data.overall = division.divisionName === "overall";
 
-  data.navigation = getNavigationHTML(division.divisionName, "driver", links);
+  data.navigation = getNavigationHTML(
+    division.divisionName,
+    "driver",
+    links,
+    data.headerLocations
+    );
 
   data.lastUpdatedAt = moment()
     .utc()
