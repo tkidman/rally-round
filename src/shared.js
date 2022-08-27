@@ -44,7 +44,7 @@ const getDuration = durationString => {
 
 const getSortNumber = (entry, field) => {
   const durationInMillis = getDuration(entry[field]).asMilliseconds();
-  if (entry.isDnfEntry) {
+  if (entry.isDnfEntry || entry.isDebutant) {
     return durationInMillis + dnfFactor;
   }
   return durationInMillis;
