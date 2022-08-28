@@ -35,7 +35,11 @@ const updatePoints = ({
     if (orderedEntries.length > i) {
       const entry = orderedEntries[i];
       const driver = leagueRef.getDriver(entry.name);
-      if (!entry.isDnfEntry || leagueRef.league.pointsForDNF) {
+
+      if (
+        (!entry.isDnfEntry || leagueRef.league.pointsForDNF) &&
+        !entry.isDebutant
+      ) {
         let newPoints = points[i];
 
         if (
@@ -54,8 +58,14 @@ const updatePoints = ({
         }
         resultsByDriver[driver.name][pointsField] = newPoints;
       }
-      if (!entry.isDnfEntry && entry.isDebutant){
-        resultsByDriver[driver.name][pointsField] = leagueRef.league.numPointsForDebutant;
+
+      if (
+        !entry.isDnfEntry &&
+        entry.isDebutant &&
+        pointsField === "overallPoints"
+      ) {
+        resultsByDriver[driver.name][pointsField] =
+          leagueRef.league.numPointsForDebutant;
       }
     }
   }
