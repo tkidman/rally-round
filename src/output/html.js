@@ -127,7 +127,7 @@ const getNavigationHTML = (
     activeCountry: leagueRef.activeCountryCode,
     logo: leagueRef.league.logo,
     siteTitlePrefix: leagueRef.league.siteTitlePrefix,
-    ...getLocalization()
+    localization: getLocalization()
   });
 };
 
@@ -292,7 +292,7 @@ const transformForStandingsHTML = (division, type) => {
     logo: leagueRef.league.logo,
     showTeamNameTextColumn: leagueRef.league.showTeamNameTextColumn,
     hideTeamLogoColumn: leagueRef.league.hideTeamLogoColumn,
-    ...getLocalization()
+    localization: getLocalization()
   };
 };
 
@@ -345,7 +345,7 @@ const transformForDriverResultsHTML = (event, division) => {
     fullResultsLink: division.rbr
       ? `https://rallysimfans.hu/rbr/rally_online.php?centerbox=rally_results.php&rally_id=${event.eventId}`
       : null,
-    ...getLocalization()
+    localization: getLocalization()
   };
 };
 
