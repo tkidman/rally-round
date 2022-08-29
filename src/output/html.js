@@ -13,6 +13,7 @@ const {
 } = require("./shared");
 const { outputPath, templatePath, getCountryForAnyCode } = require("../shared");
 const { processFantasyResults } = require("../fantasy/fantasyCalculator");
+const { getLocalization } = require("./localization");
 // const { eventStatuses } = require("../shared");
 const resultColours = ["#76FF6A", "#faff5d", "#ffe300", "#ff5858"];
 
@@ -125,7 +126,8 @@ const getNavigationHTML = (
     endTime: leagueRef.endTime,
     activeCountry: leagueRef.activeCountryCode,
     logo: leagueRef.league.logo,
-    siteTitlePrefix: leagueRef.league.siteTitlePrefix
+    siteTitlePrefix: leagueRef.league.siteTitlePrefix,
+    ...getLocalization()
   });
 };
 
@@ -289,7 +291,8 @@ const transformForStandingsHTML = (division, type) => {
     backgroundStyle: leagueRef.getBackgroundStyle(),
     logo: leagueRef.league.logo,
     showTeamNameTextColumn: leagueRef.league.showTeamNameTextColumn,
-    hideTeamLogoColumn: leagueRef.league.hideTeamLogoColumn
+    hideTeamLogoColumn: leagueRef.league.hideTeamLogoColumn,
+    ...getLocalization()
   };
 };
 
@@ -341,7 +344,8 @@ const transformForDriverResultsHTML = (event, division) => {
     showSuperRallyColumn: leagueRef.league.showSuperRallyColumn,
     fullResultsLink: division.rbr
       ? `https://rallysimfans.hu/rbr/rally_online.php?centerbox=rally_results.php&rally_id=${event.eventId}`
-      : null
+      : null,
+    ...getLocalization()
   };
 };
 
@@ -354,7 +358,7 @@ const writeDriverResultsHTML = (event, division, links, eventIndex) => {
     "driver",
     links,
     data.headerLocations
-    );
+  );
 
   data.lastUpdatedAt = moment()
     .utc()
