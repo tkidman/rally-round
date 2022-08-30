@@ -62,6 +62,13 @@ const initialState = {
             locationName: "Rallye de France",
             locationFlag: "FR",
             numStages: 9
+          },
+          {
+            eventId: 46602,
+            endTime: "2022-09-12 10:59",
+            locationName: "Rally USA",
+            locationFlag: "US",
+            numStages: 12
           }
         ]
       },
