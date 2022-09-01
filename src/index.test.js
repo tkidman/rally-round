@@ -72,6 +72,31 @@ describe("calculates event results", () => {
         teamId: "Time Penalty Boys",
         totalPoints: 16
       },
+      // isDebutant (should only get points defined by numPointsForDebutant)
+      {
+        divisionName: "pro",
+        entry: {
+          isDebutant: true,
+          isDnfEntry: false,
+          isFounder: false,
+          isPlayer: false,
+          isVIP: false,
+          name: "Weepy",
+          nationality: "swedish",
+          playerDiff: 0,
+          rank: 1.5,
+          stageDiff: "+00:00:01.000",
+          stageTime: "05:34.000",
+          totalDiff: "+00:18:22.013",
+          totalTime: "04:59:58.000",
+          vehicleName: "Alpine Renault A110 1600 S"
+        },
+        name: "Weepy",
+        overallPoints: 2,
+        pointsDisplay: 2,
+        teamId: "privateer",
+        totalPoints: 2
+      },
       {
         divisionName: "pro",
         entry: {

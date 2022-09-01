@@ -19,6 +19,22 @@
       "nationality": "eLngLatvian"
     },
     {
+      "rank": 1.5,
+      "name": "Weepy",
+      "isVIP": false,
+      "isFounder": false,
+      "isPlayer": false,
+      "isDnfEntry": false,
+      "isDebutant": true,
+      "playerDiff": 0,
+      "vehicleName": "Alpine Renault A110 1600 S",
+      "stageTime": "05:34.000",
+      "stageDiff": "--",
+      "totalTime": "04:59:58.000",
+      "totalDiff": "+18:22.013",
+      "nationality": "swedish"
+    },
+    {
       "rank": 2,
       "name": "SFRrallimoilane",
       "isVIP": false,

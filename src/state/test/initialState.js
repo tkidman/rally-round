@@ -40,7 +40,8 @@ const initialState = {
   },
   teamOverride: {
     Kuul: ["Ditch Dusters"]
-  }
+  },
+  numPointsForDebutant: 2
 };
 
 module.exports = initialState;
