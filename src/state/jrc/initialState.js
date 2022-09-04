@@ -39,6 +39,12 @@ const initialState = {
               name: "CA_Oisin-Hussey_6",
               stageTime: "07:52.947",
               totalTime: "47:43.750"
+            },
+            {
+              name: "ifBULL",
+              stageTime: "08:01.608",
+              totalTime: "51:53.064",
+              isDnfEntry: false
             }
           ]
         }
