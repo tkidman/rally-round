@@ -41,9 +41,9 @@
 				<table>
 					<thead>
 						<tr>
-							<th>{{location}}</th>
+							<th>{{localization.location}}</th>
 							<th>💰</th>
-							<th>{{captain}}</th>
+							<th>{{localization.captain}}</th>
 							<th>{{localization.driver}} 1</th>
 							<th>{{localization.driver}} 2</th>
 							<th>{{localization.driver}} 3</th>
@@ -83,7 +83,7 @@
 						<div class="w3-container">
 							<div class="w3-row w3-row-padding" style="padding:0.5em;">
 								<div class="w3-col m6 l6">
-									<label>{{captain}}</label>
+									<label>{{localization.captain}}</label>
 									<input list="driverPrices" id="driver1" name="driver1" placeholder="Captain"
 										class="w3-input w3-border" />
 									<label>{{localization.driver}} 2</label>
@@ -93,7 +93,7 @@
 									<input list="driverPrices" id="driver3" name="driver3" placeholder="driver 3"
 										class="w3-input w3-border" />
 									<button class="w3-btn w3-blue" style="margin: auto;display: table;margin-top: 1em;"
-										onclick="calculatePrice()">Is it valid?</button>
+										onclick="calculatePrice()">{{localization.valid_qn}}?</button>
 								</div>
 								<div class="w3-col m6 l6">
 									<p style="font-weight:bold;">{{localization.budget}}: <span id="budget_check"></span></p>
@@ -140,7 +140,7 @@
 					<tbody>
 						{{#each prices}}{{#with this}}
 						<tr>
-							<td class="text-left bold">{{localization.driver}}</td>
+							<td class="text-left bold">{{driver}}</td>
 							{{#each prices}}{{#with this}}
 							<td style="text-align:left;">
 								£{{price}}
