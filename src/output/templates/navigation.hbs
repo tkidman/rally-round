@@ -28,7 +28,7 @@
 
 		{{#if links.driver}}
 		<div class="w3-dropdown-hover w3-hide-small w3-hide-medium">
-			<button class="w3-button">Driver Standings</button>
+			<button class="w3-button">{{localization.driver_standings}}</button>
 			<div class="w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small w3-hide-medium">
 				{{#with links.driver}}
 				{{#each this}}
@@ -41,7 +41,7 @@
 
 		{{#if links.team}}
 		<div class="w3-dropdown-hover w3-hide-small w3-hide-medium">
-			<button class="w3-button">Team Standings</button>
+			<button class="w3-button">{{localization.team_standings}}</button>
 			<div class="w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small w3-hide-medium">
 				{{#with links.team}}
 				{{#each this}}
@@ -97,7 +97,7 @@
                 </div>
             </div>
             <div class="w3-dropdown-hover w3-hide-small w3-hide-medium">
-                <button class="w3-button">overall</button>
+                <button class="w3-button">{{localization.overall}}</button>
                 <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small">
                     {{#with links.overall}}
                     {{#each this}}
@@ -122,12 +122,12 @@
 	<div id="mobileNav" class="w3-bar-block w3-black w3-hide w3-hide-large" style="overflow-y:scroll;max-height:95vh;">
 		{{#with links.driver}}
 		{{#each this}}
-		<a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">Driver Standings - {{link}}</a>
+		<a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">{{localization.driver_standings}} - {{link}}</a>
 		{{/each}}
 		{{/with}}
 		{{#with links.team}}
 		{{#each this}}
-		<a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">Team Standings - {{link}}</a>
+		<a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">{{localization.team_standings}} - {{link}}</a>
 		{{/each}}
 		{{/with}}
 		{{#with links.fantasy}}
@@ -152,12 +152,12 @@
 		{{/with}}
 		{{#with links.overall}}
 		{{#each this}}
-		<a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">overall - {{link}}</a>
+		<a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">{{localization.overall}} - {{link}}</a>
 		{{/each}}
 		{{/with}}
 	</div>
 
-	{{#if secondary}}
+ 	{{#if secondary}}
 	<div class="w3-bar w3-light-grey secondaryNav">
 		{{#each secondary}}
 			<a href="./{{../links.active.name}}-{{this.eventId}}-driver-results.html">
