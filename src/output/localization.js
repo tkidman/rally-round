@@ -27,6 +27,7 @@ const localization = {
     transfers: "Transfers",
     location: "Location",
     captain: "Captain",
+    valid_qn: "Is it valid",
     roster_to_clipboard: "Copy roster to clipboard",
     adr: "ADR*",
     full_results: "full results",
