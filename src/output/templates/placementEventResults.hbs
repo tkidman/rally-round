@@ -17,23 +17,23 @@
             <div style="margin-bottom: 1em;" class="">
                 <div class="logo" style="display:flex;">
                     <img src="./assets/{{logo}}" />
-                    <h2 style="margin-left:1em;">{{title}} {{location.countryName}} Driver Results</h2>
+                    <h2 style="margin-left:1em;">{{title}} {{location.countryName}} >{{localization.driver_results}}</h2>
                 </div>
             </div>
 
             <table id="tableDrivers">
                 <thead>
                 <tr>
-                    <th>Pos</th>
-                    <th>Nat</th>
-                    <th>Driver</th>
+                    <th>{{localization.pos}}</th>
+                    <th>{{localization.nat}}</th>
+                    <th>{{localization.driver}}</th>
 
-					<th>Div</th>
+					<th>{{localization.div}}</th>
 					<th>SS1</th>
 					<th>SS2</th>
 					<th>SS3</th>
 					<th>SS4</th>
-                    <td>Total</td>
+                    <td>{{localization.total}}</td>
                 </tr>
                 </thead>
                 <tbody>
@@ -58,7 +58,7 @@
 
             </table>
             <div style="margin:0 auto; text-align:center;">
-                <p>last updated at: {{lastUpdatedAt}}</p>
+                <p>{{localization.last_updated}}: {{lastUpdatedAt}}</p>
             </div>
         </div>
     </div>

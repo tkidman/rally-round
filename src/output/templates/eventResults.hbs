@@ -16,45 +16,45 @@
             <div style="margin-bottom: 1em;" class="w3-hide-medium w3-hide-small">
                 <div class="logo" style="display:flex;">
                     <img src="./assets/{{logo}}" />
-                    <h2 style="margin-left:1em;">{{title}} {{location.countryName}} Driver Results</h2>
+                    <h2 style="margin-left:1em;">{{title}} {{location.countryName}} {{localization.driver_results}}</h2>
                 </div>
             </div>
 
             <table id="tableDrivers">
                 <thead>
                 <tr>
-                    <th>Pos</th>
-                    <th>Nat</th>
-                    <th>Driver</th>
+                    <th>{{localization.pos}}</th>
+                    <th>{{localization.nat}}</th>
+                    <th>{{localization.driver}}</th>
                     {{#if overall}}
-                        <th>Div</th>
+                        <th>{{localization.div}}</th>
                     {{/if}}
                     {{#if showTeam}}
                         {{#unless hideTeamLogoColumn}}
-                            <th>Team</th>
+                            <th>{{localization.team}}</th>
                         {{/unless}}
                         {{#if showTeamNameTextColumn}}
-                            <th>Team Name</th>
+                            <th>{{localization.team_name}}</th>
                         {{/if}}
                     {{/if}}
                     {{#if showCar}}
-                        <th>Car</th>
+                        <th>{{localization.car}}</th>
                     {{/if}}
-                    <td>PS</td>
-                    <td>Diff</td>
-                    <td>Total</td>
-                    <td>Diff</td>
+                    <td>{{localization.ps}}</td>
+                    <td>{{localization.diff}}</td>
+                    <td>{{localization.total}}</td>
+                    <td>{{localization.diff}}</td>
                     {{#if showSuperRallyColumn}}
-                        <td>SR</td>
+                        <td>{{localization.sr}}</td>
                     {{/if}}
                     {{#if showStagePoints}}
-                        <td>Stage Points</td>
+                        <td>{{localization.stage_points}}</td>
                     {{/if}}
                     {{#if showPowerStagePoints}}
-                        <td>PS Points</td>
+                        <td>{{localization.ps}} {{localization.points}}</td>
                     {{/if}}
-                    <td>Points</td>
-                    <td>Total Points</td>
+                    <td>{{localization.points}}</td>
+                    <td>{{localization.total_points}}</td>
                 </tr>
                 </thead>
                 <tbody>
@@ -112,21 +112,21 @@
 
             </table>
             <div style="margin:0 auto; text-align:center;">
-                <p>last updated at: {{lastUpdatedAt}}</p>
+                <p>{{localization.last_updated}}: {{lastUpdatedAt}}</p>
             </div>
             {{#if incorrectCarTimePenaltySeconds}}
                 <div style="margin:0 auto; text-align:center;">
-                    <p>*{{incorrectCarTimePenaltySeconds}} second penalty applied for incorrect car choice</p>
+                    <p>*{{incorrectCarTimePenaltySeconds}} {{localization.second_penalty}}</p>
                 </div>
             {{/if}}
             {{#if event.enduranceRoundMultiplier}}
                 <div style="margin:0 auto; text-align:center;">
-                    <p>endurance round: points multiplied by {{event.enduranceRoundMultiplier}}</p>
+                    <p>{{localization.endurance_multiplied}} {{event.enduranceRoundMultiplier}}</p>
                 </div>
             {{/if}}
             {{#if fullResultsLink}}
                 <div style="margin:0 auto; text-align:center;">
-                    <a href="{{fullResultsLink}}" target="_none">full results</a>
+                    <a href="{{fullResultsLink}}" target="_none">{{localization.full_results}}</a>
                 </div>
             {{/if}}
         </div>

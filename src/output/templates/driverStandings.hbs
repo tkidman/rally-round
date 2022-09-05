@@ -16,30 +16,30 @@
                 <div style="margin-bottom: 1em;" class="w3-hide-medium w3-hide-small">
                     <div class="logo" style="display:flex;">
                         <img src="./assets/{{logo}}" />
-                        <h2 style="margin-left:1em;">{{title}} Driver Standings</h2>
+                        <h2 style="margin-left:1em;">{{title}} {{localization.driver_standings}}</h2>
                     </div>
                 </div>
 
                 <table id="tableDrivers">
                     <thead>
                         <tr>
+                            <th>{{localization.pos}}</th>
                             <th></th>
-                            <th></th>
-                            <th>Nat</th>
+                            <th>{{localization.nat}}</th>
                             <th>{{localization.driver}}</th>
                             {{#if overall}}
-                                <th>Div</th>
+                                <th>{{localization.div}}</th>
                             {{/if}}
                             {{#if showTeam}}
                                 {{#unless hideTeamLogoColumn}}
-                                    <th>Team</th>
+                                    <th>{{localization.team}}</th>
                                 {{/unless}}
                                 {{#if showTeamNameTextColumn}}
-                                    <th>Team Name</th>
+                                    <th>{{localization.team_name}}</th>
                                 {{/if}}
                             {{/if}}
                             {{#if showCar}}
-                            <th>Car</th>
+                            <th>{{localization.car}}</th>
                             {{/if}}
 
                             {{#each headerLocations}}
@@ -50,9 +50,9 @@
                             </th>
 
                             {{/each}}
-                            <th>Points</th>
+                            <th>{{localization.points}}</th>
                             {{#if showPointsAfterDropRounds}}
-                                <th>ADR*</th>
+                                <th>{{localization.adr}}</th>
                             {{/if}}
                         </tr>
                     </thead>
@@ -116,7 +116,7 @@
 
                 </table>
                 <div style="margin:0 auto; text-align:center;">
-                    <p>last updated at: {{lastUpdatedAt}}</p>
+                    <p>{{localization.last_updated}}: {{lastUpdatedAt}}</p>
                 </div>
                 {{#if showPointsAfterDropRounds}}
                     <div style="margin:0 auto; text-align:center;">

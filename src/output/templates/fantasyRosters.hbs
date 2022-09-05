@@ -41,13 +41,13 @@
 				<table>
 					<thead>
 						<tr>
-							<th>Location</th>
+							<th>{{location}}</th>
 							<th>💰</th>
-							<th>Captain</th>
-							<th>Driver 1</th>
-							<th>Driver 2</th>
-							<th>Driver 3</th>
-							<th>Points</th>
+							<th>{{captain}}</th>
+							<th>{{localization.driver}} 1</th>
+							<th>{{localization.driver}} 2</th>
+							<th>{{localization.driver}} 3</th>
+							<th>{{localization.points}}</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -83,26 +83,26 @@
 						<div class="w3-container">
 							<div class="w3-row w3-row-padding" style="padding:0.5em;">
 								<div class="w3-col m6 l6">
-									<label>Captain</label>
+									<label>{{captain}}</label>
 									<input list="driverPrices" id="driver1" name="driver1" placeholder="Captain"
 										class="w3-input w3-border" />
-									<label>Driver 2</label>
+									<label>{{localization.driver}} 2</label>
 									<input list="driverPrices" id="driver2" name="driver2" placeholder="driver 2"
 										class="w3-input w3-border" />
-									<label>Driver 3</label>
+									<label>{{localization.driver}} 3</label>
 									<input list="driverPrices" id="driver3" name="driver3" placeholder="driver 3"
 										class="w3-input w3-border" />
 									<button class="w3-btn w3-blue" style="margin: auto;display: table;margin-top: 1em;"
 										onclick="calculatePrice()">Is it valid?</button>
 								</div>
 								<div class="w3-col m6 l6">
-									<p style="font-weight:bold;">Budget: <span id="budget_check"></span></p>
-									<p style="font-weight:bold;">Captain: <span id="captain_check"></span></p>
-									<p style="font-weight:bold;">Transfers: <span id="transfer_check"></span></p>
+									<p style="font-weight:bold;">{{localization.budget}}: <span id="budget_check"></span></p>
+									<p style="font-weight:bold;">{{localization.captain}}: <span id="captain_check"></span></p>
+									<p style="font-weight:bold;">{{localization.transfers}}: <span id="transfer_check"></span></p>
 
 									<input type="text" style="display:none;" id="discordString" value="placeholder" >
 									<button class="w3-btn w3-blue" id="discordButton" style="margin: auto;display: table;margin-top: 1em;"
-										 disabled="true" onclick="copyDiscordText()">Copy roster to clipboard</button>
+										 disabled="true" onclick="copyDiscordText()">{{roster_to_clipboard}}</button>
 								</div>
 							</div>
 							<datalist id="driverPrices">
@@ -126,7 +126,7 @@
 				<table id="tableDrivers">
 					<thead>
 						<tr>
-							<th>Driver</th>
+							<th>{{localization.driver}}</th>
 							<th><img src="./assets/country-flags/mco.png" /></th>
 							<th><img src="./assets/country-flags/swe.png" /></th>
 							<th><img src="./assets/country-flags/usa.png" /></th>
@@ -140,7 +140,7 @@
 					<tbody>
 						{{#each prices}}{{#with this}}
 						<tr>
-							<td class="text-left bold">{{driver}}</td>
+							<td class="text-left bold">{{localization.driver}}</td>
 							{{#each prices}}{{#with this}}
 							<td style="text-align:left;">
 								£{{price}}
