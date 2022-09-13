@@ -65,51 +65,7 @@
 		</div>
 		{{/if}}
 
-		{{#if links.JRC1}}
-            <div class="w3-dropdown-hover w3-hide-small w3-hide-medium">
-                <button class="w3-button">JRC1</button>
-                <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small">
-                    {{#with links.JRC1}}
-                    {{#each this}}
-                    <a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">{{link}}</a>
-                    {{/each}}
-                    {{/with}}
-                </div>
-            </div>
-            <div class="w3-dropdown-hover w3-hide-small w3-hide-medium">
-                <button class="w3-button">JRC2</button>
-                <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small">
-                    {{#with links.JRC2}}
-                    {{#each this}}
-                    <a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">{{link}}</a>
-                    {{/each}}
-                    {{/with}}
-                </div>
-            </div>
-            <div class="w3-dropdown-hover w3-hide-small w3-hide-medium">
-                <button class="w3-button">JRC3</button>
-                <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small">
-                    {{#with links.JRC3}}
-                    {{#each this}}
-                    <a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">{{link}}</a>
-                    {{/each}}
-                    {{/with}}
-                </div>
-            </div>
-            <div class="w3-dropdown-hover w3-hide-small w3-hide-medium">
-                <button class="w3-button">{{localization.overall}}</button>
-                <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small">
-                    {{#with links.overall}}
-                    {{#each this}}
-                    <a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">{{link}}</a>
-                    {{/each}}
-                    {{/with}}
-                </div>
-            </div>
-		{{/if}}
-
 		{{#if endTime}}
-
 		<div class="w3-bar-item w3-right w3-hide-small w3-hide-medium">
 			<div class="logo">
 				<img src="./assets/country-flags/{{activeCountry}}.png" style="max-height: 0.9em;border-radius: 0.3em;"/>
@@ -121,39 +77,19 @@
 
 	<div id="mobileNav" class="w3-bar-block w3-black w3-hide w3-hide-large" style="overflow-y:scroll;max-height:95vh;">
 		{{#with links.driver}}
-		{{#each this}}
-		<a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">{{localization.driver_standings}} - {{link}}</a>
-		{{/each}}
+            {{#each this}}
+            <a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">{{../../localization.driver_standings}} - {{link}}</a>
+            {{/each}}
 		{{/with}}
 		{{#with links.team}}
-		{{#each this}}
-		<a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">{{localization.team_standings}} - {{link}}</a>
-		{{/each}}
-		{{/with}}
-		{{#with links.fantasy}}
-		{{#each this}}
-		<a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">Fantasy JRC - {{link}}</a>
-		{{/each}}
-		{{/with}}
-		{{#with links.JRC1}}
-		{{#each this}}
-		<a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">JRC1 - {{link}}</a>
-		{{/each}}
-		{{/with}}
-		{{#with links.JRC2}}
-		{{#each this}}
-		<a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">JRC2 - {{link}}</a>
-		{{/each}}
-		{{/with}}
-		{{#with links.JRC3}}
-		{{#each this}}
-		<a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">JRC3 - {{link}}</a>
-		{{/each}}
+            {{#each this}}
+            <a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">{{../../localization.team_standings}} - {{link}}</a>
+            {{/each}}
 		{{/with}}
 		{{#with links.overall}}
-		{{#each this}}
-		<a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">{{localization.overall}} - {{link}}</a>
-		{{/each}}
+            {{#each this}}
+            <a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">{{../../localization.overall}} - {{link}}</a>
+            {{/each}}
 		{{/with}}
 	</div>
 
