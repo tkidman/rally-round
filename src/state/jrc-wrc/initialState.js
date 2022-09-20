@@ -17,8 +17,8 @@ const initialState = {
   siteTitlePrefix: "JRC",
   divisions: {
     jrcWrc: {
-      divisionName: "wrcSeason3",
-      displayName: "WRC Season 3",
+      divisionName: "wrcSeason4",
+      displayName: "WRC Season 4",
       disableSameCarValidation: false,
       // enableSameCarClassValidation: true,
       maxDriversScoringPointsForTeam: 2,
