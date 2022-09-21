@@ -44,20 +44,20 @@ const processCsv = (eventResultsCsv, eventStandingsCsv, event) => {
   }));
   resultRows.forEach(row => {
     const stageDuration = moment.duration(parseFloat(row.time3), "seconds");
-    const superRally = standingsByUserName[row.user]
-      ? Number(standingsByUserName[row.user].super_rally)
+    const superRally = standingsByUserName[row["User name"]]
+      ? Number(standingsByUserName[row["User name"]].super_rally)
       : null;
     const commonResult = {
-      name: row.user,
+      name: row["User name"],
       isDnfEntry: false,
-      vehicleName: row.car,
-      vehicleClass: row.car_group,
-      nationality: row.nationality,
+      vehicleName: row["Car name"],
+      vehicleClass: row["Group"],
+      nationality: row.Nationality,
       comment: row.comment,
       stageTime: formatDuration(stageDuration),
       superRally
     };
-    const stageIndex = row.stage_no - 1;
+    const stageIndex = row.SS - 1;
     leaderboardStages[stageIndex].entries.push(commonResult);
   });
 

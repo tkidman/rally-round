@@ -30,9 +30,9 @@ jobs:
 #      - name: rsc
 #        if: always()
 #        run: CLUB=rsc node --unhandled-rejections=strict ./runner.js
-      - name: jrc-rbr
-        if: always()
-        run: CLUB=jrc-rbr node --unhandled-rejections=strict ./runner.js
+#       - name: jrc-rbr
+#         if: always()
+#         run: CLUB=jrc-rbr node --unhandled-rejections=strict ./runner.js
       - name: jrc
         if: always()
         run: CLUB=jrc node --unhandled-rejections=strict ./runner.js
