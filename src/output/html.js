@@ -11,7 +11,12 @@ const {
   getAllResults,
   getLocation
 } = require("./shared");
-const { outputPath, templatePath, getCountryForAnyCode } = require("../shared");
+const {
+  outputPath,
+  templatePath,
+  getCountryForAnyCode,
+  eventStatuses
+} = require("../shared");
 const { processFantasyResults } = require("../fantasy/fantasyCalculator");
 const { getLocalization } = require("./localization");
 // const { eventStatuses } = require("../shared");
@@ -300,6 +305,16 @@ const hasPoints = (pointsField, rows) => {
   return rows.some(row => row[pointsField]);
 };
 
+const getStageTimeDisplay = (result, event) => {
+  if (
+    leagueRef.league.hideStageTimesUntilEventEnd &&
+    event.eventStatus !== eventStatuses.finished
+  ) {
+    return "";
+  }
+  return result.stageTime;
+};
+
 const transformForDriverResultsHTML = (event, division) => {
   const events = division.events;
   const divisionName = division.divisionName;
@@ -320,7 +335,8 @@ const transformForDriverResultsHTML = (event, division) => {
       teamLogo: getTeamLogo(driver.teamId),
       country,
       divisionDisplayName:
-        resultDivision.displayName || resultDivision.divisionName
+        resultDivision.displayName || resultDivision.divisionName,
+      stageTimeDisplay: getStageTimeDisplay(result, event)
     };
   });
   return {
