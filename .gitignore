@@ -23,3 +23,5 @@ example.json
 src/state/jrc/new_fantasyTeams.json
 
 .env
+/clubs.json
+/clubs.csv

@@ -91,13 +91,12 @@ You can also pull driver information directly from a google sheet. You need to h
 * enable cloudfront
 * Better logging for manual events parsing
 * Better logging generally
+* knapsack problem for drop rounds ✓
+* double points for endurance rounds ✓
+* double points for non superrally ✓
+* Team as text only ✓
 
 RBR support
 * vehicle config (maybe just text for a while)
 * pull event data from website, only require event id to configure.
 
-RSC support
-* knapsack problem for drop rounds
-* double points for endurance rounds
-* double points for non superrally 
-* Team as text only
