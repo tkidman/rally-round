@@ -310,7 +310,7 @@ const getStageTimeDisplay = (result, event) => {
     leagueRef.league.hideStageTimesUntilEventEnd &&
     event.eventStatus !== eventStatuses.finished
   ) {
-    return "---";
+    return "--";
   }
   return result.entry.stageTime;
 };
