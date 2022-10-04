@@ -310,9 +310,9 @@ const getStageTimeDisplay = (result, event) => {
     leagueRef.league.hideStageTimesUntilEventEnd &&
     event.eventStatus !== eventStatuses.finished
   ) {
-    return "";
+    return "---";
   }
-  return result.stageTime;
+  return result.entry.stageTime;
 };
 
 const transformForDriverResultsHTML = (event, division) => {

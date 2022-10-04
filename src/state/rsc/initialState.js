@@ -43,6 +43,14 @@ const initialState = {
             locationFlag: "SE",
             numStages: 7
             // enduranceRoundMultiplier: 2
+          },
+          {
+            eventId: 47616,
+            endTime: "2022-10-10 12:00",
+            locationName: "Rally Nonko",
+            locationFlag: "EE",
+            numStages: 8
+            // enduranceRoundMultiplier: 2
           }
         ]
       },
