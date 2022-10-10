@@ -4,7 +4,7 @@ const initialState = {
   useStandingsForHome: true,
   // subfolderName: "rbr",
   showLivePoints: true,
-  showLivePointsDaysRemaining: 3,
+  showLivePointsDaysRemaining: 9,
   noSuperRallyPointsMultiplier: 2,
   dropLowestScoringRoundsNumber: 2,
   afterDropRoundMessage:
@@ -51,6 +51,14 @@ const initialState = {
             locationFlag: "EE",
             numStages: 8
             // enduranceRoundMultiplier: 2
+          },
+          {
+            eventId: 47905,
+            endTime: "2022-10-24 12:00",
+            locationName: "Rally Shakey",
+            locationFlag: "GB",
+            numStages: 15,
+            enduranceRoundMultiplier: 2
           }
         ]
       },
