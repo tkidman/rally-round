@@ -3,6 +3,7 @@ const fs = require("fs");
 
 const { outputPath, hiddenPath, cachePath } = require("../shared");
 const { leagueRef } = require("../state/league");
+const { allLeagues } = require("../state/allLeagues");
 const copydir = require("copy-dir");
 const { upload } = require("../api/aws/s3");
 const { writeSheetsForDivision } = require("./spreadsheet");
@@ -22,6 +23,27 @@ const addLinks = (links, name, type, displayName) => {
     href: `./${name}-${type}-standings.html`,
     active: false
   });
+};
+
+const addHistoricalLinks = links => {
+  links.historical = leagueRef.league.historicalSeasonLinks;
+};
+
+const addSeriesLinks = links => {
+  links.series = allLeagues.reduce((seriesLinks, otherLeague) => {
+    if (
+      otherLeague.websiteName === leagueRef.league.websiteName &&
+      otherLeague.subfolderName !== leagueRef.league.subfolderName &&
+      !otherLeague.hideFromSeriesLinks
+    ) {
+      seriesLinks.push({
+        name: otherLeague.siteTitlePrefix,
+        link: otherLeague.siteTitlePrefix,
+        href: `/${otherLeague.websiteName}/${otherLeague.subfolderName}`,
+        active: false
+      });
+    }
+  }, []);
 };
 
 const getHtmlLinks = () => {
@@ -46,6 +68,8 @@ const getHtmlLinks = () => {
     addLinks(links, "driver", "fantasy");
     addLinks(links, "rosters", "fantasy");
   }
+  addHistoricalLinks(links);
+  addSeriesLinks(links);
   return links;
 };
 
