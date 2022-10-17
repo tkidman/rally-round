@@ -26,7 +26,7 @@ const addLinks = (links, name, type, displayName) => {
 };
 
 const addHistoricalLinks = links => {
-  links.historical = leagueRef.league.historicalSeasonLinks;
+  links.historical = leagueRef.league.historicalSeasonLinks || [];
 };
 
 const addSeriesLinks = links => {

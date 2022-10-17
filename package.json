@@ -4,7 +4,8 @@
   "description": "dirt2 results",
   "main": "src/index.js",
   "scripts": {
-    "test": "jest test",
+    "test": "jest",
+    "test-e2e": "jest e2e.test.js",
     "lint": "eslint src/",
     "prepush": "npm run lint -- --fix && npm run test"
   },

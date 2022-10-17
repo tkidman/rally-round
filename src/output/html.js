@@ -174,6 +174,15 @@ const writeErrorHTML = links => {
   fs.writeFileSync(`./${outputPath}/website/error.html`, out);
 };
 
+const getLastUpdatedAt = () => {
+  if (leagueRef.league.overrideLastUpdated) {
+    return leagueRef.league.overrideLastUpdated;
+  }
+  return moment()
+    .utc()
+    .format();
+};
+
 const writeStandingsHTML = (division, type, links) => {
   const data = transformForStandingsHTML(division, type);
   data.overall = division.divisionName === "overall";
@@ -183,9 +192,7 @@ const writeStandingsHTML = (division, type, links) => {
     links,
     data.headerLocations
   );
-  data.lastUpdatedAt = moment()
-    .utc()
-    .format();
+  data.lastUpdatedAt = getLastUpdatedAt();
 
   const standingsTemplateFile = `${templatePath}/${type}Standings.hbs`;
   const _t = fs.readFileSync(standingsTemplateFile).toString();
@@ -376,9 +383,7 @@ const writeDriverResultsHTML = (event, division, links, eventIndex) => {
     data.headerLocations
   );
 
-  data.lastUpdatedAt = moment()
-    .utc()
-    .format();
+  data.lastUpdatedAt = getLastUpdatedAt();
 
   const templateFile = `${templatePath}/eventResults.hbs`;
   if (!fs.existsSync(templateFile)) {
