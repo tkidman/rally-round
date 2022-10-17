@@ -182,15 +182,17 @@ tbody>tr:nth-child(odd) {
 	text-transform: uppercase;
 }
 
-#mobileNav {
+#mobileNav #seriesMobileNav {
 	font-weight: bold;
 }
 
 #mobileNav>span,
-#mobileNav>a {
+#mobileNav>a,
+#seriesMobileNav>span,
+#seriesMobileNav>a {
 	text-align: center;
-	font-size: 2.5em;
-	padding: 1em 0;
+	font-size: 2em;
+	padding: 0.5em 0;
 }
 
 .active {

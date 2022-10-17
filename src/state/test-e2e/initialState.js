@@ -12,8 +12,6 @@ const initialState = {
   hideCarColumnInStandings: true,
   showCarNameAsTextInResults: true,
   nullTeamIsPrivateer: true,
-  // useCarAsTeam: false,
-  // useCarClassAsTeam: true,
   showTeamNameTextColumn: true,
   hideTeamLogoColumn: true,
   disableOverall: true,
@@ -25,6 +23,7 @@ const initialState = {
   hideStageTimesUntilEventEnd: true,
   overrideLastUpdated: "last-updated-test-e2e",
   teamOverride: {},
+  historicalSeasonLinks: [{ name: "E2E Season 1", href: "/e2e-1" }],
   divisions: {
     testE2E: {
       divisionName: "test-e2e",

@@ -10,9 +10,10 @@
 ## Setup
 
 1. Install nodejs (https://nodejs.org/en/download/) - if installing on windows, you don't need the extra tools.
-1. Clone this repo to a location on your hard drive, or just download the zip to a location in your home folder and expand (https://github.com/tkidman/dirt2-results -> clone or download).
-1. Open a terminal / command prompt in this location. Eg: if in windows, open the unzipped directory in explorer, then copy the path at the top of the window, click the start menu, type 'cmd', then type 'cd ' and paste the path you copied earlier.
-1. Run `npm install` from your terminal from this directory
+2. Clone this repo to a location on your hard drive, or just download the zip to a location in your home folder and expand (https://github.com/tkidman/dirt2-results -> clone or download).
+3. Open a terminal / command prompt in this location. Eg: if in windows, open the unzipped directory in explorer, then copy the path at the top of the window, click the start menu, type 'cmd', then type 'cd ' and paste the path you copied earlier.
+4. Run `npm install` from your terminal from this directory
+5. Test everything is working by running `npm test` - this will generate a sample site in `./hidden/out/test-e2e/website`
 
 ## Execution
 

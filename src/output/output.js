@@ -3,78 +3,13 @@ const fs = require("fs");
 
 const { outputPath, hiddenPath, cachePath } = require("../shared");
 const { leagueRef } = require("../state/league");
-const { allLeagues } = require("../state/allLeagues");
 const copydir = require("copy-dir");
 const { upload } = require("../api/aws/s3");
 const { writeSheetsForDivision } = require("./spreadsheet");
-const { writeHTMLOutputForDivision } = require("./html");
+const { writeAllHTML } = require("./html");
 const { writePlacementOutput } = require("./html");
-const { writeFantasyHTML } = require("./html");
-const { writeHomeHTML, writeErrorHTML } = require("./html");
 
-const addLinks = (links, name, type, displayName) => {
-  const linkDisplay = displayName || name;
-  if (!links[type]) {
-    links[type] = [];
-  }
-  links[type].push({
-    name,
-    link: `${linkDisplay}`,
-    href: `./${name}-${type}-standings.html`,
-    active: false
-  });
-};
-
-const addHistoricalLinks = links => {
-  links.historical = leagueRef.league.historicalSeasonLinks || [];
-};
-
-const addSeriesLinks = links => {
-  links.series = allLeagues.reduce((seriesLinks, otherLeague) => {
-    if (
-      otherLeague.websiteName === leagueRef.league.websiteName &&
-      otherLeague.subfolderName !== leagueRef.league.subfolderName &&
-      !otherLeague.hideFromSeriesLinks
-    ) {
-      seriesLinks.push({
-        name: otherLeague.siteTitlePrefix,
-        link: otherLeague.siteTitlePrefix,
-        href: `/${otherLeague.websiteName}/${otherLeague.subfolderName}`,
-        active: false
-      });
-    }
-  }, []);
-};
-
-const getHtmlLinks = () => {
-  const league = leagueRef.league;
-  const links = Object.values(league.divisions).reduce((links, division) => {
-    const divisionName = division.divisionName;
-    const displayName = division.displayName;
-    if (leagueRef.hasTeams) {
-      addLinks(links, divisionName, "team", displayName);
-    }
-    addLinks(links, divisionName, "driver", displayName);
-    return links;
-  }, {});
-  if (leagueRef.includeOverall) {
-    if (leagueRef.hasTeams) {
-      addLinks(links, "overall", "team");
-    }
-    addLinks(links, "overall", "driver");
-  }
-  if (league.fantasy) {
-    addLinks(links, "team", "fantasy");
-    addLinks(links, "driver", "fantasy");
-    addLinks(links, "rosters", "fantasy");
-  }
-  addHistoricalLinks(links);
-  addSeriesLinks(links);
-  return links;
-};
-
-const writeOutputForDivision = async (division, links) => {
-  writeHTMLOutputForDivision(division, links);
+const writeOutputForDivision = async division => {
   await writeSheetsForDivision(division);
 };
 
@@ -90,21 +25,17 @@ const writeOutput = async () => {
     debug("only writing placements, returning");
     return true;
   }
-  const links = getHtmlLinks();
-  if (!league.subfolderName && !league.useStandingsForHome) {
-    writeHomeHTML(links);
-    writeErrorHTML(links);
-  }
+
+  writeAllHTML();
+
   for (let divisionName of Object.keys(league.divisions)) {
     const division = league.divisions[divisionName];
-    await writeOutputForDivision(division, links);
+    await writeOutputForDivision(division);
   }
   if (league.overall) {
-    await writeOutputForDivision(league.overall, links);
+    await writeOutputForDivision(league.overall);
   }
-  if (league.fantasy) {
-    writeFantasyHTML(league.fantasy, links);
-  }
+
   writeJSON(league);
   if (process.env.DIRT_AWS_ACCESS_KEY && league.websiteName) {
     await upload(league.websiteName, league.subfolderName);

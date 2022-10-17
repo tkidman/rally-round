@@ -1,0 +1,22 @@
+<script>
+    function openMobileNav() {
+        closeNav("seriesMobileNav");
+        openNav("mobileNav");
+    }
+    function openSeriesMobileNav() {
+        closeNav("mobileNav");
+        openNav("seriesMobileNav");
+    }
+    function closeNav(navId) {
+        var x = document.getElementById(navId);
+        x.className = x.className.replace(" w3-show", "");
+    }
+    function openNav(navId) {
+        var x = document.getElementById(navId);
+        if (x.className.indexOf("w3-show") == -1) {
+            x.className += " w3-show";
+        } else {
+            closeNav(navId);
+        }
+    }
+</script>
