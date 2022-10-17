@@ -14,7 +14,7 @@ const initialState = {
   nullTeamIsPrivateer: true,
   showTeamNameTextColumn: true,
   hideTeamLogoColumn: true,
-  disableOverall: true,
+  disableOverall: false,
   teamPointsForPowerstage: false,
   backgroundStyle:
     "background-image: linear-gradient(315deg, #ffffff 0%, #d7e1ec 74%); background-size: cover; background-repeat: no-repeat; background-attachment: fixed;",

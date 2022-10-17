@@ -452,9 +452,9 @@ const getHtmlLinks = () => {
   }, {});
   if (leagueRef.includeOverall) {
     if (leagueRef.hasTeams) {
-      addLinks(links, "overall", "team");
+      addLinks(links, getLocalization().overall, "team");
     }
-    addLinks(links, "overall", "driver");
+    addLinks(links, getLocalization().overall, "driver");
   }
   if (league.fantasy) {
     addLinks(links, "team", "fantasy");
