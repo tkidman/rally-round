@@ -26,6 +26,7 @@ const initialState = {
   siteTitlePrefix: "RSC",
   hideStageTimesUntilEventEnd: true,
   teamOverride: {},
+  historicalSeasonLinks: [{ name: "Season 4", href: "/rsc-4" }],
   divisions: {
     rsc: {
       divisionName: "rsc5",

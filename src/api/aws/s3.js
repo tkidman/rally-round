@@ -84,6 +84,21 @@ const uploadHTML = async (directory, bucket, subfolderName) => {
   debug(`uploaded ${htmlFiles.length} files to s3`);
 };
 
+const uploadCSS = async ({ bucket, subfolderName }) => {
+  const file = "./assets/css/style.css";
+  const remoteCSSFolder = subfolderName
+    ? `${subfolderName}/assets/css`
+    : "assets/css";
+  const key = `${remoteCSSFolder}/style.css`;
+  await uploadToS3({
+    file,
+    key,
+    bucket,
+    contentType: "text/css"
+  });
+  debug(`uploaded style.css to s3`);
+};
+
 const uploadCache = async ({
   directory,
   bucket,
@@ -156,6 +171,8 @@ const upload = async (bucket, subfolderName) => {
     fileType: ".csv",
     contentType: "text/csv"
   });
+
+  await uploadCSS({ bucket, subfolderName });
 };
 
 const downloadFiles = async (bucket, keys) => {
