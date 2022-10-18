@@ -8,7 +8,7 @@ const initialState = {
   backgroundStyle:
     "background-image: linear-gradient(#2193b0, #6dd5ed); background-size: cover; background-repeat: no-repeat; background-attachment: fixed;",
   logo: "JRC.png",
-  siteTitlePrefix: "JRC",
+  siteTitlePrefix: "JRC Historic",
   divisions: {
     historic: {
       divisionName: "historic",

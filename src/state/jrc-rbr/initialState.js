@@ -17,7 +17,7 @@ const initialState = {
   backgroundStyle:
     "background-image: linear-gradient(315deg, #eec0c6 0%, #7ee8fa 74%); background-size: cover; background-repeat: no-repeat; background-attachment: fixed;",
   logo: "JRC.png",
-  siteTitlePrefix: "JRC",
+  siteTitlePrefix: "JRC RBR",
   divisions: {
     jrcRbr: {
       divisionName: "rbrSeason2",

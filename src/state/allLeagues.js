@@ -2,10 +2,10 @@ const fs = require("fs");
 
 const getAllLeagues = () => {
   const leagues = [];
-  const files = fs.readdirSync(".");
+  const files = fs.readdirSync("./src/state");
   files.forEach(file => {
-    if (fs.existsSync(`${file}/initialState`)) {
-      leagues.push(require(`${file}/initialState`));
+    if (fs.existsSync(`./src/state/${file}/initialState.js`)) {
+      leagues.push(require(`./${file}/initialState`));
     }
   });
   return leagues;

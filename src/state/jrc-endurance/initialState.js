@@ -5,7 +5,7 @@ const initialState = {
   showLivePoints: false,
   showCarNameAsTextInResults: true,
   logo: "JRC.png",
-  siteTitlePrefix: "JRC",
+  siteTitlePrefix: "JRC Endurance",
   divisions: {
     endurance: {
       divisionName: "endurance",

@@ -17,6 +17,40 @@ const initialState = {
   incorrectCarTimePenaltySeconds: 120,
   backgroundStyle:
     "background-image: linear-gradient(#2193b0, #6dd5ed); background-size: cover; background-repeat: no-repeat; background-attachment: fixed;",
+  historicalSeasonLinks: [
+    {
+      name: "JRC 12",
+      href: "/jrc-12"
+    },
+    {
+      name: "JRC 11",
+      href: "/jrc-11"
+    },
+    {
+      name: "JRC 10",
+      href: "jrc-10"
+    },
+    {
+      name: "JRC 9",
+      href: "jrc-9"
+    },
+    {
+      name: "JRC 8",
+      href: "jrc-8"
+    },
+    {
+      name: "JRC 7",
+      href: "jrc-7"
+    },
+    {
+      name: "JRC 6",
+      href: "jrc-6"
+    },
+    {
+      name: "JRC 5",
+      href: "jrc-5"
+    }
+  ],
   divisions: {
     worldCup: {
       divisionName: "worldCup",

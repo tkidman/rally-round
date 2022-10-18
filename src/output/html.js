@@ -436,6 +436,7 @@ const addSeriesLinks = links => {
         active: false
       });
     }
+    return seriesLinks;
   }, []);
 };
 

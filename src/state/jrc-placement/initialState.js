@@ -3,6 +3,7 @@ const initialState = {
   pointsForDNF: false,
   getAllResults: true,
   placement: true,
+  hideFromSeriesLinks: true,
   divisions: {
     jrc11: {
       displayName: "JRC1",
