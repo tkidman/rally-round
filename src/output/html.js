@@ -432,7 +432,7 @@ const addSeriesLinks = links => {
       seriesLinks.push({
         name: otherLeague.siteTitlePrefix,
         link: otherLeague.siteTitlePrefix,
-        href: `/${otherLeague.websiteName}/${otherLeague.subfolderName}`,
+        href: `/${otherLeague.subfolderName}`,
         active: false
       });
     }
