@@ -60,6 +60,14 @@ const initialState = {
             locationFlag: "GB",
             numStages: 15,
             enduranceRoundMultiplier: 2
+          },
+          {
+            eventId: 48343,
+            endTime: "2022-10-31 12:00",
+            locationName: "Rally Kringel B",
+            locationFlag: "DE",
+            numStages: 7,
+            // enduranceRoundMultiplier: 2
           }
         ]
       },
