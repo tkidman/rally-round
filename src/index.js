@@ -23,7 +23,7 @@ const { writeOutput, checkOutputDirs } = require("./output/output");
 const { getTotalPoints } = require("./shared");
 const { calculateFantasyStandings } = require("./fantasy/fantasyCalculator");
 const { fetchEvents } = require("./fetch/fetch");
-const { getLocalization } = require("./output/localization");
+const { translate } = require("./output/localization");
 
 const updatePoints = ({
   resultsByDriver,
@@ -811,7 +811,7 @@ const calculateOverall = processedDivisions => {
   const overall = {
     events: [],
     divisionName: "overall",
-    displayName: getLocalization().overall
+    displayName: translate("overall")
   };
   Object.keys(processedDivisions).forEach(divisionName => {
     const division = processedDivisions[divisionName];

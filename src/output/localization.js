@@ -77,4 +77,19 @@ const getLocalization = () => {
   }
   return localization.en;
 };
-module.exports = { getLocalization };
+
+const translate = stringToTranslate => {
+  if (process.env.LOCALE && localization[process.env.LOCALE]) {
+    let translatedString = localization[process.env.LOCALE][stringToTranslate];
+    if (typeof translatedString != "undefined") {
+      return translatedString;
+    } else if (typeof localization.en[stringToTranslate] != "undefined") {
+      return localization.en[stringToTranslate];
+    } else {
+      return stringToTranslate;
+    }
+  }
+  return localization.en[stringToTranslate];
+};
+
+module.exports = { getLocalization, translate };

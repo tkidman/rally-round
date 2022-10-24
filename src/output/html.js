@@ -18,7 +18,7 @@ const {
   eventStatuses
 } = require("../shared");
 const { processFantasyResults } = require("../fantasy/fantasyCalculator");
-const { getLocalization } = require("./localization");
+const { getLocalization, translate } = require("./localization");
 const { allLeagues } = require("../state/allLeagues");
 // const { eventStatuses } = require("../shared");
 const resultColours = ["#76FF6A", "#faff5d", "#ffe300", "#ff5858"];
@@ -379,7 +379,6 @@ const transformForDriverResultsHTML = (event, division) => {
 const writeDriverResultsHTML = (event, division, links, eventIndex) => {
   const data = transformForDriverResultsHTML(event, division);
   data.overall = division.divisionName === "overall";
-
   data.navigation = getNavigationHTML(
     division.divisionName,
     "driver",
@@ -406,12 +405,13 @@ const writeDriverResultsHTML = (event, division, links, eventIndex) => {
 };
 
 const addLinks = (links, name, type, displayName) => {
-  const linkDisplay = displayName || name;
+  let linkDisplay = displayName || name;
+  linkDisplay = translate(linkDisplay);
   if (!links[type]) {
     links[type] = [];
   }
   links[type].push({
-    name,
+    name: name,
     link: `${linkDisplay}`,
     href: `./${name}-${type}-standings.html`,
     active: false
@@ -453,9 +453,9 @@ const getHtmlLinks = () => {
   }, {});
   if (leagueRef.includeOverall) {
     if (leagueRef.hasTeams) {
-      addLinks(links, getLocalization().overall, "team");
+      addLinks(links, "overall", "team");
     }
-    addLinks(links, getLocalization().overall, "driver");
+    addLinks(links, "overall", "driver");
   }
   if (league.fantasy) {
     addLinks(links, "team", "fantasy");
