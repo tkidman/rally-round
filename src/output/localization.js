@@ -34,7 +34,9 @@ const localization = {
     second_penalty: "second penalty applied for incorrect car choice",
     endurance_multiplied: "endurance round: points multiplied by",
     page_not_found: "Page not found",
-    last_updated: "Last updated at"
+    last_updated: "Last updated at",
+    series: "series",
+    historical: "historical"
   },
   se: {
     driver_standings: "Poängställning",
@@ -67,7 +69,9 @@ const localization = {
     second_penalty: "sekunder tidstillägg för val av fel bil",
     endurance_multiplied: "endurance round: points multiplied by",
     page_not_found: "Sidan kan inte hittas",
-    last_updated: "Senast uppdaterad vid"
+    last_updated: "Senast uppdaterad vid",
+    series: "serier",
+    historical: "historisk"
   }
 };
 
