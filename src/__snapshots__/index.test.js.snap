@@ -6,7 +6,11 @@ Object {
   "divisionName": "overall",
   "events": Array [
     Object {
+      "endTime": undefined,
+      "eventStatus": undefined,
       "location": "Australia",
+      "locationFlag": undefined,
+      "locationName": undefined,
       "results": Object {
         "driverResults": Array [
           Object {
