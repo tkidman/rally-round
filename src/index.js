@@ -817,11 +817,18 @@ const calculateOverall = processedDivisions => {
     const division = processedDivisions[divisionName];
     division.events.forEach(event => {
       let overallEvent = overall.events.find(
-        overallEvent => overallEvent.location === event.location
+        overallEvent =>
+          (overallEvent.location && overallEvent.location === event.location) ||
+          (overallEvent.locationName &&
+            overallEvent.locationName === event.locationName)
       );
       if (!overallEvent) {
         overallEvent = {
           location: event.location,
+          locationName: event.locationName,
+          locationFlag: event.locationFlag,
+          endTime: event.endTime,
+          eventStatus: event.eventStatus,
           results: { driverResults: [], teamResults: [] }
         };
         overall.events.push(overallEvent);
