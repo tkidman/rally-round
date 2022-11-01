@@ -68,6 +68,14 @@ const initialState = {
             locationFlag: "DE",
             numStages: 7
             // enduranceRoundMultiplier: 2
+          },
+          {
+            eventId: 48562,
+            endTime: "2022-11-07 14:30",
+            locationName: "Rally Satchmo",
+            locationFlag: "AU",
+            numStages: 7
+            // enduranceRoundMultiplier: 2
           }
         ]
       },
