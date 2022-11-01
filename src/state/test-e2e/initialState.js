@@ -53,6 +53,35 @@ const initialState = {
         powerStage: [5, 4, 3, 2, 1],
         overall: [30, 24, 19, 15, 12, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
       }
+    },
+    testE2E2: {
+      divisionName: "test-e2e2",
+      displayName: "Test E2E2",
+      disableSameCarValidation: true,
+      rbr: {
+        rallies: [
+          {
+            eventId: 47368,
+            endTime: "2022-10-03 12:00",
+            locationName: "Rally Grundstrom",
+            locationFlag: "SE",
+            numStages: 7
+          },
+          {
+            eventId: 47617,
+            endTime: "2022-10-10 12:00",
+            locationName: "Rally Nonko",
+            locationFlag: "EE",
+            numStages: 8
+          }
+        ]
+      },
+      manualResults: [],
+      events: [],
+      points: {
+        powerStage: [5, 4, 3, 2, 1],
+        overall: [30, 24, 19, 15, 12, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+      }
     }
   }
 };

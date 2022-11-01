@@ -1,6 +1,765 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`e2e generates the site 1`] = `
+exports[`e2e generates driver results 1`] = `
+"<html lang=\\"en\\">
+
+<head>
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"./assets/css/style.css\\">
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"./assets/css/animation.css\\">
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"./assets/css/w3.css\\">
+	<meta http-equiv=\\"Content-Type\\" content=\\"text/html; charset=utf-8\\">
+    <link rel=\\"icon\\" href=\\"./assets/rsc-guy.png\\">
+</head>
+
+<body style=\\"background-image: linear-gradient(315deg, #ffffff 0%, #d7e1ec 74%); background-size: cover; background-repeat: no-repeat; background-attachment: fixed;\\">
+<head>
+	<title>
+		TEST-E2E |
+			driver Test E2E
+	</title>
+</head>
+
+<div class=\\"w3-top\\">
+	<div class=\\"w3-bar w3-black\\" style=\\"text-align:center;\\">
+        <div class=\\"logo w3-dropdown-hover w3-hide-small w3-hide-medium\\" style=\\"background-color: #0000\\">
+            <a href=\\"/index.html\\">
+                <img src=\\"./assets/rsc-guy.png\\">
+            </a>
+            <div class=\\"w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small w3-hide-medium\\">
+                <span class=\\"w3-bar-item\\">---historical---</span>
+                    <a href=\\"/e2e-1\\" class=\\"w3-bar-item w3-button \\">E2E Season 1</a>
+            </div>
+        </div>
+
+		<div class=\\"w3-dropdown-hover w3-hide-small w3-hide-medium\\">
+			<button class=\\"w3-button\\">Driver Standings</button>
+			<div class=\\"w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small w3-hide-medium\\">
+				<a href=\\"./test-e2e-driver-standings.html\\" class=\\"w3-bar-item w3-button active\\">Test E2E</a>
+				<a href=\\"./test-e2e2-driver-standings.html\\" class=\\"w3-bar-item w3-button \\">Test E2E2</a>
+				<a href=\\"./overall-driver-standings.html\\" class=\\"w3-bar-item w3-button \\">Overall</a>
+			</div>
+		</div>
+
+		<div class=\\"w3-dropdown-hover w3-hide-small w3-hide-medium\\">
+			<button class=\\"w3-button\\">Team Standings</button>
+			<div class=\\"w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small w3-hide-medium\\">
+				<a href=\\"./test-e2e-team-standings.html\\" class=\\"w3-bar-item w3-button \\">Test E2E</a>
+				<a href=\\"./test-e2e2-team-standings.html\\" class=\\"w3-bar-item w3-button \\">Test E2E2</a>
+				<a href=\\"./overall-team-standings.html\\" class=\\"w3-bar-item w3-button \\">Overall</a>
+			</div>
+		</div>
+
+
+
+        <!-- mobile stuff -->
+        <a href=\\"javascript:void(0)\\" class=\\"logo w3-left w3-hide-large\\" style=\\"font-size:3em;\\" onclick=\\"openSeriesMobileNav()\\">
+            <img src=\\"./assets/rsc-guy.png\\" style=\\"max-height: 1em;margin: 0.1em;border: 1px solid darkgray\\">
+        </a>
+
+        <a href=\\"javascript:void(0)\\" class=\\"w3-bar-item w3-button w3-right w3-hide-large\\" style=\\"font-size:3em;\\" onclick=\\"openMobileNav()\\">&#9776;
+        </a>
+
+        <h3 class=\\"w3-hide-large navTitle bold\\" style=\\"display:block;\\">
+            driver - Test E2E
+            
+        </h3>
+
+	</div>
+
+	<div id=\\"mobileNav\\" class=\\"w3-bar-block w3-black w3-hide w3-hide-large\\" style=\\"overflow-y:scroll;max-height:95vh;\\">
+            <a href=\\"./test-e2e-driver-standings.html\\" class=\\"w3-bar-item w3-button active\\">Driver Standings - Test E2E</a>
+            <a href=\\"./test-e2e2-driver-standings.html\\" class=\\"w3-bar-item w3-button \\">Driver Standings - Test E2E2</a>
+            <a href=\\"./overall-driver-standings.html\\" class=\\"w3-bar-item w3-button \\">Driver Standings - Overall</a>
+            <a href=\\"./test-e2e-team-standings.html\\" class=\\"w3-bar-item w3-button \\">Team Standings - Test E2E</a>
+            <a href=\\"./test-e2e2-team-standings.html\\" class=\\"w3-bar-item w3-button \\">Team Standings - Test E2E2</a>
+            <a href=\\"./overall-team-standings.html\\" class=\\"w3-bar-item w3-button \\">Team Standings - Overall</a>
+	</div>
+
+	<div id=\\"seriesMobileNav\\" class=\\"w3-bar-block w3-black w3-hide w3-hide-large\\" style=\\"overflow-y:scroll;max-height:95vh;\\">
+            <span class=\\"w3-bar-item\\">---historical---</span>
+                <a href=\\"/e2e-1\\" class=\\"w3-bar-item w3-button \\">E2E Season 1</a>
+	</div>
+
+	<div class=\\"w3-bar w3-light-grey secondaryNav\\">
+			<a href=\\"./test-e2e-0-driver-results.html\\">
+				<img src=\\"./assets/country-flags/swe.png\\" />
+			</a>
+			<a href=\\"./test-e2e-1-driver-results.html\\">
+				<img src=\\"./assets/country-flags/est.png\\" />
+			</a>
+	</div>
+</div>
+
+<div id=\\"container\\">
+    <div id=\\"flexContainer\\">
+        <div class=\\"flexBox\\">
+            <div style=\\"margin-bottom: 1em;\\" class=\\"w3-hide-medium w3-hide-small\\">
+                <div class=\\"logo\\" style=\\"display:flex;\\">
+                    <img src=\\"./assets/rsc-guy.png\\" />
+                    <h2 style=\\"margin-left:1em;\\">Test E2E Rally Grundstrom Driver Results</h2>
+                </div>
+            </div>
+
+            <table id=\\"tableDrivers\\">
+                <thead>
+                <tr>
+                    <th>Pos</th>
+                    <th>Nat</th>
+                    <th>Driver</th>
+                        <th>Car</th>
+                    <td>PS</td>
+                    <td>Diff</td>
+                    <td>Total</td>
+                    <td>Diff</td>
+                        <td>SR</td>
+                        <td>PS Points</td>
+                    <td>Points</td>
+                    <td>Total Points</td>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/deu.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"deu\\" title=\\"deu\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">Hawk24</td>
+                                <td class=\\"text-left\\">
+                                    Mitsubishi Lancer Evo IX N4
+                                </td>
+                        <td>00:05:58.725</td>
+                        <td>--</td>
+                        <td>00:36:39.874</td>
+                        <td>--</td>
+                            <td>
+                                0
+                            </td>
+                            <td>5</td>
+                        <td>60</td>
+                        <td class=\\"bold\\">65</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/bel.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"bel\\" title=\\"bel\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">THELC Matt</td>
+                                <td class=\\"text-left\\">
+                                    Mitsubishi Lancer Evo IX N4
+                                </td>
+                        <td>00:06:08.560</td>
+                        <td>+00:00:09.835</td>
+                        <td>00:36:54.735</td>
+                        <td>+00:00:14.861</td>
+                            <td>
+                                0
+                            </td>
+                            <td>4</td>
+                        <td>48</td>
+                        <td class=\\"bold\\">52</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/fin.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"fin\\" title=\\"fin\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">QazRa</td>
+                                <td class=\\"text-left\\">
+                                    Subaru Impreza N14 N4
+                                </td>
+                        <td>00:06:27.630</td>
+                        <td>+00:00:28.905</td>
+                        <td>00:38:00.240</td>
+                        <td>+00:01:20.366</td>
+                            <td>
+                                0
+                            </td>
+                            <td></td>
+                        <td>38</td>
+                        <td class=\\"bold\\">38</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/usa.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"usa\\" title=\\"usa\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">HotdogCowboy</td>
+                                <td class=\\"text-left\\">
+                                    Mitsubishi Lancer Evo IX N4
+                                </td>
+                        <td>00:06:15.381</td>
+                        <td>+00:00:16.656</td>
+                        <td>00:38:05.045</td>
+                        <td>+00:01:25.171</td>
+                            <td>
+                                0
+                            </td>
+                            <td>2</td>
+                        <td>30</td>
+                        <td class=\\"bold\\">32</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/nor.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"nor\\" title=\\"nor\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">Roy Magnes</td>
+                                <td class=\\"text-left\\">
+                                    Subaru Impreza N14 N4
+                                </td>
+                        <td>00:06:24.457</td>
+                        <td>+00:00:25.732</td>
+                        <td>00:38:49.944</td>
+                        <td>+00:02:10.070</td>
+                            <td>
+                                0
+                            </td>
+                            <td></td>
+                        <td>24</td>
+                        <td class=\\"bold\\">24</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/aus.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"aus\\" title=\\"aus\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">satchmo</td>
+                                <td class=\\"text-left\\">
+                                    Mitsubishi Lancer Evo IX N4
+                                </td>
+                        <td>00:06:23.351</td>
+                        <td>+00:00:24.626</td>
+                        <td>00:38:56.208</td>
+                        <td>+00:02:16.334</td>
+                            <td>
+                                0
+                            </td>
+                            <td></td>
+                        <td>20</td>
+                        <td class=\\"bold\\">20</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/gbr.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"gbr\\" title=\\"gbr\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">Joe Hutchinson</td>
+                                <td class=\\"text-left\\">
+                                    Mitsubishi Lancer Evo IX N4
+                                </td>
+                        <td>00:06:37.517</td>
+                        <td>+00:00:38.792</td>
+                        <td>00:39:25.422</td>
+                        <td>+00:02:45.548</td>
+                            <td>
+                                0
+                            </td>
+                            <td></td>
+                        <td>18</td>
+                        <td class=\\"bold\\">18</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/kor.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"kor\\" title=\\"kor\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">Prodicrux</td>
+                                <td class=\\"text-left\\">
+                                    Mitsubishi Lancer Evo IX N4
+                                </td>
+                        <td>00:06:37.507</td>
+                        <td>+00:00:38.782</td>
+                        <td>00:39:57.017</td>
+                        <td>+00:03:17.143</td>
+                            <td>
+                                0
+                            </td>
+                            <td></td>
+                        <td>16</td>
+                        <td class=\\"bold\\">16</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/deu.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"deu\\" title=\\"deu\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">Thom B</td>
+                                <td class=\\"text-left\\">
+                                    Mitsubishi Lancer Evo IX N4
+                                </td>
+                        <td>00:06:14.609</td>
+                        <td>+00:00:15.884</td>
+                        <td>00:41:44.586</td>
+                        <td>+00:05:04.712</td>
+                            <td>
+                                1
+                            </td>
+                            <td>3</td>
+                        <td>7</td>
+                        <td class=\\"bold\\">10</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/swe.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"swe\\" title=\\"swe\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">davidgrundstrom</td>
+                                <td class=\\"text-left\\">
+                                    Mitsubishi Lancer Evo IX N4
+                                </td>
+                        <td>00:06:18.475</td>
+                        <td>+00:00:19.750</td>
+                        <td>00:42:12.016</td>
+                        <td>+00:05:32.142</td>
+                            <td>
+                                1
+                            </td>
+                            <td>1</td>
+                        <td>6</td>
+                        <td class=\\"bold\\">7</td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/swe.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"swe\\" title=\\"swe\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">Bollis</td>
+                                <td class=\\"text-left\\">
+                                    Mitsubishi Lancer Evo IX N4
+                                </td>
+                        <td>00:06:26.622</td>
+                        <td>+00:00:27.897</td>
+                        <td>00:43:33.809</td>
+                        <td>+00:06:53.935</td>
+                            <td>
+                                1
+                            </td>
+                            <td></td>
+                        <td>5</td>
+                        <td class=\\"bold\\">5</td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/usa.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"usa\\" title=\\"usa\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">meatcreap</td>
+                                <td class=\\"text-left\\">
+                                    Mitsubishi Lancer Evo IX N4
+                                </td>
+                        <td>00:06:54.465</td>
+                        <td>+00:00:55.740</td>
+                        <td>00:45:20.708</td>
+                        <td>+00:08:40.834</td>
+                            <td>
+                                1
+                            </td>
+                            <td></td>
+                        <td>4</td>
+                        <td class=\\"bold\\">4</td>
+                    </tr>
+                    <tr>
+                        <td>13</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/deu.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"deu\\" title=\\"deu\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">Kringelwurst</td>
+                                <td class=\\"text-left\\">
+                                    Mitsubishi Lancer Evo IX N4
+                                </td>
+                        <td>00:06:53.085</td>
+                        <td>+00:00:54.360</td>
+                        <td>00:48:05.626</td>
+                        <td>+00:11:25.752</td>
+                            <td>
+                                3
+                            </td>
+                            <td></td>
+                        <td>3</td>
+                        <td class=\\"bold\\">3</td>
+                    </tr>
+                    <tr>
+                        <td>14</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/gbr.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"gbr\\" title=\\"gbr\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">PETTET Jordan (shakey-deal)</td>
+                                <td class=\\"text-left\\">
+                                    Subaru Impreza N14 N4
+                                </td>
+                        <td>00:12:31.500</td>
+                        <td>+00:06:32.775</td>
+                        <td>00:54:17.683</td>
+                        <td>+00:17:37.809</td>
+                            <td>
+                                2
+                            </td>
+                            <td></td>
+                        <td>2</td>
+                        <td class=\\"bold\\">2</td>
+                    </tr>
+                    <tr>
+                        <td>15</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/gbr.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"gbr\\" title=\\"gbr\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">FAHEY Andrew</td>
+                                <td class=\\"text-left\\">
+                                    Seat Leon Cupra R GrpN
+                                </td>
+                        <td>00:12:31.500</td>
+                        <td>+00:06:32.775</td>
+                        <td>00:56:23.828</td>
+                        <td>+00:19:43.954</td>
+                            <td>
+                                2
+                            </td>
+                            <td></td>
+                        <td>1</td>
+                        <td class=\\"bold\\">1</td>
+                    </tr>
+                    <tr>
+                        <td>16</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/swe.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"swe\\" title=\\"swe\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">ctbr</td>
+                                <td class=\\"text-left\\">
+                                    Mitsubishi Lancer Evo IX N4
+                                </td>
+                        <td>00:12:31.500</td>
+                        <td>+00:06:32.775</td>
+                        <td>00:56:47.703</td>
+                        <td>+00:20:07.829</td>
+                            <td>
+                                2
+                            </td>
+                            <td></td>
+                        <td></td>
+                        <td class=\\"bold\\">0</td>
+                    </tr>
+                    <tr>
+                        <td>17</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/swe.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"swe\\" title=\\"swe\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">Weepy</td>
+                                <td class=\\"text-left\\">
+                                    Mitsubishi Lancer Evo IX N4
+                                </td>
+                        <td>00:12:31.500</td>
+                        <td>+00:06:32.775</td>
+                        <td>01:00:55.901</td>
+                        <td>+00:24:16.027</td>
+                            <td>
+                                3
+                            </td>
+                            <td></td>
+                        <td></td>
+                        <td class=\\"bold\\">0</td>
+                    </tr>
+                    <tr>
+                        <td>18</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/aus.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"aus\\" title=\\"aus\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">jezza</td>
+                                <td class=\\"text-left\\">
+                                    Seat Leon Cupra R GrpN
+                                </td>
+                        <td>00:12:31.500</td>
+                        <td>+00:06:32.775</td>
+                        <td>01:01:55.456</td>
+                        <td>+00:25:15.582</td>
+                            <td>
+                                3
+                            </td>
+                            <td></td>
+                        <td></td>
+                        <td class=\\"bold\\">0</td>
+                    </tr>
+                    <tr>
+                        <td>19</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/hun.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"hun\\" title=\\"hun\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">fujiRS</td>
+                                <td class=\\"text-left\\">
+                                    Mitsubishi Lancer Evo IX N4
+                                </td>
+                        <td>00:12:31.500</td>
+                        <td>+00:06:32.775</td>
+                        <td>01:02:50.520</td>
+                        <td>+00:26:10.646</td>
+                            <td>
+                                4
+                            </td>
+                            <td></td>
+                        <td></td>
+                        <td class=\\"bold\\">0</td>
+                    </tr>
+                    <tr>
+                        <td>20</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/deu.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"deu\\" title=\\"deu\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">Maximilian Maksy</td>
+                                <td class=\\"text-left\\">
+                                    Mitsubishi Lancer Evo IX N4
+                                </td>
+                        <td>00:12:31.500</td>
+                        <td>+00:06:32.775</td>
+                        <td>01:03:48.054</td>
+                        <td>+00:27:08.180</td>
+                            <td>
+                                4
+                            </td>
+                            <td></td>
+                        <td></td>
+                        <td class=\\"bold\\">0</td>
+                    </tr>
+                    <tr>
+                        <td>21</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/row.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"row\\" title=\\"row\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">Erki Erik Poola</td>
+                                <td class=\\"text-left\\">
+                                    Mitsubishi Lancer Evo IX N4
+                                </td>
+                        <td>00:12:31.500</td>
+                        <td>+00:06:32.775</td>
+                        <td>01:04:08.542</td>
+                        <td>+00:27:28.668</td>
+                            <td>
+                                4
+                            </td>
+                            <td></td>
+                        <td></td>
+                        <td class=\\"bold\\">0</td>
+                    </tr>
+                    <tr>
+                        <td>22</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/esp.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"esp\\" title=\\"esp\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">dejota95</td>
+                                <td class=\\"text-left\\">
+                                    Mitsubishi Lancer Evo IX N4
+                                </td>
+                        <td>00:12:31.500</td>
+                        <td>+00:06:32.775</td>
+                        <td>01:04:30.968</td>
+                        <td>+00:27:51.094</td>
+                            <td>
+                                4
+                            </td>
+                            <td></td>
+                        <td></td>
+                        <td class=\\"bold\\">0</td>
+                    </tr>
+                    <tr>
+                        <td>23</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/swe.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"swe\\" title=\\"swe\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">Tommie Lindberg</td>
+                                <td class=\\"text-left\\">
+                                    Mitsubishi Lancer Evo IX N4
+                                </td>
+                        <td>00:12:31.500</td>
+                        <td>+00:06:32.775</td>
+                        <td>01:05:55.714</td>
+                        <td>+00:29:15.840</td>
+                            <td>
+                                6
+                            </td>
+                            <td></td>
+                        <td></td>
+                        <td class=\\"bold\\">0</td>
+                    </tr>
+                    <tr>
+                        <td>24</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/est.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"est\\" title=\\"est\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">TheZenor</td>
+                                <td class=\\"text-left\\">
+                                    Mitsubishi Lancer Evo IX N4
+                                </td>
+                        <td>00:12:31.500</td>
+                        <td>+00:06:32.775</td>
+                        <td>01:09:43.642</td>
+                        <td>+00:33:03.768</td>
+                            <td>
+                                6
+                            </td>
+                            <td></td>
+                        <td></td>
+                        <td class=\\"bold\\">0</td>
+                    </tr>
+                    <tr>
+                        <td>25</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/esp.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"esp\\" title=\\"esp\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">TASIS Edgar</td>
+                                <td class=\\"text-left\\">
+                                    
+                                </td>
+                        <td>15:00:00.000</td>
+                        <td>N/A</td>
+                        <td>23:59:59.000</td>
+                        <td>N/A</td>
+                            <td>
+                                
+                            </td>
+                            <td></td>
+                        <td></td>
+                        <td class=\\"bold\\">DNF</td>
+                    </tr>
+                    <tr>
+                        <td>26</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/est.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"est\\" title=\\"est\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">ninko</td>
+                                <td class=\\"text-left\\">
+                                    
+                                </td>
+                        <td>15:00:00.000</td>
+                        <td>N/A</td>
+                        <td>23:59:59.000</td>
+                        <td>N/A</td>
+                            <td>
+                                
+                            </td>
+                            <td></td>
+                        <td></td>
+                        <td class=\\"bold\\">DNF</td>
+                    </tr>
+                    <tr>
+                        <td>27</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/bra.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"bra\\" title=\\"bra\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">Htchet</td>
+                                <td class=\\"text-left\\">
+                                    
+                                </td>
+                        <td>15:00:00.000</td>
+                        <td>N/A</td>
+                        <td>23:59:59.000</td>
+                        <td>N/A</td>
+                            <td>
+                                
+                            </td>
+                            <td></td>
+                        <td></td>
+                        <td class=\\"bold\\">DNF</td>
+                    </tr>
+                    <tr>
+                        <td>28</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/ita.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"ita\\" title=\\"ita\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">Superciuc93</td>
+                                <td class=\\"text-left\\">
+                                    
+                                </td>
+                        <td>15:00:00.000</td>
+                        <td>N/A</td>
+                        <td>23:59:59.000</td>
+                        <td>N/A</td>
+                            <td>
+                                
+                            </td>
+                            <td></td>
+                        <td></td>
+                        <td class=\\"bold\\">DNF</td>
+                    </tr>
+                    <tr>
+                        <td>29</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/gbr.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"gbr\\" title=\\"gbr\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">Williams Huw</td>
+                                <td class=\\"text-left\\">
+                                    
+                                </td>
+                        <td>15:00:00.000</td>
+                        <td>N/A</td>
+                        <td>23:59:59.000</td>
+                        <td>N/A</td>
+                            <td>
+                                
+                            </td>
+                            <td></td>
+                        <td></td>
+                        <td class=\\"bold\\">DNF</td>
+                    </tr>
+                    <tr>
+                        <td>30</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/est.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"est\\" title=\\"est\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">MartinRC</td>
+                                <td class=\\"text-left\\">
+                                    
+                                </td>
+                        <td>15:00:00.000</td>
+                        <td>N/A</td>
+                        <td>23:59:59.000</td>
+                        <td>N/A</td>
+                            <td>
+                                
+                            </td>
+                            <td></td>
+                        <td></td>
+                        <td class=\\"bold\\">DNS</td>
+                    </tr>
+                </tbody>
+
+            </table>
+            <div style=\\"margin:0 auto; text-align:center;\\">
+                <p>Last updated at: last-updated-test-e2e</p>
+            </div>
+                <div style=\\"margin:0 auto; text-align:center;\\">
+                    <a href=\\"https://rallysimfans.hu/rbr/rally_online.php?centerbox&#x3D;rally_results.php&amp;rally_id&#x3D;47367\\" target=\\"_none\\">full results</a>
+                </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openMobileNav() {
+        closeNav(\\"seriesMobileNav\\");
+        openNav(\\"mobileNav\\");
+    }
+    function openSeriesMobileNav() {
+        closeNav(\\"mobileNav\\");
+        openNav(\\"seriesMobileNav\\");
+    }
+    function closeNav(navId) {
+        var x = document.getElementById(navId);
+        x.className = x.className.replace(\\" w3-show\\", \\"\\");
+    }
+    function openNav(navId) {
+        var x = document.getElementById(navId);
+        if (x.className.indexOf(\\"w3-show\\") == -1) {
+            x.className += \\" w3-show\\";
+        } else {
+            closeNav(navId);
+        }
+    }
+</script>
+
+</body>
+
+</html>"
+`;
+
+exports[`e2e generates driver standings 1`] = `
 "<html lang=\\"en\\">
 
 <head>
@@ -35,6 +794,8 @@ exports[`e2e generates the site 1`] = `
 			<button class=\\"w3-button\\">Driver Standings</button>
 			<div class=\\"w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small w3-hide-medium\\">
 				<a href=\\"./test-e2e-driver-standings.html\\" class=\\"w3-bar-item w3-button active\\">Test E2E</a>
+				<a href=\\"./test-e2e2-driver-standings.html\\" class=\\"w3-bar-item w3-button \\">Test E2E2</a>
+				<a href=\\"./overall-driver-standings.html\\" class=\\"w3-bar-item w3-button \\">Overall</a>
 			</div>
 		</div>
 
@@ -42,6 +803,8 @@ exports[`e2e generates the site 1`] = `
 			<button class=\\"w3-button\\">Team Standings</button>
 			<div class=\\"w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small w3-hide-medium\\">
 				<a href=\\"./test-e2e-team-standings.html\\" class=\\"w3-bar-item w3-button \\">Test E2E</a>
+				<a href=\\"./test-e2e2-team-standings.html\\" class=\\"w3-bar-item w3-button \\">Test E2E2</a>
+				<a href=\\"./overall-team-standings.html\\" class=\\"w3-bar-item w3-button \\">Overall</a>
 			</div>
 		</div>
 
@@ -64,7 +827,11 @@ exports[`e2e generates the site 1`] = `
 
 	<div id=\\"mobileNav\\" class=\\"w3-bar-block w3-black w3-hide w3-hide-large\\" style=\\"overflow-y:scroll;max-height:95vh;\\">
             <a href=\\"./test-e2e-driver-standings.html\\" class=\\"w3-bar-item w3-button active\\">Driver Standings - Test E2E</a>
+            <a href=\\"./test-e2e2-driver-standings.html\\" class=\\"w3-bar-item w3-button \\">Driver Standings - Test E2E2</a>
+            <a href=\\"./overall-driver-standings.html\\" class=\\"w3-bar-item w3-button \\">Driver Standings - Overall</a>
             <a href=\\"./test-e2e-team-standings.html\\" class=\\"w3-bar-item w3-button \\">Team Standings - Test E2E</a>
+            <a href=\\"./test-e2e2-team-standings.html\\" class=\\"w3-bar-item w3-button \\">Team Standings - Test E2E2</a>
+            <a href=\\"./overall-team-standings.html\\" class=\\"w3-bar-item w3-button \\">Team Standings - Overall</a>
 	</div>
 
 	<div id=\\"seriesMobileNav\\" class=\\"w3-bar-block w3-black w3-hide w3-hide-large\\" style=\\"overflow-y:scroll;max-height:95vh;\\">
@@ -841,5 +1608,2365 @@ exports[`e2e generates the site 1`] = `
 </script>
 
 </body>
+</html>"
+`;
+
+exports[`e2e generates overall driver results 1`] = `
+"<html lang=\\"en\\">
+
+<head>
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"./assets/css/style.css\\">
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"./assets/css/animation.css\\">
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"./assets/css/w3.css\\">
+	<meta http-equiv=\\"Content-Type\\" content=\\"text/html; charset=utf-8\\">
+    <link rel=\\"icon\\" href=\\"./assets/rsc-guy.png\\">
+</head>
+
+<body style=\\"background-image: linear-gradient(315deg, #ffffff 0%, #d7e1ec 74%); background-size: cover; background-repeat: no-repeat; background-attachment: fixed;\\">
+<head>
+	<title>
+		TEST-E2E |
+			driver Overall
+	</title>
+</head>
+
+<div class=\\"w3-top\\">
+	<div class=\\"w3-bar w3-black\\" style=\\"text-align:center;\\">
+        <div class=\\"logo w3-dropdown-hover w3-hide-small w3-hide-medium\\" style=\\"background-color: #0000\\">
+            <a href=\\"/index.html\\">
+                <img src=\\"./assets/rsc-guy.png\\">
+            </a>
+            <div class=\\"w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small w3-hide-medium\\">
+                <span class=\\"w3-bar-item\\">---historical---</span>
+                    <a href=\\"/e2e-1\\" class=\\"w3-bar-item w3-button \\">E2E Season 1</a>
+            </div>
+        </div>
+
+		<div class=\\"w3-dropdown-hover w3-hide-small w3-hide-medium\\">
+			<button class=\\"w3-button\\">Driver Standings</button>
+			<div class=\\"w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small w3-hide-medium\\">
+				<a href=\\"./test-e2e-driver-standings.html\\" class=\\"w3-bar-item w3-button \\">Test E2E</a>
+				<a href=\\"./test-e2e2-driver-standings.html\\" class=\\"w3-bar-item w3-button \\">Test E2E2</a>
+				<a href=\\"./overall-driver-standings.html\\" class=\\"w3-bar-item w3-button active\\">Overall</a>
+			</div>
+		</div>
+
+		<div class=\\"w3-dropdown-hover w3-hide-small w3-hide-medium\\">
+			<button class=\\"w3-button\\">Team Standings</button>
+			<div class=\\"w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small w3-hide-medium\\">
+				<a href=\\"./test-e2e-team-standings.html\\" class=\\"w3-bar-item w3-button \\">Test E2E</a>
+				<a href=\\"./test-e2e2-team-standings.html\\" class=\\"w3-bar-item w3-button \\">Test E2E2</a>
+				<a href=\\"./overall-team-standings.html\\" class=\\"w3-bar-item w3-button \\">Overall</a>
+			</div>
+		</div>
+
+
+
+        <!-- mobile stuff -->
+        <a href=\\"javascript:void(0)\\" class=\\"logo w3-left w3-hide-large\\" style=\\"font-size:3em;\\" onclick=\\"openSeriesMobileNav()\\">
+            <img src=\\"./assets/rsc-guy.png\\" style=\\"max-height: 1em;margin: 0.1em;border: 1px solid darkgray\\">
+        </a>
+
+        <a href=\\"javascript:void(0)\\" class=\\"w3-bar-item w3-button w3-right w3-hide-large\\" style=\\"font-size:3em;\\" onclick=\\"openMobileNav()\\">&#9776;
+        </a>
+
+        <h3 class=\\"w3-hide-large navTitle bold\\" style=\\"display:block;\\">
+            driver - Overall
+            
+        </h3>
+
+	</div>
+
+	<div id=\\"mobileNav\\" class=\\"w3-bar-block w3-black w3-hide w3-hide-large\\" style=\\"overflow-y:scroll;max-height:95vh;\\">
+            <a href=\\"./test-e2e-driver-standings.html\\" class=\\"w3-bar-item w3-button \\">Driver Standings - Test E2E</a>
+            <a href=\\"./test-e2e2-driver-standings.html\\" class=\\"w3-bar-item w3-button \\">Driver Standings - Test E2E2</a>
+            <a href=\\"./overall-driver-standings.html\\" class=\\"w3-bar-item w3-button active\\">Driver Standings - Overall</a>
+            <a href=\\"./test-e2e-team-standings.html\\" class=\\"w3-bar-item w3-button \\">Team Standings - Test E2E</a>
+            <a href=\\"./test-e2e2-team-standings.html\\" class=\\"w3-bar-item w3-button \\">Team Standings - Test E2E2</a>
+            <a href=\\"./overall-team-standings.html\\" class=\\"w3-bar-item w3-button \\">Team Standings - Overall</a>
+	</div>
+
+	<div id=\\"seriesMobileNav\\" class=\\"w3-bar-block w3-black w3-hide w3-hide-large\\" style=\\"overflow-y:scroll;max-height:95vh;\\">
+            <span class=\\"w3-bar-item\\">---historical---</span>
+                <a href=\\"/e2e-1\\" class=\\"w3-bar-item w3-button \\">E2E Season 1</a>
+	</div>
+
+	<div class=\\"w3-bar w3-light-grey secondaryNav\\">
+			<a href=\\"./overall-0-driver-results.html\\">
+				<img src=\\"./assets/country-flags/swe.png\\" />
+			</a>
+			<a href=\\"./overall-1-driver-results.html\\">
+				<img src=\\"./assets/country-flags/est.png\\" />
+			</a>
+	</div>
+</div>
+
+<div id=\\"container\\">
+    <div id=\\"flexContainer\\">
+        <div class=\\"flexBox\\">
+            <div style=\\"margin-bottom: 1em;\\" class=\\"w3-hide-medium w3-hide-small\\">
+                <div class=\\"logo\\" style=\\"display:flex;\\">
+                    <img src=\\"./assets/rsc-guy.png\\" />
+                    <h2 style=\\"margin-left:1em;\\">Overall Rally Nonko Driver Results</h2>
+                </div>
+            </div>
+
+            <table id=\\"tableDrivers\\">
+                <thead>
+                <tr>
+                    <th>Pos</th>
+                    <th>Nat</th>
+                    <th>Driver</th>
+                        <th>Div</th>
+                        <th>Car</th>
+                    <td>PS</td>
+                    <td>Diff</td>
+                    <td>Total</td>
+                    <td>Diff</td>
+                        <td>SR</td>
+                        <td>PS Points</td>
+                    <td>Points</td>
+                    <td>Total Points</td>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/aus.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"aus\\" title=\\"aus\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">woosh</td>
+                            <td>Test E2E2</td>
+                                <td class=\\"text-left\\">
+                                    Porsche 911 SC 3.0 Grp4
+                                </td>
+                        <td>00:00:39.094</td>
+                        <td>--</td>
+                        <td>00:32:57.011</td>
+                        <td>--</td>
+                            <td>
+                                0
+                            </td>
+                            <td>5</td>
+                        <td>60</td>
+                        <td class=\\"bold\\">65</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/aus.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"aus\\" title=\\"aus\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">winstall</td>
+                            <td>Test E2E2</td>
+                                <td class=\\"text-left\\">
+                                    Porsche 911 SC 3.0 Grp4
+                                </td>
+                        <td>00:00:39.452</td>
+                        <td>+00:00:00.358</td>
+                        <td>00:33:29.039</td>
+                        <td>+00:00:32.028</td>
+                            <td>
+                                0
+                            </td>
+                            <td>4</td>
+                        <td>48</td>
+                        <td class=\\"bold\\">52</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/est.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"est\\" title=\\"est\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">ninko</td>
+                            <td>Test E2E</td>
+                                <td class=\\"text-left\\">
+                                    Porsche 911 SC 3.0 Grp4
+                                </td>
+                        <td>00:00:51.854</td>
+                        <td>+00:00:12.760</td>
+                        <td>00:33:30.252</td>
+                        <td>+00:00:33.241</td>
+                            <td>
+                                0
+                            </td>
+                            <td></td>
+                        <td>60</td>
+                        <td class=\\"bold\\">60</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/fin.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"fin\\" title=\\"fin\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">QazRa</td>
+                            <td>Test E2E</td>
+                                <td class=\\"text-left\\">
+                                    Porsche 911 SC 3.0 Grp4
+                                </td>
+                        <td>00:00:39.094</td>
+                        <td>+00:00:00.000</td>
+                        <td>00:33:38.157</td>
+                        <td>+00:00:41.146</td>
+                            <td>
+                                0
+                            </td>
+                            <td>5</td>
+                        <td>48</td>
+                        <td class=\\"bold\\">53</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/deu.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"deu\\" title=\\"deu\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">Hawk24</td>
+                            <td>Test E2E</td>
+                                <td class=\\"text-left\\">
+                                    Ford Escort Mk II RS Grp4
+                                </td>
+                        <td>00:00:40.644</td>
+                        <td>+00:00:01.550</td>
+                        <td>00:34:16.260</td>
+                        <td>+00:01:19.249</td>
+                            <td>
+                                0
+                            </td>
+                            <td></td>
+                        <td>38</td>
+                        <td class=\\"bold\\">38</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/deu.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"deu\\" title=\\"deu\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">Kringelwurst</td>
+                            <td>Test E2E</td>
+                                <td class=\\"text-left\\">
+                                    Porsche 911 SC 3.0 Grp4
+                                </td>
+                        <td>00:00:40.198</td>
+                        <td>+00:00:01.104</td>
+                        <td>00:35:06.801</td>
+                        <td>+00:02:09.790</td>
+                            <td>
+                                0
+                            </td>
+                            <td>2</td>
+                        <td>30</td>
+                        <td class=\\"bold\\">32</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/aus.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"aus\\" title=\\"aus\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">satchmo</td>
+                            <td>Test E2E</td>
+                                <td class=\\"text-left\\">
+                                    Porsche 911 SC 3.0 Grp4
+                                </td>
+                        <td>00:00:40.073</td>
+                        <td>+00:00:00.979</td>
+                        <td>00:35:49.452</td>
+                        <td>+00:02:52.441</td>
+                            <td>
+                                0
+                            </td>
+                            <td>3</td>
+                        <td>24</td>
+                        <td class=\\"bold\\">27</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/swe.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"swe\\" title=\\"swe\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">Weepy</td>
+                            <td>Test E2E</td>
+                                <td class=\\"text-left\\">
+                                    Lancia Stratos HF Grp4
+                                </td>
+                        <td>00:00:42.855</td>
+                        <td>+00:00:03.761</td>
+                        <td>00:35:55.042</td>
+                        <td>+00:02:58.031</td>
+                            <td>
+                                0
+                            </td>
+                            <td></td>
+                        <td>20</td>
+                        <td class=\\"bold\\">20</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/swe.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"swe\\" title=\\"swe\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">davidgrundstrom</td>
+                            <td>Test E2E</td>
+                                <td class=\\"text-left\\">
+                                    Opel Ascona 400 Grp4
+                                </td>
+                        <td>00:00:40.500</td>
+                        <td>+00:00:01.406</td>
+                        <td>00:36:08.039</td>
+                        <td>+00:03:11.028</td>
+                            <td>
+                                0
+                            </td>
+                            <td>1</td>
+                        <td>18</td>
+                        <td class=\\"bold\\">19</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/bra.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"bra\\" title=\\"bra\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">Htchet</td>
+                            <td>Test E2E</td>
+                                <td class=\\"text-left\\">
+                                    Lancia Stratos HF Grp4
+                                </td>
+                        <td>00:00:41.367</td>
+                        <td>+00:00:02.273</td>
+                        <td>00:36:09.704</td>
+                        <td>+00:03:12.693</td>
+                            <td>
+                                0
+                            </td>
+                            <td></td>
+                        <td>16</td>
+                        <td class=\\"bold\\">16</td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/nor.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"nor\\" title=\\"nor\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">Roy Magnes</td>
+                            <td>Test E2E</td>
+                                <td class=\\"text-left\\">
+                                    Ford Escort Mk II RS Grp4
+                                </td>
+                        <td>00:00:42.462</td>
+                        <td>+00:00:03.368</td>
+                        <td>00:36:15.682</td>
+                        <td>+00:03:18.671</td>
+                            <td>
+                                0
+                            </td>
+                            <td></td>
+                        <td>14</td>
+                        <td class=\\"bold\\">14</td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/usa.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"usa\\" title=\\"usa\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">HotdogCowboy</td>
+                            <td>Test E2E</td>
+                                <td class=\\"text-left\\">
+                                    Porsche 911 SC 3.0 Grp4
+                                </td>
+                        <td>00:00:39.452</td>
+                        <td>+00:00:00.358</td>
+                        <td>00:36:19.636</td>
+                        <td>+00:03:22.625</td>
+                            <td>
+                                0
+                            </td>
+                            <td>4</td>
+                        <td>12</td>
+                        <td class=\\"bold\\">16</td>
+                    </tr>
+                    <tr>
+                        <td>13</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/kor.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"kor\\" title=\\"kor\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">Prodicrux</td>
+                            <td>Test E2E</td>
+                                <td class=\\"text-left\\">
+                                    Opel Ascona 400 Grp4
+                                </td>
+                        <td>00:00:44.303</td>
+                        <td>+00:00:05.209</td>
+                        <td>00:37:27.546</td>
+                        <td>+00:04:30.535</td>
+                            <td>
+                                0
+                            </td>
+                            <td></td>
+                        <td>10</td>
+                        <td class=\\"bold\\">10</td>
+                    </tr>
+                    <tr>
+                        <td>14</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/ita.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"ita\\" title=\\"ita\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">Superciuc93</td>
+                            <td>Test E2E</td>
+                                <td class=\\"text-left\\">
+                                    Ford Escort Mk II RS Grp4
+                                </td>
+                        <td>00:00:42.699</td>
+                        <td>+00:00:03.605</td>
+                        <td>00:38:01.850</td>
+                        <td>+00:05:04.839</td>
+                            <td>
+                                0
+                            </td>
+                            <td></td>
+                        <td>8</td>
+                        <td class=\\"bold\\">8</td>
+                    </tr>
+                    <tr>
+                        <td>15</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/aus.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"aus\\" title=\\"aus\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">jezza</td>
+                            <td>Test E2E</td>
+                                <td class=\\"text-left\\">
+                                    Opel Ascona 400 Grp4
+                                </td>
+                        <td>00:00:43.563</td>
+                        <td>+00:00:04.469</td>
+                        <td>00:39:22.515</td>
+                        <td>+00:06:25.504</td>
+                            <td>
+                                0
+                            </td>
+                            <td></td>
+                        <td>6</td>
+                        <td class=\\"bold\\">6</td>
+                    </tr>
+                    <tr>
+                        <td>16</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/swe.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"swe\\" title=\\"swe\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">Bollis</td>
+                            <td>Test E2E</td>
+                                <td class=\\"text-left\\">
+                                    Ford Escort Mk II RS Grp4
+                                </td>
+                        <td>00:00:42.470</td>
+                        <td>+00:00:03.376</td>
+                        <td>00:39:43.947</td>
+                        <td>+00:06:46.936</td>
+                            <td>
+                                0
+                            </td>
+                            <td></td>
+                        <td>4</td>
+                        <td class=\\"bold\\">4</td>
+                    </tr>
+                    <tr>
+                        <td>17</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/gbr.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"gbr\\" title=\\"gbr\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">FAHEY Andrew</td>
+                            <td>Test E2E</td>
+                                <td class=\\"text-left\\">
+                                    Ford Escort Mk II RS Grp4
+                                </td>
+                        <td>00:00:47.913</td>
+                        <td>+00:00:08.819</td>
+                        <td>00:44:05.459</td>
+                        <td>+00:11:08.448</td>
+                            <td>
+                                1
+                            </td>
+                            <td></td>
+                        <td>1</td>
+                        <td class=\\"bold\\">1</td>
+                    </tr>
+                    <tr>
+                        <td>18</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/swe.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"swe\\" title=\\"swe\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">ctbr</td>
+                            <td>Test E2E</td>
+                                <td class=\\"text-left\\">
+                                    Ford Escort Mk II RS Grp4
+                                </td>
+                        <td>00:00:58.500</td>
+                        <td>+00:00:19.406</td>
+                        <td>00:49:13.508</td>
+                        <td>+00:16:16.497</td>
+                            <td>
+                                2
+                            </td>
+                            <td></td>
+                        <td></td>
+                        <td class=\\"bold\\">0</td>
+                    </tr>
+                    <tr>
+                        <td>19</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/esp.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"esp\\" title=\\"esp\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">TASIS Edgar</td>
+                            <td>Test E2E</td>
+                                <td class=\\"text-left\\">
+                                    Opel Ascona 400 Grp4
+                                </td>
+                        <td>00:00:58.500</td>
+                        <td>+00:00:19.406</td>
+                        <td>00:49:52.645</td>
+                        <td>+00:16:55.634</td>
+                            <td>
+                                4
+                            </td>
+                            <td></td>
+                        <td></td>
+                        <td class=\\"bold\\">0</td>
+                    </tr>
+                    <tr>
+                        <td>20</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/hun.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"hun\\" title=\\"hun\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">fujiRS</td>
+                            <td>Test E2E</td>
+                                <td class=\\"text-left\\">
+                                    Opel Ascona 400 Grp4
+                                </td>
+                        <td>00:00:58.500</td>
+                        <td>+00:00:19.406</td>
+                        <td>00:50:25.142</td>
+                        <td>+00:17:28.131</td>
+                            <td>
+                                4
+                            </td>
+                            <td></td>
+                        <td></td>
+                        <td class=\\"bold\\">0</td>
+                    </tr>
+                    <tr>
+                        <td>21</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/est.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"est\\" title=\\"est\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">MartinRC</td>
+                            <td>Test E2E</td>
+                                <td class=\\"text-left\\">
+                                    Ford Escort Mk II RS Grp4
+                                </td>
+                        <td>00:00:58.500</td>
+                        <td>+00:00:19.406</td>
+                        <td>00:51:48.797</td>
+                        <td>+00:18:51.786</td>
+                            <td>
+                                3
+                            </td>
+                            <td></td>
+                        <td></td>
+                        <td class=\\"bold\\">0</td>
+                    </tr>
+                    <tr>
+                        <td>22</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/usa.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"usa\\" title=\\"usa\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">meatcreap</td>
+                            <td>Test E2E</td>
+                                <td class=\\"text-left\\">
+                                    Ford Escort Mk II RS Grp4
+                                </td>
+                        <td>00:00:58.500</td>
+                        <td>+00:00:19.406</td>
+                        <td>00:52:26.933</td>
+                        <td>+00:19:29.922</td>
+                            <td>
+                                3
+                            </td>
+                            <td></td>
+                        <td></td>
+                        <td class=\\"bold\\">0</td>
+                    </tr>
+                    <tr>
+                        <td>23</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/swe.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"swe\\" title=\\"swe\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">Tommie Lindberg</td>
+                            <td>Test E2E</td>
+                                <td class=\\"text-left\\">
+                                    Opel Ascona 400 Grp4
+                                </td>
+                        <td>00:00:58.500</td>
+                        <td>+00:00:19.406</td>
+                        <td>00:55:41.040</td>
+                        <td>+00:22:44.029</td>
+                            <td>
+                                5
+                            </td>
+                            <td></td>
+                        <td></td>
+                        <td class=\\"bold\\">0</td>
+                    </tr>
+                    <tr>
+                        <td>24</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/gbr.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"gbr\\" title=\\"gbr\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">PETTET Jordan (shakey-deal)</td>
+                            <td>Test E2E</td>
+                                <td class=\\"text-left\\">
+                                    Lancia Stratos HF Grp4
+                                </td>
+                        <td>00:00:58.500</td>
+                        <td>+00:00:19.406</td>
+                        <td>00:59:11.712</td>
+                        <td>+00:26:14.701</td>
+                            <td>
+                                6
+                            </td>
+                            <td></td>
+                        <td></td>
+                        <td class=\\"bold\\">0</td>
+                    </tr>
+                    <tr>
+                        <td>25</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/esp.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"esp\\" title=\\"esp\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">dejota95</td>
+                            <td>Test E2E</td>
+                                <td class=\\"text-left\\">
+                                    Opel Ascona 400 Grp4
+                                </td>
+                        <td>00:00:58.500</td>
+                        <td>+00:00:19.406</td>
+                        <td>00:59:17.892</td>
+                        <td>+00:26:20.881</td>
+                            <td>
+                                5
+                            </td>
+                            <td></td>
+                        <td></td>
+                        <td class=\\"bold\\">0</td>
+                    </tr>
+                    <tr>
+                        <td>26</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/deu.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"deu\\" title=\\"deu\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">Maximilian Maksy</td>
+                            <td>Test E2E</td>
+                                <td class=\\"text-left\\">
+                                    Opel Ascona 400 Grp4
+                                </td>
+                        <td>00:00:58.500</td>
+                        <td>+00:00:19.406</td>
+                        <td>01:00:13.506</td>
+                        <td>+00:27:16.495</td>
+                            <td>
+                                6
+                            </td>
+                            <td></td>
+                        <td></td>
+                        <td class=\\"bold\\">0</td>
+                    </tr>
+                    <tr>
+                        <td>27</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/bel.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"bel\\" title=\\"bel\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">THELC Matt</td>
+                            <td>Test E2E</td>
+                                <td class=\\"text-left\\">
+                                    Porsche 911 SC 3.0 Grp4
+                                </td>
+                        <td>00:00:58.500</td>
+                        <td>+00:00:19.406</td>
+                        <td>01:04:22.331</td>
+                        <td>+00:31:25.320</td>
+                            <td>
+                                7
+                            </td>
+                            <td></td>
+                        <td></td>
+                        <td class=\\"bold\\">0</td>
+                    </tr>
+                    <tr>
+                        <td>28</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/est.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"est\\" title=\\"est\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">TheZenor</td>
+                            <td>Test E2E</td>
+                                <td class=\\"text-left\\">
+                                    Ford Escort Mk II RS Grp4
+                                </td>
+                        <td>00:00:58.500</td>
+                        <td>+00:00:19.406</td>
+                        <td>01:07:03.299</td>
+                        <td>+00:34:06.288</td>
+                            <td>
+                                6
+                            </td>
+                            <td></td>
+                        <td></td>
+                        <td class=\\"bold\\">0</td>
+                    </tr>
+                    <tr>
+                        <td>29</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/gbr.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"gbr\\" title=\\"gbr\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">Joe Hutchinson</td>
+                            <td>Test E2E</td>
+                                <td class=\\"text-left\\">
+                                    
+                                </td>
+                        <td>15:00:00.000</td>
+                        <td>N/A</td>
+                        <td>23:59:59.000</td>
+                        <td>N/A</td>
+                            <td>
+                                
+                            </td>
+                            <td></td>
+                        <td></td>
+                        <td class=\\"bold\\">DNS</td>
+                    </tr>
+                    <tr>
+                        <td>30</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/row.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"row\\" title=\\"row\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">Erki Erik Poola</td>
+                            <td>Test E2E</td>
+                                <td class=\\"text-left\\">
+                                    
+                                </td>
+                        <td>15:00:00.000</td>
+                        <td>+14:59:20.906</td>
+                        <td>23:59:59.000</td>
+                        <td>+23:27:01.989</td>
+                            <td>
+                                
+                            </td>
+                            <td></td>
+                        <td></td>
+                        <td class=\\"bold\\">DNF</td>
+                    </tr>
+                    <tr>
+                        <td>31</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/deu.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"deu\\" title=\\"deu\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">Thom B</td>
+                            <td>Test E2E</td>
+                                <td class=\\"text-left\\">
+                                    
+                                </td>
+                        <td>15:00:00.000</td>
+                        <td>+14:59:20.906</td>
+                        <td>23:59:59.000</td>
+                        <td>+23:27:01.989</td>
+                            <td>
+                                
+                            </td>
+                            <td></td>
+                        <td></td>
+                        <td class=\\"bold\\">DNF</td>
+                    </tr>
+                    <tr>
+                        <td>32</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/gbr.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"gbr\\" title=\\"gbr\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">Williams Huw</td>
+                            <td>Test E2E</td>
+                                <td class=\\"text-left\\">
+                                    
+                                </td>
+                        <td>15:00:00.000</td>
+                        <td>N/A</td>
+                        <td>23:59:59.000</td>
+                        <td>N/A</td>
+                            <td>
+                                
+                            </td>
+                            <td></td>
+                        <td></td>
+                        <td class=\\"bold\\">DNS</td>
+                    </tr>
+                </tbody>
+
+            </table>
+            <div style=\\"margin:0 auto; text-align:center;\\">
+                <p>Last updated at: last-updated-test-e2e</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openMobileNav() {
+        closeNav(\\"seriesMobileNav\\");
+        openNav(\\"mobileNav\\");
+    }
+    function openSeriesMobileNav() {
+        closeNav(\\"mobileNav\\");
+        openNav(\\"seriesMobileNav\\");
+    }
+    function closeNav(navId) {
+        var x = document.getElementById(navId);
+        x.className = x.className.replace(\\" w3-show\\", \\"\\");
+    }
+    function openNav(navId) {
+        var x = document.getElementById(navId);
+        if (x.className.indexOf(\\"w3-show\\") == -1) {
+            x.className += \\" w3-show\\";
+        } else {
+            closeNav(navId);
+        }
+    }
+</script>
+
+</body>
+
+</html>"
+`;
+
+exports[`e2e generates overall driver standings 1`] = `
+"<html lang=\\"en\\">
+
+<head>
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"./assets/css/style.css\\">
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"./assets/css/animation.css\\">
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"./assets/css/w3.css\\">
+    <meta http-equiv=\\"Content-Type\\" content=\\"text/html; charset=utf-8\\">
+    <link rel=\\"icon\\" href=\\"./assets/rsc-guy.png\\">
+</head>
+
+<body style=\\"background-image: linear-gradient(315deg, #ffffff 0%, #d7e1ec 74%); background-size: cover; background-repeat: no-repeat; background-attachment: fixed;\\">
+    <head>
+	<title>
+		TEST-E2E |
+			driver Overall
+	</title>
+</head>
+
+<div class=\\"w3-top\\">
+	<div class=\\"w3-bar w3-black\\" style=\\"text-align:center;\\">
+        <div class=\\"logo w3-dropdown-hover w3-hide-small w3-hide-medium\\" style=\\"background-color: #0000\\">
+            <a href=\\"/index.html\\">
+                <img src=\\"./assets/rsc-guy.png\\">
+            </a>
+            <div class=\\"w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small w3-hide-medium\\">
+                <span class=\\"w3-bar-item\\">---historical---</span>
+                    <a href=\\"/e2e-1\\" class=\\"w3-bar-item w3-button \\">E2E Season 1</a>
+            </div>
+        </div>
+
+		<div class=\\"w3-dropdown-hover w3-hide-small w3-hide-medium\\">
+			<button class=\\"w3-button\\">Driver Standings</button>
+			<div class=\\"w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small w3-hide-medium\\">
+				<a href=\\"./test-e2e-driver-standings.html\\" class=\\"w3-bar-item w3-button \\">Test E2E</a>
+				<a href=\\"./test-e2e2-driver-standings.html\\" class=\\"w3-bar-item w3-button \\">Test E2E2</a>
+				<a href=\\"./overall-driver-standings.html\\" class=\\"w3-bar-item w3-button active\\">Overall</a>
+			</div>
+		</div>
+
+		<div class=\\"w3-dropdown-hover w3-hide-small w3-hide-medium\\">
+			<button class=\\"w3-button\\">Team Standings</button>
+			<div class=\\"w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small w3-hide-medium\\">
+				<a href=\\"./test-e2e-team-standings.html\\" class=\\"w3-bar-item w3-button \\">Test E2E</a>
+				<a href=\\"./test-e2e2-team-standings.html\\" class=\\"w3-bar-item w3-button \\">Test E2E2</a>
+				<a href=\\"./overall-team-standings.html\\" class=\\"w3-bar-item w3-button \\">Overall</a>
+			</div>
+		</div>
+
+
+
+        <!-- mobile stuff -->
+        <a href=\\"javascript:void(0)\\" class=\\"logo w3-left w3-hide-large\\" style=\\"font-size:3em;\\" onclick=\\"openSeriesMobileNav()\\">
+            <img src=\\"./assets/rsc-guy.png\\" style=\\"max-height: 1em;margin: 0.1em;border: 1px solid darkgray\\">
+        </a>
+
+        <a href=\\"javascript:void(0)\\" class=\\"w3-bar-item w3-button w3-right w3-hide-large\\" style=\\"font-size:3em;\\" onclick=\\"openMobileNav()\\">&#9776;
+        </a>
+
+        <h3 class=\\"w3-hide-large navTitle bold\\" style=\\"display:block;\\">
+            driver - Overall
+            
+        </h3>
+
+	</div>
+
+	<div id=\\"mobileNav\\" class=\\"w3-bar-block w3-black w3-hide w3-hide-large\\" style=\\"overflow-y:scroll;max-height:95vh;\\">
+            <a href=\\"./test-e2e-driver-standings.html\\" class=\\"w3-bar-item w3-button \\">Driver Standings - Test E2E</a>
+            <a href=\\"./test-e2e2-driver-standings.html\\" class=\\"w3-bar-item w3-button \\">Driver Standings - Test E2E2</a>
+            <a href=\\"./overall-driver-standings.html\\" class=\\"w3-bar-item w3-button active\\">Driver Standings - Overall</a>
+            <a href=\\"./test-e2e-team-standings.html\\" class=\\"w3-bar-item w3-button \\">Team Standings - Test E2E</a>
+            <a href=\\"./test-e2e2-team-standings.html\\" class=\\"w3-bar-item w3-button \\">Team Standings - Test E2E2</a>
+            <a href=\\"./overall-team-standings.html\\" class=\\"w3-bar-item w3-button \\">Team Standings - Overall</a>
+	</div>
+
+	<div id=\\"seriesMobileNav\\" class=\\"w3-bar-block w3-black w3-hide w3-hide-large\\" style=\\"overflow-y:scroll;max-height:95vh;\\">
+            <span class=\\"w3-bar-item\\">---historical---</span>
+                <a href=\\"/e2e-1\\" class=\\"w3-bar-item w3-button \\">E2E Season 1</a>
+	</div>
+
+	<div class=\\"w3-bar w3-light-grey secondaryNav\\">
+			<a href=\\"./overall-0-driver-results.html\\">
+				<img src=\\"./assets/country-flags/swe.png\\" />
+			</a>
+			<a href=\\"./overall-1-driver-results.html\\">
+				<img src=\\"./assets/country-flags/est.png\\" />
+			</a>
+	</div>
+</div>
+
+    <div id=\\"container\\">
+        <div id=\\"flexContainer\\">
+            <div class=\\"flexBox\\">
+                <div style=\\"margin-bottom: 1em;\\" class=\\"w3-hide-medium w3-hide-small\\">
+                    <div class=\\"logo\\" style=\\"display:flex;\\">
+                        <img src=\\"./assets/rsc-guy.png\\" />
+                        <h2 style=\\"margin-left:1em;\\">Overall Driver Standings</h2>
+                    </div>
+                </div>
+
+                <table id=\\"tableDrivers\\">
+                    <thead>
+                        <tr>
+                            <th>Pos</th>
+                            <th></th>
+                            <th>Nat</th>
+                            <th>Driver</th>
+                                <th>Div</th>
+                                    <th>Team Name</th>
+
+                            <th>
+                                <a href=\\"./overall-0-driver-results.html\\">
+                                    <img src=\\"./assets/country-flags/swe.png\\" alt=\\"swe\\" title=\\"swe\\"/>
+                                </a>
+                            </th>
+
+                            <th>
+                                <a href=\\"./overall-1-driver-results.html\\">
+                                    <img src=\\"./assets/country-flags/est.png\\" alt=\\"est\\" title=\\"est\\"/>
+                                </a>
+                            </th>
+
+                            <th>Points</th>
+                                <th>ADR*</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style=\\"background-color: \\">
+                            <td>1</td>
+                            <td>
+                                <span class=\\"neutral\\">=</span>
+                            </td>
+                            <td>
+                                <img src=\\"./assets/country-flags/aus.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"aus\\" title=\\"aus\\"/>
+                            </td>
+                            <td class=\\"text-left bold\\">woosh</td>
+                                <td>Test E2E2</td>
+                                    <td class=\\"text-left\\">CodeBros</td>
+                            
+                            <td>
+                                65
+                            </td>
+                            
+                            <td>
+                                65
+                            </td>
+                            
+                            <td class=\\"bold\\">130</td>
+                                <td class=\\"bold\\">0</td>
+                        </tr>
+                        <tr style=\\"background-color: \\">
+                            <td>2</td>
+                            <td>
+                                <span class=\\"positive\\"><i
+                                        class=\\"arrow up\\"></i>&nbsp;1</span>
+                            </td>
+                            <td>
+                                <img src=\\"./assets/country-flags/aus.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"aus\\" title=\\"aus\\"/>
+                            </td>
+                            <td class=\\"text-left bold\\">winstall</td>
+                                <td>Test E2E2</td>
+                                    <td class=\\"text-left\\">CodeBros</td>
+                            
+                            <td>
+                                52
+                            </td>
+                            
+                            <td>
+                                52
+                            </td>
+                            
+                            <td class=\\"bold\\">104</td>
+                                <td class=\\"bold\\">0</td>
+                        </tr>
+                        <tr style=\\"background-color: \\">
+                            <td>3</td>
+                            <td>
+                                <span class=\\"negative\\"><i
+                                        class=\\"arrow down\\"></i>&nbsp;-2</span>
+                            </td>
+                            <td>
+                                <img src=\\"./assets/country-flags/deu.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"deu\\" title=\\"deu\\"/>
+                            </td>
+                            <td class=\\"text-left bold\\">Hawk24</td>
+                                <td>Test E2E</td>
+                                    <td class=\\"text-left\\">Heat Seeking Geezers mk2</td>
+                            
+                            <td>
+                                65
+                            </td>
+                            
+                            <td>
+                                38
+                            </td>
+                            
+                            <td class=\\"bold\\">103</td>
+                                <td class=\\"bold\\">0</td>
+                        </tr>
+                        <tr style=\\"background-color: \\">
+                            <td>4</td>
+                            <td>
+                                <span class=\\"positive\\"><i
+                                        class=\\"arrow up\\"></i>&nbsp;1</span>
+                            </td>
+                            <td>
+                                <img src=\\"./assets/country-flags/fin.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"fin\\" title=\\"fin\\"/>
+                            </td>
+                            <td class=\\"text-left bold\\">QazRa</td>
+                                <td>Test E2E</td>
+                                    <td class=\\"text-left\\">privateer</td>
+                            
+                            <td>
+                                38
+                            </td>
+                            
+                            <td>
+                                53
+                            </td>
+                            
+                            <td class=\\"bold\\">91</td>
+                                <td class=\\"bold\\">0</td>
+                        </tr>
+                        <tr style=\\"background-color: \\">
+                            <td>5</td>
+                            <td>
+                                <span class=\\"positive\\"><i
+                                        class=\\"arrow up\\"></i>&nbsp;13</span>
+                            </td>
+                            <td>
+                                <img src=\\"./assets/country-flags/est.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"est\\" title=\\"est\\"/>
+                            </td>
+                            <td class=\\"text-left bold\\">ninko</td>
+                                <td>Test E2E</td>
+                                    <td class=\\"text-left\\">Flat Out Racing</td>
+                            
+                            <td>
+                                DNF
+                            </td>
+                            
+                            <td>
+                                60
+                            </td>
+                            
+                            <td class=\\"bold\\">60</td>
+                                <td class=\\"bold\\">0</td>
+                        </tr>
+                        <tr style=\\"background-color: \\">
+                            <td>6</td>
+                            <td>
+                                <span class=\\"negative\\"><i
+                                        class=\\"arrow down\\"></i>&nbsp;-3</span>
+                            </td>
+                            <td>
+                                <img src=\\"./assets/country-flags/bel.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"bel\\" title=\\"bel\\"/>
+                            </td>
+                            <td class=\\"text-left bold\\">THELC Matt</td>
+                                <td>Test E2E</td>
+                                    <td class=\\"text-left\\">Rizla&#x27;s Suffering Club</td>
+                            
+                            <td>
+                                52
+                            </td>
+                            
+                            <td>
+                                0
+                            </td>
+                            
+                            <td class=\\"bold\\">52</td>
+                                <td class=\\"bold\\">0</td>
+                        </tr>
+                        <tr style=\\"background-color: \\">
+                            <td>7</td>
+                            <td>
+                                <span class=\\"negative\\"><i
+                                        class=\\"arrow down\\"></i>&nbsp;-1</span>
+                            </td>
+                            <td>
+                                <img src=\\"./assets/country-flags/usa.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"usa\\" title=\\"usa\\"/>
+                            </td>
+                            <td class=\\"text-left bold\\">HotdogCowboy</td>
+                                <td>Test E2E</td>
+                                    <td class=\\"text-left\\">All Beef Franks</td>
+                            
+                            <td>
+                                32
+                            </td>
+                            
+                            <td>
+                                16
+                            </td>
+                            
+                            <td class=\\"bold\\">48</td>
+                                <td class=\\"bold\\">0</td>
+                        </tr>
+                        <tr style=\\"background-color: \\">
+                            <td>8</td>
+                            <td>
+                                <span class=\\"neutral\\">=</span>
+                            </td>
+                            <td>
+                                <img src=\\"./assets/country-flags/aus.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"aus\\" title=\\"aus\\"/>
+                            </td>
+                            <td class=\\"text-left bold\\">satchmo</td>
+                                <td>Test E2E</td>
+                                    <td class=\\"text-left\\">CodeBros</td>
+                            
+                            <td>
+                                20
+                            </td>
+                            
+                            <td>
+                                27
+                            </td>
+                            
+                            <td class=\\"bold\\">47</td>
+                                <td class=\\"bold\\">0</td>
+                        </tr>
+                        <tr style=\\"background-color: \\">
+                            <td>9</td>
+                            <td>
+                                <span class=\\"negative\\"><i
+                                        class=\\"arrow down\\"></i>&nbsp;-2</span>
+                            </td>
+                            <td>
+                                <img src=\\"./assets/country-flags/nor.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"nor\\" title=\\"nor\\"/>
+                            </td>
+                            <td class=\\"text-left bold\\">Roy Magnes</td>
+                                <td>Test E2E</td>
+                                    <td class=\\"text-left\\">privateer</td>
+                            
+                            <td>
+                                24
+                            </td>
+                            
+                            <td>
+                                14
+                            </td>
+                            
+                            <td class=\\"bold\\">38</td>
+                                <td class=\\"bold\\">0</td>
+                        </tr>
+                        <tr style=\\"background-color: \\">
+                            <td>10</td>
+                            <td>
+                                <span class=\\"positive\\"><i
+                                        class=\\"arrow up\\"></i>&nbsp;5</span>
+                            </td>
+                            <td>
+                                <img src=\\"./assets/country-flags/deu.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"deu\\" title=\\"deu\\"/>
+                            </td>
+                            <td class=\\"text-left bold\\">Kringelwurst</td>
+                                <td>Test E2E</td>
+                                    <td class=\\"text-left\\">Kringel&#x27;s Coal Rental and Co.</td>
+                            
+                            <td>
+                                3
+                            </td>
+                            
+                            <td>
+                                32
+                            </td>
+                            
+                            <td class=\\"bold\\">35</td>
+                                <td class=\\"bold\\">0</td>
+                        </tr>
+                        <tr style=\\"background-color: \\">
+                            <td>11</td>
+                            <td>
+                                <span class=\\"positive\\"><i
+                                        class=\\"arrow up\\"></i>&nbsp;1</span>
+                            </td>
+                            <td>
+                                <img src=\\"./assets/country-flags/swe.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"swe\\" title=\\"swe\\"/>
+                            </td>
+                            <td class=\\"text-left bold\\">davidgrundstrom</td>
+                                <td>Test E2E</td>
+                                    <td class=\\"text-left\\">No-recce</td>
+                            
+                            <td>
+                                7
+                            </td>
+                            
+                            <td>
+                                19
+                            </td>
+                            
+                            <td class=\\"bold\\">26</td>
+                                <td class=\\"bold\\">0</td>
+                        </tr>
+                        <tr style=\\"background-color: \\">
+                            <td>11</td>
+                            <td>
+                                <span class=\\"negative\\"><i
+                                        class=\\"arrow down\\"></i>&nbsp;-1</span>
+                            </td>
+                            <td>
+                                <img src=\\"./assets/country-flags/kor.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"kor\\" title=\\"kor\\"/>
+                            </td>
+                            <td class=\\"text-left bold\\">Prodicrux</td>
+                                <td>Test E2E</td>
+                                    <td class=\\"text-left\\">privateer</td>
+                            
+                            <td>
+                                16
+                            </td>
+                            
+                            <td>
+                                10
+                            </td>
+                            
+                            <td class=\\"bold\\">26</td>
+                                <td class=\\"bold\\">0</td>
+                        </tr>
+                        <tr style=\\"background-color: \\">
+                            <td>13</td>
+                            <td>
+                                <span class=\\"positive\\"><i
+                                        class=\\"arrow up\\"></i>&nbsp;5</span>
+                            </td>
+                            <td>
+                                <img src=\\"./assets/country-flags/swe.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"swe\\" title=\\"swe\\"/>
+                            </td>
+                            <td class=\\"text-left bold\\">Weepy</td>
+                                <td>Test E2E</td>
+                                    <td class=\\"text-left\\">CodeBros</td>
+                            
+                            <td>
+                                0
+                            </td>
+                            
+                            <td>
+                                20
+                            </td>
+                            
+                            <td class=\\"bold\\">20</td>
+                                <td class=\\"bold\\">0</td>
+                        </tr>
+                        <tr style=\\"background-color: \\">
+                            <td>14</td>
+                            <td>
+                                <span class=\\"negative\\"><i
+                                        class=\\"arrow down\\"></i>&nbsp;-5</span>
+                            </td>
+                            <td>
+                                <img src=\\"./assets/country-flags/gbr.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"gbr\\" title=\\"gbr\\"/>
+                            </td>
+                            <td class=\\"text-left bold\\">Joe Hutchinson</td>
+                                <td>Test E2E</td>
+                                    <td class=\\"text-left\\">Rizla&#x27;s Suffering Club</td>
+                            
+                            <td>
+                                18
+                            </td>
+                            
+                            <td>
+                                DNS
+                            </td>
+                            
+                            <td class=\\"bold\\">18</td>
+                                <td class=\\"bold\\">0</td>
+                        </tr>
+                        <tr style=\\"background-color: \\">
+                            <td>15</td>
+                            <td>
+                                <span class=\\"positive\\"><i
+                                        class=\\"arrow up\\"></i>&nbsp;3</span>
+                            </td>
+                            <td>
+                                <img src=\\"./assets/country-flags/bra.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"bra\\" title=\\"bra\\"/>
+                            </td>
+                            <td class=\\"text-left bold\\">Htchet</td>
+                                <td>Test E2E</td>
+                                    <td class=\\"text-left\\">privateer</td>
+                            
+                            <td>
+                                DNF
+                            </td>
+                            
+                            <td>
+                                16
+                            </td>
+                            
+                            <td class=\\"bold\\">16</td>
+                                <td class=\\"bold\\">0</td>
+                        </tr>
+                        <tr style=\\"background-color: \\">
+                            <td>16</td>
+                            <td>
+                                <span class=\\"negative\\"><i
+                                        class=\\"arrow down\\"></i>&nbsp;-5</span>
+                            </td>
+                            <td>
+                                <img src=\\"./assets/country-flags/deu.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"deu\\" title=\\"deu\\"/>
+                            </td>
+                            <td class=\\"text-left bold\\">Thom B</td>
+                                <td>Test E2E</td>
+                                    <td class=\\"text-left\\">Kringel&#x27;s Coal Rental and Co.</td>
+                            
+                            <td>
+                                10
+                            </td>
+                            
+                            <td>
+                                DNF
+                            </td>
+                            
+                            <td class=\\"bold\\">10</td>
+                                <td class=\\"bold\\">0</td>
+                        </tr>
+                        <tr style=\\"background-color: \\">
+                            <td>17</td>
+                            <td>
+                                <span class=\\"negative\\"><i
+                                        class=\\"arrow down\\"></i>&nbsp;-4</span>
+                            </td>
+                            <td>
+                                <img src=\\"./assets/country-flags/swe.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"swe\\" title=\\"swe\\"/>
+                            </td>
+                            <td class=\\"text-left bold\\">Bollis</td>
+                                <td>Test E2E</td>
+                                    <td class=\\"text-left\\">privateer</td>
+                            
+                            <td>
+                                5
+                            </td>
+                            
+                            <td>
+                                4
+                            </td>
+                            
+                            <td class=\\"bold\\">9</td>
+                                <td class=\\"bold\\">0</td>
+                        </tr>
+                        <tr style=\\"background-color: \\">
+                            <td>18</td>
+                            <td>
+                                <span class=\\"neutral\\">=</span>
+                            </td>
+                            <td>
+                                <img src=\\"./assets/country-flags/ita.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"ita\\" title=\\"ita\\"/>
+                            </td>
+                            <td class=\\"text-left bold\\">Superciuc93</td>
+                                <td>Test E2E</td>
+                                    <td class=\\"text-left\\">privateer</td>
+                            
+                            <td>
+                                DNF
+                            </td>
+                            
+                            <td>
+                                8
+                            </td>
+                            
+                            <td class=\\"bold\\">8</td>
+                                <td class=\\"bold\\">0</td>
+                        </tr>
+                        <tr style=\\"background-color: \\">
+                            <td>19</td>
+                            <td>
+                                <span class=\\"negative\\"><i
+                                        class=\\"arrow down\\"></i>&nbsp;-1</span>
+                            </td>
+                            <td>
+                                <img src=\\"./assets/country-flags/aus.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"aus\\" title=\\"aus\\"/>
+                            </td>
+                            <td class=\\"text-left bold\\">jezza</td>
+                                <td>Test E2E</td>
+                                    <td class=\\"text-left\\">The stale poos</td>
+                            
+                            <td>
+                                0
+                            </td>
+                            
+                            <td>
+                                6
+                            </td>
+                            
+                            <td class=\\"bold\\">6</td>
+                                <td class=\\"bold\\">0</td>
+                        </tr>
+                        <tr style=\\"background-color: \\">
+                            <td>20</td>
+                            <td>
+                                <span class=\\"negative\\"><i
+                                        class=\\"arrow down\\"></i>&nbsp;-6</span>
+                            </td>
+                            <td>
+                                <img src=\\"./assets/country-flags/usa.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"usa\\" title=\\"usa\\"/>
+                            </td>
+                            <td class=\\"text-left bold\\">meatcreap</td>
+                                <td>Test E2E</td>
+                                    <td class=\\"text-left\\">All Beef Franks</td>
+                            
+                            <td>
+                                4
+                            </td>
+                            
+                            <td>
+                                0
+                            </td>
+                            
+                            <td class=\\"bold\\">4</td>
+                                <td class=\\"bold\\">0</td>
+                        </tr>
+                        <tr style=\\"background-color: \\">
+                            <td>21</td>
+                            <td>
+                                <span class=\\"negative\\"><i
+                                        class=\\"arrow down\\"></i>&nbsp;-4</span>
+                            </td>
+                            <td>
+                                <img src=\\"./assets/country-flags/gbr.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"gbr\\" title=\\"gbr\\"/>
+                            </td>
+                            <td class=\\"text-left bold\\">FAHEY Andrew</td>
+                                <td>Test E2E</td>
+                                    <td class=\\"text-left\\">privateer</td>
+                            
+                            <td>
+                                1
+                            </td>
+                            
+                            <td>
+                                1
+                            </td>
+                            
+                            <td class=\\"bold\\">2</td>
+                                <td class=\\"bold\\">0</td>
+                        </tr>
+                        <tr style=\\"background-color: \\">
+                            <td>21</td>
+                            <td>
+                                <span class=\\"negative\\"><i
+                                        class=\\"arrow down\\"></i>&nbsp;-5</span>
+                            </td>
+                            <td>
+                                <img src=\\"./assets/country-flags/gbr.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"gbr\\" title=\\"gbr\\"/>
+                            </td>
+                            <td class=\\"text-left bold\\">PETTET Jordan (shakey-deal)</td>
+                                <td>Test E2E</td>
+                                    <td class=\\"text-left\\">Heat Seeking Geezers mk2</td>
+                            
+                            <td>
+                                2
+                            </td>
+                            
+                            <td>
+                                0
+                            </td>
+                            
+                            <td class=\\"bold\\">2</td>
+                                <td class=\\"bold\\">0</td>
+                        </tr>
+                        <tr style=\\"background-color: \\">
+                            <td>23</td>
+                            <td>
+                                <span class=\\"negative\\"><i
+                                        class=\\"arrow down\\"></i>&nbsp;-5</span>
+                            </td>
+                            <td>
+                                <img src=\\"./assets/country-flags/swe.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"swe\\" title=\\"swe\\"/>
+                            </td>
+                            <td class=\\"text-left bold\\">ctbr</td>
+                                <td>Test E2E</td>
+                                    <td class=\\"text-left\\">privateer</td>
+                            
+                            <td>
+                                0
+                            </td>
+                            
+                            <td>
+                                0
+                            </td>
+                            
+                            <td class=\\"bold\\">0</td>
+                                <td class=\\"bold\\">0</td>
+                        </tr>
+                        <tr style=\\"background-color: \\">
+                            <td>23</td>
+                            <td>
+                                <span class=\\"negative\\"><i
+                                        class=\\"arrow down\\"></i>&nbsp;-5</span>
+                            </td>
+                            <td>
+                                <img src=\\"./assets/country-flags/esp.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"esp\\" title=\\"esp\\"/>
+                            </td>
+                            <td class=\\"text-left bold\\">TASIS Edgar</td>
+                                <td>Test E2E</td>
+                                    <td class=\\"text-left\\">privateer</td>
+                            
+                            <td>
+                                DNF
+                            </td>
+                            
+                            <td>
+                                0
+                            </td>
+                            
+                            <td class=\\"bold\\">0</td>
+                                <td class=\\"bold\\">0</td>
+                        </tr>
+                        <tr style=\\"background-color: \\">
+                            <td>23</td>
+                            <td>
+                                <span class=\\"negative\\"><i
+                                        class=\\"arrow down\\"></i>&nbsp;-5</span>
+                            </td>
+                            <td>
+                                <img src=\\"./assets/country-flags/hun.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"hun\\" title=\\"hun\\"/>
+                            </td>
+                            <td class=\\"text-left bold\\">fujiRS</td>
+                                <td>Test E2E</td>
+                                    <td class=\\"text-left\\">privateer</td>
+                            
+                            <td>
+                                0
+                            </td>
+                            
+                            <td>
+                                0
+                            </td>
+                            
+                            <td class=\\"bold\\">0</td>
+                                <td class=\\"bold\\">0</td>
+                        </tr>
+                        <tr style=\\"background-color: \\">
+                            <td>23</td>
+                            <td>
+                                <span class=\\"negative\\"><i
+                                        class=\\"arrow down\\"></i>&nbsp;-5</span>
+                            </td>
+                            <td>
+                                <img src=\\"./assets/country-flags/est.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"est\\" title=\\"est\\"/>
+                            </td>
+                            <td class=\\"text-left bold\\">MartinRC</td>
+                                <td>Test E2E</td>
+                                    <td class=\\"text-left\\">privateer</td>
+                            
+                            <td>
+                                DNS
+                            </td>
+                            
+                            <td>
+                                0
+                            </td>
+                            
+                            <td class=\\"bold\\">0</td>
+                                <td class=\\"bold\\">0</td>
+                        </tr>
+                        <tr style=\\"background-color: \\">
+                            <td>23</td>
+                            <td>
+                                <span class=\\"negative\\"><i
+                                        class=\\"arrow down\\"></i>&nbsp;-5</span>
+                            </td>
+                            <td>
+                                <img src=\\"./assets/country-flags/swe.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"swe\\" title=\\"swe\\"/>
+                            </td>
+                            <td class=\\"text-left bold\\">Tommie Lindberg</td>
+                                <td>Test E2E</td>
+                                    <td class=\\"text-left\\">privateer</td>
+                            
+                            <td>
+                                0
+                            </td>
+                            
+                            <td>
+                                0
+                            </td>
+                            
+                            <td class=\\"bold\\">0</td>
+                                <td class=\\"bold\\">0</td>
+                        </tr>
+                        <tr style=\\"background-color: \\">
+                            <td>23</td>
+                            <td>
+                                <span class=\\"negative\\"><i
+                                        class=\\"arrow down\\"></i>&nbsp;-5</span>
+                            </td>
+                            <td>
+                                <img src=\\"./assets/country-flags/esp.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"esp\\" title=\\"esp\\"/>
+                            </td>
+                            <td class=\\"text-left bold\\">dejota95</td>
+                                <td>Test E2E</td>
+                                    <td class=\\"text-left\\">privateer</td>
+                            
+                            <td>
+                                0
+                            </td>
+                            
+                            <td>
+                                0
+                            </td>
+                            
+                            <td class=\\"bold\\">0</td>
+                                <td class=\\"bold\\">0</td>
+                        </tr>
+                        <tr style=\\"background-color: \\">
+                            <td>23</td>
+                            <td>
+                                <span class=\\"negative\\"><i
+                                        class=\\"arrow down\\"></i>&nbsp;-5</span>
+                            </td>
+                            <td>
+                                <img src=\\"./assets/country-flags/deu.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"deu\\" title=\\"deu\\"/>
+                            </td>
+                            <td class=\\"text-left bold\\">Maximilian Maksy</td>
+                                <td>Test E2E</td>
+                                    <td class=\\"text-left\\">The stale poos</td>
+                            
+                            <td>
+                                0
+                            </td>
+                            
+                            <td>
+                                0
+                            </td>
+                            
+                            <td class=\\"bold\\">0</td>
+                                <td class=\\"bold\\">0</td>
+                        </tr>
+                        <tr style=\\"background-color: \\">
+                            <td>23</td>
+                            <td>
+                                <span class=\\"negative\\"><i
+                                        class=\\"arrow down\\"></i>&nbsp;-5</span>
+                            </td>
+                            <td>
+                                <img src=\\"./assets/country-flags/est.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"est\\" title=\\"est\\"/>
+                            </td>
+                            <td class=\\"text-left bold\\">TheZenor</td>
+                                <td>Test E2E</td>
+                                    <td class=\\"text-left\\">Flat Out Racing</td>
+                            
+                            <td>
+                                0
+                            </td>
+                            
+                            <td>
+                                0
+                            </td>
+                            
+                            <td class=\\"bold\\">0</td>
+                                <td class=\\"bold\\">0</td>
+                        </tr>
+                        <tr style=\\"background-color: \\">
+                            <td>23</td>
+                            <td>
+                                <span class=\\"negative\\"><i
+                                        class=\\"arrow down\\"></i>&nbsp;-5</span>
+                            </td>
+                            <td>
+                                <img src=\\"./assets/country-flags/row.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"row\\" title=\\"row\\"/>
+                            </td>
+                            <td class=\\"text-left bold\\">Erki Erik Poola</td>
+                                <td>Test E2E</td>
+                                    <td class=\\"text-left\\">privateer</td>
+                            
+                            <td>
+                                0
+                            </td>
+                            
+                            <td>
+                                DNF
+                            </td>
+                            
+                            <td class=\\"bold\\">0</td>
+                                <td class=\\"bold\\">0</td>
+                        </tr>
+                        <tr style=\\"background-color: \\">
+                            <td>23</td>
+                            <td>
+                                <span class=\\"negative\\"><i
+                                        class=\\"arrow down\\"></i>&nbsp;-5</span>
+                            </td>
+                            <td>
+                                <img src=\\"./assets/country-flags/gbr.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"gbr\\" title=\\"gbr\\"/>
+                            </td>
+                            <td class=\\"text-left bold\\">Williams Huw</td>
+                                <td>Test E2E</td>
+                                    <td class=\\"text-left\\">privateer</td>
+                            
+                            <td>
+                                DNF
+                            </td>
+                            
+                            <td>
+                                DNS
+                            </td>
+                            
+                            <td class=\\"bold\\">0</td>
+                                <td class=\\"bold\\">0</td>
+                        </tr>
+                    </tbody>
+
+                </table>
+                <div style=\\"margin:0 auto; text-align:center;\\">
+                    <p>Last updated at: last-updated-test-e2e</p>
+                </div>
+                    <div style=\\"margin:0 auto; text-align:center;\\">
+                        <p>*After Dropped Rounds: total points after 2 lowest scoring rounds removed - endurance rounds count as 2</p>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <script>
+    function openMobileNav() {
+        closeNav(\\"seriesMobileNav\\");
+        openNav(\\"mobileNav\\");
+    }
+    function openSeriesMobileNav() {
+        closeNav(\\"mobileNav\\");
+        openNav(\\"seriesMobileNav\\");
+    }
+    function closeNav(navId) {
+        var x = document.getElementById(navId);
+        x.className = x.className.replace(\\" w3-show\\", \\"\\");
+    }
+    function openNav(navId) {
+        var x = document.getElementById(navId);
+        if (x.className.indexOf(\\"w3-show\\") == -1) {
+            x.className += \\" w3-show\\";
+        } else {
+            closeNav(navId);
+        }
+    }
+</script>
+
+</body>
+</html>"
+`;
+
+exports[`e2e generates overall team standings 1`] = `
+"<html lang=\\"en\\">
+
+<head>
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"./assets/css/style.css\\">
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"./assets/css/animation.css\\">
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"./assets/css/w3.css\\">
+	<meta http-equiv=\\"Content-Type\\" content=\\"text/html; charset=utf-8\\">
+    <link rel=\\"icon\\" href=\\"./assets/rsc-guy.png\\">
+</head>
+
+<body style=\\"background-image: linear-gradient(315deg, #ffffff 0%, #d7e1ec 74%); background-size: cover; background-repeat: no-repeat; background-attachment: fixed;\\">
+    <head>
+	<title>
+		TEST-E2E |
+			team Overall
+	</title>
+</head>
+
+<div class=\\"w3-top\\">
+	<div class=\\"w3-bar w3-black\\" style=\\"text-align:center;\\">
+        <div class=\\"logo w3-dropdown-hover w3-hide-small w3-hide-medium\\" style=\\"background-color: #0000\\">
+            <a href=\\"/index.html\\">
+                <img src=\\"./assets/rsc-guy.png\\">
+            </a>
+            <div class=\\"w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small w3-hide-medium\\">
+                <span class=\\"w3-bar-item\\">---historical---</span>
+                    <a href=\\"/e2e-1\\" class=\\"w3-bar-item w3-button \\">E2E Season 1</a>
+            </div>
+        </div>
+
+		<div class=\\"w3-dropdown-hover w3-hide-small w3-hide-medium\\">
+			<button class=\\"w3-button\\">Driver Standings</button>
+			<div class=\\"w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small w3-hide-medium\\">
+				<a href=\\"./test-e2e-driver-standings.html\\" class=\\"w3-bar-item w3-button \\">Test E2E</a>
+				<a href=\\"./test-e2e2-driver-standings.html\\" class=\\"w3-bar-item w3-button \\">Test E2E2</a>
+				<a href=\\"./overall-driver-standings.html\\" class=\\"w3-bar-item w3-button \\">Overall</a>
+			</div>
+		</div>
+
+		<div class=\\"w3-dropdown-hover w3-hide-small w3-hide-medium\\">
+			<button class=\\"w3-button\\">Team Standings</button>
+			<div class=\\"w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small w3-hide-medium\\">
+				<a href=\\"./test-e2e-team-standings.html\\" class=\\"w3-bar-item w3-button \\">Test E2E</a>
+				<a href=\\"./test-e2e2-team-standings.html\\" class=\\"w3-bar-item w3-button \\">Test E2E2</a>
+				<a href=\\"./overall-team-standings.html\\" class=\\"w3-bar-item w3-button active\\">Overall</a>
+			</div>
+		</div>
+
+
+
+        <!-- mobile stuff -->
+        <a href=\\"javascript:void(0)\\" class=\\"logo w3-left w3-hide-large\\" style=\\"font-size:3em;\\" onclick=\\"openSeriesMobileNav()\\">
+            <img src=\\"./assets/rsc-guy.png\\" style=\\"max-height: 1em;margin: 0.1em;border: 1px solid darkgray\\">
+        </a>
+
+        <a href=\\"javascript:void(0)\\" class=\\"w3-bar-item w3-button w3-right w3-hide-large\\" style=\\"font-size:3em;\\" onclick=\\"openMobileNav()\\">&#9776;
+        </a>
+
+        <h3 class=\\"w3-hide-large navTitle bold\\" style=\\"display:block;\\">
+            team - Overall
+            
+        </h3>
+
+	</div>
+
+	<div id=\\"mobileNav\\" class=\\"w3-bar-block w3-black w3-hide w3-hide-large\\" style=\\"overflow-y:scroll;max-height:95vh;\\">
+            <a href=\\"./test-e2e-driver-standings.html\\" class=\\"w3-bar-item w3-button \\">Driver Standings - Test E2E</a>
+            <a href=\\"./test-e2e2-driver-standings.html\\" class=\\"w3-bar-item w3-button \\">Driver Standings - Test E2E2</a>
+            <a href=\\"./overall-driver-standings.html\\" class=\\"w3-bar-item w3-button \\">Driver Standings - Overall</a>
+            <a href=\\"./test-e2e-team-standings.html\\" class=\\"w3-bar-item w3-button \\">Team Standings - Test E2E</a>
+            <a href=\\"./test-e2e2-team-standings.html\\" class=\\"w3-bar-item w3-button \\">Team Standings - Test E2E2</a>
+            <a href=\\"./overall-team-standings.html\\" class=\\"w3-bar-item w3-button active\\">Team Standings - Overall</a>
+	</div>
+
+	<div id=\\"seriesMobileNav\\" class=\\"w3-bar-block w3-black w3-hide w3-hide-large\\" style=\\"overflow-y:scroll;max-height:95vh;\\">
+            <span class=\\"w3-bar-item\\">---historical---</span>
+                <a href=\\"/e2e-1\\" class=\\"w3-bar-item w3-button \\">E2E Season 1</a>
+	</div>
+
+	<div class=\\"w3-bar w3-light-grey secondaryNav\\">
+			<a href=\\"./overall-0-driver-results.html\\">
+				<img src=\\"./assets/country-flags/swe.png\\" />
+			</a>
+			<a href=\\"./overall-1-driver-results.html\\">
+				<img src=\\"./assets/country-flags/est.png\\" />
+			</a>
+	</div>
+</div>
+
+    <div id=\\"container\\">
+        <div id=\\"flexContainer\\">
+            <div class=\\"flexBox\\">
+                <div style=\\"margin-bottom: 1em;\\" class=\\"w3-hide-medium w3-hide-small\\">
+                    <div class=\\"logo\\" style=\\"display:flex;\\">
+                        <img src=\\"./assets/rsc-guy.png\\" />
+                        <h2 style=\\"margin-left:1em;\\">Overall Team Standings</h2>
+                    </div>
+                </div>
+
+                <table id=\\"tableDrivers\\">
+                    <thead>
+                        <tr>
+                            <th>Pos</th>
+                            <th></th>
+                            <th>Team Name</th>
+                            <th><img src=\\"./assets/country-flags/swe.png\\"  alt=\\"swe\\"/></th>
+                            <th><img src=\\"./assets/country-flags/est.png\\"  alt=\\"est\\"/></th>
+                            <th>Points</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        <tr>
+                            <td>1</td>
+                            <td>
+                                <span class=\\"neutral\\">=</span>
+                            </td>
+                                <td class=\\"text-left bold\\">CodeBros</td>
+                            
+                            <td>
+                                128
+                            </td>
+                            
+                            <td>
+                                152
+                            </td>
+                            
+                            <td class=\\"bold\\">280</td>
+                        </tr>
+                        
+                        <tr>
+                            <td>2</td>
+                            <td>
+                                <span class=\\"positive\\"><i class=\\"arrow up\\"></i>&nbsp;1</span>
+                            </td>
+                                <td class=\\"text-left bold\\">Heat Seeking Geezers mk2</td>
+                            
+                            <td>
+                                62
+                            </td>
+                            
+                            <td>
+                                38
+                            </td>
+                            
+                            <td class=\\"bold\\">100</td>
+                        </tr>
+                        
+                        <tr>
+                            <td>3</td>
+                            <td>
+                                <span class=\\"negative\\"><i
+                                        class=\\"arrow down\\"></i>&nbsp;-1</span>
+                            </td>
+                                <td class=\\"text-left bold\\">Rizla&#x27;s Suffering Club</td>
+                            
+                            <td>
+                                66
+                            </td>
+                            
+                            <td>
+                                0
+                            </td>
+                            
+                            <td class=\\"bold\\">66</td>
+                        </tr>
+                        
+                        <tr>
+                            <td>4</td>
+                            <td>
+                                <span class=\\"positive\\"><i class=\\"arrow up\\"></i>&nbsp;3</span>
+                            </td>
+                                <td class=\\"text-left bold\\">Flat Out Racing</td>
+                            
+                            <td>
+                                0
+                            </td>
+                            
+                            <td>
+                                60
+                            </td>
+                            
+                            <td class=\\"bold\\">60</td>
+                        </tr>
+                        
+                        <tr>
+                            <td>5</td>
+                            <td>
+                                <span class=\\"negative\\"><i
+                                        class=\\"arrow down\\"></i>&nbsp;-1</span>
+                            </td>
+                                <td class=\\"text-left bold\\">All Beef Franks</td>
+                            
+                            <td>
+                                34
+                            </td>
+                            
+                            <td>
+                                12
+                            </td>
+                            
+                            <td class=\\"bold\\">46</td>
+                        </tr>
+                        
+                        <tr>
+                            <td>6</td>
+                            <td>
+                                <span class=\\"negative\\"><i
+                                        class=\\"arrow down\\"></i>&nbsp;-1</span>
+                            </td>
+                                <td class=\\"text-left bold\\">Kringel&#x27;s Coal Rental and Co.</td>
+                            
+                            <td>
+                                10
+                            </td>
+                            
+                            <td>
+                                30
+                            </td>
+                            
+                            <td class=\\"bold\\">40</td>
+                        </tr>
+                        
+                        <tr>
+                            <td>7</td>
+                            <td>
+                                <span class=\\"negative\\"><i
+                                        class=\\"arrow down\\"></i>&nbsp;-1</span>
+                            </td>
+                                <td class=\\"text-left bold\\">No-recce</td>
+                            
+                            <td>
+                                6
+                            </td>
+                            
+                            <td>
+                                18
+                            </td>
+                            
+                            <td class=\\"bold\\">24</td>
+                        </tr>
+                        
+                        <tr>
+                            <td>8</td>
+                            <td>
+                                <span class=\\"negative\\"><i
+                                        class=\\"arrow down\\"></i>&nbsp;-1</span>
+                            </td>
+                                <td class=\\"text-left bold\\">The stale poos</td>
+                            
+                            <td>
+                                0
+                            </td>
+                            
+                            <td>
+                                6
+                            </td>
+                            
+                            <td class=\\"bold\\">6</td>
+                        </tr>
+                        
+                    </tbody>
+
+                </table>
+                <div style=\\"margin:0 auto; text-align:center;\\">
+                    <p>Last updated at: last-updated-test-e2e</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    function openMobileNav() {
+        closeNav(\\"seriesMobileNav\\");
+        openNav(\\"mobileNav\\");
+    }
+    function openSeriesMobileNav() {
+        closeNav(\\"mobileNav\\");
+        openNav(\\"seriesMobileNav\\");
+    }
+    function closeNav(navId) {
+        var x = document.getElementById(navId);
+        x.className = x.className.replace(\\" w3-show\\", \\"\\");
+    }
+    function openNav(navId) {
+        var x = document.getElementById(navId);
+        if (x.className.indexOf(\\"w3-show\\") == -1) {
+            x.className += \\" w3-show\\";
+        } else {
+            closeNav(navId);
+        }
+    }
+</script>
+
+</body>
+
+</html>"
+`;
+
+exports[`e2e generates team standings 1`] = `
+"<html lang=\\"en\\">
+
+<head>
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"./assets/css/style.css\\">
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"./assets/css/animation.css\\">
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"./assets/css/w3.css\\">
+	<meta http-equiv=\\"Content-Type\\" content=\\"text/html; charset=utf-8\\">
+    <link rel=\\"icon\\" href=\\"./assets/rsc-guy.png\\">
+</head>
+
+<body style=\\"background-image: linear-gradient(315deg, #ffffff 0%, #d7e1ec 74%); background-size: cover; background-repeat: no-repeat; background-attachment: fixed;\\">
+    <head>
+	<title>
+		TEST-E2E |
+			team Test E2E
+	</title>
+</head>
+
+<div class=\\"w3-top\\">
+	<div class=\\"w3-bar w3-black\\" style=\\"text-align:center;\\">
+        <div class=\\"logo w3-dropdown-hover w3-hide-small w3-hide-medium\\" style=\\"background-color: #0000\\">
+            <a href=\\"/index.html\\">
+                <img src=\\"./assets/rsc-guy.png\\">
+            </a>
+            <div class=\\"w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small w3-hide-medium\\">
+                <span class=\\"w3-bar-item\\">---historical---</span>
+                    <a href=\\"/e2e-1\\" class=\\"w3-bar-item w3-button \\">E2E Season 1</a>
+            </div>
+        </div>
+
+		<div class=\\"w3-dropdown-hover w3-hide-small w3-hide-medium\\">
+			<button class=\\"w3-button\\">Driver Standings</button>
+			<div class=\\"w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small w3-hide-medium\\">
+				<a href=\\"./test-e2e-driver-standings.html\\" class=\\"w3-bar-item w3-button \\">Test E2E</a>
+				<a href=\\"./test-e2e2-driver-standings.html\\" class=\\"w3-bar-item w3-button \\">Test E2E2</a>
+				<a href=\\"./overall-driver-standings.html\\" class=\\"w3-bar-item w3-button \\">Overall</a>
+			</div>
+		</div>
+
+		<div class=\\"w3-dropdown-hover w3-hide-small w3-hide-medium\\">
+			<button class=\\"w3-button\\">Team Standings</button>
+			<div class=\\"w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small w3-hide-medium\\">
+				<a href=\\"./test-e2e-team-standings.html\\" class=\\"w3-bar-item w3-button active\\">Test E2E</a>
+				<a href=\\"./test-e2e2-team-standings.html\\" class=\\"w3-bar-item w3-button \\">Test E2E2</a>
+				<a href=\\"./overall-team-standings.html\\" class=\\"w3-bar-item w3-button \\">Overall</a>
+			</div>
+		</div>
+
+
+
+        <!-- mobile stuff -->
+        <a href=\\"javascript:void(0)\\" class=\\"logo w3-left w3-hide-large\\" style=\\"font-size:3em;\\" onclick=\\"openSeriesMobileNav()\\">
+            <img src=\\"./assets/rsc-guy.png\\" style=\\"max-height: 1em;margin: 0.1em;border: 1px solid darkgray\\">
+        </a>
+
+        <a href=\\"javascript:void(0)\\" class=\\"w3-bar-item w3-button w3-right w3-hide-large\\" style=\\"font-size:3em;\\" onclick=\\"openMobileNav()\\">&#9776;
+        </a>
+
+        <h3 class=\\"w3-hide-large navTitle bold\\" style=\\"display:block;\\">
+            team - Test E2E
+            
+        </h3>
+
+	</div>
+
+	<div id=\\"mobileNav\\" class=\\"w3-bar-block w3-black w3-hide w3-hide-large\\" style=\\"overflow-y:scroll;max-height:95vh;\\">
+            <a href=\\"./test-e2e-driver-standings.html\\" class=\\"w3-bar-item w3-button \\">Driver Standings - Test E2E</a>
+            <a href=\\"./test-e2e2-driver-standings.html\\" class=\\"w3-bar-item w3-button \\">Driver Standings - Test E2E2</a>
+            <a href=\\"./overall-driver-standings.html\\" class=\\"w3-bar-item w3-button \\">Driver Standings - Overall</a>
+            <a href=\\"./test-e2e-team-standings.html\\" class=\\"w3-bar-item w3-button active\\">Team Standings - Test E2E</a>
+            <a href=\\"./test-e2e2-team-standings.html\\" class=\\"w3-bar-item w3-button \\">Team Standings - Test E2E2</a>
+            <a href=\\"./overall-team-standings.html\\" class=\\"w3-bar-item w3-button \\">Team Standings - Overall</a>
+	</div>
+
+	<div id=\\"seriesMobileNav\\" class=\\"w3-bar-block w3-black w3-hide w3-hide-large\\" style=\\"overflow-y:scroll;max-height:95vh;\\">
+            <span class=\\"w3-bar-item\\">---historical---</span>
+                <a href=\\"/e2e-1\\" class=\\"w3-bar-item w3-button \\">E2E Season 1</a>
+	</div>
+
+	<div class=\\"w3-bar w3-light-grey secondaryNav\\">
+			<a href=\\"./test-e2e-0-driver-results.html\\">
+				<img src=\\"./assets/country-flags/swe.png\\" />
+			</a>
+			<a href=\\"./test-e2e-1-driver-results.html\\">
+				<img src=\\"./assets/country-flags/est.png\\" />
+			</a>
+	</div>
+</div>
+
+    <div id=\\"container\\">
+        <div id=\\"flexContainer\\">
+            <div class=\\"flexBox\\">
+                <div style=\\"margin-bottom: 1em;\\" class=\\"w3-hide-medium w3-hide-small\\">
+                    <div class=\\"logo\\" style=\\"display:flex;\\">
+                        <img src=\\"./assets/rsc-guy.png\\" />
+                        <h2 style=\\"margin-left:1em;\\">Test E2E Team Standings</h2>
+                    </div>
+                </div>
+
+                <table id=\\"tableDrivers\\">
+                    <thead>
+                        <tr>
+                            <th>Pos</th>
+                            <th></th>
+                            <th>Team Name</th>
+                            <th><img src=\\"./assets/country-flags/swe.png\\"  alt=\\"swe\\"/></th>
+                            <th><img src=\\"./assets/country-flags/est.png\\"  alt=\\"est\\"/></th>
+                            <th>Points</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        <tr>
+                            <td>1</td>
+                            <td>
+                                <span class=\\"positive\\"><i class=\\"arrow up\\"></i>&nbsp;1</span>
+                            </td>
+                                <td class=\\"text-left bold\\">Heat Seeking Geezers mk2</td>
+                            
+                            <td>
+                                62
+                            </td>
+                            
+                            <td>
+                                38
+                            </td>
+                            
+                            <td class=\\"bold\\">100</td>
+                        </tr>
+                        
+                        <tr>
+                            <td>2</td>
+                            <td>
+                                <span class=\\"negative\\"><i
+                                        class=\\"arrow down\\"></i>&nbsp;-1</span>
+                            </td>
+                                <td class=\\"text-left bold\\">Rizla&#x27;s Suffering Club</td>
+                            
+                            <td>
+                                66
+                            </td>
+                            
+                            <td>
+                                0
+                            </td>
+                            
+                            <td class=\\"bold\\">66</td>
+                        </tr>
+                        
+                        <tr>
+                            <td>3</td>
+                            <td>
+                                <span class=\\"positive\\"><i class=\\"arrow up\\"></i>&nbsp;1</span>
+                            </td>
+                                <td class=\\"text-left bold\\">CodeBros</td>
+                            
+                            <td>
+                                20
+                            </td>
+                            
+                            <td>
+                                44
+                            </td>
+                            
+                            <td class=\\"bold\\">64</td>
+                        </tr>
+                        
+                        <tr>
+                            <td>4</td>
+                            <td>
+                                <span class=\\"positive\\"><i class=\\"arrow up\\"></i>&nbsp;3</span>
+                            </td>
+                                <td class=\\"text-left bold\\">Flat Out Racing</td>
+                            
+                            <td>
+                                0
+                            </td>
+                            
+                            <td>
+                                60
+                            </td>
+                            
+                            <td class=\\"bold\\">60</td>
+                        </tr>
+                        
+                        <tr>
+                            <td>5</td>
+                            <td>
+                                <span class=\\"negative\\"><i
+                                        class=\\"arrow down\\"></i>&nbsp;-2</span>
+                            </td>
+                                <td class=\\"text-left bold\\">All Beef Franks</td>
+                            
+                            <td>
+                                34
+                            </td>
+                            
+                            <td>
+                                12
+                            </td>
+                            
+                            <td class=\\"bold\\">46</td>
+                        </tr>
+                        
+                        <tr>
+                            <td>6</td>
+                            <td>
+                                <span class=\\"negative\\"><i
+                                        class=\\"arrow down\\"></i>&nbsp;-1</span>
+                            </td>
+                                <td class=\\"text-left bold\\">Kringel&#x27;s Coal Rental and Co.</td>
+                            
+                            <td>
+                                10
+                            </td>
+                            
+                            <td>
+                                30
+                            </td>
+                            
+                            <td class=\\"bold\\">40</td>
+                        </tr>
+                        
+                        <tr>
+                            <td>7</td>
+                            <td>
+                                <span class=\\"negative\\"><i
+                                        class=\\"arrow down\\"></i>&nbsp;-1</span>
+                            </td>
+                                <td class=\\"text-left bold\\">No-recce</td>
+                            
+                            <td>
+                                6
+                            </td>
+                            
+                            <td>
+                                18
+                            </td>
+                            
+                            <td class=\\"bold\\">24</td>
+                        </tr>
+                        
+                        <tr>
+                            <td>8</td>
+                            <td>
+                                <span class=\\"negative\\"><i
+                                        class=\\"arrow down\\"></i>&nbsp;-1</span>
+                            </td>
+                                <td class=\\"text-left bold\\">The stale poos</td>
+                            
+                            <td>
+                                0
+                            </td>
+                            
+                            <td>
+                                6
+                            </td>
+                            
+                            <td class=\\"bold\\">6</td>
+                        </tr>
+                        
+                    </tbody>
+
+                </table>
+                <div style=\\"margin:0 auto; text-align:center;\\">
+                    <p>Last updated at: last-updated-test-e2e</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    function openMobileNav() {
+        closeNav(\\"seriesMobileNav\\");
+        openNav(\\"mobileNav\\");
+    }
+    function openSeriesMobileNav() {
+        closeNav(\\"mobileNav\\");
+        openNav(\\"seriesMobileNav\\");
+    }
+    function closeNav(navId) {
+        var x = document.getElementById(navId);
+        x.className = x.className.replace(\\" w3-show\\", \\"\\");
+    }
+    function openNav(navId) {
+        var x = document.getElementById(navId);
+        if (x.className.indexOf(\\"w3-show\\") == -1) {
+            x.className += \\" w3-show\\";
+        } else {
+            closeNav(navId);
+        }
+    }
+</script>
+
+</body>
+
 </html>"
 `;
