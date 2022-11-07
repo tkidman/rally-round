@@ -108,7 +108,26 @@ const initialState = {
         "SUBARU Impreza S4 Rally",
         "Mitsubishi Lancer Evolution VI"
       ],
-      manualResults: [],
+      manualResults: [
+        {
+          eventIndex: 1,
+          results: [
+            {
+              name: "JoeMVR [GRF]",
+              totalTime: "38:22.784"
+            }
+          ]
+        },
+        {
+          eventIndex: 1,
+          results: [
+            {
+              name: "Stirls23",
+              totalTime: "38:17.451"
+            }
+          ]
+        }
+      ],
       filterEntries: {
         matchDivision: true
       }
@@ -171,7 +190,17 @@ const initialState = {
         "Volkswagen Polo GTI R5",
         "Peugeot 208 T16 R5"
       ],
-      manualResults: []
+      manualResults: [
+        {
+          eventIndex: 1,
+          results: [
+            {
+              name: "doktor.frojd",
+              totalTime: "39:33.923"
+            }
+          ]
+        }
+      ]
       // promotionRelegation: {
       //   promotionZone: 9,
       //   relegationZone: 9
