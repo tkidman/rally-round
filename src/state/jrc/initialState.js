@@ -115,12 +115,7 @@ const initialState = {
             {
               name: "JoeMVR [GRF]",
               totalTime: "38:22.784"
-            }
-          ]
-        },
-        {
-          eventIndex: 1,
-          results: [
+            },
             {
               name: "Stirls23",
               totalTime: "38:17.451"
