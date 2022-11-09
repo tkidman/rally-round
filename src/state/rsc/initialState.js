@@ -9,7 +9,7 @@ const initialState = {
   dropLowestScoringRoundsNumber: 2,
   afterDropRoundMessage:
     "*After Dropped Rounds: total points after 2 lowest scoring rounds removed - endurance rounds count as 2",
-  sortByDropRoundPoints: false,
+  sortByDropRoundPoints: true,
   showSuperRallyColumn: true,
   hideCarColumnInStandings: true,
   showCarNameAsTextInResults: true,
@@ -75,6 +75,14 @@ const initialState = {
             locationName: "Rally Satchmo",
             locationFlag: "AU",
             numStages: 7
+            // enduranceRoundMultiplier: 2
+          },
+          {
+            eventId: 48698,
+            endTime: "2022-11-21 12:00",
+            locationName: "Rally Thelc",
+            locationFlag: "BE",
+            numStages: 16
             // enduranceRoundMultiplier: 2
           }
         ]
