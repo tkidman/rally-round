@@ -226,7 +226,6 @@ tbody>tr:nth-child(odd) {
 
 .popup {
 	position: relative;
-	display: inline-block;
 	cursor: pointer;
 	-webkit-user-select: none;
 	-moz-user-select: none;
@@ -234,10 +233,12 @@ tbody>tr:nth-child(odd) {
 	user-select: none;
 	text-decoration: underline;
 	text-decoration-style: dotted;
+	text-align: center;
 }
 
 /* The actual popup */
 .popup .popuptext {
+	display: inline-block;
 	visibility: hidden;
 	width: 160px;
 	background-color: #555;
