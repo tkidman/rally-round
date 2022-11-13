@@ -450,7 +450,7 @@ exports[`e2e generates driver results 1`] = `
                         <td>00:12:41.500</td>
                         <td>+00:06:42.775</td>
                         <td class=\\"popup\\" onclick=\\"openPopup('Weepy')\\">
-                            01:01:05.901
+                            1:01:05.901
                             <span class=\\"popuptext\\" id=\\"Weepy\\">10s penalty for cutting</span>
                         </td>
                         <td>+00:24:26.027</td>

@@ -54,7 +54,7 @@ const initialState = {
             {
               name: "Weepy",
               stageTime: "00:12:41.500",
-              totalTime: "01:01:05.901",
+              totalTime: "1:01:05.901",
               extraInfo: "10s penalty for cutting"
             }
           ]
