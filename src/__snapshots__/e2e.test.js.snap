@@ -447,10 +447,13 @@ exports[`e2e generates driver results 1`] = `
                                 <td class=\\"text-left\\">
                                     Mitsubishi Lancer Evo IX N4
                                 </td>
-                        <td>00:12:31.500</td>
-                        <td>+00:06:32.775</td>
-                        <td>01:00:55.901</td>
-                        <td>+00:24:16.027</td>
+                        <td>00:12:41.500</td>
+                        <td>+00:06:42.775</td>
+                        <td class=\\"popup\\" onclick=\\"openPopup('Weepy')\\">
+                            01:01:05.901
+                            <span class=\\"popuptext\\" id=\\"Weepy\\">10s penalty for cutting</span>
+                        </td>
+                        <td>+00:24:26.027</td>
                             <td>
                                 3
                             </td>
@@ -751,6 +754,11 @@ exports[`e2e generates driver results 1`] = `
         } else {
             closeNav(navId);
         }
+    }
+    // When the user clicks on div, open the popup
+    function openPopup(id) {
+      var popup = document.getElementById(id);
+      popup.classList.toggle(\\"show\\");
     }
 </script>
 
@@ -1605,6 +1613,11 @@ exports[`e2e generates driver standings 1`] = `
             closeNav(navId);
         }
     }
+    // When the user clicks on div, open the popup
+    function openPopup(id) {
+      var popup = document.getElementById(id);
+      popup.classList.toggle(\\"show\\");
+    }
 </script>
 
 </body>
@@ -2432,6 +2445,11 @@ exports[`e2e generates overall driver results 1`] = `
         } else {
             closeNav(navId);
         }
+    }
+    // When the user clicks on div, open the popup
+    function openPopup(id) {
+      var popup = document.getElementById(id);
+      popup.classList.toggle(\\"show\\");
     }
 </script>
 
@@ -3365,6 +3383,11 @@ exports[`e2e generates overall driver standings 1`] = `
             closeNav(navId);
         }
     }
+    // When the user clicks on div, open the popup
+    function openPopup(id) {
+      var popup = document.getElementById(id);
+      popup.classList.toggle(\\"show\\");
+    }
 </script>
 
 </body>
@@ -3663,6 +3686,11 @@ exports[`e2e generates overall team standings 1`] = `
         } else {
             closeNav(navId);
         }
+    }
+    // When the user clicks on div, open the popup
+    function openPopup(id) {
+      var popup = document.getElementById(id);
+      popup.classList.toggle(\\"show\\");
     }
 </script>
 
@@ -3963,6 +3991,11 @@ exports[`e2e generates team standings 1`] = `
         } else {
             closeNav(navId);
         }
+    }
+    // When the user clicks on div, open the popup
+    function openPopup(id) {
+      var popup = document.getElementById(id);
+      popup.classList.toggle(\\"show\\");
     }
 </script>
 

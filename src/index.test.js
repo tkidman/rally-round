@@ -49,6 +49,7 @@ describe("calculates event results", () => {
       {
         divisionName: "pro",
         entry: {
+          extraInfo: "Manual result applied",
           isDnfEntry: false,
           isFounder: false,
           isManualResult: true,
@@ -72,7 +73,6 @@ describe("calculates event results", () => {
         teamId: "Time Penalty Boys",
         totalPoints: 16
       },
-      // isDebutant (should only get points defined by numPointsForDebutant)
       {
         divisionName: "pro",
         entry: {
@@ -100,7 +100,8 @@ describe("calculates event results", () => {
       {
         divisionName: "pro",
         entry: {
-          disqualificationReason: "Wrong car choice",
+          disqualificationReason: "Incorrect car choice",
+          extraInfo: "Incorrect car choice",
           isDnfEntry: true,
           isFounder: false,
           isPlayer: false,
@@ -123,7 +124,8 @@ describe("calculates event results", () => {
       {
         divisionName: "pro",
         entry: {
-          disqualificationReason: "Wrong car choice",
+          disqualificationReason: "Incorrect car choice",
+          extraInfo: "Incorrect car choice",
           isDnfEntry: true,
           isFounder: false,
           isPlayer: false,

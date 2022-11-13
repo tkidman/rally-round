@@ -89,9 +89,16 @@
                                 </td>
                             {{/if}}
                         {{/if}}
-                        <td>{{this.stageTimeDisplay}}{{#if this.entry.penaltyReason}}*{{/if}}</td>
+                        <td>{{this.stageTimeDisplay}}</td>
                         <td>{{this.entry.stageDiff}}</td>
-                        <td>{{this.entry.totalTime}}{{#if this.entry.penaltyReason}}*{{/if}}</td>
+                        {{#if this.entry.extraInfo}}
+                        <td class="popup" onclick="openPopup('{{this.entry.name}}')">
+                            {{this.entry.totalTime}}
+                            <span class="popuptext" id="{{this.entry.name}}">{{this.entry.extraInfo}}</span>
+                        </td>
+                        {{else}}
+                        <td>{{this.entry.totalTime}}</td>
+                        {{/if}}
                         <td>{{this.entry.totalDiff}}</td>
                         {{#if ../showSuperRallyColumn}}
                             <td>
@@ -114,11 +121,6 @@
             <div style="margin:0 auto; text-align:center;">
                 <p>{{localization.last_updated}}: {{lastUpdatedAt}}</p>
             </div>
-            {{#if incorrectCarTimePenaltySeconds}}
-                <div style="margin:0 auto; text-align:center;">
-                    <p>*{{incorrectCarTimePenaltySeconds}} {{localization.second_penalty}}</p>
-                </div>
-            {{/if}}
             {{#if event.enduranceRoundMultiplier}}
                 <div style="margin:0 auto; text-align:center;">
                     <p>{{localization.endurance_multiplied}} {{event.enduranceRoundMultiplier}}</p>

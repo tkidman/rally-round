@@ -47,8 +47,19 @@ const initialState = {
           }
         ]
       },
-      manualResults: [],
-      events: [],
+      manualResults: [
+        {
+          eventIndex: 0,
+          results: [
+            {
+              name: "Weepy",
+              stageTime: "00:12:41.500",
+              totalTime: "01:01:05.901",
+              extraInfo: "10s penalty for cutting"
+            }
+          ]
+        }
+      ],
       points: {
         powerStage: [5, 4, 3, 2, 1],
         overall: [30, 24, 19, 15, 12, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
@@ -77,7 +88,6 @@ const initialState = {
         ]
       },
       manualResults: [],
-      events: [],
       points: {
         powerStage: [5, 4, 3, 2, 1],
         overall: [30, 24, 19, 15, 12, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]

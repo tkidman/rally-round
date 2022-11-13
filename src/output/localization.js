@@ -32,11 +32,13 @@ const localization = {
     adr: "ADR*",
     full_results: "full results",
     second_penalty: "second penalty applied for incorrect car choice",
+    incorrect_car_choice: "Incorrect car choice",
     endurance_multiplied: "endurance round: points multiplied by",
     page_not_found: "Page not found",
     last_updated: "Last updated at",
     series: "series",
-    historical: "historical"
+    historical: "historical",
+    manual_result_applied: "Manual result applied"
   },
   se: {
     driver_standings: "Poängställning",
@@ -67,11 +69,13 @@ const localization = {
     adr: "ADR*",
     full_results: "fullständigt resultat",
     second_penalty: "sekunder tidstillägg för val av fel bil",
+    incorrect_car_choice: "val av fel bil",
     endurance_multiplied: "endurance round: points multiplied by",
     page_not_found: "Sidan kan inte hittas",
     last_updated: "Senast uppdaterad vid",
     series: "serier",
-    historical: "historisk"
+    historical: "historisk",
+    manual_result_applied: "Manuellt resultat tillämpat"
   }
 };
 
