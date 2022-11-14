@@ -82,8 +82,8 @@ const initialState = {
             endTime: "2022-11-21 12:00",
             locationName: "Rally Thelc",
             locationFlag: "BE",
-            numStages: 16
-            // enduranceRoundMultiplier: 2
+            numStages: 16,
+            enduranceRoundMultiplier: 2
           }
         ]
       },
