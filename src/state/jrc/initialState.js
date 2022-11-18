@@ -121,6 +121,26 @@ const initialState = {
               totalTime: "38:17.451"
             }
           ]
+        },
+        {
+          eventIndex: 2,
+          results: [
+            {
+              name: "knifekninja",
+              totalTime: "00:40:28.077",
+              extraInfo: "Manual result applied - game crash on SS6"
+            },
+            {
+              name: "whaddayamean",
+              totalTime: "00:41:19.461",
+              extraInfo: "Manual result applied - blue screen on SS6"
+            },
+            {
+              name: "JoeMVR [GRF]",
+              totalTime: "00:41:21.739",
+              extraInfo: "Manual result applied - game crash on SS7"
+            }
+          ]
         }
       ],
       filterEntries: {
@@ -155,7 +175,18 @@ const initialState = {
         "SUBARU Impreza S4 Rally",
         "Mitsubishi Lancer Evolution VI"
       ],
-      manualResults: [],
+      manualResults: [
+        {
+          eventIndex: 2,
+          results: [
+            {
+              name: "Bonus Taco",
+              totalTime: "00:42:31.342",
+              extraInfo: "Manual result applied - blue screen on SS7"
+            }
+          ]
+        }
+      ],
       filterEntries: {
         matchDivision: true
       }
