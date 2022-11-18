@@ -127,17 +127,17 @@ const initialState = {
           results: [
             {
               name: "knifekninja",
-              totalTime: "00:40:28.077",
+              totalTime: "40:28.077",
               extraInfo: "Manual result applied - game crash on SS6"
             },
             {
               name: "whaddayamean",
-              totalTime: "00:41:19.461",
+              totalTime: "41:19.461",
               extraInfo: "Manual result applied - blue screen on SS6"
             },
             {
               name: "JoeMVR [GRF]",
-              totalTime: "00:41:21.739",
+              totalTime: "41:21.739",
               extraInfo: "Manual result applied - game crash on SS7"
             }
           ]
@@ -181,7 +181,7 @@ const initialState = {
           results: [
             {
               name: "Bonus Taco",
-              totalTime: "00:42:31.342",
+              totalTime: "42:31.342",
               extraInfo: "Manual result applied - blue screen on SS7"
             }
           ]
