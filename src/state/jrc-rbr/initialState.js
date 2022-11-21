@@ -12,6 +12,7 @@ const initialState = {
   // useCarAsTeam: false,
   // useCarClassAsTeam: true,
   disableOverall: true,
+  hideStageTimesUntilEventEnd: true,
   // teamPointsForPowerstage: true,
   backgroundStyle:
     "background-color: #CCCACB;\n" +
