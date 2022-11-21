@@ -6,7 +6,7 @@ const initialState = {
   showLivePointsDaysRemaining: 4,
   hideCarColumnInStandings: true,
   showCarNameAsTextInResults: true,
-  // nullTeamIsPrivateer: true,
+  nullTeamIsPrivateer: true,
   // dropLowestScoringRoundsNumber: 1,
   // sortByDropRoundPoints: true,
   // useCarAsTeam: false,
