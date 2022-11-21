@@ -60,11 +60,11 @@ const initialState = {
   historicalSeasonLinks: [
     {
       name: "RBR Season 1",
-      href: "/rbr-1"
+      href: "/rbr/rbr-1"
     },
     {
       name: "RBR Season 2",
-      href: "/rbr-2"
+      href: "/rbr/rbr-2"
     }
   ]
 };
