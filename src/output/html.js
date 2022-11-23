@@ -429,10 +429,11 @@ const addSeriesLinks = links => {
       otherLeague.subfolderName !== leagueRef.league.subfolderName &&
       !otherLeague.hideFromSeriesLinks
     ) {
+      const subfolderName = otherLeague.subfolderName || "";
       seriesLinks.push({
         name: otherLeague.siteTitlePrefix,
         link: otherLeague.siteTitlePrefix,
-        href: `/${otherLeague.subfolderName}`,
+        href: `/${subfolderName}`,
         active: false
       });
     }

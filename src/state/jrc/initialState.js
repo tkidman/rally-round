@@ -141,6 +141,16 @@ const initialState = {
               extraInfo: "Manual result applied - game crash on SS7"
             }
           ]
+        },
+        {
+          eventIndex: 3,
+          results: [
+            {
+              name: "Doc Babana",
+              totalTime: "42:11.021",
+              extraInfo: "Manual result applied - game crash on SS5"
+            }
+          ]
         }
       ],
       filterEntries: {
@@ -245,7 +255,23 @@ const initialState = {
       ],
       events: [],
       points,
-      manualResults: [],
+      manualResults: [
+        {
+          eventIndex: 3,
+          results: [
+            {
+              name: "andy18cruz",
+              totalTime: "53:10.402",
+              extraInfo: "Manual result applied - game freeze on SS5"
+            },
+            {
+              name: "Lih Akama",
+              totalTime: "55:58.216",
+              extraInfo: "Manual result applied - blackout on SS2"
+            }
+          ]
+        }
+      ],
       // promotionRelegation: {
       //   promotionZone: 12
       // },
