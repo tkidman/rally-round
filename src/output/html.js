@@ -355,6 +355,7 @@ const transformForDriverResultsHTML = (event, division) => {
     rows,
     title: division.displayName || divisionName,
     showTeam: leagueRef.hasTeams && !leagueRef.league.useNationalityAsTeam,
+    showTeamNameTextColumn: leagueRef.league.showTeamNameTextColumn,
     showCar: leagueRef.hasCars || leagueRef.league.showCarNameAsTextInResults,
     showCarName: leagueRef.league.showCarNameAsTextInResults,
     showPowerStagePoints: hasPoints("powerStagePoints", rows),

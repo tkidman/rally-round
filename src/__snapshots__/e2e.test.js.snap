@@ -106,6 +106,7 @@ exports[`e2e generates driver results 1`] = `
                     <th>Pos</th>
                     <th>Nat</th>
                     <th>Driver</th>
+                            <th>Team Name</th>
                         <th>Car</th>
                     <td>PS</td>
                     <td>Diff</td>
@@ -124,6 +125,7 @@ exports[`e2e generates driver results 1`] = `
                             <img src=\\"./assets/country-flags/deu.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"deu\\" title=\\"deu\\"/>
                         </td>
                         <td class=\\"text-left bold\\">Hawk24</td>
+                                <td class=\\"text-left\\">Heat Seeking Geezers mk2</td>
                                 <td class=\\"text-left\\">
                                     Mitsubishi Lancer Evo IX N4
                                 </td>
@@ -144,6 +146,7 @@ exports[`e2e generates driver results 1`] = `
                             <img src=\\"./assets/country-flags/bel.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"bel\\" title=\\"bel\\"/>
                         </td>
                         <td class=\\"text-left bold\\">THELC Matt</td>
+                                <td class=\\"text-left\\">Rizla&#x27;s Suffering Club</td>
                                 <td class=\\"text-left\\">
                                     Mitsubishi Lancer Evo IX N4
                                 </td>
@@ -164,6 +167,7 @@ exports[`e2e generates driver results 1`] = `
                             <img src=\\"./assets/country-flags/fin.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"fin\\" title=\\"fin\\"/>
                         </td>
                         <td class=\\"text-left bold\\">QazRa</td>
+                                <td class=\\"text-left\\">privateer</td>
                                 <td class=\\"text-left\\">
                                     Subaru Impreza N14 N4
                                 </td>
@@ -184,6 +188,7 @@ exports[`e2e generates driver results 1`] = `
                             <img src=\\"./assets/country-flags/usa.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"usa\\" title=\\"usa\\"/>
                         </td>
                         <td class=\\"text-left bold\\">HotdogCowboy</td>
+                                <td class=\\"text-left\\">All Beef Franks</td>
                                 <td class=\\"text-left\\">
                                     Mitsubishi Lancer Evo IX N4
                                 </td>
@@ -204,6 +209,7 @@ exports[`e2e generates driver results 1`] = `
                             <img src=\\"./assets/country-flags/nor.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"nor\\" title=\\"nor\\"/>
                         </td>
                         <td class=\\"text-left bold\\">Roy Magnes</td>
+                                <td class=\\"text-left\\">privateer</td>
                                 <td class=\\"text-left\\">
                                     Subaru Impreza N14 N4
                                 </td>
@@ -224,6 +230,7 @@ exports[`e2e generates driver results 1`] = `
                             <img src=\\"./assets/country-flags/aus.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"aus\\" title=\\"aus\\"/>
                         </td>
                         <td class=\\"text-left bold\\">satchmo</td>
+                                <td class=\\"text-left\\">CodeBros</td>
                                 <td class=\\"text-left\\">
                                     Mitsubishi Lancer Evo IX N4
                                 </td>
@@ -244,6 +251,7 @@ exports[`e2e generates driver results 1`] = `
                             <img src=\\"./assets/country-flags/gbr.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"gbr\\" title=\\"gbr\\"/>
                         </td>
                         <td class=\\"text-left bold\\">Joe Hutchinson</td>
+                                <td class=\\"text-left\\">Rizla&#x27;s Suffering Club</td>
                                 <td class=\\"text-left\\">
                                     Mitsubishi Lancer Evo IX N4
                                 </td>
@@ -264,6 +272,7 @@ exports[`e2e generates driver results 1`] = `
                             <img src=\\"./assets/country-flags/kor.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"kor\\" title=\\"kor\\"/>
                         </td>
                         <td class=\\"text-left bold\\">Prodicrux</td>
+                                <td class=\\"text-left\\">privateer</td>
                                 <td class=\\"text-left\\">
                                     Mitsubishi Lancer Evo IX N4
                                 </td>
@@ -284,6 +293,7 @@ exports[`e2e generates driver results 1`] = `
                             <img src=\\"./assets/country-flags/deu.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"deu\\" title=\\"deu\\"/>
                         </td>
                         <td class=\\"text-left bold\\">Thom B</td>
+                                <td class=\\"text-left\\">Kringel&#x27;s Coal Rental and Co.</td>
                                 <td class=\\"text-left\\">
                                     Mitsubishi Lancer Evo IX N4
                                 </td>
@@ -304,6 +314,7 @@ exports[`e2e generates driver results 1`] = `
                             <img src=\\"./assets/country-flags/swe.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"swe\\" title=\\"swe\\"/>
                         </td>
                         <td class=\\"text-left bold\\">davidgrundstrom</td>
+                                <td class=\\"text-left\\">No-recce</td>
                                 <td class=\\"text-left\\">
                                     Mitsubishi Lancer Evo IX N4
                                 </td>
@@ -324,6 +335,7 @@ exports[`e2e generates driver results 1`] = `
                             <img src=\\"./assets/country-flags/swe.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"swe\\" title=\\"swe\\"/>
                         </td>
                         <td class=\\"text-left bold\\">Bollis</td>
+                                <td class=\\"text-left\\">privateer</td>
                                 <td class=\\"text-left\\">
                                     Mitsubishi Lancer Evo IX N4
                                 </td>
@@ -344,6 +356,7 @@ exports[`e2e generates driver results 1`] = `
                             <img src=\\"./assets/country-flags/usa.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"usa\\" title=\\"usa\\"/>
                         </td>
                         <td class=\\"text-left bold\\">meatcreap</td>
+                                <td class=\\"text-left\\">All Beef Franks</td>
                                 <td class=\\"text-left\\">
                                     Mitsubishi Lancer Evo IX N4
                                 </td>
@@ -364,6 +377,7 @@ exports[`e2e generates driver results 1`] = `
                             <img src=\\"./assets/country-flags/deu.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"deu\\" title=\\"deu\\"/>
                         </td>
                         <td class=\\"text-left bold\\">Kringelwurst</td>
+                                <td class=\\"text-left\\">Kringel&#x27;s Coal Rental and Co.</td>
                                 <td class=\\"text-left\\">
                                     Mitsubishi Lancer Evo IX N4
                                 </td>
@@ -384,6 +398,7 @@ exports[`e2e generates driver results 1`] = `
                             <img src=\\"./assets/country-flags/gbr.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"gbr\\" title=\\"gbr\\"/>
                         </td>
                         <td class=\\"text-left bold\\">PETTET Jordan (shakey-deal)</td>
+                                <td class=\\"text-left\\">Heat Seeking Geezers mk2</td>
                                 <td class=\\"text-left\\">
                                     Subaru Impreza N14 N4
                                 </td>
@@ -404,6 +419,7 @@ exports[`e2e generates driver results 1`] = `
                             <img src=\\"./assets/country-flags/gbr.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"gbr\\" title=\\"gbr\\"/>
                         </td>
                         <td class=\\"text-left bold\\">FAHEY Andrew</td>
+                                <td class=\\"text-left\\">privateer</td>
                                 <td class=\\"text-left\\">
                                     Seat Leon Cupra R GrpN
                                 </td>
@@ -424,6 +440,7 @@ exports[`e2e generates driver results 1`] = `
                             <img src=\\"./assets/country-flags/swe.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"swe\\" title=\\"swe\\"/>
                         </td>
                         <td class=\\"text-left bold\\">ctbr</td>
+                                <td class=\\"text-left\\">privateer</td>
                                 <td class=\\"text-left\\">
                                     Mitsubishi Lancer Evo IX N4
                                 </td>
@@ -444,6 +461,7 @@ exports[`e2e generates driver results 1`] = `
                             <img src=\\"./assets/country-flags/swe.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"swe\\" title=\\"swe\\"/>
                         </td>
                         <td class=\\"text-left bold\\">Weepy</td>
+                                <td class=\\"text-left\\">CodeBros</td>
                                 <td class=\\"text-left\\">
                                     Mitsubishi Lancer Evo IX N4
                                 </td>
@@ -467,6 +485,7 @@ exports[`e2e generates driver results 1`] = `
                             <img src=\\"./assets/country-flags/aus.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"aus\\" title=\\"aus\\"/>
                         </td>
                         <td class=\\"text-left bold\\">jezza</td>
+                                <td class=\\"text-left\\">The stale poos</td>
                                 <td class=\\"text-left\\">
                                     Seat Leon Cupra R GrpN
                                 </td>
@@ -487,6 +506,7 @@ exports[`e2e generates driver results 1`] = `
                             <img src=\\"./assets/country-flags/hun.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"hun\\" title=\\"hun\\"/>
                         </td>
                         <td class=\\"text-left bold\\">fujiRS</td>
+                                <td class=\\"text-left\\">privateer</td>
                                 <td class=\\"text-left\\">
                                     Mitsubishi Lancer Evo IX N4
                                 </td>
@@ -507,6 +527,7 @@ exports[`e2e generates driver results 1`] = `
                             <img src=\\"./assets/country-flags/deu.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"deu\\" title=\\"deu\\"/>
                         </td>
                         <td class=\\"text-left bold\\">Maximilian Maksy</td>
+                                <td class=\\"text-left\\">The stale poos</td>
                                 <td class=\\"text-left\\">
                                     Mitsubishi Lancer Evo IX N4
                                 </td>
@@ -527,6 +548,7 @@ exports[`e2e generates driver results 1`] = `
                             <img src=\\"./assets/country-flags/row.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"row\\" title=\\"row\\"/>
                         </td>
                         <td class=\\"text-left bold\\">Erki Erik Poola</td>
+                                <td class=\\"text-left\\">privateer</td>
                                 <td class=\\"text-left\\">
                                     Mitsubishi Lancer Evo IX N4
                                 </td>
@@ -547,6 +569,7 @@ exports[`e2e generates driver results 1`] = `
                             <img src=\\"./assets/country-flags/esp.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"esp\\" title=\\"esp\\"/>
                         </td>
                         <td class=\\"text-left bold\\">dejota95</td>
+                                <td class=\\"text-left\\">privateer</td>
                                 <td class=\\"text-left\\">
                                     Mitsubishi Lancer Evo IX N4
                                 </td>
@@ -567,6 +590,7 @@ exports[`e2e generates driver results 1`] = `
                             <img src=\\"./assets/country-flags/swe.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"swe\\" title=\\"swe\\"/>
                         </td>
                         <td class=\\"text-left bold\\">Tommie Lindberg</td>
+                                <td class=\\"text-left\\">privateer</td>
                                 <td class=\\"text-left\\">
                                     Mitsubishi Lancer Evo IX N4
                                 </td>
@@ -587,6 +611,7 @@ exports[`e2e generates driver results 1`] = `
                             <img src=\\"./assets/country-flags/est.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"est\\" title=\\"est\\"/>
                         </td>
                         <td class=\\"text-left bold\\">TheZenor</td>
+                                <td class=\\"text-left\\">Flat Out Racing</td>
                                 <td class=\\"text-left\\">
                                     Mitsubishi Lancer Evo IX N4
                                 </td>
@@ -607,6 +632,7 @@ exports[`e2e generates driver results 1`] = `
                             <img src=\\"./assets/country-flags/esp.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"esp\\" title=\\"esp\\"/>
                         </td>
                         <td class=\\"text-left bold\\">TASIS Edgar</td>
+                                <td class=\\"text-left\\">privateer</td>
                                 <td class=\\"text-left\\">
                                     
                                 </td>
@@ -627,6 +653,7 @@ exports[`e2e generates driver results 1`] = `
                             <img src=\\"./assets/country-flags/est.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"est\\" title=\\"est\\"/>
                         </td>
                         <td class=\\"text-left bold\\">ninko</td>
+                                <td class=\\"text-left\\">Flat Out Racing</td>
                                 <td class=\\"text-left\\">
                                     
                                 </td>
@@ -647,6 +674,7 @@ exports[`e2e generates driver results 1`] = `
                             <img src=\\"./assets/country-flags/bra.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"bra\\" title=\\"bra\\"/>
                         </td>
                         <td class=\\"text-left bold\\">Htchet</td>
+                                <td class=\\"text-left\\">privateer</td>
                                 <td class=\\"text-left\\">
                                     
                                 </td>
@@ -667,6 +695,7 @@ exports[`e2e generates driver results 1`] = `
                             <img src=\\"./assets/country-flags/ita.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"ita\\" title=\\"ita\\"/>
                         </td>
                         <td class=\\"text-left bold\\">Superciuc93</td>
+                                <td class=\\"text-left\\">privateer</td>
                                 <td class=\\"text-left\\">
                                     
                                 </td>
@@ -687,6 +716,7 @@ exports[`e2e generates driver results 1`] = `
                             <img src=\\"./assets/country-flags/gbr.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"gbr\\" title=\\"gbr\\"/>
                         </td>
                         <td class=\\"text-left bold\\">Williams Huw</td>
+                                <td class=\\"text-left\\">privateer</td>
                                 <td class=\\"text-left\\">
                                     
                                 </td>
@@ -707,6 +737,7 @@ exports[`e2e generates driver results 1`] = `
                             <img src=\\"./assets/country-flags/est.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"est\\" title=\\"est\\"/>
                         </td>
                         <td class=\\"text-left bold\\">MartinRC</td>
+                                <td class=\\"text-left\\">privateer</td>
                                 <td class=\\"text-left\\">
                                     
                                 </td>
@@ -1731,6 +1762,7 @@ exports[`e2e generates overall driver results 1`] = `
                     <th>Nat</th>
                     <th>Driver</th>
                         <th>Div</th>
+                            <th>Team Name</th>
                         <th>Car</th>
                     <td>PS</td>
                     <td>Diff</td>
@@ -1750,6 +1782,7 @@ exports[`e2e generates overall driver results 1`] = `
                         </td>
                         <td class=\\"text-left bold\\">woosh</td>
                             <td>Test E2E2</td>
+                                <td class=\\"text-left\\">CodeBros</td>
                                 <td class=\\"text-left\\">
                                     Porsche 911 SC 3.0 Grp4
                                 </td>
@@ -1771,6 +1804,7 @@ exports[`e2e generates overall driver results 1`] = `
                         </td>
                         <td class=\\"text-left bold\\">winstall</td>
                             <td>Test E2E2</td>
+                                <td class=\\"text-left\\">CodeBros</td>
                                 <td class=\\"text-left\\">
                                     Porsche 911 SC 3.0 Grp4
                                 </td>
@@ -1792,6 +1826,7 @@ exports[`e2e generates overall driver results 1`] = `
                         </td>
                         <td class=\\"text-left bold\\">ninko</td>
                             <td>Test E2E</td>
+                                <td class=\\"text-left\\">Flat Out Racing</td>
                                 <td class=\\"text-left\\">
                                     Porsche 911 SC 3.0 Grp4
                                 </td>
@@ -1813,6 +1848,7 @@ exports[`e2e generates overall driver results 1`] = `
                         </td>
                         <td class=\\"text-left bold\\">QazRa</td>
                             <td>Test E2E</td>
+                                <td class=\\"text-left\\">privateer</td>
                                 <td class=\\"text-left\\">
                                     Porsche 911 SC 3.0 Grp4
                                 </td>
@@ -1834,6 +1870,7 @@ exports[`e2e generates overall driver results 1`] = `
                         </td>
                         <td class=\\"text-left bold\\">Hawk24</td>
                             <td>Test E2E</td>
+                                <td class=\\"text-left\\">Heat Seeking Geezers mk2</td>
                                 <td class=\\"text-left\\">
                                     Ford Escort Mk II RS Grp4
                                 </td>
@@ -1855,6 +1892,7 @@ exports[`e2e generates overall driver results 1`] = `
                         </td>
                         <td class=\\"text-left bold\\">Kringelwurst</td>
                             <td>Test E2E</td>
+                                <td class=\\"text-left\\">Kringel&#x27;s Coal Rental and Co.</td>
                                 <td class=\\"text-left\\">
                                     Porsche 911 SC 3.0 Grp4
                                 </td>
@@ -1876,6 +1914,7 @@ exports[`e2e generates overall driver results 1`] = `
                         </td>
                         <td class=\\"text-left bold\\">satchmo</td>
                             <td>Test E2E</td>
+                                <td class=\\"text-left\\">CodeBros</td>
                                 <td class=\\"text-left\\">
                                     Porsche 911 SC 3.0 Grp4
                                 </td>
@@ -1897,6 +1936,7 @@ exports[`e2e generates overall driver results 1`] = `
                         </td>
                         <td class=\\"text-left bold\\">Weepy</td>
                             <td>Test E2E</td>
+                                <td class=\\"text-left\\">CodeBros</td>
                                 <td class=\\"text-left\\">
                                     Lancia Stratos HF Grp4
                                 </td>
@@ -1918,6 +1958,7 @@ exports[`e2e generates overall driver results 1`] = `
                         </td>
                         <td class=\\"text-left bold\\">davidgrundstrom</td>
                             <td>Test E2E</td>
+                                <td class=\\"text-left\\">No-recce</td>
                                 <td class=\\"text-left\\">
                                     Opel Ascona 400 Grp4
                                 </td>
@@ -1939,6 +1980,7 @@ exports[`e2e generates overall driver results 1`] = `
                         </td>
                         <td class=\\"text-left bold\\">Htchet</td>
                             <td>Test E2E</td>
+                                <td class=\\"text-left\\">privateer</td>
                                 <td class=\\"text-left\\">
                                     Lancia Stratos HF Grp4
                                 </td>
@@ -1960,6 +2002,7 @@ exports[`e2e generates overall driver results 1`] = `
                         </td>
                         <td class=\\"text-left bold\\">Roy Magnes</td>
                             <td>Test E2E</td>
+                                <td class=\\"text-left\\">privateer</td>
                                 <td class=\\"text-left\\">
                                     Ford Escort Mk II RS Grp4
                                 </td>
@@ -1981,6 +2024,7 @@ exports[`e2e generates overall driver results 1`] = `
                         </td>
                         <td class=\\"text-left bold\\">HotdogCowboy</td>
                             <td>Test E2E</td>
+                                <td class=\\"text-left\\">All Beef Franks</td>
                                 <td class=\\"text-left\\">
                                     Porsche 911 SC 3.0 Grp4
                                 </td>
@@ -2002,6 +2046,7 @@ exports[`e2e generates overall driver results 1`] = `
                         </td>
                         <td class=\\"text-left bold\\">Prodicrux</td>
                             <td>Test E2E</td>
+                                <td class=\\"text-left\\">privateer</td>
                                 <td class=\\"text-left\\">
                                     Opel Ascona 400 Grp4
                                 </td>
@@ -2023,6 +2068,7 @@ exports[`e2e generates overall driver results 1`] = `
                         </td>
                         <td class=\\"text-left bold\\">Superciuc93</td>
                             <td>Test E2E</td>
+                                <td class=\\"text-left\\">privateer</td>
                                 <td class=\\"text-left\\">
                                     Ford Escort Mk II RS Grp4
                                 </td>
@@ -2044,6 +2090,7 @@ exports[`e2e generates overall driver results 1`] = `
                         </td>
                         <td class=\\"text-left bold\\">jezza</td>
                             <td>Test E2E</td>
+                                <td class=\\"text-left\\">The stale poos</td>
                                 <td class=\\"text-left\\">
                                     Opel Ascona 400 Grp4
                                 </td>
@@ -2065,6 +2112,7 @@ exports[`e2e generates overall driver results 1`] = `
                         </td>
                         <td class=\\"text-left bold\\">Bollis</td>
                             <td>Test E2E</td>
+                                <td class=\\"text-left\\">privateer</td>
                                 <td class=\\"text-left\\">
                                     Ford Escort Mk II RS Grp4
                                 </td>
@@ -2086,6 +2134,7 @@ exports[`e2e generates overall driver results 1`] = `
                         </td>
                         <td class=\\"text-left bold\\">FAHEY Andrew</td>
                             <td>Test E2E</td>
+                                <td class=\\"text-left\\">privateer</td>
                                 <td class=\\"text-left\\">
                                     Ford Escort Mk II RS Grp4
                                 </td>
@@ -2107,6 +2156,7 @@ exports[`e2e generates overall driver results 1`] = `
                         </td>
                         <td class=\\"text-left bold\\">ctbr</td>
                             <td>Test E2E</td>
+                                <td class=\\"text-left\\">privateer</td>
                                 <td class=\\"text-left\\">
                                     Ford Escort Mk II RS Grp4
                                 </td>
@@ -2128,6 +2178,7 @@ exports[`e2e generates overall driver results 1`] = `
                         </td>
                         <td class=\\"text-left bold\\">TASIS Edgar</td>
                             <td>Test E2E</td>
+                                <td class=\\"text-left\\">privateer</td>
                                 <td class=\\"text-left\\">
                                     Opel Ascona 400 Grp4
                                 </td>
@@ -2149,6 +2200,7 @@ exports[`e2e generates overall driver results 1`] = `
                         </td>
                         <td class=\\"text-left bold\\">fujiRS</td>
                             <td>Test E2E</td>
+                                <td class=\\"text-left\\">privateer</td>
                                 <td class=\\"text-left\\">
                                     Opel Ascona 400 Grp4
                                 </td>
@@ -2170,6 +2222,7 @@ exports[`e2e generates overall driver results 1`] = `
                         </td>
                         <td class=\\"text-left bold\\">MartinRC</td>
                             <td>Test E2E</td>
+                                <td class=\\"text-left\\">privateer</td>
                                 <td class=\\"text-left\\">
                                     Ford Escort Mk II RS Grp4
                                 </td>
@@ -2191,6 +2244,7 @@ exports[`e2e generates overall driver results 1`] = `
                         </td>
                         <td class=\\"text-left bold\\">meatcreap</td>
                             <td>Test E2E</td>
+                                <td class=\\"text-left\\">All Beef Franks</td>
                                 <td class=\\"text-left\\">
                                     Ford Escort Mk II RS Grp4
                                 </td>
@@ -2212,6 +2266,7 @@ exports[`e2e generates overall driver results 1`] = `
                         </td>
                         <td class=\\"text-left bold\\">Tommie Lindberg</td>
                             <td>Test E2E</td>
+                                <td class=\\"text-left\\">privateer</td>
                                 <td class=\\"text-left\\">
                                     Opel Ascona 400 Grp4
                                 </td>
@@ -2233,6 +2288,7 @@ exports[`e2e generates overall driver results 1`] = `
                         </td>
                         <td class=\\"text-left bold\\">PETTET Jordan (shakey-deal)</td>
                             <td>Test E2E</td>
+                                <td class=\\"text-left\\">Heat Seeking Geezers mk2</td>
                                 <td class=\\"text-left\\">
                                     Lancia Stratos HF Grp4
                                 </td>
@@ -2254,6 +2310,7 @@ exports[`e2e generates overall driver results 1`] = `
                         </td>
                         <td class=\\"text-left bold\\">dejota95</td>
                             <td>Test E2E</td>
+                                <td class=\\"text-left\\">privateer</td>
                                 <td class=\\"text-left\\">
                                     Opel Ascona 400 Grp4
                                 </td>
@@ -2275,6 +2332,7 @@ exports[`e2e generates overall driver results 1`] = `
                         </td>
                         <td class=\\"text-left bold\\">Maximilian Maksy</td>
                             <td>Test E2E</td>
+                                <td class=\\"text-left\\">The stale poos</td>
                                 <td class=\\"text-left\\">
                                     Opel Ascona 400 Grp4
                                 </td>
@@ -2296,6 +2354,7 @@ exports[`e2e generates overall driver results 1`] = `
                         </td>
                         <td class=\\"text-left bold\\">THELC Matt</td>
                             <td>Test E2E</td>
+                                <td class=\\"text-left\\">Rizla&#x27;s Suffering Club</td>
                                 <td class=\\"text-left\\">
                                     Porsche 911 SC 3.0 Grp4
                                 </td>
@@ -2317,6 +2376,7 @@ exports[`e2e generates overall driver results 1`] = `
                         </td>
                         <td class=\\"text-left bold\\">TheZenor</td>
                             <td>Test E2E</td>
+                                <td class=\\"text-left\\">Flat Out Racing</td>
                                 <td class=\\"text-left\\">
                                     Ford Escort Mk II RS Grp4
                                 </td>
@@ -2338,6 +2398,7 @@ exports[`e2e generates overall driver results 1`] = `
                         </td>
                         <td class=\\"text-left bold\\">Joe Hutchinson</td>
                             <td>Test E2E</td>
+                                <td class=\\"text-left\\">Rizla&#x27;s Suffering Club</td>
                                 <td class=\\"text-left\\">
                                     
                                 </td>
@@ -2359,6 +2420,7 @@ exports[`e2e generates overall driver results 1`] = `
                         </td>
                         <td class=\\"text-left bold\\">Erki Erik Poola</td>
                             <td>Test E2E</td>
+                                <td class=\\"text-left\\">privateer</td>
                                 <td class=\\"text-left\\">
                                     
                                 </td>
@@ -2380,6 +2442,7 @@ exports[`e2e generates overall driver results 1`] = `
                         </td>
                         <td class=\\"text-left bold\\">Thom B</td>
                             <td>Test E2E</td>
+                                <td class=\\"text-left\\">Kringel&#x27;s Coal Rental and Co.</td>
                                 <td class=\\"text-left\\">
                                     
                                 </td>
@@ -2401,6 +2464,7 @@ exports[`e2e generates overall driver results 1`] = `
                         </td>
                         <td class=\\"text-left bold\\">Williams Huw</td>
                             <td>Test E2E</td>
+                                <td class=\\"text-left\\">privateer</td>
                                 <td class=\\"text-left\\">
                                     
                                 </td>
