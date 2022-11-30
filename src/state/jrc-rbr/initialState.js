@@ -44,6 +44,13 @@ const initialState = {
             locationName: "Barum Czech Rally",
             locationFlag: "CZ",
             numStages: 11
+          },
+          {
+            eventId: 49587,
+            endTime: "2022-12-05 13:59",
+            locationName: "Tour De Corse",
+            locationFlag: "FR",
+            numStages: 12
           }
         ]
       },
