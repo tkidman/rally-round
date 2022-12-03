@@ -171,6 +171,17 @@ const knapsack = (allowedRoundsWeight, roundWeights, points) => {
   return K[numRounds][allowedRoundsWeight];
 };
 
+const mergeEvent = (mergedEvent, event) => {
+  if (mergedEvent.location !== event.location) {
+    throw new Error("multiclass championship but events do not line up.");
+  }
+  for (let i = 0; i < event.leaderboardStages.length; i++) {
+    mergedEvent.leaderboardStages[i].entries.push(
+      ...event.leaderboardStages[i].entries
+    );
+  }
+};
+
 module.exports = {
   outputPath,
   cachePath,
@@ -193,5 +204,6 @@ module.exports = {
   getCountryByAlpha2Code,
   getCountryForAnyCode,
   addSeconds,
-  knapsack
+  knapsack,
+  mergeEvent
 };
