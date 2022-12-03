@@ -10,7 +10,8 @@ const {
   cachePath,
   eventStatuses,
   getSummedTotalTime,
-  recalculateDiffs
+  recalculateDiffs,
+  mergeEvent
 } = require("../../shared");
 const { leagueRef } = require("../../state/league");
 const locations = require("../../state/constants/locations.json");
@@ -160,17 +161,6 @@ const fetchEventsFromKeys = async (eventKeys, getAllResults) => {
     });
   }
   return events;
-};
-
-const mergeEvent = (mergedEvent, event) => {
-  if (mergedEvent.location !== event.location) {
-    throw new Error("multiclass championship but events do not line up.");
-  }
-  for (let i = 0; i < event.leaderboardStages.length; i++) {
-    mergedEvent.leaderboardStages[i].entries.push(
-      ...event.leaderboardStages[i].entries
-    );
-  }
 };
 
 const recalculateEventDiffs = event => {

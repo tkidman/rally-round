@@ -3,7 +3,8 @@ const {
   getDuration,
   recalculateDiffs,
   eventStatuses,
-  getCountryForAnyCode
+  getCountryForAnyCode,
+  mergeEvent
 } = require("../../shared");
 const Papa = require("papaparse");
 const moment = require("moment-timezone");
@@ -86,18 +87,34 @@ const processCsv = (eventResultsCsv, eventStandingsCsv, event) => {
   };
 };
 
-const fetchEvent = async event => {
-  const eventFinished = isFinished(event);
-  const eventResultsCsv = await fetchResults(event.eventId, isFinished(event));
+const fetchEventPartForId = async (rally, rallyId) => {
+  const eventFinished = isFinished(rally);
+  const eventResultsCsv = await fetchResults(rallyId, isFinished(rally));
   const eventStandingsCsv = await fetchStandings(
-    event.eventId,
-    isFinished(event)
+    rally.eventId,
+    isFinished(rally)
   );
-  const processedEvent = processCsv(eventResultsCsv, eventStandingsCsv, event);
+  const processedEvent = processCsv(eventResultsCsv, eventStandingsCsv, rally);
   if (eventFinished) {
     processedEvent.eventStatus = eventStatuses.finished;
   }
   return processedEvent;
+};
+
+const fetchEvent = async rally => {
+  // an event can be constructed from 2 separate rallies by passing in multiple event ids.
+  // results get merged into the one event.
+  const rallyIdsForEvent = rally.eventId ? [rally.eventId] : rally.eventIds;
+  const processedEventParts = [];
+  for (const rallyId of rallyIdsForEvent) {
+    const eventPart = await fetchEventPartForId(rally, rallyId);
+    processedEventParts.push(eventPart);
+  }
+  const mergedEvent = processedEventParts[0];
+  for (let i = 1; i < processedEventParts.length; i++) {
+    mergeEvent(mergedEvent, processedEventParts[i]);
+  }
+  return mergedEvent;
 };
 
 const isFinished = rally => {

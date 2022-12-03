@@ -3,9 +3,9 @@ const initialState = {
   websiteName: "rsc-results",
   useStandingsForHome: true,
   // subfolderName: "rbr",
-  showLivePoints: false,
+  showLivePoints: true,
   showLivePointsDaysRemaining: 4,
-  noSuperRallyPointsMultiplier: 2,
+  // noSuperRallyPointsMultiplier: 2,
   // dropLowestScoringRoundsNumber: 2,
   // afterDropRoundMessage:
   //   "*After Dropped Rounds: total points after 2 lowest scoring rounds removed - endurance rounds count as 2",
@@ -18,7 +18,7 @@ const initialState = {
   // useCarClassAsTeam: true,
   showTeamNameTextColumn: true,
   hideTeamLogoColumn: true,
-  disableOverall: false,
+  disableOverall: true,
   teamPointsForPowerstage: false,
   backgroundStyle:
     "background-image: linear-gradient(315deg, #ffffff 0%, #d7e1ec 74%); background-size: cover; background-repeat: no-repeat; background-attachment: fixed;",
@@ -33,7 +33,7 @@ const initialState = {
   divisions: {
     rsc1987GroupA: {
       divisionName: "rsc1987GroupA",
-      displayName: "Group A",
+      displayName: "WRC 1987 Group A",
       disableSameCarValidation: false,
       // enableSameCarClassValidation: true,
       maxDriversScoringPointsForTeam: 2,
@@ -53,8 +53,8 @@ const initialState = {
       manualResults: [],
       events: [],
       points: {
-        powerStage: [5, 4, 3, 2, 1],
-        overall: [30, 24, 19, 15, 12, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+        powerStage: [],
+        overall: [20, 17, 14, 12, 10, 8, 6, 4, 2, 1]
         // stage: [1]
       }
       // cars: ["Peugeot 205 GTI"]
@@ -62,10 +62,10 @@ const initialState = {
     },
     rsc1987GroupN: {
       divisionName: "rsc1987GroupN",
-      displayName: "Group N",
+      displayName: "WRC 1987 Group N",
       disableSameCarValidation: false,
       // enableSameCarClassValidation: true,
-      maxDriversScoringPointsForTeam: 2,
+      maxDriversScoringPointsForTeam: 3,
       // filterEntries: true,
       rbr: {
         rallies: [
@@ -82,8 +82,37 @@ const initialState = {
       manualResults: [],
       events: [],
       points: {
-        powerStage: [5, 4, 3, 2, 1],
-        overall: [30, 24, 19, 15, 12, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+        powerStage: [],
+        overall: [20, 17, 14, 12, 10, 8, 6, 4, 2, 1]
+        // stage: [1]
+      }
+      // cars: ["Peugeot 205 GTI"]
+      // outputSheetId: "1C3fU9y1236wFmPuKcui4CEXBuSsUANH6OJ0BpQIasTc"
+    },
+    rsc1987Overall: {
+      divisionName: "rsc1987Overall",
+      displayName: "WRC 1987 Overall",
+      disableSameCarValidation: false,
+      // enableSameCarClassValidation: true,
+      maxDriversScoringPointsForTeam: 2,
+      // filterEntries: true,
+      rbr: {
+        rallies: [
+          {
+            eventIds: [49449, 49516],
+            endTime: "2022-12-05 12:00",
+            locationName: "Tour de Corse",
+            locationFlag: "FR",
+            numStages: 8
+            // enduranceRoundMultiplier: 2
+          }
+        ]
+      },
+      manualResults: [],
+      events: [],
+      points: {
+        powerStage: [],
+        overall: [20, 17, 14, 12, 10, 8, 6, 4, 2, 1]
         // stage: [1]
       }
       // cars: ["Peugeot 205 GTI"]

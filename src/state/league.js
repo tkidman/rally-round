@@ -14,16 +14,23 @@ const missingDrivers = {};
 const drivers = {};
 const leagueRef = {};
 
+const getField = (row, fieldName) => {
+  if (row[fieldName]) {
+    return row[fieldName].trim();
+  }
+  return row[fieldName];
+};
+
 // driver rows is an array of objects of column headers to cell values (ie: [{ racenet: "satchmo", ... }] )
 const transformDriverRows = driverRows => {
   const driversById = driverRows.reduce((driversById, row) => {
-    const nameValue = row[driverColumns[driverFieldNames.name]];
+    const nameValue = getField(row, driverColumns[driverFieldNames.name]);
     if (nameValue && nameValue.trim().length > 0) {
       const driverNameValue = nameValue.trim();
       const id = driverNameValue.toUpperCase();
       let team = null;
       if (league.useCarAsTeam) {
-        const carName = row[driverColumns[driverFieldNames.car]];
+        const carName = getField(row, driverColumns[driverFieldNames.car]);
         const car = vehicles[carName];
         if (!car && carName) {
           debug(`no car found in lookup for ${carName}`);
@@ -31,7 +38,7 @@ const transformDriverRows = driverRows => {
           team = car.brand;
         }
       } else {
-        team = row[driverColumns[driverFieldNames.teamId]];
+        team = getField(row, driverColumns[driverFieldNames.teamId]);
         if (team && team.toLowerCase() === privateer) {
           team = privateer;
         }
@@ -42,15 +49,27 @@ const transformDriverRows = driverRows => {
       driversById[id] = {
         id,
         [driverFieldNames.name]: driverNameValue,
-        [driverFieldNames.raceNetName]:
-          row[driverColumns[driverFieldNames.raceNetName]],
-        [driverFieldNames.name3]: row[driverColumns[driverFieldNames.name3]],
+        [driverFieldNames.raceNetName]: getField(
+          row,
+          driverColumns[driverFieldNames.raceNetName]
+        ),
+        [driverFieldNames.name3]: getField(
+          row,
+          driverColumns[driverFieldNames.name3]
+        ),
         [driverFieldNames.teamId]: team,
-        [driverFieldNames.division]:
-          row[driverColumns[driverFieldNames.division]],
-        [driverFieldNames.car]: row[driverColumns[driverFieldNames.car]],
-        [driverFieldNames.nationality]:
-          row[driverColumns[driverFieldNames.nationality]]
+        [driverFieldNames.division]: getField(
+          row,
+          driverColumns[driverFieldNames.division]
+        ),
+        [driverFieldNames.car]: getField(
+          row,
+          driverColumns[driverFieldNames.car]
+        ),
+        [driverFieldNames.nationality]: getField(
+          row,
+          driverColumns[driverFieldNames.nationality]
+        )
       };
     } else {
       debug(
