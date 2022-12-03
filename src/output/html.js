@@ -374,9 +374,10 @@ const transformForDriverResultsHTML = (event, division) => {
     logo: leagueRef.league.logo,
     hideTeamLogoColumn: leagueRef.league.hideTeamLogoColumn,
     showSuperRallyColumn: leagueRef.league.showSuperRallyColumn,
-    fullResultsLink: division.rbr
-      ? `https://rallysimfans.hu/rbr/rally_online.php?centerbox=rally_results.php&rally_id=${event.eventId}`
-      : null,
+    fullResultsLink:
+      division.rbr && event.eventId
+        ? `https://rallysimfans.hu/rbr/rally_online.php?centerbox=rally_results.php&rally_id=${event.eventId}`
+        : null,
     localization: getLocalization()
   };
 };
