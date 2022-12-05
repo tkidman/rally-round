@@ -37,7 +37,7 @@ const initialState = {
       disableSameCarValidation: false,
       // enableSameCarClassValidation: true,
       maxDriversScoringPointsForTeam: 2,
-      // filterEntries: true,
+      filterEntries: { matchDivision: true },
       rbr: {
         rallies: [
           {
@@ -46,6 +46,14 @@ const initialState = {
             locationName: "Tour de Corse",
             locationFlag: "FR",
             numStages: 8
+            // enduranceRoundMultiplier: 2
+          },
+          {
+            eventId: 49789,
+            endTime: "2022-12-12 12:00",
+            locationName: "Olympus Rally",
+            locationFlag: "US",
+            numStages: 7
             // enduranceRoundMultiplier: 2
           }
         ]
@@ -66,7 +74,7 @@ const initialState = {
       disableSameCarValidation: false,
       // enableSameCarClassValidation: true,
       maxDriversScoringPointsForTeam: 3,
-      // filterEntries: true,
+      filterEntries: { matchDivision: true },
       rbr: {
         rallies: [
           {
@@ -75,6 +83,14 @@ const initialState = {
             locationName: "Tour de Corse",
             locationFlag: "FR",
             numStages: 8
+            // enduranceRoundMultiplier: 2
+          },
+          {
+            eventId: 49789,
+            endTime: "2022-12-12 12:00",
+            locationName: "Olympus Rally",
+            locationFlag: "US",
+            numStages: 7
             // enduranceRoundMultiplier: 2
           }
         ]
@@ -104,6 +120,14 @@ const initialState = {
             locationName: "Tour de Corse",
             locationFlag: "FR",
             numStages: 8
+            // enduranceRoundMultiplier: 2
+          },
+          {
+            eventId: 49789,
+            endTime: "2022-12-12 12:00",
+            locationName: "Olympus Rally",
+            locationFlag: "US",
+            numStages: 7
             // enduranceRoundMultiplier: 2
           }
         ]
