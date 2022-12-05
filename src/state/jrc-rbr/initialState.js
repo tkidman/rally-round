@@ -51,6 +51,13 @@ const initialState = {
             locationName: "Tour De Corse",
             locationFlag: "FR",
             numStages: 12
+          },
+          {
+            eventId: 49820,
+            endTime: "2022-12-12 13:59",
+            locationName: "Rally de Españ a",
+            locationFlag: "SP",
+            numStages: 10
           }
         ]
       },

@@ -1,10 +1,17 @@
-const { name, teamId, car, name3 } = require("../constants/driverFieldNames");
+const {
+  name,
+  teamId,
+  car,
+  name3,
+  division
+} = require("../constants/driverFieldNames");
 
 const driverColumns = {
   [name]: "Driver",
   [teamId]: "Team",
   [car]: "Car",
-  [name3]: "Alt Name"
+  [name3]: "Alt Name",
+  [division]: "Class"
 };
 
 const sheetsConfig = {
