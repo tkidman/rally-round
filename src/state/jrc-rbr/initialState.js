@@ -55,7 +55,7 @@ const initialState = {
           {
             eventId: 49820,
             endTime: "2022-12-12 13:59",
-            locationName: "Rally de Españ a",
+            locationName: "Rally de España",
             locationFlag: "SP",
             numStages: 10
           }
