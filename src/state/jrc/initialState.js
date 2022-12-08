@@ -155,10 +155,10 @@ const initialState = {
       ],
       filterEntries: {
         matchDivision: true
+      },
+      promotionRelegation: {
+        relegationZone: 8
       }
-      // promotionRelegation: {
-      //   relegationZone: 7
-      // }
     },
     jrc2: {
       displayName: "JRC2",
@@ -195,15 +195,25 @@ const initialState = {
               extraInfo: "Manual result applied - blue screen on SS7"
             }
           ]
+        },
+        {
+          eventIndex: 5,
+          results: [
+            {
+              name: "PerfectionFlawed",
+              totalTime: "44:12.790",
+              extraInfo: "Manual result applied - VR crash on SS4"
+            }
+          ]
         }
       ],
       filterEntries: {
         matchDivision: true
+      },
+      promotionRelegation: {
+        promotionZone: 9,
+        relegationZone: 9
       }
-      // promotionRelegation: {
-      //   promotionZone: 9,
-      //   relegationZone: 8
-      // }
     },
     jrc3: {
       displayName: "JRC3",
@@ -236,11 +246,12 @@ const initialState = {
             }
           ]
         }
-      ]
-      // promotionRelegation: {
-      //   promotionZone: 9,
-      //   relegationZone: 9
-      // }
+      ],
+      promotionRelegation: {
+        promotionDoubleZone: 1,
+        promotionZone: 10,
+        relegationZone: 9
+      }
     },
     jrc4: {
       displayName: "JRC4",
@@ -272,9 +283,10 @@ const initialState = {
           ]
         }
       ],
-      // promotionRelegation: {
-      //   promotionZone: 12
-      // },
+      promotionRelegation: {
+        promotionDoubleZone: 1,
+        promotionZone: 12
+      },
       cars: ["Opel Adam R2", "Peugeot 208 R2"]
     }
   },
