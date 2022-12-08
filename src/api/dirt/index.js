@@ -16,9 +16,13 @@ const validCreds = {};
 const dirtRally2Domain = "https://dirtrally2.dirtgame.com";
 
 // export the three certs in the chain from chrome as x509 certificate (Base64-encoded ASCII, single certificate)
-const ca = fs.readFileSync("./src/api/dirt/GlobalSignRoot-CA.cer");
-const g2 = fs.readFileSync("./src/api/dirt/G2.cer");
-const cert = fs.readFileSync("./src/api/dirt/dirtgame.cer");
+const ca = fs.readFileSync(
+  "./src/api/dirt/Builtin Object Token_USERTrust RSA Certification Authority.pem"
+);
+const g2 = fs.readFileSync(
+  "./src/api/dirt/Sectigo RSA Organization Validation Secure Server CA.pem"
+);
+const cert = fs.readFileSync("./src/api/dirt/_.dirtgame.pem");
 const httpsAgent = new https.Agent({
   ca: [ca, g2, cert]
 });
