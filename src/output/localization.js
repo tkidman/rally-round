@@ -74,7 +74,7 @@ const localization = {
     page_not_found: "Sidan kan inte hittas",
     last_updated: "Senast uppdaterad vid",
     series: "serier",
-    historical: "historisk",
+    historical: "historiska",
     manual_result_applied: "Manuellt resultat tillämpat"
   }
 };
