@@ -4,7 +4,8 @@ const {
   recalculateDiffs,
   eventStatuses,
   getCountryForAnyCode,
-  mergeEvent
+  mergeEvent,
+  createDNFResult
 } = require("../../shared");
 const Papa = require("papaparse");
 const moment = require("moment-timezone");
@@ -58,8 +59,12 @@ const processCsv = (eventResultsCsv, eventStandingsCsv, event) => {
       stageTime: formatDuration(stageDuration),
       superRally
     };
+
+    const actualResult = row.time3
+      ? commonResult
+      : { ...commonResult, ...createDNFResult(commonResult.name, false).entry };
     const stageIndex = row.SS - 1;
-    leaderboardStages[stageIndex].entries.push(commonResult);
+    leaderboardStages[stageIndex].entries.push(actualResult);
   });
 
   // calc total time
