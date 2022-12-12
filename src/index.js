@@ -9,7 +9,7 @@ const {
   getTeamIds,
   getCarByName
 } = require("./state/league");
-const { sortBy, keyBy, sum } = require("lodash");
+const { sortBy, keyBy, sum, flatMap } = require("lodash");
 const { cachePath } = require("./shared");
 const fs = require("fs");
 const { createDNFResult } = require("./shared");
@@ -212,12 +212,19 @@ const setManualResults = ({
     isDnfEntry: false
   };
   const division = leagueRef.divisions[divisionName];
-  if (division.manualResults) {
-    const eventManualResults = division.manualResults.find(
+  if (division.manualResults || leagueRef.league.manualResults) {
+    const allManualResults = [
+      ...division.manualResults,
+      ...leagueRef.league.manualResults
+    ];
+    // not the best data structure: [{ eventIndex, results: [] }]
+    const eventManualResults = allManualResults.filter(
       eventManualResults => eventManualResults.eventIndex === eventIndex
     );
-    if (eventManualResults) {
-      eventManualResults.results.forEach(manualEntry => {
+    // flatmap to collect all the nested results in one array
+    const results = flatMap(eventManualResults, "results");
+    if (results) {
+      results.forEach(manualEntry => {
         debug(`applying manual result for ${manualEntry.name}`);
         if (!manualEntry.extraInfo) {
           manualEntry.extraInfo = getLocalization().manual_result_applied;
@@ -235,7 +242,7 @@ const setManualResults = ({
           const firstStageResult = firstStageResultsByDriver[driver.name];
           if (!firstStageResult) {
             debug(
-              `unable to find first stage result for manual result for driver ${manualEntry.name} - make sure the name in the manual result matches what is returned from racenet`
+              `unable to find first stage result for manual result for driver ${manualEntry.name} - assuming not a part of this division`
             );
           } else {
             entries.push({
@@ -382,13 +389,14 @@ const calculateEventResults = ({
   drivers,
   eventIndex
 }) => {
+  // alert! mutations to the racenetLeaderboard entries occur here, and should only occur here
+  filterLeaderboardStages({ event, drivers, divisionName });
+
   const firstStageResultsByDriver = getResultsByDriver(
     event.leaderboardStages[0].entries,
     divisionName
   );
 
-  // alert! mutations to the racenetLeaderboard entries occur here, and should only occur here
-  filterLeaderboardStages({ event, drivers, divisionName });
   const lastStageEntries =
     event.leaderboardStages[event.leaderboardStages.length - 1].entries;
   setManualResults({
