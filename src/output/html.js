@@ -4,7 +4,7 @@ const fs = require("fs");
 const Handlebars = require("handlebars");
 const debug = require("debug")("tkidman:dirt2-results:output:html");
 
-const { leagueRef } = require("../state/league");
+const { leagueRef, getCarByName } = require("../state/league");
 const {
   getDriverData,
   getHeaderLocations,
@@ -342,10 +342,11 @@ const transformForDriverResultsHTML = (event, division) => {
         result.stageTimes,
         division.benchmarks
       );
+    const entryCar = getCarByName(result.entry.vehicleName);
     return {
       ...result,
       position: index + 1,
-      car: carBrand,
+      car: entryCar ? entryCar.brand : carBrand,
       driver,
       teamLogo: getTeamLogo(driver.teamId),
       country,
