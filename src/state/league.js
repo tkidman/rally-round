@@ -154,7 +154,7 @@ const loadDrivers = async () => {
 const loadManualResultsFromSheets = async () => {
   const resultRows = await loadSheetAndTransform({
     sheetId: sheetsConfig.sheetId,
-    tabName: "Manual Results"
+    tabName: sheetsConfig.manualResultsTabName || "Manual Results"
   });
   const manualResults = resultRows.map(row => {
     if (!row["Name"] || !row["Event Number"] || !row["Total Time"]) {
