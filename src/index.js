@@ -4,14 +4,17 @@ const { orderEntriesBy } = require("./shared");
 const debug = require("debug")("tkidman:dirt2-results");
 const { eventStatuses } = require("./shared");
 const { privateer } = require("./shared");
-const { printMissingDrivers, getTeamIds } = require("./state/league");
+const {
+  printMissingDrivers,
+  getTeamIds,
+  getCarByName
+} = require("./state/league");
 const { sortBy, keyBy, sum } = require("lodash");
 const { cachePath } = require("./shared");
 const fs = require("fs");
 const { createDNFResult } = require("./shared");
 const { cloneDeep, last, get } = require("lodash");
 const { recalculateDiffsForEntries } = require("./shared");
-const vehicles = require("./state/constants/vehicles.json");
 const { addSeconds } = require("./shared");
 const { resultTypes } = require("./shared");
 const { map } = require("lodash");
@@ -177,13 +180,13 @@ const applyPenaltyIfIncorrectCar = (event, lastStageEntries, divisionName) => {
       }
       if (
         division.enableSameCarClassValidation &&
-        vehicles[driver.car].class !== vehicles[entry.vehicleName].class
+        getCarByName(driver.car).class !== getCarByName(entry.vehicleName).class
       ) {
         debug(
           `driver ${entry.name} used wrong car class ${
-            vehicles[entry.vehicleName].class
+            getCarByName(entry.vehicleName).class
           }, should have used ${
-            vehicles[driver.car].class
+            getCarByName(driver.car).class
           }. Applying incorrect car penalty`
         );
         applyIncorrectCarPenalty(entry);
@@ -765,13 +768,13 @@ const loadEventDriver = (entry, drivers, divisionName) => {
   if (!driver.teamId) {
     if (leagueRef.league.useCarAsTeam) {
       if (driver.firstCarDriven) {
-        driver.teamId = vehicles[driver.firstCarDriven].brand;
+        driver.teamId = getCarByName(driver.firstCarDriven).brand;
       }
     } else if (leagueRef.league.useNationalityAsTeam) {
       driver.teamId = driver.nationality;
     } else if (leagueRef.league.useCarClassAsTeam) {
       if (driver.firstCarDriven) {
-        driver.teamId = vehicles[driver.firstCarDriven].class;
+        driver.teamId = getCarByName(driver.firstCarDriven).class;
       }
     } else if (leagueRef.league.nullTeamIsPrivateer) {
       driver.teamId = privateer;

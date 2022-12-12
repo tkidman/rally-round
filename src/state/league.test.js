@@ -1,5 +1,5 @@
 const moment = require("moment");
-const { leagueRef, init, getTeamIds } = require("./league");
+const { leagueRef, init, getTeamIds, getCarByName } = require("./league");
 
 const driver = {
   car: "Alpine Renault A110 1600 S",
@@ -67,5 +67,17 @@ describe("league", () => {
       "Flat Out Racing",
       "Full Send"
     ]);
+  });
+
+  test("getCarByName", () => {
+    expect(getCarByName("Mustang Ford XL12")).toEqual({
+      brand: "ford",
+      class: "unknown"
+    });
+
+    expect(getCarByName("SUBARU impreza")).toEqual({
+      brand: "subaru",
+      class: "2000cc"
+    });
   });
 });

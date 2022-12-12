@@ -14,6 +14,36 @@ const missingDrivers = {};
 const drivers = {};
 const leagueRef = {};
 
+// cars by lowercase name
+const carsByName = Object.keys(vehicles).reduce((acc, key) => {
+  acc[key.toLowerCase()] = vehicles[key];
+  return acc;
+}, {});
+
+const carBrands = fs
+  .readdirSync("./assets/cars")
+  .map(carFile => carFile.split(".")[0]);
+
+const getCarByName = carName => {
+  if (!carName) {
+    throw new Error("can't find car for empty car name");
+  }
+  const lowerCarName = carName.toLowerCase();
+  if (!carsByName[lowerCarName]) {
+    const brand = carBrands.find(carBrand =>
+      lowerCarName.includes(carBrand.toLowerCase())
+    );
+    if (!brand) {
+      debug(`Unable to find brand for car: ${carName}, setting to unknown`);
+    }
+    carsByName[lowerCarName] = {
+      brand: brand || "unknown",
+      class: "unknown"
+    };
+  }
+  return carsByName[lowerCarName];
+};
+
 const getField = (row, fieldName) => {
   if (row[fieldName]) {
     return row[fieldName].trim();
@@ -265,5 +295,6 @@ module.exports = {
   leagueRef,
   getDriversByDivision,
   getTeamIds,
-  printMissingDrivers
+  printMissingDrivers,
+  getCarByName
 };

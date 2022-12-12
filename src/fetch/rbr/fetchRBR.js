@@ -95,10 +95,7 @@ const processCsv = (eventResultsCsv, eventStandingsCsv, event) => {
 const fetchEventPartForId = async (rally, rallyId) => {
   const eventFinished = isFinished(rally);
   const eventResultsCsv = await fetchResults(rallyId, isFinished(rally));
-  const eventStandingsCsv = await fetchStandings(
-    rally.eventId,
-    isFinished(rally)
-  );
+  const eventStandingsCsv = await fetchStandings(rallyId, isFinished(rally));
   const processedEvent = processCsv(eventResultsCsv, eventStandingsCsv, rally);
   if (eventFinished) {
     processedEvent.eventStatus = eventStatuses.finished;

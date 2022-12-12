@@ -1,6 +1,5 @@
-const { leagueRef } = require("../state/league");
+const { leagueRef, getCarByName } = require("../state/league");
 const locations = require("../state/constants/locations.json");
-const vehicles = require("../state/constants/vehicles.json");
 const { getCountryForDriver, getCountryByAlpha2Code } = require("../shared");
 const debug = require("debug")("tkidman:dirt2-results:output:shared");
 
@@ -47,7 +46,7 @@ const getTeamStandingData = (standing, events) => {
 const getDriverData = driverName => {
   const driver = leagueRef.getDriver(driverName);
   let country = getCountryForDriver(driver);
-  const car = vehicles[driver.car];
+  const car = getCarByName(driver.car);
   let carBrand;
   if (!car) {
     if (driver.car) {
