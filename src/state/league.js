@@ -1,4 +1,4 @@
-const { keyBy } = require("lodash");
+const { keyBy, isEmpty } = require("lodash");
 const Papa = require("papaparse");
 const fs = require("fs");
 const debug = require("debug")("tkidman:dirt2-results:state");
@@ -26,7 +26,7 @@ const carBrands = fs
 
 const getCarByName = carName => {
   if (!carName) {
-    throw new Error("can't find car for empty car name");
+    return null;
   }
   const lowerCarName = carName.toLowerCase();
   if (!carsByName[lowerCarName]) {
@@ -151,6 +151,35 @@ const loadDrivers = async () => {
   return { driversById: {}, driversByRaceNet: {}, driversByName3: {} };
 };
 
+const loadManualResultsFromSheets = async () => {
+  const resultRows = await loadSheetAndTransform({
+    sheetId: sheetsConfig.sheetId,
+    tabName: "Manual Results"
+  });
+  const manualResults = resultRows.map(row => {
+    if (!row["Name"] || !row["Event Number"] || !row["Total Time"]) {
+      throw new Error(
+        "'Event Number', 'Name' and 'Total Time' are mandatory columns"
+      );
+    }
+    const result = {
+      name: row["Name"],
+      totalTime: row["Total Time"]
+    };
+    if (row["PS Time"]) {
+      result.stageTime = row["PS Time"];
+    }
+    if (row["Comment"]) {
+      result.extraInfo = row["Comment"];
+    }
+    return {
+      eventIndex: row["Event Number"] - 1,
+      results: [result]
+    };
+  });
+  return manualResults;
+};
+
 const loadFantasy = async league => {
   if (!league.fantasy) {
     return;
@@ -232,6 +261,17 @@ const init = async () => {
     );
   };
   await loadFantasy(leagueRef.league);
+  if (isEmpty(league.manualResults)) {
+    league.manualResults = [];
+  }
+  try {
+    const manualResultsFromSheets = await loadManualResultsFromSheets();
+    league.manualResults.push(...manualResultsFromSheets);
+  } catch (e) {
+    debug(
+      `Unable to load manual results from sheets, probably because a tab named 'Manual Results' does not exist - ${e.message}`
+    );
+  }
   return leagueRef;
 };
 
