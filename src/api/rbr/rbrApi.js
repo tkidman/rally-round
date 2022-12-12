@@ -2,6 +2,7 @@ const debug = require("debug")("tkidman:dirt2-results:api:rbr");
 const axios = require("axios");
 const { cachePath } = require("../../shared");
 const fs = require("fs");
+const { isNil } = require("lodash");
 
 const loadFromCache = cacheFileName => {
   try {
@@ -35,6 +36,9 @@ const fetchResults = async (rallyId, eventFinished) => {
 };
 
 const fetchStandings = async (rallyId, eventFinished) => {
+  if (isNil(rallyId)) {
+    throw new Error("invalid rally id, aborting");
+  }
   const cacheFileName = `${cachePath}/${rallyId}_standings.csv`;
   if (eventFinished) {
     const cacheFile = loadFromCache(cacheFileName);

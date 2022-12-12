@@ -123,37 +123,38 @@ const uploadCache = async ({
   debug(`uploaded ${cacheFiles.length} cache files to s3`);
 };
 
-const uploadTeamLogos = async (bucket, subfolderName) => {
-  const remoteTeamsFolder = subfolderName
-    ? `${subfolderName}/assets/teams`
-    : "assets/teams";
-  const remoteLogos = await listObjects(bucket, `${remoteTeamsFolder}`);
+const uploadLogos = async (bucket, subfolderName, logoDir) => {
+  const remoteLogoFolder = subfolderName
+    ? `${subfolderName}/assets/${logoDir}`
+    : `assets/${logoDir}`;
+  const remoteLogos = await listObjects(bucket, `${remoteLogoFolder}`);
   const remoteLogoNames = remoteLogos.Contents.map(s3File => {
     const fileSplit = s3File.Key.split("/");
     return fileSplit[fileSplit.length - 1];
   }).filter(fileName => fileName.endsWith(".png"));
   const localLogos = fs
-    .readdirSync("./assets/teams")
+    .readdirSync(`./assets/${logoDir}`)
     .filter(fileName => fileName.endsWith(".png"));
   const missingLogos = difference(localLogos, remoteLogoNames);
 
   const promises = missingLogos.map(file => {
     const key = subfolderName
-      ? `${remoteTeamsFolder}/${file}`
-      : `assets/teams/${file}`;
+      ? `${remoteLogoFolder}/${file}`
+      : `assets/${logoDir}/${file}`;
     return uploadToS3({
-      file: `./assets/teams/${file}`,
+      file: `./assets/${logoDir}/${file}`,
       key,
       bucket,
       contentType: "image/png"
     });
   });
   await Promise.all(promises);
-  debug(`uploaded ${promises.length} team logo files to s3`);
+  debug(`uploaded ${promises.length} ${logoDir} logo files to s3`);
 };
 
 const upload = async (bucket, subfolderName) => {
-  await uploadTeamLogos(bucket, subfolderName);
+  await uploadLogos(bucket, subfolderName, "teams");
+  await uploadLogos(bucket, subfolderName, "cars");
 
   await uploadHTML(`./${outputPath}/website`, bucket, subfolderName);
   await uploadCache({
