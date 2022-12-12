@@ -4,8 +4,8 @@ const initialState = {
   subfolderName: "rbr",
   showLivePoints: true,
   showLivePointsDaysRemaining: 4,
-  hideCarColumnInStandings: true,
-  showCarNameAsTextInResults: true,
+  hideCarColumnInStandings: false,
+  showCarNameAsTextInResults: false,
   nullTeamIsPrivateer: true,
   // dropLowestScoringRoundsNumber: 1,
   // sortByDropRoundPoints: true,
@@ -58,6 +58,13 @@ const initialState = {
             locationName: "Rally de España",
             locationFlag: "ES",
             numStages: 10
+          },
+          {
+            eventId: 50056,
+            endTime: "2022-12-19 13:59",
+            locationName: "Rally USA",
+            locationFlag: "US",
+            numStages: 11
           }
         ]
       },
