@@ -55,6 +55,14 @@ const initialState = {
             locationFlag: "US",
             numStages: 7
             // enduranceRoundMultiplier: 2
+          },
+          {
+            eventId: 50089,
+            endTime: "2022-12-19 12:00",
+            locationName: "RAC Rally",
+            locationFlag: "GB",
+            numStages: 8
+            // enduranceRoundMultiplier: 2
           }
         ]
       },
@@ -92,6 +100,14 @@ const initialState = {
             locationFlag: "US",
             numStages: 7
             // enduranceRoundMultiplier: 2
+          },
+          {
+            eventId: 50089,
+            endTime: "2022-12-19 12:00",
+            locationName: "RAC Rally",
+            locationFlag: "GB",
+            numStages: 8
+            // enduranceRoundMultiplier: 2
           }
         ]
       },
@@ -128,6 +144,14 @@ const initialState = {
             locationName: "Olympus Rally",
             locationFlag: "US",
             numStages: 7
+            // enduranceRoundMultiplier: 2
+          },
+          {
+            eventId: 50089,
+            endTime: "2022-12-19 12:00",
+            locationName: "RAC Rally",
+            locationFlag: "GB",
+            numStages: 8
             // enduranceRoundMultiplier: 2
           }
         ]
