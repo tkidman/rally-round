@@ -208,7 +208,10 @@ const writeStandingsHTML = (division, type, links) => {
     `./${outputPath}/website/${division.divisionName}-${type}-standings.html`,
     out
   );
-  if (!fs.existsSync(`./${outputPath}/website/index.html`) && leagueRef.league.useStandingsForHome) {
+  if (
+    !fs.existsSync(`./${outputPath}/website/index.html`) &&
+    leagueRef.league.useStandingsForHome
+  ) {
     fs.writeFileSync(`./${outputPath}/website/index.html`, out);
   }
 };
@@ -406,7 +409,10 @@ const writeDriverResultsHTML = (event, division, links, eventIndex) => {
     `./${outputPath}/website/${division.divisionName}-${eventIndex}-driver-results.html`,
     out
   );
-  if (division.divisionName == "overall" && leagueRef.league.useResultsForHome) {
+  if (
+    division.divisionName == "overall" &&
+    leagueRef.league.useResultsForHome
+  ) {
     fs.writeFileSync(`./${outputPath}/website/index.html`, out);
   }
 };
