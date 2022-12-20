@@ -66,6 +66,13 @@ const initialState = {
             locationName: "Rally USA",
             locationFlag: "US",
             numStages: 11
+          },
+          {
+            eventId: 50343,
+            endTime: "2022-12-26 13:59",
+            locationName: "Rally Sweden",
+            locationFlag: "SE",
+            numStages: 11
           }
         ]
       },
