@@ -66,7 +66,7 @@ const initialState = {
             endTime: "2022-10-31 12:00",
             locationName: "Rally Kringel B",
             locationFlag: "DE",
-            numStages: 7,
+            numStages: 7
             // enduranceRoundMultiplier: 2
           }
         ]

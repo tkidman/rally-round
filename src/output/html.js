@@ -31,6 +31,10 @@ const colours = {
   default: ""
 };
 
+Handlebars.registerHelper('translate', function(stringToTranslate) {
+	return translate(stringToTranslate)
+})
+
 let compiledNavigation = null;
 let compiledScripts = null;
 
