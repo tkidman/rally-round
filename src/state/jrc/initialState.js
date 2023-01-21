@@ -301,27 +301,27 @@ const initialState = {
     },
     {
       name: "JRC 10",
-      href: "jrc-10"
+      href: "/jrc-10"
     },
     {
       name: "JRC 9",
-      href: "jrc-9"
+      href: "/jrc-9"
     },
     {
       name: "JRC 8",
-      href: "jrc-8"
+      href: "/jrc-8"
     },
     {
       name: "JRC 7",
-      href: "jrc-7"
+      href: "/jrc-7"
     },
     {
       name: "JRC 6",
-      href: "jrc-6"
+      href: "/jrc-6"
     },
     {
       name: "JRC 5",
-      href: "jrc-5"
+      href: "/jrc-5"
     }
   ]
 };
