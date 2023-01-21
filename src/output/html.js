@@ -329,6 +329,17 @@ const getStageTimeDisplay = (result, event) => {
   return result.entry.stageTime;
 };
 
+const getTotalTimeDisplay = (result, event) => {
+  if (
+    leagueRef.league.hideStageTimesUntilEventEnd &&
+    event.eventStatus !== eventStatuses.finished &&
+    leagueRef.league.isRallySprint
+  ) {
+    return "--";
+  }
+  return result.entry.totalTime;
+};
+
 const transformForDriverResultsHTML = (event, division) => {
   const events = division.events;
   const divisionName = division.divisionName;
@@ -351,7 +362,8 @@ const transformForDriverResultsHTML = (event, division) => {
       country,
       divisionDisplayName:
         resultDivision.displayName || resultDivision.divisionName,
-      stageTimeDisplay: getStageTimeDisplay(result, event)
+      stageTimeDisplay: getStageTimeDisplay(result, event),
+      totalTimeDisplay: getTotalTimeDisplay(result, event)
     };
   });
   return {
@@ -362,6 +374,7 @@ const transformForDriverResultsHTML = (event, division) => {
     showTeamNameTextColumn: leagueRef.league.showTeamNameTextColumn,
     showCar: leagueRef.hasCars || leagueRef.league.showCarNameAsTextInResults,
     showCarName: leagueRef.league.showCarNameAsTextInResults,
+    showPowerStage: !leagueRef.league.isRallySprint,
     showPowerStagePoints: hasPoints("powerStagePoints", rows),
     showStagePoints: hasPoints("stagePoints", rows),
     event,

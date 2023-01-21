@@ -1,5 +1,5 @@
 const { downloadCache } = require("./api/aws/s3");
-const { orderResultsBy, knapsack } = require("./shared");
+const { orderResultsBy, knapsack, getDuration } = require("./shared");
 const { orderEntriesBy } = require("./shared");
 const debug = require("debug")("tkidman:dirt2-results");
 const { eventStatuses } = require("./shared");
@@ -9,7 +9,7 @@ const {
   getTeamIds,
   getCarByName
 } = require("./state/league");
-const { sortBy, keyBy, sum, flatMap } = require("lodash");
+const { sortBy, keyBy, sum, flatMap, minBy } = require("lodash");
 const { cachePath } = require("./shared");
 const fs = require("fs");
 const { createDNFResult } = require("./shared");
@@ -274,6 +274,21 @@ const getResultsByDriver = entries => {
   return resultsByDriver;
 };
 
+const getAllResultsByDriver = leaderboardStages => {
+  const allResultsByDriver = leaderboardStages.reduce((acc, stage) => {
+    const resultsByDriver = getResultsByDriver(stage.entries);
+    Object.keys(resultsByDriver).forEach(driverName => {
+      if (acc[driverName]) {
+        acc[driverName].push(resultsByDriver[driverName]);
+      } else {
+        acc[driverName] = [resultsByDriver[driverName]];
+      }
+    });
+    return acc;
+  }, {});
+  return allResultsByDriver;
+};
+
 const addStageTimesToResultsByDriver = (resultsByDriver, leaderboardStages) => {
   leaderboardStages.forEach(leadboardStage => {
     leadboardStage.entries.forEach(driverTime => {
@@ -443,9 +458,26 @@ const calculateEventResults = ({
     });
   });
 
+  if (leagueRef.league.isRallySprint) {
+    // rallysprint - use the fastest stage time as total time
+    const allResultsByDriver = getAllResultsByDriver(event.leaderboardStages);
+    Object.keys(allResultsByDriver).forEach(driverName => {
+      const driverEventResults = allResultsByDriver[driverName];
+      const minResult = minBy(driverEventResults, result =>
+        getDuration(result.entry.stageTime)
+      );
+      // just update the total time on the final stage for now. Would probably be better to
+      // update total time on every stage as it goes but not important yet
+      // OR we could have a new field - bestResult?
+      driverEventResults[driverEventResults.length - 1].entry.totalTime =
+        minResult.entry.stageTime;
+    });
+  }
+
   event.leaderboardStages.forEach(stage => {
     recalculateDiffs(stage.entries);
   });
+
   // end alert
 
   if (leagueRef.league.getAllResults)
