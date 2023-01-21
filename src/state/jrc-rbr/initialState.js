@@ -3,7 +3,7 @@ const initialState = {
   websiteName: "jrc-results",
   subfolderName: "rbr",
   useStandingsForHome: true,
-  showLivePoints: true,
+  showLivePoints: false,
   showLivePointsDaysRemaining: 4,
   hideCarColumnInStandings: false,
   showCarNameAsTextInResults: false,
@@ -23,9 +23,9 @@ const initialState = {
   logo: "JRC.png",
   siteTitlePrefix: "JRC RBR",
   divisions: {
-    jrcRbr: {
-      divisionName: "jrcRbrOffSeason1",
-      displayName: "RBR Winter 2022 Off-season",
+    jrcRbrSeason3: {
+      divisionName: "jrcRbrSeason3",
+      displayName: "RBR Season 3",
       disableSameCarValidation: false,
       // enableSameCarClassValidation: true,
       maxDriversScoringPointsForTeam: 2,
@@ -33,46 +33,11 @@ const initialState = {
       rbr: {
         rallies: [
           {
-            eventId: 49006,
+            eventId: 51550,
             endTime: "2022-11-20 23:59",
-            locationName: "Finland Rally",
-            locationFlag: "FI",
-            numStages: 9
-          },
-          {
-            eventId: 49278,
-            endTime: "2022-11-28 13:59",
-            locationName: "Barum Czech Rally",
-            locationFlag: "CZ",
-            numStages: 11
-          },
-          {
-            eventId: 49587,
-            endTime: "2022-12-05 13:59",
-            locationName: "Tour De Corse",
-            locationFlag: "FR",
-            numStages: 12
-          },
-          {
-            eventId: 49820,
-            endTime: "2022-12-12 13:59",
-            locationName: "Rally de España",
-            locationFlag: "ES",
-            numStages: 10
-          },
-          {
-            eventId: 50056,
-            endTime: "2022-12-19 13:59",
-            locationName: "Rally USA",
-            locationFlag: "US",
-            numStages: 11
-          },
-          {
-            eventId: 50343,
-            endTime: "2022-12-26 13:59",
-            locationName: "Rally Sweden",
-            locationFlag: "SE",
-            numStages: 11
+            locationName: "Rallye Monte Carlo",
+            locationFlag: "MC",
+            numStages: 8
           }
         ]
       },
@@ -95,6 +60,10 @@ const initialState = {
     {
       name: "RBR Season 2",
       href: "/rbr/rbr-2"
+    },
+    {
+      name: "RBR Off Season 1",
+      href: "/rbr/rbr-off-1"
     }
   ]
 };
