@@ -40,8 +40,10 @@
                     {{#if showCar}}
                         <th>{{localization.car}}</th>
                     {{/if}}
-                    <td>{{localization.ps}}</td>
-                    <td>{{localization.diff}}</td>
+                    {{#if showPowerStage}}
+                        <td>{{localization.ps}}</td>
+                        <td>{{localization.diff}}</td>
+                    {{/if}}
                     <td>{{localization.total}}</td>
                     <td>{{localization.diff}}</td>
                     {{#if showSuperRallyColumn}}
@@ -89,15 +91,17 @@
                                 </td>
                             {{/if}}
                         {{/if}}
-                        <td>{{this.stageTimeDisplay}}</td>
-                        <td>{{this.entry.stageDiff}}</td>
+                        {{#if ../showPowerStage}}
+                            <td>{{this.stageTimeDisplay}}</td>
+                            <td>{{this.entry.stageDiff}}</td>
+                        {{/if}}
                         {{#if this.entry.extraInfo}}
                         <td class="popup" onclick="openPopup('{{this.entry.name}}')">
-                            {{this.entry.totalTime}}
+                            {{this.totalTimeDisplay}}
                             <span class="popuptext" id="{{this.entry.name}}">{{this.entry.extraInfo}}</span>
                         </td>
                         {{else}}
-                        <td>{{this.entry.totalTime}}</td>
+                        <td>{{this.totalTimeDisplay}}</td>
                         {{/if}}
                         <td>{{this.entry.totalDiff}}</td>
                         {{#if ../showSuperRallyColumn}}
