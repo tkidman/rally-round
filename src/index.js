@@ -864,13 +864,8 @@ const calculateOverall = processedDivisions => {
   };
   Object.keys(processedDivisions).forEach(divisionName => {
     const division = processedDivisions[divisionName];
-    division.events.forEach(event => {
-      let overallEvent = overall.events.find(
-        overallEvent =>
-          (overallEvent.location && overallEvent.location === event.location) ||
-          (overallEvent.locationName &&
-            overallEvent.locationName === event.locationName)
-      );
+    division.events.forEach((event, index) => {
+      let overallEvent = overall.events[index];
       if (!overallEvent) {
         overallEvent = {
           location: event.location,
