@@ -39,6 +39,9 @@
                     {{/if}}
                     {{#if showCar}}
                         <th>{{localization.car}}</th>
+                        {{#if showCarName}}
+                            <th>{{localization.car_name}}</th>
+                        {{/if}}
                     {{/if}}
                     {{#if showPowerStage}}
                         <td>{{localization.ps}}</td>
@@ -81,13 +84,12 @@
                             {{/if}}
                        {{/if}}
                         {{#if ../showCar}}
+                            <td>
+                                <img src="./assets/cars/{{this.car}}.png" style="max-width:2em; max-height:2em;" alt="{{this.car}}" title="{{this.car}}"/>
+                            </td>
                             {{#if ../showCarName}}
                                 <td class="text-left">
                                     {{this.entry.vehicleName}}
-                                </td>
-                            {{else}}
-                                <td>
-                                    <img src="./assets/cars/{{this.car}}.png" style="max-width:2em; max-height:2em;" alt="{{this.car}}" title="{{this.car}}"/>
                                 </td>
                             {{/if}}
                         {{/if}}
