@@ -37,7 +37,14 @@ const initialState = {
           {
             eventId: 51210,
             endTime: "2023-01-22 11:59",
-            locationName: "Hakolahti Rallysprint",
+            locationName: "Hakolahti",
+            locationFlag: "FI",
+            numStages: 3
+          },
+          {
+            eventId: 51598,
+            endTime: "2023-01-30 11:59",
+            locationName: "Hokkara",
             locationFlag: "FI",
             numStages: 3
           }
