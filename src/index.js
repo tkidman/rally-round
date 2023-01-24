@@ -403,6 +403,31 @@ const filterLeaderboardStages = ({ event, drivers, divisionName }) => {
   }
 };
 
+// rallysprint - use the fastest stage time as total time
+const processRallysprint = event => {
+  const allResultsByDriver = getAllResultsByDriver(event.leaderboardStages);
+  Object.keys(allResultsByDriver).forEach(driverName => {
+    const driverEventResults = allResultsByDriver[driverName];
+    const minResult = minBy(driverEventResults, result =>
+      getDuration(result.entry.stageTime)
+    );
+    // just update the total time on the final stage for now. Would probably be better to
+    // update total time on every stage as it goes but not important yet
+    // OR we could have a new field - bestResult?
+    driverEventResults[driverEventResults.length - 1].entry.totalTime =
+      minResult.entry.stageTime;
+
+    // if a driver finishes the first stage, their run is not a DNF
+    if (minResult.entry.stageTime !== DNF_STAGE_TIME) {
+      driverEventResults[
+        driverEventResults.length - 1
+      ].entry.isDnfEntry = false;
+      driverEventResults[
+        driverEventResults.length - 1
+      ].entry.isDnsEntry = false;
+    }
+  });
+};
 const calculateEventResults = ({
   event,
   divisionName,
@@ -464,29 +489,7 @@ const calculateEventResults = ({
   });
 
   if (leagueRef.league.isRallySprint) {
-    // rallysprint - use the fastest stage time as total time
-    const allResultsByDriver = getAllResultsByDriver(event.leaderboardStages);
-    Object.keys(allResultsByDriver).forEach(driverName => {
-      const driverEventResults = allResultsByDriver[driverName];
-      const minResult = minBy(driverEventResults, result =>
-        getDuration(result.entry.stageTime)
-      );
-      // just update the total time on the final stage for now. Would probably be better to
-      // update total time on every stage as it goes but not important yet
-      // OR we could have a new field - bestResult?
-      driverEventResults[driverEventResults.length - 1].entry.totalTime =
-        minResult.entry.stageTime;
-
-      // if a driver finishes the first stage, their run is not a DNF
-      if (minResult.entry.stageTime !== DNF_STAGE_TIME) {
-        driverEventResults[
-          driverEventResults.length - 1
-        ].entry.isDnfEntry = false;
-        driverEventResults[
-          driverEventResults.length - 1
-        ].entry.isDnsEntry = false;
-      }
-    });
+    processRallysprint(event);
   }
 
   event.leaderboardStages.forEach(stage => {
