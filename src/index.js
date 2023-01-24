@@ -1,5 +1,10 @@
 const { downloadCache } = require("./api/aws/s3");
-const { orderResultsBy, knapsack, getDuration } = require("./shared");
+const {
+  orderResultsBy,
+  knapsack,
+  getDuration,
+  DNF_STAGE_TIME
+} = require("./shared");
 const { orderEntriesBy } = require("./shared");
 const debug = require("debug")("tkidman:dirt2-results");
 const { eventStatuses } = require("./shared");
@@ -471,6 +476,16 @@ const calculateEventResults = ({
       // OR we could have a new field - bestResult?
       driverEventResults[driverEventResults.length - 1].entry.totalTime =
         minResult.entry.stageTime;
+
+      // if a driver finishes the first stage, their run is not a DNF
+      if (minResult.entry.stageTime !== DNF_STAGE_TIME) {
+        driverEventResults[
+          driverEventResults.length - 1
+        ].entry.isDnfEntry = false;
+        driverEventResults[
+          driverEventResults.length - 1
+        ].entry.isDnsEntry = false;
+      }
     });
   }
 

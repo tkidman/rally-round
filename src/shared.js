@@ -104,6 +104,7 @@ const addSeconds = (entryTime, numSeconds) => {
   return formatDuration(duration);
 };
 
+const DNF_STAGE_TIME = "15:00:00.000";
 const createDNFResult = (driverName, isDnsEntry) => {
   return {
     name: driverName,
@@ -111,7 +112,7 @@ const createDNFResult = (driverName, isDnsEntry) => {
       name: driverName,
       isDnfEntry: true,
       isDnsEntry,
-      stageTime: "15:00:00.000",
+      stageTime: DNF_STAGE_TIME,
       stageDiff: "N/A",
       totalTime: "23:59:59.000",
       totalDiff: "N/A"
@@ -205,5 +206,6 @@ module.exports = {
   getCountryForAnyCode,
   addSeconds,
   knapsack,
-  mergeEvent
+  mergeEvent,
+  DNF_STAGE_TIME
 };
