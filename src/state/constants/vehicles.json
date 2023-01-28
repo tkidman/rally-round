@@ -1,7 +1,7 @@
 {
 	"Peugeot 206 Rally": {
 		"class": "2000cc",
-		"brand": "peugot"
+		"brand": "peugeot"
 	},
 	"Ford Focus RS Rally 2001":{
 		"class": "2000cc",
@@ -77,7 +77,7 @@
 	},
 	"Peugeot 208 T16 R5":{
 		"class": "R5",
-		"brand": "peugot"
+		"brand": "peugeot"
 	},
 	"Seat Ibiza Kit Car": {
 		"class": "F2",
@@ -85,7 +85,7 @@
 	},
 	"Peugeot 306 Maxi": {
 		"class": "F2",
-		"brand": "peugot"
+		"brand": "peugeot"
 	},
 	"Volkswagen Golf Kitcar": {
 		"class": "F2",
@@ -101,7 +101,7 @@
 	},
 	"Peugeot 208 R2": {
 		"class": "R2",
-		"brand": "peugot"
+		"brand": "peugeot"
 	},
 	"Mitsubishi Lancer Evolution X": {
 		"class": "R4",
@@ -121,7 +121,7 @@
 	},
 	"Peugeot 205 T16 Evo 2": {
 		"class": "groupB",
-		"brand": "peugot"
+		"brand": "peugeot"
 	},
 	"Audi Sport quattro S1 E2": {
 		"class": "groupB",
@@ -161,7 +161,7 @@
 	},
 	"Peugeot 205 GTI": {
 		"class": "H2",
-		"brand": "peugot"
+		"brand": "peugeot"
 	},
 	"Ford Escort Mk II": {
 		"class": "H2R",
