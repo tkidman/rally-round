@@ -22,7 +22,7 @@ const initialState = {
     kenBlockTribute: {
       divisionName: "kenBlockTribute",
       displayName: "Ken Block Tribute",
-      disableSameCarValidation: false,
+      disableSameCarValidation: true,
       // enableSameCarClassValidation: true,
       // maxDriversScoringPointsForTeam: 4,
       // filterEntries: true,
