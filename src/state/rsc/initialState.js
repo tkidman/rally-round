@@ -48,6 +48,14 @@ const initialState = {
             locationFlag: "FI",
             numStages: 7
             // enduranceRoundMultiplier: 2
+          },
+          {
+            eventId: 52043,
+            endTime: "2023-02-06 12:00",
+            locationName: "Central Europe Rally",
+            locationFlag: "EU",
+            numStages: 6
+            // enduranceRoundMultiplier: 2
           }
         ]
       },

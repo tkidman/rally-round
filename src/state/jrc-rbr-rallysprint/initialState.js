@@ -47,6 +47,13 @@ const initialState = {
             locationName: "Hokkara",
             locationFlag: "FI",
             numStages: 3
+          },
+          {
+            eventId: 52077,
+            endTime: "2023-02-06 11:59",
+            locationName: "Kuomiokoski",
+            locationFlag: "FI",
+            numStages: 3
           }
         ]
       },

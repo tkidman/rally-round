@@ -34,10 +34,17 @@ const initialState = {
         rallies: [
           {
             eventId: 51550,
-            endTime: "2022-11-20 23:59",
+            endTime: "2023-01-30 12:59",
             locationName: "Rallye Monte Carlo",
             locationFlag: "MC",
             numStages: 8
+          },
+          {
+            eventId: 52052,
+            endTime: "2023-02-06 12:59",
+            locationName: "Rally Sweden",
+            locationFlag: "SE",
+            numStages: 9
           }
         ]
       },
