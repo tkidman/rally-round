@@ -52,7 +52,28 @@ const initialState = {
       events: [],
       points: {
         powerStage: [5, 4, 3, 2, 1],
-        overall: [15, 12, 10, 8, 6, 5, 4, 3, 2, 1]
+        overall: [
+          30,
+          24,
+          21,
+          18,
+          16,
+          15,
+          14,
+          13,
+          12,
+          11,
+          10,
+          9,
+          8,
+          7,
+          6,
+          5,
+          4,
+          3,
+          2,
+          1
+        ]
         // stage: [1]
       }
       // cars: ["Peugeot 205 GTI"]
