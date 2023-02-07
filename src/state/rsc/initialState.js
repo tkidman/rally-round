@@ -56,6 +56,14 @@ const initialState = {
             locationFlag: "EU",
             numStages: 6
             // enduranceRoundMultiplier: 2
+          },
+          {
+            eventId: 52371,
+            endTime: "2023-02-13 22:00",
+            locationName: "Safari Rally",
+            locationFlag: "KE",
+            numStages: 6
+            // enduranceRoundMultiplier: 2
           }
         ]
       },

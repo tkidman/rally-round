@@ -45,6 +45,13 @@ const initialState = {
             locationName: "Rally Sweden",
             locationFlag: "SE",
             numStages: 9
+          },
+          {
+            eventId: 52335,
+            endTime: "2023-02-13 12:59",
+            locationName: "Acropolis Rally",
+            locationFlag: "GR",
+            numStages: 9
           }
         ]
       },
