@@ -32,7 +32,22 @@ const fetchEventsForClub = async ({
     divisionName,
     club
   });
-  const events = await fetchEventsFromKeys(eventKeys, getAllResults);
+    
+  let events = await fetchEventsFromKeys(eventKeys, getAllResults);
+  if(club.mergeEventsInChampionships != undefined){
+    let eventsToMerge = [];
+    events.forEach(event => {
+      if (club.mergeEventsInChampionships.includes(event.racenetChampionship.id)){
+        eventsToMerge.push(event);
+      }
+    });
+
+    eventsToMerge.forEach(event => {
+        events.splice(events.indexOf(event), true);
+    });
+
+    events.push(mergeEventsInChampionship(eventsToMerge));
+  }
 
   if (club.cachedEvent) {
     const leaderboardStages = [];
@@ -205,13 +220,34 @@ const appendResultsToPreviousEvent = (
     );
   }
   const event = mergedEvents[club.appendToEventIndex];
-  const lastStageBeforeAppend =
-    event.leaderboardStages[event.leaderboardStages.length - 1];
+  const lastStageBeforeAppend = event.leaderboardStages[event.leaderboardStages.length - 1];
   const eventToAppend = eventToAppendArray[0];
   eventToAppend.leaderboardStages.forEach(stage => {
     const adjustedStage = adjustAppendStageTimes(stage, lastStageBeforeAppend);
     event.leaderboardStages.push(adjustedStage);
   });
+};
+
+const mergeEventsInChampionship = (
+  eventsToMerge
+) => {
+  debug(`Merging championship events`);
+  if (eventsToMerge.length <= 1) {
+    throw new Error(
+      "merge events returned wrong number of events, should return 2 or more events."
+    );
+  }
+
+  const event = eventsToMerge[0];
+  const lastStageBeforeAppend = event.leaderboardStages[event.leaderboardStages.length - 1];
+  eventsToMerge.splice(0, true);
+  eventsToMerge.forEach(eventToMerge =>{
+    eventToMerge.leaderboardStages.forEach(stage => {
+      const adjustedStage = adjustAppendStageTimes(stage, lastStageBeforeAppend);
+      event.leaderboardStages.push(adjustedStage);
+    });
+  });
+  return event;
 };
 
 const fetchDirt2Events = async (division, divisionName, getAllResults) => {
