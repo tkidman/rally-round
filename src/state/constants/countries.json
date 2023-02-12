@@ -2014,5 +2014,10 @@
 		"code": "fns",
 		"name": "Fennoscandia",
 		"alpha2Code": "FS"
+	},
+	"eLngEuropean": {
+		"code": "eur",
+		"name": "Europe",
+		"alpha2Code": "EU"
 	}
 }
