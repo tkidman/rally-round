@@ -1,7 +1,7 @@
 const {
   getEventKeysFromRecentResults,
   fetchEventsFromKeys,
-  appendResultsToPreviousEvent,
+  appendEvents,
   recalculateEventDiffs
 } = require("./fetchDirt");
 const { init } = require("../../state/league");
@@ -241,44 +241,7 @@ describe("fetchDirt", () => {
     ]);
   });
 
-  describe("appendResultsToPreviousEvent", () => {
-    const eventToAppendArray = [
-      {
-        lastStageId: 2,
-        location: "Aus",
-        leaderboardStages: [
-          {
-            entries: [
-              {
-                totalTime: "04:00.000",
-                stageTime: "04:00.000",
-                name: "bobz99"
-              },
-              {
-                totalTime: "01:00.000",
-                stageTime: "01:00.000",
-                name: "trolli"
-              }
-            ]
-          },
-          {
-            entries: [
-              {
-                totalTime: "07:00.000",
-                stageTime: "03:00.000",
-                name: "bobz99"
-              },
-              {
-                totalTime: "02:00.000",
-                stageTime: "01:00.000",
-                name: "trolli"
-              }
-            ]
-          }
-        ]
-      }
-    ];
-
+  describe("appendEvents", () => {
     const mergedEvents = [
       {
         lastStageId: 2,
@@ -327,12 +290,47 @@ describe("fetchDirt", () => {
             ]
           }
         ]
+      },
+      {
+        lastStageId: 2,
+        location: "Aus",
+        leaderboardStages: [
+          {
+            entries: [
+              {
+                totalTime: "04:00.000",
+                stageTime: "04:00.000",
+                name: "bobz99"
+              },
+              {
+                totalTime: "01:00.000",
+                stageTime: "01:00.000",
+                name: "trolli"
+              }
+            ]
+          },
+          {
+            entries: [
+              {
+                totalTime: "07:00.000",
+                stageTime: "03:00.000",
+                name: "bobz99"
+              },
+              {
+                totalTime: "02:00.000",
+                stageTime: "01:00.000",
+                name: "trolli"
+              }
+            ]
+          }
+        ]
       }
     ];
 
     it("appends results", () => {
-      appendResultsToPreviousEvent(eventToAppendArray, mergedEvents, {
-        appendToEventIndex: 1
+      appendEvents({
+        division: { appendEventIndexesToPrevious: [2] },
+        mergedEvents
       });
       expect(mergedEvents).toEqual([
         {

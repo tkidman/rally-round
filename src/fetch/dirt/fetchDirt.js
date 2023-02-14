@@ -15,6 +15,7 @@ const {
 } = require("../../shared");
 const { leagueRef } = require("../../state/league");
 const locations = require("../../state/constants/locations.json");
+const { isNil } = require("lodash");
 
 const fetchEventsForClub = async ({
   club,
@@ -188,29 +189,27 @@ const adjustAppendStageTimes = (stage, lastStageBeforeAppend) => {
   return stage;
 };
 
-const appendResultsToPreviousEvent = (
-  eventToAppendArray,
-  mergedEvents,
-  club
-) => {
-  debug(`appending results to previous event`);
-  if (eventToAppendArray.length !== 1) {
-    throw new Error(
-      "append results returned wrong number of events, should only return 1 event."
-    );
-  }
-  if (mergedEvents.length <= club.appendToEventIndex) {
-    throw new Error(
-      `invalid index ${club.appendToEventIndex} to append results to, only ${mergedEvents.length} events available`
-    );
-  }
-  const event = mergedEvents[club.appendToEventIndex];
+const appendResults = ({ eventToAppendTo, eventToAppendFrom }) => {
   const lastStageBeforeAppend =
-    event.leaderboardStages[event.leaderboardStages.length - 1];
-  const eventToAppend = eventToAppendArray[0];
-  eventToAppend.leaderboardStages.forEach(stage => {
+    eventToAppendTo.leaderboardStages[
+      eventToAppendTo.leaderboardStages.length - 1
+    ];
+  eventToAppendFrom.leaderboardStages.forEach(stage => {
     const adjustedStage = adjustAppendStageTimes(stage, lastStageBeforeAppend);
-    event.leaderboardStages.push(adjustedStage);
+    eventToAppendTo.leaderboardStages.push(adjustedStage);
+  });
+};
+
+const appendEvents = ({ division, mergedEvents }) => {
+  division.appendEventIndexesToPrevious.forEach(eventToAppendFromIndex => {
+    const eventToAppendFrom = mergedEvents[eventToAppendFromIndex];
+    const eventToAppendTo = mergedEvents[eventToAppendFromIndex - 1];
+    if (!eventToAppendTo || !eventToAppendFrom) {
+      debug("invalid append event config, ignoring");
+    } else {
+      mergedEvents.splice(eventToAppendFromIndex, 1);
+      appendResults({ eventToAppendTo, eventToAppendFrom });
+    }
   });
 };
 
@@ -218,15 +217,18 @@ const fetchDirt2Events = async (division, divisionName, getAllResults) => {
   const mergedEvents = [];
   for (let club of division.clubs) {
     debug(`fetching event for club ${club.clubId}`);
+    if (!isNil(club.appendToEventIndex)) {
+      throw new Error(
+        "no longer supported - use division.appendEventIndexesToPrevious instead"
+      );
+    }
     const events = await fetchEventsForClub({
       club,
       division,
       divisionName,
       getAllResults
     });
-    if (club.appendToEventIndex === 0 || club.appendToEventIndex > 0) {
-      appendResultsToPreviousEvent(events, mergedEvents, club);
-    } else if (mergedEvents.length === 0) {
+    if (mergedEvents.length === 0) {
       mergedEvents.push(...events);
     } else {
       for (let i = 0; i < events.length; i++) {
@@ -234,7 +236,13 @@ const fetchDirt2Events = async (division, divisionName, getAllResults) => {
       }
     }
   }
-  if (division.clubs.length > 1) {
+  // appendEventIndexesToPrevious is an array of ints. Each int will cause the event at that index to have
+  // its stages appended to the event at the previous index, and the event is removed from the array.
+  // If merging more than one event it's best to order the array from high to low as the length of the events array changes as the process goes on.
+  if (division.appendEventIndexesToPrevious) {
+    appendEvents({ division, mergedEvents });
+  }
+  if (division.clubs.length > 1 || division.appendEventIndexesToPrevious) {
     mergedEvents.forEach(event => {
       recalculateEventDiffs(event);
     });
@@ -246,7 +254,7 @@ module.exports = {
   fetchDirt2Events,
   // tests
   getEventKeysFromRecentResults,
+  appendEvents,
   fetchEventsFromKeys,
-  appendResultsToPreviousEvent,
   recalculateEventDiffs
 };
