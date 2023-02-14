@@ -52,6 +52,13 @@ const initialState = {
             locationName: "Acropolis Rally",
             locationFlag: "GR",
             numStages: 9
+          },
+          {
+            eventId: 52595,
+            endTime: "2023-02-20 12:59",
+            locationName: "Rallye Deutschland",
+            locationFlag: "DE",
+            numStages: 8
           }
         ]
       },

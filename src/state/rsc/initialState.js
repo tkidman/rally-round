@@ -4,7 +4,7 @@ const initialState = {
   useStandingsForHome: true,
   // subfolderName: "rbr",
   showLivePoints: true,
-  showLivePointsDaysRemaining: 4,
+  showLivePointsDaysRemaining: 10,
   noSuperRallyPointsMultiplier: 2,
   dropLowestScoringRoundsNumber: 2,
   afterDropRoundMessage:
@@ -64,6 +64,14 @@ const initialState = {
             locationFlag: "KE",
             numStages: 6
             // enduranceRoundMultiplier: 2
+          },
+          {
+            eventId: 52474,
+            endTime: "2023-02-27 22:00",
+            locationName: "Rally Sweden",
+            locationFlag: "SE",
+            numStages: 17,
+            enduranceRoundMultiplier: 2
           }
         ]
       },

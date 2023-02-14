@@ -61,6 +61,13 @@ const initialState = {
             locationName: "Vesala",
             locationFlag: "FI",
             numStages: 3
+          },
+          {
+            eventId: 52594,
+            endTime: "2023-02-20 12:59",
+            locationName: "Poykky",
+            locationFlag: "FI",
+            numStages: 3
           }
         ]
       },
