@@ -26,8 +26,8 @@ const initialState = {
   siteTitlePrefix: "JRC RBR Rallysprint",
   divisions: {
     jrcRbrRallySprintSeason1: {
-      divisionName: "jrcRbrRallysprintSeason1",
-      displayName: "RBR Rallysprint Season 1",
+      divisionName: "jrcRbrRallysprintSeason2",
+      displayName: "RBR Rallysprint Season 2",
       disableSameCarValidation: false,
       // enableSameCarClassValidation: true,
       // maxDriversScoringPointsForTeam: 2,
@@ -35,38 +35,10 @@ const initialState = {
       rbr: {
         rallies: [
           {
-            eventId: 51210,
-            endTime: "2023-01-22 11:59",
-            locationName: "Hakolahti",
-            locationFlag: "FI",
-            numStages: 3
-          },
-          {
-            eventId: 51598,
-            endTime: "2023-01-30 11:59",
-            locationName: "Hokkara",
-            locationFlag: "FI",
-            numStages: 3
-          },
-          {
-            eventId: 52077,
-            endTime: "2023-02-06 11:59",
-            locationName: "Kuomiokoski",
-            locationFlag: "FI",
-            numStages: 3
-          },
-          {
-            eventId: 52356,
-            endTime: "2023-02-13 12:59",
-            locationName: "Vesala",
-            locationFlag: "FI",
-            numStages: 3
-          },
-          {
-            eventId: 52594,
-            endTime: "2023-02-20 12:59",
-            locationName: "Poykky",
-            locationFlag: "FI",
+            eventId: 53164,
+            endTime: "2023-03-06 12:59",
+            locationName: "Torsby",
+            locationFlag: "SE",
             numStages: 3
           }
         ]
@@ -133,6 +105,11 @@ const initialState = {
       // outputSheetId: "1C3fU9y1236wFmPuKcui4CEXBuSsUANH6OJ0BpQIasTc"
     }
   },
-  historicalSeasonLinks: []
+  historicalSeasonLinks: [
+    {
+      name: "RBR Rallysprint Season 1",
+      href: "/rbr-rallysprint/rbr-rallysprint-1"
+    }
+  ]
 };
 module.exports = initialState;

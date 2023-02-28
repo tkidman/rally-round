@@ -4,7 +4,7 @@ const initialState = {
   useStandingsForHome: true,
   // subfolderName: "rbr",
   showLivePoints: true,
-  showLivePointsDaysRemaining: 10,
+  showLivePointsDaysRemaining: 4,
   noSuperRallyPointsMultiplier: 2,
   dropLowestScoringRoundsNumber: 2,
   afterDropRoundMessage:
@@ -72,6 +72,14 @@ const initialState = {
             locationFlag: "SE",
             numStages: 17,
             enduranceRoundMultiplier: 2
+          },
+          {
+            eventId: 53208,
+            endTime: "2023-03-06 22:00",
+            locationName: "Rally Australasia",
+            locationFlag: "AU",
+            numStages: 7
+            // enduranceRoundMultiplier: 1
           }
         ]
       },

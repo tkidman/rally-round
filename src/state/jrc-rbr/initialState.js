@@ -66,6 +66,13 @@ const initialState = {
             locationName: "Rally Australia",
             locationFlag: "AU",
             numStages: 9
+          },
+          {
+            eventId: 53163,
+            endTime: "2023-03-06 12:59",
+            locationName: "Rally Bulgaria",
+            locationFlag: "BG",
+            numStages: 8
           }
         ]
       },
