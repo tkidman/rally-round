@@ -40,6 +40,13 @@ const initialState = {
             locationName: "Torsby",
             locationFlag: "SE",
             numStages: 3
+          },
+          {
+            eventId: 53424,
+            endTime: "2023-03-13 12:59",
+            locationName: "Gästabudstrofen",
+            locationFlag: "SE",
+            numStages: 3
           }
         ]
       },
