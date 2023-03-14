@@ -82,7 +82,7 @@ const initialState = {
             // enduranceRoundMultiplier: 1
           },
           {
-            eventId: 53208,
+            eventId: 53436,
             endTime: "2023-03-13 22:00",
             locationName: "Superspecial Rally",
             locationFlag: "EU",
