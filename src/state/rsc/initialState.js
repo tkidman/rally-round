@@ -80,6 +80,22 @@ const initialState = {
             locationFlag: "AU",
             numStages: 7
             // enduranceRoundMultiplier: 1
+          },
+          {
+            eventId: 53208,
+            endTime: "2023-03-13 22:00",
+            locationName: "Superspecial Rally",
+            locationFlag: "EU",
+            numStages: 11
+            // enduranceRoundMultiplier: 1
+          },
+          {
+            eventId: 53808,
+            endTime: "2023-03-20 22:00",
+            locationName: "Rally PolItaly",
+            locationFlag: "PL",
+            numStages: 6
+            // enduranceRoundMultiplier: 1
           }
         ]
       },
