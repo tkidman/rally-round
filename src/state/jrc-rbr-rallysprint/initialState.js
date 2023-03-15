@@ -28,7 +28,7 @@ const initialState = {
     jrcRbrRallySprintSeason1: {
       divisionName: "jrcRbrRallysprintSeason2",
       displayName: "RBR Rallysprint Season 2",
-      disableSameCarValidation: false,
+      disableSameCarValidation: true,
       // enableSameCarClassValidation: true,
       // maxDriversScoringPointsForTeam: 2,
       // filterEntries: true,
@@ -104,6 +104,22 @@ const initialState = {
           4,
           3,
           2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
           1
         ]
         // stage: [1]
