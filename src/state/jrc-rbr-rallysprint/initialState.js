@@ -47,6 +47,13 @@ const initialState = {
             locationName: "Gästabudstrofen",
             locationFlag: "SE",
             numStages: 3
+          },
+          {
+            eventId: 53857,
+            endTime: "2023-03-20 12:59",
+            locationName: "Piren",
+            locationFlag: "SE",
+            numStages: 3
           }
         ]
       },
