@@ -2,6 +2,7 @@ const initialState = {
   pointsForDNF: false,
   websiteName: "jrc-results",
   subfolderName: "wrc",
+  useStandingsForHome: true,
   showLivePoints: true,
   showLivePointsDaysRemaining: 3,
   hideCarColumnInStandings: true,
@@ -17,14 +18,14 @@ const initialState = {
   siteTitlePrefix: "JRC WRC",
   divisions: {
     jrcWrc: {
-      divisionName: "wrcSeason4",
-      displayName: "WRC Season 4",
+      divisionName: "wrcSeason5",
+      displayName: "WRC Season 5",
       disableSameCarValidation: false,
       // enableSameCarClassValidation: true,
       maxDriversScoringPointsForTeam: 2,
       // filterEntries: true,
       manual: {
-        sheetId: "1XLdvxPe9bCZybKWb9nPTCn7kItN-7Xfwtt9LF_KLLNw"
+        sheetId: "1IpbqdDUJCijNzeRM9lsqP1jwutbVug1JdZ-LH8tQM9M"
       },
       manualResults: [],
       events: [],
@@ -72,6 +73,24 @@ const initialState = {
       // cars: ["Peugeot 205 GTI"]
       // outputSheetId: "1C3fU9y1236wFmPuKcui4CEXBuSsUANH6OJ0BpQIasTc"
     }
-  }
+  },
+  historicalSeasonLinks: [
+    {
+      name: "WRC Season 1",
+      href: "/wrc/wrc-1"
+    },
+    {
+      name: "WRC Season 2",
+      href: "/wrc/wrc-2"
+    },
+    {
+      name: "WRC Season 3",
+      href: "/wrc/wrc-3"
+    },
+    {
+      name: "WRC Season 4",
+      href: "/wrc/wrc-4"
+    }
+  ]
 };
 module.exports = initialState;
