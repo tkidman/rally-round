@@ -229,39 +229,52 @@ const fetchEventResults = async ({
     debug(`cached event results retrieved: ${cacheFileName}`);
     return JSON.parse(cacheFile);
   }
-  const payload = {
-    eventId,
-    challengeId,
-    stageId,
-    page: 1,
-    pageSize: 100
-    // selectedEventId: 0,
-    // orderByTotalTime: true,
-    // platformFilter: "None",
-    // playerFilter: "Everyone",
-    // filterByAssists: "Unspecified",
-    // filterByWheel: "Unspecified",
-    // nationalityFilter: "None",
-  };
-  debug(`retrieving event results from racenet: ${eventId}`);
-  const response = await retry(
-    {
-      method: "POST",
-      url: `${dirtRally2Domain}/api/Leaderboard`,
-      headers: { Cookie: cookie.trim(), "RaceNet.XSRFH": xsrfh.trim() },
-      data: payload
-    },
-    10
-  );
-  debug(`event results retrieved, event id: ${eventId}, stage id: ${stageId}`);
-  // only cache finished events
+  
+  let previousResponses = [];
+  let allResponses;
+  let page = 1;
+  let pageCount = null;
+
+  while (!pageCount || page <= pageCount) {
+    const payload = {
+      eventId,
+      challengeId,
+      stageId,
+      page,
+      pageSize: 100
+      // selectedEventId: 0,
+      // orderByTotalTime: true,
+      // platformFilter: "None",
+      // playerFilter: "Everyone",
+      // filterByAssists: "Unspecified",
+      // filterByWheel: "Unspecified",
+      // nationalityFilter: "None",
+    };
+    debug(`retrieving event results from racenet: ${eventId}`);
+    const response = await retry(
+      {
+        method: "POST",
+        url: `${dirtRally2Domain}/api/Leaderboard`,
+        headers: { Cookie: cookie.trim(), "RaceNet.XSRFH": xsrfh.trim() },
+        data: payload
+      },
+      10
+    );
+    allResponses = response.data;
+    previousResponses.push(...response.data.entries);
+    pageCount = response.data.pageCount;
+    debug(`event results retrieved, event id: ${eventId}, stage id: ${stageId}, Page: ${page}`);
+    page++;
+  }
+  allResponses.entries.push(...previousResponses)
+  //only cache finished events
   if (eventStatus === eventStatuses.finished) {
     fs.writeFileSync(
       `${cacheFileName}`,
-      JSON.stringify(response.data, null, 2)
+      JSON.stringify(allResponses, null, 2)
     );
   }
-  return response.data;
+  return allResponses;
 };
 
 module.exports = {
