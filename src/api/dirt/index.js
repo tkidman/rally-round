@@ -230,7 +230,7 @@ const fetchEventResults = async ({
     return JSON.parse(cacheFile);
   }
   
-  let previousResponses = [];
+  let previousEntries = [];
   let allResponses;
   let page = 1;
   let pageCount = null;
@@ -261,12 +261,12 @@ const fetchEventResults = async ({
       10
     );
     allResponses = response.data;
-    previousResponses.push(...response.data.entries);
+    previousEntries.push(...response.data.entries);
     pageCount = response.data.pageCount;
     debug(`event results retrieved, event id: ${eventId}, stage id: ${stageId}, Page: ${page}`);
     page++;
   }
-  allResponses.entries.push(...previousResponses)
+  allResponses.entries = previousEntries
   //only cache finished events
   if (eventStatus === eventStatuses.finished) {
     fs.writeFileSync(
