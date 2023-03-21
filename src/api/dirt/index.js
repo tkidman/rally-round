@@ -229,7 +229,7 @@ const fetchEventResults = async ({
     debug(`cached event results retrieved: ${cacheFileName}`);
     return JSON.parse(cacheFile);
   }
-  
+
   let previousEntries = [];
   let allResponses;
   let page = 1;
@@ -263,16 +263,15 @@ const fetchEventResults = async ({
     allResponses = response.data;
     previousEntries.push(...response.data.entries);
     pageCount = response.data.pageCount;
-    debug(`event results retrieved, event id: ${eventId}, stage id: ${stageId}, Page: ${page}`);
+    debug(
+      `event results retrieved, event id: ${eventId}, stage id: ${stageId}, Page: ${page}`
+    );
     page++;
   }
-  allResponses.entries = previousEntries
+  allResponses.entries = previousEntries;
   //only cache finished events
   if (eventStatus === eventStatuses.finished) {
-    fs.writeFileSync(
-      `${cacheFileName}`,
-      JSON.stringify(allResponses, null, 2)
-    );
+    fs.writeFileSync(`${cacheFileName}`, JSON.stringify(allResponses, null, 2));
   }
   return allResponses;
 };
