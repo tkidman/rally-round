@@ -5,7 +5,7 @@ const initialState = {
   useStandingsForHome: true,
   showLivePoints: true,
   showLivePointsDaysRemaining: 3,
-  hideCarColumnInStandings: true,
+  hideCarColumnInStandings: false,
   showCarNameAsTextInResults: true,
   nullTeamIsPrivateer: true,
   // useCarAsTeam: false,
@@ -68,7 +68,11 @@ const initialState = {
         ]
         // stage: [1]
       }
-      // cars: ["Peugeot 205 GTI"]
+      cars: [
+        "Ford Puma Rally1",
+        "Hyundai i20 N Rally1",
+        "Toyota GR Yaris Rally1",
+      ]
       // outputSheetId: "1C3fU9y1236wFmPuKcui4CEXBuSsUANH6OJ0BpQIasTc"
     }
   },
