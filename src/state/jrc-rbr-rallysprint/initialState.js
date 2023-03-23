@@ -54,6 +54,13 @@ const initialState = {
             locationName: "Piren",
             locationFlag: "SE",
             numStages: 3
+          },
+          {
+            eventId: 54028,
+            endTime: "2023-03-27 12:59",
+            locationName: "Skogby",
+            locationFlag: "SE",
+            numStages: 3
           }
         ]
       },

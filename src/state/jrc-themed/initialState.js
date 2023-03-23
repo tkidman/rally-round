@@ -3,12 +3,12 @@ const initialState = {
   websiteName: "jrc-results",
   subfolderName: "themed",
   useStandingsForHome: true,
-  showLivePoints: false,
+  showLivePoints: true,
   showLivePointsDaysRemaining: 4,
-  hideCarColumnInStandings: true,
+  hideCarColumnInStandings: false,
   showCarNameAsTextInResults: true,
-  // useCarAsTeam: false,
-  // useCarClassAsTeam: true,
+  useCarAsTeam: true,
+  // useCarClassAsTeam: false,
   disableOverall: true,
   // teamPointsForPowerstage: false,
   backgroundStyle:
@@ -19,14 +19,17 @@ const initialState = {
   logo: "JRC.png",
   siteTitlePrefix: "JRC Themed",
   divisions: {
-    kenBlockTribute: {
-      divisionName: "kenBlockTribute",
-      displayName: "Ken Block Tribute",
-      disableSameCarValidation: true,
+    wrc2001: {
+      divisionName: "wrc2001",
+      displayName: "WRC 2001",
+      disableSameCarValidation: false,
       // enableSameCarClassValidation: true,
-      // maxDriversScoringPointsForTeam: 4,
+      maxDriversScoringPointsForTeam: 4,
       // filterEntries: true,
-      clubs: [{ clubId: "256173", championshipIds: ["703057"] }],
+      clubs: [
+        { clubId: "256173", championshipIds: ["727138"] },
+        { clubId: "360961", championshipIds: ["727132"] }
+      ],
       manualResults: [],
       events: [],
       points: {
@@ -114,15 +117,19 @@ const initialState = {
         // stage: [1]
       },
       cars: [
-        "Ford Escort Mk II",
-        "Ford Focus RS Rally 2007",
-        "Ford Escort RS Cosworth",
-        "ŠKODA Fabia R5"
+        "SUBARU Impreza (2001)",
+        "Peugeot 206 Rally",
+        "Ford Focus RS Rally 2001",
+        "Mitsubishi Lancer Evolution VI"
       ]
       // outputSheetId: "1C3fU9y1236wFmPuKcui4CEXBuSsUANH6OJ0BpQIasTc"
     }
   },
   historicalSeasonLinks: [
+    {
+      name: "Ken Block Tribute",
+      href: "/themed/themed-11"
+    },
     {
       name: "Peugeot Rally Challenge",
       href: "/themed/themed-10"

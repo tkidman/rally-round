@@ -2,7 +2,7 @@ const initialState = {
   pointsForDNF: false,
   websiteName: "jrc-results",
   subfolderName: "historic",
-  showLivePoints: false,
+  showLivePoints: true,
   showLivePointsDaysRemaining: 4,
   showCarNameAsTextInResults: true,
   useStandingsForHome: true,
@@ -16,7 +16,7 @@ const initialState = {
       divisionName: "historic2301",
       displayName: "JRC Historic",
       disableSameCarValidation: true,
-      clubs: [{ clubId: "192069", championshipIds: ["703027"] }],
+      clubs: [{ clubId: "192069", championshipIds: ["727034"] }],
       events: [],
       points: {
         powerStage: [],
@@ -112,6 +112,10 @@ const initialState = {
     }
   },
   historicalSeasonLinks: [
+    {
+      name: "Historic 2023-02",
+      href: "/historic/historic-13"
+    },
     {
       name: "Historic 2022-09",
       href: "/historic/historic-12"
