@@ -28,6 +28,7 @@ describe("league", () => {
       leagueRef.league.showLivePoints = true;
       leagueRef.league.showLivePointsDaysRemaining = 3;
       leagueRef.endTime = moment()
+        .utc()
         .add(3, "days")
         .toISOString();
       expect(leagueRef.showLivePoints()).toBeTruthy();
@@ -40,6 +41,7 @@ describe("league", () => {
       leagueRef.league.showLivePoints = true;
       leagueRef.league.showLivePointsDaysRemaining = 2;
       leagueRef.endTime = moment()
+        .utc()
         .add(3, "days")
         .toISOString();
       expect(leagueRef.showLivePoints()).toBeFalsy();
