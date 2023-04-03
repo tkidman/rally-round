@@ -11,6 +11,7 @@ const PASSWORD_SELECTOR = "#Password";
 const LOGIN_BUTTON_SELECTOR = "#login_button_container > input";
 const puppeteer = require("puppeteer");
 const { eventStatuses } = require("../../shared");
+const { isNil } = require("lodash");
 const validCreds = {};
 
 const dirtRally2Domain = "https://dirtrally2.dirtgame.com";
@@ -155,7 +156,7 @@ const fetchClubs = async () => {
   let pageNumber = 1;
   let numPages = null;
 
-  while (!numPages || pageNumber <= numPages) {
+  while (isNil(numPages) || pageNumber <= numPages) {
     const payload = {
       searchTerm: "",
       pageNumber,
@@ -235,7 +236,7 @@ const fetchEventResults = async ({
   let page = 1;
   let pageCount = null;
 
-  while (!pageCount || page <= pageCount) {
+  while (isNil(pageCount) || page <= pageCount) {
     const payload = {
       eventId,
       challengeId,
@@ -264,7 +265,7 @@ const fetchEventResults = async ({
     previousEntries.push(...response.data.entries);
     pageCount = response.data.pageCount;
     debug(
-      `event results retrieved, event id: ${eventId}, stage id: ${stageId}, Page: ${page}`
+      `event results retrieved, event id: ${eventId}, stage id: ${stageId}, Page: ${page}, pageCount: ${pageCount}`
     );
     page++;
   }

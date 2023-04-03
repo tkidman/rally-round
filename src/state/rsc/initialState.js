@@ -9,7 +9,7 @@ const initialState = {
   dropLowestScoringRoundsNumber: 2,
   afterDropRoundMessage:
     "*After Dropped Rounds: total points after 2 lowest scoring rounds removed - endurance rounds count as 2",
-  sortByDropRoundPoints: false,
+  sortByDropRoundPoints: true,
   showSuperRallyColumn: true,
   hideCarColumnInStandings: false,
   showCarNameAsTextInResults: true,
@@ -96,6 +96,14 @@ const initialState = {
             locationFlag: "PL",
             numStages: 6
             // enduranceRoundMultiplier: 1
+          },
+          {
+            eventId: 53924,
+            endTime: "2023-04-03 22:00",
+            locationName: "Rally Monte Carlo",
+            locationFlag: "MC",
+            numStages: 15,
+            enduranceRoundMultiplier: 2
           }
         ]
       },
