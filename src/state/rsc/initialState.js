@@ -96,6 +96,14 @@ const initialState = {
             locationFlag: "PL",
             numStages: 6
             // enduranceRoundMultiplier: 1
+          },
+          {
+            eventId: 53924,
+            endTime: "2023-04-03 22:00",
+            locationName: "Rally Monte Carlo",
+            locationFlag: "MC",
+            numStages: 15,
+            enduranceRoundMultiplier: 2
           }
         ]
       },
