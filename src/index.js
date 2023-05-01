@@ -14,7 +14,7 @@ const {
   getTeamIds,
   getCarByName
 } = require("./state/league");
-const { sortBy, keyBy, sum, flatMap, minBy } = require("lodash");
+const { sortBy, keyBy, sum, flatMap, minBy, isEmpty } = require("lodash");
 const { cachePath } = require("./shared");
 const fs = require("fs");
 const { createDNFResult } = require("./shared");
@@ -356,7 +356,10 @@ const shouldFilterDriver = (division, driverName) => {
   const removeDriverByDivision =
     get(division, "filterEntries.matchDivision", false) &&
     driver.division !== division.divisionName;
-  return removeDriverByName || removeDriverByDivision;
+  const allowedCars = get(division, "filterEntries.allowedCars");
+  const removeDriverByCar =
+    !isEmpty(allowedCars) && !allowedCars.includes(driver.car);
+  return removeDriverByName || removeDriverByDivision || removeDriverByCar;
 };
 
 const isDuplicateEntryNotFirstCarDriven = (entryCountByDriver, entry) => {

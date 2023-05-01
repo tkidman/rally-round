@@ -6,7 +6,7 @@ const initialState = {
   showLivePoints: false,
   showLivePointsDaysRemaining: 4,
   hideCarColumnInStandings: false,
-  showCarNameAsTextInResults: false,
+  showCarNameAsTextInResults: true,
   nullTeamIsPrivateer: true,
   // dropLowestScoringRoundsNumber: 1,
   // sortByDropRoundPoints: true,
@@ -23,9 +23,9 @@ const initialState = {
   logo: "JRC.png",
   siteTitlePrefix: "JRC RBR",
   divisions: {
-    jrcRbrSeason3: {
-      divisionName: "jrcRbrSeason3",
-      displayName: "RBR Season 3",
+    jrcRbrSeason4: {
+      divisionName: "jrcRbrSeason4",
+      displayName: "RBR Season 4 - Overall",
       disableSameCarValidation: false,
       // enableSameCarClassValidation: true,
       maxDriversScoringPointsForTeam: 2,
@@ -33,53 +33,68 @@ const initialState = {
       rbr: {
         rallies: [
           {
-            eventId: 51550,
-            endTime: "2023-01-30 12:59",
-            locationName: "Rallye Monte Carlo",
-            locationFlag: "MC",
-            numStages: 8
-          },
-          {
-            eventId: 52052,
-            endTime: "2023-02-06 12:59",
-            locationName: "Rally Sweden",
-            locationFlag: "SE",
+            // eventIds: [55244, 55529],
+            eventIds: [55244],
+            endTime: "2023-05-01 12:59",
+            locationName: "Janner Rallye",
+            locationFlag: "CZ",
             numStages: 9
-          },
+          }
+        ]
+      },
+      manualResults: [],
+      events: [],
+      points: {
+        powerStage: [5, 4, 3, 2, 1],
+        overall: [
+          30,
+          24,
+          21,
+          18,
+          16,
+          15,
+          14,
+          13,
+          12,
+          11,
+          10,
+          9,
+          8,
+          7,
+          6,
+          5,
+          4,
+          3,
+          2,
+          1
+        ]
+        // stage: [1]
+      }
+      // cars: ["Peugeot 205 GTI"]
+      // outputSheetId: "1C3fU9y1236wFmPuKcui4CEXBuSsUANH6OJ0BpQIasTc"
+    },
+    jrcRbrSeason4LowP2W: {
+      divisionName: "jrcRbrSeason4LowPWR",
+      displayName: "RBR Season 4 - Low PWR",
+      disableSameCarValidation: false,
+      // enableSameCarClassValidation: true,
+      maxDriversScoringPointsForTeam: 2,
+      filterEntries: {
+        allowedCars: [
+          "Fiat 131 Abarth Grp4",
+          "Lada VFTS GrpB",
+          "Opel Ascona 400 Grp4"
+        ]
+      },
+      rbr: {
+        rallies: [
           {
-            eventId: 52335,
-            endTime: "2023-02-13 12:59",
-            locationName: "Acropolis Rally",
-            locationFlag: "GR",
+            // eventIds: [55244, 55529],
+            eventIds: [55244],
+            endTime: "2023-05-01 12:59",
+            locationName: "Janner Rallye",
+            locationFlag: "CZ",
             numStages: 9
-          },
-          {
-            eventId: 52595,
-            endTime: "2023-02-20 12:59",
-            locationName: "Rallye Deutschland",
-            locationFlag: "DE",
-            numStages: 8
-          },
-          {
-            eventId: 52840,
-            endTime: "2023-02-27 12:59",
-            locationName: "Rally Australia",
-            locationFlag: "AU",
-            numStages: 9
-          },
-          {
-            eventId: 53163,
-            endTime: "2023-03-06 12:59",
-            locationName: "Rally Bulgaria",
-            locationFlag: "BG",
-            numStages: 8
-          },
-          {
-            eventId: 53421,
-            endTime: "2023-03-13 12:59",
-            locationName: "Wales Rally GB",
-            locationFlag: "welsh",
-            numStages: 10
           }
         ]
       },
@@ -127,6 +142,10 @@ const initialState = {
     {
       name: "RBR Off Season 1",
       href: "/rbr/rbr-off-1"
+    },
+    {
+      name: "RBR Season 3",
+      href: "/rbr/rbr-3"
     }
   ]
 };
