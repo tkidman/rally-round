@@ -9,7 +9,7 @@ const initialState = {
   dropLowestScoringRoundsNumber: 2,
   afterDropRoundMessage:
     "*After Dropped Rounds: total points after 2 lowest scoring rounds removed - endurance rounds count as 2",
-  sortByDropRoundPoints: false,
+  sortByDropRoundPoints: true,
   showSuperRallyColumn: true,
   hideCarColumnInStandings: false,
   showCarNameAsTextInResults: true,

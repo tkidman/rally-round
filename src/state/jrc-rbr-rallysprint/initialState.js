@@ -61,6 +61,13 @@ const initialState = {
             locationName: "Skogby",
             locationFlag: "SE",
             numStages: 3
+          },
+          {
+            eventId: 54333,
+            endTime: "2023-04-04 00:20",
+            locationName: "Ramirent Sprinten",
+            locationFlag: "SE",
+            numStages: 3
           }
         ]
       },
