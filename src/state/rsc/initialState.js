@@ -57,7 +57,7 @@ const initialState = {
       manualResults: [],
       events: [],
       points: {
-        powerStage: [5, 4, 3, 2, 1],
+        // powerStage: [5, 4, 3, 2, 1],
         overall: [
           40,
           35,
