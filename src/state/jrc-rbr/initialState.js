@@ -3,7 +3,7 @@ const initialState = {
   websiteName: "jrc-results",
   subfolderName: "rbr",
   useStandingsForHome: true,
-  showLivePoints: false,
+  showLivePoints: true,
   showLivePointsDaysRemaining: 4,
   hideCarColumnInStandings: false,
   showCarNameAsTextInResults: true,
@@ -38,6 +38,13 @@ const initialState = {
             endTime: "2023-05-01 12:59",
             locationName: "Janner Rallye",
             locationFlag: "CZ",
+            numStages: 9
+          },
+          {
+            eventIds: [55770],
+            endTime: "2023-05-08 12:59",
+            locationName: "Rally Costa Brava",
+            locationFlag: "ES",
             numStages: 9
           }
         ]
@@ -89,11 +96,17 @@ const initialState = {
       rbr: {
         rallies: [
           {
-            // eventIds: [55244, 55529],
             eventIds: [55244],
             endTime: "2023-05-01 12:59",
             locationName: "Janner Rallye",
             locationFlag: "CZ",
+            numStages: 9
+          },
+          {
+            eventIds: [55770],
+            endTime: "2023-05-08 12:59",
+            locationName: "Rally Costa Brava",
+            locationFlag: "ES",
             numStages: 9
           }
         ]
