@@ -14,9 +14,9 @@ const initialState = {
   websiteName: "rsc-results",
   useStandingsForHome: true,
   // subfolderName: "rbr",
-  showLivePoints: false,
+  showLivePoints: true,
   showLivePointsDaysRemaining: 4,
-  noSuperRallyPointsMultiplier: 2,
+  // noSuperRallyPointsMultiplier: 2,
   // dropLowestScoringRoundsNumber: 2,
   // afterDropRoundMessage:
   //   "*After Dropped Rounds: total points after 2 lowest scoring rounds removed - endurance rounds count as 2",
@@ -58,7 +58,28 @@ const initialState = {
       events: [],
       points: {
         powerStage: [5, 4, 3, 2, 1],
-        overall: [30, 24, 19, 15, 12, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+        overall: [
+          40,
+          35,
+          31,
+          27,
+          23,
+          20,
+          17,
+          15,
+          13,
+          11,
+          10,
+          9,
+          8,
+          7,
+          6,
+          5,
+          4,
+          3,
+          2,
+          1
+        ]
       }
       // cars: ["Peugeot 205 GTI"]
     },
@@ -77,8 +98,8 @@ const initialState = {
       manualResults: [],
       events: [],
       points: {
-        powerStage: [5, 4, 3, 2, 1],
-        overall: [30, 24, 19, 15, 12, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+        // powerStage: [5, 4, 3, 2, 1],
+        overall: [10, 7, 5, 3, 2, 1]
       }
       // cars: ["Peugeot 205 GTI"]
     },
@@ -97,8 +118,8 @@ const initialState = {
       manualResults: [],
       events: [],
       points: {
-        powerStage: [5, 4, 3, 2, 1],
-        overall: [30, 24, 19, 15, 12, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+        // powerStage: [5, 4, 3, 2, 1],
+        overall: [10, 7, 5, 3, 2, 1]
       }
       // cars: ["Peugeot 205 GTI"]
     }
