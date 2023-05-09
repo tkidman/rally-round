@@ -3,8 +3,16 @@ const rallies = [
     eventId: 55802,
     endTime: "2023-05-08 22:00",
     locationName: "Rally Eggleston",
-    locationFlag: "EU",
+    locationFlag: "GB",
     numStages: 9
+    // enduranceRoundMultiplier: 2
+  },
+  {
+    eventId: 56065,
+    endTime: "2023-05-15 22:30",
+    locationName: "Rally Middleton-in-Teesdale",
+    locationFlag: "GB",
+    numStages: 8
     // enduranceRoundMultiplier: 2
   }
 ];

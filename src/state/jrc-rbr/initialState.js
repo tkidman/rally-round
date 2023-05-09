@@ -1,3 +1,27 @@
+const rallies = [
+  {
+    eventIds: [55244],
+    endTime: "2023-05-01 12:59",
+    locationName: "Janner Rallye",
+    locationFlag: "CZ",
+    numStages: 9
+  },
+  {
+    eventIds: [55770],
+    endTime: "2023-05-08 12:59",
+    locationName: "Rally Costa Brava",
+    locationFlag: "ES",
+    numStages: 9
+  },
+  {
+    eventIds: [56045],
+    endTime: "2023-05-15 14:29",
+    locationName: "Hankiralli",
+    locationFlag: "FI",
+    numStages: 8
+  }
+];
+
 const initialState = {
   pointsForDNF: false,
   websiteName: "jrc-results",
@@ -31,23 +55,7 @@ const initialState = {
       maxDriversScoringPointsForTeam: 2,
       // filterEntries: true,
       rbr: {
-        rallies: [
-          {
-            // eventIds: [55244, 55529],
-            eventIds: [55244],
-            endTime: "2023-05-01 12:59",
-            locationName: "Janner Rallye",
-            locationFlag: "CZ",
-            numStages: 9
-          },
-          {
-            eventIds: [55770],
-            endTime: "2023-05-08 12:59",
-            locationName: "Rally Costa Brava",
-            locationFlag: "ES",
-            numStages: 9
-          }
-        ]
+        rallies
       },
       manualResults: [],
       events: [],
@@ -94,22 +102,7 @@ const initialState = {
         ]
       },
       rbr: {
-        rallies: [
-          {
-            eventIds: [55244],
-            endTime: "2023-05-01 12:59",
-            locationName: "Janner Rallye",
-            locationFlag: "CZ",
-            numStages: 9
-          },
-          {
-            eventIds: [55770],
-            endTime: "2023-05-08 12:59",
-            locationName: "Rally Costa Brava",
-            locationFlag: "ES",
-            numStages: 9
-          }
-        ]
+        rallies
       },
       manualResults: [],
       events: [],
