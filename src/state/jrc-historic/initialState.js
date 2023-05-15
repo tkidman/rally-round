@@ -12,11 +12,11 @@ const initialState = {
   logo: "JRC.png",
   siteTitlePrefix: "JRC Historic",
   divisions: {
-    historic2301: {
-      divisionName: "historic2301",
+    historic2305: {
+      divisionName: "historic2305",
       displayName: "JRC Historic",
       disableSameCarValidation: true,
-      clubs: [{ clubId: "192069", championshipIds: ["727034"] }],
+      clubs: [{ clubId: "192069", championshipIds: ["743272"] }],
       events: [],
       points: {
         powerStage: [],
@@ -100,6 +100,10 @@ const initialState = {
     }
   },
   historicalSeasonLinks: [
+    {
+      name: "Historic 2023-04",
+      href: "/historic/historic-14"
+    },
     {
       name: "Historic 2023-02",
       href: "/historic/historic-13"

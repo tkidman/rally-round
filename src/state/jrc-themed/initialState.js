@@ -7,7 +7,8 @@ const initialState = {
   showLivePointsDaysRemaining: 4,
   hideCarColumnInStandings: false,
   showCarNameAsTextInResults: true,
-  useCarAsTeam: true,
+  nullTeamIsPrivateer: true,
+  useCarAsTeam: false,
   // useCarClassAsTeam: false,
   disableOverall: true,
   // teamPointsForPowerstage: false,
@@ -19,21 +20,18 @@ const initialState = {
   logo: "JRC.png",
   siteTitlePrefix: "JRC Themed",
   divisions: {
-    wrc2001: {
-      divisionName: "wrc2001",
-      displayName: "WRC 2001",
+    craigBreenTribute: {
+      divisionName: "craigBreenTribute",
+      displayName: "Craig Breen Tribute",
       disableSameCarValidation: false,
       // enableSameCarClassValidation: true,
       maxDriversScoringPointsForTeam: 4,
       // filterEntries: true,
-      clubs: [
-        { clubId: "256173", championshipIds: ["727138"] },
-        { clubId: "360961", championshipIds: ["727132"] }
-      ],
+      clubs: [{ clubId: "256173", championshipIds: ["743245"] }],
       manualResults: [],
       events: [],
       points: {
-        powerStage: [],
+        powerStage: [5, 4, 3, 2, 1],
         overall: [
           35,
           29,
@@ -116,16 +114,15 @@ const initialState = {
         ]
         // stage: [1]
       },
-      cars: [
-        "SUBARU Impreza (2001)",
-        "Peugeot 206 Rally",
-        "Ford Focus RS Rally 2001",
-        "Mitsubishi Lancer Evolution VI"
-      ]
+      cars: ["Mitsubishi Space Star R5", "Ford Fiesta R5", "Peugeot 208 T16 R5"]
       // outputSheetId: "1C3fU9y1236wFmPuKcui4CEXBuSsUANH6OJ0BpQIasTc"
     }
   },
   historicalSeasonLinks: [
+    {
+      name: "WRC 2001",
+      href: "/themed/themed-12"
+    },
     {
       name: "Ken Block Tribute",
       href: "/themed/themed-11"
