@@ -19,6 +19,13 @@ const rallies = [
     locationName: "Hankiralli",
     locationFlag: "FI",
     numStages: 8
+  },
+  {
+    eventIds: [56274],
+    endTime: "2023-05-22 12:59",
+    locationName: "RSAC Scottish Rally",
+    locationFlag: "scot",
+    numStages: 10
   }
 ];
 

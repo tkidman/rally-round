@@ -14,6 +14,14 @@ const rallies = [
     locationFlag: "GB",
     numStages: 8
     // enduranceRoundMultiplier: 2
+  },
+  {
+    eventId: 56300,
+    endTime: "2023-05-22 22:00",
+    locationName: "Rally Mickleton",
+    locationFlag: "GB",
+    numStages: 8
+    // enduranceRoundMultiplier: 2
   }
 ];
 
