@@ -22,6 +22,14 @@ const rallies = [
     locationFlag: "GB",
     numStages: 8
     // enduranceRoundMultiplier: 2
+  },
+  {
+    eventId: 56565,
+    endTime: "2023-05-29 22:00",
+    locationName: "Rally Romaldkirk",
+    locationFlag: "GB",
+    numStages: 10
+    // enduranceRoundMultiplier: 2
   }
 ];
 

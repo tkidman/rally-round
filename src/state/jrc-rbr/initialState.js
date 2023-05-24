@@ -26,6 +26,13 @@ const rallies = [
     locationName: "RSAC Scottish Rally",
     locationFlag: "scot",
     numStages: 10
+  },
+  {
+    eventIds: [56556],
+    endTime: "2023-05-29 12:59",
+    locationName: "Targa Florio Rally",
+    locationFlag: "IT",
+    numStages: 9
   }
 ];
 
