@@ -3,7 +3,7 @@ const rallies = [
     eventIds: [55244],
     endTime: "2023-05-01 12:59",
     locationName: "Janner Rallye",
-    locationFlag: "CZ",
+    locationFlag: "AT",
     numStages: 9
   },
   {
