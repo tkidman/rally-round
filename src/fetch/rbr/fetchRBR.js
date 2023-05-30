@@ -107,6 +107,9 @@ const fetchEvent = async rally => {
   // an event can be constructed from 2 separate rallies by passing in multiple event ids.
   // results get merged into the one event.
   const rallyIdsForEvent = rally.eventId ? [rally.eventId] : rally.eventIds;
+  if (rallyIdsForEvent.length === 1 && !rally.eventId) {
+    rally.eventId = rallyIdsForEvent[0];
+  }
   const processedEventParts = [];
   for (const rallyId of rallyIdsForEvent) {
     const eventPart = await fetchEventPartForId(rally, rallyId);

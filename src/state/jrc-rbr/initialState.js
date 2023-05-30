@@ -33,6 +33,13 @@ const rallies = [
     locationName: "Targa Florio Rally",
     locationFlag: "IT",
     numStages: 9
+  },
+  {
+    eventIds: [56821],
+    endTime: "2023-06-05 16:59",
+    locationName: "Ypres 24 Hours Rally",
+    locationFlag: "BE",
+    numStages: 9
   }
 ];
 

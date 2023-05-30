@@ -30,6 +30,14 @@ const rallies = [
     locationFlag: "GB",
     numStages: 10
     // enduranceRoundMultiplier: 2
+  },
+  {
+    eventId: 56832,
+    endTime: "2023-06-05 22:00",
+    locationName: "Rally Cotherstone",
+    locationFlag: "GB",
+    numStages: 10
+    // enduranceRoundMultiplier: 2
   }
 ];
 
