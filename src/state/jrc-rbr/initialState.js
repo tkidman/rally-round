@@ -40,6 +40,13 @@ const rallies = [
     locationName: "Ypres 24 Hours Rally",
     locationFlag: "BE",
     numStages: 9
+  },
+  {
+    eventIds: [57072],
+    endTime: "2023-06-12 16:59",
+    locationName: "Barum Tribec Rally",
+    locationFlag: "CZ",
+    numStages: 9
   }
 ];
 
