@@ -1,4 +1,4 @@
-const { keyBy, isEmpty } = require("lodash");
+const { keyBy, isEmpty, isNil, some } = require("lodash");
 const Papa = require("papaparse");
 const fs = require("fs");
 const debug = require("debug")("tkidman:dirt2-results:state");
@@ -45,10 +45,13 @@ const getCarByName = carName => {
 };
 
 const getField = (row, fieldName) => {
-  if (row[fieldName]) {
-    return row[fieldName].trim();
+  if (fieldName) {
+    const field = row[fieldName] || row[fieldName.toLowerCase()];
+    if (!isNil(field)) {
+      return field.trim();
+    }
   }
-  return row[fieldName];
+  return null;
 };
 
 // driver rows is an array of objects of column headers to cell values (ie: [{ racenet: "satchmo", ... }] )
@@ -233,8 +236,9 @@ const init = async () => {
   leagueRef.drivers = drivers;
   leagueRef.getDriverNames = getDriverNames;
   leagueRef.missingDrivers = missingDrivers;
+  const teamsFoundOnDrivers = some(Object.values(driversById), "teamId");
   leagueRef.hasTeams =
-    !!driverColumns.teamId ||
+    teamsFoundOnDrivers ||
     league.useCarAsTeam ||
     league.useCarClassAsTeam ||
     league.useNationalityAsTeam;

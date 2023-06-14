@@ -40,13 +40,13 @@ describe("fetchManual", () => {
         endTime: "2019-09-26T07:00Z",
         eventId: "1",
         eventStatus: "Finished",
-        locationFlag: "AU",
         leaderboardStages: [
           {
             entries: [
               {
                 isDnfEntry: true,
                 name: "satchmo",
+                nationality: null,
                 stageTime: "05:35.345",
                 totalTime: "01:05:59.999",
                 vehicleClass: "Ford Escort Mk II",
@@ -55,6 +55,7 @@ describe("fetchManual", () => {
               {
                 isDnfEntry: false,
                 name: "npiipo",
+                nationality: null,
                 stageTime: "05:15.345",
                 totalTime: "01:06:59.999",
                 vehicleClass: "Ford Escort Mk II",
@@ -62,19 +63,20 @@ describe("fetchManual", () => {
               }
             ]
           }
-        ]
+        ],
+        locationFlag: "AU"
       },
       {
         endTime: "2019-10-02T07:00Z",
         eventId: "2",
         eventStatus: "Finished",
-        locationFlag: "FI",
         leaderboardStages: [
           {
             entries: [
               {
                 isDnfEntry: false,
                 name: "npiipo",
+                nationality: null,
                 stageTime: "04:30:123",
                 totalTime: "55:55:123",
                 vehicleClass: "Ford Escort Mk II",
@@ -82,7 +84,8 @@ describe("fetchManual", () => {
               }
             ]
           }
-        ]
+        ],
+        locationFlag: "FI"
       }
     ]);
   });

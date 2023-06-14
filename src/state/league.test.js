@@ -6,6 +6,8 @@ const driver = {
   division: "pro",
   id: "SPOOKEX *-*",
   name: "Spookex *-*",
+  name3: null,
+  nationality: null,
   raceNetName: "Spookex",
   teamId: "Time Penalty Boys"
 };
