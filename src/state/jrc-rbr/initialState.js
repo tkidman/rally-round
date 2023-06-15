@@ -47,6 +47,13 @@ const rallies = [
     locationName: "Barum Tribec Rally",
     locationFlag: "CZ",
     numStages: 9
+  },
+  {
+    eventIds: [57288],
+    endTime: "2023-06-19 11:59",
+    locationName: "Rajd Polski",
+    locationFlag: "PL",
+    numStages: 9
   }
 ];
 
