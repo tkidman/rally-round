@@ -54,6 +54,13 @@ const rallies = [
     locationName: "Rajd Polski",
     locationFlag: "PL",
     numStages: 9
+  },
+  {
+    eventIds: [57469],
+    endTime: "2023-06-26 12:59",
+    locationName: "Halkidiki Rally",
+    locationFlag: "GR",
+    numStages: 9
   }
 ];
 
