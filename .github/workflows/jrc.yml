@@ -33,12 +33,12 @@ jobs:
 #      - name: jrc-rbr-rallysprint
 #        if: always()
 #        run: CLUB=jrc-rbr-rallysprint node --unhandled-rejections=strict ./runner.js
-      - name: jrc-themed
-        if: always()
-        run: CLUB=jrc-themed node --unhandled-rejections=strict ./runner.js
-      - name: jrc-historic
-        if: always()
-        run: CLUB=jrc-historic node --unhandled-rejections=strict ./runner.js
+#      - name: jrc-themed
+#        if: always()
+#        run: CLUB=jrc-themed node --unhandled-rejections=strict ./runner.js
+#      - name: jrc-historic
+#        if: always()
+#        run: CLUB=jrc-historic node --unhandled-rejections=strict ./runner.js
 #      - name: jrc
 #        if: always()
 #        run: CLUB=jrc node --unhandled-rejections=strict ./runner.js
