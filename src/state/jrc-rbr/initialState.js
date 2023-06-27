@@ -61,6 +61,13 @@ const rallies = [
     locationName: "Halkidiki Rally",
     locationFlag: "GR",
     numStages: 9
+  },
+  {
+    eventIds: [57707],
+    endTime: "2023-07-03 12:59",
+    locationName: "Rallye International d'Antibes",
+    locationFlag: "FR",
+    numStages: 9
   }
 ];
 
