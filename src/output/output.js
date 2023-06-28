@@ -53,7 +53,7 @@ const writeJSON = eventResults => {
 const checkOutputDirs = () => {
   fs.existsSync(hiddenPath) || fs.mkdirSync(hiddenPath);
   fs.existsSync(cachePath) || fs.mkdirSync(cachePath, { recursive: true });
-  fs.rmdirSync(outputPath, { recursive: true });
+  fs.existsSync(outputPath) && fs.rmSync(outputPath, { recursive: true });
   fs.mkdirSync(outputPath, { recursive: true });
   fs.mkdirSync(`${outputPath}/website`);
   copydir.sync("./assets", `${outputPath}/website/assets`);

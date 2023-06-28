@@ -3,7 +3,7 @@ const initialState = {
   websiteName: "jrc-results",
   subfolderName: "themed",
   useStandingsForHome: true,
-  showLivePoints: true,
+  showLivePoints: false,
   showLivePointsDaysRemaining: 4,
   hideCarColumnInStandings: false,
   showCarNameAsTextInResults: true,
@@ -20,14 +20,17 @@ const initialState = {
   logo: "JRC.png",
   siteTitlePrefix: "JRC Themed",
   divisions: {
-    craigBreenTribute: {
-      divisionName: "craigBreenTribute",
-      displayName: "Craig Breen Tribute",
+    wrc1976: {
+      divisionName: "wrc1976",
+      displayName: "WRC 1976",
       disableSameCarValidation: false,
       // enableSameCarClassValidation: true,
       maxDriversScoringPointsForTeam: 2,
       // filterEntries: true,
-      clubs: [{ clubId: "256173", championshipIds: ["743245"] }],
+      clubs: [
+        { clubId: "256173", championshipIds: ["755129"] },
+        { clubId: "360961", championshipIds: ["755134"] }
+      ],
       manualResults: [],
       events: [],
       points: {
@@ -114,11 +117,20 @@ const initialState = {
         ]
         // stage: [1]
       },
-      cars: ["Mitsubishi Space Star R5", "Ford Fiesta R5", "Peugeot 208 T16 R5"]
+      cars: [
+        "Opel Kadett C GT/E",
+        "Ford Escort Mk II",
+        "Fiat 131 Abarth Rally",
+        "Lancia Stratos"
+      ]
       // outputSheetId: "1C3fU9y1236wFmPuKcui4CEXBuSsUANH6OJ0BpQIasTc"
     }
   },
   historicalSeasonLinks: [
+    {
+      name: "Craig Breen Tribute",
+      href: "/themed/themed-13"
+    },
     {
       name: "WRC 2001",
       href: "/themed/themed-12"
