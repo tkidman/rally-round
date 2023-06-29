@@ -240,6 +240,16 @@ const getTeamLogo = teamId => {
   return `./assets/teams/unknown.png`;
 };
 
+const getAfterDropRoundMessage = () => {
+  if (leagueRef.league.afterDropRoundMessage) {
+    return leagueRef.league.afterDropRoundMessage;
+  }
+  if (leagueRef.league.dropLowestScoringRoundsNumber > 1) {
+    return `*After Drop Rounds: total points after lowest ${leagueRef.league.dropLowestScoringRoundsNumber} scoring rounds removed`;
+  }
+  return "*After Drop Round: total points after lowest scoring round removed";
+};
+
 const transformForStandingsHTML = (division, type) => {
   const events = division.events;
   const headerLocations = getHeaderLocations(events);
@@ -304,9 +314,7 @@ const transformForStandingsHTML = (division, type) => {
     divisionName: division.divisionName,
     showPointsAfterDropRounds:
       leagueRef.league.dropLowestScoringRoundsNumber > 0,
-    afterDropRoundMessage:
-      leagueRef.league.afterDropRoundMessage ||
-      "*After Drop Round: total points after lowest scoring round removed",
+    afterDropRoundMessage: getAfterDropRoundMessage(),
     backgroundStyle: leagueRef.getBackgroundStyle(),
     logo: leagueRef.league.logo,
     showTeamNameTextColumn: leagueRef.league.showTeamNameTextColumn,
