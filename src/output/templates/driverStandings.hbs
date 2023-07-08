@@ -44,7 +44,7 @@
 
                             {{#each headerLocations}}
                             <th>
-                                <a href="./{{../divisionName}}-{{this.eventId}}-driver-results.html">
+                                <a href="./{{../divisionName}}-{{this.eventId}}-driver-results.html" style="{{#if this.disableLink}}pointer-events: none;{{/if}}">
                                     <img src="./assets/country-flags/{{this.locationCode}}.png" alt="{{this.locationCode}}" title="{{this.locationCode}}"/>
                                 </a>
                             </th>

@@ -3,7 +3,7 @@
 		{{siteTitlePrefix}} |
 		{{#if links.active.menu}}
 			{{links.active.menu}} {{links.active.link}}
-			{{else}}
+        {{else}}
 			Home
 		{{/if}}
 	</title>
@@ -130,9 +130,9 @@
  	{{#if secondary}}
 	<div class="w3-bar w3-light-grey secondaryNav">
 		{{#each secondary}}
-			<a href="./{{../links.active.name}}-{{this.eventId}}-driver-results.html">
-				<img src="./assets/country-flags/{{this.locationCode}}.png" />
-			</a>
+            <a href="./{{../links.active.name}}-{{this.eventId}}-driver-results.html" style="{{#if this.disableLink}}pointer-events: none;{{/if}}">
+                <img src="./assets/country-flags/{{this.locationCode}}.png" />
+            </a>
 		{{/each}}
 	</div>
 	{{/if}}

@@ -13,7 +13,10 @@ const getHeaderLocations = events => {
   const headerLocations = events.reduce((headerLocations, event, index) => {
     headerLocations.push({
       eventId: index,
-      locationCode: getLocationCountryCode(event)
+      locationCode: getLocationCountryCode(event),
+      disableLink:
+        leagueRef.league.aggregateDriverResultsInOverall &&
+        event.divisionName === "overall"
     });
     return headerLocations;
   }, []);

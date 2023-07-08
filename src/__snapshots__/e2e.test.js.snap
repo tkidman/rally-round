@@ -81,12 +81,12 @@ exports[`e2e generates driver results 1`] = `
 	</div>
 
 	<div class=\\"w3-bar w3-light-grey secondaryNav\\">
-			<a href=\\"./test-e2e-0-driver-results.html\\">
-				<img src=\\"./assets/country-flags/swe.png\\" />
-			</a>
-			<a href=\\"./test-e2e-1-driver-results.html\\">
-				<img src=\\"./assets/country-flags/est.png\\" />
-			</a>
+            <a href=\\"./test-e2e-0-driver-results.html\\" style=\\"\\">
+                <img src=\\"./assets/country-flags/swe.png\\" />
+            </a>
+            <a href=\\"./test-e2e-1-driver-results.html\\" style=\\"\\">
+                <img src=\\"./assets/country-flags/est.png\\" />
+            </a>
 	</div>
 </div>
 
@@ -970,12 +970,12 @@ exports[`e2e generates driver standings 1`] = `
 	</div>
 
 	<div class=\\"w3-bar w3-light-grey secondaryNav\\">
-			<a href=\\"./test-e2e-0-driver-results.html\\">
-				<img src=\\"./assets/country-flags/swe.png\\" />
-			</a>
-			<a href=\\"./test-e2e-1-driver-results.html\\">
-				<img src=\\"./assets/country-flags/est.png\\" />
-			</a>
+            <a href=\\"./test-e2e-0-driver-results.html\\" style=\\"\\">
+                <img src=\\"./assets/country-flags/swe.png\\" />
+            </a>
+            <a href=\\"./test-e2e-1-driver-results.html\\" style=\\"\\">
+                <img src=\\"./assets/country-flags/est.png\\" />
+            </a>
 	</div>
 </div>
 
@@ -999,13 +999,13 @@ exports[`e2e generates driver standings 1`] = `
                                     <th>Team Name</th>
 
                             <th>
-                                <a href=\\"./test-e2e-0-driver-results.html\\">
+                                <a href=\\"./test-e2e-0-driver-results.html\\" style=\\"\\">
                                     <img src=\\"./assets/country-flags/swe.png\\" alt=\\"swe\\" title=\\"swe\\"/>
                                 </a>
                             </th>
 
                             <th>
-                                <a href=\\"./test-e2e-1-driver-results.html\\">
+                                <a href=\\"./test-e2e-1-driver-results.html\\" style=\\"\\">
                                     <img src=\\"./assets/country-flags/est.png\\" alt=\\"est\\" title=\\"est\\"/>
                                 </a>
                             </th>
@@ -1827,12 +1827,12 @@ exports[`e2e generates overall driver results 1`] = `
 	</div>
 
 	<div class=\\"w3-bar w3-light-grey secondaryNav\\">
-			<a href=\\"./overall-0-driver-results.html\\">
-				<img src=\\"./assets/country-flags/swe.png\\" />
-			</a>
-			<a href=\\"./overall-1-driver-results.html\\">
-				<img src=\\"./assets/country-flags/est.png\\" />
-			</a>
+            <a href=\\"./overall-0-driver-results.html\\" style=\\"\\">
+                <img src=\\"./assets/country-flags/swe.png\\" />
+            </a>
+            <a href=\\"./overall-1-driver-results.html\\" style=\\"\\">
+                <img src=\\"./assets/country-flags/est.png\\" />
+            </a>
 	</div>
 </div>
 
@@ -2791,12 +2791,12 @@ exports[`e2e generates overall driver standings 1`] = `
 	</div>
 
 	<div class=\\"w3-bar w3-light-grey secondaryNav\\">
-			<a href=\\"./overall-0-driver-results.html\\">
-				<img src=\\"./assets/country-flags/swe.png\\" />
-			</a>
-			<a href=\\"./overall-1-driver-results.html\\">
-				<img src=\\"./assets/country-flags/est.png\\" />
-			</a>
+            <a href=\\"./overall-0-driver-results.html\\" style=\\"\\">
+                <img src=\\"./assets/country-flags/swe.png\\" />
+            </a>
+            <a href=\\"./overall-1-driver-results.html\\" style=\\"\\">
+                <img src=\\"./assets/country-flags/est.png\\" />
+            </a>
 	</div>
 </div>
 
@@ -2821,13 +2821,13 @@ exports[`e2e generates overall driver standings 1`] = `
                                     <th>Team Name</th>
 
                             <th>
-                                <a href=\\"./overall-0-driver-results.html\\">
+                                <a href=\\"./overall-0-driver-results.html\\" style=\\"\\">
                                     <img src=\\"./assets/country-flags/swe.png\\" alt=\\"swe\\" title=\\"swe\\"/>
                                 </a>
                             </th>
 
                             <th>
-                                <a href=\\"./overall-1-driver-results.html\\">
+                                <a href=\\"./overall-1-driver-results.html\\" style=\\"\\">
                                     <img src=\\"./assets/country-flags/est.png\\" alt=\\"est\\" title=\\"est\\"/>
                                 </a>
                             </th>
@@ -3727,12 +3727,12 @@ exports[`e2e generates overall team standings 1`] = `
 	</div>
 
 	<div class=\\"w3-bar w3-light-grey secondaryNav\\">
-			<a href=\\"./overall-0-driver-results.html\\">
-				<img src=\\"./assets/country-flags/swe.png\\" />
-			</a>
-			<a href=\\"./overall-1-driver-results.html\\">
-				<img src=\\"./assets/country-flags/est.png\\" />
-			</a>
+            <a href=\\"./overall-0-driver-results.html\\" style=\\"\\">
+                <img src=\\"./assets/country-flags/swe.png\\" />
+            </a>
+            <a href=\\"./overall-1-driver-results.html\\" style=\\"\\">
+                <img src=\\"./assets/country-flags/est.png\\" />
+            </a>
 	</div>
 </div>
 
@@ -4032,12 +4032,12 @@ exports[`e2e generates team standings 1`] = `
 	</div>
 
 	<div class=\\"w3-bar w3-light-grey secondaryNav\\">
-			<a href=\\"./test-e2e-0-driver-results.html\\">
-				<img src=\\"./assets/country-flags/swe.png\\" />
-			</a>
-			<a href=\\"./test-e2e-1-driver-results.html\\">
-				<img src=\\"./assets/country-flags/est.png\\" />
-			</a>
+            <a href=\\"./test-e2e-0-driver-results.html\\" style=\\"\\">
+                <img src=\\"./assets/country-flags/swe.png\\" />
+            </a>
+            <a href=\\"./test-e2e-1-driver-results.html\\" style=\\"\\">
+                <img src=\\"./assets/country-flags/est.png\\" />
+            </a>
 	</div>
 </div>
 

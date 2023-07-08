@@ -1,6 +1,6 @@
 const {
   calculateEventResults,
-  sortTeamResults,
+  sortResults,
   calculateEventStandings,
   calculateOverall,
   calculateTotalPointsAfterDropRounds
@@ -219,7 +219,7 @@ describe("calculates event results", () => {
         totalPoints: 15
       }
     };
-    expect(sortTeamResults(teamResultsById)).toEqual([
+    expect(sortResults(teamResultsById)).toEqual([
       {
         totalPoints: 15
       },

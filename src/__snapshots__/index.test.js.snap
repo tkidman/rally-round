@@ -6,6 +6,7 @@ Object {
   "divisionName": "overall",
   "events": Array [
     Object {
+      "divisionName": "overall",
       "endTime": undefined,
       "eventStatus": undefined,
       "location": "Australia",
