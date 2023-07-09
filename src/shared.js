@@ -20,6 +20,7 @@ const getTotalPoints = result => {
   totalPoints += result.powerStagePoints ? result.powerStagePoints : 0;
   totalPoints += result.overallPoints ? result.overallPoints : 0;
   totalPoints += result.stagePoints ? result.stagePoints : 0;
+  totalPoints += result.legPoints ? result.legPoints : 0;
   return totalPoints;
 };
 
@@ -93,9 +94,13 @@ const recalculateDiffs = entries => {
 };
 
 const getSummedTotalTime = (entry1, entry2) => {
-  const entry1Duration = getDuration(entry1.totalTime);
-  const entry2Duration = getDuration(entry2.totalTime);
-  const summedDuration = entry1Duration.add(entry2Duration);
+  return getSummedTotalTimeStrings(entry1.totalTime, entry2.totalTime);
+};
+
+const getSummedTotalTimeStrings = (time1, time2) => {
+  const time1Duration = getDuration(time1);
+  const time2Duration = getDuration(time2);
+  const summedDuration = time1Duration.add(time2Duration);
   return formatDuration(summedDuration);
 };
 
@@ -200,6 +205,7 @@ module.exports = {
   recalculateDiffs,
   createDNFResult,
   getSummedTotalTime,
+  getSummedTotalTimeStrings,
   formatDuration,
   getCountryForDriver,
   getCountryByAlpha2Code,

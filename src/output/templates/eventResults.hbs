@@ -52,6 +52,9 @@
                     {{#if showSuperRallyColumn}}
                         <td>{{localization.sr}}</td>
                     {{/if}}
+                    {{#if showLegPoints}}
+                        <td>{{localization.leg_points}}</td>
+                    {{/if}}
                     {{#if showStagePoints}}
                         <td>{{localization.stage_points}}</td>
                     {{/if}}
@@ -110,6 +113,9 @@
                             <td>
                                 {{this.entry.superRally}}
                             </td>
+                        {{/if}}
+                        {{#if ../showLegPoints}}
+                            <td>{{this.legPoints}}</td>
                         {{/if}}
                         {{#if ../showStagePoints}}
                             <td>{{this.stagePoints}}</td>

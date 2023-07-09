@@ -385,6 +385,7 @@ const transformForDriverResultsHTML = (event, division) => {
     showPowerStage: !leagueRef.league.isRallySprint,
     showPowerStagePoints: hasPoints("powerStagePoints", rows),
     showStagePoints: hasPoints("stagePoints", rows),
+    showLegPoints: hasPoints("legPoints", rows),
     event,
     location: getLocation(event),
     divisionName,

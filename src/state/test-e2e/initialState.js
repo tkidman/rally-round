@@ -36,14 +36,22 @@ const initialState = {
             endTime: "2022-10-03 12:00",
             locationName: "Rally Grundstrom",
             locationFlag: "SE",
-            numStages: 7
+            numStages: 7,
+            legs: [
+              { startIndex: 0, endIndex: 3 },
+              { startIndex: 4, endIndex: 6 }
+            ]
           },
           {
             eventId: 47616,
             endTime: "2022-10-10 12:00",
             locationName: "Rally Nonko",
             locationFlag: "EE",
-            numStages: 8
+            numStages: 8,
+            legs: [
+              { startIndex: 0, endIndex: 3 },
+              { startIndex: 4, endIndex: 7 }
+            ]
           }
         ]
       },
@@ -62,6 +70,7 @@ const initialState = {
       ],
       points: {
         powerStage: [5, 4, 3, 2, 1],
+        leg: [1],
         overall: [30, 24, 19, 15, 12, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
       }
     },

@@ -3,7 +3,8 @@ const {
   orderResultsBy,
   knapsack,
   getDuration,
-  DNF_STAGE_TIME
+  DNF_STAGE_TIME,
+  getSummedTotalTimeStrings
 } = require("./shared");
 const { orderEntriesBy } = require("./shared");
 const debug = require("debug")("tkidman:dirt2-results");
@@ -21,7 +22,7 @@ const {
   flatMap,
   minBy,
   isEmpty,
-  filter
+  slice
 } = require("lodash");
 const { cachePath } = require("./shared");
 const fs = require("fs");
@@ -225,16 +226,18 @@ const setManualResults = ({
     isDnfEntry: false
   };
   const division = leagueRef.divisions[divisionName];
-  if (division.manualResults || leagueRef.league.manualResults) {
-    const allManualResults = [
-      ...division.manualResults,
-      ...leagueRef.league.manualResults
-    ];
+  if (
+    !isEmpty(division.manualResults) ||
+    !isEmpty(leagueRef.league.manualResults)
+  ) {
+    const allManualResults = [];
+    if (!isEmpty(division.manualResults)) {
+      allManualResults.push(...division.manualResults);
+    }
+    if (!isEmpty(leagueRef.league.manualResults)) {
+      allManualResults.push(...leagueRef.league.manualResults);
+    }
 
-    // const allManualResults = flatMap(
-    //   division.manualResults,
-    //   leagueRef.league.manualResults
-    // );
     // not the best data structure: [{ eventIndex, results: [] }]
     const eventManualResults = allManualResults.filter(
       eventManualResults => eventManualResults.eventIndex === eventIndex
@@ -408,19 +411,16 @@ const filterStage = ({ stage, division }) => {
 
 const filterLeaderboardStages = ({ event, drivers, divisionName }) => {
   const division = leagueRef.divisions[divisionName];
-  if (event.legIndexes) {
-    event.leaderboardStages = filter(
+
+  // using this as a quick way to show results for a leg - create a whole division to track leg 1, leg 2 etc.
+  // points for a leg are still calculated as part of the proper event though
+  if (division.legNumber > 0) {
+    event.leaderboardStages = slice(
       event.leaderboardStages,
-      (stage, stageIndex) => {
-        if (isEmpty(event.legIndexes)) {
-          return false;
-        }
-        return (
-          stageIndex >= event.legIndexes.start &&
-          stageIndex <= event.legIndexes.end
-        );
-      }
+      event.legs[division.legNumber - 1].startIndex,
+      event.legs[division.legNumber - 1].endIndex + 1
     );
+    recalculateTotalTime({ stages: event.leaderboardStages });
   }
   if (division.filterEntries) {
     event.leaderboardStages.forEach(stage => {
@@ -528,9 +528,9 @@ const calculateEventResults = ({
 
   // end alert
 
-  if (leagueRef.league.getAllResults)
+  if (leagueRef.league.getAllResults) {
     addStageTimesToResultsByDriver(resultsByDriver, event.leaderboardStages);
-
+  }
   // dnf entries are sorted below non-dnf entries
   const powerStageEntries = orderEntriesBy(lastStageEntries, "stageTime");
   const totalEntries = orderEntriesBy(lastStageEntries, "totalTime");
@@ -567,6 +567,21 @@ const calculateEventResults = ({
         });
       });
     }
+    if (division.points.leg) {
+      for (const leg of event.legs) {
+        const legStages = cloneDeep(
+          slice(event.leaderboardStages, leg.startIndex, leg.endIndex + 1)
+        );
+        recalculateTotalTime({ stages: legStages });
+        updatePoints({
+          resultsByDriver,
+          orderedEntries: legStages[legStages.length - 1].entries,
+          points: division.points.leg,
+          pointsField: "legPoints",
+          event
+        });
+      }
+    }
   }
   const driverResults = orderResultsBy(
     Object.values(resultsByDriver),
@@ -593,6 +608,23 @@ const calculateEventResults = ({
     result.pointsDisplay = getTotalPointsDisplay(result, event);
   });
   return { driverResults, teamResults };
+};
+
+const recalculateTotalTime = ({ stages }) => {
+  let previousEntriesByDriverName = {};
+  for (const stage of stages) {
+    for (const entry of stage.entries) {
+      const previousTotalTime = previousEntriesByDriverName[entry.name]
+        ? previousEntriesByDriverName[entry.name].totalTime
+        : "00:00";
+      entry.totalTime = getSummedTotalTimeStrings(
+        previousTotalTime,
+        entry.stageTime
+      );
+    }
+    previousEntriesByDriverName = keyBy(stage.entries, "name");
+    recalculateDiffs(stage.entries);
+  }
 };
 
 const calculateTotalPointsAfterDropRounds = ({
