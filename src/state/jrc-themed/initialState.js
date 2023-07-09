@@ -3,7 +3,7 @@ const initialState = {
   websiteName: "jrc-results",
   subfolderName: "themed",
   useStandingsForHome: true,
-  showLivePoints: false,
+  showLivePoints: true,
   showLivePointsDaysRemaining: 4,
   hideCarColumnInStandings: false,
   showCarNameAsTextInResults: true,
