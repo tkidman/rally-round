@@ -20,6 +20,7 @@ const {
 const { processFantasyResults } = require("../fantasy/fantasyCalculator");
 const { getLocalization } = require("./localization");
 const { allLeagues } = require("../state/allLeagues");
+const { isEmpty, isNil } = require("lodash");
 // const { eventStatuses } = require("../shared");
 const resultColours = ["#76FF6A", "#faff5d", "#ffe300", "#ff5858"];
 
@@ -348,7 +349,7 @@ const getTotalTimeDisplay = (result, event) => {
   return result.entry.totalTime;
 };
 
-const transformForDriverResultsHTML = (event, division) => {
+const transformForDriverResultsHTML = (event, division, legIndex) => {
   const events = division.events;
   const divisionName = division.divisionName;
   const headerLocations = getHeaderLocations(events);
@@ -374,7 +375,7 @@ const transformForDriverResultsHTML = (event, division) => {
       totalTimeDisplay: getTotalTimeDisplay(result, event)
     };
   });
-  return {
+  const data = {
     headerLocations,
     rows,
     title: division.displayName || divisionName,
@@ -382,10 +383,12 @@ const transformForDriverResultsHTML = (event, division) => {
     showTeamNameTextColumn: leagueRef.league.showTeamNameTextColumn,
     showCar: leagueRef.hasCars || leagueRef.league.showCarNameAsTextInResults,
     showCarName: leagueRef.league.showCarNameAsTextInResults,
-    showPowerStage: !leagueRef.league.isRallySprint,
+    showPowerStage: !leagueRef.league.isRallySprint && isNil(legIndex),
     showPowerStagePoints: hasPoints("powerStagePoints", rows),
     showStagePoints: hasPoints("stagePoints", rows),
-    showLegPoints: hasPoints("legPoints", rows),
+    // legPoints not supported for overall driver results yet
+    showLegPoints:
+      hasPoints("legPoints", rows) && !(divisionName === "overall"),
     event,
     location: getLocation(event),
     divisionName,
@@ -402,10 +405,29 @@ const transformForDriverResultsHTML = (event, division) => {
         : null,
     localization: getLocalization()
   };
+  const legDisplay = isNil(legIndex)
+    ? ""
+    : `${getLocalization().leg} ${legIndex + 1} `;
+  const fullTitle = `${data.title} ${data.location.countryName} ${legDisplay}${
+    getLocalization().driver_results
+  }`;
+  data.fullTitle = fullTitle;
+  return data;
 };
 
-const writeDriverResultsHTML = (event, division, links, eventIndex) => {
-  const data = transformForDriverResultsHTML(event, division);
+const getResultsFileName = ({ divisionName, eventIndex, legIndex }) => {
+  const legIndexPath = !isNil(legIndex) ? `-${legIndex}` : "";
+  return `${divisionName}-${eventIndex}${legIndexPath}-driver-results.html`;
+};
+
+const writeDriverResultsHTML = ({
+  event,
+  division,
+  links,
+  eventIndex,
+  legIndex
+}) => {
+  const data = transformForDriverResultsHTML(event, division, legIndex);
   data.overall = division.divisionName === "overall";
 
   data.navigation = getNavigationHTML(
@@ -428,11 +450,15 @@ const writeDriverResultsHTML = (event, division, links, eventIndex) => {
   const out = template(data);
 
   fs.writeFileSync(
-    `./${outputPath}/website/${division.divisionName}-${eventIndex}-driver-results.html`,
+    `./${outputPath}/website/${getResultsFileName({
+      divisionName: division.divisionName,
+      eventIndex,
+      legIndex
+    })}`,
     out
   );
   if (
-    division.divisionName == "overall" &&
+    division.divisionName === "overall" &&
     leagueRef.league.useResultsForHome
   ) {
     fs.writeFileSync(`./${outputPath}/website/index.html`, out);
@@ -507,9 +533,33 @@ const writeHTMLOutputForDivision = (division, links) => {
   if (leagueRef.hasTeams) {
     writeStandingsHTML(division, "team", links);
   }
-  division.events.forEach((event, eventIndex) =>
-    writeDriverResultsHTML(event, division, links, eventIndex)
-  );
+  division.events.forEach((event, eventIndex) => {
+    if (!isEmpty(event.driverLegsResults)) {
+      for (let i = 0; i < event.driverLegsResults.length; i++) {
+        const resultsFileName = getResultsFileName({
+          divisionName: division.divisionName,
+          eventIndex,
+          legIndex: i
+        });
+        event.legs[i].legUrl = `./${resultsFileName}`;
+        event.legs[i].legColumnHeader = `${getLocalization().leg} ${i + 1}`;
+        const driverLegResults = event.driverLegsResults[i];
+        const legEvent = {
+          ...event,
+          results: { driverResults: driverLegResults }
+        };
+        writeDriverResultsHTML({
+          event: legEvent,
+          division,
+          links,
+          eventIndex,
+          legIndex: i
+        });
+      }
+    }
+
+    writeDriverResultsHTML({ event, division, links, eventIndex });
+  });
 };
 
 const writeAllHTML = () => {

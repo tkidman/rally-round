@@ -13,6 +13,7 @@ Object {
       "locationFlag": undefined,
       "locationName": undefined,
       "results": Object {
+        "driverLegsResults": Array [],
         "driverResults": Array [
           Object {
             "divisionName": "pro",

@@ -1,7 +1,7 @@
 const debug = require("debug")("tkidman:dirt2-results:shared");
 const moment = require("moment");
 const countries = require("./state/constants/countries.json");
-const { keyBy } = require("lodash");
+const { keyBy, sum } = require("lodash");
 
 const hiddenPath = "./hidden";
 const club = process.env.CLUB || "test";
@@ -20,7 +20,7 @@ const getTotalPoints = result => {
   totalPoints += result.powerStagePoints ? result.powerStagePoints : 0;
   totalPoints += result.overallPoints ? result.overallPoints : 0;
   totalPoints += result.stagePoints ? result.stagePoints : 0;
-  totalPoints += result.legPoints ? result.legPoints : 0;
+  totalPoints += result.legPoints ? sum(result.legPoints) : 0;
   return totalPoints;
 };
 

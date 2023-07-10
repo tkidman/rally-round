@@ -16,7 +16,7 @@
             <div style="margin-bottom: 1em;" class="w3-hide-medium w3-hide-small">
                 <div class="logo" style="display:flex;">
                     <img src="./assets/{{logo}}" />
-                    <h2 style="margin-left:1em;">{{title}} {{location.countryName}} {{localization.driver_results}}</h2>
+                    <h2 style="margin-left:1em;">{{fullTitle}}</h2>
                 </div>
             </div>
 
@@ -53,7 +53,11 @@
                         <td>{{localization.sr}}</td>
                     {{/if}}
                     {{#if showLegPoints}}
-                        <td>{{localization.leg_points}}</td>
+                        {{#each event.legs}}
+                            <td>
+                                <a href="{{this.legUrl}}">{{this.legColumnHeader}}</a>
+                            </td>
+                        {{/each}}
                     {{/if}}
                     {{#if showStagePoints}}
                         <td>{{localization.stage_points}}</td>
@@ -115,7 +119,9 @@
                             </td>
                         {{/if}}
                         {{#if ../showLegPoints}}
-                            <td>{{this.legPoints}}</td>
+                            {{#each this.legPoints}}
+                                <td>{{this}}</td>
+                            {{/each}}
                         {{/if}}
                         {{#if ../showStagePoints}}
                             <td>{{this.stagePoints}}</td>

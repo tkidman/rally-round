@@ -22,7 +22,8 @@ const {
   flatMap,
   minBy,
   isEmpty,
-  slice
+  slice,
+  forEach
 } = require("lodash");
 const { cachePath } = require("./shared");
 const fs = require("fs");
@@ -47,7 +48,8 @@ const updatePoints = ({
   orderedEntries,
   points,
   pointsField,
-  event
+  event,
+  legIndex
 }) => {
   for (let i = 0; i < points.length; i++) {
     if (orderedEntries.length > i) {
@@ -71,10 +73,18 @@ const updatePoints = ({
         if (event.enduranceRoundMultiplier && pointsField === "overallPoints") {
           newPoints *= event.enduranceRoundMultiplier;
         }
-        if (resultsByDriver[driver.name][pointsField]) {
-          newPoints += resultsByDriver[driver.name][pointsField];
+
+        if (pointsField === "legPoints") {
+          resultsByDriver[driver.name].legPoints[legIndex] = newPoints;
+          // orderedEntries is a deep clone when updating legPoints.
+          // tracking overall points here to show a results page for the leg
+          entry.overallPoints = newPoints;
+        } else {
+          if (resultsByDriver[driver.name][pointsField]) {
+            newPoints += resultsByDriver[driver.name][pointsField];
+          }
+          resultsByDriver[driver.name][pointsField] = newPoints;
         }
-        resultsByDriver[driver.name][pointsField] = newPoints;
       }
 
       if (
@@ -535,6 +545,8 @@ const calculateEventResults = ({
   const powerStageEntries = orderEntriesBy(lastStageEntries, "stageTime");
   const totalEntries = orderEntriesBy(lastStageEntries, "totalTime");
   const division = leagueRef.league.divisions[divisionName];
+  const legResults = [];
+
   if (
     event.eventStatus === eventStatuses.finished ||
     leagueRef.showLivePoints()
@@ -567,20 +579,46 @@ const calculateEventResults = ({
         });
       });
     }
-    if (division.points.leg) {
-      for (const leg of event.legs) {
+
+    if (!isEmpty(division.points.leg)) {
+      const driverResults = Object.values(resultsByDriver);
+      for (const result of driverResults) {
+        result.legPoints = [];
+        for (let i = 0; i < event.legs.length; i++) {
+          result.legPoints.push(null);
+        }
+      }
+      forEach(event.legs, (leg, legIndex) => {
         const legStages = cloneDeep(
           slice(event.leaderboardStages, leg.startIndex, leg.endIndex + 1)
         );
         recalculateTotalTime({ stages: legStages });
+        const lastLegStageEntries = legStages[legStages.length - 1].entries;
+        const sortedLastLegStageEntries = orderEntriesBy(
+          lastLegStageEntries,
+          "totalTime"
+        );
         updatePoints({
           resultsByDriver,
-          orderedEntries: legStages[legStages.length - 1].entries,
+          orderedEntries: sortedLastLegStageEntries,
           points: division.points.leg,
           pointsField: "legPoints",
-          event
+          event,
+          legIndex
         });
-      }
+        const lastLegStageResults = map(sortedLastLegStageEntries, entry => {
+          const result = {
+            ...leagueRef.getDriver(entry.name),
+            entry,
+            overallPoints: entry.overallPoints,
+            divisionName
+          };
+          result.totalPoints = getTotalPoints(result);
+          result.pointsDisplay = getTotalPointsDisplay(result, event);
+          return result;
+        });
+        legResults.push(lastLegStageResults);
+      });
     }
   }
   const driverResults = orderResultsBy(
@@ -591,7 +629,7 @@ const calculateEventResults = ({
     result.totalPoints = getTotalPoints(result);
     result.pointsDisplay = getTotalPointsDisplay(result, event);
   });
-
+  event.driverLegsResults = legResults;
   const teamResults = [];
   if (leagueRef.hasTeams) {
     const teamResultsById = calculateTeamResults(
@@ -972,7 +1010,7 @@ const calculateOverall = processedDivisions => {
           endTime: event.endTime,
           eventStatus: event.eventStatus,
           divisionName: "overall",
-          results: { driverResults: [], teamResults: [] }
+          results: { driverResults: [], teamResults: [], driverLegsResults: [] }
         };
         overall.events.push(overallEvent);
       }

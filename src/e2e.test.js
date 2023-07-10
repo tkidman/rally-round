@@ -30,6 +30,15 @@ describe("e2e", () => {
     expect(standings).toMatchSnapshot();
   });
 
+  it("generates driver leg results", async () => {
+    const { outputPath } = require("./shared");
+    const standings = fs.readFileSync(
+      `${outputPath}/website/test-e2e-0-0-driver-results.html`,
+      "utf-8"
+    );
+    expect(standings).toMatchSnapshot();
+  });
+
   it("generates team standings", async () => {
     const { outputPath } = require("./shared");
     const standings = fs.readFileSync(

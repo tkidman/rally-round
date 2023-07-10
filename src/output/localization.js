@@ -4,7 +4,7 @@ const localization = {
     driver_results: "Driver Results",
     team_standings: "Team Standings",
     stage_points: "Stage Points",
-    leg_points: "Leg Points",
+    leg: "Leg",
     total_points: "Total Points",
     nat: "Nat",
     pos: "Pos",
@@ -48,7 +48,6 @@ const localization = {
     team_standings: "Teammästerskap",
     stage_points: "Sträckpoäng",
     total_points: "Totalpoäng",
-    leg_points: "Legpoäng",
     nat: "Nat",
     pos: "Pos",
     driver: "Förare",
@@ -79,7 +78,8 @@ const localization = {
     last_updated: "Senast uppdaterad vid",
     series: "serier",
     historical: "historiska",
-    manual_result_applied: "Manuellt resultat tillämpat"
+    manual_result_applied: "Manuellt resultat tillämpat",
+    leg: "Etapp"
   }
 };
 

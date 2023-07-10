@@ -1,5 +1,735 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`e2e generates driver leg results 1`] = `
+"<html lang=\\"en\\">
+
+<head>
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"./assets/css/style.css\\">
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"./assets/css/animation.css\\">
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"./assets/css/w3.css\\">
+	<meta http-equiv=\\"Content-Type\\" content=\\"text/html; charset=utf-8\\">
+    <link rel=\\"icon\\" href=\\"./assets/rsc-guy.png\\">
+</head>
+
+<body style=\\"background-image: linear-gradient(315deg, #ffffff 0%, #d7e1ec 74%); background-size: cover; background-repeat: no-repeat; background-attachment: fixed;\\">
+<head>
+	<title>
+		TEST-E2E |
+			driver Test E2E
+	</title>
+</head>
+
+<div class=\\"w3-top\\">
+	<div class=\\"w3-bar w3-black\\" style=\\"text-align:center;\\">
+        <div class=\\"logo w3-dropdown-hover w3-hide-small w3-hide-medium\\" style=\\"background-color: #0000\\">
+            <a href=\\"/index.html\\">
+                <img src=\\"./assets/rsc-guy.png\\">
+            </a>
+            <div class=\\"w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small w3-hide-medium\\">
+                <span class=\\"w3-bar-item\\">---historical---</span>
+                    <a href=\\"/e2e-1\\" class=\\"w3-bar-item w3-button \\">E2E Season 1</a>
+            </div>
+        </div>
+
+		<div class=\\"w3-dropdown-hover w3-hide-small w3-hide-medium\\">
+			<button class=\\"w3-button\\">Driver Standings</button>
+			<div class=\\"w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small w3-hide-medium\\">
+				<a href=\\"./test-e2e-driver-standings.html\\" class=\\"w3-bar-item w3-button active\\">Test E2E</a>
+				<a href=\\"./test-e2e2-driver-standings.html\\" class=\\"w3-bar-item w3-button \\">Test E2E2</a>
+				<a href=\\"./overall-driver-standings.html\\" class=\\"w3-bar-item w3-button \\">Overall</a>
+			</div>
+		</div>
+
+		<div class=\\"w3-dropdown-hover w3-hide-small w3-hide-medium\\">
+			<button class=\\"w3-button\\">Team Standings</button>
+			<div class=\\"w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small w3-hide-medium\\">
+				<a href=\\"./test-e2e-team-standings.html\\" class=\\"w3-bar-item w3-button \\">Test E2E</a>
+				<a href=\\"./test-e2e2-team-standings.html\\" class=\\"w3-bar-item w3-button \\">Test E2E2</a>
+				<a href=\\"./overall-team-standings.html\\" class=\\"w3-bar-item w3-button \\">Overall</a>
+			</div>
+		</div>
+
+
+
+        <!-- mobile stuff -->
+        <a href=\\"javascript:void(0)\\" class=\\"logo w3-left w3-hide-large\\" style=\\"font-size:3em;\\" onclick=\\"openSeriesMobileNav()\\">
+            <img src=\\"./assets/rsc-guy.png\\" style=\\"max-height: 1em;margin: 0.1em;border: 1px solid darkgray\\">
+        </a>
+
+        <a href=\\"javascript:void(0)\\" class=\\"w3-bar-item w3-button w3-right w3-hide-large\\" style=\\"font-size:3em;\\" onclick=\\"openMobileNav()\\">&#9776;
+        </a>
+
+        <h3 class=\\"w3-hide-large navTitle bold\\" style=\\"display:block;\\">
+            driver - Test E2E
+            
+        </h3>
+
+	</div>
+
+	<div id=\\"mobileNav\\" class=\\"w3-bar-block w3-black w3-hide w3-hide-large\\" style=\\"overflow-y:scroll;max-height:95vh;\\">
+            <a href=\\"./test-e2e-driver-standings.html\\" class=\\"w3-bar-item w3-button active\\">Driver Standings - Test E2E</a>
+            <a href=\\"./test-e2e2-driver-standings.html\\" class=\\"w3-bar-item w3-button \\">Driver Standings - Test E2E2</a>
+            <a href=\\"./overall-driver-standings.html\\" class=\\"w3-bar-item w3-button \\">Driver Standings - Overall</a>
+            <a href=\\"./test-e2e-team-standings.html\\" class=\\"w3-bar-item w3-button \\">Team Standings - Test E2E</a>
+            <a href=\\"./test-e2e2-team-standings.html\\" class=\\"w3-bar-item w3-button \\">Team Standings - Test E2E2</a>
+            <a href=\\"./overall-team-standings.html\\" class=\\"w3-bar-item w3-button \\">Team Standings - Overall</a>
+	</div>
+
+	<div id=\\"seriesMobileNav\\" class=\\"w3-bar-block w3-black w3-hide w3-hide-large\\" style=\\"overflow-y:scroll;max-height:95vh;\\">
+            <span class=\\"w3-bar-item\\">---historical---</span>
+                <a href=\\"/e2e-1\\" class=\\"w3-bar-item w3-button \\">E2E Season 1</a>
+	</div>
+
+	<div class=\\"w3-bar w3-light-grey secondaryNav\\">
+            <a href=\\"./test-e2e-0-driver-results.html\\" style=\\"\\">
+                <img src=\\"./assets/country-flags/swe.png\\" />
+            </a>
+            <a href=\\"./test-e2e-1-driver-results.html\\" style=\\"\\">
+                <img src=\\"./assets/country-flags/est.png\\" />
+            </a>
+	</div>
+</div>
+
+<div id=\\"container\\">
+    <div id=\\"flexContainer\\">
+        <div class=\\"flexBox\\">
+            <div style=\\"margin-bottom: 1em;\\" class=\\"w3-hide-medium w3-hide-small\\">
+                <div class=\\"logo\\" style=\\"display:flex;\\">
+                    <img src=\\"./assets/rsc-guy.png\\" />
+                    <h2 style=\\"margin-left:1em;\\">Test E2E Rally Grundstrom Leg 1 Driver Results</h2>
+                </div>
+            </div>
+
+            <table id=\\"tableDrivers\\">
+                <thead>
+                <tr>
+                    <th>Pos</th>
+                    <th>Nat</th>
+                    <th>Driver</th>
+                            <th>Team Name</th>
+                        <th>Car</th>
+                            <th>Car Name</th>
+                    <td>Total</td>
+                    <td>Diff</td>
+                        <td>SR</td>
+                    <td>Points</td>
+                    <td>Total Points</td>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/fin.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"fin\\" title=\\"fin\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">QazRa</td>
+                                <td class=\\"text-left\\">privateer</td>
+                            <td>
+                                <img src=\\"./assets/cars/subaru.png\\" style=\\"max-width:2em; max-height:2em;\\" alt=\\"subaru\\" title=\\"subaru\\"/>
+                            </td>
+                                <td class=\\"text-left\\">
+                                    Subaru Impreza N14 N4
+                                </td>
+                        <td>00:15:31.747</td>
+                        <td>--</td>
+                            <td>
+                                0
+                            </td>
+                        <td>1</td>
+                        <td class=\\"bold\\">1</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/deu.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"deu\\" title=\\"deu\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">Hawk24</td>
+                                <td class=\\"text-left\\">Heat Seeking Geezers mk2</td>
+                            <td>
+                                <img src=\\"./assets/cars/mitsubishi.png\\" style=\\"max-width:2em; max-height:2em;\\" alt=\\"mitsubishi\\" title=\\"mitsubishi\\"/>
+                            </td>
+                                <td class=\\"text-left\\">
+                                    Mitsubishi Lancer Evo IX N4
+                                </td>
+                        <td>00:15:45.285</td>
+                        <td>+00:00:13.538</td>
+                            <td>
+                                0
+                            </td>
+                        <td></td>
+                        <td class=\\"bold\\">0</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/bel.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"bel\\" title=\\"bel\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">THELC Matt</td>
+                                <td class=\\"text-left\\">Rizla&#x27;s Suffering Club</td>
+                            <td>
+                                <img src=\\"./assets/cars/mitsubishi.png\\" style=\\"max-width:2em; max-height:2em;\\" alt=\\"mitsubishi\\" title=\\"mitsubishi\\"/>
+                            </td>
+                                <td class=\\"text-left\\">
+                                    Mitsubishi Lancer Evo IX N4
+                                </td>
+                        <td>00:15:46.897</td>
+                        <td>+00:00:15.150</td>
+                            <td>
+                                0
+                            </td>
+                        <td></td>
+                        <td class=\\"bold\\">0</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/gbr.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"gbr\\" title=\\"gbr\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">Joe Hutchinson</td>
+                                <td class=\\"text-left\\">Rizla&#x27;s Suffering Club</td>
+                            <td>
+                                <img src=\\"./assets/cars/mitsubishi.png\\" style=\\"max-width:2em; max-height:2em;\\" alt=\\"mitsubishi\\" title=\\"mitsubishi\\"/>
+                            </td>
+                                <td class=\\"text-left\\">
+                                    Mitsubishi Lancer Evo IX N4
+                                </td>
+                        <td>00:16:00.404</td>
+                        <td>+00:00:28.657</td>
+                            <td>
+                                0
+                            </td>
+                        <td></td>
+                        <td class=\\"bold\\">0</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/usa.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"usa\\" title=\\"usa\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">HotdogCowboy</td>
+                                <td class=\\"text-left\\">All Beef Franks</td>
+                            <td>
+                                <img src=\\"./assets/cars/mitsubishi.png\\" style=\\"max-width:2em; max-height:2em;\\" alt=\\"mitsubishi\\" title=\\"mitsubishi\\"/>
+                            </td>
+                                <td class=\\"text-left\\">
+                                    Mitsubishi Lancer Evo IX N4
+                                </td>
+                        <td>00:16:01.516</td>
+                        <td>+00:00:29.769</td>
+                            <td>
+                                0
+                            </td>
+                        <td></td>
+                        <td class=\\"bold\\">0</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/gbr.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"gbr\\" title=\\"gbr\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">PETTET Jordan (shakey-deal)</td>
+                                <td class=\\"text-left\\">Heat Seeking Geezers mk2</td>
+                            <td>
+                                <img src=\\"./assets/cars/subaru.png\\" style=\\"max-width:2em; max-height:2em;\\" alt=\\"subaru\\" title=\\"subaru\\"/>
+                            </td>
+                                <td class=\\"text-left\\">
+                                    Subaru Impreza N14 N4
+                                </td>
+                        <td>00:16:08.614</td>
+                        <td>+00:00:36.867</td>
+                            <td>
+                                2
+                            </td>
+                        <td></td>
+                        <td class=\\"bold\\">0</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/nor.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"nor\\" title=\\"nor\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">Roy Magnes</td>
+                                <td class=\\"text-left\\">privateer</td>
+                            <td>
+                                <img src=\\"./assets/cars/subaru.png\\" style=\\"max-width:2em; max-height:2em;\\" alt=\\"subaru\\" title=\\"subaru\\"/>
+                            </td>
+                                <td class=\\"text-left\\">
+                                    Subaru Impreza N14 N4
+                                </td>
+                        <td>00:16:08.765</td>
+                        <td>+00:00:37.018</td>
+                            <td>
+                                0
+                            </td>
+                        <td></td>
+                        <td class=\\"bold\\">0</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/aus.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"aus\\" title=\\"aus\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">satchmo</td>
+                                <td class=\\"text-left\\">CodeBros</td>
+                            <td>
+                                <img src=\\"./assets/cars/mitsubishi.png\\" style=\\"max-width:2em; max-height:2em;\\" alt=\\"mitsubishi\\" title=\\"mitsubishi\\"/>
+                            </td>
+                                <td class=\\"text-left\\">
+                                    Mitsubishi Lancer Evo IX N4
+                                </td>
+                        <td>00:16:25.551</td>
+                        <td>+00:00:53.804</td>
+                            <td>
+                                0
+                            </td>
+                        <td></td>
+                        <td class=\\"bold\\">0</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/swe.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"swe\\" title=\\"swe\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">Weepy</td>
+                                <td class=\\"text-left\\">CodeBros</td>
+                            <td>
+                                <img src=\\"./assets/cars/mitsubishi.png\\" style=\\"max-width:2em; max-height:2em;\\" alt=\\"mitsubishi\\" title=\\"mitsubishi\\"/>
+                            </td>
+                                <td class=\\"text-left\\">
+                                    Mitsubishi Lancer Evo IX N4
+                                </td>
+                        <td>00:16:40.901</td>
+                        <td>+00:01:09.154</td>
+                            <td>
+                                3
+                            </td>
+                        <td></td>
+                        <td class=\\"bold\\">0</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/kor.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"kor\\" title=\\"kor\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">Prodicrux</td>
+                                <td class=\\"text-left\\">privateer</td>
+                            <td>
+                                <img src=\\"./assets/cars/mitsubishi.png\\" style=\\"max-width:2em; max-height:2em;\\" alt=\\"mitsubishi\\" title=\\"mitsubishi\\"/>
+                            </td>
+                                <td class=\\"text-left\\">
+                                    Mitsubishi Lancer Evo IX N4
+                                </td>
+                        <td>00:16:46.396</td>
+                        <td>+00:01:14.649</td>
+                            <td>
+                                0
+                            </td>
+                        <td></td>
+                        <td class=\\"bold\\">0</td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/gbr.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"gbr\\" title=\\"gbr\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">FAHEY Andrew</td>
+                                <td class=\\"text-left\\">privateer</td>
+                            <td>
+                                <img src=\\"./assets/cars/seat.png\\" style=\\"max-width:2em; max-height:2em;\\" alt=\\"seat\\" title=\\"seat\\"/>
+                            </td>
+                                <td class=\\"text-left\\">
+                                    Seat Leon Cupra R GrpN
+                                </td>
+                        <td>00:17:33.411</td>
+                        <td>+00:02:01.664</td>
+                            <td>
+                                2
+                            </td>
+                        <td></td>
+                        <td class=\\"bold\\">0</td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/aus.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"aus\\" title=\\"aus\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">jezza</td>
+                                <td class=\\"text-left\\">The stale poos</td>
+                            <td>
+                                <img src=\\"./assets/cars/seat.png\\" style=\\"max-width:2em; max-height:2em;\\" alt=\\"seat\\" title=\\"seat\\"/>
+                            </td>
+                                <td class=\\"text-left\\">
+                                    Seat Leon Cupra R GrpN
+                                </td>
+                        <td>00:17:40.456</td>
+                        <td>+00:02:08.709</td>
+                            <td>
+                                3
+                            </td>
+                        <td></td>
+                        <td class=\\"bold\\">0</td>
+                    </tr>
+                    <tr>
+                        <td>13</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/swe.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"swe\\" title=\\"swe\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">ctbr</td>
+                                <td class=\\"text-left\\">privateer</td>
+                            <td>
+                                <img src=\\"./assets/cars/mitsubishi.png\\" style=\\"max-width:2em; max-height:2em;\\" alt=\\"mitsubishi\\" title=\\"mitsubishi\\"/>
+                            </td>
+                                <td class=\\"text-left\\">
+                                    Mitsubishi Lancer Evo IX N4
+                                </td>
+                        <td>00:17:50.029</td>
+                        <td>+00:02:18.282</td>
+                            <td>
+                                2
+                            </td>
+                        <td></td>
+                        <td class=\\"bold\\">0</td>
+                    </tr>
+                    <tr>
+                        <td>14</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/deu.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"deu\\" title=\\"deu\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">Maximilian Maksy</td>
+                                <td class=\\"text-left\\">The stale poos</td>
+                            <td>
+                                <img src=\\"./assets/cars/mitsubishi.png\\" style=\\"max-width:2em; max-height:2em;\\" alt=\\"mitsubishi\\" title=\\"mitsubishi\\"/>
+                            </td>
+                                <td class=\\"text-left\\">
+                                    Mitsubishi Lancer Evo IX N4
+                                </td>
+                        <td>00:19:33.054</td>
+                        <td>+00:04:01.307</td>
+                            <td>
+                                4
+                            </td>
+                        <td></td>
+                        <td class=\\"bold\\">0</td>
+                    </tr>
+                    <tr>
+                        <td>15</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/deu.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"deu\\" title=\\"deu\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">Thom B</td>
+                                <td class=\\"text-left\\">Kringel&#x27;s Coal Rental and Co.</td>
+                            <td>
+                                <img src=\\"./assets/cars/mitsubishi.png\\" style=\\"max-width:2em; max-height:2em;\\" alt=\\"mitsubishi\\" title=\\"mitsubishi\\"/>
+                            </td>
+                                <td class=\\"text-left\\">
+                                    Mitsubishi Lancer Evo IX N4
+                                </td>
+                        <td>00:19:48.728</td>
+                        <td>+00:04:16.981</td>
+                            <td>
+                                1
+                            </td>
+                        <td></td>
+                        <td class=\\"bold\\">0</td>
+                    </tr>
+                    <tr>
+                        <td>16</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/row.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"row\\" title=\\"row\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">Erki Erik Poola</td>
+                                <td class=\\"text-left\\">privateer</td>
+                            <td>
+                                <img src=\\"./assets/cars/mitsubishi.png\\" style=\\"max-width:2em; max-height:2em;\\" alt=\\"mitsubishi\\" title=\\"mitsubishi\\"/>
+                            </td>
+                                <td class=\\"text-left\\">
+                                    Mitsubishi Lancer Evo IX N4
+                                </td>
+                        <td>00:19:53.542</td>
+                        <td>+00:04:21.795</td>
+                            <td>
+                                4
+                            </td>
+                        <td></td>
+                        <td class=\\"bold\\">0</td>
+                    </tr>
+                    <tr>
+                        <td>17</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/swe.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"swe\\" title=\\"swe\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">davidgrundstrom</td>
+                                <td class=\\"text-left\\">No-recce</td>
+                            <td>
+                                <img src=\\"./assets/cars/mitsubishi.png\\" style=\\"max-width:2em; max-height:2em;\\" alt=\\"mitsubishi\\" title=\\"mitsubishi\\"/>
+                            </td>
+                                <td class=\\"text-left\\">
+                                    Mitsubishi Lancer Evo IX N4
+                                </td>
+                        <td>00:20:09.472</td>
+                        <td>+00:04:37.725</td>
+                            <td>
+                                1
+                            </td>
+                        <td></td>
+                        <td class=\\"bold\\">0</td>
+                    </tr>
+                    <tr>
+                        <td>18</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/esp.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"esp\\" title=\\"esp\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">dejota95</td>
+                                <td class=\\"text-left\\">privateer</td>
+                            <td>
+                                <img src=\\"./assets/cars/mitsubishi.png\\" style=\\"max-width:2em; max-height:2em;\\" alt=\\"mitsubishi\\" title=\\"mitsubishi\\"/>
+                            </td>
+                                <td class=\\"text-left\\">
+                                    Mitsubishi Lancer Evo IX N4
+                                </td>
+                        <td>00:20:15.968</td>
+                        <td>+00:04:44.221</td>
+                            <td>
+                                4
+                            </td>
+                        <td></td>
+                        <td class=\\"bold\\">0</td>
+                    </tr>
+                    <tr>
+                        <td>19</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/usa.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"usa\\" title=\\"usa\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">meatcreap</td>
+                                <td class=\\"text-left\\">All Beef Franks</td>
+                            <td>
+                                <img src=\\"./assets/cars/mitsubishi.png\\" style=\\"max-width:2em; max-height:2em;\\" alt=\\"mitsubishi\\" title=\\"mitsubishi\\"/>
+                            </td>
+                                <td class=\\"text-left\\">
+                                    Mitsubishi Lancer Evo IX N4
+                                </td>
+                        <td>00:20:36.795</td>
+                        <td>+00:05:05.048</td>
+                            <td>
+                                1
+                            </td>
+                        <td></td>
+                        <td class=\\"bold\\">0</td>
+                    </tr>
+                    <tr>
+                        <td>20</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/swe.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"swe\\" title=\\"swe\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">Bollis</td>
+                                <td class=\\"text-left\\">privateer</td>
+                            <td>
+                                <img src=\\"./assets/cars/mitsubishi.png\\" style=\\"max-width:2em; max-height:2em;\\" alt=\\"mitsubishi\\" title=\\"mitsubishi\\"/>
+                            </td>
+                                <td class=\\"text-left\\">
+                                    Mitsubishi Lancer Evo IX N4
+                                </td>
+                        <td>00:20:44.073</td>
+                        <td>+00:05:12.326</td>
+                            <td>
+                                1
+                            </td>
+                        <td></td>
+                        <td class=\\"bold\\">0</td>
+                    </tr>
+                    <tr>
+                        <td>21</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/hun.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"hun\\" title=\\"hun\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">fujiRS</td>
+                                <td class=\\"text-left\\">privateer</td>
+                            <td>
+                                <img src=\\"./assets/cars/mitsubishi.png\\" style=\\"max-width:2em; max-height:2em;\\" alt=\\"mitsubishi\\" title=\\"mitsubishi\\"/>
+                            </td>
+                                <td class=\\"text-left\\">
+                                    Mitsubishi Lancer Evo IX N4
+                                </td>
+                        <td>00:23:01.081</td>
+                        <td>+00:07:29.334</td>
+                            <td>
+                                4
+                            </td>
+                        <td></td>
+                        <td class=\\"bold\\">0</td>
+                    </tr>
+                    <tr>
+                        <td>22</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/deu.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"deu\\" title=\\"deu\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">Kringelwurst</td>
+                                <td class=\\"text-left\\">Kringel&#x27;s Coal Rental and Co.</td>
+                            <td>
+                                <img src=\\"./assets/cars/mitsubishi.png\\" style=\\"max-width:2em; max-height:2em;\\" alt=\\"mitsubishi\\" title=\\"mitsubishi\\"/>
+                            </td>
+                                <td class=\\"text-left\\">
+                                    Mitsubishi Lancer Evo IX N4
+                                </td>
+                        <td>00:25:21.345</td>
+                        <td>+00:09:49.598</td>
+                            <td>
+                                3
+                            </td>
+                        <td></td>
+                        <td class=\\"bold\\">0</td>
+                    </tr>
+                    <tr>
+                        <td>23</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/est.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"est\\" title=\\"est\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">TheZenor</td>
+                                <td class=\\"text-left\\">Flat Out Racing</td>
+                            <td>
+                                <img src=\\"./assets/cars/mitsubishi.png\\" style=\\"max-width:2em; max-height:2em;\\" alt=\\"mitsubishi\\" title=\\"mitsubishi\\"/>
+                            </td>
+                                <td class=\\"text-left\\">
+                                    Mitsubishi Lancer Evo IX N4
+                                </td>
+                        <td>00:25:28.642</td>
+                        <td>+00:09:56.895</td>
+                            <td>
+                                6
+                            </td>
+                        <td></td>
+                        <td class=\\"bold\\">0</td>
+                    </tr>
+                    <tr>
+                        <td>24</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/swe.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"swe\\" title=\\"swe\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">Tommie Lindberg</td>
+                                <td class=\\"text-left\\">privateer</td>
+                            <td>
+                                <img src=\\"./assets/cars/mitsubishi.png\\" style=\\"max-width:2em; max-height:2em;\\" alt=\\"mitsubishi\\" title=\\"mitsubishi\\"/>
+                            </td>
+                                <td class=\\"text-left\\">
+                                    Mitsubishi Lancer Evo IX N4
+                                </td>
+                        <td>00:27:18.000</td>
+                        <td>+00:11:46.253</td>
+                            <td>
+                                6
+                            </td>
+                        <td></td>
+                        <td class=\\"bold\\">0</td>
+                    </tr>
+                    <tr>
+                        <td>25</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/esp.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"esp\\" title=\\"esp\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">TASIS Edgar</td>
+                                <td class=\\"text-left\\">privateer</td>
+                            <td>
+                                <img src=\\"./assets/cars/mitsubishi.png\\" style=\\"max-width:2em; max-height:2em;\\" alt=\\"mitsubishi\\" title=\\"mitsubishi\\"/>
+                            </td>
+                                <td class=\\"text-left\\">
+                                    Mitsubishi Lancer Evo IX N4
+                                </td>
+                        <td>00:25:20.749</td>
+                        <td>+00:09:49.002</td>
+                            <td>
+                                
+                            </td>
+                        <td></td>
+                        <td class=\\"bold\\">DNF</td>
+                    </tr>
+                    <tr>
+                        <td>26</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/est.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"est\\" title=\\"est\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">ninko</td>
+                                <td class=\\"text-left\\">Flat Out Racing</td>
+                            <td>
+                                <img src=\\"./assets/cars/mitsubishi.png\\" style=\\"max-width:2em; max-height:2em;\\" alt=\\"mitsubishi\\" title=\\"mitsubishi\\"/>
+                            </td>
+                                <td class=\\"text-left\\">
+                                    Mitsubishi Lancer Evo IX N4
+                                </td>
+                        <td>00:25:24.432</td>
+                        <td>+00:09:52.685</td>
+                            <td>
+                                
+                            </td>
+                        <td></td>
+                        <td class=\\"bold\\">DNF</td>
+                    </tr>
+                    <tr>
+                        <td>27</td>
+                        <td>
+                            <img src=\\"./assets/country-flags/bra.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\" alt=\\"bra\\" title=\\"bra\\"/>
+                        </td>
+                        <td class=\\"text-left bold\\">Htchet</td>
+                                <td class=\\"text-left\\">privateer</td>
+                            <td>
+                                <img src=\\"./assets/cars/mitsubishi.png\\" style=\\"max-width:2em; max-height:2em;\\" alt=\\"mitsubishi\\" title=\\"mitsubishi\\"/>
+                            </td>
+                                <td class=\\"text-left\\">
+                                    Mitsubishi Lancer Evo IX N4
+                                </td>
+                        <td>15:11:11.161</td>
+                        <td>+14:55:39.414</td>
+                            <td>
+                                
+                            </td>
+                        <td></td>
+                        <td class=\\"bold\\">DNF</td>
+                    </tr>
+                </tbody>
+
+            </table>
+            <div style=\\"margin:0 auto; text-align:center;\\">
+                <p>Last updated at: last-updated-test-e2e</p>
+            </div>
+                <div style=\\"margin:0 auto; text-align:center;\\">
+                    <a href=\\"https://rallysimfans.hu/rbr/rally_online.php?centerbox&#x3D;rally_results.php&amp;rally_id&#x3D;47367\\" target=\\"_none\\">full results</a>
+                </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openMobileNav() {
+        closeNav(\\"seriesMobileNav\\");
+        openNav(\\"mobileNav\\");
+    }
+    function openSeriesMobileNav() {
+        closeNav(\\"mobileNav\\");
+        openNav(\\"seriesMobileNav\\");
+    }
+    function closeNav(navId) {
+        var x = document.getElementById(navId);
+        x.className = x.className.replace(\\" w3-show\\", \\"\\");
+    }
+    function openNav(navId) {
+        var x = document.getElementById(navId);
+        if (x.className.indexOf(\\"w3-show\\") == -1) {
+            x.className += \\" w3-show\\";
+        } else {
+            closeNav(navId);
+        }
+    }
+    // When the user clicks on div, open the popup
+    function openPopup(id) {
+      var popup = document.getElementById(id);
+      popup.classList.toggle(\\"show\\");
+    }
+</script>
+
+</body>
+
+</html>"
+`;
+
 exports[`e2e generates driver results 1`] = `
 "<html lang=\\"en\\">
 
@@ -114,7 +844,12 @@ exports[`e2e generates driver results 1`] = `
                     <td>Total</td>
                     <td>Diff</td>
                         <td>SR</td>
-                        <td>Leg Points</td>
+                            <td>
+                                <a href=\\"./test-e2e-0-0-driver-results.html\\">Leg 1</a>
+                            </td>
+                            <td>
+                                <a href=\\"./test-e2e-0-1-driver-results.html\\">Leg 2</a>
+                            </td>
                         <td>PS Points</td>
                     <td>Points</td>
                     <td>Total Points</td>
@@ -141,7 +876,8 @@ exports[`e2e generates driver results 1`] = `
                             <td>
                                 0
                             </td>
-                            <td>1</td>
+                                <td></td>
+                                <td>1</td>
                             <td>5</td>
                         <td>60</td>
                         <td class=\\"bold\\">66</td>
@@ -166,7 +902,8 @@ exports[`e2e generates driver results 1`] = `
                             <td>
                                 0
                             </td>
-                            <td></td>
+                                <td></td>
+                                <td></td>
                             <td>4</td>
                         <td>48</td>
                         <td class=\\"bold\\">52</td>
@@ -191,7 +928,8 @@ exports[`e2e generates driver results 1`] = `
                             <td>
                                 0
                             </td>
-                            <td>1</td>
+                                <td>1</td>
+                                <td></td>
                             <td></td>
                         <td>38</td>
                         <td class=\\"bold\\">39</td>
@@ -216,7 +954,8 @@ exports[`e2e generates driver results 1`] = `
                             <td>
                                 0
                             </td>
-                            <td></td>
+                                <td></td>
+                                <td></td>
                             <td>2</td>
                         <td>30</td>
                         <td class=\\"bold\\">32</td>
@@ -241,7 +980,8 @@ exports[`e2e generates driver results 1`] = `
                             <td>
                                 0
                             </td>
-                            <td></td>
+                                <td></td>
+                                <td></td>
                             <td></td>
                         <td>24</td>
                         <td class=\\"bold\\">24</td>
@@ -266,7 +1006,8 @@ exports[`e2e generates driver results 1`] = `
                             <td>
                                 0
                             </td>
-                            <td></td>
+                                <td></td>
+                                <td></td>
                             <td></td>
                         <td>20</td>
                         <td class=\\"bold\\">20</td>
@@ -291,7 +1032,8 @@ exports[`e2e generates driver results 1`] = `
                             <td>
                                 0
                             </td>
-                            <td></td>
+                                <td></td>
+                                <td></td>
                             <td></td>
                         <td>18</td>
                         <td class=\\"bold\\">18</td>
@@ -316,7 +1058,8 @@ exports[`e2e generates driver results 1`] = `
                             <td>
                                 0
                             </td>
-                            <td></td>
+                                <td></td>
+                                <td></td>
                             <td></td>
                         <td>16</td>
                         <td class=\\"bold\\">16</td>
@@ -341,7 +1084,8 @@ exports[`e2e generates driver results 1`] = `
                             <td>
                                 1
                             </td>
-                            <td></td>
+                                <td></td>
+                                <td></td>
                             <td>3</td>
                         <td>7</td>
                         <td class=\\"bold\\">10</td>
@@ -366,7 +1110,8 @@ exports[`e2e generates driver results 1`] = `
                             <td>
                                 1
                             </td>
-                            <td></td>
+                                <td></td>
+                                <td></td>
                             <td>1</td>
                         <td>6</td>
                         <td class=\\"bold\\">7</td>
@@ -391,7 +1136,8 @@ exports[`e2e generates driver results 1`] = `
                             <td>
                                 1
                             </td>
-                            <td></td>
+                                <td></td>
+                                <td></td>
                             <td></td>
                         <td>5</td>
                         <td class=\\"bold\\">5</td>
@@ -416,7 +1162,8 @@ exports[`e2e generates driver results 1`] = `
                             <td>
                                 1
                             </td>
-                            <td></td>
+                                <td></td>
+                                <td></td>
                             <td></td>
                         <td>4</td>
                         <td class=\\"bold\\">4</td>
@@ -441,7 +1188,8 @@ exports[`e2e generates driver results 1`] = `
                             <td>
                                 3
                             </td>
-                            <td></td>
+                                <td></td>
+                                <td></td>
                             <td></td>
                         <td>3</td>
                         <td class=\\"bold\\">3</td>
@@ -466,7 +1214,8 @@ exports[`e2e generates driver results 1`] = `
                             <td>
                                 2
                             </td>
-                            <td></td>
+                                <td></td>
+                                <td></td>
                             <td></td>
                         <td>2</td>
                         <td class=\\"bold\\">2</td>
@@ -491,7 +1240,8 @@ exports[`e2e generates driver results 1`] = `
                             <td>
                                 2
                             </td>
-                            <td></td>
+                                <td></td>
+                                <td></td>
                             <td></td>
                         <td>1</td>
                         <td class=\\"bold\\">1</td>
@@ -516,7 +1266,8 @@ exports[`e2e generates driver results 1`] = `
                             <td>
                                 2
                             </td>
-                            <td></td>
+                                <td></td>
+                                <td></td>
                             <td></td>
                         <td></td>
                         <td class=\\"bold\\">0</td>
@@ -544,7 +1295,8 @@ exports[`e2e generates driver results 1`] = `
                             <td>
                                 3
                             </td>
-                            <td></td>
+                                <td></td>
+                                <td></td>
                             <td></td>
                         <td></td>
                         <td class=\\"bold\\">0</td>
@@ -569,7 +1321,8 @@ exports[`e2e generates driver results 1`] = `
                             <td>
                                 3
                             </td>
-                            <td></td>
+                                <td></td>
+                                <td></td>
                             <td></td>
                         <td></td>
                         <td class=\\"bold\\">0</td>
@@ -594,7 +1347,8 @@ exports[`e2e generates driver results 1`] = `
                             <td>
                                 4
                             </td>
-                            <td></td>
+                                <td></td>
+                                <td></td>
                             <td></td>
                         <td></td>
                         <td class=\\"bold\\">0</td>
@@ -619,7 +1373,8 @@ exports[`e2e generates driver results 1`] = `
                             <td>
                                 4
                             </td>
-                            <td></td>
+                                <td></td>
+                                <td></td>
                             <td></td>
                         <td></td>
                         <td class=\\"bold\\">0</td>
@@ -644,7 +1399,8 @@ exports[`e2e generates driver results 1`] = `
                             <td>
                                 4
                             </td>
-                            <td></td>
+                                <td></td>
+                                <td></td>
                             <td></td>
                         <td></td>
                         <td class=\\"bold\\">0</td>
@@ -669,7 +1425,8 @@ exports[`e2e generates driver results 1`] = `
                             <td>
                                 4
                             </td>
-                            <td></td>
+                                <td></td>
+                                <td></td>
                             <td></td>
                         <td></td>
                         <td class=\\"bold\\">0</td>
@@ -694,7 +1451,8 @@ exports[`e2e generates driver results 1`] = `
                             <td>
                                 6
                             </td>
-                            <td></td>
+                                <td></td>
+                                <td></td>
                             <td></td>
                         <td></td>
                         <td class=\\"bold\\">0</td>
@@ -719,7 +1477,8 @@ exports[`e2e generates driver results 1`] = `
                             <td>
                                 6
                             </td>
-                            <td></td>
+                                <td></td>
+                                <td></td>
                             <td></td>
                         <td></td>
                         <td class=\\"bold\\">0</td>
@@ -744,7 +1503,8 @@ exports[`e2e generates driver results 1`] = `
                             <td>
                                 
                             </td>
-                            <td></td>
+                                <td></td>
+                                <td></td>
                             <td></td>
                         <td></td>
                         <td class=\\"bold\\">DNF</td>
@@ -769,7 +1529,8 @@ exports[`e2e generates driver results 1`] = `
                             <td>
                                 
                             </td>
-                            <td></td>
+                                <td></td>
+                                <td></td>
                             <td></td>
                         <td></td>
                         <td class=\\"bold\\">DNF</td>
@@ -794,7 +1555,8 @@ exports[`e2e generates driver results 1`] = `
                             <td>
                                 
                             </td>
-                            <td></td>
+                                <td></td>
+                                <td></td>
                             <td></td>
                         <td></td>
                         <td class=\\"bold\\">DNF</td>
@@ -819,7 +1581,8 @@ exports[`e2e generates driver results 1`] = `
                             <td>
                                 
                             </td>
-                            <td></td>
+                                <td></td>
+                                <td></td>
                             <td></td>
                         <td></td>
                         <td class=\\"bold\\">DNF</td>
@@ -844,7 +1607,8 @@ exports[`e2e generates driver results 1`] = `
                             <td>
                                 
                             </td>
-                            <td></td>
+                                <td></td>
+                                <td></td>
                             <td></td>
                         <td></td>
                         <td class=\\"bold\\">DNF</td>
@@ -869,7 +1633,8 @@ exports[`e2e generates driver results 1`] = `
                             <td>
                                 
                             </td>
-                            <td></td>
+                                <td></td>
+                                <td></td>
                             <td></td>
                         <td></td>
                         <td class=\\"bold\\">DNS</td>
@@ -1892,7 +2657,6 @@ exports[`e2e generates overall driver results 1`] = `
                     <td>Total</td>
                     <td>Diff</td>
                         <td>SR</td>
-                        <td>Leg Points</td>
                         <td>PS Points</td>
                     <td>Points</td>
                     <td>Total Points</td>
@@ -1920,7 +2684,6 @@ exports[`e2e generates overall driver results 1`] = `
                             <td>
                                 0
                             </td>
-                            <td></td>
                             <td>5</td>
                         <td>60</td>
                         <td class=\\"bold\\">65</td>
@@ -1946,7 +2709,6 @@ exports[`e2e generates overall driver results 1`] = `
                             <td>
                                 0
                             </td>
-                            <td></td>
                             <td>4</td>
                         <td>48</td>
                         <td class=\\"bold\\">52</td>
@@ -1972,7 +2734,6 @@ exports[`e2e generates overall driver results 1`] = `
                             <td>
                                 0
                             </td>
-                            <td>1</td>
                             <td></td>
                         <td>60</td>
                         <td class=\\"bold\\">61</td>
@@ -1998,7 +2759,6 @@ exports[`e2e generates overall driver results 1`] = `
                             <td>
                                 0
                             </td>
-                            <td>1</td>
                             <td>5</td>
                         <td>48</td>
                         <td class=\\"bold\\">54</td>
@@ -2025,7 +2785,6 @@ exports[`e2e generates overall driver results 1`] = `
                                 0
                             </td>
                             <td></td>
-                            <td></td>
                         <td>38</td>
                         <td class=\\"bold\\">38</td>
                     </tr>
@@ -2050,7 +2809,6 @@ exports[`e2e generates overall driver results 1`] = `
                             <td>
                                 0
                             </td>
-                            <td></td>
                             <td>2</td>
                         <td>30</td>
                         <td class=\\"bold\\">32</td>
@@ -2076,7 +2834,6 @@ exports[`e2e generates overall driver results 1`] = `
                             <td>
                                 0
                             </td>
-                            <td></td>
                             <td>3</td>
                         <td>24</td>
                         <td class=\\"bold\\">27</td>
@@ -2103,7 +2860,6 @@ exports[`e2e generates overall driver results 1`] = `
                                 0
                             </td>
                             <td></td>
-                            <td></td>
                         <td>20</td>
                         <td class=\\"bold\\">20</td>
                     </tr>
@@ -2128,7 +2884,6 @@ exports[`e2e generates overall driver results 1`] = `
                             <td>
                                 0
                             </td>
-                            <td></td>
                             <td>1</td>
                         <td>18</td>
                         <td class=\\"bold\\">19</td>
@@ -2155,7 +2910,6 @@ exports[`e2e generates overall driver results 1`] = `
                                 0
                             </td>
                             <td></td>
-                            <td></td>
                         <td>16</td>
                         <td class=\\"bold\\">16</td>
                     </tr>
@@ -2181,7 +2935,6 @@ exports[`e2e generates overall driver results 1`] = `
                                 0
                             </td>
                             <td></td>
-                            <td></td>
                         <td>14</td>
                         <td class=\\"bold\\">14</td>
                     </tr>
@@ -2206,7 +2959,6 @@ exports[`e2e generates overall driver results 1`] = `
                             <td>
                                 0
                             </td>
-                            <td></td>
                             <td>4</td>
                         <td>12</td>
                         <td class=\\"bold\\">16</td>
@@ -2233,7 +2985,6 @@ exports[`e2e generates overall driver results 1`] = `
                                 0
                             </td>
                             <td></td>
-                            <td></td>
                         <td>10</td>
                         <td class=\\"bold\\">10</td>
                     </tr>
@@ -2258,7 +3009,6 @@ exports[`e2e generates overall driver results 1`] = `
                             <td>
                                 0
                             </td>
-                            <td></td>
                             <td></td>
                         <td>8</td>
                         <td class=\\"bold\\">8</td>
@@ -2285,7 +3035,6 @@ exports[`e2e generates overall driver results 1`] = `
                                 0
                             </td>
                             <td></td>
-                            <td></td>
                         <td>6</td>
                         <td class=\\"bold\\">6</td>
                     </tr>
@@ -2310,7 +3059,6 @@ exports[`e2e generates overall driver results 1`] = `
                             <td>
                                 0
                             </td>
-                            <td></td>
                             <td></td>
                         <td>4</td>
                         <td class=\\"bold\\">4</td>
@@ -2337,7 +3085,6 @@ exports[`e2e generates overall driver results 1`] = `
                                 1
                             </td>
                             <td></td>
-                            <td></td>
                         <td>1</td>
                         <td class=\\"bold\\">1</td>
                     </tr>
@@ -2362,7 +3109,6 @@ exports[`e2e generates overall driver results 1`] = `
                             <td>
                                 2
                             </td>
-                            <td></td>
                             <td></td>
                         <td></td>
                         <td class=\\"bold\\">0</td>
@@ -2389,7 +3135,6 @@ exports[`e2e generates overall driver results 1`] = `
                                 4
                             </td>
                             <td></td>
-                            <td></td>
                         <td></td>
                         <td class=\\"bold\\">0</td>
                     </tr>
@@ -2414,7 +3159,6 @@ exports[`e2e generates overall driver results 1`] = `
                             <td>
                                 4
                             </td>
-                            <td></td>
                             <td></td>
                         <td></td>
                         <td class=\\"bold\\">0</td>
@@ -2441,7 +3185,6 @@ exports[`e2e generates overall driver results 1`] = `
                                 3
                             </td>
                             <td></td>
-                            <td></td>
                         <td></td>
                         <td class=\\"bold\\">0</td>
                     </tr>
@@ -2466,7 +3209,6 @@ exports[`e2e generates overall driver results 1`] = `
                             <td>
                                 3
                             </td>
-                            <td></td>
                             <td></td>
                         <td></td>
                         <td class=\\"bold\\">0</td>
@@ -2493,7 +3235,6 @@ exports[`e2e generates overall driver results 1`] = `
                                 5
                             </td>
                             <td></td>
-                            <td></td>
                         <td></td>
                         <td class=\\"bold\\">0</td>
                     </tr>
@@ -2518,7 +3259,6 @@ exports[`e2e generates overall driver results 1`] = `
                             <td>
                                 6
                             </td>
-                            <td></td>
                             <td></td>
                         <td></td>
                         <td class=\\"bold\\">0</td>
@@ -2545,7 +3285,6 @@ exports[`e2e generates overall driver results 1`] = `
                                 5
                             </td>
                             <td></td>
-                            <td></td>
                         <td></td>
                         <td class=\\"bold\\">0</td>
                     </tr>
@@ -2570,7 +3309,6 @@ exports[`e2e generates overall driver results 1`] = `
                             <td>
                                 6
                             </td>
-                            <td></td>
                             <td></td>
                         <td></td>
                         <td class=\\"bold\\">0</td>
@@ -2597,7 +3335,6 @@ exports[`e2e generates overall driver results 1`] = `
                                 7
                             </td>
                             <td></td>
-                            <td></td>
                         <td></td>
                         <td class=\\"bold\\">0</td>
                     </tr>
@@ -2622,7 +3359,6 @@ exports[`e2e generates overall driver results 1`] = `
                             <td>
                                 6
                             </td>
-                            <td></td>
                             <td></td>
                         <td></td>
                         <td class=\\"bold\\">0</td>
@@ -2649,7 +3385,6 @@ exports[`e2e generates overall driver results 1`] = `
                                 
                             </td>
                             <td></td>
-                            <td></td>
                         <td></td>
                         <td class=\\"bold\\">DNS</td>
                     </tr>
@@ -2674,7 +3409,6 @@ exports[`e2e generates overall driver results 1`] = `
                             <td>
                                 
                             </td>
-                            <td></td>
                             <td></td>
                         <td></td>
                         <td class=\\"bold\\">DNF</td>
@@ -2701,7 +3435,6 @@ exports[`e2e generates overall driver results 1`] = `
                                 
                             </td>
                             <td></td>
-                            <td></td>
                         <td></td>
                         <td class=\\"bold\\">DNF</td>
                     </tr>
@@ -2726,7 +3459,6 @@ exports[`e2e generates overall driver results 1`] = `
                             <td>
                                 
                             </td>
-                            <td></td>
                             <td></td>
                         <td></td>
                         <td class=\\"bold\\">DNS</td>
