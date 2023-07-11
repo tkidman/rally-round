@@ -1,42 +1,14 @@
 const rallies = [
   {
-    eventId: 55802,
-    endTime: "2023-05-08 22:00",
-    locationName: "Rally Eggleston",
-    locationFlag: "GB",
-    numStages: 9
-    // enduranceRoundMultiplier: 2
-  },
-  {
-    eventId: 56065,
-    endTime: "2023-05-15 22:30",
-    locationName: "Rally Middleton-in-Teesdale",
-    locationFlag: "GB",
-    numStages: 8
-    // enduranceRoundMultiplier: 2
-  },
-  {
-    eventId: 56300,
-    endTime: "2023-05-22 22:00",
-    locationName: "Rally Mickleton",
-    locationFlag: "GB",
-    numStages: 8
-    // enduranceRoundMultiplier: 2
-  },
-  {
-    eventId: 56565,
-    endTime: "2023-05-29 22:00",
-    locationName: "Rally Romaldkirk",
-    locationFlag: "GB",
-    numStages: 10
-    // enduranceRoundMultiplier: 2
-  },
-  {
-    eventId: 56832,
-    endTime: "2023-06-05 22:00",
-    locationName: "Rally Cotherstone",
-    locationFlag: "GB",
-    numStages: 10
+    eventId: 58026,
+    endTime: "2023-07-17 22:00",
+    locationName: "Rally Islas Canarias",
+    locationFlag: "ES",
+    numStages: 7,
+    legs: [
+      { startIndex: 0, endIndex: 2 },
+      { startIndex: 3, endIndex: 6 }
+    ]
     // enduranceRoundMultiplier: 2
   }
 ];
@@ -45,7 +17,6 @@ const initialState = {
   pointsForDNF: false,
   websiteName: "rsc-results",
   useStandingsForHome: true,
-  // subfolderName: "rbr",
   showLivePoints: true,
   showLivePointsDaysRemaining: 4,
   // noSuperRallyPointsMultiplier: 2,
@@ -56,29 +27,30 @@ const initialState = {
   showSuperRallyColumn: true,
   hideCarColumnInStandings: false,
   showCarNameAsTextInResults: true,
-  nullTeamIsPrivateer: true,
-  useCarAsTeam: true,
+  nullTeamIsPrivateer: false,
+  useCarAsTeam: false,
   // useCarClassAsTeam: true,
-  showTeamNameTextColumn: false,
+  showTeamNameTextColumn: true,
   hideTeamLogoColumn: true,
   disableOverall: true,
   teamPointsForPowerstage: false,
   backgroundStyle:
     "background-image: linear-gradient(315deg, #ffffff 0%, #d7e1ec 74%); background-size: cover; background-repeat: no-repeat; background-attachment: fixed;",
   logo: "rsc-guy.png",
-  siteTitlePrefix: "RSC Season 6",
+  siteTitlePrefix: "ERC 2018",
   hideStageTimesUntilEventEnd: true,
   teamOverride: {},
   historicalSeasonLinks: [
     { name: "Season 4", href: "/rsc-4" },
     { name: "Season 5", href: "/rsc-5" },
     { name: "WRC 1987", href: "/rsc-1987" },
-    { name: "Season 6", href: "/rsc-6" }
+    { name: "Season 6", href: "/rsc-6" },
+    { name: "Old Farts", href: "/rsc-old-farts" }
   ],
   divisions: {
-    rscOldFarts: {
-      divisionName: "rscOldFarts",
-      displayName: "RSC OLDFARTS",
+    erc2018: {
+      divisionName: "erc2018",
+      displayName: "ERC 2018",
       disableSameCarValidation: false,
       // enableSameCarClassValidation: true,
       maxDriversScoringPointsForTeam: 3,
@@ -90,40 +62,18 @@ const initialState = {
       events: [],
       points: {
         // powerStage: [5, 4, 3, 2, 1],
-        overall: [
-          40,
-          35,
-          31,
-          27,
-          23,
-          20,
-          17,
-          15,
-          13,
-          11,
-          10,
-          9,
-          8,
-          7,
-          6,
-          5,
-          4,
-          3,
-          2,
-          1
-        ]
+        leg: [7, 6, 5, 4, 3, 2, 1],
+        overall: [25, 18, 15, 12, 10, 8, 6, 4, 2, 1]
       }
       // cars: ["Peugeot 205 GTI"]
     },
-    rscOldFartsLadaCup: {
-      divisionName: "rscOldFartsLadaCup",
-      displayName: "RSC OLDFARTS Lada Cup",
+    erc2018Junior: {
+      divisionName: "erc2018Junior",
+      displayName: "ERC 2018 Junior U27",
       disableSameCarValidation: false,
       // enableSameCarClassValidation: true,
-      maxDriversScoringPointsForTeam: 3,
-      filterEntries: {
-        allowedCars: ["Lada VFTS GrpB"]
-      },
+      maxDriversScoringPointsForTeam: 4,
+      filterEntries: { matchDivision: true },
       rbr: {
         rallies
       },
@@ -131,27 +81,8 @@ const initialState = {
       events: [],
       points: {
         // powerStage: [5, 4, 3, 2, 1],
-        overall: [10, 7, 5, 3, 2, 1]
-      }
-      // cars: ["Peugeot 205 GTI"]
-    },
-    rscOldFartsSkodaCup: {
-      divisionName: "rscOldFartsSkodaCup",
-      displayName: "RSC OLDFARTS Skoda Cup",
-      disableSameCarValidation: false,
-      // enableSameCarClassValidation: true,
-      maxDriversScoringPointsForTeam: 3,
-      filterEntries: {
-        allowedCars: ["Skoda 130 RS Grp2"]
-      },
-      rbr: {
-        rallies
-      },
-      manualResults: [],
-      events: [],
-      points: {
-        // powerStage: [5, 4, 3, 2, 1],
-        overall: [10, 7, 5, 3, 2, 1]
+        leg: [7, 6, 5, 4, 3, 2, 1],
+        overall: [25, 18, 15, 12, 10, 8, 6, 4, 2, 1]
       }
       // cars: ["Peugeot 205 GTI"]
     }
