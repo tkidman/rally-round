@@ -18,7 +18,7 @@ const initialState = {
   websiteName: "rsc-results",
   useStandingsForHome: true,
   showLivePoints: true,
-  showLivePointsDaysRemaining: 4,
+  showLivePointsDaysRemaining: 7,
   // noSuperRallyPointsMultiplier: 2,
   // dropLowestScoringRoundsNumber: 2,
   // afterDropRoundMessage:
