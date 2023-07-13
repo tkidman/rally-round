@@ -4582,14 +4582,14 @@ exports[`e2e generates overall team standings 1`] = `
                                 <td class=\\"text-left bold\\">Heat Seeking Geezers mk2</td>
                             
                             <td>
-                                62
+                                63
                             </td>
                             
                             <td>
                                 38
                             </td>
                             
-                            <td class=\\"bold\\">100</td>
+                            <td class=\\"bold\\">101</td>
                         </tr>
                         
                         <tr>
@@ -4623,10 +4623,10 @@ exports[`e2e generates overall team standings 1`] = `
                             </td>
                             
                             <td>
-                                60
+                                61
                             </td>
                             
-                            <td class=\\"bold\\">60</td>
+                            <td class=\\"bold\\">61</td>
                         </tr>
                         
                         <tr>
@@ -4869,14 +4869,14 @@ exports[`e2e generates team standings 1`] = `
                                 <td class=\\"text-left bold\\">Heat Seeking Geezers mk2</td>
                             
                             <td>
-                                62
+                                63
                             </td>
                             
                             <td>
                                 38
                             </td>
                             
-                            <td class=\\"bold\\">100</td>
+                            <td class=\\"bold\\">101</td>
                         </tr>
                         
                         <tr>
@@ -4928,10 +4928,10 @@ exports[`e2e generates team standings 1`] = `
                             </td>
                             
                             <td>
-                                60
+                                61
                             </td>
                             
-                            <td class=\\"bold\\">60</td>
+                            <td class=\\"bold\\">61</td>
                         </tr>
                         
                         <tr>

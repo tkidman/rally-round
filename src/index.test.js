@@ -164,8 +164,8 @@ describe("calculates event results", () => {
         divisionName: "pro",
         driverResultsCounted: 1,
         name: "Time Penalty Boys",
-        pointsDisplay: 10,
-        totalPoints: 10
+        pointsDisplay: 11,
+        totalPoints: 11
       },
       {
         divisionName: "pro",

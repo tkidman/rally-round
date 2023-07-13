@@ -99,22 +99,28 @@ const updatePoints = ({
   }
 };
 
+const getTotalPointsForTeam = driverResult => {
+  if (leagueRef.league.teamPointsForPowerstage) {
+    return driverResult.totalPoints;
+  }
+  const powerStagePoints = driverResult.powerStagePoints || 0;
+  return driverResult.totalPoints - powerStagePoints;
+};
+
 const calculateTeamResults = (
   driverResults,
   maxDriversScoringPointsForTeam,
   eventIndex
 ) => {
-  const pointsField = leagueRef.league.teamPointsForPowerstage
-    ? "totalPoints"
-    : "overallPoints";
   const sortedDriverResults = [...driverResults].sort(
-    (a, b) => b[pointsField] - a[pointsField]
+    (a, b) => getTotalPointsForTeam(b) - getTotalPointsForTeam(a)
   );
   const teamIds = getTeamIds();
   const teamResults = sortedDriverResults.reduce((teamResults, result) => {
     const driver = leagueRef.getDriver(result.name);
     if (driver) {
       const resultTeamId = getResultTeamId(eventIndex, driver);
+      const totalPointsForTeam = getTotalPointsForTeam(result);
       result.teamId = resultTeamId;
       if (resultTeamId && resultTeamId !== privateer) {
         if (!teamResults[resultTeamId]) {
@@ -124,13 +130,13 @@ const calculateTeamResults = (
             driverResultsCounted: 0
           };
         }
-        if (result[pointsField]) {
+        if (totalPointsForTeam > 0) {
           const maxDriversReached =
             maxDriversScoringPointsForTeam &&
             teamResults[resultTeamId].driverResultsCounted >=
               maxDriversScoringPointsForTeam;
           if (!maxDriversReached) {
-            teamResults[resultTeamId].totalPoints += result[pointsField];
+            teamResults[resultTeamId].totalPoints += totalPointsForTeam;
             teamResults[resultTeamId].driverResultsCounted++;
           } else {
             debug(
