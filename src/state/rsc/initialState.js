@@ -10,6 +10,18 @@ const rallies = [
       { startIndex: 3, endIndex: 6 }
     ]
     // enduranceRoundMultiplier: 2
+  },
+  {
+    eventId: 58253,
+    endTime: "2023-07-24 22:00",
+    locationName: "Cyprus Rally",
+    locationFlag: "CY",
+    numStages: 10,
+    legs: [
+      { startIndex: 0, endIndex: 5 },
+      { startIndex: 6, endIndex: 9 }
+    ]
+    // enduranceRoundMultiplier: 2
   }
 ];
 
@@ -18,7 +30,7 @@ const initialState = {
   websiteName: "rsc-results",
   useStandingsForHome: true,
   showLivePoints: true,
-  showLivePointsDaysRemaining: 7,
+  showLivePointsDaysRemaining: 4,
   // noSuperRallyPointsMultiplier: 2,
   // dropLowestScoringRoundsNumber: 2,
   // afterDropRoundMessage:
