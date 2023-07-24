@@ -22,6 +22,18 @@ const rallies = [
       { startIndex: 6, endIndex: 9 }
     ]
     // enduranceRoundMultiplier: 2
+  },
+  {
+    eventId: 58483,
+    endTime: "2023-07-31 22:00",
+    locationName: "Rally di Roma Capitale",
+    locationFlag: "IT",
+    numStages: 8,
+    legs: [
+      { startIndex: 0, endIndex: 3 },
+      { startIndex: 4, endIndex: 7 }
+    ]
+    // enduranceRoundMultiplier: 2
   }
 ];
 
