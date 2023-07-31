@@ -34,6 +34,18 @@ const rallies = [
       { startIndex: 4, endIndex: 7 }
     ]
     // enduranceRoundMultiplier: 2
+  },
+  {
+    eventId: 58727,
+    endTime: "2023-08-07 22:00",
+    locationName: "Barum Czech Rally Zlin",
+    locationFlag: "CZ",
+    numStages: 7,
+    legs: [
+      { startIndex: 0, endIndex: 3 },
+      { startIndex: 4, endIndex: 6 }
+    ]
+    // enduranceRoundMultiplier: 2
   }
 ];
 
