@@ -25,9 +25,9 @@ const initialState = {
   logo: "JRC.png",
   siteTitlePrefix: "JRC RBR Rallysprint",
   divisions: {
-    jrcRbrRallySprintSeason1: {
-      divisionName: "jrcRbrRallysprintSeason2",
-      displayName: "RBR Rallysprint Season 2",
+    jrcRbrRallySprintSeason3: {
+      divisionName: "jrcRbrRallysprintSeason3",
+      displayName: "Rallysprint Season 3",
       disableSameCarValidation: true,
       // enableSameCarClassValidation: true,
       // maxDriversScoringPointsForTeam: 2,
@@ -35,38 +35,17 @@ const initialState = {
       rbr: {
         rallies: [
           {
-            eventId: 53164,
-            endTime: "2023-03-06 12:59",
-            locationName: "Torsby",
-            locationFlag: "SE",
+            eventId: 58584,
+            endTime: "2023-08-02 11:59",
+            locationName: "La Serra d Almos",
+            locationFlag: "ES",
             numStages: 3
           },
           {
-            eventId: 53424,
-            endTime: "2023-03-13 12:59",
-            locationName: "Gästabudstrofen",
-            locationFlag: "SE",
-            numStages: 3
-          },
-          {
-            eventId: 53857,
-            endTime: "2023-03-20 12:59",
-            locationName: "Piren",
-            locationFlag: "SE",
-            numStages: 3
-          },
-          {
-            eventId: 54028,
-            endTime: "2023-03-27 12:59",
-            locationName: "Skogby",
-            locationFlag: "SE",
-            numStages: 3
-          },
-          {
-            eventId: 54333,
-            endTime: "2023-04-04 00:20",
-            locationName: "Ramirent Sprinten",
-            locationFlag: "SE",
+            eventId: 58728,
+            endTime: "2023-08-07 11:59",
+            locationName: "Cote D Arbroz",
+            locationFlag: "FR",
             numStages: 3
           }
         ]
@@ -256,6 +235,10 @@ const initialState = {
     {
       name: "RBR Rallysprint Season 1",
       href: "/rbr-rallysprint/rbr-rallysprint-1"
+    },
+    {
+      name: "RBR Rallysprint Season 2",
+      href: "/rbr-rallysprint/rbr-rallysprint-2"
     }
   ]
 };
