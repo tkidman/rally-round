@@ -379,7 +379,8 @@ const getResultTeamId = (eventIndex, driver) => {
   return driver.teamId;
 };
 
-const shouldFilterDriver = (division, driverName) => {
+const shouldFilterDriver = (division, entry) => {
+  const { vehicleName, name: driverName } = entry;
   const driver = leagueRef.getDriver(driverName);
   const removeDrivers = get(division, "filterEntries.removeDrivers", []);
   const removeDriverByName = removeDrivers.find(removeDriverName => {
@@ -390,7 +391,7 @@ const shouldFilterDriver = (division, driverName) => {
     driver.division !== division.divisionName;
   const allowedCars = get(division, "filterEntries.allowedCars");
   const removeDriverByCar =
-    !isEmpty(allowedCars) && !allowedCars.includes(driver.car);
+    !isEmpty(allowedCars) && !allowedCars.includes(vehicleName);
   return removeDriverByName || removeDriverByDivision || removeDriverByCar;
 };
 
@@ -418,7 +419,7 @@ const filterStage = ({ stage, division }) => {
 
   stage.entries = stage.entries.filter(entry => {
     return (
-      !shouldFilterDriver(division, entry.name) &&
+      !shouldFilterDriver(division, entry) &&
       !isDuplicateEntryNotFirstCarDriven(entryCountByDriver, entry)
     );
   });
@@ -917,7 +918,7 @@ const loadEventDriver = (entry, drivers, divisionName) => {
     leagueRef.missingDrivers[entry.name] = driver;
   }
 
-  if (division.filterEntries && shouldFilterDriver(division, entry.name)) {
+  if (division.filterEntries && shouldFilterDriver(division, entry)) {
     return;
   }
   if (!driver.nationality) {
