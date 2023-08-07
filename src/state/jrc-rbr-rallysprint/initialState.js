@@ -219,21 +219,21 @@ const initialState = {
   siteTitlePrefix: "JRC RBR Rallysprint",
   divisions: {
     jrcRbrRallySprintSeason3RGT: {
-      divisionName: "jrcRbrRallysprintSeason3RGT",
-      displayName: "Rallysprint Season 3 RGT",
+      divisionName: "jrcRbrRallysprintSeason3Overall",
+      displayName: "Rallysprint Season 3 Overall",
       disableSameCarValidation: true,
       // enableSameCarClassValidation: true,
       // maxDriversScoringPointsForTeam: 2,
-      filterEntries: {
-        allowedCars: [
-          "Porsche 911 GT3 RS (2010) RGT",
-          "Porsche 911 GT3 RS (2007) RGT",
-          "Alpine A110 Rally RGT",
-          "Lotus Exige S RGT",
-          "Aston Martin Vantage RGT",
-          "Fiat 124 Abarth Rally RGT"
-        ]
-      },
+      // filterEntries: {
+      //   allowedCars: [
+      //     "Porsche 911 GT3 RS (2010) RGT",
+      //     "Porsche 911 GT3 RS (2007) RGT",
+      //     "Alpine A110 Rally RGT",
+      //     "Lotus Exige S RGT",
+      //     "Aston Martin Vantage RGT",
+      //     "Fiat 124 Abarth Rally RGT"
+      //   ]
+      // },
       rbr: {
         rallies
       },

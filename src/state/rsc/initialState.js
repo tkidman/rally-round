@@ -46,6 +46,18 @@ const rallies = [
       { startIndex: 4, endIndex: 6 }
     ]
     // enduranceRoundMultiplier: 2
+  },
+  {
+    eventId: 58916,
+    endTime: "2023-08-14 22:00",
+    locationName: "Rally Poland",
+    locationFlag: "PL",
+    numStages: 0,
+    legs: [
+      { startIndex: 0, endIndex: 4 },
+      { startIndex: 5, endIndex: 7 }
+    ]
+    // enduranceRoundMultiplier: 2
   }
 ];
 
