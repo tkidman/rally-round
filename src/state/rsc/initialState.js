@@ -52,7 +52,7 @@ const rallies = [
     endTime: "2023-08-14 22:00",
     locationName: "Rally Poland",
     locationFlag: "PL",
-    numStages: 0,
+    numStages: 8,
     legs: [
       { startIndex: 0, endIndex: 4 },
       { startIndex: 5, endIndex: 7 }
