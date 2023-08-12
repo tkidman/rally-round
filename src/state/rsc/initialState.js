@@ -87,7 +87,24 @@ const initialState = {
   logo: "rsc-guy.png",
   siteTitlePrefix: "ERC 2018",
   hideStageTimesUntilEventEnd: true,
-  teamOverride: {},
+  teamOverride: {
+    "Chris Thelcgram": [
+      "Saintéloc Junior Team",
+      "Saintéloc Junior Team",
+      "Saintéloc Junior Team",
+      "Peugeot Rally Academy",
+      "Saintéloc Junior Team"
+    ]
+  },
+  divisionOverride: {
+    "Chris Thelcgram": [
+      "erc2018Junior",
+      "erc2018Junior",
+      "erc2018Junior",
+      null,
+      "erc2018Junior"
+    ]
+  },
   historicalSeasonLinks: [
     { name: "Season 4", href: "/rsc-4" },
     { name: "Season 5", href: "/rsc-5" },
@@ -99,7 +116,7 @@ const initialState = {
     erc2018: {
       divisionName: "erc2018",
       displayName: "ERC 2018",
-      disableSameCarValidation: false,
+      disableSameCarValidation: true,
       // enableSameCarClassValidation: true,
       maxDriversScoringPointsForTeam: 3,
       // filterEntries: { matchDivision: true },
@@ -118,7 +135,7 @@ const initialState = {
     erc2018Junior: {
       divisionName: "erc2018Junior",
       displayName: "ERC 2018 Junior U27",
-      disableSameCarValidation: false,
+      disableSameCarValidation: true,
       // enableSameCarClassValidation: true,
       maxDriversScoringPointsForTeam: 4,
       filterEntries: { matchDivision: true },
