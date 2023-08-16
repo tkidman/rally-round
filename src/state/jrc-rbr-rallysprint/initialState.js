@@ -195,6 +195,13 @@ const rallies = [
     locationName: "Fintele",
     locationFlag: "BE",
     numStages: 3
+  },
+  {
+    eventId: 59149,
+    endTime: "2023-08-21 11:59",
+    locationName: "Puy Du Lac",
+    locationFlag: "FR",
+    numStages: 3
   }
 ];
 
