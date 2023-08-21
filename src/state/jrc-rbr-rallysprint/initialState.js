@@ -202,6 +202,13 @@ const rallies = [
     locationName: "Puy Du Lac",
     locationFlag: "FR",
     numStages: 3
+  },
+  {
+    eventId: 59415,
+    endTime: "2023-08-28 11:59",
+    locationName: "Halenkovice",
+    locationFlag: "CZ",
+    numStages: 3
   }
 ];
 
