@@ -20,18 +20,14 @@ const initialState = {
   logo: "JRC.png",
   siteTitlePrefix: "JRC Themed",
   divisions: {
-    wrc1976: {
-      divisionName: "wrc1999",
-      displayName: "WRC 1999",
-      disableSameCarValidation: false,
+    roadToWRC: {
+      divisionName: "roadToWRC",
+      displayName: "Road To WRC",
+      disableSameCarValidation: true,
       // enableSameCarClassValidation: true,
       maxDriversScoringPointsForTeam: 2,
       // filterEntries: true,
-      clubs: [
-        { clubId: "256173", championshipIds: ["775580"] },
-        { clubId: "360961", championshipIds: ["775825"] },
-        { clubId: "452162", championshipIds: ["775717"] }
-      ],
+      clubs: [{ clubId: "256173", championshipIds: ["785674"] }],
       manualResults: [],
       events: [],
       points: {
@@ -117,98 +113,15 @@ const initialState = {
           1
         ]
         // stage: [1]
-      },
-      cars: [
-        "SUBARU Impreza S4 Rally",
-        "Peugeot 206 Rally",
-        "Mitsubishi Lancer Evolution VI",
-        "Lancia Stratos",
-        "Seat Ibiza Kit Car",
-        "Peugeot 306 Maxi",
-        "Volkswagen Golf Kitcar"
-      ]
-      // outputSheetId: "1C3fU9y1236wFmPuKcui4CEXBuSsUANH6OJ0BpQIasTc"
-    },
-    wrc1976F2: {
-      divisionName: "wrc1999F2",
-      displayName: "WRC 1999 F2",
-      disableSameCarValidation: false,
-      // enableSameCarClassValidation: true,
-      maxDriversScoringPointsForTeam: 2,
-      // filterEntries: true,
-      clubs: [{ clubId: "452162", championshipIds: ["775717"] }],
-      manualResults: [],
-      events: [],
-      points: {
-        powerStage: [],
-        overall: [
-          15,
-          12,
-          10,
-          9,
-          8,
-          7,
-          6,
-          5,
-          4,
-          3,
-          2,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1
-        ]
-        // stage: [1]
       }
-      // cars: []
       // outputSheetId: "1C3fU9y1236wFmPuKcui4CEXBuSsUANH6OJ0BpQIasTc"
     }
   },
   historicalSeasonLinks: [
+    {
+      name: "WRC 1999",
+      href: "/themed/themed-15"
+    },
     {
       name: "WRC 1976",
       href: "/themed/themed-14"
