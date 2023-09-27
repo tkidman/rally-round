@@ -5,7 +5,7 @@ const initialState = {
   useStandingsForHome: true,
   showLivePoints: true,
   showLivePointsDaysRemaining: 4,
-  hideCarColumnInStandings: false,
+  hideCarColumnInStandings: true,
   showCarNameAsTextInResults: true,
   nullTeamIsPrivateer: true,
   useCarAsTeam: false,
