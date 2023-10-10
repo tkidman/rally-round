@@ -1,12 +1,12 @@
 const rallies = [
-  // {
-  //   eventId: 58026,
-  //   endTime: "2023-07-17 22:00",
-  //   locationName: "Rally Islas Canarias",
-  //   locationFlag: "ES",
-  //   numStages: 7,
-  //   // enduranceRoundMultiplier: 2
-  // },
+  {
+    eventId: 60977,
+    endTime: "2023-10-16 22:00",
+    locationName: "Round 1 Paris",
+    locationFlag: "FR",
+    numStages: 7,
+    // enduranceRoundMultiplier: 2
+  },
 ];
 
 const initialState = {
@@ -66,6 +66,44 @@ const initialState = {
     rscWorldCupB: {
       divisionName: "rscWorldCupB",
       displayName: "RSC World Cup B",
+      disableSameCarValidation: true,
+      // enableSameCarClassValidation: true,
+      // maxDriversScoringPointsForTeam: 3,
+      filterEntries: { matchDivision: true },
+      rbr: {
+        rallies
+      },
+      manualResults: [],
+      events: [],
+      points: {
+        // powerStage: [5, 4, 3, 2, 1],
+        // leg: [7, 6, 5, 4, 3, 2, 1],
+        overall: [25, 18, 15, 12, 10, 8, 6, 4, 2, 1]
+      }
+      // cars: ["Peugeot 205 GTI"]
+    },
+    rscWorldCupC: {
+      divisionName: "rscWorldCupC",
+      displayName: "RSC World Cup C",
+      disableSameCarValidation: true,
+      // enableSameCarClassValidation: true,
+      // maxDriversScoringPointsForTeam: 3,
+      filterEntries: { matchDivision: true },
+      rbr: {
+        rallies
+      },
+      manualResults: [],
+      events: [],
+      points: {
+        // powerStage: [5, 4, 3, 2, 1],
+        // leg: [7, 6, 5, 4, 3, 2, 1],
+        overall: [25, 18, 15, 12, 10, 8, 6, 4, 2, 1]
+      }
+      // cars: ["Peugeot 205 GTI"]
+    },
+    rscWorldCupCD: {
+      divisionName: "rscWorldCupD",
+      displayName: "RSC World Cup D",
       disableSameCarValidation: true,
       // enableSameCarClassValidation: true,
       // maxDriversScoringPointsForTeam: 3,
