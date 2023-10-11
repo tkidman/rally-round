@@ -22,7 +22,7 @@ const initialState = {
   // sortByDropRoundPoints: true,
   showSuperRallyColumn: true,
   hideCarColumnInStandings: false,
-  showCarNameAsTextInResults: true,
+  showCarNameAsTextInResults: false,
   nullTeamIsPrivateer: false,
   useCarAsTeam: false,
   // useCarClassAsTeam: true,
