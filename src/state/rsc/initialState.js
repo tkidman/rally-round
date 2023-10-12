@@ -59,7 +59,7 @@ const initialState = {
       points: {
         // powerStage: [5, 4, 3, 2, 1],
         // leg: [7, 6, 5, 4, 3, 2, 1],
-        overall: [25, 18, 15, 12, 10, 8, 6, 4, 2, 1]
+        overall: [10, 8, 5, 3, 1]
       }
       // cars: ["Peugeot 205 GTI"]
     },
@@ -78,7 +78,7 @@ const initialState = {
       points: {
         // powerStage: [5, 4, 3, 2, 1],
         // leg: [7, 6, 5, 4, 3, 2, 1],
-        overall: [25, 18, 15, 12, 10, 8, 6, 4, 2, 1]
+        overall: [10, 8, 5, 3, 1]
       }
       // cars: ["Peugeot 205 GTI"]
     },
@@ -97,7 +97,7 @@ const initialState = {
       points: {
         // powerStage: [5, 4, 3, 2, 1],
         // leg: [7, 6, 5, 4, 3, 2, 1],
-        overall: [25, 18, 15, 12, 10, 8, 6, 4, 2, 1]
+        overall: [10, 8, 5, 3, 1]
       }
       // cars: ["Peugeot 205 GTI"]
     },
@@ -116,7 +116,7 @@ const initialState = {
       points: {
         // powerStage: [5, 4, 3, 2, 1],
         // leg: [7, 6, 5, 4, 3, 2, 1],
-        overall: [25, 18, 15, 12, 10, 8, 6, 4, 2, 1]
+        overall: [10, 8, 5, 3, 1]
       }
       // cars: ["Peugeot 205 GTI"]
     }
