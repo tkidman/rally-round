@@ -7,6 +7,14 @@ const rallies = [
     numStages: 7,
     // enduranceRoundMultiplier: 2
   },
+  {
+    eventId: 61348,
+    endTime: "2023-10-23 22:00",
+    locationName: "Round 2 Sydney",
+    locationFlag: "AU",
+    numStages: 7,
+    // enduranceRoundMultiplier: 2
+  },
 ];
 
 const initialState = {
