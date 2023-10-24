@@ -15,6 +15,14 @@ const rallies = [
     numStages: 7,
     // enduranceRoundMultiplier: 2
   },
+  {
+    eventId: 61680,
+    endTime: "2023-10-30 22:00",
+    locationName: "Round 3 Switzerland",
+    locationFlag: "CH",
+    numStages: 7,
+    // enduranceRoundMultiplier: 2
+  },
 ];
 
 const initialState = {
@@ -29,7 +37,7 @@ const initialState = {
   //   "*After Dropped Rounds: total points after 2 lowest scoring rounds removed - endurance rounds count as 2",
   // sortByDropRoundPoints: true,
   showSuperRallyColumn: true,
-  hideCarColumnInStandings: false,
+  hideCarColumnInStandings: true,
   showCarNameAsTextInResults: false,
   nullTeamIsPrivateer: false,
   useCarAsTeam: false,
@@ -64,6 +72,9 @@ const initialState = {
       },
       manualResults: [],
       events: [],
+      promotionRelegation: {
+        promotionZone: 2
+      },
       points: {
         // powerStage: [5, 4, 3, 2, 1],
         // leg: [7, 6, 5, 4, 3, 2, 1],
@@ -83,6 +94,9 @@ const initialState = {
       },
       manualResults: [],
       events: [],
+      promotionRelegation: {
+        promotionZone: 2
+      },
       points: {
         // powerStage: [5, 4, 3, 2, 1],
         // leg: [7, 6, 5, 4, 3, 2, 1],
@@ -102,6 +116,9 @@ const initialState = {
       },
       manualResults: [],
       events: [],
+      promotionRelegation: {
+        promotionZone: 2
+      },
       points: {
         // powerStage: [5, 4, 3, 2, 1],
         // leg: [7, 6, 5, 4, 3, 2, 1],
@@ -121,6 +138,9 @@ const initialState = {
       },
       manualResults: [],
       events: [],
+      promotionRelegation: {
+        promotionZone: 2
+      },
       points: {
         // powerStage: [5, 4, 3, 2, 1],
         // leg: [7, 6, 5, 4, 3, 2, 1],
