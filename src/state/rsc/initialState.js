@@ -23,6 +23,14 @@ const rallies = [
     numStages: 7,
     // enduranceRoundMultiplier: 2
   },
+  {
+    eventId: 61956,
+    endTime: "2023-11-06 22:00",
+    locationName: "Round 4 Dallas",
+    locationFlag: "US",
+    numStages: 8,
+    // enduranceRoundMultiplier: 2
+  },
 ];
 
 const initialState = {
