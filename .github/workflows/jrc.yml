@@ -30,15 +30,15 @@ jobs:
       - name: rsc
         if: always()
         run: CLUB=rsc node --unhandled-rejections=strict ./runner.js
-      - name: jrc-themed
-        if: always()
-        run: CLUB=jrc-themed node --unhandled-rejections=strict ./runner.js
-      - name: jrc-modern
-        if: always()
-        run: CLUB=jrc-modern node --unhandled-rejections=strict ./runner.js
-      - name: jrc-rbr-rallysprint
-        if: always()
-        run: CLUB=jrc-rbr-rallysprint node --unhandled-rejections=strict ./runner.js
+#      - name: jrc-themed
+#        if: always()
+#        run: CLUB=jrc-themed node --unhandled-rejections=strict ./runner.js
+#      - name: jrc-modern
+#        if: always()
+#        run: CLUB=jrc-modern node --unhandled-rejections=strict ./runner.js
+#      - name: jrc-rbr-rallysprint
+#        if: always()
+#        run: CLUB=jrc-rbr-rallysprint node --unhandled-rejections=strict ./runner.js
 #      - name: jrc-historic
 #        if: always()
 #        run: CLUB=jrc-historic node --unhandled-rejections=strict ./runner.js

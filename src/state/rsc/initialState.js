@@ -4,7 +4,7 @@ const rallies = [
     endTime: "2023-10-16 22:00",
     locationName: "Round 1 Paris",
     locationFlag: "FR",
-    numStages: 7,
+    numStages: 7
     // enduranceRoundMultiplier: 2
   },
   {
@@ -12,7 +12,7 @@ const rallies = [
     endTime: "2023-10-23 22:00",
     locationName: "Round 2 Sydney",
     locationFlag: "AU",
-    numStages: 7,
+    numStages: 7
     // enduranceRoundMultiplier: 2
   },
   {
@@ -20,7 +20,7 @@ const rallies = [
     endTime: "2023-10-30 22:00",
     locationName: "Round 3 Switzerland",
     locationFlag: "CH",
-    numStages: 7,
+    numStages: 7
     // enduranceRoundMultiplier: 2
   },
   {
@@ -28,9 +28,9 @@ const rallies = [
     endTime: "2023-11-06 22:00",
     locationName: "Round 4 Dallas",
     locationFlag: "US",
-    numStages: 8,
+    numStages: 8
     // enduranceRoundMultiplier: 2
-  },
+  }
 ];
 
 const initialState = {

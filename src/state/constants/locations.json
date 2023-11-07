@@ -50,6 +50,12 @@
   "PERTH AND KINROSS": {
     "countryName": "Scotland",
     "countryCode": "scot"
-  }
-
-}
+  },
+  "Rally Italia Sardegna": {
+    "countryName": "Italy",
+    "countryCode": "ita"
+  },
+  "Rallye Monte-Carlo": {
+    "countryName": "Monaco",
+    "countryCode": "mco"
+  }}

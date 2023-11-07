@@ -383,7 +383,10 @@ const transformForDriverResultsHTML = (event, division, legIndex) => {
     showTeamNameTextColumn: leagueRef.league.showTeamNameTextColumn,
     showCar: leagueRef.hasCars || leagueRef.league.showCarNameAsTextInResults,
     showCarName: leagueRef.league.showCarNameAsTextInResults,
-    showPowerStage: !leagueRef.league.isRallySprint && isNil(legIndex) && hasPoints("powerStagePoints", rows),
+    showPowerStage:
+      !leagueRef.league.isRallySprint &&
+      isNil(legIndex) &&
+      hasPoints("powerStagePoints", rows),
     showPowerStagePoints: hasPoints("powerStagePoints", rows),
     showStagePoints: hasPoints("stagePoints", rows),
     // legPoints not supported for overall driver results yet
