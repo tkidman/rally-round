@@ -66,6 +66,28 @@ const initialState = {
         overall: [10, 8, 5, 3, 1]
       }
       // cars: ["Peugeot 205 GTI"]
+    },
+    rscWorldCupOpen: {
+      divisionName: "rscWorldCupOpen",
+      displayName: "RSC Open",
+      disableSameCarValidation: true,
+      // enableSameCarClassValidation: true,
+      // maxDriversScoringPointsForTeam: 3,
+      filterEntries: { matchDivision: true },
+      rbr: {
+        rallies
+      },
+      manualResults: [],
+      events: [],
+      promotionRelegation: {
+        promotionZone: 2
+      },
+      points: {
+        // powerStage: [5, 4, 3, 2, 1],
+        // leg: [7, 6, 5, 4, 3, 2, 1],
+        overall: [10, 8, 5, 3, 1]
+      }
+      // cars: ["Peugeot 205 GTI"]
     }
   }
 };
