@@ -42,7 +42,7 @@ const initialState = {
     { name: "Season 6", href: "/rsc-6" },
     { name: "Old Farts", href: "/rsc-old-farts" },
     { name: "ERC 2018", href: "/erc-2018" },
-    { name: "World Cup Groups", href: "/rsc-world-cup" }
+    { name: "World Cup Groups", href: "/rsc-world-cup-group-stage" }
   ],
   divisions: {
     rscWorldCupFinal: {
