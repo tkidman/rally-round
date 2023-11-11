@@ -5,7 +5,7 @@ id,code,name
 7,fr,French
 8,ci,Côte dIvoire
 9,no,Norwegian
-10,gb-nir,Northern Ireland
+10,nre,Northern Ireland
 11,cz,Czech Republic
 12,cl,Chilean
 13,mx,Mexican
@@ -18,7 +18,7 @@ id,code,name
 20,us,American
 21,kr,South Korea
 22,my,Malaysian
-23,nre,English
+23,engl,English
 24,scot,Scottish
 25,ca,Canadian
 26,be,Belgian
@@ -80,7 +80,7 @@ id,code,name
 82,cr,Costa Rica
 83,uy,Uruguayan
 84,py,Paraguayan
-85,engl,British
+85,gbr,British
 86,bo,Bolivian
 87,pe,Peruvian
 88,zm,Zambian
