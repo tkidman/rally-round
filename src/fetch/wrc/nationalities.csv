@@ -1,0 +1,86 @@
+id,code,name
+1,hu,Hungarian
+2,pt,Portuguese
+6,it,Italian
+7,fr,French
+8,ci,Côte dIvoire
+9,no,Norwegian
+10,gb-nir,Northern Ireland
+11,cz,Czech Republic
+12,cl,Chilean
+13,mx,Mexican
+14,id,Indonesian
+15,jp,Japanese
+16,ru,Russian
+17,gb,United Kingdom
+18,es,Spanish
+19,de,German
+20,us,American
+21,kr,South Korea
+22,my,Malaysian
+23,nre,English
+24,scot,Scottish
+25,ca,Canadian
+26,be,Belgian
+27,tr,Turkish
+28,fi,Finnish
+29,br,Brazilian
+30,nl,Dutch
+31,ie,Irish
+32,at,Austrian
+33,gr,Greek
+34,lu,Luxembourger
+35,si,Slovenian
+36,cy,Cypriot
+37,au,Australian
+38,ar,Argentinian
+39,bg,Bulgarian
+40,cn,China
+41,hr,Croatian
+42,dk,Danish
+43,ee,Estonian
+44,sk,Slovakian
+45,is,Icelander
+46,in,Indian
+47,jm,Jamaican
+48,jo,Jordanian
+49,lv,Latvian
+50,lt,Lithuanian
+51,nz,New Zealand
+52,pk,Pakistani
+53,pl,Polish
+54,ro,Romanian
+55,sa,Saudi Arabia
+56,za,South Africa
+57,ch,Swiss
+58,th,Thai
+59,welsh,Welsh
+60,bh,Bahraini
+61,rs,Serbian
+62,se,Swedish
+63,ae,Emirian
+64,hk,Hong Kong
+65,ec,Ecuadorean
+66,pr,Puerto Rico
+67,ve,Venezuelan
+68,gh,Ghanaian
+69,cm,Camerounaise
+70,kw,Kuwaiti
+71,im,Isle of Man
+72,om,Omani
+73,qa,Qatari
+74,ye,Yemeni
+75,ng,Nigerian
+76,ke,Kenyan
+77,mc,Monégasque
+78,ua,Ukrainian
+79,il,Israeli
+80,co,Colombian
+81,ps,Palestinian
+82,cr,Costa Rica
+83,uy,Uruguayan
+84,py,Paraguayan
+85,engl,British
+86,bo,Bolivian
+87,pe,Peruvian
+88,zm,Zambian

@@ -9,17 +9,36 @@ const {
   eventStatuses,
   getSummedTotalTime,
   recalculateDiffs,
-  mergeEvent
+  mergeEvent,
+  getCountryForAnyCode
 } = require("../../shared");
 const { leagueRef } = require("../../state/league");
 const locations = require("../../state/constants/locations.json");
-const { last, slice, findIndex, reverse, map } = require("lodash");
+const { last, slice, findIndex, reverse, map, keyBy } = require("lodash");
+const { readFileSync } = require("fs");
+const Papa = require("papaparse");
 
 const wrcEventStatuses = {
   1: eventStatuses.active,
   2: eventStatuses.finished
 };
 
+const wrcNationalitiesFile = readFileSync(
+  "./src/fetch/wrc/nationalities.csv",
+  "utf8"
+);
+const wrcNationalities = Papa.parse(wrcNationalitiesFile, {
+  header: true,
+  skipEmptyLines: true
+}).data;
+const wrcNationalitiesById = keyBy(wrcNationalities, "id");
+
+const getCountryCodeFromNationalityId = nationalityId => {
+  const nationality = wrcNationalitiesById[nationalityId];
+  const alpha2code = nationality.code;
+  const country = getCountryForAnyCode(alpha2code.toUpperCase());
+  return country.code;
+};
 const fetchEventsForClub = async ({
   club,
   division,
@@ -69,9 +88,7 @@ const fetchEvents = async ({ allRacenetEvents, getAllResults, clubId }) => {
             name: entry.displayName,
             isDnfEntry: false,
             vehicleName: entry.vehicle,
-            // vehicleClass: row["Group"],
-            // TODO wtf? this id is a random number ...
-            nationality: entry.nationalityID,
+            nationality: getCountryCodeFromNationalityId(entry.nationalityID),
             stageTime: entry.time.substring(0, 12),
             totalTime: entry.timeAccumulated.substring(0, 12)
           };
