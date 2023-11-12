@@ -4,45 +4,13 @@ const axios = require("axios");
 const debug = require("debug")("tkidman:rally-round:wrcAPI");
 const fs = require("fs");
 const { cachePath } = require("../../shared");
-const cachedCredsFile = "./wrc-cached-creds.json";
-
-const validCreds = {};
+const { getCreds } = require("./getCreds");
 
 const racenetDomain = "https://web-api.racenet.com";
 
 const axiosInstance = axios.create({});
 
-const getCreds = async () => {
-  if (validCreds.token) {
-    return validCreds;
-  }
-  const promise = new Promise((resolve, reject) => {
-    login(resolve);
-  });
-  const creds = await promise;
-  validCreds.token = creds.token;
-  return validCreds;
-};
-
-const login = async resolve => {
-  if (fs.existsSync(cachedCredsFile)) {
-    try {
-      const response = { status: 200 };
-      const cachedCreds = JSON.parse(fs.readFileSync(cachedCredsFile, "utf8"));
-      if (response.status === 200) {
-        debug("using cached credentials");
-        resolve(cachedCreds);
-        return;
-      }
-      debug("cached credentials are invalid, regenerating");
-    } catch (err) {
-      debug("cached credentials are invalid, regenerating");
-    }
-  }
-  // TODO get to the bearer token somehow
-};
-
-const retry = async (requestParams, attempts) => {
+const retry = async (requestParams, attempts = 1) => {
   let error;
   for (let i = 0; i < attempts; i++) {
     try {
@@ -50,7 +18,7 @@ const retry = async (requestParams, attempts) => {
       return result;
     } catch (err) {
       error = err;
-      debug(`error accessing dirt api, attempt ${i} : ${err.message}`);
+      debug(`error accessing racenet api, attempt ${i} : ${err.message}`);
     }
   }
   debug(error);
@@ -59,31 +27,25 @@ const retry = async (requestParams, attempts) => {
 
 const fetchChampionshipIds = async clubId => {
   debug(`fetching championships ids for club ${clubId}`);
-  const { token } = await getCreds();
-  const response = await retry(
-    {
-      method: "GET",
-      // https://web-api.racenet.com/api/wrc2023clubs/67?includeChampionship=true
-      url: `${racenetDomain}/api/wrc2023clubs/${clubId}?includeChampionship=true`,
-      headers: { Authorization: token }
-    },
-    10
-  );
+  const { accessToken } = await getCreds();
+  const response = await retry({
+    method: "GET",
+    // https://web-api.racenet.com/api/wrc2023clubs/67?includeChampionship=true
+    url: `${racenetDomain}/api/wrc2023clubs/${clubId}?includeChampionship=true`,
+    headers: { Authorization: `Bearer ${accessToken}` }
+  });
   return response.data.championshipIDs;
 };
 
 const fetchChampionship = async championshipId => {
   debug(`fetching championship for id ${championshipId}`);
-  const { token } = await getCreds();
-  const response = await retry(
-    {
-      method: "GET",
-      // https://web-api.racenet.com/api/wrc2023clubs/championships/5cES2pt12CVFjQcgA
-      url: `${racenetDomain}/api/wrc2023clubs/championships/${championshipId}`,
-      headers: { Authorization: token }
-    },
-    10
-  );
+  const { accessToken } = await getCreds();
+  const response = await retry({
+    method: "GET",
+    // https://web-api.racenet.com/api/wrc2023clubs/championships/5cES2pt12CVFjQcgA
+    url: `${racenetDomain}/api/wrc2023clubs/championships/${championshipId}`,
+    headers: { Authorization: `Bearer ${accessToken}` }
+  });
   return response.data;
 };
 
@@ -109,7 +71,7 @@ const fetchLeaderboard = async ({
     return JSON.parse(cacheFile);
   }
 
-  const { token } = await getCreds();
+  const { accessToken } = await getCreds();
   let firstCall = true;
   let next = null;
   let response;
@@ -121,14 +83,11 @@ const fetchLeaderboard = async ({
     if (next) {
       url = `${url}&Cursor=${next}`;
     }
-    response = await retry(
-      {
-        method: "GET",
-        url,
-        headers: { Authorization: token }
-      },
-      10
-    );
+    response = await retry({
+      method: "GET",
+      url,
+      headers: { Authorization: `Bearer ${accessToken}` }
+    });
     next = response.data.next;
     allEntries.push(...response.data.entries);
   }

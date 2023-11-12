@@ -7,7 +7,7 @@
 /src/state/jrc-themed/drivers.csv
 /src/state/jrc/drivers.csv
 /cached-creds.json
-/wrc-cached-creds.json
+/tokens.json
 .~lock.*
 image.png
 src/visualisation/1test.html

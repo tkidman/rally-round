@@ -7,6 +7,8 @@ jobs:
       DIRT_PASSWORD: ${{ secrets.DIRT_PASSWORD }}
       DIRT_AWS_ACCESS_KEY: ${{ secrets.DIRT_AWS_ACCESS_KEY }}
       DIRT_AWS_SECRET_ACCESS_KEY: ${{ secrets.DIRT_AWS_SECRET_ACCESS_KEY }}
+      RACENET_USERNAME: ${{ secrets.RACENET_USERNAME }}
+      RACENET_PASSWORD: ${{ secrets.RACENET_PASSWORD }}
       GOOGLE_SHEETS_API_KEY: ${{ secrets.GOOGLE_SHEETS_API_KEY }}
       DEBUG: tkidman:*
       CLUB: jrc-themed

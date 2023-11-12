@@ -9,6 +9,8 @@ jobs:
     env:
       DIRT_USERNAME: ${{ secrets.DIRT_USERNAME }}
       DIRT_PASSWORD: ${{ secrets.DIRT_PASSWORD }}
+      RACENET_USERNAME: ${{ secrets.RACENET_USERNAME }}
+      RACENET_PASSWORD: ${{ secrets.RACENET_PASSWORD }}
       DIRT_AWS_ACCESS_KEY: ${{ secrets.DIRT_AWS_ACCESS_KEY }}
       DIRT_AWS_SECRET_ACCESS_KEY: ${{ secrets.DIRT_AWS_SECRET_ACCESS_KEY }}
       GOOGLE_SHEETS_API_KEY: ${{ secrets.GOOGLE_SHEETS_API_KEY }}
