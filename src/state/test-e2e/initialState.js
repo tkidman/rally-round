@@ -30,6 +30,7 @@ const initialState = {
       displayName: "Test E2E",
       disableSameCarValidation: true,
       rbr: {
+        useCsv: true,
         rallies: [
           {
             eventId: 47367,
@@ -79,6 +80,7 @@ const initialState = {
       displayName: "Test E2E2",
       disableSameCarValidation: true,
       rbr: {
+        useCsv: true,
         rallies: [
           {
             eventId: 47368,

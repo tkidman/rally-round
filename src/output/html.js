@@ -328,23 +328,30 @@ const hasPoints = (pointsField, rows) => {
   return rows.some(row => row[pointsField]);
 };
 
+const hiddenTimeDisplay = "--";
 const getStageTimeDisplay = (result, event) => {
+  if (event.hideTimesUntilEventEnd) {
+    return hiddenTimeDisplay;
+  }
   if (
     leagueRef.league.hideStageTimesUntilEventEnd &&
     event.eventStatus !== eventStatuses.finished
   ) {
-    return "--";
+    return hiddenTimeDisplay;
   }
   return result.entry.stageTime;
 };
 
 const getTotalTimeDisplay = (result, event) => {
+  if (event.hideTimesUntilEventEnd) {
+    return hiddenTimeDisplay;
+  }
   if (
     leagueRef.league.hideStageTimesUntilEventEnd &&
     event.eventStatus !== eventStatuses.finished &&
     leagueRef.league.isRallySprint
   ) {
-    return "--";
+    return hiddenTimeDisplay;
   }
   return result.entry.totalTime;
 };

@@ -10,8 +10,13 @@ const {
 const Papa = require("papaparse");
 const moment = require("moment-timezone");
 const { leagueRef } = require("../../state/league");
-const { fetchResults, fetchStandings } = require("../../api/rbr/rbrApi");
-const { keyBy } = require("lodash");
+const {
+  fetchCsvResults,
+  fetchCsvStandings,
+  fetchHtmlSuperRally,
+  fetchHtmlStageResults
+} = require("../../api/rbr/rbrApi");
+const { keyBy, last } = require("lodash");
 
 // sometimes comments can contain invalid values leading to an invalid csv
 const stripComments = eventResultsCsv => {
@@ -92,18 +97,67 @@ const processCsv = (eventResultsCsv, eventStandingsCsv, event) => {
   };
 };
 
-const fetchEventPartForId = async (rally, rallyId) => {
+const processFromHtml = ({ eventSuperRallies, stagesResults, event }) => {
+  // add superrally info to the last stage results
+  const lastStageResults = last(stagesResults);
+  const lastStageResultsByName = keyBy(lastStageResults, "name");
+  eventSuperRallies.forEach(driverSuperRally => {
+    lastStageResultsByName[driverSuperRally.name].superRally =
+      driverSuperRally.superRally;
+  });
+
+  const leaderboardStages = [];
+  stagesResults.forEach(stageResults => {
+    leaderboardStages.push({ entries: stageResults });
+  });
+  return {
+    leaderboardStages,
+    ...event
+  };
+};
+
+const fetchEventPartForId = async (rally, rallyId, useCsv) => {
   const eventFinished = isFinished(rally);
-  const eventResultsCsv = await fetchResults(rallyId, isFinished(rally));
-  const eventStandingsCsv = await fetchStandings(rallyId, isFinished(rally));
-  const processedEvent = processCsv(eventResultsCsv, eventStandingsCsv, rally);
+  let processedEvent;
+  if (useCsv) {
+    const eventResultsCsv = await fetchCsvResults(rallyId, isFinished(rally));
+    const eventStandingsCsv = await fetchCsvStandings(
+      rallyId,
+      isFinished(rally)
+    );
+    processedEvent = processCsv(eventResultsCsv, eventStandingsCsv, rally);
+  } else {
+    // scrape the website
+    const eventSuperRallies = await fetchHtmlSuperRally({
+      rallyId,
+      eventFinished
+    });
+    const firstStageResults = await fetchHtmlStageResults({
+      rallyId,
+      eventFinished,
+      stageNumber: 1
+    });
+    const lastStageResults = await fetchHtmlStageResults({
+      rallyId,
+      eventFinished,
+      stageNumber: rally.numStages
+    });
+    // TODO all stages flag
+    processedEvent = processFromHtml({
+      eventSuperRallies,
+      stagesResults: [firstStageResults, lastStageResults],
+      event: rally
+    });
+  }
   if (eventFinished) {
     processedEvent.eventStatus = eventStatuses.finished;
+  } else {
+    processedEvent.hideTimesUntilEventEnd = true;
   }
   return processedEvent;
 };
 
-const fetchEvent = async rally => {
+const fetchEvent = async (rally, useCsv) => {
   // an event can be constructed from 2 separate rallies by passing in multiple event ids.
   // results get merged into the one event.
   const rallyIdsForEvent = rally.eventId ? [rally.eventId] : rally.eventIds;
@@ -112,7 +166,7 @@ const fetchEvent = async rally => {
   }
   const processedEventParts = [];
   for (const rallyId of rallyIdsForEvent) {
-    const eventPart = await fetchEventPartForId(rally, rallyId);
+    const eventPart = await fetchEventPartForId(rally, rallyId, useCsv);
     processedEventParts.push(eventPart);
   }
   const mergedEvent = processedEventParts[0];
@@ -156,7 +210,8 @@ const fetchRBREvents = async ({ division }) => {
   const events = [];
   const rallies = division.rbr.rallies;
   for (const rally of rallies) {
-    const fetchedEvent = await fetchEvent(rally);
+    const useCsv = division.rbr.useCsv;
+    const fetchedEvent = await fetchEvent(rally, useCsv);
     events.push(fetchedEvent);
   }
   return events;

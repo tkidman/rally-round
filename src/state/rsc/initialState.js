@@ -2,7 +2,7 @@ const rallies = [
   {
     eventId: 62270,
     endTime: "2023-11-14 21:00",
-    locationName: "Final London",
+    locationName: "London",
     locationFlag: "GB",
     numStages: 7
     // enduranceRoundMultiplier: 2
@@ -36,13 +36,13 @@ const initialState = {
   siteTitlePrefix: "RSC World Cup",
   hideStageTimesUntilEventEnd: true,
   historicalSeasonLinks: [
-    { name: "Season 4", href: "/rsc-4" },
-    { name: "Season 5", href: "/rsc-5" },
-    { name: "WRC 1987", href: "/rsc-1987" },
-    { name: "Season 6", href: "/rsc-6" },
-    { name: "Old Farts", href: "/rsc-old-farts" },
+    { name: "World Cup Groups", href: "/rsc-world-cup-group-stage" },
     { name: "ERC 2018", href: "/erc-2018" },
-    { name: "World Cup Groups", href: "/rsc-world-cup-group-stage" }
+    { name: "Old Farts", href: "/rsc-old-farts" },
+    { name: "Season 6", href: "/rsc-6" },
+    { name: "WRC 1987", href: "/rsc-1987" },
+    { name: "Season 5", href: "/rsc-5" },
+    { name: "Season 4", href: "/rsc-4" }
   ],
   divisions: {
     rscWorldCupFinal: {
