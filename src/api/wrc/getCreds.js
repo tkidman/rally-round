@@ -34,6 +34,7 @@ const login = async resolve => {
 
   // Handle the "auth" response
   page.on("response", async response => {
+    debug(`response received ${response.url()}`);
     if (
       response
         .url()
@@ -74,6 +75,7 @@ const login = async resolve => {
     await page.goto(url);
 
     // Enters login information and click the "Sign in" button on the login page
+    debug(`using creds ${username} ${password.slice(0, 2)}`);
     await page.type("#email", username);
     await page.type("#password", password);
     await page.click("#logInBtn");
@@ -82,6 +84,7 @@ const login = async resolve => {
     // Wait for the login process to complete
     await page.waitForNavigation({ waitUntil: "networkidle2" });
 
+    debug("nav complete");
     // Handle the cookie notice if it's present
     await page.waitForSelector("#truste-consent-button");
     const cookieButton = await page.$("#truste-consent-button");
