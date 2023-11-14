@@ -229,6 +229,15 @@ const applyPenaltyIfIncorrectCar = (event, lastStageEntries, divisionName) => {
       );
       applyIncorrectCarPenalty(entry);
     }
+    if (
+      division.excludedCars &&
+      division.excludedCars.includes(entry.vehicleName)
+    ) {
+      debug(
+        `driver ${entry.name} used excluded car ${entry.vehicleName}. Applying incorrect car penalty`
+      );
+      applyIncorrectCarPenalty(entry);
+    }
   });
 };
 
