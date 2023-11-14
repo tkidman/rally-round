@@ -116,12 +116,13 @@ const initialState = {
         {
           clubId: "17",
           championshipIds: ["5XKa2qSTa4WdaU5ut"],
-          includeNextChampionships: true
+          includeNextChampionships: false
         }
       ],
       manualResults: [],
       events: [],
-      points
+      points,
+      excludedCars: ["WRC Builder Vehicle"]
     },
     wrc2023Rally2: {
       divisionName: "wrc2023Rally2",
@@ -134,12 +135,13 @@ const initialState = {
         {
           clubId: "362",
           championshipIds: ["2iTQhk1UV5KKyUpXh"],
-          includeNextChampionships: true
+          includeNextChampionships: false
         }
       ],
       manualResults: [],
       events: [],
-      points
+      points,
+      excludedCars: ["WRC Builder Vehicle"]
     },
     wrc2023Rally3: {
       divisionName: "wrc2023Rally3",
@@ -152,12 +154,13 @@ const initialState = {
         {
           clubId: "363",
           championshipIds: ["4fXVM89ToHpw9wL8F"],
-          includeNextChampionships: true
+          includeNextChampionships: false
         }
       ],
       manualResults: [],
       events: [],
-      points
+      points,
+      excludedCars: ["WRC Builder Vehicle"]
     }
   },
   historicalSeasonLinks: [

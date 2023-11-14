@@ -231,7 +231,9 @@ const applyPenaltyIfIncorrectCar = (event, lastStageEntries, divisionName) => {
     }
     if (
       division.excludedCars &&
-      division.excludedCars.includes(entry.vehicleName)
+      division.excludedCars.some(excludedCar => {
+        return entry.vehicleName.includes(excludedCar);
+      })
     ) {
       debug(
         `driver ${entry.name} used excluded car ${entry.vehicleName}. Applying incorrect car penalty`

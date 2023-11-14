@@ -58,4 +58,9 @@
   "Rallye Monte-Carlo": {
     "countryName": "Monaco",
     "countryCode": "mco"
-  }}
+  },
+  "Rally Sweden": {
+    "countryName": "Sweden",
+    "countryCode": "swe"
+  }
+}

@@ -1,11 +1,34 @@
 const puppeteer = require("puppeteer");
 const fs = require("fs");
+const axios = require("axios");
 const validCreds = {};
 const debug = require("debug")("tkidman:rally-round:wrcAPI:getCreds");
+const axiosInstance = axios.create({});
+const racenetDomain = "https://web-api.racenet.com";
 
 const getCreds = async () => {
   if (validCreds.accessToken) {
     return validCreds;
+  }
+  if (fs.existsSync("./tokens.json")) {
+    const cachedCreds = JSON.parse(fs.readFileSync("./tokens.json"));
+    debug("cached creds found, checking if valid");
+    // validate the token
+    try {
+      const response = await axiosInstance({
+        method: "GET",
+        url: `${racenetDomain}/api/wrc2023clubs/67`,
+        headers: { Authorization: `Bearer ${cachedCreds.accessToken}` }
+      });
+      if (response.status === 200) {
+        debug("cached creds valid, using");
+        validCreds.accessToken = cachedCreds.accessToken;
+        return validCreds;
+      }
+    } catch (e) {
+      debug(e.message);
+    }
+    debug("cached creds invalid, will regenerate");
   }
   const promise = new Promise((resolve, reject) => {
     login(resolve);
