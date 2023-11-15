@@ -116,7 +116,7 @@ const initialState = {
         {
           clubId: "17",
           championshipIds: ["5XKa2qSTa4WdaU5ut"],
-          includeNextChampionships: false
+          includeNextChampionships: true
         }
       ],
       manualResults: [],
@@ -135,7 +135,7 @@ const initialState = {
         {
           clubId: "362",
           championshipIds: ["2iTQhk1UV5KKyUpXh"],
-          includeNextChampionships: false
+          includeNextChampionships: true
         }
       ],
       manualResults: [],
@@ -154,7 +154,7 @@ const initialState = {
         {
           clubId: "363",
           championshipIds: ["4fXVM89ToHpw9wL8F"],
-          includeNextChampionships: false
+          includeNextChampionships: true
         }
       ],
       manualResults: [],

@@ -57,7 +57,7 @@ const login = async resolve => {
 
   // Handle the "auth" response
   page.on("response", async response => {
-    debug(`response received ${response.url()}`);
+    // debug(`response received ${response.url()}`);
     if (
       response
         .url()

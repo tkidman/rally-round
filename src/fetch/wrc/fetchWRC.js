@@ -14,7 +14,15 @@ const {
 } = require("../../shared");
 const { leagueRef } = require("../../state/league");
 const locations = require("../../state/constants/locations.json");
-const { last, slice, findIndex, reverse, map, keyBy } = require("lodash");
+const {
+  last,
+  slice,
+  findIndex,
+  reverse,
+  map,
+  keyBy,
+  indexOf
+} = require("lodash");
 const { readFileSync } = require("fs");
 const Papa = require("papaparse");
 
@@ -52,7 +60,7 @@ const fetchEventsForClub = async ({
     // so most recent championship is last in the array
     const reversedChampionshipIds = reverse(allChampionshipIds);
     const startingChampionshipId = last(club.championshipIds);
-    const startingChampionshipIndex = findIndex(
+    const startingChampionshipIndex = indexOf(
       reversedChampionshipIds,
       startingChampionshipId
     );
