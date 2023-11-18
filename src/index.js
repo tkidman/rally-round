@@ -952,7 +952,11 @@ const loadEventDriver = (entry, drivers, event) => {
   }
   if (
     !driver.firstCarDriven &&
-    (!division.cars || division.cars.includes(entry.vehicleName))
+    (!division.cars || division.cars.includes(entry.vehicleName)) &&
+    (!division.excludedCars ||
+      !division.excludedCars.some(excludedCar => {
+        return entry.vehicleName.includes(excludedCar);
+      }))
   ) {
     driver.firstCarDriven = entry.vehicleName;
   }
