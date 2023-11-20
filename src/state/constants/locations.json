@@ -52,15 +52,23 @@
     "countryCode": "scot"
   },
   "Rally Italia Sardegna": {
-    "countryName": "Italy",
+    "countryName": "Italia Sardegna",
     "countryCode": "ita"
   },
   "Rallye Monte-Carlo": {
-    "countryName": "Monaco",
+    "countryName": "Monte-Carlo",
     "countryCode": "mco"
   },
   "Rally Sweden": {
     "countryName": "Sweden",
     "countryCode": "swe"
+  },
+  "EKO Acropolis Rally Greece": {
+    "countryName": "Greece",
+    "countryCode": "grc"
+  },
+  "Rally Mediterraneo": {
+    "countryName": "Mediterraneo",
+    "countryCode": "fra"
   }
 }
