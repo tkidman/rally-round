@@ -14,15 +14,7 @@ const {
 } = require("../../shared");
 const { leagueRef } = require("../../state/league");
 const locations = require("../../state/constants/locations.json");
-const {
-  last,
-  slice,
-  findIndex,
-  reverse,
-  map,
-  keyBy,
-  indexOf
-} = require("lodash");
+const { last, slice, reverse, map, keyBy, indexOf } = require("lodash");
 const { readFileSync } = require("fs");
 const Papa = require("papaparse");
 
