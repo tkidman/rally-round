@@ -70,5 +70,57 @@
   "Rally Mediterraneo": {
     "countryName": "Mediterraneo",
     "countryCode": "fra"
+  },
+  "AGON by AOC Rally Pacifico": {
+    "countryName": "Pacifico",
+    "countryCode": "idn"
+  },
+  "Vodafone Rally de Portugal": {
+    "countryName": "Portugal",
+    "countryCode": "prt"
+  },
+  "Guanajuato Rally México": {
+    "countryName": "Mexico",
+    "countryCode": "mex"
+  },
+  "Croatia Rally": {
+    "countryName": "Croatia",
+    "countryCode": "hrv"
+  },
+  "Safari Rally Kenya": {
+    "countryName": "Kenya",
+    "countryCode": "ken"
+  },
+  "Rally Estonia": {
+    "countryName": "Estonia",
+    "countryCode": "est"
+  },
+  "Secto Rally Finland": {
+    "countryName": "Finland",
+    "countryCode": "fin"
+  },
+  "Bio Bío Rally Chile": {
+    "countryName": "Chile",
+    "countryCode": "chl"
+  },
+  "Forum8 Rally Japan": {
+    "countryName": "Japan",
+    "countryCode": "jpn"
+  },
+  "Fanatec Rally Oceania": {
+    "countryName": "Oceania",
+    "countryCode": "aus"
+  },
+  "Rally Scandia": {
+    "countryName": "Scandia",
+    "countryCode": "nor"
+  },
+  "Rally Iberia": {
+    "countryName": "Iberia",
+    "countryCode": "esp"
+  },
+  "Central European Rally": {
+    "countryName": "Europe",
+    "countryCode": "eur"
   }
 }
