@@ -2,7 +2,7 @@ const initialState = {
   pointsForDNF: false,
   websiteName: "jrc-results",
   subfolderName: "historic",
-  showLivePoints: false,
+  showLivePoints: true,
   showLivePointsDaysRemaining: 4,
   showCarNameAsTextInResults: true,
   useStandingsForHome: true,
