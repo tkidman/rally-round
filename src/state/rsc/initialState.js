@@ -1,13 +1,38 @@
 const rallies = [
   {
-    eventId: 62270,
-    endTime: "2023-11-14 21:00",
-    locationName: "London",
-    locationFlag: "GB",
-    numStages: 7
+    eventId: 63664,
+    endTime: "2023-12-25 22:00",
+    locationName: "",
+    locationFlag: "AQ",
+    numStages: 9
     // enduranceRoundMultiplier: 2
   }
 ];
+
+const points = {
+  overall: [
+    20,
+    19,
+    18,
+    17,
+    16,
+    15,
+    14,
+    13,
+    12,
+    11,
+    10,
+    9,
+    8,
+    7,
+    6,
+    5,
+    4,
+    3,
+    2,
+    1
+  ]
+};
 
 const initialState = {
   pointsForDNF: false,
@@ -21,8 +46,9 @@ const initialState = {
   //   "*After Dropped Rounds: total points after 2 lowest scoring rounds removed - endurance rounds count as 2",
   // sortByDropRoundPoints: true,
   showSuperRallyColumn: true,
-  hideCarColumnInStandings: true,
-  showCarNameAsTextInResults: false,
+  hideCarColumnInStandings: false,
+  showCarNameAsTextInStandings: true,
+  showCarNameAsTextInResults: true,
   nullTeamIsPrivateer: false,
   useCarAsTeam: false,
   // useCarClassAsTeam: true,
@@ -33,9 +59,10 @@ const initialState = {
   backgroundStyle:
     "background-image: linear-gradient(315deg, #ffffff 0%, #d7e1ec 74%); background-size: cover; background-repeat: no-repeat; background-attachment: fixed;",
   logo: "rsc-guy.png",
-  siteTitlePrefix: "RSC World Cup",
+  siteTitlePrefix: "RSC Fiat Christmas Rally",
   hideStageTimesUntilEventEnd: true,
   historicalSeasonLinks: [
+    { name: "World Cup Finals", href: "/rsc-world-cup-finals" },
     { name: "World Cup Groups", href: "/rsc-world-cup-group-stage" },
     { name: "ERC 2018", href: "/erc-2018" },
     { name: "Old Farts", href: "/rsc-old-farts" },
@@ -45,48 +72,94 @@ const initialState = {
     { name: "Season 4", href: "/rsc-4" }
   ],
   divisions: {
-    rscWorldCupFinal: {
-      divisionName: "rscWorldCupFinal",
-      displayName: "RSC World Cup Final",
+    open: {
+      divisionName: "open",
+      displayName: "Open Fiat Christmas Rally",
       disableSameCarValidation: true,
       // enableSameCarClassValidation: true,
       // maxDriversScoringPointsForTeam: 3,
-      filterEntries: { matchDivision: true },
+      // filterEntries: { allowedCars: [] },
       rbr: {
         rallies
       },
       manualResults: [],
       events: [],
-      promotionRelegation: {
-        promotionZone: 2
-      },
-      points: {
-        // powerStage: [5, 4, 3, 2, 1],
-        // leg: [7, 6, 5, 4, 3, 2, 1],
-        overall: [10, 8, 5, 3, 1]
-      }
+      points
       // cars: ["Peugeot 205 GTI"]
     },
-    rscWorldCupOpen: {
-      divisionName: "rscWorldCupOpen",
-      displayName: "RSC Open",
+    punto: {
+      divisionName: "punto",
+      displayName: "Abarth Grande Punto S2000",
       disableSameCarValidation: true,
       // enableSameCarClassValidation: true,
       // maxDriversScoringPointsForTeam: 3,
-      filterEntries: { matchDivision: true },
+      filterEntries: { allowedCars: ["Abarth Grande Punto S2000"] },
       rbr: {
         rallies
       },
       manualResults: [],
       events: [],
-      promotionRelegation: {
-        promotionZone: 2
+      points
+      // cars: ["Peugeot 205 GTI"]
+    },
+    RGT: {
+      divisionName: "RGT",
+      displayName: "Fiat 124 Abarth Rally RGT",
+      disableSameCarValidation: true,
+      // enableSameCarClassValidation: true,
+      // maxDriversScoringPointsForTeam: 3,
+      filterEntries: { allowedCars: ["Fiat 124 Abarth Rally RGT"] },
+      rbr: {
+        rallies
       },
-      points: {
-        // powerStage: [5, 4, 3, 2, 1],
-        // leg: [7, 6, 5, 4, 3, 2, 1],
-        overall: [10, 8, 5, 3, 1]
-      }
+      manualResults: [],
+      events: [],
+      points
+      // cars: ["Peugeot 205 GTI"]
+    },
+    R3T: {
+      divisionName: "R3T",
+      displayName: "Fiat Abarth 500 R3T",
+      disableSameCarValidation: true,
+      // enableSameCarClassValidation: true,
+      // maxDriversScoringPointsForTeam: 3,
+      filterEntries: { allowedCars: ["Fiat Abarth 500 R3T"] },
+      rbr: {
+        rallies
+      },
+      manualResults: [],
+      events: [],
+      points
+      // cars: ["Peugeot 205 GTI"]
+    },
+    Grp4: {
+      divisionName: "Grp4",
+      displayName: "Fiat 131 Abarth Grp4",
+      disableSameCarValidation: true,
+      // enableSameCarClassValidation: true,
+      // maxDriversScoringPointsForTeam: 3,
+      filterEntries: { allowedCars: ["Fiat 131 Abarth Grp4"] },
+      rbr: {
+        rallies
+      },
+      manualResults: [],
+      events: [],
+      points
+      // cars: ["Peugeot 205 GTI"]
+    },
+    Grp2: {
+      divisionName: "Grp2",
+      displayName: "Fiat 126 Grp2",
+      disableSameCarValidation: true,
+      // enableSameCarClassValidation: true,
+      // maxDriversScoringPointsForTeam: 3,
+      filterEntries: { allowedCars: ["Fiat 126 Grp2"] },
+      rbr: {
+        rallies
+      },
+      manualResults: [],
+      events: [],
+      points
       // cars: ["Peugeot 205 GTI"]
     }
   }
