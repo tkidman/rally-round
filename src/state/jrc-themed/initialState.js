@@ -88,7 +88,7 @@ const initialState = {
   websiteName: "jrc-results",
   subfolderName: "themed",
   useStandingsForHome: true,
-  showLivePoints: true,
+  showLivePoints: false,
   showLivePointsDaysRemaining: 4,
   hideCarColumnInStandings: false,
   showCarNameAsTextInResults: true,
@@ -105,9 +105,9 @@ const initialState = {
   logo: "JRC.png",
   siteTitlePrefix: "JRC Themed",
   divisions: {
-    wrc2023Rally1: {
-      divisionName: "wrc2023Rally1",
-      displayName: "WRC 2023 Rally1",
+    wrc1999: {
+      divisionName: "wrc1999",
+      displayName: "WRC 1999",
       disableSameCarValidation: false,
       // enableSameCarClassValidation: true,
       maxDriversScoringPointsForTeam: 2,
@@ -115,18 +115,35 @@ const initialState = {
       wrc: [
         {
           clubId: "17",
-          championshipIds: ["5XKa2qSTa4WdaU5ut"],
+          championshipIds: ["ih41KsFB1PnXQHnX"],
+          includeNextChampionships: true
+        },
+        {
+          clubId: "362",
+          championshipIds: ["2CsamxBNsG6BPUKKS"],
           includeNextChampionships: true
         }
       ],
       manualResults: [],
       events: [],
       points,
-      excludedCars: ["WRC Builder Vehicle"]
+      // excludedCars: ["WRC Builder Vehicle"],
+      cars: [
+        "Mitsubishi Lancer Evolution VI",
+        "Peugeot 206 Rally",
+        "SEAT Córdoba WRC",
+        "SUBARU Impreza 1998",
+        "Ford Escort Mk 6 Maxi",
+        "Peugeot 306 Maxi",
+        "Renault Maxi Mégane",
+        "Seat Ibiza Kit Car",
+        "Vauxhall Astra Rally Car",
+        "Volkswagen Golf IV Kit Car"
+      ]
     },
-    wrc2023Rally2: {
-      divisionName: "wrc2023Rally2",
-      displayName: "WRC 2023 Rally2",
+    wrc1999kitcar: {
+      divisionName: "wrc1999kitcar",
+      displayName: "WRC 1999 Kitcars",
       disableSameCarValidation: false,
       // enableSameCarClassValidation: true,
       maxDriversScoringPointsForTeam: 2,
@@ -134,7 +151,7 @@ const initialState = {
       wrc: [
         {
           clubId: "362",
-          championshipIds: ["2iTQhk1UV5KKyUpXh"],
+          championshipIds: ["2CsamxBNsG6BPUKKS"],
           includeNextChampionships: true
         }
       ],
@@ -160,10 +177,22 @@ const initialState = {
       manualResults: [],
       events: [],
       points,
-      excludedCars: ["WRC Builder Vehicle"]
+      // excludedCars: ["WRC Builder Vehicle"],
+      cars: [
+        "Ford Escort Mk 6 Maxi",
+        "Peugeot 306 Maxi",
+        "Renault Maxi Mégane",
+        "Seat Ibiza Kit Car",
+        "Vauxhall Astra Rally Car",
+        "Volkswagen Golf IV Kit Car"
+      ]
     }
   },
   historicalSeasonLinks: [
+    {
+      name: "WRC 2023",
+      href: "/themed/themed-17"
+    },
     {
       name: "Road to WRC",
       href: "/themed/themed-16"

@@ -2,7 +2,7 @@ const initialState = {
   pointsForDNF: false,
   websiteName: "jrc-results",
   subfolderName: "historic",
-  showLivePoints: true,
+  showLivePoints: false,
   showLivePointsDaysRemaining: 4,
   showCarNameAsTextInResults: true,
   useStandingsForHome: true,
@@ -13,15 +13,15 @@ const initialState = {
   logo: "JRC.png",
   siteTitlePrefix: "JRC Historic",
   divisions: {
-    historic2311: {
-      divisionName: "historic2311",
+    historic2401: {
+      divisionName: "historic2401",
       displayName: "JRC Historic",
       disableSameCarValidation: true,
       maxDriversScoringPointsForTeam: 2,
       wrc: [
         {
           clubId: "18",
-          championshipIds: ["5cKZ189tc8ppaJpzA"],
+          championshipIds: ["5nNESofLMdqK6ypK1"],
           includeNextChampionships: true
         }
       ],
@@ -108,6 +108,10 @@ const initialState = {
     }
   },
   historicalSeasonLinks: [
+    {
+      name: "Historic 2023-11",
+      href: "/historic/historic-17"
+    },
     {
       name: "Historic 2023-06",
       href: "/historic/historic-16"

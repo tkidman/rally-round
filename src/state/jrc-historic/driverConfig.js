@@ -8,7 +8,7 @@ const driverColumns = {
 };
 
 const sheetsConfig = {
-  sheetId: "1U-OG1KY4mmJqAZfpVQpyvKIQw3fQloQR2LaTf0awUGM",
+  sheetId: "1C77G-vIhHjFAggJHYJsbmB2QjrqeUi3c6chMc60M7qk",
   tabName: "drivers"
 };
 
