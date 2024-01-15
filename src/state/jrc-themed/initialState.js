@@ -88,7 +88,7 @@ const initialState = {
   websiteName: "jrc-results",
   subfolderName: "themed",
   useStandingsForHome: true,
-  showLivePoints: false,
+  showLivePoints: true,
   showLivePointsDaysRemaining: 4,
   hideCarColumnInStandings: false,
   showCarNameAsTextInResults: true,
@@ -158,26 +158,6 @@ const initialState = {
       manualResults: [],
       events: [],
       points,
-      excludedCars: ["WRC Builder Vehicle"]
-    },
-    wrc2023Rally3: {
-      divisionName: "wrc2023Rally3",
-      displayName: "WRC 2023 Rally3",
-      disableSameCarValidation: false,
-      // enableSameCarClassValidation: true,
-      maxDriversScoringPointsForTeam: 2,
-      // filterEntries: true,
-      wrc: [
-        {
-          clubId: "363",
-          championshipIds: ["4fXVM89ToHpw9wL8F"],
-          includeNextChampionships: true
-        }
-      ],
-      manualResults: [],
-      events: [],
-      points,
-      // excludedCars: ["WRC Builder Vehicle"],
       cars: [
         "Ford Escort Mk 6 Maxi",
         "Peugeot 306 Maxi",

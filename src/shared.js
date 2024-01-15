@@ -134,6 +134,7 @@ const getCountryForAnyCode = code => {
     countries[code] ||
     countriesByAlpha2Code[code] ||
     countriesByCode[code] ||
+    countriesByCode[code.toLowerCase()] ||
     countries.eLngRestOfWorld
   );
 };
@@ -141,6 +142,7 @@ const getCountryForDriver = driver => {
   if (
     !countries[driver.nationality] &&
     !countriesByAlpha2Code[driver.nationality] &&
+    !countriesByCode[driver.nationality.toLowerCase()] &&
     !countriesByCode[driver.nationality]
   ) {
     debug(`no country found for driver: ${JSON.stringify(driver)}`);
