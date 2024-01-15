@@ -1,5 +1,5 @@
 const points = {
-  powerStage: [5, 4, 3, 2, 1],
+  //powerStage: [5, 4, 3, 2, 1],
   overall: [
     50,
     44,
