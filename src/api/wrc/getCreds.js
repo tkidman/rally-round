@@ -6,6 +6,12 @@ const debug = require("debug")("tkidman:rally-round:wrcAPI:getCreds");
 const axiosInstance = axios.create({});
 const racenetDomain = "https://web-api.racenet.com";
 
+const delay = time => {
+  return new Promise(function(resolve) {
+    setTimeout(resolve, time);
+  });
+};
+
 const getCreds = async () => {
   if (validCreds.accessToken) {
     return validCreds;
@@ -85,7 +91,9 @@ const login = async resolve => {
 
       debug("writing tokens to tokens.json");
       fs.writeFileSync("tokens.json", JSON.stringify(tokens, null, 2));
-      debug("returning tokens");
+      debug("credentials retrieved, closing headless browser");
+      await page.close();
+      await browser.close();
       resolve(tokens);
     }
   });
@@ -106,19 +114,10 @@ const login = async resolve => {
     debug("credentials entered");
     // Wait for the login process to complete
     await page.waitForNavigation({ waitUntil: "networkidle2" });
-
+    await delay(4000);
     debug("nav complete");
-    // Handle the cookie notice if it's present
-    await page.waitForSelector("#truste-consent-button");
-    const cookieButton = await page.$("#truste-consent-button");
-    if (cookieButton) {
-      debug("cookie button found, clicking");
-      await cookieButton.click();
-    }
   } catch (error) {
     debug("An error occurred:", error);
-  } finally {
-    //await browser.close();
   }
 };
 
