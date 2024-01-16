@@ -14,7 +14,7 @@ const {
 } = require("../../shared");
 const { leagueRef } = require("../../state/league");
 const locations = require("../../state/constants/locations.json");
-const { last, slice, reverse, map, keyBy, indexOf } = require("lodash");
+const { last, slice, reverse, map, keyBy, indexOf, uniqBy } = require("lodash");
 const { readFileSync } = require("fs");
 const Papa = require("papaparse");
 
@@ -83,7 +83,8 @@ const fetchEvents = async ({ allRacenetEvents, getAllResults, clubId }) => {
           cacheLeaderboard:
             wrcEventStatuses[racenetEvent.status] === eventStatuses.finished
         });
-        const convertedResults = map(racenetLeaderboard.entries, entry => {
+        const uniqueEntries = uniqBy(racenetLeaderboard.entries, "ssid");
+        const convertedResults = map(uniqueEntries, entry => {
           const commonResult = {
             name: entry.displayName,
             isDnfEntry: false,
