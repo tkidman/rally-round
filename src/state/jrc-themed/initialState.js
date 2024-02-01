@@ -136,7 +136,7 @@ const initialState = {
         "Ford Escort Mk 6 Maxi",
         "Peugeot 306 Maxi",
         "Renault Maxi Mégane",
-        "Seat Ibiza Kit Car",
+        "SEAT Ibiza Kit Car",
         "Vauxhall Astra Rally Car",
         "Volkswagen Golf IV Kit Car"
       ]
@@ -162,7 +162,7 @@ const initialState = {
         "Ford Escort Mk 6 Maxi",
         "Peugeot 306 Maxi",
         "Renault Maxi Mégane",
-        "Seat Ibiza Kit Car",
+        "SEAT Ibiza Kit Car",
         "Vauxhall Astra Rally Car",
         "Volkswagen Golf IV Kit Car"
       ]
