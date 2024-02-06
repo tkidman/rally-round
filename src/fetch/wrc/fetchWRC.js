@@ -106,6 +106,9 @@ const fetchEvents = async ({ allRacenetEvents, getAllResults, clubId }) => {
     });
     if (wrcEventStatuses[racenetEvent.status] === eventStatuses.active) {
       leagueRef.endTime = racenetEvent.absoluteCloseDate;
+      debug(
+        `getting country code for WRC location ${racenetEvent.eventSettings.location}`
+      );
       leagueRef.activeCountryCode =
         locations[racenetEvent.eventSettings.location].countryCode;
     }
