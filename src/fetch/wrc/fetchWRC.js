@@ -35,7 +35,13 @@ const wrcNationalitiesById = keyBy(wrcNationalities, "id");
 
 const getCountryCodeFromNationalityId = nationalityId => {
   const nationality = wrcNationalitiesById[nationalityId];
-  const alpha2code = nationality.code;
+  let alpha2code;
+  if (!nationality) {
+    debug(`unable to find nationality for wrc code: ${nationalityId}`);
+    alpha2code = "RX";
+  } else {
+    alpha2code = nationality.code;
+  }
   const country = getCountryForAnyCode(alpha2code.toUpperCase());
   return country.code;
 };
