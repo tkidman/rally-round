@@ -1,7 +1,7 @@
 const https = require("https");
 
 const axios = require("axios");
-const debug = require("debug")("tkidman:dirt2-results:dirtAPI");
+const debug = require("debug")("tkidman:rally-round:dirtAPI");
 const fs = require("fs");
 const { cachePath } = require("../../shared");
 const cachedCredsFile = "./cached-creds.json";

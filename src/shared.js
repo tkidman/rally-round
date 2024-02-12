@@ -1,4 +1,4 @@
-const debug = require("debug")("tkidman:dirt2-results:shared");
+const debug = require("debug")("tkidman:rally-round:shared");
 const moment = require("moment");
 const countries = require("./state/constants/countries.json");
 const { keyBy, sum } = require("lodash");

@@ -1,7 +1,7 @@
 const { keyBy, isEmpty, isNil, some } = require("lodash");
 const Papa = require("papaparse");
 const fs = require("fs");
-const debug = require("debug")("tkidman:dirt2-results:state");
+const debug = require("debug")("tkidman:rally-round:state");
 const { club, privateer } = require("../shared");
 const league = require(`./${club}/initialState`);
 const { driverColumns, sheetsConfig } = require(`./${club}/driverConfig`);

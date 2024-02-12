@@ -1,4 +1,4 @@
-const debug = require("debug")("tkidman:dirt2-results:fetch:fetchDirt");
+const debug = require("debug")("tkidman:rally-round:fetch:fetchDirt");
 
 const {
   fetchRecentResults,

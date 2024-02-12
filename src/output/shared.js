@@ -1,7 +1,7 @@
 const { leagueRef, getCarByName } = require("../state/league");
 const locations = require("../state/constants/locations.json");
 const { getCountryForDriver, getCountryByAlpha2Code } = require("../shared");
-const debug = require("debug")("tkidman:dirt2-results:output:shared");
+const debug = require("debug")("tkidman:rally-round:output:shared");
 
 const getAllResults = (name, events, type) => {
   return events.map(event =>

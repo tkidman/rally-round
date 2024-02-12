@@ -7,7 +7,7 @@ const {
   getSummedTotalTimeStrings
 } = require("./shared");
 const { orderEntriesBy } = require("./shared");
-const debug = require("debug")("tkidman:dirt2-results");
+const debug = require("debug")("tkidman:rally-round");
 const { eventStatuses } = require("./shared");
 const { privateer } = require("./shared");
 const {

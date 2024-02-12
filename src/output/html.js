@@ -2,7 +2,7 @@ const moment = require("moment");
 
 const fs = require("fs");
 const Handlebars = require("handlebars");
-const debug = require("debug")("tkidman:dirt2-results:output:html");
+const debug = require("debug")("tkidman:rally-round:output:html");
 
 const { leagueRef, getCarByName } = require("../state/league");
 const {

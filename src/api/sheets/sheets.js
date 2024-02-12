@@ -1,5 +1,5 @@
 const { google } = require("googleapis");
-const debug = require("debug")("tkidman:dirt2-results:sheets");
+const debug = require("debug")("tkidman:rally-round:sheets");
 const sheetId = "1M-JZAPJMp0ASihKi7z2kHMiL9BFi7PQlakvvl7pcal0";
 const inMemoryCache = {};
 

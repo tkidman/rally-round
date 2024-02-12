@@ -1,4 +1,4 @@
-const debug = require("debug")("tkidman:dirt2-results:output");
+const debug = require("debug")("tkidman:rally-round:output");
 const fs = require("fs");
 
 const { outputPath, hiddenPath, cachePath } = require("../shared");

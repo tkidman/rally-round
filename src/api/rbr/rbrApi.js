@@ -1,4 +1,4 @@
-const debug = require("debug")("tkidman:dirt2-results:api:rbr");
+const debug = require("debug")("tkidman:rally-round:api:rbr");
 const axios = require("axios");
 const { cachePath } = require("../../shared");
 const fs = require("fs");

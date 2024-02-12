@@ -1,7 +1,7 @@
 // Load the AWS SDK for Node.js
 const AWS = require("aws-sdk");
 const fs = require("fs");
-const debug = require("debug")("tkidman:dirt2-results:awsAPI");
+const debug = require("debug")("tkidman:rally-round:awsAPI");
 const { outputPath, cachePath } = require("../../shared");
 const { difference } = require("lodash");
 
