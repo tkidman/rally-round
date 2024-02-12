@@ -12,12 +12,8 @@ const wrcCarList = {
     "Škoda Fabia RS Rally2",
     "Volkswagen Polo GTI R5"
   ],
-  "Junior WRC": [
-    "Ford Fiesta Rally3",
-    "World Rally Cars 2017-2021",
-    "Ford Fiesta WRC",
-    "Volkswagen Polo 2017"
-  ],
+  "Junior WRC": ["Ford Fiesta Rally3"],
+  "World Rally Cars 2017-2021": ["Ford Fiesta WRC", "Volkswagen Polo 2017"],
   "World Rally Cars 1997-2011": [
     "Citroën C4 WRC",
     "Citroën Xsara WRC",
@@ -26,7 +22,7 @@ const wrcCarList = {
     "MINI Countryman Rally Edition",
     "Mitsubishi Lancer Evolution VI",
     "Peugeot 206 Rally",
-    "Seat Córdoba WRC",
+    "SEAT Córdoba WRC",
     "Škoda Fabia WRC",
     "SUBARU Impreza 1998",
     "SUBARU Impreza 2001",
@@ -55,7 +51,7 @@ const wrcCarList = {
     "Ford Escort Mk 6 Maxi",
     "Peugeot 306 Maxi",
     "Renault Maxi Mégane",
-    "Seat Ibiza Kit Car",
+    "SEAT Ibiza Kit Car",
     "Vauxhall Astra Rally Car",
     "Volkswagen Golf IV Kit Car"
   ],

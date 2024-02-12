@@ -26,12 +26,12 @@ jobs:
           node-version: 12.x
       - name: npm install
         run: npm install
-      #      - name: jrc-rbr
-      #        if: always()
-      #        run: CLUB=jrc-rbr node --unhandled-rejections=strict ./runner.js
-      - name: rsc
-        if: always()
-        run: CLUB=rsc node --unhandled-rejections=strict ./runner.js
+#      - name: jrc-rbr
+#        if: always()
+#        run: CLUB=jrc-rbr node --unhandled-rejections=strict ./runner.js
+#      - name: rsc
+#        if: always()
+#        run: CLUB=rsc node --unhandled-rejections=strict ./runner.js
 #      - name: jrc-themed
 #        if: always()
 #        run: CLUB=jrc-themed node --unhandled-rejections=strict ./runner.js

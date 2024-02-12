@@ -61,7 +61,7 @@ const initialState = {
   pointsForDNF: false,
   websiteName: "jrc-results",
   useStandingsForHome: true,
-  showLivePoints: true,
+  showLivePoints: false,
   showLivePointsDaysRemaining: 4,
   nullTeamIsPrivateer: true,
   enableDnsPenalty: true,
@@ -73,7 +73,7 @@ const initialState = {
   // disableOverall: true,
   // teamPointsForPowerstage: false,
   dropLowestScoringRoundsNumber: 1,
-  sortByDropRoundPoints: true,
+  sortByDropRoundPoints: false,
   // incorrectCarTimePenaltySeconds: 120,
   backgroundStyle:
     "background-color: #ffffff;\n" +
@@ -87,210 +87,107 @@ const initialState = {
       displayName: "JRC",
       divisionName: "jrc1",
       maxDriversScoringPointsForTeam: 2,
-      clubs: [
+      wrc: [
         {
-          clubId: "180867",
-          championshipIds: ["675485"],
-          includeNextChampionships: true
-        },
-        {
-          clubId: "439038",
-          championshipIds: ["675484"],
+          clubId: "158",
+          championshipIds: ["4F9TnonZH2bSRrBDm"],
           includeNextChampionships: true
         }
       ],
       events: [],
       points,
-      cars: [
-        "Ford Focus RS Rally 2001",
-        "Peugeot 206 Rally",
-        "SUBARU Impreza (2001)",
-        "SUBARU Impreza S4 Rally",
-        "Mitsubishi Lancer Evolution VI"
-      ],
-      manualResults: [
-        {
-          eventIndex: 1,
-          results: [
-            {
-              name: "JoeMVR [GRF]",
-              totalTime: "38:22.784"
-            },
-            {
-              name: "Stirls23",
-              totalTime: "38:17.451"
-            }
-          ]
-        },
-        {
-          eventIndex: 2,
-          results: [
-            {
-              name: "knifekninja",
-              totalTime: "40:28.077",
-              extraInfo: "Manual result applied - game crash on SS6"
-            },
-            {
-              name: "whaddayamean",
-              totalTime: "41:19.461",
-              extraInfo: "Manual result applied - blue screen on SS6"
-            },
-            {
-              name: "JoeMVR [GRF]",
-              totalTime: "41:21.739",
-              extraInfo: "Manual result applied - game crash on SS7"
-            }
-          ]
-        },
-        {
-          eventIndex: 3,
-          results: [
-            {
-              name: "Doc Babana",
-              totalTime: "42:11.021",
-              extraInfo: "Manual result applied - game crash on SS5"
-            }
-          ]
-        }
-      ],
+      // cars: [],
+      manualResults: [],
       filterEntries: {
         matchDivision: true
-      },
-      promotionRelegation: {
-        relegationZone: 8
       }
+      // promotionRelegation: {
+      //   relegationZone: 8
+      // }
     },
     jrc2: {
       displayName: "JRC2",
       divisionName: "jrc2",
       maxDriversScoringPointsForTeam: 2,
-      clubs: [
+      wrc: [
         {
-          clubId: "180867",
-          championshipIds: ["675485"],
+          clubId: "26",
+          championshipIds: ["5LMAikrE3choxHUju"],
           includeNextChampionships: true
         },
         {
-          clubId: "439038",
-          championshipIds: ["675484"],
+          clubId: "12475",
+          championshipIds: ["5hrmzTFjEg3wJaG9s"],
           includeNextChampionships: true
         }
       ],
       events: [],
       points,
       cars: [
-        "Ford Focus RS Rally 2001",
-        "Peugeot 206 Rally",
-        "SUBARU Impreza (2001)",
-        "SUBARU Impreza S4 Rally",
-        "Mitsubishi Lancer Evolution VI"
+        "Citroën C3 Rally2",
+        "Ford Fiesta Rally2",
+        "Hyundai i20 N Rally2",
+        "Škoda Fabia Rally2 Evo",
+        "Volkswagen Polo GTI R5",
+        "Ford Fiesta R5 MK7 Evo 2",
+        "Peugeot 208 T16 R5"
       ],
-      manualResults: [
-        {
-          eventIndex: 2,
-          results: [
-            {
-              name: "Bonus Taco",
-              totalTime: "42:31.342",
-              extraInfo: "Manual result applied - blue screen on SS7"
-            }
-          ]
-        },
-        {
-          eventIndex: 5,
-          results: [
-            {
-              name: "PerfectionFlawed",
-              totalTime: "44:12.790",
-              extraInfo: "Manual result applied - VR crash on SS4"
-            }
-          ]
-        }
-      ],
+      manualResults: [],
       filterEntries: {
         matchDivision: true
-      },
-      promotionRelegation: {
-        promotionZone: 9,
-        relegationZone: 9
       }
+      // promotionRelegation: {
+      //   promotionZone: 9,
+      //   relegationZone: 9
+      // }
     },
     jrc3: {
       displayName: "JRC3",
       divisionName: "jrc3",
       maxDriversScoringPointsForTeam: 2,
-      clubs: [
+      wrc: [
         {
-          clubId: "330674",
-          championshipIds: ["675483"],
+          clubId: "27",
+          championshipIds: ["3fV8qwSmnF7mCYHan"],
           includeNextChampionships: true
         }
       ],
       events: [],
       points,
-      cars: [
-        "Ford Fiesta R5",
-        "ŠKODA Fabia R5",
-        "Mitsubishi Space Star R5",
-        "Citroën C3 R5",
-        "Volkswagen Polo GTI R5",
-        "Peugeot 208 T16 R5"
-      ],
-      manualResults: [
-        {
-          eventIndex: 1,
-          results: [
-            {
-              name: "doktor.frojd",
-              totalTime: "39:33.923"
-            }
-          ]
-        }
-      ],
-      promotionRelegation: {
-        promotionDoubleZone: 1,
-        promotionZone: 10,
-        relegationZone: 9
-      }
+      // cars: [],
+      manualResults: []
+      // promotionRelegation: {
+      //   promotionDoubleZone: 1,
+      //   promotionZone: 10,
+      //   relegationZone: 9
+      // }
     },
     jrc4: {
       displayName: "JRC4",
       divisionName: "jrc4",
       maxDriversScoringPointsForTeam: 2,
-      clubs: [
+      wrc: [
         {
-          clubId: "342117",
-          championshipIds: ["675482"],
+          clubId: "28",
+          championshipIds: ["5oHK56M9NHWcy78KA"],
           includeNextChampionships: true
         }
       ],
       events: [],
       points,
-      manualResults: [
-        {
-          eventIndex: 3,
-          results: [
-            {
-              name: "andy18cruz",
-              totalTime: "53:10.402",
-              extraInfo: "Manual result applied - game freeze on SS5"
-            },
-            {
-              name: "Lih Akama",
-              totalTime: "55:58.216",
-              extraInfo: "Manual result applied - blackout on SS2"
-            }
-          ]
-        }
-      ],
-      promotionRelegation: {
-        promotionDoubleZone: 1,
-        promotionZone: 12
-      },
-      cars: ["Opel Adam R2", "Peugeot 208 R2"]
+      manualResults: []
+      // promotionRelegation: {
+      //   promotionDoubleZone: 1,
+      //   promotionZone: 12
+      // },
+      // cars: []
     }
   },
   historicalSeasonLinks: [
+    {
+      name: "JRC 13",
+      href: "/jrc-13"
+    },
     {
       name: "JRC 12",
       href: "/jrc-12"

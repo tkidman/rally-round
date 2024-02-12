@@ -10,7 +10,7 @@ const {
 
 const driverColumns = {
   [name]: "Driver",
-  [raceNetName]: "Gamertag",
+  [raceNetName]: "Racenet",
   [name3]: "Name 3",
   [teamId]: "Team",
   [division]: "Tier",
@@ -19,7 +19,7 @@ const driverColumns = {
 };
 
 const sheetsConfig = {
-  sheetId: "1-OlAYY2yT4aQETGPZyJta3r3YziRL19fqL0xNRSk_JE",
+  sheetId: "1-iSG6fi6SMv951kqd4iINED_SxBMmqGLaS7Sr8sq3wY",
   tabName: "All tiers"
 };
 
