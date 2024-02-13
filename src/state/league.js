@@ -175,6 +175,12 @@ const loadManualResultsFromSheets = async () => {
     if (row["Comment"]) {
       result.extraInfo = row["Comment"];
     }
+    if (row["Debutant"]) {
+      result.isDebutant = !!row["Debutant"];
+    }
+    if (row["DNF"]) {
+      result.isDnfEntry = !!row["DNF"];
+    }
     return {
       eventIndex: row["Event Number"] - 1,
       results: [result]
