@@ -127,7 +127,7 @@ const initialState = {
         "Citroën C3 Rally2",
         "Ford Fiesta Rally2",
         "Hyundai i20 N Rally2",
-        "Škoda Fabia Rally2 Evo",
+        "ŠKODA Fabia Rally2 Evo",
         "Volkswagen Polo GTI R5",
         "Ford Fiesta R5 MK7 Evo 2",
         "Peugeot 208 T16 R5"
