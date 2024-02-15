@@ -176,11 +176,23 @@ const loadManualResultsFromSheets = async () => {
       result.extraInfo = row["Comment"];
     }
     if (row["Debutant"]) {
-      result.isDebutant = !!row["Debutant"];
+      if (row["Debutant"].toLowerCase() === "false") {
+        result.isDebutant = false;
+      } else {
+        result.isDebutant = true;
+      }
     }
     if (row["DNF"]) {
-      result.isDnfEntry = !!row["DNF"];
-    }
+      const dnfValue = row["DNF"].toLowerCase();
+      if (dnfValue === "false") {
+          result.isDnfEntry = false;
+      } else if (dnfValue === "dq") {
+          result.isDnfEntry = true;
+          result.disqualificationReason = true;
+      } else {
+          result.isDnfEntry = true;
+      }
+  }
     return {
       eventIndex: row["Event Number"] - 1,
       results: [result]
