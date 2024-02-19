@@ -185,14 +185,14 @@ const loadManualResultsFromSheets = async () => {
     if (row["DNF"]) {
       const dnfValue = row["DNF"].toLowerCase();
       if (dnfValue === "false") {
-          result.isDnfEntry = false;
+        result.isDnfEntry = false;
       } else if (dnfValue === "dq") {
-          result.isDnfEntry = true;
-          result.disqualificationReason = true;
+        result.isDnfEntry = true;
+        result.disqualificationReason = true;
       } else {
-          result.isDnfEntry = true;
+        result.isDnfEntry = true;
       }
-  }
+    }
     return {
       eventIndex: row["Event Number"] - 1,
       results: [result]
