@@ -44,6 +44,18 @@ const getCreds = async () => {
   return validCreds;
 };
 
+const navigateToLogin = async page => {
+  try {
+    const url =
+      "https://accounts.ea.com/connect/auth?client_id=RACENET_1_JS_WEB_APP&response_type=code&redirect_uri=https://racenet.com/oauthCallback";
+    await page.goto(url);
+    return page.evaluate(() => document.title);
+  } catch (err) {
+    debug(err.message);
+    return false;
+  }
+};
+
 const login = async resolve => {
   const username = process.env.RACENET_USERNAME;
   const password = process.env.RACENET_PASSWORD;
@@ -98,13 +110,26 @@ const login = async resolve => {
     }
   });
 
-  try {
-    // Navigate to the URL that requires authorization
-    debug("navigating to ea");
-    const url =
-      "https://accounts.ea.com/connect/auth?client_id=RACENET_1_JS_WEB_APP&response_type=code&redirect_uri=https://racenet.com/oauthCallback";
-    await page.goto(url);
+  let data = false;
+  let attempts = 0;
 
+  // Retry request until it gets data or tries 5 times
+  while (data === false && attempts < 5) {
+    debug(`navigating to EA, attempt ${attempts}`);
+    data = await navigateToLogin(page);
+    attempts += 1;
+    if (data === false) {
+      await new Promise(resolve => setTimeout(resolve, 3000));
+    }
+  }
+  if (data === false) {
+    debug("credentials retrieved, closing headless browser");
+    await page.close();
+    await browser.close();
+    throw new Error("failed to get to login page");
+  }
+
+  try {
     // Enters login information and click the "Sign in" button on the login page
     debug(`using creds ${username} ${password.slice(0, 2)}`);
     await page.type("#email", username);
@@ -117,7 +142,10 @@ const login = async resolve => {
     await delay(4000);
     debug("nav complete");
   } catch (error) {
+    await page.close();
+    await browser.close();
     debug("An error occurred:", error);
+    throw error;
   }
 };
 
