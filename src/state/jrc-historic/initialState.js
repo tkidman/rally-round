@@ -13,15 +13,15 @@ const initialState = {
   logo: "JRC.png",
   siteTitlePrefix: "JRC Historic",
   divisions: {
-    historic2401: {
-      divisionName: "historic2401",
+    historic2402: {
+      divisionName: "historic2402",
       displayName: "JRC Historic",
       disableSameCarValidation: true,
       maxDriversScoringPointsForTeam: 2,
       wrc: [
         {
           clubId: "18",
-          championshipIds: ["5nNESofLMdqK6ypK1"],
+          championshipIds: ["4DvewH6EFq6csj3gN"],
           includeNextChampionships: true
         }
       ],
@@ -108,6 +108,10 @@ const initialState = {
     }
   },
   historicalSeasonLinks: [
+    {
+      name: "Historic 2024-01",
+      href: "/historic/historic-18"
+    },
     {
       name: "Historic 2023-11",
       href: "/historic/historic-17"
