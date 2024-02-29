@@ -105,9 +105,9 @@ const initialState = {
   logo: "JRC.png",
   siteTitlePrefix: "JRC Themed",
   divisions: {
-    wrc1999: {
-      divisionName: "wrc1999",
-      displayName: "WRC 1999",
+    intercontinentalRallyChallenge: {
+      divisionName: "intercontinentalRallyChallenge",
+      displayName: "Intercontinental Rally Challenge",
       disableSameCarValidation: false,
       // enableSameCarClassValidation: true,
       maxDriversScoringPointsForTeam: 2,
@@ -115,12 +115,17 @@ const initialState = {
       wrc: [
         {
           clubId: "17",
-          championshipIds: ["ih41KsFB1PnXQHnX"],
+          championshipIds: ["2g1uZfhsVEa9WkyoF"],
           includeNextChampionships: true
         },
         {
           clubId: "362",
-          championshipIds: ["2CsamxBNsG6BPUKKS"],
+          championshipIds: ["2hGYevk7nDKZSsnTs"],
+          includeNextChampionships: true
+        },
+        {
+          clubId: "363",
+          championshipIds: ["5Toncb7z4aTMhXEt1"],
           includeNextChampionships: true
         }
       ],
@@ -129,21 +134,18 @@ const initialState = {
       points,
       // excludedCars: ["WRC Builder Vehicle"],
       cars: [
-        "Mitsubishi Lancer Evolution VI",
-        "Peugeot 206 Rally",
-        "SEAT Córdoba WRC",
-        "SUBARU Impreza 1998",
-        "Ford Escort Mk 6 Maxi",
-        "Peugeot 306 Maxi",
-        "Renault Maxi Mégane",
-        "SEAT Ibiza Kit Car",
-        "Vauxhall Astra Rally Car",
-        "Volkswagen Golf IV Kit Car"
+        "Fiat Grande Punto Abarth S2000",
+        "Opel Corsa S2000",
+        "Peugeot 207 S2000",
+        "Citroën C2 Super 1600",
+        "Citroën Saxo Super 1600",
+        "Ford Puma S1600",
+        "Renault Clio S1600"
       ]
     },
-    wrc1999kitcar: {
-      divisionName: "wrc1999kitcar",
-      displayName: "WRC 1999 Kitcars",
+    intercontinentalRallyChallenge2wdCup: {
+      divisionName: "2wd Cup",
+      displayName: "2wd Cup",
       disableSameCarValidation: false,
       // enableSameCarClassValidation: true,
       maxDriversScoringPointsForTeam: 2,
@@ -151,7 +153,7 @@ const initialState = {
       wrc: [
         {
           clubId: "362",
-          championshipIds: ["2CsamxBNsG6BPUKKS"],
+          championshipIds: ["2hGYevk7nDKZSsnTs"],
           includeNextChampionships: true
         }
       ],
@@ -159,16 +161,18 @@ const initialState = {
       events: [],
       points,
       cars: [
-        "Ford Escort Mk 6 Maxi",
-        "Peugeot 306 Maxi",
-        "Renault Maxi Mégane",
-        "SEAT Ibiza Kit Car",
-        "Vauxhall Astra Rally Car",
-        "Volkswagen Golf IV Kit Car"
+        "Citroën C2 Super 1600",
+        "Citroën Saxo Super 1600",
+        "Ford Puma S1600",
+        "Renault Clio S1600"
       ]
     }
   },
   historicalSeasonLinks: [
+    {
+      name: "EA WRC 1999",
+      href: "/themed/themed-18"
+    },
     {
       name: "WRC 2023",
       href: "/themed/themed-17"
