@@ -137,6 +137,7 @@ const initialState = {
         "Fiat Grande Punto Abarth S2000",
         "Opel Corsa S2000",
         "Peugeot 207 S2000",
+        "Mitsubishi Lancer Evolution X",
         "Citroën C2 Super 1600",
         "Citroën Saxo Super 1600",
         "Ford Puma S1600",
