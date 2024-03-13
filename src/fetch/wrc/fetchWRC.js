@@ -19,6 +19,7 @@ const { readFileSync } = require("fs");
 const Papa = require("papaparse");
 
 const wrcEventStatuses = {
+  0: eventStatuses.future,
   1: eventStatuses.active,
   2: eventStatuses.finished
 };

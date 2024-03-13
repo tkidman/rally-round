@@ -352,8 +352,9 @@ const addStageTimesToResultsByDriver = (resultsByDriver, leaderboardStages) => {
 const getTotalPointsDisplay = (result, event) => {
   let display = result.totalPoints;
   if (
-    !leagueRef.showLivePoints() &&
-    event.eventStatus === eventStatuses.active
+    (!leagueRef.showLivePoints() &&
+      event.eventStatus === eventStatuses.active) ||
+    event.eventStatus === eventStatuses.future
   ) {
     display = "";
   }
@@ -361,8 +362,11 @@ const getTotalPointsDisplay = (result, event) => {
     if (result.entry.disqualificationReason) {
       display = "DQ";
     } else if (result.entry.isDnsEntry) {
-      if (event.eventStatus === eventStatuses.active) {
-        // don't display DNS if event is still active
+      if (
+        event.eventStatus === eventStatuses.active ||
+        event.eventStatus === eventStatuses.future
+      ) {
+        // don't display DNS if event is still active or in the future
         display = "";
       } else {
         display = "DNS";

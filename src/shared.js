@@ -26,7 +26,8 @@ const getTotalPoints = result => {
 
 const eventStatuses = {
   active: "Active",
-  finished: "Finished"
+  finished: "Finished",
+  future: "Future"
 };
 
 const resultTypes = {
