@@ -100,10 +100,10 @@ const initialState = {
       manualResults: [],
       filterEntries: {
         matchDivision: true
+      },
+      promotionRelegation: {
+        relegationZone: 11
       }
-      // promotionRelegation: {
-      //   relegationZone: 8
-      // }
     },
     jrc2: {
       displayName: "JRC2",
@@ -135,11 +135,11 @@ const initialState = {
       manualResults: [],
       filterEntries: {
         matchDivision: true
+      },
+      promotionRelegation: {
+        promotionZone: 9,
+        relegationZone: 12
       }
-      // promotionRelegation: {
-      //   promotionZone: 9,
-      //   relegationZone: 9
-      // }
     },
     jrc3: {
       displayName: "JRC3",
@@ -155,12 +155,12 @@ const initialState = {
       events: [],
       points,
       // cars: [],
-      manualResults: []
-      // promotionRelegation: {
-      //   promotionDoubleZone: 1,
-      //   promotionZone: 10,
-      //   relegationZone: 9
-      // }
+      manualResults: [],
+      promotionRelegation: {
+        promotionDoubleZone: 1,
+        promotionZone: 7,
+        relegationZone: 11
+      }
     },
     jrc4: {
       displayName: "JRC4",
@@ -175,11 +175,11 @@ const initialState = {
       ],
       events: [],
       points,
-      manualResults: []
-      // promotionRelegation: {
-      //   promotionDoubleZone: 1,
-      //   promotionZone: 12
-      // },
+      manualResults: [],
+      promotionRelegation: {
+        promotionDoubleZone: 1,
+        promotionZone: 7
+      }
       // cars: []
     }
   },
