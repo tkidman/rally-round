@@ -15,8 +15,8 @@ const driverColumns = {
 };
 
 const sheetsConfig = {
-  sheetId: "16BMHc9C1y017ILxi8YWZjzYbpMBBFD6GV-PwBwoF4Xc",
-  tabName: "Final"
+  sheetId: "13dSH93-YobmJIZCrO0O_8Mn0-JE4gwY4a9n4VevfeIY",
+  tabName: "All tiers"
 };
 
 module.exports = { driverColumns, sheetsConfig };

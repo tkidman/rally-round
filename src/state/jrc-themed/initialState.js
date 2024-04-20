@@ -105,9 +105,9 @@ const initialState = {
   logo: "JRC.png",
   siteTitlePrefix: "JRC Themed",
   divisions: {
-    intercontinentalRallyChallenge: {
-      divisionName: "intercontinentalRallyChallenge",
-      displayName: "Intercontinental Rally Challenge",
+    wrc2017: {
+      divisionName: "wrc2017",
+      displayName: "WRC 2017",
       disableSameCarValidation: false,
       // enableSameCarClassValidation: true,
       maxDriversScoringPointsForTeam: 2,
@@ -115,17 +115,12 @@ const initialState = {
       wrc: [
         {
           clubId: "17",
-          championshipIds: ["2g1uZfhsVEa9WkyoF"],
+          championshipIds: ["Bj7XyGY36x3ewMZ5"],
           includeNextChampionships: true
         },
         {
           clubId: "362",
-          championshipIds: ["2hGYevk7nDKZSsnTs"],
-          includeNextChampionships: true
-        },
-        {
-          clubId: "363",
-          championshipIds: ["5Toncb7z4aTMhXEt1"],
+          championshipIds: ["3EsWiMTvqLTDmtHzB"],
           includeNextChampionships: true
         }
       ],
@@ -134,42 +129,18 @@ const initialState = {
       points,
       // excludedCars: ["WRC Builder Vehicle"],
       cars: [
-        "Fiat Grande Punto Abarth S2000",
-        "Opel Corsa S2000",
-        "Peugeot 207 S2000",
-        "Mitsubishi Lancer Evolution X",
-        "Citroën C2 Super 1600",
-        "Citroën Saxo Super 1600",
-        "Ford Puma S1600",
-        "Renault Clio S1600"
-      ]
-    },
-    intercontinentalRallyChallenge2wdCup: {
-      divisionName: "2wd Cup",
-      displayName: "2wd Cup",
-      disableSameCarValidation: false,
-      // enableSameCarClassValidation: true,
-      maxDriversScoringPointsForTeam: 2,
-      // filterEntries: true,
-      wrc: [
-        {
-          clubId: "362",
-          championshipIds: ["2hGYevk7nDKZSsnTs"],
-          includeNextChampionships: true
-        }
-      ],
-      manualResults: [],
-      events: [],
-      points,
-      cars: [
-        "Citroën C2 Super 1600",
-        "Citroën Saxo Super 1600",
-        "Ford Puma S1600",
-        "Renault Clio S1600"
+        "Ford Fiesta WRC",
+        "Volkswagen Polo 2017",
+        "Ford Fiesta R5 MK7 Evo 2",
+        "Peugeot 208 T16 R5"
       ]
     }
   },
   historicalSeasonLinks: [
+    {
+      name: "Intercontinental Rally Challenge",
+      href: "/themed/themed-19"
+    },
     {
       name: "EA WRC 1999",
       href: "/themed/themed-18"
