@@ -75,7 +75,7 @@ const initialState = {
   divisions: {
     audiVsPorsche: {
       divisionName: "open",
-      displayName: "Open Fiat Christmas Rally",
+      displayName: "Audi vs Porsche",
       disableSameCarValidation: false,
       // enableSameCarClassValidation: true,
       maxDriversScoringPointsForTeam: 4,
