@@ -14,6 +14,14 @@ const rallies = [
     locationFlag: "RX",
     numStages: 7
     // enduranceRoundMultiplier: 2
+  },
+  {
+    eventIds: [68716, 68717],
+    endTime: "2024-05-07 22:00",
+    locationName: "Round 3",
+    locationFlag: "RX",
+    numStages: 7
+    // enduranceRoundMultiplier: 2
   }
 ];
 
