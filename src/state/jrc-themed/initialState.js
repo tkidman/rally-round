@@ -107,7 +107,7 @@ const initialState = {
   divisions: {
     wrc2017: {
       divisionName: "wrc2017",
-      displayName: "WRC 2017",
+      displayName: "WRC 2017 Overall",
       disableSameCarValidation: false,
       // enableSameCarClassValidation: true,
       maxDriversScoringPointsForTeam: 2,
@@ -134,6 +134,26 @@ const initialState = {
         "Ford Fiesta R5 MK7 Evo 2",
         "Peugeot 208 T16 R5"
       ]
+    },
+    wrc2017WRC2: {
+      divisionName: "wrc2017WRC2",
+      displayName: "WRC 2017 WRC2",
+      disableSameCarValidation: false,
+      // enableSameCarClassValidation: true,
+      maxDriversScoringPointsForTeam: 2,
+      // filterEntries: true,
+      wrc: [
+        {
+          clubId: "362",
+          championshipIds: ["3EsWiMTvqLTDmtHzB"],
+          includeNextChampionships: true
+        }
+      ],
+      manualResults: [],
+      events: [],
+      points,
+      // excludedCars: ["WRC Builder Vehicle"],
+      cars: ["Ford Fiesta R5 MK7 Evo 2", "Peugeot 208 T16 R5"]
     }
   },
   historicalSeasonLinks: [
