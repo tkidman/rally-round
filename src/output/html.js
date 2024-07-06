@@ -282,7 +282,10 @@ const transformForStandingsHTML = (division, type) => {
       colour
     };
     if (type === "driver") {
-      const { driver, country, carBrand } = getDriverData(standing.name);
+      const { driver, country, carBrand } = getDriverData(
+        standing.name,
+        standing.divisionName
+      );
       return {
         ...row,
         car: carBrand,
@@ -362,7 +365,10 @@ const transformForDriverResultsHTML = (event, division, legIndex) => {
   const headerLocations = getHeaderLocations(events);
   const rows = event.results.driverResults.map((result, index) => {
     const resultDivision = leagueRef.divisions[result.divisionName];
-    const { driver, country, carBrand } = getDriverData(result.name);
+    const { driver, country, carBrand } = getDriverData(
+      result.name,
+      divisionName
+    );
     if (leagueRef.league.placement)
       result.stageTimes = getStageColours(
         result.stageTimes,
@@ -519,7 +525,9 @@ const getHtmlLinks = () => {
     if (leagueRef.hasTeams) {
       addLinks(links, divisionName, "team", displayName);
     }
-    addLinks(links, divisionName, "driver", displayName);
+    if (!division.hideDriverStandingsLink) {
+      addLinks(links, divisionName, "driver", displayName);
+    }
     return links;
   }, {});
   if (leagueRef.includeOverall) {

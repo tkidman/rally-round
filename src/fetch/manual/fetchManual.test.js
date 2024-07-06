@@ -1,8 +1,10 @@
 const { populateManualEvents } = require("./fetchManual");
-const { init } = require("../../state/league");
+const { init, leagueRef } = require("../../state/league");
 describe("fetchManual", () => {
   it("populates manual results", async () => {
     await init();
+    leagueRef.league.currentDivision = leagueRef.league.divisions["pro"];
+    leagueRef.league.currentDivision.drivers = leagueRef.drivers;
     const resultRows = [
       {
         EventId: "1",

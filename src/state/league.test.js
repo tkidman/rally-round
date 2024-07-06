@@ -15,7 +15,10 @@ const driver = {
 describe("league", () => {
   beforeEach(async () => {
     await init();
+    leagueRef.league.currentDivision = leagueRef.league.divisions["pro"];
+    leagueRef.league.currentDivision.drivers = leagueRef.drivers;
   });
+
   test("getDriver", () => {
     expect(leagueRef.getDriver("SPOOKEX *-*")).toEqual(driver);
     expect(leagueRef.getDriver("Spookex")).toEqual(driver);

@@ -940,14 +940,17 @@ const processEvent = ({
 const loadEventDriver = (entry, drivers, event) => {
   const divisionName = event.divisionName;
   const division = leagueRef.league.divisions[divisionName];
-  let driver = leagueRef.getDriver(entry.name);
+  let driver = drivers[entry.name];
   if (!driver) {
-    debug(`adding unknown driver ${entry.name}`);
-    driver = { name: entry.name };
-    leagueRef.addDriver(driver);
-    leagueRef.missingDrivers[entry.name] = driver;
+    let leagueDriver = leagueRef.getLeagueDriver(entry.name);
+    if (!leagueDriver) {
+      debug(`adding unknown driver ${entry.name}`);
+      leagueDriver = { name: entry.name };
+      leagueRef.addDriver(leagueDriver);
+      leagueRef.missingDrivers[entry.name] = leagueDriver;
+    }
+    driver = { ...leagueDriver };
   }
-
   if (division.filterEntries && shouldFilterDriver(division, entry, event)) {
     return;
   }
@@ -964,14 +967,23 @@ const loadEventDriver = (entry, drivers, event) => {
   ) {
     driver.firstCarDriven = entry.vehicleName;
   }
-  if (!driver.teamId) {
-    if (leagueRef.league.useCarAsTeam) {
+  if (!driver.teamId || division.overrideTeam) {
+    if (
+      leagueRef.league.useCarAsTeam ||
+      get(division, "overrideTeam.useCarAsTeam")
+    ) {
       if (driver.firstCarDriven) {
         driver.teamId = getCarByName(driver.firstCarDriven).brand;
       }
-    } else if (leagueRef.league.useNationalityAsTeam) {
+    } else if (
+      leagueRef.league.useNationalityAsTeam ||
+      get(division, "overrideTeam.useNationalityAsTeam")
+    ) {
       driver.teamId = driver.nationality;
-    } else if (leagueRef.league.useCarClassAsTeam) {
+    } else if (
+      leagueRef.league.useCarClassAsTeam ||
+      get(division, "overrideTeam.useCarClassAsTeam")
+    ) {
       if (driver.firstCarDriven) {
         driver.teamId = getCarByName(driver.firstCarDriven).class;
       }
@@ -1006,6 +1018,7 @@ const loadDriversAcrossAllEvents = events => {
 
 const processEvents = (events, divisionName) => {
   const drivers = loadDriversAcrossAllEvents(events);
+  leagueRef.saveDivisionDrivers(drivers, divisionName);
   const previousEvents = [];
   for (let eventIndex = 0; eventIndex < events.length; eventIndex++) {
     const event = events[eventIndex];
@@ -1039,8 +1052,27 @@ const calculateOverall = processedDivisions => {
     divisionName: "overall",
     displayName: getLocalization().overall
   };
+  leagueRef.league.currentDivision = overall;
+  overall.drivers = {
+    driversById: {},
+    driversByRaceNet: {},
+    driversByName3: {}
+  };
   Object.keys(processedDivisions).forEach(divisionName => {
     const division = processedDivisions[divisionName];
+    overall.drivers.driversById = {
+      ...overall.drivers.driversById,
+      ...division.drivers.driversById
+    };
+    // we probably don't need these in overall
+    overall.drivers.driversByRaceNet = {
+      ...overall.drivers.driversByRaceNet,
+      ...division.drivers.driversByRaceNet
+    };
+    overall.drivers.driversByName3 = {
+      ...overall.drivers.driversByName3,
+      ...division.drivers.driversByName3
+    };
     division.events.forEach((event, index) => {
       let overallEvent = overall.events[index];
       if (!overallEvent) {
@@ -1123,6 +1155,7 @@ const processAllDivisions = async () => {
     await loadCache();
     for (const divisionName of Object.keys(divisions)) {
       const division = divisions[divisionName];
+      league.currentDivision = division;
       const getAllResults =
         leagueRef.league.getAllResults || division.points.stage;
       division.events = await fetchEvents(

@@ -21,7 +21,7 @@ const initialState = {
       wrc: [
         {
           clubId: "18",
-          championshipIds: ["3iM2ZGvm38RaWdmrL"],
+          championshipIds: ["4h8CyiwRCamzDEFwc"],
           includeNextChampionships: true
         }
       ],
@@ -108,6 +108,10 @@ const initialState = {
     }
   },
   historicalSeasonLinks: [
+    {
+      name: "Historic 2024-06",
+      href: "/historic/historic-20"
+    },
     {
       name: "Historic 2024-02",
       href: "/historic/historic-19"

@@ -26,7 +26,10 @@ const transformForDriverResultsSheet = event => {
     "Total Points"
   ];
   const rows = event.results.driverResults.map((result, index) => {
-    const { driver, country, carBrand } = getDriverData(result.name);
+    const { driver, country, carBrand } = getDriverData(
+      result.name,
+      event.divisionName
+    );
     let dnf = "";
     if (result.entry.disqualificationReason) {
       dnf = "DQ";

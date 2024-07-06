@@ -105,9 +105,9 @@ const initialState = {
   logo: "JRC.png",
   siteTitlePrefix: "JRC Themed",
   divisions: {
-    wrc2017: {
-      divisionName: "wrc2017",
-      displayName: "WRC 2017 Overall",
+    wrc2000: {
+      divisionName: "wrc2000",
+      displayName: "WRC 2000",
       disableSameCarValidation: false,
       // enableSameCarClassValidation: true,
       maxDriversScoringPointsForTeam: 2,
@@ -115,12 +115,7 @@ const initialState = {
       wrc: [
         {
           clubId: "17",
-          championshipIds: ["Bj7XyGY36x3ewMZ5"],
-          includeNextChampionships: true
-        },
-        {
-          clubId: "362",
-          championshipIds: ["3EsWiMTvqLTDmtHzB"],
+          championshipIds: ["31H132gjXEZ9LnHKE"],
           includeNextChampionships: true
         }
       ],
@@ -129,23 +124,25 @@ const initialState = {
       points,
       // excludedCars: ["WRC Builder Vehicle"],
       cars: [
-        "Ford Fiesta WRC",
-        "Volkswagen Polo 2017",
-        "Ford Fiesta R5 MK7 Evo 2",
-        "Peugeot 208 T16 R5"
+        "Ford Focus RS Rally 2001",
+        "Mitsubishi Lancer Evolution VI",
+        "Peugeot 206 Rally",
+        "SEAT Córdoba WRC"
       ]
     },
-    wrc2017WRC2: {
-      divisionName: "wrc2017WRC2",
-      displayName: "WRC 2017 WRC2",
+    wrc2000Constructors: {
+      divisionName: "wrc2000Constructors",
+      displayName: "WRC 2000 Constructors",
       disableSameCarValidation: false,
       // enableSameCarClassValidation: true,
       maxDriversScoringPointsForTeam: 2,
       // filterEntries: true,
+      overrideTeam: { useCarAsTeam: true },
+      hideDriverStandingsLink: true,
       wrc: [
         {
-          clubId: "362",
-          championshipIds: ["3EsWiMTvqLTDmtHzB"],
+          clubId: "17",
+          championshipIds: ["31H132gjXEZ9LnHKE"],
           includeNextChampionships: true
         }
       ],
@@ -153,10 +150,19 @@ const initialState = {
       events: [],
       points,
       // excludedCars: ["WRC Builder Vehicle"],
-      cars: ["Ford Fiesta R5 MK7 Evo 2", "Peugeot 208 T16 R5"]
+      cars: [
+        "Ford Focus RS Rally 2001",
+        "Mitsubishi Lancer Evolution VI",
+        "Peugeot 206 Rally",
+        "SEAT Córdoba WRC"
+      ]
     }
   },
   historicalSeasonLinks: [
+    {
+      name: "WRC 2017",
+      href: "/themed/themed-20"
+    },
     {
       name: "Intercontinental Rally Challenge",
       href: "/themed/themed-19"

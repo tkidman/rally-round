@@ -1,4 +1,4 @@
-const { keyBy, isEmpty, isNil, some } = require("lodash");
+const { keyBy, isEmpty, isNil, some, reduce } = require("lodash");
 const Papa = require("papaparse");
 const fs = require("fs");
 const debug = require("debug")("tkidman:rally-round:state");
@@ -254,6 +254,9 @@ const init = async () => {
   leagueRef.drivers = drivers;
   leagueRef.getDriverNames = getDriverNames;
   leagueRef.missingDrivers = missingDrivers;
+  leagueRef.saveDivisionDrivers = saveDivisionDrivers;
+  leagueRef.getLeagueDriver = getLeagueDriver;
+  leagueRef.getDriverInDivision = getDriverInDivision;
   const teamsFoundOnDrivers = some(Object.values(driversById), "teamId");
   leagueRef.hasTeams =
     teamsFoundOnDrivers ||
@@ -302,16 +305,31 @@ const addDriver = driver => {
   drivers.driversById[driver.id] = driver;
 };
 
-const getDriver = name => {
+const getDriverInternal = (theDrivers, name) => {
   const upperName = name.toUpperCase();
-  let driver = drivers.driversById[upperName];
+  let driver = theDrivers.driversById[upperName];
   if (!driver) {
-    driver = drivers.driversByRaceNet[upperName];
+    driver = theDrivers.driversByRaceNet[upperName];
   }
   if (!driver) {
-    driver = drivers.driversByName3[upperName];
+    driver = theDrivers.driversByName3[upperName];
   }
   return driver;
+};
+
+const getLeagueDriver = name => {
+  return getDriverInternal(drivers, name);
+};
+const getDriverInDivision = (name, divisionName) => {
+  if (divisionName === "overall") {
+    return getDriverInternal(league.overall.drivers, name);
+  }
+  const { drivers: divisionDrivers } = league.divisions[divisionName];
+  return getDriverInternal(divisionDrivers, name);
+};
+const getDriver = name => {
+  const { drivers: divisionDrivers } = league.currentDivision;
+  return getDriverInternal(divisionDrivers, name);
 };
 
 const getDriverNames = name => {
@@ -323,25 +341,41 @@ const getDriverNames = name => {
   ].filter(name => !!name);
 };
 
-const getDriversByDivision = division => {
-  return Object.values(drivers.driversById).filter(driver => {
-    return (
-      driver.division &&
-      driver.division.toUpperCase() === division.toUpperCase()
-    );
-  });
-};
-
-const getTeamIds = () => {
-  const teamsIds = Object.values(drivers.driversById).reduce(
-    (teamIdsObj, driver) => {
-      if (driver.teamId && driver.teamId !== privateer) {
-        teamIdsObj[driver.teamId] = driver.teamId;
-      }
-      return teamIdsObj;
+const saveDivisionDrivers = (driversByName, divisionName) => {
+  const division = league.divisions[divisionName];
+  const driversById = reduce(
+    driversByName,
+    (acc, driver) => {
+      acc[driver.name.toUpperCase()] = driver;
+      return acc;
     },
     {}
   );
+  division.drivers = { driversById };
+
+  const driversWithRaceNet = Object.values(driversById).filter(
+    driver => driver.raceNetName
+  );
+  division.drivers.driversByRaceNet = keyBy(driversWithRaceNet, driver =>
+    driver.raceNetName.toUpperCase()
+  );
+  const driversWithName3 = Object.values(driversById).filter(
+    driver => driver.name3
+  );
+  division.drivers.driversByName3 = keyBy(driversWithName3, driver =>
+    driver.name3.toUpperCase()
+  );
+};
+
+const getTeamIds = () => {
+  const teamsIds = Object.values(
+    league.currentDivision.drivers.driversById
+  ).reduce((teamIdsObj, driver) => {
+    if (driver.teamId && driver.teamId !== privateer) {
+      teamIdsObj[driver.teamId] = driver.teamId;
+    }
+    return teamIdsObj;
+  }, {});
   return Object.keys(teamsIds);
 };
 
@@ -355,7 +389,6 @@ const printMissingDrivers = () => {
 module.exports = {
   init,
   leagueRef,
-  getDriversByDivision,
   getTeamIds,
   printMissingDrivers,
   getCarByName

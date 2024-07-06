@@ -12,6 +12,7 @@ const { calculatePromotionRelegation } = require("./index");
 const { isDnsPenalty } = require("./index");
 const { init } = require("./state/league");
 const { resultTypes } = require("./shared");
+const { forEach, omit } = require("lodash");
 
 describe("calculates event results", () => {
   let leagueRef;
@@ -146,6 +147,8 @@ describe("calculates event results", () => {
         totalPoints: 0
       }
     ];
+    leagueRef.league.currentDivision = leagueRef.league.divisions["pro"];
+    leagueRef.league.currentDivision.drivers = leagueRef.drivers;
     const driverResults = calculateEventResults({
       event: {
         leaderboardStages: [leaderboard, leaderboard],
@@ -196,6 +199,8 @@ describe("calculates event results", () => {
         totalPoints: 0
       }
     ];
+    leagueRef.league.currentDivision = leagueRef.league.divisions["pro"];
+    leagueRef.league.currentDivision.drivers = leagueRef.drivers;
     expect(
       calculateEventResults({
         event: {
@@ -434,7 +439,11 @@ describe("calculates event results", () => {
 
   it("calculates overall results", () => {
     const preOverallResults = require("./__fixtures__/preOverallLeague.json");
-    expect(calculateOverall(preOverallResults.divisions)).toMatchSnapshot();
+    forEach(preOverallResults.divisions, division => {
+      division.drivers = leagueRef.drivers;
+    });
+    const overall = calculateOverall(preOverallResults.divisions);
+    expect(omit(overall, "drivers")).toMatchSnapshot();
   });
 
   describe("isDnsPenalty", () => {

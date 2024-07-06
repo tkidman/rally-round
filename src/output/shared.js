@@ -32,7 +32,7 @@ const getDriverStandingData = (standing, events) => {
   return {
     results,
     resultsTotalPoints,
-    ...getDriverData(standing.name)
+    ...getDriverData(standing.name, standing.divisionName)
   };
 };
 
@@ -46,8 +46,8 @@ const getTeamStandingData = (standing, events) => {
   };
 };
 
-const getDriverData = driverName => {
-  const driver = leagueRef.getDriver(driverName);
+const getDriverData = (driverName, divisionName) => {
+  const driver = leagueRef.getDriverInDivision(driverName, divisionName);
   let country = getCountryForDriver(driver);
   const car = getCarByName(driver.car);
   let carBrand;

@@ -25,7 +25,7 @@ const initialState = {
   teamOverride: {},
   historicalSeasonLinks: [{ name: "E2E Season 1", href: "/e2e-1" }],
   divisions: {
-    testE2E: {
+    "test-e2e": {
       divisionName: "test-e2e",
       displayName: "Test E2E",
       disableSameCarValidation: true,
@@ -75,7 +75,7 @@ const initialState = {
         overall: [30, 24, 19, 15, 12, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
       }
     },
-    testE2E2: {
+    "test-e2e2": {
       divisionName: "test-e2e2",
       displayName: "Test E2E2",
       disableSameCarValidation: true,
