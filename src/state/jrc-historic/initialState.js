@@ -4,6 +4,7 @@ const initialState = {
   subfolderName: "historic",
   showLivePoints: true,
   showLivePointsDaysRemaining: 4,
+  hideCarColumnInStandings: true,
   showCarNameAsTextInResults: true,
   useStandingsForHome: true,
   nullTeamIsPrivateer: true,
