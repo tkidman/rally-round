@@ -90,20 +90,25 @@ const initialState = {
       wrc: [
         {
           clubId: "158",
-          championshipIds: ["4F9TnonZH2bSRrBDm"],
+          championshipIds: ["4fzz1BZi5wGrojAgg"],
           includeNextChampionships: true
         }
       ],
       events: [],
       points,
-      // cars: [],
+      cars: [
+        "Citroën Xsara WRC",
+        "Ford Focus RS Rally 2008",
+        "Škoda Fabia WRC",
+        "SUBARU Impreza 2008"
+      ],
       manualResults: [],
       filterEntries: {
         matchDivision: true
-      },
-      promotionRelegation: {
-        relegationZone: 11
       }
+      // promotionRelegation: {
+      //   relegationZone: 11
+      // }
     },
     jrc2: {
       displayName: "JRC2",
@@ -112,34 +117,21 @@ const initialState = {
       wrc: [
         {
           clubId: "26",
-          championshipIds: ["5LMAikrE3choxHUju"],
-          includeNextChampionships: true
-        },
-        {
-          clubId: "12475",
-          championshipIds: ["5hrmzTFjEg3wJaG9s"],
+          championshipIds: ["34cMdUhR45Q48ELUn"],
           includeNextChampionships: true
         }
       ],
       events: [],
       points,
-      cars: [
-        "Citroën C3 Rally2",
-        "Ford Fiesta Rally2",
-        "Hyundai i20 N Rally2",
-        "ŠKODA Fabia Rally2 Evo",
-        "Volkswagen Polo GTI R5",
-        "Ford Fiesta R5 MK7 Evo 2",
-        "Peugeot 208 T16 R5"
-      ],
+      cars: [],
       manualResults: [],
       filterEntries: {
         matchDivision: true
-      },
-      promotionRelegation: {
-        promotionZone: 9,
-        relegationZone: 12
       }
+      // promotionRelegation: {
+      //   promotionZone: 9,
+      //   relegationZone: 12
+      // }
     },
     jrc3: {
       displayName: "JRC3",
@@ -148,42 +140,26 @@ const initialState = {
       wrc: [
         {
           clubId: "27",
-          championshipIds: ["3fV8qwSmnF7mCYHan"],
+          championshipIds: ["53kUVbxwuGkdd1Tdq"],
           includeNextChampionships: true
         }
       ],
       events: [],
       points,
       // cars: [],
-      manualResults: [],
-      promotionRelegation: {
-        promotionDoubleZone: 1,
-        promotionZone: 7,
-        relegationZone: 11
-      }
-    },
-    jrc4: {
-      displayName: "JRC4",
-      divisionName: "jrc4",
-      maxDriversScoringPointsForTeam: 2,
-      wrc: [
-        {
-          clubId: "28",
-          championshipIds: ["5oHK56M9NHWcy78KA"],
-          includeNextChampionships: true
-        }
-      ],
-      events: [],
-      points,
-      manualResults: [],
-      promotionRelegation: {
-        promotionDoubleZone: 1,
-        promotionZone: 7
-      }
-      // cars: []
+      manualResults: []
+      // promotionRelegation: {
+      //   promotionDoubleZone: 1,
+      //   promotionZone: 7,
+      //   relegationZone: 11
+      // }
     }
   },
   historicalSeasonLinks: [
+    {
+      name: "JRC 14",
+      href: "/jrc-14"
+    },
     {
       name: "JRC 13",
       href: "/jrc-13"
