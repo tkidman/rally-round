@@ -98,7 +98,8 @@ const fetchEvents = async ({ allRacenetEvents, getAllResults, clubId }) => {
             vehicleName: entry.vehicle,
             nationality: getCountryCodeFromNationalityId(entry.nationalityID),
             stageTime: entry.time.substring(0, 12),
-            totalTime: entry.timeAccumulated.substring(0, 12)
+            totalTime: entry.timeAccumulated.substring(0, 12),
+            superRally: entry.time === entry.timePenalty ? 1 : null
           };
           return commonResult;
         });

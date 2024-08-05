@@ -104,6 +104,8 @@ const initialState = {
     "background-size: cover;",
   logo: "JRC.png",
   siteTitlePrefix: "JRC Themed",
+  superRallyIsDnf: true,
+  showSuperRallyColumn: true,
   divisions: {
     wrc2000: {
       divisionName: "wrc2000",

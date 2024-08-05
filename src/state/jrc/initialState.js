@@ -82,6 +82,8 @@ const initialState = {
     "background-size: cover;",
   logo: "JRC.png",
   siteTitlePrefix: "JRC",
+  superRallyIsDnf: true,
+  showSuperRallyColumn: true,
   divisions: {
     jrc1: {
       displayName: "JRC",

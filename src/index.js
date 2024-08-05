@@ -243,6 +243,14 @@ const applyPenaltyIfIncorrectCar = (event, lastStageEntries, divisionName) => {
   });
 };
 
+const applyDnf = (event, lastStageEntries) => {
+  lastStageEntries.forEach(entry => {
+    if (leagueRef.league.superRallyIsDnf && entry.superRally) {
+      entry.isDnfEntry = true;
+    }
+  });
+};
+
 const setManualResults = ({
   eventIndex,
   entries,
@@ -527,6 +535,7 @@ const calculateEventResults = ({
     firstStageResultsByDriver
   });
   applyPenaltyIfIncorrectCar(event, lastStageEntries, divisionName);
+  applyDnf(event, lastStageEntries, divisionName);
   // TODO validate correct class
   const resultsByDriver = getResultsByDriver(lastStageEntries, divisionName);
 
