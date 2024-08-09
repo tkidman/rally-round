@@ -64,7 +64,7 @@ const initialState = {
   showLivePoints: true,
   showLivePointsDaysRemaining: 4,
   nullTeamIsPrivateer: true,
-  enableDnsPenalty: true,
+  // enableDnsPenalty: true,
   dnsPenaltyFromFirstRound: true,
   // showCarNameAsTextInResults: true,
   // hideCarColumnInStandings: false,
@@ -125,7 +125,7 @@ const initialState = {
       ],
       events: [],
       points,
-      cars: [],
+      // cars: [],
       manualResults: [],
       filterEntries: {
         matchDivision: true

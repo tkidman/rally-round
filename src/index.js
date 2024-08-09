@@ -410,10 +410,10 @@ const getEventIndex = (division, event) => {
 
 const shouldFilterDriver = (division, entry, event) => {
   const { vehicleName, name: driverName } = entry;
-  const driver = leagueRef.getDriver(driverName);
+  const driver = leagueRef.getLeagueDriver(driverName);
   const removeDrivers = get(division, "filterEntries.removeDrivers", []);
   const removeDriverByName = removeDrivers.find(removeDriverName => {
-    return leagueRef.getDriver(removeDriverName) === driver;
+    return leagueRef.getLeagueDriver(removeDriverName) === driver;
   });
 
   const divisionOverride = leagueRef.league.divisionOverride || {};
@@ -441,6 +441,7 @@ const isDuplicateEntryNotFirstCarDriven = (entryCountByDriver, entry) => {
   }
   return duplicateEntryNotFirstCarDriven;
 };
+
 const filterStage = ({ stage, division, event }) => {
   // can get duplicate entries if a division is 2 clubs combined
   const entryCountByDriver = stage.entries.reduce(
