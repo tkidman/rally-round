@@ -101,7 +101,7 @@ const initialState = {
       cars: [
         "Citroën Xsara WRC",
         "Ford Focus RS Rally 2008",
-        "Škoda Fabia WRC",
+        "ŠKODA Fabia WRC",
         "SUBARU Impreza 2008"
       ],
       manualResults: [],
