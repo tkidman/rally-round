@@ -296,7 +296,9 @@ const setManualResults = ({
           });
         } else {
           const driver = leagueRef.getDriver(manualEntry.name);
-          const firstStageResult = firstStageResultsByDriver[driver.name];
+          const firstStageResult = driver
+            ? firstStageResultsByDriver[driver.name]
+            : null;
           if (!firstStageResult) {
             debug(
               `unable to find first stage result for manual result for driver ${manualEntry.name} - assuming not a part of this division`

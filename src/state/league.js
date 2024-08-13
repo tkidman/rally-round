@@ -333,7 +333,7 @@ const getDriver = name => {
 };
 
 const getDriverNames = name => {
-  const driver = getDriver(name);
+  const driver = getDriver(name) || {};
   return [
     driver[driverFieldNames.name],
     driver[driverFieldNames.raceNetName],
