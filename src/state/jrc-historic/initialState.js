@@ -24,8 +24,12 @@ const initialState = {
       wrc: [
         {
           clubId: "18",
-          championshipIds: ["4h8CyiwRCamzDEFwc"],
-          includeNextChampionships: true
+          championshipIds: [
+            "4h8CyiwRCamzDEFwc",
+            "454oCUmsiyJ451HX8",
+            "26j2wtPLPmmxz9cGD"
+          ]
+          // includeNextChampionships: true
         }
       ],
       events: [],
