@@ -762,15 +762,46 @@ const isDnsPenalty = allResultsForDriver => {
   return dnsResults.length * 2 >= actualResults.length;
 };
 
+const getPromotionRelegationZoneNumber = (
+  promotionRelegationConfigNumber,
+  numValidDrivers,
+  usePercentage
+) => {
+  if (!promotionRelegationConfigNumber) {
+    return promotionRelegationConfigNumber;
+  }
+  if (usePercentage) {
+    return Math.round(
+      (promotionRelegationConfigNumber / 100) * numValidDrivers
+    );
+  }
+  return promotionRelegationConfigNumber;
+};
 const calculatePromotionRelegation = ({
   standing,
   division,
   standingIndexPlusOne,
-  numDrivers
+  numValidDrivers
 }) => {
+  const usePercentage =
+    leagueRef.league.usePercentageForPromotionRelegationZones;
   const promotionDoubleZone =
-    division.promotionRelegation.promotionDoubleZone || 0;
-  const { promotionZone, relegationZone } = division.promotionRelegation;
+    getPromotionRelegationZoneNumber(
+      division.promotionRelegation.promotionDoubleZone,
+      numValidDrivers,
+      usePercentage
+    ) || 0;
+  const promotionZone = getPromotionRelegationZoneNumber(
+    division.promotionRelegation.promotionZone,
+    numValidDrivers,
+    usePercentage
+  );
+
+  const relegationZone = getPromotionRelegationZoneNumber(
+    division.promotionRelegation.relegationZone,
+    numValidDrivers,
+    usePercentage
+  );
 
   if (promotionDoubleZone && standingIndexPlusOne <= promotionDoubleZone) {
     standing.promotionRelegation = 2;
@@ -781,7 +812,7 @@ const calculatePromotionRelegation = ({
     standing.promotionRelegation = 1;
   } else if (
     relegationZone &&
-    numDrivers - relegationZone < standingIndexPlusOne
+    numValidDrivers - relegationZone < standingIndexPlusOne
   ) {
     standing.promotionRelegation = -1;
   }
@@ -800,7 +831,7 @@ const calculatePromotionRelegations = (standings, divisionName) => {
           standing,
           division,
           standingIndexPlusOne: standingIndex + 1,
-          numDrivers: nonDnsPenaltyStandings.length
+          numValidDrivers: nonDnsPenaltyStandings.length
         })
       );
     }
@@ -1200,5 +1231,6 @@ module.exports = {
   isDnsPenalty,
   calculatePromotionRelegation,
   calculatePromotionRelegations,
-  calculateTotalPointsAfterDropRounds
+  calculateTotalPointsAfterDropRounds,
+  getPromotionRelegationZoneNumber
 };

@@ -3,7 +3,8 @@ const {
   sortResults,
   calculateEventStandings,
   calculateOverall,
-  calculateTotalPointsAfterDropRounds
+  calculateTotalPointsAfterDropRounds,
+  getPromotionRelegationZoneNumber
 } = require("./index");
 const leaderboard = require("./__fixtures__/leaderboard");
 const moment = require("moment");
@@ -489,7 +490,7 @@ describe("calculates event results", () => {
         standing: {},
         division,
         standingIndexPlusOne,
-        numDrivers
+        numValidDrivers: numDrivers
       };
     };
 
@@ -568,6 +569,17 @@ describe("calculates event results", () => {
           dnsPenalty: false
         }
       ]);
+    });
+  });
+
+  describe("getPromotionRelegationZoneNumber", () => {
+    it("returns correct number when using a percentage", () => {
+      const zoneNumber1 = getPromotionRelegationZoneNumber(5, 20, true);
+      expect(zoneNumber1).toEqual(1);
+      const zoneNumber2 = getPromotionRelegationZoneNumber(7, 50, true);
+      expect(zoneNumber2).toEqual(4);
+      const zoneNumber3 = getPromotionRelegationZoneNumber(7, 49, true);
+      expect(zoneNumber3).toEqual(3);
     });
   });
 

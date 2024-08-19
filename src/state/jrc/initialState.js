@@ -64,7 +64,7 @@ const initialState = {
   showLivePoints: true,
   showLivePointsDaysRemaining: 4,
   nullTeamIsPrivateer: true,
-  // enableDnsPenalty: true,
+  enableDnsPenalty: true,
   dnsPenaltyFromFirstRound: true,
   // showCarNameAsTextInResults: true,
   // hideCarColumnInStandings: false,
@@ -74,6 +74,7 @@ const initialState = {
   // teamPointsForPowerstage: false,
   dropLowestScoringRoundsNumber: 1,
   sortByDropRoundPoints: false,
+  usePercentageForPromotionRelegationZones: true,
   // incorrectCarTimePenaltySeconds: 120,
   backgroundStyle:
     "background-color: #ffffff;\n" +
@@ -109,7 +110,7 @@ const initialState = {
         matchDivision: true
       }
       // promotionRelegation: {
-      //   relegationZone: 11
+      //   relegationZone: 18
       // }
     },
     jrc2: {
@@ -131,8 +132,8 @@ const initialState = {
         matchDivision: true
       }
       // promotionRelegation: {
-      //   promotionZone: 9,
-      //   relegationZone: 12
+      //   promotionZone: 21,
+      //   relegationZone: 24
       // }
     },
     jrc3: {
@@ -151,9 +152,9 @@ const initialState = {
       // cars: [],
       manualResults: []
       // promotionRelegation: {
-      //   promotionDoubleZone: 1,
-      //   promotionZone: 7,
-      //   relegationZone: 11
+      //   promotionDoubleZone: -,
+      //   promotionZone: 23,
+      //   relegationZone: -
       // }
     }
   },
