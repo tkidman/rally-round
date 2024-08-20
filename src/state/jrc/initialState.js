@@ -64,7 +64,7 @@ const initialState = {
   showLivePoints: true,
   showLivePointsDaysRemaining: 4,
   nullTeamIsPrivateer: true,
-  enableDnsPenalty: true,
+  enableDnsPenalty: false,
   dnsPenaltyFromFirstRound: true,
   // showCarNameAsTextInResults: true,
   // hideCarColumnInStandings: false,
