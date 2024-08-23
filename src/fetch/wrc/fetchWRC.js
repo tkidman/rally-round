@@ -17,6 +17,7 @@ const locations = require("../../state/constants/locations.json");
 const { last, slice, reverse, map, keyBy, indexOf, uniqBy } = require("lodash");
 const { readFileSync } = require("fs");
 const Papa = require("papaparse");
+const moment = require("moment");
 
 const wrcEventStatuses = {
   0: eventStatuses.future,
@@ -68,7 +69,10 @@ const fetchEventsForClub = async ({
   const allRacenetEvents = [];
   for (const championshipId of championshipIds) {
     const championship = await fetchChampionship(championshipId);
-    allRacenetEvents.push(...championship.events);
+    const pastOrCurrentEvents = championship.events.filter(event => {
+      return moment(event.absoluteOpenDate) < moment();
+    });
+    allRacenetEvents.push(...pastOrCurrentEvents);
   }
   const events = await fetchEvents({
     allRacenetEvents,
