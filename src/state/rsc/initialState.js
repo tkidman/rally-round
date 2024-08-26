@@ -1,53 +1,16 @@
 const rallies = [
   {
-    eventIds: [68133, 68134],
-    endTime: "2024-04-22 22:00",
-    locationName: "Round 1",
-    locationFlag: "RX",
-    numStages: 7
-    // enduranceRoundMultiplier: 2
-  },
-  {
-    eventIds: [68510, 68511],
-    endTime: "2024-04-30 22:00",
-    locationName: "Round 2",
-    locationFlag: "RX",
-    numStages: 7
-    // enduranceRoundMultiplier: 2
-  },
-  {
-    eventIds: [68716, 68717],
-    endTime: "2024-05-07 22:00",
-    locationName: "Round 3",
-    locationFlag: "RX",
-    numStages: 7
+    eventIds: [72446],
+    endTime: "2024-09-03 22:00",
+    locationName: "Rally Poland",
+    locationFlag: "PL",
+    numStages: 8
     // enduranceRoundMultiplier: 2
   }
 ];
 
 const points = {
-  overall: [
-    20,
-    19,
-    18,
-    17,
-    16,
-    15,
-    14,
-    13,
-    12,
-    11,
-    10,
-    9,
-    8,
-    7,
-    6,
-    5,
-    4,
-    3,
-    2,
-    1
-  ]
+  overall: [1]
 };
 
 const initialState = {
@@ -65,19 +28,20 @@ const initialState = {
   hideCarColumnInStandings: false,
   showCarNameAsTextInStandings: false,
   showCarNameAsTextInResults: false,
-  nullTeamIsPrivateer: false,
-  useCarAsTeam: true,
+  nullTeamIsPrivateer: true,
+  useCarAsTeam: false,
   // useCarClassAsTeam: true,
-  showTeamNameTextColumn: false,
-  hideTeamLogoColumn: false,
+  showTeamNameTextColumn: true,
+  hideTeamLogoColumn: true,
   disableOverall: true,
   teamPointsForPowerstage: false,
   backgroundStyle:
     "background-image: linear-gradient(315deg, #ffffff 0%, #d7e1ec 74%); background-size: cover; background-repeat: no-repeat; background-attachment: fixed;",
   logo: "rsc-guy.png",
-  siteTitlePrefix: "Audi vs Porsche",
+  siteTitlePrefix: "RSC Season 7",
   hideStageTimesUntilEventEnd: true,
   historicalSeasonLinks: [
+    { name: "Audi vs Porsche", href: "/rsc-audi-vs-porsche" },
     { name: "Fiat Christmas", href: "/rsc-fiat-christmas" },
     { name: "World Cup Finals", href: "/rsc-world-cup-finals" },
     { name: "World Cup Groups", href: "/rsc-world-cup-group-stage" },
@@ -89,12 +53,12 @@ const initialState = {
     { name: "Season 4", href: "/rsc-4" }
   ],
   divisions: {
-    audiVsPorsche: {
-      divisionName: "open",
-      displayName: "Audi vs Porsche",
-      disableSameCarValidation: false,
+    rscSeason7: {
+      divisionName: "rscSeason7",
+      displayName: "RSC Season 7",
+      disableSameCarValidation: true,
       // enableSameCarClassValidation: true,
-      maxDriversScoringPointsForTeam: 4,
+      maxDriversScoringPointsForTeam: 2,
       // filterEntries: { allowedCars: [] },
       rbr: {
         rallies
