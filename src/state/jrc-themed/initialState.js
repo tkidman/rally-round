@@ -107,9 +107,9 @@ const initialState = {
   superRallyIsDnf: true,
   showSuperRallyColumn: true,
   divisions: {
-    wrc2000: {
-      divisionName: "wrc2000",
-      displayName: "WRC 2000",
+    wrc1993: {
+      divisionName: "wrc1993",
+      displayName: "WRC 1993",
       disableSameCarValidation: false,
       // enableSameCarClassValidation: true,
       maxDriversScoringPointsForTeam: 2,
@@ -117,12 +117,8 @@ const initialState = {
       wrc: [
         {
           clubId: "17",
-          championshipIds: [
-            "31H132gjXEZ9LnHKE",
-            "4mAg491e6NAy5ByPV",
-            "3Usx1ABWXtrQnuWGm"
-          ]
-          // includeNextChampionships: true
+          championshipIds: ["3GRiR2U1LoLbriGh3"],
+          includeNextChampionships: true
         }
       ],
       manualResults: [],
@@ -130,15 +126,15 @@ const initialState = {
       points,
       // excludedCars: ["WRC Builder Vehicle"],
       cars: [
-        "Ford Focus RS Rally 2001",
-        "Mitsubishi Lancer Evolution VI",
-        "Peugeot 206 Rally",
-        "SEAT Córdoba WRC"
+        "Ford Escort RS Cosworth",
+        "Lancia Delta HF Integrale",
+        "SUBARU Impreza 1995",
+        "SUBARU Legacy RS"
       ]
     },
-    wrc2000Constructors: {
-      divisionName: "wrc2000Constructors",
-      displayName: "WRC 2000 Constructors",
+    wrc1993Constructors: {
+      divisionName: "wrc1993Constructors",
+      displayName: "WRC 1993 Constructors",
       disableSameCarValidation: false,
       // enableSameCarClassValidation: true,
       maxDriversScoringPointsForTeam: 2,
@@ -148,12 +144,8 @@ const initialState = {
       wrc: [
         {
           clubId: "17",
-          championshipIds: [
-            "31H132gjXEZ9LnHKE",
-            "4mAg491e6NAy5ByPV",
-            "3Usx1ABWXtrQnuWGm"
-          ]
-          // includeNextChampionships: true
+          championshipIds: ["3GRiR2U1LoLbriGh3"],
+          includeNextChampionships: true
         }
       ],
       manualResults: [],
@@ -161,14 +153,18 @@ const initialState = {
       points,
       // excludedCars: ["WRC Builder Vehicle"],
       cars: [
-        "Ford Focus RS Rally 2001",
-        "Mitsubishi Lancer Evolution VI",
-        "Peugeot 206 Rally",
-        "SEAT Córdoba WRC"
+        "Ford Escort RS Cosworth",
+        "Lancia Delta HF Integrale",
+        "SUBARU Impreza 1995",
+        "SUBARU Legacy RS"
       ]
     }
   },
   historicalSeasonLinks: [
+    {
+      name: "WRC 2000",
+      href: "/themed/themed-21"
+    },
     {
       name: "WRC 2017",
       href: "/themed/themed-20"

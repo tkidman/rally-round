@@ -10,7 +10,7 @@ const rallies = [
 ];
 
 const points = {
-  overall: [1]
+  overall: [20, 15, 12, 10, 8, 6, 4, 3, 2, 1]
 };
 
 const initialState = {

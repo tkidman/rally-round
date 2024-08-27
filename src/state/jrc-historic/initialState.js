@@ -16,20 +16,16 @@ const initialState = {
   superRallyIsDnf: true,
   showSuperRallyColumn: true,
   divisions: {
-    historic2404: {
-      divisionName: "historic2404",
+    historic2408: {
+      divisionName: "historic2408",
       displayName: "JRC Historic",
       disableSameCarValidation: true,
       maxDriversScoringPointsForTeam: 2,
       wrc: [
         {
           clubId: "18",
-          championshipIds: [
-            "4h8CyiwRCamzDEFwc",
-            "454oCUmsiyJ451HX8",
-            "26j2wtPLPmmxz9cGD"
-          ]
-          // includeNextChampionships: true
+          championshipIds: ["3uNzDs2QQWQngWrDA"],
+          includeNextChampionships: true
         }
       ],
       events: [],
@@ -115,6 +111,10 @@ const initialState = {
     }
   },
   historicalSeasonLinks: [
+    {
+      name: "Historic 2024-07",
+      href: "/historic/historic-21"
+    },
     {
       name: "Historic 2024-06",
       href: "/historic/historic-20"
