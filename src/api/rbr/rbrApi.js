@@ -174,11 +174,14 @@ const extractStageTableData = ({ stageTable, eventFinished, $ }) => {
         .find("b")
         .text()
         .trim();
-      const diffFirst = $(psRow)
+      let diffFirst = $(psRow)
         .find(".stage_results_diff_first")
         .text()
         .trim();
 
+      if (!diffFirst.includes(":")) {
+        diffFirst = `0:${diffFirst}`;
+      }
       data.push({
         ...driver,
         // rsf hides times from us, so we have to use the diff as the time until the event ends
