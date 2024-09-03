@@ -73,7 +73,7 @@ const initialState = {
   // disableOverall: true,
   // teamPointsForPowerstage: false,
   dropLowestScoringRoundsNumber: 1,
-  sortByDropRoundPoints: false,
+  sortByDropRoundPoints: true,
   usePercentageForPromotionRelegationZones: true,
   // incorrectCarTimePenaltySeconds: 120,
   backgroundStyle:
@@ -108,10 +108,10 @@ const initialState = {
       manualResults: [],
       filterEntries: {
         matchDivision: true
+      },
+      promotionRelegation: {
+        relegationZone: 18
       }
-      // promotionRelegation: {
-      //   relegationZone: 18
-      // }
     },
     jrc2: {
       displayName: "JRC2",
@@ -130,11 +130,11 @@ const initialState = {
       manualResults: [],
       filterEntries: {
         matchDivision: true
+      },
+      promotionRelegation: {
+        promotionZone: 21,
+        relegationZone: 24
       }
-      // promotionRelegation: {
-      //   promotionZone: 21,
-      //   relegationZone: 24
-      // }
     },
     jrc3: {
       displayName: "JRC3",
@@ -150,12 +150,12 @@ const initialState = {
       events: [],
       points,
       // cars: [],
-      manualResults: []
-      // promotionRelegation: {
-      //   promotionDoubleZone: -,
-      //   promotionZone: 23,
-      //   relegationZone: -
-      // }
+      manualResults: [],
+      promotionRelegation: {
+        // promotionDoubleZone: -,
+        promotionZone: 23
+        // relegationZone: -
+      }
     }
   },
   historicalSeasonLinks: [
