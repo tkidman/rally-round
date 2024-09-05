@@ -6,6 +6,14 @@ const rallies = [
     locationFlag: "PL",
     numStages: 8
     // enduranceRoundMultiplier: 2
+  },
+  {
+    eventIds: [72841],
+    endTime: "2024-09-10 22:00",
+    locationName: "Rally Aus/NZ",
+    locationFlag: "NZ",
+    numStages: 6
+    // enduranceRoundMultiplier: 2
   }
 ];
 
