@@ -109,11 +109,11 @@ exports[`e2e generates driver leg results 1`] = `
                             <th>Team Name</th>
                         <th>Car</th>
                             <th>Car Name</th>
-                    <td>Total</td>
-                    <td>Diff</td>
-                        <td>SR</td>
-                    <td>Points</td>
-                    <td>Total Points</td>
+                    <th>Total</th>
+                    <th>Diff</th>
+                        <th>SR</th>
+                    <th>Points</th>
+                    <th>Total Points</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -702,14 +702,17 @@ exports[`e2e generates driver leg results 1`] = `
         closeNav(\\"seriesMobileNav\\");
         openNav(\\"mobileNav\\");
     }
+
     function openSeriesMobileNav() {
         closeNav(\\"mobileNav\\");
         openNav(\\"seriesMobileNav\\");
     }
+
     function closeNav(navId) {
         var x = document.getElementById(navId);
         x.className = x.className.replace(\\" w3-show\\", \\"\\");
     }
+
     function openNav(navId) {
         var x = document.getElementById(navId);
         if (x.className.indexOf(\\"w3-show\\") == -1) {
@@ -718,11 +721,79 @@ exports[`e2e generates driver leg results 1`] = `
             closeNav(navId);
         }
     }
+
     // When the user clicks on div, open the popup
     function openPopup(id) {
-      var popup = document.getElementById(id);
-      popup.classList.toggle(\\"show\\");
+        var popup = document.getElementById(id);
+        popup.classList.toggle(\\"show\\");
     }
+
+    document.addEventListener(\\"DOMContentLoaded\\", function () {
+        const table = document.getElementById(\\"tableDrivers\\");
+        const headers = table.querySelectorAll(\\"th\\");
+        let sortOrder = 1; // 1 for ascending, -1 for descending
+
+        // Sort the first column in ascending order on page load
+        sortTableByColumn(table, 0, 1);
+        updateHeaderStyles(headers, headers[0], 1);
+
+        headers.forEach((header, index) => {
+            header.addEventListener(\\"click\\", () => {
+                sortTableByColumn(table, index, sortOrder);
+                updateHeaderStyles(headers, header, sortOrder);
+                sortOrder *= -1; // Toggle sort order
+            });
+        });
+
+        function sortTableByColumn(table, columnIndex, order) {
+            const tbody = table.querySelector(\\"tbody\\");
+            const rows = Array.from(tbody.querySelectorAll(\\"tr\\"));
+
+            rows.sort((rowA, rowB) => {
+                const cellA = getCellValue(rowA.children[columnIndex]);
+                const cellB = getCellValue(rowB.children[columnIndex]);
+
+                const isNumberA = !isNaN(cellA);
+                const isNumberB = !isNaN(cellB);
+
+                if (cellA === \\"\\" && cellB === \\"\\") return 0;
+                if (cellA === \\"\\") return -1 * order;
+                if (cellB === \\"\\") return 1 * order;
+
+                if (isNumberA && isNumberB) {
+                    return (parseFloat(cellA) - parseFloat(cellB)) * order;
+                } else if (isNumberA) {
+                    return 1 * order;
+                } else if (isNumberB) {
+                    return -1 * order;
+                } else {
+                    return cellA.localeCompare(cellB) * order;
+                }
+            });
+
+            rows.forEach(row => tbody.appendChild(row));
+        }
+
+        function getCellValue(cell) {
+            const img = cell.querySelector(\\"img\\");
+            if (img) {
+                return img.alt.toLowerCase();
+            }
+            const text = cell.innerText.toLowerCase();
+            if (text === '=') {
+                return '0';
+            }
+            return text;
+        }
+
+        function updateHeaderStyles(headers, sortedHeader, order) {
+            headers.forEach(header => {
+                header.classList.remove(\\"sorted-asc\\", \\"sorted-desc\\");
+            });
+            sortedHeader.classList.add(order === 1 ? \\"sorted-asc\\" : \\"sorted-desc\\");
+        }
+    });
+
 </script>
 
 </body>
@@ -839,20 +910,20 @@ exports[`e2e generates driver results 1`] = `
                             <th>Team Name</th>
                         <th>Car</th>
                             <th>Car Name</th>
-                        <td>PS</td>
-                        <td>Diff</td>
-                    <td>Total</td>
-                    <td>Diff</td>
-                        <td>SR</td>
-                            <td>
+                        <th>PS</th>
+                        <th>Diff</th>
+                    <th>Total</th>
+                    <th>Diff</th>
+                        <th>SR</th>
+                            <th>
                                 <a href=\\"./test-e2e-0-0-driver-results.html\\">Leg 1</a>
-                            </td>
-                            <td>
+                            </th>
+                            <th>
                                 <a href=\\"./test-e2e-0-1-driver-results.html\\">Leg 2</a>
-                            </td>
-                        <td>PS Points</td>
-                    <td>Points</td>
-                    <td>Total Points</td>
+                            </th>
+                        <th>PS Points</th>
+                    <th>Points</th>
+                    <th>Total Points</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -1288,7 +1359,7 @@ exports[`e2e generates driver results 1`] = `
                             <td>00:12:41.500</td>
                             <td>+00:06:42.775</td>
                         <td class=\\"popup\\" onclick=\\"openPopup('Weepy')\\">
-                            1:01:05.901
+                            01:01:05.901
                             <span class=\\"popuptext\\" id=\\"Weepy\\">10s penalty for cutting</span>
                         </td>
                         <td>+00:24:26.027</td>
@@ -1657,14 +1728,17 @@ exports[`e2e generates driver results 1`] = `
         closeNav(\\"seriesMobileNav\\");
         openNav(\\"mobileNav\\");
     }
+
     function openSeriesMobileNav() {
         closeNav(\\"mobileNav\\");
         openNav(\\"seriesMobileNav\\");
     }
+
     function closeNav(navId) {
         var x = document.getElementById(navId);
         x.className = x.className.replace(\\" w3-show\\", \\"\\");
     }
+
     function openNav(navId) {
         var x = document.getElementById(navId);
         if (x.className.indexOf(\\"w3-show\\") == -1) {
@@ -1673,11 +1747,79 @@ exports[`e2e generates driver results 1`] = `
             closeNav(navId);
         }
     }
+
     // When the user clicks on div, open the popup
     function openPopup(id) {
-      var popup = document.getElementById(id);
-      popup.classList.toggle(\\"show\\");
+        var popup = document.getElementById(id);
+        popup.classList.toggle(\\"show\\");
     }
+
+    document.addEventListener(\\"DOMContentLoaded\\", function () {
+        const table = document.getElementById(\\"tableDrivers\\");
+        const headers = table.querySelectorAll(\\"th\\");
+        let sortOrder = 1; // 1 for ascending, -1 for descending
+
+        // Sort the first column in ascending order on page load
+        sortTableByColumn(table, 0, 1);
+        updateHeaderStyles(headers, headers[0], 1);
+
+        headers.forEach((header, index) => {
+            header.addEventListener(\\"click\\", () => {
+                sortTableByColumn(table, index, sortOrder);
+                updateHeaderStyles(headers, header, sortOrder);
+                sortOrder *= -1; // Toggle sort order
+            });
+        });
+
+        function sortTableByColumn(table, columnIndex, order) {
+            const tbody = table.querySelector(\\"tbody\\");
+            const rows = Array.from(tbody.querySelectorAll(\\"tr\\"));
+
+            rows.sort((rowA, rowB) => {
+                const cellA = getCellValue(rowA.children[columnIndex]);
+                const cellB = getCellValue(rowB.children[columnIndex]);
+
+                const isNumberA = !isNaN(cellA);
+                const isNumberB = !isNaN(cellB);
+
+                if (cellA === \\"\\" && cellB === \\"\\") return 0;
+                if (cellA === \\"\\") return -1 * order;
+                if (cellB === \\"\\") return 1 * order;
+
+                if (isNumberA && isNumberB) {
+                    return (parseFloat(cellA) - parseFloat(cellB)) * order;
+                } else if (isNumberA) {
+                    return 1 * order;
+                } else if (isNumberB) {
+                    return -1 * order;
+                } else {
+                    return cellA.localeCompare(cellB) * order;
+                }
+            });
+
+            rows.forEach(row => tbody.appendChild(row));
+        }
+
+        function getCellValue(cell) {
+            const img = cell.querySelector(\\"img\\");
+            if (img) {
+                return img.alt.toLowerCase();
+            }
+            const text = cell.innerText.toLowerCase();
+            if (text === '=') {
+                return '0';
+            }
+            return text;
+        }
+
+        function updateHeaderStyles(headers, sortedHeader, order) {
+            headers.forEach(header => {
+                header.classList.remove(\\"sorted-asc\\", \\"sorted-desc\\");
+            });
+            sortedHeader.classList.add(order === 1 ? \\"sorted-asc\\" : \\"sorted-desc\\");
+        }
+    });
+
 </script>
 
 </body>
@@ -1795,15 +1937,11 @@ exports[`e2e generates driver standings 1`] = `
                                     <th>Team Name</th>
 
                             <th>
-                                <a href=\\"./test-e2e-0-driver-results.html\\" style=\\"\\">
-                                    <img src=\\"./assets/country-flags/swe.png\\" alt=\\"swe\\" title=\\"swe\\"/>
-                                </a>
+                                <img src=\\"./assets/country-flags/swe.png\\" alt=\\"swe\\" title=\\"swe\\"/>
                             </th>
 
                             <th>
-                                <a href=\\"./test-e2e-1-driver-results.html\\" style=\\"\\">
-                                    <img src=\\"./assets/country-flags/est.png\\" alt=\\"est\\" title=\\"est\\"/>
-                                </a>
+                                <img src=\\"./assets/country-flags/est.png\\" alt=\\"est\\" title=\\"est\\"/>
                             </th>
 
                             <th>Points</th>
@@ -2515,14 +2653,17 @@ exports[`e2e generates driver standings 1`] = `
         closeNav(\\"seriesMobileNav\\");
         openNav(\\"mobileNav\\");
     }
+
     function openSeriesMobileNav() {
         closeNav(\\"mobileNav\\");
         openNav(\\"seriesMobileNav\\");
     }
+
     function closeNav(navId) {
         var x = document.getElementById(navId);
         x.className = x.className.replace(\\" w3-show\\", \\"\\");
     }
+
     function openNav(navId) {
         var x = document.getElementById(navId);
         if (x.className.indexOf(\\"w3-show\\") == -1) {
@@ -2531,11 +2672,79 @@ exports[`e2e generates driver standings 1`] = `
             closeNav(navId);
         }
     }
+
     // When the user clicks on div, open the popup
     function openPopup(id) {
-      var popup = document.getElementById(id);
-      popup.classList.toggle(\\"show\\");
+        var popup = document.getElementById(id);
+        popup.classList.toggle(\\"show\\");
     }
+
+    document.addEventListener(\\"DOMContentLoaded\\", function () {
+        const table = document.getElementById(\\"tableDrivers\\");
+        const headers = table.querySelectorAll(\\"th\\");
+        let sortOrder = 1; // 1 for ascending, -1 for descending
+
+        // Sort the first column in ascending order on page load
+        sortTableByColumn(table, 0, 1);
+        updateHeaderStyles(headers, headers[0], 1);
+
+        headers.forEach((header, index) => {
+            header.addEventListener(\\"click\\", () => {
+                sortTableByColumn(table, index, sortOrder);
+                updateHeaderStyles(headers, header, sortOrder);
+                sortOrder *= -1; // Toggle sort order
+            });
+        });
+
+        function sortTableByColumn(table, columnIndex, order) {
+            const tbody = table.querySelector(\\"tbody\\");
+            const rows = Array.from(tbody.querySelectorAll(\\"tr\\"));
+
+            rows.sort((rowA, rowB) => {
+                const cellA = getCellValue(rowA.children[columnIndex]);
+                const cellB = getCellValue(rowB.children[columnIndex]);
+
+                const isNumberA = !isNaN(cellA);
+                const isNumberB = !isNaN(cellB);
+
+                if (cellA === \\"\\" && cellB === \\"\\") return 0;
+                if (cellA === \\"\\") return -1 * order;
+                if (cellB === \\"\\") return 1 * order;
+
+                if (isNumberA && isNumberB) {
+                    return (parseFloat(cellA) - parseFloat(cellB)) * order;
+                } else if (isNumberA) {
+                    return 1 * order;
+                } else if (isNumberB) {
+                    return -1 * order;
+                } else {
+                    return cellA.localeCompare(cellB) * order;
+                }
+            });
+
+            rows.forEach(row => tbody.appendChild(row));
+        }
+
+        function getCellValue(cell) {
+            const img = cell.querySelector(\\"img\\");
+            if (img) {
+                return img.alt.toLowerCase();
+            }
+            const text = cell.innerText.toLowerCase();
+            if (text === '=') {
+                return '0';
+            }
+            return text;
+        }
+
+        function updateHeaderStyles(headers, sortedHeader, order) {
+            headers.forEach(header => {
+                header.classList.remove(\\"sorted-asc\\", \\"sorted-desc\\");
+            });
+            sortedHeader.classList.add(order === 1 ? \\"sorted-asc\\" : \\"sorted-desc\\");
+        }
+    });
+
 </script>
 
 </body>
@@ -2652,14 +2861,14 @@ exports[`e2e generates overall driver results 1`] = `
                             <th>Team Name</th>
                         <th>Car</th>
                             <th>Car Name</th>
-                        <td>PS</td>
-                        <td>Diff</td>
-                    <td>Total</td>
-                    <td>Diff</td>
-                        <td>SR</td>
-                        <td>PS Points</td>
-                    <td>Points</td>
-                    <td>Total Points</td>
+                        <th>PS</th>
+                        <th>Diff</th>
+                    <th>Total</th>
+                    <th>Diff</th>
+                        <th>SR</th>
+                        <th>PS Points</th>
+                    <th>Points</th>
+                    <th>Total Points</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -3478,14 +3687,17 @@ exports[`e2e generates overall driver results 1`] = `
         closeNav(\\"seriesMobileNav\\");
         openNav(\\"mobileNav\\");
     }
+
     function openSeriesMobileNav() {
         closeNav(\\"mobileNav\\");
         openNav(\\"seriesMobileNav\\");
     }
+
     function closeNav(navId) {
         var x = document.getElementById(navId);
         x.className = x.className.replace(\\" w3-show\\", \\"\\");
     }
+
     function openNav(navId) {
         var x = document.getElementById(navId);
         if (x.className.indexOf(\\"w3-show\\") == -1) {
@@ -3494,11 +3706,79 @@ exports[`e2e generates overall driver results 1`] = `
             closeNav(navId);
         }
     }
+
     // When the user clicks on div, open the popup
     function openPopup(id) {
-      var popup = document.getElementById(id);
-      popup.classList.toggle(\\"show\\");
+        var popup = document.getElementById(id);
+        popup.classList.toggle(\\"show\\");
     }
+
+    document.addEventListener(\\"DOMContentLoaded\\", function () {
+        const table = document.getElementById(\\"tableDrivers\\");
+        const headers = table.querySelectorAll(\\"th\\");
+        let sortOrder = 1; // 1 for ascending, -1 for descending
+
+        // Sort the first column in ascending order on page load
+        sortTableByColumn(table, 0, 1);
+        updateHeaderStyles(headers, headers[0], 1);
+
+        headers.forEach((header, index) => {
+            header.addEventListener(\\"click\\", () => {
+                sortTableByColumn(table, index, sortOrder);
+                updateHeaderStyles(headers, header, sortOrder);
+                sortOrder *= -1; // Toggle sort order
+            });
+        });
+
+        function sortTableByColumn(table, columnIndex, order) {
+            const tbody = table.querySelector(\\"tbody\\");
+            const rows = Array.from(tbody.querySelectorAll(\\"tr\\"));
+
+            rows.sort((rowA, rowB) => {
+                const cellA = getCellValue(rowA.children[columnIndex]);
+                const cellB = getCellValue(rowB.children[columnIndex]);
+
+                const isNumberA = !isNaN(cellA);
+                const isNumberB = !isNaN(cellB);
+
+                if (cellA === \\"\\" && cellB === \\"\\") return 0;
+                if (cellA === \\"\\") return -1 * order;
+                if (cellB === \\"\\") return 1 * order;
+
+                if (isNumberA && isNumberB) {
+                    return (parseFloat(cellA) - parseFloat(cellB)) * order;
+                } else if (isNumberA) {
+                    return 1 * order;
+                } else if (isNumberB) {
+                    return -1 * order;
+                } else {
+                    return cellA.localeCompare(cellB) * order;
+                }
+            });
+
+            rows.forEach(row => tbody.appendChild(row));
+        }
+
+        function getCellValue(cell) {
+            const img = cell.querySelector(\\"img\\");
+            if (img) {
+                return img.alt.toLowerCase();
+            }
+            const text = cell.innerText.toLowerCase();
+            if (text === '=') {
+                return '0';
+            }
+            return text;
+        }
+
+        function updateHeaderStyles(headers, sortedHeader, order) {
+            headers.forEach(header => {
+                header.classList.remove(\\"sorted-asc\\", \\"sorted-desc\\");
+            });
+            sortedHeader.classList.add(order === 1 ? \\"sorted-asc\\" : \\"sorted-desc\\");
+        }
+    });
+
 </script>
 
 </body>
@@ -3617,15 +3897,11 @@ exports[`e2e generates overall driver standings 1`] = `
                                     <th>Team Name</th>
 
                             <th>
-                                <a href=\\"./overall-0-driver-results.html\\" style=\\"\\">
-                                    <img src=\\"./assets/country-flags/swe.png\\" alt=\\"swe\\" title=\\"swe\\"/>
-                                </a>
+                                <img src=\\"./assets/country-flags/swe.png\\" alt=\\"swe\\" title=\\"swe\\"/>
                             </th>
 
                             <th>
-                                <a href=\\"./overall-1-driver-results.html\\" style=\\"\\">
-                                    <img src=\\"./assets/country-flags/est.png\\" alt=\\"est\\" title=\\"est\\"/>
-                                </a>
+                                <img src=\\"./assets/country-flags/est.png\\" alt=\\"est\\" title=\\"est\\"/>
                             </th>
 
                             <th>Points</th>
@@ -4416,14 +4692,17 @@ exports[`e2e generates overall driver standings 1`] = `
         closeNav(\\"seriesMobileNav\\");
         openNav(\\"mobileNav\\");
     }
+
     function openSeriesMobileNav() {
         closeNav(\\"mobileNav\\");
         openNav(\\"seriesMobileNav\\");
     }
+
     function closeNav(navId) {
         var x = document.getElementById(navId);
         x.className = x.className.replace(\\" w3-show\\", \\"\\");
     }
+
     function openNav(navId) {
         var x = document.getElementById(navId);
         if (x.className.indexOf(\\"w3-show\\") == -1) {
@@ -4432,11 +4711,79 @@ exports[`e2e generates overall driver standings 1`] = `
             closeNav(navId);
         }
     }
+
     // When the user clicks on div, open the popup
     function openPopup(id) {
-      var popup = document.getElementById(id);
-      popup.classList.toggle(\\"show\\");
+        var popup = document.getElementById(id);
+        popup.classList.toggle(\\"show\\");
     }
+
+    document.addEventListener(\\"DOMContentLoaded\\", function () {
+        const table = document.getElementById(\\"tableDrivers\\");
+        const headers = table.querySelectorAll(\\"th\\");
+        let sortOrder = 1; // 1 for ascending, -1 for descending
+
+        // Sort the first column in ascending order on page load
+        sortTableByColumn(table, 0, 1);
+        updateHeaderStyles(headers, headers[0], 1);
+
+        headers.forEach((header, index) => {
+            header.addEventListener(\\"click\\", () => {
+                sortTableByColumn(table, index, sortOrder);
+                updateHeaderStyles(headers, header, sortOrder);
+                sortOrder *= -1; // Toggle sort order
+            });
+        });
+
+        function sortTableByColumn(table, columnIndex, order) {
+            const tbody = table.querySelector(\\"tbody\\");
+            const rows = Array.from(tbody.querySelectorAll(\\"tr\\"));
+
+            rows.sort((rowA, rowB) => {
+                const cellA = getCellValue(rowA.children[columnIndex]);
+                const cellB = getCellValue(rowB.children[columnIndex]);
+
+                const isNumberA = !isNaN(cellA);
+                const isNumberB = !isNaN(cellB);
+
+                if (cellA === \\"\\" && cellB === \\"\\") return 0;
+                if (cellA === \\"\\") return -1 * order;
+                if (cellB === \\"\\") return 1 * order;
+
+                if (isNumberA && isNumberB) {
+                    return (parseFloat(cellA) - parseFloat(cellB)) * order;
+                } else if (isNumberA) {
+                    return 1 * order;
+                } else if (isNumberB) {
+                    return -1 * order;
+                } else {
+                    return cellA.localeCompare(cellB) * order;
+                }
+            });
+
+            rows.forEach(row => tbody.appendChild(row));
+        }
+
+        function getCellValue(cell) {
+            const img = cell.querySelector(\\"img\\");
+            if (img) {
+                return img.alt.toLowerCase();
+            }
+            const text = cell.innerText.toLowerCase();
+            if (text === '=') {
+                return '0';
+            }
+            return text;
+        }
+
+        function updateHeaderStyles(headers, sortedHeader, order) {
+            headers.forEach(header => {
+                header.classList.remove(\\"sorted-asc\\", \\"sorted-desc\\");
+            });
+            sortedHeader.classList.add(order === 1 ? \\"sorted-asc\\" : \\"sorted-desc\\");
+        }
+    });
+
 </script>
 
 </body>
@@ -4720,14 +5067,17 @@ exports[`e2e generates overall team standings 1`] = `
         closeNav(\\"seriesMobileNav\\");
         openNav(\\"mobileNav\\");
     }
+
     function openSeriesMobileNav() {
         closeNav(\\"mobileNav\\");
         openNav(\\"seriesMobileNav\\");
     }
+
     function closeNav(navId) {
         var x = document.getElementById(navId);
         x.className = x.className.replace(\\" w3-show\\", \\"\\");
     }
+
     function openNav(navId) {
         var x = document.getElementById(navId);
         if (x.className.indexOf(\\"w3-show\\") == -1) {
@@ -4736,11 +5086,79 @@ exports[`e2e generates overall team standings 1`] = `
             closeNav(navId);
         }
     }
+
     // When the user clicks on div, open the popup
     function openPopup(id) {
-      var popup = document.getElementById(id);
-      popup.classList.toggle(\\"show\\");
+        var popup = document.getElementById(id);
+        popup.classList.toggle(\\"show\\");
     }
+
+    document.addEventListener(\\"DOMContentLoaded\\", function () {
+        const table = document.getElementById(\\"tableDrivers\\");
+        const headers = table.querySelectorAll(\\"th\\");
+        let sortOrder = 1; // 1 for ascending, -1 for descending
+
+        // Sort the first column in ascending order on page load
+        sortTableByColumn(table, 0, 1);
+        updateHeaderStyles(headers, headers[0], 1);
+
+        headers.forEach((header, index) => {
+            header.addEventListener(\\"click\\", () => {
+                sortTableByColumn(table, index, sortOrder);
+                updateHeaderStyles(headers, header, sortOrder);
+                sortOrder *= -1; // Toggle sort order
+            });
+        });
+
+        function sortTableByColumn(table, columnIndex, order) {
+            const tbody = table.querySelector(\\"tbody\\");
+            const rows = Array.from(tbody.querySelectorAll(\\"tr\\"));
+
+            rows.sort((rowA, rowB) => {
+                const cellA = getCellValue(rowA.children[columnIndex]);
+                const cellB = getCellValue(rowB.children[columnIndex]);
+
+                const isNumberA = !isNaN(cellA);
+                const isNumberB = !isNaN(cellB);
+
+                if (cellA === \\"\\" && cellB === \\"\\") return 0;
+                if (cellA === \\"\\") return -1 * order;
+                if (cellB === \\"\\") return 1 * order;
+
+                if (isNumberA && isNumberB) {
+                    return (parseFloat(cellA) - parseFloat(cellB)) * order;
+                } else if (isNumberA) {
+                    return 1 * order;
+                } else if (isNumberB) {
+                    return -1 * order;
+                } else {
+                    return cellA.localeCompare(cellB) * order;
+                }
+            });
+
+            rows.forEach(row => tbody.appendChild(row));
+        }
+
+        function getCellValue(cell) {
+            const img = cell.querySelector(\\"img\\");
+            if (img) {
+                return img.alt.toLowerCase();
+            }
+            const text = cell.innerText.toLowerCase();
+            if (text === '=') {
+                return '0';
+            }
+            return text;
+        }
+
+        function updateHeaderStyles(headers, sortedHeader, order) {
+            headers.forEach(header => {
+                header.classList.remove(\\"sorted-asc\\", \\"sorted-desc\\");
+            });
+            sortedHeader.classList.add(order === 1 ? \\"sorted-asc\\" : \\"sorted-desc\\");
+        }
+    });
+
 </script>
 
 </body>
@@ -5025,14 +5443,17 @@ exports[`e2e generates team standings 1`] = `
         closeNav(\\"seriesMobileNav\\");
         openNav(\\"mobileNav\\");
     }
+
     function openSeriesMobileNav() {
         closeNav(\\"mobileNav\\");
         openNav(\\"seriesMobileNav\\");
     }
+
     function closeNav(navId) {
         var x = document.getElementById(navId);
         x.className = x.className.replace(\\" w3-show\\", \\"\\");
     }
+
     function openNav(navId) {
         var x = document.getElementById(navId);
         if (x.className.indexOf(\\"w3-show\\") == -1) {
@@ -5041,11 +5462,79 @@ exports[`e2e generates team standings 1`] = `
             closeNav(navId);
         }
     }
+
     // When the user clicks on div, open the popup
     function openPopup(id) {
-      var popup = document.getElementById(id);
-      popup.classList.toggle(\\"show\\");
+        var popup = document.getElementById(id);
+        popup.classList.toggle(\\"show\\");
     }
+
+    document.addEventListener(\\"DOMContentLoaded\\", function () {
+        const table = document.getElementById(\\"tableDrivers\\");
+        const headers = table.querySelectorAll(\\"th\\");
+        let sortOrder = 1; // 1 for ascending, -1 for descending
+
+        // Sort the first column in ascending order on page load
+        sortTableByColumn(table, 0, 1);
+        updateHeaderStyles(headers, headers[0], 1);
+
+        headers.forEach((header, index) => {
+            header.addEventListener(\\"click\\", () => {
+                sortTableByColumn(table, index, sortOrder);
+                updateHeaderStyles(headers, header, sortOrder);
+                sortOrder *= -1; // Toggle sort order
+            });
+        });
+
+        function sortTableByColumn(table, columnIndex, order) {
+            const tbody = table.querySelector(\\"tbody\\");
+            const rows = Array.from(tbody.querySelectorAll(\\"tr\\"));
+
+            rows.sort((rowA, rowB) => {
+                const cellA = getCellValue(rowA.children[columnIndex]);
+                const cellB = getCellValue(rowB.children[columnIndex]);
+
+                const isNumberA = !isNaN(cellA);
+                const isNumberB = !isNaN(cellB);
+
+                if (cellA === \\"\\" && cellB === \\"\\") return 0;
+                if (cellA === \\"\\") return -1 * order;
+                if (cellB === \\"\\") return 1 * order;
+
+                if (isNumberA && isNumberB) {
+                    return (parseFloat(cellA) - parseFloat(cellB)) * order;
+                } else if (isNumberA) {
+                    return 1 * order;
+                } else if (isNumberB) {
+                    return -1 * order;
+                } else {
+                    return cellA.localeCompare(cellB) * order;
+                }
+            });
+
+            rows.forEach(row => tbody.appendChild(row));
+        }
+
+        function getCellValue(cell) {
+            const img = cell.querySelector(\\"img\\");
+            if (img) {
+                return img.alt.toLowerCase();
+            }
+            const text = cell.innerText.toLowerCase();
+            if (text === '=') {
+                return '0';
+            }
+            return text;
+        }
+
+        function updateHeaderStyles(headers, sortedHeader, order) {
+            headers.forEach(header => {
+                header.classList.remove(\\"sorted-asc\\", \\"sorted-desc\\");
+            });
+            sortedHeader.classList.add(order === 1 ? \\"sorted-asc\\" : \\"sorted-desc\\");
+        }
+    });
+
 </script>
 
 </body>

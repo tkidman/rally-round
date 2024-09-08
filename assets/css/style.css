@@ -283,3 +283,11 @@ tbody>tr:nth-child(odd) {
 	from {opacity: 0;}
 	to {opacity:1 ;}
 }
+
+.sorted-asc::after {
+	content: " \25B2"; /* Up arrow */
+}
+
+.sorted-desc::after {
+	content: " \25BC"; /* Down arrow */
+}

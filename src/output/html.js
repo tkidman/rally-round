@@ -15,7 +15,9 @@ const {
   outputPath,
   templatePath,
   getCountryForAnyCode,
-  eventStatuses
+  eventStatuses,
+  getDuration,
+  formatDuration
 } = require("../shared");
 const { processFantasyResults } = require("../fantasy/fantasyCalculator");
 const { getLocalization } = require("./localization");
@@ -342,7 +344,7 @@ const getStageTimeDisplay = (result, event) => {
   ) {
     return hiddenTimeDisplay;
   }
-  return result.entry.stageTime;
+  return formatDuration(getDuration(result.entry.stageTime));
 };
 
 const getTotalTimeDisplay = (result, event) => {
@@ -356,7 +358,7 @@ const getTotalTimeDisplay = (result, event) => {
   ) {
     return hiddenTimeDisplay;
   }
-  return result.entry.totalTime;
+  return formatDuration(getDuration(result.entry.totalTime));
 };
 
 const transformForDriverResultsHTML = (event, division, legIndex) => {

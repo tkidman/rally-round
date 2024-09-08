@@ -44,29 +44,29 @@
                         {{/if}}
                     {{/if}}
                     {{#if showPowerStage}}
-                        <td>{{localization.ps}}</td>
-                        <td>{{localization.diff}}</td>
+                        <th>{{localization.ps}}</th>
+                        <th>{{localization.diff}}</th>
                     {{/if}}
-                    <td>{{localization.total}}</td>
-                    <td>{{localization.diff}}</td>
+                    <th>{{localization.total}}</th>
+                    <th>{{localization.diff}}</th>
                     {{#if showSuperRallyColumn}}
-                        <td>{{localization.sr}}</td>
+                        <th>{{localization.sr}}</th>
                     {{/if}}
                     {{#if showLegPoints}}
                         {{#each event.legs}}
-                            <td>
+                            <th>
                                 <a href="{{this.legUrl}}">{{this.legColumnHeader}}</a>
-                            </td>
+                            </th>
                         {{/each}}
                     {{/if}}
                     {{#if showStagePoints}}
-                        <td>{{localization.stage_points}}</td>
+                        <th>{{localization.stage_points}}</th>
                     {{/if}}
                     {{#if showPowerStagePoints}}
-                        <td>{{localization.ps}} {{localization.points}}</td>
+                        <th>{{localization.ps}} {{localization.points}}</th>
                     {{/if}}
-                    <td>{{localization.points}}</td>
-                    <td>{{localization.total_points}}</td>
+                    <th>{{localization.points}}</th>
+                    <th>{{localization.total_points}}</th>
                 </tr>
                 </thead>
                 <tbody>
