@@ -14,6 +14,14 @@ const rallies = [
     locationFlag: "NZ",
     numStages: 6
     // enduranceRoundMultiplier: 2
+  },
+  {
+    eventIds: [73080],
+    endTime: "2024-09-17 22:00",
+    locationName: "Rally Spain",
+    locationFlag: "ES",
+    numStages: 6
+    // enduranceRoundMultiplier: 2
   }
 ];
 
@@ -33,9 +41,9 @@ const initialState = {
   //   "*After Dropped Rounds: total points after 2 lowest scoring rounds removed - endurance rounds count as 2",
   // sortByDropRoundPoints: true,
   showSuperRallyColumn: true,
-  hideCarColumnInStandings: false,
+  hideCarColumnInStandings: true,
   showCarNameAsTextInStandings: false,
-  showCarNameAsTextInResults: false,
+  showCarNameAsTextInResults: true,
   nullTeamIsPrivateer: true,
   useCarAsTeam: false,
   // useCarClassAsTeam: true,
