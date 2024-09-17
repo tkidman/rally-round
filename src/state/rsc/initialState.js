@@ -22,6 +22,14 @@ const rallies = [
     locationFlag: "ES",
     numStages: 6
     // enduranceRoundMultiplier: 2
+  },
+  {
+    eventIds: [73355],
+    endTime: "2024-09-24 22:00",
+    locationName: "Rally Belgium",
+    locationFlag: "BE",
+    numStages: 8
+    // enduranceRoundMultiplier: 2
   }
 ];
 
