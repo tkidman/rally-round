@@ -38,6 +38,14 @@ const rallies = [
     locationFlag: "RX",
     numStages: 8
     // enduranceRoundMultiplier: 2
+  },
+  {
+    eventIds: [73816],
+    endTime: "2024-10-08 22:00",
+    locationName: "Rally Finland",
+    locationFlag: "FI",
+    numStages: 7
+    // enduranceRoundMultiplier: 2
   }
 ];
 
