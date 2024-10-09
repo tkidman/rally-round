@@ -46,6 +46,14 @@ const rallies = [
     locationFlag: "FI",
     numStages: 7
     // enduranceRoundMultiplier: 2
+  },
+  {
+    eventIds: [74081],
+    endTime: "2024-10-15 22:00",
+    locationName: "Rally Snow",
+    locationFlag: "FI",
+    numStages: 8
+    // enduranceRoundMultiplier: 2
   }
 ];
 
