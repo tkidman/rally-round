@@ -57,7 +57,7 @@ const rallies = [
   },
   {
     eventIds: [74357],
-    endTime: "2024-10-22 22:00",
+    endTime: "2024-10-23 22:00",
     locationName: "Rally Mixed",
     locationFlag: "RX",
     numStages: 7
