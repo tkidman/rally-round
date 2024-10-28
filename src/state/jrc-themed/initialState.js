@@ -107,9 +107,9 @@ const initialState = {
   superRallyIsDnf: true,
   showSuperRallyColumn: true,
   divisions: {
-    wrc1993: {
-      divisionName: "wrc1993",
-      displayName: "WRC 1993",
+    wrc2024Rally1: {
+      divisionName: "wrc2024Rally1",
+      displayName: "WRC 2024 Rally1",
       disableSameCarValidation: false,
       // enableSameCarClassValidation: true,
       maxDriversScoringPointsForTeam: 2,
@@ -117,50 +117,77 @@ const initialState = {
       wrc: [
         {
           clubId: "17",
-          championshipIds: ["3GRiR2U1LoLbriGh3"],
+          championshipIds: ["gEuFAC58MXzA2TEP"],
           includeNextChampionships: true
         }
       ],
       manualResults: [],
       events: [],
       points,
-      // excludedCars: ["WRC Builder Vehicle"],
-      cars: [
-        "Ford Escort RS Cosworth",
-        "Lancia Delta HF Integrale",
-        "SUBARU Impreza 1995",
-        "SUBARU Legacy RS"
-      ]
+      excludedCars: ["Builder Vehicle"]
+      // cars: [
+      //   "Ford Escort RS Cosworth",
+      //   "Lancia Delta HF Integrale",
+      //   "SUBARU Impreza 1995",
+      //   "SUBARU Legacy RS"
+      // ]
     },
-    wrc1993Constructors: {
-      divisionName: "wrc1993Constructors",
-      displayName: "WRC 1993 Constructors",
+    wrc2024Rally2: {
+      divisionName: "wrc2024Rally2",
+      displayName: "WRC 2024 Rally2",
       disableSameCarValidation: false,
       // enableSameCarClassValidation: true,
       maxDriversScoringPointsForTeam: 2,
       // filterEntries: true,
-      overrideTeam: { useCarAsTeam: true },
-      hideDriverStandingsLink: true,
       wrc: [
         {
-          clubId: "17",
-          championshipIds: ["3GRiR2U1LoLbriGh3"],
+          clubId: "362",
+          championshipIds: ["4iSptyoHKAcNqYAxY"],
           includeNextChampionships: true
         }
       ],
       manualResults: [],
       events: [],
       points,
-      // excludedCars: ["WRC Builder Vehicle"],
-      cars: [
-        "Ford Escort RS Cosworth",
-        "Lancia Delta HF Integrale",
-        "SUBARU Impreza 1995",
-        "SUBARU Legacy RS"
-      ]
+      excludedCars: ["Builder Vehicle"]
+      // cars: [
+      //   "Ford Escort RS Cosworth",
+      //   "Lancia Delta HF Integrale",
+      //   "SUBARU Impreza 1995",
+      //   "SUBARU Legacy RS"
+      // ]
+    },
+    wrc2024Rally3: {
+      divisionName: "wrc2024Rally3",
+      displayName: "WRC 2024 Rally3",
+      disableSameCarValidation: false,
+      // enableSameCarClassValidation: true,
+      maxDriversScoringPointsForTeam: 2,
+      // filterEntries: true,
+      wrc: [
+        {
+          clubId: "363",
+          championshipIds: ["3kgEUeAC2ugDiusn7"],
+          includeNextChampionships: true
+        }
+      ],
+      manualResults: [],
+      events: [],
+      points,
+      excludedCars: ["Builder Vehicle"]
+      // cars: [
+      //   "Ford Escort RS Cosworth",
+      //   "Lancia Delta HF Integrale",
+      //   "SUBARU Impreza 1995",
+      //   "SUBARU Legacy RS"
+      // ]
     }
   },
   historicalSeasonLinks: [
+    {
+      name: "WRC 1993",
+      href: "/themed/themed-22"
+    },
     {
       name: "WRC 2000",
       href: "/themed/themed-21"

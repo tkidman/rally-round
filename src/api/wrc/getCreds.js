@@ -133,10 +133,14 @@ const login = async resolve => {
     // Enters login information and click the "Sign in" button on the login page
     debug(`using creds ${username} ${password.slice(0, 2)}`);
     await page.type("#email", username);
+    await page.click("#logInBtn");
+    debug("login entered");
+    await delay(2000);
+    // await page.waitForNavigation({ waitUntil: "networkidle2" });
     await page.type("#password", password);
     await page.click("#logInBtn");
+    debug("password entered");
 
-    debug("credentials entered");
     // Wait for the login process to complete
     await page.waitForNavigation({ waitUntil: "networkidle2" });
     await delay(4000);
