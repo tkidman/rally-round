@@ -99,7 +99,8 @@ const initialState = {
   teamPointsForPowerstage: false,
   incorrectCarTimePenaltySeconds: 120,
   backgroundStyle:
-    "background-image: linear-gradient(#2193b0, #6dd5ed); background-size: cover; background-repeat: no-repeat; background-attachment: fixed;",
+    "background-color: #ffffff;\n" +
+    "background-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 200 200'%3E%3Cpolygon fill='%23DCEFFA' points='100 0 0 100 100 100 100 200 200 100 200 0'/%3E%3C/svg%3E\");",
   logo: "JRC.png",
   siteTitlePrefix: "JRC World Cup",
   divisions: {
