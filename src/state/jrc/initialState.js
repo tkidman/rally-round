@@ -160,6 +160,10 @@ const initialState = {
   },
   historicalSeasonLinks: [
     {
+      name: "JRC 15",
+      href: "/jrc-15"
+    },
+    {
       name: "JRC 14",
       href: "/jrc-14"
     },

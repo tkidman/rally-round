@@ -17,7 +17,8 @@ const {
   getCountryForAnyCode,
   eventStatuses,
   getDuration,
-  formatDuration
+  formatDuration,
+  useNationalityAsTeam
 } = require("../shared");
 const { processFantasyResults } = require("../fantasy/fantasyCalculator");
 const { getLocalization } = require("./localization");
@@ -296,20 +297,20 @@ const transformForStandingsHTML = (division, type) => {
         teamLogo: getTeamLogo(driver.teamId)
       };
     } else {
-      const country = leagueRef.league.useNationalityAsTeam
+      const country = useNationalityAsTeam(leagueRef, division)
         ? getCountryForAnyCode(standing.name)
         : null;
       return { ...row, teamLogo: getTeamLogo(standing.name), country };
     }
   });
   const driverStandingsNationalityAsTeam =
-    type === "driver" && leagueRef.league.useNationalityAsTeam;
+    type === "driver" && useNationalityAsTeam(leagueRef, division);
   return {
     headerLocations,
     rows,
     // don't show team for driver standings when we're using nationality as team, we already show the nationality column
     showTeam: leagueRef.hasTeams && !driverStandingsNationalityAsTeam,
-    useNationalityAsTeam: leagueRef.league.useNationalityAsTeam,
+    useNationalityAsTeam: useNationalityAsTeam(leagueRef, division),
     showCar:
       !leagueRef.league.hideCarColumnInStandings &&
       (leagueRef.hasCars || leagueRef.league.showCarsAlways),
@@ -394,7 +395,7 @@ const transformForDriverResultsHTML = (event, division, legIndex) => {
     headerLocations,
     rows,
     title: division.displayName || divisionName,
-    showTeam: leagueRef.hasTeams && !leagueRef.league.useNationalityAsTeam,
+    showTeam: leagueRef.hasTeams && !useNationalityAsTeam(leagueRef, division),
     showTeamNameTextColumn: leagueRef.league.showTeamNameTextColumn,
     showCar: leagueRef.hasCars || leagueRef.league.showCarNameAsTextInResults,
     showCarName: leagueRef.league.showCarNameAsTextInResults,

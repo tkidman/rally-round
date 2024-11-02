@@ -1,7 +1,7 @@
 const debug = require("debug")("tkidman:rally-round:shared");
 const moment = require("moment");
 const countries = require("./state/constants/countries.json");
-const { keyBy, sum } = require("lodash");
+const { keyBy, sum, get } = require("lodash");
 
 const hiddenPath = "./hidden";
 const club = process.env.CLUB || "test";
@@ -191,6 +191,13 @@ const mergeEvent = (mergedEvent, event) => {
   }
 };
 
+const useNationalityAsTeam = (leagueRef, division) => {
+  return (
+    leagueRef.league.useNationalityAsTeam ||
+    get(division, "overrideTeam.useNationalityAsTeam")
+  );
+};
+
 module.exports = {
   outputPath,
   cachePath,
@@ -216,5 +223,6 @@ module.exports = {
   addSeconds,
   knapsack,
   mergeEvent,
+  useNationalityAsTeam,
   DNF_STAGE_TIME
 };

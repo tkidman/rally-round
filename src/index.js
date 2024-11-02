@@ -4,7 +4,8 @@ const {
   knapsack,
   getDuration,
   DNF_STAGE_TIME,
-  getSummedTotalTimeStrings
+  getSummedTotalTimeStrings,
+  useNationalityAsTeam
 } = require("./shared");
 const { orderEntriesBy } = require("./shared");
 const debug = require("debug")("tkidman:rally-round");
@@ -1018,10 +1019,7 @@ const loadEventDriver = (entry, drivers, event) => {
       if (driver.firstCarDriven) {
         driver.teamId = getCarByName(driver.firstCarDriven).brand;
       }
-    } else if (
-      leagueRef.league.useNationalityAsTeam ||
-      get(division, "overrideTeam.useNationalityAsTeam")
-    ) {
+    } else if (useNationalityAsTeam(leagueRef, division)) {
       driver.teamId = driver.nationality;
     } else if (
       leagueRef.league.useCarClassAsTeam ||
