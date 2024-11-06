@@ -103,6 +103,8 @@ const initialState = {
     "background-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 200 200'%3E%3Cpolygon fill='%23DCE4FA' fill-opacity='0.36' points='100 0 0 100 100 100 100 200 200 100 200 0'/%3E%3C/svg%3E\");",
   logo: "JRC.png",
   siteTitlePrefix: "JRC World Cup",
+  superRallyIsDnf: true,
+  showSuperRallyColumn: true,
   divisions: {
     worldCup: {
       divisionName: "worldCup",
