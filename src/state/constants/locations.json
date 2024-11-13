@@ -122,5 +122,13 @@
   "Central Europe Rally": {
     "countryName": "Europe",
     "countryCode": "eur"
+  },
+  "Orlen 80th Rally Poland": {
+    "countryName": "Poland",
+    "countryCode": "pol"
+  },
+  "Tet Rally Latvia": {
+    "countryName": "Latvia",
+    "countryCode": "lva"
   }
 }
