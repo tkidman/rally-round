@@ -111,7 +111,13 @@ const initialState = {
       displayName: "World Cup JRC",
       disableSameCarValidation: true,
       maxDriversScoringPointsForTeam: 2,
-      wrc: [{ clubId: "20662", championshipIds: ["5VogcUotJcMtwq1t1"] }],
+      wrc: [
+        {
+          clubId: "20662",
+          championshipIds: ["5VogcUotJcMtwq1t1"],
+          includeNextChampionships: true
+        }
+      ],
       events: [],
       points,
       manualResults: []
@@ -126,7 +132,13 @@ const initialState = {
       disableSameCarValidation: true,
       maxDriversScoringPointsForTeam: 2,
       hideDriverStandingsLink: true,
-      wrc: [{ clubId: "20662", championshipIds: ["5VogcUotJcMtwq1t1"] }],
+      wrc: [
+        {
+          clubId: "20662",
+          championshipIds: ["5VogcUotJcMtwq1t1"],
+          includeNextChampionships: true
+        }
+      ],
       events: [],
       points,
       manualResults: []
