@@ -1,72 +1,16 @@
 const rallies = [
   {
-    eventIds: [72446],
-    endTime: "2024-09-03 22:00",
-    locationName: "Rally Poland",
-    locationFlag: "PL",
-    numStages: 8
-    // enduranceRoundMultiplier: 2
-  },
-  {
-    eventIds: [72841],
-    endTime: "2024-09-10 22:00",
-    locationName: "Rally Aus/NZ",
-    locationFlag: "NZ",
-    numStages: 6
-    // enduranceRoundMultiplier: 2
-  },
-  {
-    eventIds: [73080],
-    endTime: "2024-09-17 22:00",
-    locationName: "Rally Spain",
+    eventIds: [77899],
+    endTime: "2025-01-21 21:00",
+    locationName: "Rally Islas Canarias",
     locationFlag: "ES",
     numStages: 6
-    // enduranceRoundMultiplier: 2
-  },
-  {
-    eventIds: [73355],
-    endTime: "2024-09-24 22:00",
-    locationName: "Rally Belgium",
-    locationFlag: "BE",
-    numStages: 8
-    // enduranceRoundMultiplier: 2
-  },
-  {
-    eventIds: [73605],
-    endTime: "2024-10-01 22:00",
-    locationName: "Odd Bunch Rally",
-    locationFlag: "RX",
-    numStages: 8
-    // enduranceRoundMultiplier: 2
-  },
-  {
-    eventIds: [73816],
-    endTime: "2024-10-08 22:00",
-    locationName: "Rally Finland",
-    locationFlag: "FI",
-    numStages: 7
-    // enduranceRoundMultiplier: 2
-  },
-  {
-    eventIds: [74081],
-    endTime: "2024-10-15 22:00",
-    locationName: "Rally Snow",
-    locationFlag: "FI",
-    numStages: 8
-    // enduranceRoundMultiplier: 2
-  },
-  {
-    eventIds: [74357],
-    endTime: "2024-10-23 22:00",
-    locationName: "Rally Mixed",
-    locationFlag: "RX",
-    numStages: 7
     // enduranceRoundMultiplier: 2
   }
 ];
 
 const points = {
-  overall: [20, 15, 12, 10, 8, 6, 4, 3, 2, 1]
+  overall: [25, 18, 15, 12, 10, 8, 6, 4, 2, 1]
 };
 
 const initialState = {
@@ -81,7 +25,7 @@ const initialState = {
   //   "*After Dropped Rounds: total points after 2 lowest scoring rounds removed - endurance rounds count as 2",
   // sortByDropRoundPoints: true,
   showSuperRallyColumn: true,
-  hideCarColumnInStandings: true,
+  hideCarColumnInStandings: false,
   showCarNameAsTextInStandings: false,
   showCarNameAsTextInResults: true,
   nullTeamIsPrivateer: true,
@@ -94,9 +38,10 @@ const initialState = {
   backgroundStyle:
     "background-image: linear-gradient(315deg, #ffffff 0%, #d7e1ec 74%); background-size: cover; background-repeat: no-repeat; background-attachment: fixed;",
   logo: "rsc-guy.png",
-  siteTitlePrefix: "RSC Season 7",
+  siteTitlePrefix: "RSC IRC 2011",
   hideStageTimesUntilEventEnd: true,
   historicalSeasonLinks: [
+    { name: "Season 7", href: "/rsc-7" },
     { name: "Audi vs Porsche", href: "/rsc-audi-vs-porsche" },
     { name: "Fiat Christmas", href: "/rsc-fiat-christmas" },
     { name: "World Cup Finals", href: "/rsc-world-cup-finals" },
@@ -109,13 +54,35 @@ const initialState = {
     { name: "Season 4", href: "/rsc-4" }
   ],
   divisions: {
-    rscSeason7: {
-      divisionName: "rscSeason7",
-      displayName: "RSC Season 7",
-      disableSameCarValidation: true,
+    rscIrc2011: {
+      divisionName: "rscIrc2011",
+      displayName: "RSC IRC 2011",
+      disableSameCarValidation: false,
       // enableSameCarClassValidation: true,
       maxDriversScoringPointsForTeam: 2,
       // filterEntries: { allowedCars: [] },
+      rbr: {
+        rallies
+      },
+      manualResults: [],
+      events: [],
+      points
+      // cars: ["Peugeot 205 GTI"]
+    },
+    rscIrc20112WD: {
+      divisionName: "rscIrc20112WD",
+      displayName: "RSC IRC 2011 2WD",
+      disableSameCarValidation: false,
+      // enableSameCarClassValidation: true,
+      maxDriversScoringPointsForTeam: 2,
+      filterEntries: {
+        allowedCars: [
+          "Citroen DS3 R3-MAX",
+          "Honda Civic Type R(FN2) R3",
+          "Renault Clio III R3",
+          "Fiat Abarth 500 R3T"
+        ]
+      },
       rbr: {
         rallies
       },
