@@ -6,6 +6,14 @@ const rallies = [
     locationFlag: "ES",
     numStages: 6
     // enduranceRoundMultiplier: 2
+  },
+  {
+    eventIds: [78204],
+    endTime: "2025-01-21 21:00",
+    locationName: "Ypres Rally",
+    locationFlag: "BE",
+    numStages: 9
+    // enduranceRoundMultiplier: 2
   }
 ];
 
