@@ -9,7 +9,7 @@ const rallies = [
   },
   {
     eventIds: [78204],
-    endTime: "2025-01-21 21:00",
+    endTime: "2025-01-28 22:00",
     locationName: "Ypres Rally",
     locationFlag: "BE",
     numStages: 9
