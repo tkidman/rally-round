@@ -14,6 +14,14 @@ const rallies = [
     locationFlag: "BE",
     numStages: 9
     // enduranceRoundMultiplier: 2
+  },
+  {
+    eventIds: [78568],
+    endTime: "2025-02-04 22:00",
+    locationName: "Barum Czech Rally Zlín",
+    locationFlag: "CZ",
+    numStages: 7
+    // enduranceRoundMultiplier: 2
   }
 ];
 
