@@ -102,7 +102,7 @@
                         {{/if}}
                         {{#if ../showPowerStage}}
                             <td>{{this.stageTimeDisplay}}</td>
-                            <td>{{this.entry.stageDiff}}</td>
+                            <td>{{this.stageDiffDisplay}}</td>
                         {{/if}}
                         {{#if this.entry.extraInfo}}
                         <td class="popup" onclick="openPopup('{{this.entry.name}}')">
@@ -112,7 +112,7 @@
                         {{else}}
                         <td>{{this.totalTimeDisplay}}</td>
                         {{/if}}
-                        <td>{{this.entry.totalDiff}}</td>
+                        <td>{{this.totalDiffDisplay}}</td>
                         {{#if ../showSuperRallyColumn}}
                             <td>
                                 {{this.entry.superRally}}

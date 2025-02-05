@@ -348,6 +348,19 @@ const getStageTimeDisplay = (result, event) => {
   return formatDuration(getDuration(result.entry.stageTime));
 };
 
+const getStageDiffDisplay = (result, event) => {
+  if (event.hideStageDiffsUntilEventEnd) {
+    return hiddenTimeDisplay;
+  }
+  if (
+    leagueRef.league.hideStageDiffsUntilEventEnd &&
+    event.eventStatus !== eventStatuses.finished
+  ) {
+    return hiddenTimeDisplay;
+  }
+  return result.entry.stageDiff;
+};
+
 const getTotalTimeDisplay = (result, event) => {
   if (event.hideTimesUntilEventEnd) {
     return hiddenTimeDisplay;
@@ -360,6 +373,19 @@ const getTotalTimeDisplay = (result, event) => {
     return hiddenTimeDisplay;
   }
   return formatDuration(getDuration(result.entry.totalTime));
+};
+
+const getTotalDiffDisplay = (result, event) => {
+  if (event.hideStageDiffsUntilEventEnd) {
+    return hiddenTimeDisplay;
+  }
+  if (
+    leagueRef.league.hideStageDiffsUntilEventEnd &&
+    event.eventStatus !== eventStatuses.finished
+  ) {
+    return hiddenTimeDisplay;
+  }
+  return result.entry.totalDiff;
 };
 
 const transformForDriverResultsHTML = (event, division, legIndex) => {
@@ -388,7 +414,9 @@ const transformForDriverResultsHTML = (event, division, legIndex) => {
       divisionDisplayName:
         resultDivision.displayName || resultDivision.divisionName,
       stageTimeDisplay: getStageTimeDisplay(result, event),
-      totalTimeDisplay: getTotalTimeDisplay(result, event)
+      stageDiffDisplay: getStageDiffDisplay(result, event),
+      totalTimeDisplay: getTotalTimeDisplay(result, event),
+      totalDiffDisplay: getTotalDiffDisplay(result, event)
     };
   });
   const data = {

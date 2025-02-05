@@ -200,6 +200,7 @@ const initialState = {
   // useCarClassAsTeam: true,
   disableOverall: true,
   hideStageTimesUntilEventEnd: true,
+  hideStageDiffsUntilEventEnd: true,
   isRallySprint: true,
   // teamPointsForPowerstage: true,
   backgroundStyle:
