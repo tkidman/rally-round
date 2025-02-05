@@ -22,6 +22,14 @@ const rallies = [
     locationFlag: "CZ",
     numStages: 7
     // enduranceRoundMultiplier: 2
+  },
+  {
+    eventIds: [78909],
+    endTime: "2025-02-11 22:00",
+    locationName: "Rally of Scotland",
+    locationFlag: "scot",
+    numStages: 7
+    // enduranceRoundMultiplier: 2
   }
 ];
 
