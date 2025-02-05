@@ -178,7 +178,8 @@ const fetchEvent = async (rally, useCsv) => {
 
 const isFinished = rally => {
   const rallyEndTime = moment.tz(rally.endTime, "CET");
-  return rallyEndTime.isBefore(moment());
+  // add one hour to the end time to catch any stragglers
+  return rallyEndTime.add(1, "hour").isBefore(moment());
 };
 
 const getActiveEvent = ({ division }) => {
