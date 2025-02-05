@@ -176,38 +176,10 @@ const points = {
 
 const rallies = [
   {
-    eventId: 58584,
-    endTime: "2023-08-02 11:59",
-    locationName: "La Serra d Almos",
-    locationFlag: "ES",
-    numStages: 3
-  },
-  {
-    eventId: 58728,
-    endTime: "2023-08-07 11:59",
-    locationName: "Cote D Arbroz",
-    locationFlag: "FR",
-    numStages: 3
-  },
-  {
-    eventId: 58909,
-    endTime: "2023-08-14 11:59",
-    locationName: "Fintele",
-    locationFlag: "BE",
-    numStages: 3
-  },
-  {
-    eventId: 59149,
-    endTime: "2023-08-21 11:59",
-    locationName: "Puy Du Lac",
-    locationFlag: "FR",
-    numStages: 3
-  },
-  {
-    eventId: 59415,
-    endTime: "2023-08-28 11:59",
-    locationName: "Halenkovice",
-    locationFlag: "CZ",
+    eventId: 78878,
+    endTime: "2025-02-10 20:00",
+    locationName: "Sunava Shakedown",
+    locationFlag: "SK",
     numStages: 3
   }
 ];
@@ -217,7 +189,7 @@ const initialState = {
   websiteName: "jrc-results",
   subfolderName: "rbr-rallysprint",
   useStandingsForHome: true,
-  showLivePoints: true,
+  showLivePoints: false,
   showLivePointsDaysRemaining: 4,
   hideCarColumnInStandings: true,
   showCarNameAsTextInResults: true,
@@ -239,10 +211,10 @@ const initialState = {
   logo: "JRC.png",
   siteTitlePrefix: "JRC RBR Rallysprint",
   divisions: {
-    jrcRbrRallySprintSeason3RGT: {
-      divisionName: "jrcRbrRallysprintSeason3Overall",
-      displayName: "Rallysprint Season 3 Overall",
-      disableSameCarValidation: true,
+    powerslideRallysprint1: {
+      divisionName: "powerslideRallysprint1",
+      displayName: "Powerslide Rallysprint #1",
+      disableSameCarValidation: false,
       // enableSameCarClassValidation: true,
       // maxDriversScoringPointsForTeam: 2,
       // filterEntries: {
@@ -263,41 +235,16 @@ const initialState = {
       events: []
       // cars: ["Peugeot 205 GTI"]
       // outputSheetId: "1C3fU9y1236wFmPuKcui4CEXBuSsUANH6OJ0BpQIasTc"
-    },
-    jrcRbrRallySprintSeason3R2: {
-      divisionName: "jrcRbrRallysprintSeason3R2",
-      displayName: "Rallysprint Season 3 R2",
-      disableSameCarValidation: true,
-      // enableSameCarClassValidation: true,
-      // maxDriversScoringPointsForTeam: 2,
-      filterEntries: {
-        allowedCars: [
-          "Peugeot 208 R2",
-          "Citroen C2 R2 Max",
-          "Opel ADAM R2",
-          "Ford Fiesta Mk VIII R2",
-          "Renault Twingo R2 Evo",
-          "Ford Fiesta R2"
-        ]
-      },
-      rbr: {
-        rallies
-      },
-      points,
-      manualResults: [],
-      events: []
-      // cars: ["Peugeot 205 GTI"]
-      // outputSheetId: "1C3fU9y1236wFmPuKcui4CEXBuSsUANH6OJ0BpQIasTc"
     }
   },
   historicalSeasonLinks: [
     {
-      name: "RBR Rallysprint Season 1",
-      href: "/rbr-rallysprint/rbr-rallysprint-1"
-    },
-    {
       name: "RBR Rallysprint Season 2",
       href: "/rbr-rallysprint/rbr-rallysprint-2"
+    },
+    {
+      name: "RBR Rallysprint Season 1",
+      href: "/rbr-rallysprint/rbr-rallysprint-1"
     }
   ]
 };

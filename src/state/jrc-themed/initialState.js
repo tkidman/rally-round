@@ -107,9 +107,9 @@ const initialState = {
   superRallyIsDnf: true,
   showSuperRallyColumn: true,
   divisions: {
-    wrc2024Rally1: {
-      divisionName: "wrc2024Rally1",
-      displayName: "WRC 2024 Rally1",
+    wrc2013: {
+      divisionName: "wrc2013",
+      displayName: "WRC 2013",
       disableSameCarValidation: false,
       // enableSameCarClassValidation: true,
       maxDriversScoringPointsForTeam: 2,
@@ -117,73 +117,26 @@ const initialState = {
       wrc: [
         {
           clubId: "17",
-          championshipIds: ["gEuFAC58MXzA2TEP"],
+          championshipIds: ["2RLdo17ozbWBUk3jU"],
           includeNextChampionships: true
         }
       ],
       manualResults: [],
       events: [],
       points,
-      excludedCars: ["Builder Vehicle"]
-      // cars: [
-      //   "Ford Escort RS Cosworth",
-      //   "Lancia Delta HF Integrale",
-      //   "SUBARU Impreza 1995",
-      //   "SUBARU Legacy RS"
-      // ]
-    },
-    wrc2024Rally2: {
-      divisionName: "wrc2024Rally2",
-      displayName: "WRC 2024 Rally2",
-      disableSameCarValidation: false,
-      // enableSameCarClassValidation: true,
-      maxDriversScoringPointsForTeam: 2,
-      // filterEntries: true,
-      wrc: [
-        {
-          clubId: "362",
-          championshipIds: ["4iSptyoHKAcNqYAxY"],
-          includeNextChampionships: true
-        }
-      ],
-      manualResults: [],
-      events: [],
-      points,
-      excludedCars: ["Builder Vehicle"]
-      // cars: [
-      //   "Ford Escort RS Cosworth",
-      //   "Lancia Delta HF Integrale",
-      //   "SUBARU Impreza 1995",
-      //   "SUBARU Legacy RS"
-      // ]
-    },
-    wrc2024Rally3: {
-      divisionName: "wrc2024Rally3",
-      displayName: "WRC 2024 Rally3",
-      disableSameCarValidation: false,
-      // enableSameCarClassValidation: true,
-      maxDriversScoringPointsForTeam: 2,
-      // filterEntries: true,
-      wrc: [
-        {
-          clubId: "363",
-          championshipIds: ["3kgEUeAC2ugDiusn7"],
-          includeNextChampionships: true
-        }
-      ],
-      manualResults: [],
-      events: [],
-      points,
-      excludedCars: ["Builder Vehicle"]
-      // cars: [
-      //   "Ford Escort RS Cosworth",
-      //   "Lancia Delta HF Integrale",
-      //   "SUBARU Impreza 1995",
-      //   "SUBARU Legacy RS"
-      // ]
+      // excludedCars: ["Builder Vehicle"],
+      cars: [
+        "Citroën DS3 WRC '12",
+        "Volkswagen Polo R WRC 2013",
+        "MINI John Cooper Works WRC"
+      ]
     }
   },
   historicalSeasonLinks: [
+    {
+      name: "WRC 2024",
+      href: "/themed/themed-23"
+    },
     {
       name: "WRC 1993",
       href: "/themed/themed-22"

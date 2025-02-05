@@ -14,6 +14,11 @@ const wrcCarList = {
   ],
   "Junior WRC": ["Ford Fiesta Rally3"],
   "World Rally Cars 2017-2021": ["Ford Fiesta WRC", "Volkswagen Polo 2017"],
+  "World Rally Car: 2012-2016": [
+    "Citroën DS3 WRC '12",
+    "Volkswagen Polo R WRC",
+    "MINI John Cooper Works WRC"
+  ],
   "World Rally Cars 1997-2011": [
     "Citroën C4 WRC",
     "Citroën Xsara WRC",
