@@ -72,9 +72,9 @@ const extractSess = responseHeaders => {
 };
 
 // we just need this for superrally really
-const fetchHtmlSuperRally = async ({ rallyId, eventFinished }) => {
+const fetchHtmlSuperRally = async ({ rallyId, saveCacheFile }) => {
   const cacheFileName = `${cachePath}/${rallyId}_superrally.json`;
-  if (eventFinished) {
+  if (saveCacheFile) {
     const cacheFile = loadFromCache(cacheFileName);
 
     if (cacheFile) {
@@ -126,7 +126,7 @@ const fetchHtmlSuperRally = async ({ rallyId, eventFinished }) => {
     });
   }
 
-  if (eventFinished) {
+  if (saveCacheFile) {
     fs.writeFileSync(`${cacheFileName}`, JSON.stringify(data, null, 2));
   }
 
@@ -195,10 +195,11 @@ const extractStageTableData = ({ stageTable, eventFinished, $ }) => {
 const fetchHtmlStageResults = async ({
   rallyId,
   eventFinished,
+  saveCacheFile,
   stageNumber
 }) => {
   const cacheFileName = `${cachePath}/${rallyId}_${stageNumber}_results.json`;
-  if (eventFinished) {
+  if (saveCacheFile) {
     const cacheFile = loadFromCache(cacheFileName);
 
     if (cacheFile) {
@@ -231,7 +232,7 @@ const fetchHtmlStageResults = async ({
     resultsByName[overallResult.name].totalTime = overallResult.stageTime;
   });
 
-  if (eventFinished) {
+  if (saveCacheFile) {
     fs.writeFileSync(`${cacheFileName}`, JSON.stringify(stageResults, null, 2));
   }
 

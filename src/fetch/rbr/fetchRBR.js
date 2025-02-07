@@ -117,29 +117,33 @@ const processFromHtml = ({ eventSuperRallies, stagesResults, event }) => {
 };
 
 const fetchEventPartForId = async (rally, rallyId, useCsv) => {
-  const eventFinished = isFinished(rally);
+  const rallyEndTime = moment.tz(rally.endTime, "CET");
+  const eventFinished = rallyEndTime.isBefore(moment());
+  const saveCacheFile = moment(rallyEndTime)
+    .add(1, "hour")
+    .isBefore(moment());
+
   let processedEvent;
   if (useCsv) {
-    const eventResultsCsv = await fetchCsvResults(rallyId, isFinished(rally));
-    const eventStandingsCsv = await fetchCsvStandings(
-      rallyId,
-      isFinished(rally)
-    );
+    const eventResultsCsv = await fetchCsvResults(rallyId, saveCacheFile);
+    const eventStandingsCsv = await fetchCsvStandings(rallyId, saveCacheFile);
     processedEvent = processCsv(eventResultsCsv, eventStandingsCsv, rally);
   } else {
     // scrape the website
     const eventSuperRallies = await fetchHtmlSuperRally({
       rallyId,
-      eventFinished
+      saveCacheFile
     });
     const firstStageResults = await fetchHtmlStageResults({
       rallyId,
+      saveCacheFile,
       eventFinished,
       stageNumber: 1
     });
     const lastStageResults = await fetchHtmlStageResults({
       rallyId,
       eventFinished,
+      saveCacheFile,
       stageNumber: rally.numStages
     });
     // TODO all stages flag
@@ -174,12 +178,6 @@ const fetchEvent = async (rally, useCsv) => {
     mergeEvent(mergedEvent, processedEventParts[i]);
   }
   return mergedEvent;
-};
-
-const isFinished = rally => {
-  const rallyEndTime = moment.tz(rally.endTime, "CET");
-  // add one hour to the end time to catch any stragglers
-  return rallyEndTime.add(1, "hour").isBefore(moment());
 };
 
 const getActiveEvent = ({ division }) => {
