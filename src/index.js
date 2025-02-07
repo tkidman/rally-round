@@ -1083,6 +1083,16 @@ const aggregateOverallResults = ({ overallEvent, resultType, event }) => {
     }
   });
   overallEvent.results[resultType] = sortResults(overallResultsByName);
+  if (
+    leagueRef.league.maxOverallDriversScoringPointsForTeam &&
+    resultType === resultTypes.team
+  ) {
+    overallEvent.results[resultType] = slice(
+      overallEvent.results[resultType],
+      0,
+      leagueRef.league.maxOverallDriversScoringPointsForTeam
+    );
+  }
   overallEvent.results[resultType].forEach(result => {
     result.pointsDisplay = getTotalPointsDisplay(result, event);
   });

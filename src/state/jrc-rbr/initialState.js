@@ -86,6 +86,7 @@ const initialState = {
   // useCarAsTeam: false,
   // useCarClassAsTeam: true,
   disableOverall: true,
+  maxOverallDriversScoringPointsForTeam: 2,
   hideStageTimesUntilEventEnd: true,
   // teamPointsForPowerstage: true,
   backgroundStyle:
