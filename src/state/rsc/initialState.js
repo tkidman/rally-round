@@ -30,6 +30,14 @@ const rallies = [
     locationFlag: "scot",
     numStages: 7
     // enduranceRoundMultiplier: 2
+  },
+  {
+    eventIds: [79235],
+    endTime: "2025-02-18 22:00",
+    locationName: "Cyprus Rally",
+    locationFlag: "CY",
+    numStages: 8
+    // enduranceRoundMultiplier: 2
   }
 ];
 
