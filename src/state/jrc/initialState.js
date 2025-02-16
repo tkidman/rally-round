@@ -73,7 +73,7 @@ const initialState = {
   // disableOverall: true,
   // teamPointsForPowerstage: false,
   dropLowestScoringRoundsNumber: 1,
-  sortByDropRoundPoints: true,
+  sortByDropRoundPoints: false,
   usePercentageForPromotionRelegationZones: true,
   // incorrectCarTimePenaltySeconds: 120,
   backgroundStyle:
@@ -99,19 +99,13 @@ const initialState = {
       ],
       events: [],
       points,
-      cars: [
-        "Citroën Xsara WRC",
-        "Ford Focus RS Rally 2008",
-        "ŠKODA Fabia WRC",
-        "SUBARU Impreza 2008"
-      ],
       manualResults: [],
       filterEntries: {
         matchDivision: true
-      },
-      promotionRelegation: {
-        relegationZone: 18
       }
+      // promotionRelegation: {
+      //   relegationZone: 18
+      // }
     },
     jrc2: {
       displayName: "JRC2",
@@ -126,15 +120,20 @@ const initialState = {
       ],
       events: [],
       points,
-      // cars: [],
+      cars: [
+        "Ford Fiesta R5 MK7 Evo 2",
+        "Peugeot 208 T16 R5",
+        "Škoda Fabia Rally2 Evo",
+        "Volkswagen Polo GTI R5"
+      ],
       manualResults: [],
       filterEntries: {
         matchDivision: true
-      },
-      promotionRelegation: {
-        promotionZone: 21,
-        relegationZone: 24
       }
+      // promotionRelegation: {
+      //   promotionZone: 21,
+      //   relegationZone: 24
+      // }
     },
     jrc3: {
       displayName: "JRC3",
@@ -143,22 +142,26 @@ const initialState = {
       wrc: [
         {
           clubId: "27",
-          championshipIds: ["53kUVbxwuGkdd1Tdq"],
+          championshipIds: [],
           includeNextChampionships: true
         }
       ],
       events: [],
       points,
-      // cars: [],
-      manualResults: [],
-      promotionRelegation: {
-        // promotionDoubleZone: -,
-        promotionZone: 23
-        // relegationZone: -
-      }
+      cars: ["Opel Adam R2", "Peugeot 208 Rally4", "Renault Twingo II"],
+      manualResults: []
+      // promotionRelegation: {
+      //   promotionDoubleZone: -,
+      //   promotionZone: 23,
+      //   relegationZone: -
+      // }
     }
   },
   historicalSeasonLinks: [
+    {
+      name: "World Cup 2",
+      href: "/world-cup-2"
+    },
     {
       name: "JRC 15",
       href: "/jrc-15"
@@ -166,6 +169,10 @@ const initialState = {
     {
       name: "JRC 14",
       href: "/jrc-14"
+    },
+    {
+      name: "World Cup 1",
+      href: "/world-cup"
     },
     {
       name: "JRC 13",

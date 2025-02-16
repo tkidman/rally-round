@@ -5,71 +5,35 @@ const rallies = [
     locationName: "Janner Rallye",
     locationFlag: "AT",
     numStages: 9
-  },
-  {
-    eventIds: [55770],
-    endTime: "2023-05-08 12:59",
-    locationName: "Rally Costa Brava",
-    locationFlag: "ES",
-    numStages: 9
-  },
-  {
-    eventIds: [56045],
-    endTime: "2023-05-15 14:29",
-    locationName: "Hankiralli",
-    locationFlag: "FI",
-    numStages: 8
-  },
-  {
-    eventIds: [56274],
-    endTime: "2023-05-22 12:59",
-    locationName: "RSAC Scottish Rally",
-    locationFlag: "scot",
-    numStages: 10
-  },
-  {
-    eventIds: [56556],
-    endTime: "2023-05-29 12:59",
-    locationName: "Targa Florio Rally",
-    locationFlag: "IT",
-    numStages: 9
-  },
-  {
-    eventIds: [56821],
-    endTime: "2023-06-05 16:59",
-    locationName: "Ypres 24 Hours Rally",
-    locationFlag: "BE",
-    numStages: 9
-  },
-  {
-    eventIds: [57072],
-    endTime: "2023-06-12 16:59",
-    locationName: "Barum Tribec Rally",
-    locationFlag: "CZ",
-    numStages: 9
-  },
-  {
-    eventIds: [57288],
-    endTime: "2023-06-19 11:59",
-    locationName: "Rajd Polski",
-    locationFlag: "PL",
-    numStages: 9
-  },
-  {
-    eventIds: [57469],
-    endTime: "2023-06-26 12:59",
-    locationName: "Halkidiki Rally",
-    locationFlag: "GR",
-    numStages: 9
-  },
-  {
-    eventIds: [57707],
-    endTime: "2023-07-03 12:59",
-    locationName: "Rallye International d'Antibes",
-    locationFlag: "FR",
-    numStages: 9
   }
 ];
+
+const points = {
+  powerStage: [5, 4, 3, 2, 1],
+  overall: [
+    30,
+    24,
+    21,
+    18,
+    16,
+    15,
+    14,
+    13,
+    12,
+    11,
+    10,
+    9,
+    8,
+    7,
+    6,
+    5,
+    4,
+    3,
+    2,
+    1
+  ]
+  // stage: [1]
+};
 
 const initialState = {
   pointsForDNF: false,
@@ -81,11 +45,11 @@ const initialState = {
   hideCarColumnInStandings: false,
   showCarNameAsTextInResults: true,
   nullTeamIsPrivateer: true,
-  dropLowestScoringRoundsNumber: 2,
-  sortByDropRoundPoints: true,
+  dropLowestScoringRoundsNumber: 1,
+  // sortByDropRoundPoints: true,
   // useCarAsTeam: false,
   // useCarClassAsTeam: true,
-  disableOverall: true,
+  disableOverall: false,
   maxOverallDriversScoringPointsForTeam: 2,
   hideStageTimesUntilEventEnd: true,
   // teamPointsForPowerstage: true,
@@ -97,90 +61,98 @@ const initialState = {
   logo: "JRC.png",
   siteTitlePrefix: "JRC RBR",
   divisions: {
-    jrcRbrSeason4: {
-      divisionName: "jrcRbrSeason4",
-      displayName: "RBR Season 4 - Overall",
+    fantasyERCRally2R5: {
+      divisionName: "fantasyERCRally2R5",
+      displayName: "Fantasy ERC Rally2/R5",
       disableSameCarValidation: false,
       // enableSameCarClassValidation: true,
       maxDriversScoringPointsForTeam: 2,
-      // filterEntries: true,
       rbr: {
         rallies
       },
       manualResults: [],
       events: [],
-      points: {
-        powerStage: [5, 4, 3, 2, 1],
-        overall: [
-          30,
-          24,
-          21,
-          18,
-          16,
-          15,
-          14,
-          13,
-          12,
-          11,
-          10,
-          9,
-          8,
-          7,
-          6,
-          5,
-          4,
-          3,
-          2,
-          1
-        ]
-        // stage: [1]
-      }
-      // cars: ["Peugeot 205 GTI"]
-      // outputSheetId: "1C3fU9y1236wFmPuKcui4CEXBuSsUANH6OJ0BpQIasTc"
-    },
-    jrcRbrSeason4LowP2W: {
-      divisionName: "jrcRbrSeason4LowPWR",
-      displayName: "RBR Season 4 - Low PWR",
-      disableSameCarValidation: false,
-      // enableSameCarClassValidation: true,
-      maxDriversScoringPointsForTeam: 2,
+      points,
       filterEntries: {
         allowedCars: [
-          "Fiat 131 Abarth Grp4",
-          "Lada VFTS GrpB",
-          "Opel Ascona 400 Grp4"
+          "Skoda Fabia RS Rally2",
+          "Hyundai i20 N Rally2",
+          "Ford Fiesta Rally2",
+          "Toyota GR Yaris Rally2",
+          "Skoda Fabia R5 evo",
+          "Citroen C3 R5",
+          "VW Polo GTI R5",
+          "Ford Fiesta R5",
+          "Peugeot 208 T16 R5",
+          "Hyundai i20 R5",
+          "Skoda Fabia R5",
+          "Citroen DS3 R5"
         ]
-      },
+      }
+    },
+    fantasyERCRally3: {
+      divisionName: "fantasyERCRally3",
+      displayName: "Fantasy ERC Rally3",
+      disableSameCarValidation: false,
+      // enableSameCarClassValidation: true,
+      maxDriversScoringPointsForTeam: 2,
       rbr: {
         rallies
       },
       manualResults: [],
       events: [],
-      points: {
-        powerStage: [5, 4, 3, 2, 1],
-        overall: [25, 19, 16, 14, 12, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
-        // stage: [1]
+      points,
+      filterEntries: {
+        allowedCars: ["Ford Fiesta Rally3"]
       }
-      // cars: ["Peugeot 205 GTI"]
-      // outputSheetId: "1C3fU9y1236wFmPuKcui4CEXBuSsUANH6OJ0BpQIasTc"
+    }
+  },
+  fantasyERCRally4R2: {
+    divisionName: "fantasyERCRally4R2",
+    displayName: "Fantasy ERC Rally4/R2",
+    disableSameCarValidation: false,
+    // enableSameCarClassValidation: true,
+    maxDriversScoringPointsForTeam: 2,
+    rbr: {
+      rallies
+    },
+    manualResults: [],
+    events: [],
+    points,
+    filterEntries: {
+      allowedCars: [
+        "Peugeot 208 Rally4",
+        "Renault Clio Rally4",
+        "Ford Fiesta Rally4",
+        "Peugeot 208 R2",
+        "Citroen C2 R2 Max",
+        "Opel ADAM R2",
+        "Ford Fiesta Mk VIII R2",
+        "Renault Twingo R2 Evo",
+        "Ford Fiesta R2"
+      ]
     }
   },
   historicalSeasonLinks: [
     {
-      name: "RBR Season 1",
-      href: "/rbr/rbr-1"
+      name: "RBR Season 4",
+      href: "/rbr/rbr-4"
     },
     {
-      name: "RBR Season 2",
-      href: "/rbr/rbr-2"
+      name: "RBR Season 3",
+      href: "/rbr/rbr-3"
     },
     {
       name: "RBR Off Season 1",
       href: "/rbr/rbr-off-1"
     },
     {
-      name: "RBR Season 3",
-      href: "/rbr/rbr-3"
+      name: "RBR Season 2",
+      href: "/rbr/rbr-2"
+    },
+    {
+      name: "RBR Season 1",
+      href: "/rbr/rbr-1"
     }
   ]
 };
