@@ -130,6 +130,32 @@ const initialState = {
         "Volkswagen Polo R WRC 2013",
         "MINI John Cooper Works WRC"
       ]
+    },
+    wrc2013Constructors: {
+      divisionName: "wrc2013Constructors",
+      displayName: "WRC 2013 Constructors",
+      disableSameCarValidation: false,
+      // enableSameCarClassValidation: true,
+      maxDriversScoringPointsForTeam: 2,
+      // filterEntries: true,
+      overrideTeam: { useCarAsTeam: true },
+      hideDriverStandingsLink: true,
+      wrc: [
+        {
+          clubId: "17",
+          championshipIds: ["2RLdo17ozbWBUk3jU"],
+          includeNextChampionships: true
+        }
+      ],
+      manualResults: [],
+      events: [],
+      points,
+      // excludedCars: ["WRC Builder Vehicle"],
+      cars: [
+        "Citroën DS3 WRC '12",
+        "Volkswagen Polo R WRC 2013",
+        "MINI John Cooper Works WRC"
+      ]
     }
   },
   historicalSeasonLinks: [
