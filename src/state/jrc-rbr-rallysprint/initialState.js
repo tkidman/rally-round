@@ -184,10 +184,17 @@ const rallies = [
   },
   {
     eventId: 79127,
-    endTime: "2025-02-10 20:00",
-    locationName: "2025-02-17 12:59",
+    endTime: "2025-02-17 12:59",
+    locationName: "Bois de Bie",
     locationFlag: "FR",
     numStages: 3
+   },
+  {
+    eventId: 79546,
+    endTime: "2025-02-24 12:59",
+    locationName: "Piren Tarmac",
+    locationFlag: "SE",
+    numStages: 3 
   }
 ];
 
