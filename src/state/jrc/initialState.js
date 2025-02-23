@@ -61,7 +61,7 @@ const initialState = {
   pointsForDNF: false,
   websiteName: "jrc-results",
   useStandingsForHome: true,
-  showLivePoints: true,
+  showLivePoints: false,
   showLivePointsDaysRemaining: 4,
   nullTeamIsPrivateer: true,
   enableDnsPenalty: true,
@@ -93,7 +93,7 @@ const initialState = {
       wrc: [
         {
           clubId: "158",
-          championshipIds: ["4fzz1BZi5wGrojAgg"],
+          championshipIds: ["2gCVmPWb5MDXwga7o"],
           includeNextChampionships: true
         }
       ],
@@ -114,7 +114,7 @@ const initialState = {
       wrc: [
         {
           clubId: "26",
-          championshipIds: ["34cMdUhR45Q48ELUn"],
+          championshipIds: ["26BYX3BL6DGpYAEPv"],
           includeNextChampionships: true
         }
       ],
@@ -123,7 +123,7 @@ const initialState = {
       cars: [
         "Ford Fiesta R5 MK7 Evo 2",
         "Peugeot 208 T16 R5",
-        "Škoda Fabia Rally2 Evo",
+        "ŠKODA Fabia Rally2 Evo",
         "Volkswagen Polo GTI R5"
       ],
       manualResults: [],
@@ -142,13 +142,13 @@ const initialState = {
       wrc: [
         {
           clubId: "27",
-          championshipIds: [],
+          championshipIds: ["39mM9wEYuDmxWei2G"],
           includeNextChampionships: true
         }
       ],
       events: [],
       points,
-      cars: ["Opel Adam R2", "Peugeot 208 Rally4", "Renault Twingo II"],
+      cars: ["Opel Adam R2", "Citroën C2 R2 Max", "Renault Twingo II"],
       manualResults: []
       // promotionRelegation: {
       //   promotionDoubleZone: -,

@@ -52,7 +52,7 @@ const writeJSON = eventResults => {
 
 const checkOutputDirs = () => {
   fs.existsSync(hiddenPath) || fs.mkdirSync(hiddenPath);
-  if (process.env.CLEAR_LOCAL_CACHE) {
+  if (!process.env.KEEP_LOCAL_CACHE) {
     fs.existsSync(cachePath) && fs.rmSync(cachePath, { recursive: true });
   }
   fs.existsSync(cachePath) || fs.mkdirSync(cachePath, { recursive: true });

@@ -8,8 +8,8 @@ const wrcCarList = {
     "Citroën C3 Rally2",
     "Ford Fiesta Rally2",
     "Hyundai i20 N Rally2",
-    "Škoda Fabia Rally2 Evo",
-    "Škoda Fabia RS Rally2",
+    "ŠKODA Fabia Rally2 Evo",
+    "ŠKODA Fabia RS Rally2",
     "Volkswagen Polo GTI R5"
   ],
   "Junior WRC": ["Ford Fiesta Rally3"],
@@ -32,7 +32,7 @@ const wrcCarList = {
     "Mitsubishi Lancer Evolution VI",
     "Peugeot 206 Rally",
     "SEAT Córdoba WRC",
-    "Škoda Fabia WRC",
+    "ŠKODA Fabia WRC",
     "SUBARU Impreza 1998",
     "SUBARU Impreza 2001",
     "SUBARU Impreza 2008"

@@ -1,10 +1,10 @@
 const rallies = [
   {
-    eventIds: [55244],
-    endTime: "2023-05-01 12:59",
-    locationName: "Janner Rallye",
-    locationFlag: "AT",
-    numStages: 9
+    eventIds: [79189],
+    endTime: "2025-02-24 12:59",
+    locationName: "Arctic Rally Finland",
+    locationFlag: "FI",
+    numStages: 8
   }
 ];
 
@@ -40,7 +40,7 @@ const initialState = {
   websiteName: "jrc-results",
   subfolderName: "rbr",
   useStandingsForHome: true,
-  showLivePoints: true,
+  showLivePoints: false,
   showLivePointsDaysRemaining: 4,
   hideCarColumnInStandings: false,
   showCarNameAsTextInResults: true,
