@@ -229,7 +229,7 @@ const initialState = {
     powerslideRallysprint1: {
       divisionName: "powerslideRallysprint1",
       displayName: "Powerslide Rallysprint #1",
-      disableSameCarValidation: false,
+      disableSameCarValidation: true,
       // enableSameCarClassValidation: true,
       // maxDriversScoringPointsForTeam: 2,
       // filterEntries: {
