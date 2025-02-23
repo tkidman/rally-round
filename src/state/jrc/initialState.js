@@ -99,10 +99,10 @@ const initialState = {
       ],
       events: [],
       points,
-      manualResults: [],
-      filterEntries: {
-        matchDivision: true
-      }
+      manualResults: []
+      // filterEntries: {
+      //   matchDivision: true
+      // }
       // promotionRelegation: {
       //   relegationZone: 18
       // }
@@ -126,10 +126,10 @@ const initialState = {
         "ŠKODA Fabia Rally2 Evo",
         "Volkswagen Polo GTI R5"
       ],
-      manualResults: [],
-      filterEntries: {
-        matchDivision: true
-      }
+      manualResults: []
+      // filterEntries: {
+      //   matchDivision: true
+      // }
       // promotionRelegation: {
       //   promotionZone: 21,
       //   relegationZone: 24
