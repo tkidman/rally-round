@@ -4,6 +4,7 @@ const copydir = require("copy-dir");
 describe("e2e", () => {
   beforeAll(async () => {
     process.env.CLUB = "test-e2e";
+    process.env.KEEP_LOCAL_CACHE = true;
     const { processAllDivisions } = require("./index");
     const { checkOutputDirs } = require("./output/output");
     const { cachePath } = require("./shared");
