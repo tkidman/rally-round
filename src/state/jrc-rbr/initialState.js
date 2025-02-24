@@ -7,7 +7,7 @@ const rallies = [
     numStages: 8
   },
   {
-    eventId: 79642,
+    eventId: [79642],
     endTime: "2025-03-03 12:59",
     locationName: "Rally Sierra Morena",
     locationFlag: "ES",
