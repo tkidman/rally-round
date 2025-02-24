@@ -5,31 +5,38 @@ const rallies = [
     locationName: "Arctic Rally Finland",
     locationFlag: "FI",
     numStages: 8
+  },
+  {
+    eventId: 79642,
+    endTime: "2025-03-03 12:59",
+    locationName: "Rally Sierra Morena",
+    locationFlag: "ES",
+    numStages: 9
   }
 ];
 
 const points = {
-  powerStage: [5, 4, 3, 2, 1],
+  //powerStage: [5, 4, 3, 2, 1],
   overall: [
-    30,
-    24,
-    21,
+    25,
     18,
-    16,
     15,
-    14,
-    13,
     12,
-    11,
     10,
-    9,
     8,
-    7,
     6,
     5,
     4,
     3,
     2,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
     1
   ]
   // stage: [1]
