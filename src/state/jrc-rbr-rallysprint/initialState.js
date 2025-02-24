@@ -195,6 +195,13 @@ const rallies = [
     locationName: "Piren Tarmac",
     locationFlag: "SE",
     numStages: 3
+  },
+  {
+    eventId: 79884,
+    endTime: "2025-03-03 13:59",
+    locationName: "Fintele",
+    locationFlag: "BE",
+    numStages: 3
   }
 ];
 
