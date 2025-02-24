@@ -176,28 +176,28 @@ const points = {
 
 const rallies = [
   {
-    eventId: 78878,
+    eventId: [78878],
     endTime: "2025-02-10 20:00",
     locationName: "Sunava Shakedown",
     locationFlag: "SK",
     numStages: 3
   },
   {
-    eventId: 79127,
+    eventId: [79127],
     endTime: "2025-02-17 12:59",
     locationName: "Bois de Bie",
     locationFlag: "FR",
     numStages: 3
   },
   {
-    eventId: 79546,
+    eventId: [79546],
     endTime: "2025-02-24 12:59",
     locationName: "Piren Tarmac",
     locationFlag: "SE",
     numStages: 3
   },
   {
-    eventId: 79884,
+    eventId: [79884],
     endTime: "2025-03-03 13:59",
     locationName: "Fintele",
     locationFlag: "BE",
