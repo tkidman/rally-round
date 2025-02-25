@@ -250,7 +250,8 @@ const initialState = {
       //   ]
       // },
       rbr: {
-        rallies
+        rallies,
+        useCsv: true
       },
       points,
       manualResults: [],
