@@ -1076,23 +1076,22 @@ const aggregateOverallResults = ({ overallEvent, resultType, event }) => {
     if (!overallResultsByName[result.name]) {
       overallResultsByName[result.name] = {
         ...result,
-        divisionName: "overall"
+        divisionName: "overall",
+        resultCount: 1
       };
     } else {
-      overallResultsByName[result.name].totalPoints += result.totalPoints;
+      const skipResult =
+        leagueRef.league.maxOverallDriversScoringPointsForTeam &&
+        resultType === resultTypes.team &&
+        overallResultsByName[result.name].resultCount >=
+          leagueRef.league.maxOverallDriversScoringPointsForTeam;
+      if (!skipResult) {
+        overallResultsByName[result.name].totalPoints += result.totalPoints;
+        overallResultsByName[result.name].resultCount++;
+      }
     }
   });
   overallEvent.results[resultType] = sortResults(overallResultsByName);
-  if (
-    leagueRef.league.maxOverallDriversScoringPointsForTeam &&
-    resultType === resultTypes.team
-  ) {
-    overallEvent.results[resultType] = slice(
-      overallEvent.results[resultType],
-      0,
-      leagueRef.league.maxOverallDriversScoringPointsForTeam
-    );
-  }
   overallEvent.results[resultType].forEach(result => {
     result.pointsDisplay = getTotalPointsDisplay(result, event);
   });
