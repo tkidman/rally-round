@@ -1,4 +1,12 @@
-const { keyBy, isEmpty, isNil, some, reduce } = require("lodash");
+const {
+  keyBy,
+  isEmpty,
+  isNil,
+  some,
+  reduce,
+  uniq,
+  forEach
+} = require("lodash");
 const Papa = require("papaparse");
 const fs = require("fs");
 const debug = require("debug")("tkidman:rally-round:state");
@@ -368,15 +376,28 @@ const saveDivisionDrivers = (driversByName, divisionName) => {
 };
 
 const getTeamIds = () => {
-  const teamsIds = Object.values(
-    league.currentDivision.drivers.driversById
-  ).reduce((teamIdsObj, driver) => {
-    if (driver.teamId && driver.teamId !== privateer) {
-      teamIdsObj[driver.teamId] = driver.teamId;
-    }
-    return teamIdsObj;
-  }, {});
+  return getTeamIdsForDivision(league.currentDivision);
+};
+
+const getTeamIdsForDivision = division => {
+  const teamsIds = Object.values(division.drivers.driversById).reduce(
+    (teamIdsObj, driver) => {
+      if (driver.teamId && driver.teamId !== privateer) {
+        teamIdsObj[driver.teamId] = driver.teamId;
+      }
+      return teamIdsObj;
+    },
+    {}
+  );
   return Object.keys(teamsIds);
+};
+
+const getAllTeamIds = () => {
+  const teamIds = [];
+  forEach(leagueRef.league.divisions, division => {
+    teamIds.push(...getTeamIdsForDivision(division));
+  });
+  return uniq(teamIds);
 };
 
 const printMissingDrivers = () => {
@@ -390,6 +411,7 @@ module.exports = {
   init,
   leagueRef,
   getTeamIds,
+  getAllTeamIds,
   printMissingDrivers,
   getCarByName
 };

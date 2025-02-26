@@ -15,7 +15,8 @@ const { privateer } = require("./shared");
 const {
   printMissingDrivers,
   getTeamIds,
-  getCarByName
+  getCarByName,
+  getAllTeamIds
 } = require("./state/league");
 const {
   sortBy,
@@ -26,7 +27,9 @@ const {
   isEmpty,
   slice,
   forEach,
-  findIndex
+  findIndex,
+  orderBy,
+  isNil
 } = require("lodash");
 const { cachePath } = require("./shared");
 const fs = require("fs");
@@ -141,6 +144,7 @@ const calculateTeamResults = (
           if (!maxDriversReached) {
             teamResults[resultTeamId].totalPoints += totalPointsForTeam;
             teamResults[resultTeamId].driverResultsCounted++;
+            result.teamPoints = totalPointsForTeam;
           } else {
             debug(
               `max drivers reached for team ${resultTeamId}, result ignored for ${result.name} `
@@ -862,7 +866,7 @@ const calculateStandings = ({
     const allResultsForName = [...previousResultsForName, result];
     standing.totalPoints = sumBy(
       allResultsForName,
-      result => result.totalPoints
+      nameResult => nameResult.totalPoints
     );
     standing.totalPointsAfterDropRounds = calculateTotalPointsAfterDropRounds({
       allResultsForName,
@@ -1070,25 +1074,51 @@ const processEvents = (events, divisionName) => {
   }
 };
 
+const aggregateTeamOverallResults = ({ overallEvent }) => {
+  const teamIds = getAllTeamIds();
+  const teamResults = {};
+  forEach(teamIds, teamId => {
+    teamResults[teamId] = [{ name: teamId, points: 0 }];
+  });
+  overallEvent.results.driverResults.forEach(result => {
+    if (!isNil(result.teamPoints)) {
+      teamResults[result.teamId].push({
+        name: result.teamId,
+        points: result.teamPoints
+      });
+    }
+  });
+  const overallResultsByName = {};
+  Object.keys(teamResults).forEach(teamId => {
+    let resultsArray = teamResults[teamId];
+    if (leagueRef.league.maxOverallDriversScoringPointsForTeam) {
+      resultsArray = orderBy(resultsArray, ["points"], ["desc"]).slice(
+        0,
+        leagueRef.league.maxOverallDriversScoringPointsForTeam
+      );
+    }
+    const totalPoints = sumBy(resultsArray, "points");
+    overallResultsByName[teamId] = {
+      name: teamId,
+      totalPoints
+    };
+  });
+  overallEvent.results.teamResults = sortResults(overallResultsByName);
+  overallEvent.results.teamResults.forEach(result => {
+    result.pointsDisplay = getTotalPointsDisplay(result, overallEvent);
+  });
+};
+
 const aggregateOverallResults = ({ overallEvent, resultType, event }) => {
   const overallResultsByName = keyBy(overallEvent.results[resultType], "name");
   event.results[resultType].forEach(result => {
     if (!overallResultsByName[result.name]) {
       overallResultsByName[result.name] = {
         ...result,
-        divisionName: "overall",
-        resultCount: 1
+        divisionName: "overall"
       };
     } else {
-      const skipResult =
-        leagueRef.league.maxOverallDriversScoringPointsForTeam &&
-        resultType === resultTypes.team &&
-        overallResultsByName[result.name].resultCount >=
-          leagueRef.league.maxOverallDriversScoringPointsForTeam;
-      if (!skipResult) {
-        overallResultsByName[result.name].totalPoints += result.totalPoints;
-        overallResultsByName[result.name].resultCount++;
-      }
+      overallResultsByName[result.name].totalPoints += result.totalPoints;
     }
   });
   overallEvent.results[resultType] = sortResults(overallResultsByName);
@@ -1154,17 +1184,13 @@ const calculateOverall = processedDivisions => {
           event
         });
       }
-
-      // team results
-      aggregateOverallResults({
-        overallEvent,
-        resultType: resultTypes.team,
-        event
-      });
     });
   });
 
   overall.events.forEach((event, index) => {
+    aggregateTeamOverallResults({
+      overallEvent: event
+    });
     event.results.driverResults = orderResultsBy(
       event.results.driverResults,
       "totalTime"

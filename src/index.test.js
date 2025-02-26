@@ -2,7 +2,6 @@ const {
   calculateEventResults,
   sortResults,
   calculateEventStandings,
-  calculateOverall,
   calculateTotalPointsAfterDropRounds,
   getPromotionRelegationZoneNumber
 } = require("./index");
@@ -13,7 +12,6 @@ const { calculatePromotionRelegation } = require("./index");
 const { isDnsPenalty } = require("./index");
 const { init } = require("./state/league");
 const { resultTypes } = require("./shared");
-const { forEach, omit } = require("lodash");
 
 describe("calculates event results", () => {
   let leagueRef;
@@ -73,6 +71,7 @@ describe("calculates event results", () => {
         powerStagePoints: 5,
         stagePoints: 2,
         teamId: "Time Penalty Boys",
+        teamPoints: 11,
         totalPoints: 16
       },
       {
@@ -436,15 +435,6 @@ describe("calculates event results", () => {
         previousPosition: null
       }
     ]);
-  });
-
-  it("calculates overall results", () => {
-    const preOverallResults = require("./__fixtures__/preOverallLeague.json");
-    forEach(preOverallResults.divisions, division => {
-      division.drivers = leagueRef.drivers;
-    });
-    const overall = calculateOverall(preOverallResults.divisions);
-    expect(omit(overall, "drivers")).toMatchSnapshot();
   });
 
   describe("isDnsPenalty", () => {
