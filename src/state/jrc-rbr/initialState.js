@@ -76,6 +76,40 @@ const initialState = {
         ]
       }
     },
+    fantasyERCRally2R5Tyres: {
+      divisionName: "fantasyERCRally2R5Tyres",
+      displayName: "Fantasy ERC Rally2/R5 Tyre",
+      disableSameCarValidation: false,
+      // enableSameCarClassValidation: true,
+      maxDriversScoringPointsForTeam: 2,
+      rbr: {
+        rallies
+      },
+      manualResults: [],
+      events: [],
+      points,
+      filterEntries: {
+        allowedCars: [
+          "Skoda Fabia RS Rally2",
+          "Hyundai i20 N Rally2",
+          "Ford Fiesta Rally2",
+          "Toyota GR Yaris Rally2",
+          "Skoda Fabia R5 evo",
+          "Citroen C3 R5",
+          "VW Polo GTI R5",
+          "Ford Fiesta R5",
+          "Peugeot 208 T16 R5",
+          "Hyundai i20 R5",
+          "Skoda Fabia R5",
+          "Citroen DS3 R5"
+        ]
+      },
+      overrideTeam: {
+        useTeam2AsTeam: true
+      },
+      excludeFromOverall: true,
+      hideDriverStandingsLink: true
+    },
     fantasyERCRally3: {
       divisionName: "fantasyERCRally3",
       displayName: "Fantasy ERC Rally3",
@@ -91,6 +125,27 @@ const initialState = {
       filterEntries: {
         allowedCars: ["Ford Fiesta Rally3"]
       }
+    },
+    fantasyERCRally3Tyres: {
+      divisionName: "fantasyERCRally3Tyres",
+      displayName: "Fantasy ERC Rally3 Tyre",
+      disableSameCarValidation: false,
+      // enableSameCarClassValidation: true,
+      maxDriversScoringPointsForTeam: 2,
+      rbr: {
+        rallies
+      },
+      manualResults: [],
+      events: [],
+      points,
+      filterEntries: {
+        allowedCars: ["Ford Fiesta Rally3"]
+      },
+      excludeFromOverall: true,
+      overrideTeam: {
+        useTeam2AsTeam: true
+      },
+      hideDriverStandingsLink: true
     }
   },
   fantasyERCRally4R2: {

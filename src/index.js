@@ -395,6 +395,7 @@ const getTotalPointsDisplay = (result, event) => {
 };
 
 const getResultTeamId = (eventIndex, driver) => {
+  // not to be confused with overrideTeam :/
   const teamOverride = leagueRef.league.teamOverride;
   if (
     teamOverride &&
@@ -1033,6 +1034,8 @@ const loadEventDriver = (entry, drivers, event) => {
       if (driver.firstCarDriven) {
         driver.teamId = getCarByName(driver.firstCarDriven).class;
       }
+    } else if (get(division, "overrideTeam.useTeam2AsTeam")) {
+      driver.teamId = driver.team2Id;
     } else if (leagueRef.league.nullTeamIsPrivateer) {
       driver.teamId = privateer;
     }
@@ -1141,50 +1144,56 @@ const calculateOverall = processedDivisions => {
   };
   Object.keys(processedDivisions).forEach(divisionName => {
     const division = processedDivisions[divisionName];
-    overall.drivers.driversById = {
-      ...overall.drivers.driversById,
-      ...division.drivers.driversById
-    };
-    // we probably don't need these in overall
-    overall.drivers.driversByRaceNet = {
-      ...overall.drivers.driversByRaceNet,
-      ...division.drivers.driversByRaceNet
-    };
-    overall.drivers.driversByName3 = {
-      ...overall.drivers.driversByName3,
-      ...division.drivers.driversByName3
-    };
-    division.events.forEach((event, index) => {
-      let overallEvent = overall.events[index];
-      if (!overallEvent) {
-        overallEvent = {
-          location: event.location,
-          locationName: event.locationName,
-          locationFlag: event.locationFlag,
-          endTime: event.endTime,
-          eventStatus: event.eventStatus,
-          divisionName: "overall",
-          results: { driverResults: [], teamResults: [], driverLegsResults: [] }
-        };
-        overall.events.push(overallEvent);
-      }
+    if (!division.excludeFromOverall) {
+      overall.drivers.driversById = {
+        ...overall.drivers.driversById,
+        ...division.drivers.driversById
+      };
+      // we probably don't need these in overall
+      overall.drivers.driversByRaceNet = {
+        ...overall.drivers.driversByRaceNet,
+        ...division.drivers.driversByRaceNet
+      };
+      overall.drivers.driversByName3 = {
+        ...overall.drivers.driversByName3,
+        ...division.drivers.driversByName3
+      };
+      division.events.forEach((event, index) => {
+        let overallEvent = overall.events[index];
+        if (!overallEvent) {
+          overallEvent = {
+            location: event.location,
+            locationName: event.locationName,
+            locationFlag: event.locationFlag,
+            endTime: event.endTime,
+            eventStatus: event.eventStatus,
+            divisionName: "overall",
+            results: {
+              driverResults: [],
+              teamResults: [],
+              driverLegsResults: []
+            }
+          };
+          overall.events.push(overallEvent);
+        }
 
-      if (!leagueRef.league.aggregateDriverResultsInOverall) {
-        const driverResultsWithDivisionName = event.results.driverResults.map(
-          result =>
-            Object.assign({ divisionName: divisionName }, cloneDeep(result))
-        );
-        overallEvent.results.driverResults.push(
-          ...driverResultsWithDivisionName
-        );
-      } else {
-        aggregateOverallResults({
-          overallEvent,
-          resultType: resultTypes.driver,
-          event
-        });
-      }
-    });
+        if (!leagueRef.league.aggregateDriverResultsInOverall) {
+          const driverResultsWithDivisionName = event.results.driverResults.map(
+            result =>
+              Object.assign({ divisionName: divisionName }, cloneDeep(result))
+          );
+          overallEvent.results.driverResults.push(
+            ...driverResultsWithDivisionName
+          );
+        } else {
+          aggregateOverallResults({
+            overallEvent,
+            resultType: resultTypes.driver,
+            event
+          });
+        }
+      });
+    }
   });
 
   overall.events.forEach((event, index) => {

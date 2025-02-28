@@ -5,7 +5,8 @@ const {
   some,
   reduce,
   uniq,
-  forEach
+  forEach,
+  filter
 } = require("lodash");
 const Papa = require("papaparse");
 const fs = require("fs");
@@ -110,6 +111,10 @@ const transformDriverRows = driverRows => {
         [driverFieldNames.nationality]: getField(
           row,
           driverColumns[driverFieldNames.nationality]
+        ),
+        [driverFieldNames.team2Id]: getField(
+          row,
+          driverColumns[driverFieldNames.team2Id]
         )
       };
     } else {
@@ -394,7 +399,11 @@ const getTeamIdsForDivision = division => {
 
 const getAllTeamIds = () => {
   const teamIds = [];
-  forEach(leagueRef.league.divisions, division => {
+  const nonOverrideTeamDivisions = filter(
+    leagueRef.league.divisions,
+    division => !division.excludeFromOverall
+  );
+  forEach(nonOverrideTeamDivisions, division => {
     teamIds.push(...getTeamIdsForDivision(division));
   });
   return uniq(teamIds);

@@ -9,6 +9,7 @@ const driver = {
   name3: null,
   nationality: null,
   raceNetName: "Spookex",
+  team2Id: null,
   teamId: "Time Penalty Boys"
 };
 

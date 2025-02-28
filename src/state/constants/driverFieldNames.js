@@ -1,6 +1,7 @@
 const driverFieldNames = {
   name: "name",
   teamId: "teamId",
+  team2Id: "team2Id",
   raceNetName: "raceNetName",
   division: "division",
   car: "car",
