@@ -26,7 +26,7 @@ const initialState = {
   websiteName: "jrc-results",
   subfolderName: "rbr",
   useStandingsForHome: true,
-  showLivePoints: false,
+  showLivePoints: true,
   showLivePointsDaysRemaining: 4,
   hideCarColumnInStandings: false,
   showCarNameAsTextInResults: true,
@@ -46,6 +46,7 @@ const initialState = {
     "background-size: cover;",
   logo: "JRC.png",
   siteTitlePrefix: "JRC RBR",
+  team2ColumnName: "Tyre",
   divisions: {
     fantasyERCRally2R5: {
       divisionName: "fantasyERCRally2R5",

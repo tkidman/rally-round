@@ -38,8 +38,11 @@
                                     <th>{{localization.team_name}}</th>
                                 {{/if}}
                             {{/if}}
+                            {{#if showTeam2LogoColumn}}
+                                <th>{{team2ColumnName}}</th>
+                            {{/if}}
                             {{#if showCar}}
-                            <th>{{localization.car}}</th>
+                                <th>{{localization.car}}</th>
                             {{/if}}
 
                             {{#each headerLocations}}
@@ -88,6 +91,11 @@
                                     <td class="text-left">{{this.driver.teamId}}</td>
                                 {{/if}}
                             {{/if}}
+                            {{#if ../showTeam2LogoColumn}}
+                                <td>
+                                    <img src="{{this.team2Logo}}" style="max-width:2em; max-height:2em;" alt="{{this.driver.team2Id}}" title="{{this.driver.team2Id}}"/>
+                                </td>
+                            {{/if}}
                             {{#if ../showCar}}
                                 {{#if ../showCarName}}
                                     <td class="text-left">
@@ -119,6 +127,11 @@
                 {{#if showPointsAfterDropRounds}}
                     <div style="margin:0 auto; text-align:center;">
                         <p>{{afterDropRoundMessage}}</p>
+                    </div>
+                {{/if}}
+                {{#if fullResultsLink}}
+                    <div style="margin:0 auto; text-align:center;">
+                        <a href="{{fullResultsLink}}" target="_none">{{localization.full_results}}</a>
                     </div>
                 {{/if}}
             </div>

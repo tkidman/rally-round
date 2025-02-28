@@ -297,7 +297,8 @@ const transformForStandingsHTML = (division, type) => {
         car: carBrand,
         driver,
         country,
-        teamLogo: getTeamLogo(driver.teamId)
+        teamLogo: getTeamLogo(driver.teamId),
+        team2Logo: getTeamLogo(driver.team2Id)
       };
     } else {
       const country = useNationalityAsTeam(leagueRef, division)
@@ -329,7 +330,10 @@ const transformForStandingsHTML = (division, type) => {
     logo: leagueRef.league.logo,
     showTeamNameTextColumn: leagueRef.league.showTeamNameTextColumn,
     hideTeamLogoColumn: leagueRef.league.hideTeamLogoColumn,
-    localization: getLocalization()
+    localization: getLocalization(),
+    team2ColumnName: leagueRef.league.team2ColumnName,
+    showTeam2LogoColumn: !!leagueRef.league.team2ColumnName,
+    fullResultsLink: getFullResultsLink(division)
   };
 };
 
@@ -391,6 +395,16 @@ const getTotalDiffDisplay = (result, event) => {
   return result.entry.totalDiff;
 };
 
+const getFullResultsLink = (division, event) => {
+  if (division.rbr && event && event.eventId) {
+    return `https://rallysimfans.hu/rbr/rally_online.php?centerbox=rally_results.php&rally_id=${event.eventId}`;
+  }
+  if (division.wrc && division.wrc.length === 1) {
+    return `https://racenet.com/ea_sports_wrc/clubs/${division.wrc[0].clubId}`;
+  }
+  return null;
+};
+
 const transformForDriverResultsHTML = (event, division, legIndex) => {
   const events = division.events;
   const divisionName = division.divisionName;
@@ -413,6 +427,7 @@ const transformForDriverResultsHTML = (event, division, legIndex) => {
       car: entryCar ? entryCar.brand : carBrand,
       driver,
       teamLogo: getTeamLogo(driver.teamId),
+      team2Logo: getTeamLogo(driver.team2Id),
       country,
       divisionDisplayName:
         resultDivision.displayName || resultDivision.divisionName,
@@ -449,11 +464,10 @@ const transformForDriverResultsHTML = (event, division, legIndex) => {
     logo: leagueRef.league.logo,
     hideTeamLogoColumn: leagueRef.league.hideTeamLogoColumn,
     showSuperRallyColumn: leagueRef.league.showSuperRallyColumn,
-    fullResultsLink:
-      division.rbr && event.eventId
-        ? `https://rallysimfans.hu/rbr/rally_online.php?centerbox=rally_results.php&rally_id=${event.eventId}`
-        : null,
-    localization: getLocalization()
+    fullResultsLink: getFullResultsLink(division, event),
+    localization: getLocalization(),
+    team2ColumnName: leagueRef.league.team2ColumnName,
+    showTeam2LogoColumn: !!leagueRef.league.team2ColumnName
   };
   const legDisplay = isNil(legIndex)
     ? ""

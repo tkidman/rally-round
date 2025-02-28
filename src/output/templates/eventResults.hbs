@@ -37,6 +37,9 @@
                             <th>{{localization.team_name}}</th>
                         {{/if}}
                     {{/if}}
+                    {{#if showTeam2LogoColumn}}
+                        <th>{{team2ColumnName}}</th>
+                    {{/if}}
                     {{#if showCar}}
                         <th>{{localization.car}}</th>
                         {{#if showCarName}}
@@ -90,6 +93,11 @@
                                 <td class="text-left">{{this.teamId}}</td>
                             {{/if}}
                        {{/if}}
+                        {{#if ../showTeam2LogoColumn}}
+                            <td>
+                                <img src="{{this.team2Logo}}" style="max-width:2em; max-height:2em;" alt="{{this.driver.team2Id}}" title="{{this.driver.team2Id}}"/>
+                            </td>
+                        {{/if}}
                         {{#if ../showCar}}
                             <td>
                                 <img src="./assets/cars/{{this.car}}.png" style="max-width:2em; max-height:2em;" alt="{{this.car}}" title="{{this.car}}"/>

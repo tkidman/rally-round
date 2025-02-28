@@ -73,7 +73,7 @@ const initialState = {
   pointsForDNF: false,
   websiteName: "jrc-results",
   useStandingsForHome: true,
-  showLivePoints: false,
+  showLivePoints: true,
   showLivePointsDaysRemaining: 4,
   nullTeamIsPrivateer: true,
   enableDnsPenalty: true,
