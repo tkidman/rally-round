@@ -12,12 +12,19 @@ const rallies = [
     locationName: "Rally Sierra Morena",
     locationFlag: "ES",
     numStages: 9
+  },
+  {
+    eventId: [80028],
+    endTime: "2025-03-10 12:59",
+    locationName: "Rally Hungary",
+    locationFlag: "HU",
+    numStages: 8
   }
 ];
 
 const points = {
   //powerStage: [5, 4, 3, 2, 1],
-  overall: [25, 18, 15, 12, 10, 8, 6, 5, 4, 3, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+  overall: [25, 18, 15, 12, 10, 8, 6, 5, 4, 3, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
   // stage: [1]
 };
 
