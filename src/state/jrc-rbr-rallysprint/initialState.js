@@ -202,6 +202,13 @@ const rallies = [
     locationName: "Fintele",
     locationFlag: "BE",
     numStages: 3
+  },
+  {
+    eventId: [80029],
+    endTime: "2025-03-10 13:59",
+    locationName: "Cote D Arbroz II",
+    locationFlag: "FR",
+    numStages: 3
   }
 ];
 
