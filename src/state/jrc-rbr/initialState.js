@@ -19,6 +19,13 @@ const rallies = [
     locationName: "Rally Hungary",
     locationFlag: "HU",
     numStages: 8
+  },
+  {
+    eventId: [80334],
+    endTime: "2025-03-17 12:59",
+    locationName: "Kielder Forest Rally",
+    locationFlag: "GB",
+    numStages: 9
   }
 ];
 
