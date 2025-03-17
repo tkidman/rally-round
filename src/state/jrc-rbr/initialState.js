@@ -26,6 +26,13 @@ const rallies = [
     locationName: "Kielder Forest Rally",
     locationFlag: "GB",
     numStages: 9
+  },
+  {
+    eventId: [80620],
+    endTime: "2025-03-24 12:59",
+    locationName: "Royal Rally of Scandinavia",
+    locationFlag: "SE",
+    numStages: 9
   }
 ];
 
