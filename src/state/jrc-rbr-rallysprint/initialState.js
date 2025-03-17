@@ -209,6 +209,13 @@ const rallies = [
     locationName: "Cote D Arbroz II",
     locationFlag: "FR",
     numStages: 3
+  },
+  {
+    eventId: [80335],
+    endTime: "2025-03-17 13:59",
+    locationName: "Halenkovice Shakedown",
+    locationFlag: "CZ",
+    numStages: 3
   }
 ];
 
