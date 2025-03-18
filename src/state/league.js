@@ -11,7 +11,7 @@ const {
 const Papa = require("papaparse");
 const fs = require("fs");
 const debug = require("debug")("tkidman:rally-round:state");
-const { club, privateer } = require("../shared");
+const { club, privateer, MAX_TOTAL_TIME } = require("../shared");
 const league = require(`./${club}/initialState`);
 const { driverColumns, sheetsConfig } = require(`./${club}/driverConfig`);
 const driverFieldNames = require("./constants/driverFieldNames");
@@ -173,14 +173,12 @@ const loadManualResultsFromSheets = async () => {
     tabName: sheetsConfig.manualResultsTabName || "Manual Results"
   });
   const manualResults = resultRows.map(row => {
-    if (!row["Name"] || !row["Event Number"] || !row["Total Time"]) {
-      throw new Error(
-        "'Event Number', 'Name' and 'Total Time' are mandatory columns"
-      );
+    if (!row["Name"] || !row["Event Number"]) {
+      throw new Error("'Event Number' and 'Name' are mandatory columns");
     }
     const result = {
       name: row["Name"],
-      totalTime: row["Total Time"]
+      totalTime: row["Total Time"] || MAX_TOTAL_TIME
     };
     if (row["PS Time"]) {
       result.stageTime = row["PS Time"];

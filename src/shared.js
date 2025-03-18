@@ -111,6 +111,7 @@ const addSeconds = (entryTime, numSeconds) => {
 };
 
 const DNF_STAGE_TIME = "15:00:00.000";
+const MAX_TOTAL_TIME = "23:59:59.000";
 const createDNFResult = (driverName, isDnsEntry) => {
   return {
     name: driverName,
@@ -120,7 +121,7 @@ const createDNFResult = (driverName, isDnsEntry) => {
       isDnsEntry,
       stageTime: DNF_STAGE_TIME,
       stageDiff: "N/A",
-      totalTime: "23:59:59.000",
+      totalTime: MAX_TOTAL_TIME,
       totalDiff: "N/A"
     }
   };
@@ -224,5 +225,6 @@ module.exports = {
   knapsack,
   mergeEvent,
   useNationalityAsTeam,
-  DNF_STAGE_TIME
+  DNF_STAGE_TIME,
+  MAX_TOTAL_TIME
 };
