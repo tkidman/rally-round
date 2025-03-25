@@ -33,6 +33,13 @@ const rallies = [
     locationName: "Royal Rally of Scandinavia",
     locationFlag: "SE",
     numStages: 9
+  },
+  {
+    eventId: [81028],
+    endTime: "2025-03-31 12:59",
+    locationName: "Barum Rally Zlin",
+    locationFlag: "CZ",
+    numStages: 8
   }
 ];
 
