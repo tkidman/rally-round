@@ -85,7 +85,7 @@ const initialState = {
   // disableOverall: true,
   // teamPointsForPowerstage: false,
   dropLowestScoringRoundsNumber: 1,
-  sortByDropRoundPoints: false,
+  sortByDropRoundPoints: true,
   usePercentageForPromotionRelegationZones: true,
   // incorrectCarTimePenaltySeconds: 120,
   backgroundStyle:
