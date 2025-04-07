@@ -117,8 +117,12 @@ const initialState = {
       wrc: [
         {
           clubId: "17",
-          championshipIds: ["2RLdo17ozbWBUk3jU"],
-          includeNextChampionships: true
+          championshipIds: [
+            "2RLdo17ozbWBUk3jU",
+            "3KRSzSQELcrZArbrW",
+            "2RcJkJjoC1UM5DHPS"
+          ],
+          includeNextChampionships: false
         }
       ],
       manualResults: [],
@@ -143,8 +147,12 @@ const initialState = {
       wrc: [
         {
           clubId: "17",
-          championshipIds: ["2RLdo17ozbWBUk3jU"],
-          includeNextChampionships: true
+          championshipIds: [
+            "2RLdo17ozbWBUk3jU",
+            "3KRSzSQELcrZArbrW",
+            "2RcJkJjoC1UM5DHPS"
+          ],
+          includeNextChampionships: false
         }
       ],
       manualResults: [],
