@@ -40,6 +40,20 @@ const rallies = [
     locationName: "Barum Rally Zlin",
     locationFlag: "CZ",
     numStages: 8
+  },
+  {
+    eventId: [81327],
+    endTime: "2025-04-07 12:59",
+    locationName: "Rali Ceredigion",
+    locationFlag: "GB",
+    numStages: 11
+  },
+  {
+    eventId: [81515],
+    endTime: "2025-04-14 12:59",
+    locationName: "Croatia Rally",
+    locationFlag: "HR",
+    numStages: 9
   }
 ];
 
