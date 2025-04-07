@@ -107,9 +107,9 @@ const initialState = {
   superRallyIsDnf: true,
   showSuperRallyColumn: true,
   divisions: {
-    wrc2013: {
-      divisionName: "wrc2013",
-      displayName: "WRC 2013",
+    wrc1999: {
+      divisionName: "wrc1999",
+      displayName: "WRC 1999",
       disableSameCarValidation: false,
       // enableSameCarClassValidation: true,
       maxDriversScoringPointsForTeam: 2,
@@ -117,12 +117,8 @@ const initialState = {
       wrc: [
         {
           clubId: "17",
-          championshipIds: [
-            "2RLdo17ozbWBUk3jU",
-            "3KRSzSQELcrZArbrW",
-            "2RcJkJjoC1UM5DHPS"
-          ],
-          includeNextChampionships: false
+          championshipIds: ["5k6aUnuhBV6JQ8B8k"],
+          includeNextChampionships: true
         }
       ],
       manualResults: [],
@@ -130,43 +126,49 @@ const initialState = {
       points,
       // excludedCars: ["Builder Vehicle"],
       cars: [
-        "Citroën DS3 WRC '12",
-        "Volkswagen Polo R WRC 2013",
-        "MINI John Cooper Works WRC"
+        "Ford Focus WRC '99",
+        "Mitsubishi Lancer Evolution VI",
+        "Peugeot 206 Rally",
+        "SEAT Córdoba WRC",
+        "SUBARU Impreza 1998"
       ]
     },
-    wrc2013Constructors: {
-      divisionName: "wrc2013Constructors",
-      displayName: "WRC 2013 Constructors",
+    wrc1999KitCar: {
+      divisionName: "wrc1999KitCar",
+      displayName: "WRC 1999 Kit Car",
       disableSameCarValidation: false,
       // enableSameCarClassValidation: true,
       maxDriversScoringPointsForTeam: 2,
       // filterEntries: true,
-      overrideTeam: { useCarAsTeam: true },
-      hideDriverStandingsLink: true,
+      // overrideTeam: { useCarAsTeam: true },
+      // hideDriverStandingsLink: true,
       wrc: [
         {
-          clubId: "17",
-          championshipIds: [
-            "2RLdo17ozbWBUk3jU",
-            "3KRSzSQELcrZArbrW",
-            "2RcJkJjoC1UM5DHPS"
-          ],
-          includeNextChampionships: false
+          clubId: "362",
+          championshipIds: ["3Xnpn3M8Cdatp3r6i"],
+          includeNextChampionships: true
         }
       ],
       manualResults: [],
       events: [],
-      points,
+      points
       // excludedCars: ["WRC Builder Vehicle"],
-      cars: [
-        "Citroën DS3 WRC '12",
-        "Volkswagen Polo R WRC 2013",
-        "MINI John Cooper Works WRC"
-      ]
+      // cars: [
+      //   "Citroën Xsara Kit Car",
+      //   "Ford Escort Mk 6 Maxi",
+      //   "Peugeot 306 Maxi",
+      //   "Renault Maxi Mégane",
+      //   "SEAT Ibiza Kit Car",
+      //   "Vauxhall Astra Rally Car",
+      //   "Volkswagen Golf IV Kit Car"
+      // ]
     }
   },
   historicalSeasonLinks: [
+    {
+      name: "WRC 2013",
+      href: "/themed/themed-24"
+    },
     {
       name: "WRC 2024",
       href: "/themed/themed-23"

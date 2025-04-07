@@ -24,6 +24,7 @@ const wrcCarList = {
     "MINI John Cooper Works WRC"
   ],
   "World Rally Cars 1997-2011": [
+    "Ford Focus WRC '99",
     "Citroën C4 WRC",
     "Citroën Xsara WRC",
     "Ford Focus RS Rally 2001",
@@ -57,6 +58,7 @@ const wrcCarList = {
     "Renault Clio S1600"
   ],
   "F2 Kit Cars": [
+    "Citroën Xsara Kit Car",
     "Ford Escort Mk 6 Maxi",
     "Peugeot 306 Maxi",
     "Renault Maxi Mégane",
