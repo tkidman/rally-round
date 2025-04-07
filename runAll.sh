@@ -7,5 +7,5 @@ CLUB=jrc-rbr timeout 120s node runner.js
 CLUB=jrc timeout 120s node runner.js
 #CLUB=jrc-historic timeout 120s node runner.js
 #CLUB=rsc timeout 120s node runner.js
-CLUB=oor timeout 120s node runner.js
+#CLUB=oor timeout 120s node runner.js
 echo "complete"

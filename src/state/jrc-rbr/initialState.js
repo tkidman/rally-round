@@ -43,14 +43,14 @@ const rallies = [
   },
   {
     eventId: [81327],
-    endTime: "2025-04-07 12:59",
+    endTime: "2025-04-07 13:59",
     locationName: "Rali Ceredigion",
-    locationFlag: "GB",
+    locationFlag: "welsh",
     numStages: 11
   },
   {
     eventId: [81515],
-    endTime: "2025-04-14 12:59",
+    endTime: "2025-04-14 13:58",
     locationName: "Croatia Rally",
     locationFlag: "HR",
     numStages: 9
@@ -59,7 +59,43 @@ const rallies = [
 
 const points = {
   //powerStage: [5, 4, 3, 2, 1],
-  overall: [25, 18, 15, 12, 10, 8, 6, 5, 4, 3, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+  overall: [
+    25,
+    18,
+    15,
+    12,
+    10,
+    8,
+    6,
+    5,
+    4,
+    3,
+    2,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+  ]
   // stage: [1]
 };
 
