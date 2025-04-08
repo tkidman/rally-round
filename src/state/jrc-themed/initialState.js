@@ -131,18 +131,11 @@ const initialState = {
         "Peugeot 206 Rally",
         "SEAT Córdoba WRC",
         "SUBARU Impreza 1998"
-        "Citroën Xsara Kit Car",
-        "Ford Escort Mk 6 Maxi",
-        "Peugeot 306 Maxi",
-        "Renault Maxi Mégane",
-        "SEAT Ibiza Kit Car",
-        "Vauxhall Astra Rally Car",
-        "Volkswagen Golf IV Kit Car"
       ]
     },
-    wrc1999F2KitCar: {
-      divisionName: "wrc1999F2KitCar",
-      displayName: "WRC 1999 F2 Kit Car",
+    wrc1999KitCar: {
+      divisionName: "wrc1999KitCar",
+      displayName: "WRC 1999 Kit Car",
       disableSameCarValidation: false,
       // enableSameCarClassValidation: true,
       maxDriversScoringPointsForTeam: 2,
