@@ -110,7 +110,7 @@ const initialState = {
   showCarNameAsTextInResults: true,
   nullTeamIsPrivateer: true,
   dropLowestScoringRoundsNumber: 1,
-  // sortByDropRoundPoints: true,
+  sortByDropRoundPoints: true,
   // useCarAsTeam: false,
   // useCarClassAsTeam: true,
   disableOverall: false,
