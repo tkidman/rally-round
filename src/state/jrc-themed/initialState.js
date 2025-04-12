@@ -119,6 +119,11 @@ const initialState = {
           clubId: "17",
           championshipIds: ["5k6aUnuhBV6JQ8B8k"],
           includeNextChampionships: true
+        },
+        {
+          clubId: "362",
+          championshipIds: ["3Xnpn3M8Cdatp3r6i"],
+          includeNextChampionships: true
         }
       ],
       manualResults: [],
@@ -130,7 +135,14 @@ const initialState = {
         "Mitsubishi Lancer Evolution VI",
         "Peugeot 206 Rally",
         "SEAT Córdoba WRC",
-        "SUBARU Impreza 1998"
+        "SUBARU Impreza 1998",
+        "Citroën Xsara Kit Car",
+        "Ford Escort Mk 6 Maxi",
+        "Peugeot 306 Maxi",
+        "Renault Maxi Mégane",
+        "SEAT Ibiza Kit Car",
+        "Vauxhall Astra Rally Car",
+        "Volkswagen Golf IV Kit Car"
       ]
     },
     wrc1999KitCar: {
@@ -151,7 +163,9 @@ const initialState = {
       ],
       manualResults: [],
       events: [],
-      points
+      points: {
+        overall: [9, 6, 4, 3, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+      }
       // excludedCars: ["WRC Builder Vehicle"],
       // cars: [
       //   "Citroën Xsara Kit Car",

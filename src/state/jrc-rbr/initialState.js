@@ -225,32 +225,37 @@ const initialState = {
         useTeam2AsTeam: true
       },
       hideDriverStandingsLink: true
-    }
-  },
-  fantasyERCRally4R2: {
-    divisionName: "fantasyERCRally4R2",
-    displayName: "Fantasy ERC Rally4/R2",
-    disableSameCarValidation: false,
-    // enableSameCarClassValidation: true,
-    maxDriversScoringPointsForTeam: 2,
-    rbr: {
-      rallies
     },
-    manualResults: [],
-    events: [],
-    points,
-    filterEntries: {
-      allowedCars: [
-        "Peugeot 208 Rally4",
-        "Renault Clio Rally4",
-        "Ford Fiesta Rally4",
-        "Peugeot 208 R2",
-        "Citroen C2 R2 Max",
-        "Opel ADAM R2",
-        "Ford Fiesta Mk VIII R2",
-        "Renault Twingo R2 Evo",
-        "Ford Fiesta R2"
-      ]
+    fantasyERCAll: {
+      divisionName: "fantasyERCAll",
+      displayName: "Fantasy ERC All",
+      disableSameCarValidation: false,
+      // enableSameCarClassValidation: true,
+      maxDriversScoringPointsForTeam: 2,
+      rbr: {
+        rallies
+      },
+      excludeFromOverall: true,
+      manualResults: [],
+      events: [],
+      points,
+      filterEntries: {
+        allowedCars: [
+          "Skoda Fabia RS Rally2",
+          "Hyundai i20 N Rally2",
+          "Ford Fiesta Rally2",
+          "Toyota GR Yaris Rally2",
+          "Skoda Fabia R5 evo",
+          "Citroen C3 R5",
+          "VW Polo GTI R5",
+          "Ford Fiesta R5",
+          "Peugeot 208 T16 R5",
+          "Hyundai i20 R5",
+          "Skoda Fabia R5",
+          "Citroen DS3 R5",
+          "Ford Fiesta Rally3"
+        ]
+      }
     }
   },
   historicalSeasonLinks: [
