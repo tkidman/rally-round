@@ -29,7 +29,8 @@ const {
   forEach,
   findIndex,
   orderBy,
-  isNil
+  isNil,
+  find
 } = require("lodash");
 const { cachePath } = require("./shared");
 const fs = require("fs");
@@ -505,20 +506,18 @@ const processRallysprint = event => {
     const minResult = minBy(driverEventResults, result =>
       getDuration(result.entry.stageTime)
     );
-    // just update the total time on the final stage for now. Would probably be better to
-    // update total time on every stage as it goes but not important yet
-    // OR we could have a new field - bestResult?
-    driverEventResults[driverEventResults.length - 1].entry.totalTime =
-      minResult.entry.stageTime;
-
-    // if a driver finishes the first stage, their run is not a DNF
-    if (minResult.entry.stageTime !== DNF_STAGE_TIME) {
-      driverEventResults[
-        driverEventResults.length - 1
-      ].entry.isDnfEntry = false;
-      driverEventResults[
-        driverEventResults.length - 1
-      ].entry.isDnsEntry = false;
+    minResult.entry.totalTime = minResult.entry.stageTime;
+    for (const stage of event.leaderboardStages) {
+      const entry = find(stage.entries, stageEntry => {
+        return stageEntry.name === driverName;
+      });
+      if (entry) {
+        // copy the min result entry to all other entries.
+        Object.assign(entry, minResult.entry);
+      } else {
+        // add the missing entry
+        stage.entries.push(minResult.entry);
+      }
     }
   });
 };
@@ -528,8 +527,12 @@ const calculateEventResults = ({
   drivers,
   eventIndex
 }) => {
-  // alert! mutations to the racenetLeaderboard entries occur here, and should only occur here
+  // alert! mutations to the leaderboardStages entries occur here, and should only occur here
   filterLeaderboardStages({ event, drivers, divisionName });
+
+  if (leagueRef.league.isRallySprint) {
+    processRallysprint(event);
+  }
 
   const firstStageResultsByDriver = getResultsByDriver(
     event.leaderboardStages[0].entries,
@@ -582,10 +585,6 @@ const calculateEventResults = ({
       }
     });
   });
-
-  if (leagueRef.league.isRallySprint) {
-    processRallysprint(event);
-  }
 
   event.leaderboardStages.forEach(stage => {
     recalculateDiffs(stage.entries);

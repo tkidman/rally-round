@@ -176,45 +176,24 @@ const points = {
 
 const rallies = [
   {
-    eventId: [78878],
-    endTime: "2025-02-10 20:00",
-    locationName: "Sunava Shakedown",
-    locationFlag: "SK",
+    eventId: [81916],
+    endTime: "2025-04-21 12:59",
+    locationName: "Mitterbach",
+    locationFlag: "AT",
     numStages: 3
   },
   {
-    eventId: [79127],
-    endTime: "2025-02-17 12:59",
-    locationName: "Bois de Bie",
-    locationFlag: "FR",
+    eventId: [82193],
+    endTime: "2025-04-28 12:59",
+    locationName: "Elmenteita",
+    locationFlag: "KE",
     numStages: 3
   },
   {
-    eventId: [79546],
-    endTime: "2025-02-24 12:59",
-    locationName: "Piren Tarmac",
-    locationFlag: "SE",
-    numStages: 3
-  },
-  {
-    eventId: [79884],
-    endTime: "2025-03-03 13:59",
-    locationName: "Fintele",
-    locationFlag: "BE",
-    numStages: 3
-  },
-  {
-    eventId: [80029],
-    endTime: "2025-03-10 13:59",
-    locationName: "Cote D Arbroz II",
-    locationFlag: "FR",
-    numStages: 3
-  },
-  {
-    eventId: [80335],
-    endTime: "2025-03-17 13:59",
-    locationName: "Halenkovice Shakedown",
-    locationFlag: "CZ",
+    eventId: [82495],
+    endTime: "2025-05-05 12:59",
+    locationName: "La Serra d'Almos",
+    locationFlag: "ES",
     numStages: 3
   }
 ];
@@ -247,9 +226,9 @@ const initialState = {
   logo: "JRC.png",
   siteTitlePrefix: "JRC RBR Rallysprint",
   divisions: {
-    powerslideRallysprint1: {
-      divisionName: "powerslideRallysprint1",
-      displayName: "Powerslide Rallysprint #1",
+    powerslideRallysprint2: {
+      divisionName: "powerslideRallysprint2",
+      displayName: "Powerslide Rallysprint #2",
       disableSameCarValidation: true,
       // enableSameCarClassValidation: true,
       // maxDriversScoringPointsForTeam: 2,
@@ -265,6 +244,7 @@ const initialState = {
       // },
       rbr: {
         rallies,
+        // web scraper doesn't support all stages yet
         useCsv: true
       },
       points,
@@ -275,6 +255,10 @@ const initialState = {
     }
   },
   historicalSeasonLinks: [
+    {
+      name: "Powerslide Rallysprint Season 1",
+      href: "/rbr-rallysprint/rbr-rallysprint-1"
+    },
     {
       name: "RBR Rallysprint Season 2",
       href: "/rbr-rallysprint/rbr-rallysprint-2"
