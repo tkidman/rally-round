@@ -195,6 +195,13 @@ const rallies = [
     locationName: "La Serra d'Almos",
     locationFlag: "ES",
     numStages: 3
+  },
+  {
+    eventId: [82766],
+    endTime: "2025-05-12 13:59",
+    locationName: "Humalamäki",
+    locationFlag: "FI",
+    numStages: 3
   }
 ];
 
