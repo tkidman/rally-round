@@ -1,62 +1,12 @@
 const rallies = [
   {
-    eventIds: [79189],
-    endTime: "2025-02-24 12:59",
-    locationName: "Arctic Rally Finland",
+    eventId: [82779],
+    endTime: "2025-05-19 13:59",
+    locationName: "Arctic Rally Sprint",
     locationFlag: "FI",
-    numStages: 8
-  },
-  {
-    eventId: [79642],
-    endTime: "2025-03-03 12:59",
-    locationName: "Rally Sierra Morena",
-    locationFlag: "ES",
-    numStages: 9
-  },
-  {
-    eventId: [80028],
-    endTime: "2025-03-10 12:59",
-    locationName: "Rally Hungary",
-    locationFlag: "HU",
-    numStages: 8
-  },
-  {
-    eventId: [80334],
-    endTime: "2025-03-17 12:59",
-    locationName: "Kielder Forest Rally",
-    locationFlag: "GB",
-    numStages: 9
-  },
-  {
-    eventId: [80620],
-    endTime: "2025-03-24 12:59",
-    locationName: "Royal Rally of Scandinavia",
-    locationFlag: "SE",
-    numStages: 9
-  },
-  {
-    eventId: [81028],
-    endTime: "2025-03-31 12:59",
-    locationName: "Barum Rally Zlin",
-    locationFlag: "CZ",
-    numStages: 8
-  },
-  {
-    eventId: [81327],
-    endTime: "2025-04-07 13:59",
-    locationName: "Rali Ceredigion",
-    locationFlag: "welsh",
-    numStages: 11
-  },
-  {
-    eventId: [81515],
-    endTime: "2025-04-14 13:58",
-    locationName: "Croatia Rally",
-    locationFlag: "HR",
-    numStages: 9
+    numStages: 4
   }
 ];
-
 const points = {
   //powerStage: [5, 4, 3, 2, 1],
   overall: [
@@ -104,7 +54,7 @@ const initialState = {
   websiteName: "jrc-results",
   subfolderName: "rbr",
   useStandingsForHome: true,
-  showLivePoints: true,
+  showLivePoints: false,
   showLivePointsDaysRemaining: 4,
   hideCarColumnInStandings: false,
   showCarNameAsTextInResults: true,
@@ -124,11 +74,11 @@ const initialState = {
     "background-size: cover;",
   logo: "JRC.png",
   siteTitlePrefix: "JRC RBR",
-  team2ColumnName: "Tyre",
+  // team2ColumnName: "Tyre",
   divisions: {
-    fantasyERCRally2R5: {
-      divisionName: "fantasyERCRally2R5",
-      displayName: "Fantasy ERC Rally2/R5",
+    powerslideRealLife: {
+      divisionName: "powerslideRealLife",
+      displayName: "Powerslide Real Life Series",
       disableSameCarValidation: false,
       // enableSameCarClassValidation: true,
       maxDriversScoringPointsForTeam: 2,
@@ -137,128 +87,19 @@ const initialState = {
       },
       manualResults: [],
       events: [],
-      points,
-      filterEntries: {
-        allowedCars: [
-          "Skoda Fabia RS Rally2",
-          "Hyundai i20 N Rally2",
-          "Ford Fiesta Rally2",
-          "Toyota GR Yaris Rally2",
-          "Skoda Fabia R5 evo",
-          "Citroen C3 R5",
-          "VW Polo GTI R5",
-          "Ford Fiesta R5",
-          "Peugeot 208 T16 R5",
-          "Hyundai i20 R5",
-          "Skoda Fabia R5",
-          "Citroen DS3 R5"
-        ]
-      }
-    },
-    fantasyERCRally2R5Tyres: {
-      divisionName: "fantasyERCRally2R5Tyres",
-      displayName: "Fantasy ERC Rally2/R5 Tyre",
-      disableSameCarValidation: false,
-      // enableSameCarClassValidation: true,
-      maxDriversScoringPointsForTeam: 2,
-      rbr: {
-        rallies
-      },
-      manualResults: [],
-      events: [],
-      points,
-      filterEntries: {
-        allowedCars: [
-          "Skoda Fabia RS Rally2",
-          "Hyundai i20 N Rally2",
-          "Ford Fiesta Rally2",
-          "Toyota GR Yaris Rally2",
-          "Skoda Fabia R5 evo",
-          "Citroen C3 R5",
-          "VW Polo GTI R5",
-          "Ford Fiesta R5",
-          "Peugeot 208 T16 R5",
-          "Hyundai i20 R5",
-          "Skoda Fabia R5",
-          "Citroen DS3 R5"
-        ]
-      },
-      overrideTeam: {
-        useTeam2AsTeam: true
-      },
-      excludeFromOverall: true,
-      hideDriverStandingsLink: true
-    },
-    fantasyERCRally3: {
-      divisionName: "fantasyERCRally3",
-      displayName: "Fantasy ERC Rally3",
-      disableSameCarValidation: false,
-      // enableSameCarClassValidation: true,
-      maxDriversScoringPointsForTeam: 2,
-      rbr: {
-        rallies
-      },
-      manualResults: [],
-      events: [],
-      points,
-      filterEntries: {
-        allowedCars: ["Ford Fiesta Rally3"]
-      }
-    },
-    fantasyERCRally3Tyres: {
-      divisionName: "fantasyERCRally3Tyres",
-      displayName: "Fantasy ERC Rally3 Tyre",
-      disableSameCarValidation: false,
-      // enableSameCarClassValidation: true,
-      maxDriversScoringPointsForTeam: 2,
-      rbr: {
-        rallies
-      },
-      manualResults: [],
-      events: [],
-      points,
-      filterEntries: {
-        allowedCars: ["Ford Fiesta Rally3"]
-      },
-      excludeFromOverall: true,
-      overrideTeam: {
-        useTeam2AsTeam: true
-      },
-      hideDriverStandingsLink: true
-    },
-    fantasyERCAll: {
-      divisionName: "fantasyERCAll",
-      displayName: "Fantasy ERC All",
-      disableSameCarValidation: false,
-      // enableSameCarClassValidation: true,
-      maxDriversScoringPointsForTeam: 2,
-      rbr: {
-        rallies
-      },
-      excludeFromOverall: true,
-      manualResults: [],
-      events: [],
-      points,
-      filterEntries: {
-        allowedCars: [
-          "Skoda Fabia RS Rally2",
-          "Hyundai i20 N Rally2",
-          "Ford Fiesta Rally2",
-          "Toyota GR Yaris Rally2",
-          "Skoda Fabia R5 evo",
-          "Citroen C3 R5",
-          "VW Polo GTI R5",
-          "Ford Fiesta R5",
-          "Peugeot 208 T16 R5",
-          "Hyundai i20 R5",
-          "Skoda Fabia R5",
-          "Citroen DS3 R5",
-          "Ford Fiesta Rally3"
-        ]
-      }
+      points
+      // filterEntries: {
+      //   allowedCars: [
+      //     "Skoda Fabia RS Rally2",
+      //   ]
+      // }
     }
   },
   historicalSeasonLinks: [
+    {
+      name: "Powerslide/JRC Fantasy ERC",
+      href: "/rbr/rbr-5"
+    },
     {
       name: "RBR Season 4",
       href: "/rbr/rbr-4"

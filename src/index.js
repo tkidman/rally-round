@@ -3,7 +3,6 @@ const {
   orderResultsBy,
   knapsack,
   getDuration,
-  DNF_STAGE_TIME,
   getSummedTotalTimeStrings,
   useNationalityAsTeam,
   getCountryForDriver
