@@ -5,6 +5,13 @@ const rallies = [
     locationName: "Arctic Rally Sprint",
     locationFlag: "FI",
     numStages: 4
+  },
+  {
+    eventId: [83044],
+    endTime: "2025-05-19 13:59",
+    locationName: "Rally Maspalomas",
+    locationFlag: "IC",
+    numStages: 3
   }
 ];
 const points = {
