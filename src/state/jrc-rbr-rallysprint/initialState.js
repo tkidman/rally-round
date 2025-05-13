@@ -202,6 +202,13 @@ const rallies = [
     locationName: "Humalamäki",
     locationFlag: "FI",
     numStages: 3
+  },
+  {
+    eventId: [83042],
+    endTime: "2025-05-19 13:59",
+    locationName: "Banov",
+    locationFlag: "CZ",
+    numStages: 3
   }
 ];
 
