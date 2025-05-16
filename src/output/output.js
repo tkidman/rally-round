@@ -38,7 +38,7 @@ const writeOutput = async () => {
 
   writeJSON(league);
   if (process.env.DIRT_AWS_ACCESS_KEY && league.websiteName) {
-    await upload(league.websiteName, league.subfolderName);
+    // await upload(league.websiteName, league.subfolderName);
   }
   return true;
 };

@@ -600,15 +600,18 @@ const calculateEventResults = ({
   const division = leagueRef.league.divisions[divisionName];
   const legResults = [];
 
+  const pointsSystem = division.eventPoints
+    ? division.eventPoints[eventIndex]
+    : division.points;
   if (
     event.eventStatus === eventStatuses.finished ||
     leagueRef.showLivePoints()
   ) {
-    if (division.points.powerStage) {
+    if (pointsSystem.powerStage) {
       updatePoints({
         resultsByDriver,
         orderedEntries: powerStageEntries,
-        points: division.points.powerStage,
+        points: pointsSystem.powerStage,
         pointsField: "powerStagePoints",
         event
       });
@@ -616,24 +619,24 @@ const calculateEventResults = ({
     updatePoints({
       resultsByDriver,
       orderedEntries: totalEntries,
-      points: division.points.overall,
+      points: pointsSystem.overall,
       pointsField: "overallPoints",
       event
     });
-    if (division.points.stage) {
+    if (pointsSystem.stage) {
       event.leaderboardStages.forEach(stage => {
         const stageEntries = orderEntriesBy(stage.entries, "stageTime");
         updatePoints({
           resultsByDriver,
           orderedEntries: stageEntries,
-          points: division.points.stage,
+          points: pointsSystem.stage,
           pointsField: "stagePoints",
           event
         });
       });
     }
 
-    if (!isEmpty(division.points.leg)) {
+    if (!isEmpty(pointsSystem.leg)) {
       const driverResults = Object.values(resultsByDriver);
       for (const result of driverResults) {
         result.legPoints = [];
@@ -654,7 +657,7 @@ const calculateEventResults = ({
         updatePoints({
           resultsByDriver,
           orderedEntries: sortedLastLegStageEntries,
-          points: division.points.leg,
+          points: pointsSystem.leg,
           pointsField: "legPoints",
           event,
           legIndex
@@ -1241,7 +1244,9 @@ const processAllDivisions = async () => {
       const division = divisions[divisionName];
       league.currentDivision = division;
       const getAllResults =
-        leagueRef.league.getAllResults || division.points.stage;
+        leagueRef.league.getAllResults ||
+        // TODO should probably loop through all eventPoints here to check
+        (division.points && division.points.stage);
       division.events = await fetchEvents(
         division,
         divisionName,

@@ -14,46 +14,82 @@ const rallies = [
     numStages: 3
   }
 ];
-const points = {
+
+const pointsLong = {
   //powerStage: [5, 4, 3, 2, 1],
   overall: [
+    35,
+    31,
+    28,
     25,
-    18,
+    22,
+    19,
+    17,
     15,
-    12,
+    13,
+    11,
     10,
+    9,
     8,
+    7,
     6,
     5,
     4,
     3,
     2,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
     1
   ]
   // stage: [1]
+};
+
+const pointsNormal = {
+  overall: [
+    30,
+    27,
+    25,
+    23,
+    21,
+    19,
+    17,
+    15,
+    13,
+    11,
+    10,
+    9,
+    8,
+    7,
+    6,
+    5,
+    4,
+    3,
+    2,
+    1
+  ]
+};
+
+const pointsShort = {
+  overall: [
+    25,
+    22,
+    20,
+    18,
+    16,
+    15,
+    14,
+    13,
+    12,
+    11,
+    10,
+    9,
+    8,
+    7,
+    6,
+    5,
+    4,
+    3,
+    2,
+    1
+  ]
 };
 
 const initialState = {
@@ -94,7 +130,7 @@ const initialState = {
       },
       manualResults: [],
       events: [],
-      points
+      eventPoints: [pointsNormal, pointsShort]
       // filterEntries: {
       //   allowedCars: [
       //     "Skoda Fabia RS Rally2",
