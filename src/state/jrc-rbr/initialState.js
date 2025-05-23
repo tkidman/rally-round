@@ -99,7 +99,7 @@ const initialState = {
   websiteName: "jrc-results",
   subfolderName: "rbr",
   useStandingsForHome: true,
-  showLivePoints: false,
+  showLivePoints: true,
   showLivePointsDaysRemaining: 4,
   hideCarColumnInStandings: false,
   showCarNameAsTextInResults: true,
