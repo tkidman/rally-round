@@ -11,36 +11,37 @@ const rallies = [
     endTime: "2025-05-26 13:59",
     locationName: "Rally Maspalomas",
     locationFlag: "ES",
-    numStages: 3
+    numStages: 6
   }
 ];
 
-// const pointsLong = {
-//   //powerStage: [5, 4, 3, 2, 1],
-//   overall: [
-//     35,
-//     31,
-//     28,
-//     25,
-//     22,
-//     19,
-//     17,
-//     15,
-//     13,
-//     11,
-//     10,
-//     9,
-//     8,
-//     7,
-//     6,
-//     5,
-//     4,
-//     3,
-//     2,
-//     1
-//   ]
-//   // stage: [1]
-// };
+// eslint-disable-next-line no-unused-vars
+const pointsLong = {
+  //powerStage: [5, 4, 3, 2, 1],
+  overall: [
+    35,
+    31,
+    28,
+    25,
+    22,
+    19,
+    17,
+    15,
+    13,
+    11,
+    10,
+    9,
+    8,
+    7,
+    6,
+    5,
+    4,
+    3,
+    2,
+    1
+  ]
+  // stage: [1]
+};
 
 const pointsNormal = {
   overall: [
@@ -67,6 +68,7 @@ const pointsNormal = {
   ]
 };
 
+// eslint-disable-next-line no-unused-vars
 const pointsShort = {
   overall: [
     25,
@@ -130,7 +132,7 @@ const initialState = {
       },
       manualResults: [],
       events: [],
-      eventPoints: [pointsNormal, pointsShort]
+      eventPoints: [pointsNormal, pointsNormal]
       // filterEntries: {
       //   allowedCars: [
       //     "Skoda Fabia RS Rally2",
