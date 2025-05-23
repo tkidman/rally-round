@@ -8,7 +8,7 @@ const rallies = [
   },
   {
     eventId: [83044],
-    endTime: "2025-05-19 13:59",
+    endTime: "2025-05-26 13:59",
     locationName: "Rally Maspalomas",
     locationFlag: "ES",
     numStages: 3
