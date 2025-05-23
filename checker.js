@@ -7,7 +7,7 @@ const debug = require("debug")("tkidman:rally-round:checker");
 async function fetchWebsiteContent() {
   try {
     const response = await axios.get(
-      "http://jrc-results.s3-website-ap-southeast-2.amazonaws.com/themed"
+      "http://jrc-results.s3-website-ap-southeast-2.amazonaws.com/rbr"
     );
     return response.data;
   } catch (error) {
