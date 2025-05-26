@@ -209,6 +209,13 @@ const rallies = [
     locationName: "Banov",
     locationFlag: "CZ",
     numStages: 3
+  },
+  {
+    eventId: [83290],
+    endTime: "2025-05-26 13:59",
+    locationName: "Estrada da Banana",
+    locationFlag: "BR",
+    numStages: 3
   }
 ];
 
