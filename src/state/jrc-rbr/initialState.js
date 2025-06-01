@@ -12,6 +12,20 @@ const rallies = [
     locationName: "Rally Maspalomas",
     locationFlag: "ES",
     numStages: 6
+  },
+  {
+    eventId: [83423],
+    endTime: "2025-06-02 13:59",
+    locationName: "Ahuroa Rally Sprint",
+    locationFlag: "NZ",
+    numStages: 6
+  },
+  {
+    eventId: [83691],
+    endTime: " 2025-06-09 13:59",
+    locationName: "Rally di Enego Vicenza",
+    locationFlag: "IT",
+    numStages: 7
   }
 ];
 
@@ -132,7 +146,7 @@ const initialState = {
       },
       manualResults: [],
       events: [],
-      eventPoints: [pointsNormal, pointsNormal]
+      eventPoints: [pointsNormal, pointsNormal, pointsShort, pointsNormal]
       // filterEntries: {
       //   allowedCars: [
       //     "Skoda Fabia RS Rally2",

@@ -107,22 +107,17 @@ const initialState = {
   superRallyIsDnf: true,
   showSuperRallyColumn: true,
   divisions: {
-    wrc1999: {
+    wrc1973: {
       divisionName: "wrc1999",
-      displayName: "WRC 1999",
+      displayName: "WRC 1973",
       disableSameCarValidation: false,
       // enableSameCarClassValidation: true,
       maxDriversScoringPointsForTeam: 2,
       // filterEntries: true,
-      wrc: [
+      wrc1973: [
         {
           clubId: "17",
-          championshipIds: ["5k6aUnuhBV6JQ8B8k"],
-          includeNextChampionships: true
-        },
-        {
-          clubId: "362",
-          championshipIds: ["3Xnpn3M8Cdatp3r6i"],
+          championshipIds: ["9eSRXZB4hpe3GS9L"],
           includeNextChampionships: true
         }
       ],
@@ -131,54 +126,17 @@ const initialState = {
       points,
       // excludedCars: ["Builder Vehicle"],
       cars: [
-        "Ford Focus WRC '99",
-        "Mitsubishi Lancer Evolution VI",
-        "Peugeot 206 Rally",
-        "SEAT Córdoba WRC",
-        "SUBARU Impreza 1998",
-        "Citroën Xsara Kit Car",
-        "Ford Escort Mk 6 Maxi",
-        "Peugeot 306 Maxi",
-        "Renault Maxi Mégane",
-        "SEAT Ibiza Kit Car",
-        "Vauxhall Astra Rally Car",
-        "Volkswagen Golf IV Kit Car"
+        "Alpine Renault A110 1600 S",
+        "Hillman Avenger",
+        "Ford Escort RS 1600 MK1"
       ]
-    },
-    wrc1999KitCar: {
-      divisionName: "wrc1999KitCar",
-      displayName: "WRC 1999 Kit Car",
-      disableSameCarValidation: false,
-      // enableSameCarClassValidation: true,
-      maxDriversScoringPointsForTeam: 2,
-      // filterEntries: true,
-      // overrideTeam: { useCarAsTeam: true },
-      // hideDriverStandingsLink: true,
-      wrc: [
-        {
-          clubId: "362",
-          championshipIds: ["3Xnpn3M8Cdatp3r6i"],
-          includeNextChampionships: true
-        }
-      ],
-      manualResults: [],
-      events: [],
-      points: {
-        overall: [9, 6, 4, 3, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-      }
-      // excludedCars: ["WRC Builder Vehicle"],
-      // cars: [
-      //   "Citroën Xsara Kit Car",
-      //   "Ford Escort Mk 6 Maxi",
-      //   "Peugeot 306 Maxi",
-      //   "Renault Maxi Mégane",
-      //   "SEAT Ibiza Kit Car",
-      //   "Vauxhall Astra Rally Car",
-      //   "Volkswagen Golf IV Kit Car"
-      // ]
     }
   },
   historicalSeasonLinks: [
+    {
+      name: "WRC 1999",
+      href: "/themed/themed-25"
+    },
     {
       name: "WRC 2013",
       href: "/themed/themed-24"

@@ -12,7 +12,7 @@ const wrcCarList = {
     "ŠKODA Fabia RS Rally2",
     "Volkswagen Polo GTI R5"
   ],
-  "Junior WRC": ["Ford Fiesta Rally3"],
+  "Junior WRC": ["Ford Fiesta Rally3", "Ford Fiesta Rally3 Evo"],
   "World Rally Cars 2017-2021": [
     "Ford Fiesta WRC",
     "Volkswagen Polo 2017",
@@ -40,9 +40,12 @@ const wrcCarList = {
   ],
   "Rally2 *": ["Ford Fiesta R5 MK7 Evo 2", "Peugeot 208 T16 R5"],
   "Rally4 Cars": [
+    "Citroën C2 R2 Max",
     "Ford Fiesta MK8 Rally4",
     "Opel Adam R2",
+    "Opel Corsa Rally4",
     "Peugeot 208 Rally4",
+    "Renault Clio Rally4",
     "Renault Twingo II"
   ],
   "NR4/R4": ["McRae R4", "Mitsubishi Lancer Evolution X", "SUBARU WRX STI NR4"],
@@ -100,7 +103,8 @@ const wrcCarList = {
     "Ford Escort MK2",
     "Hillman Avenger",
     "Opel Kadett C GT/E",
-    "Talbot Sunbeam Lotus"
+    "Talbot Sunbeam Lotus",
+    "Ford Escort RS 1600 MK1"
   ],
   "H2 (FWD)": ["Peugeot 205 GTI", "Peugeot 309 GTI", "Volkswagen Golf GTI"],
   "H1 (FWD)": ["Lancia Fulvia HF", "MINI Cooper S", "Vauxhall Nova Sport"],

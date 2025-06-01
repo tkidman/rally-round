@@ -19,7 +19,7 @@ const driverColumns = {
 };
 
 const sheetsConfig = {
-  sheetId: "1oJIKanTLsBWoshbhFXLfDG-KE-SL8VJjVjyCjca1EGg",
+  sheetId: "1o6DF_4yVSTViMxEHRHxrKF-aFHkbr6y0IMlKefO1IWw",
   tabName: "All tiers"
 };
 
