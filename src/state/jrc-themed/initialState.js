@@ -108,13 +108,13 @@ const initialState = {
   showSuperRallyColumn: true,
   divisions: {
     wrc1973: {
-      divisionName: "wrc1999",
+      divisionName: "wrc1973",
       displayName: "WRC 1973",
       disableSameCarValidation: false,
       // enableSameCarClassValidation: true,
       maxDriversScoringPointsForTeam: 2,
       // filterEntries: true,
-      wrc1973: [
+      wrc: [
         {
           clubId: "17",
           championshipIds: ["9eSRXZB4hpe3GS9L"],
