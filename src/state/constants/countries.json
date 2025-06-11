@@ -2019,5 +2019,10 @@
 		"code": "eur",
 		"name": "Europe",
 		"alpha2Code": "EU"
+	},
+	"eLngRSC": {
+		"code": "rsc",
+		"name": "Richard's Suffering Club",
+		"alpha2Code": "RC"
 	}
 }
