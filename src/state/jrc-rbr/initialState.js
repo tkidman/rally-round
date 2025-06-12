@@ -26,6 +26,20 @@ const rallies = [
     locationName: "Rally di Enego Vicenza",
     locationFlag: "IT",
     numStages: 7
+  },
+  {
+    eventId: [83941],
+    endTime: "2025-06-16 13:59",
+    locationName: "Hankasalmi Ralli",
+    locationFlag: "FI",
+    numStages: 8
+  },
+  {
+    eventId: [84125],
+    endTime: " 2025-06-23 13:59",
+    locationName: "Rajd Swidnicki",
+    locationFlag: "PL",
+    numStages: 6
   }
 ];
 
