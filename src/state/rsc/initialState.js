@@ -17,6 +17,11 @@ const points = {
   overall
 };
 
+const round1Points = [];
+for (let i = 1; i <= 19; i++) {
+  round1Points.push(1);
+}
+
 const initialState = {
   pointsForDNF: false,
   websiteName: "rsc-results",
@@ -72,9 +77,10 @@ const initialState = {
       },
       manualResults: [],
       events: [],
-      points,
+      // points,
+      eventPoints: [{ overall: round1Points }, points],
       promotionRelegation: {
-        relegationZone: 25
+        relegationZone: 40
       }
       // cars: ["Peugeot 205 GTI"]
     }
