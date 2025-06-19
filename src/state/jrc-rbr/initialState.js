@@ -160,7 +160,14 @@ const initialState = {
       },
       manualResults: [],
       events: [],
-      eventPoints: [pointsNormal, pointsNormal, pointsShort, pointsNormal]
+      eventPoints: [
+        pointsNormal,
+        pointsNormal,
+        pointsShort,
+        pointsNormal,
+        pointsLong,
+        pointsNormal
+      ]
       // filterEntries: {
       //   allowedCars: [
       //     "Skoda Fabia RS Rally2",
