@@ -76,7 +76,7 @@ const initialState = {
     dontComeLast: {
       divisionName: "dontComeLast",
       displayName: "RSC Don't Come Last",
-      disableSameCarValidation: false,
+      disableSameCarValidation: true,
       // enableSameCarClassValidation: true,
       // maxDriversScoringPointsForTeam: 2,
       // filterEntries: { allowedCars: [] },
