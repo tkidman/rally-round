@@ -49,7 +49,7 @@ const initialState = {
   logo: "rsc-guy.png",
   siteTitlePrefix: "RSC Don't Come Last",
   hideStageTimesUntilEventEnd: true,
-  usePercentageForPromotionRelegationZones: true,
+  usePercentageForPromotionRelegationZones: false,
   historicalSeasonLinks: [
     { name: "IRC 2011", href: "/rsc-irc-2011" },
     { name: "Season 7", href: "/rsc-7" },
@@ -80,7 +80,7 @@ const initialState = {
       // points,
       eventPoints: [{ overall: round1Points }, points],
       promotionRelegation: {
-        relegationZone: 40
+        relegationZone: 8
       }
       // cars: ["Peugeot 205 GTI"]
     }
