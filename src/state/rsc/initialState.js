@@ -34,8 +34,8 @@ const initialState = {
   pointsForDNF: false,
   websiteName: "rsc-results",
   useStandingsForHome: true,
-  showLivePoints: false,
-  showLivePointsDaysRemaining: 4,
+  showLivePoints: true,
+  showLivePointsDaysRemaining: 6,
   // noSuperRallyPointsMultiplier: 2,
   // dropLowestScoringRoundsNumber: 2,
   // afterDropRoundMessage:
