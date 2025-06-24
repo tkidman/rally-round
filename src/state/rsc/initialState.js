@@ -18,7 +18,7 @@ const rallies = [
 ];
 
 const overall = [];
-for (let i = 50; i >= 1; i--) {
+for (let i = 19; i >= 1; i--) {
   overall.push(i);
 }
 const points = {
