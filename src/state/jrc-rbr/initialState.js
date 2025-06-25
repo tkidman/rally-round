@@ -40,6 +40,13 @@ const rallies = [
     locationName: "Rajd Swidnicki",
     locationFlag: "PL",
     numStages: 6
+  },
+  {
+    eventId: [84523],
+    endTime: " 2025-06-30 13:59",
+    locationName: "Rally Roznava",
+    locationFlag: "SK",
+    numStages: 6
   }
 ];
 
