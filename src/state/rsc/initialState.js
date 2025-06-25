@@ -14,16 +14,29 @@ const rallies = [
     locationFlag: "RC",
     numStages: 9
     // enduranceRoundMultiplier: 2
+  },
+  {
+    eventIds: [84654],
+    endTime: "2025-07-01 22:00",
+    locationName: "Round 3",
+    locationFlag: "RC",
+    numStages: 8
+    // enduranceRoundMultiplier: 2
   }
 ];
 
 const overall = [];
-for (let i = 19; i >= 1; i--) {
+for (let i = 15; i >= 1; i--) {
   overall.push(i);
 }
 const points = {
   overall
 };
+
+const round2Points = [];
+for (let i = 1; i <= 15; i++) {
+  round2Points.push(1);
+}
 
 const round1Points = [];
 for (let i = 1; i <= 19; i++) {
@@ -86,9 +99,13 @@ const initialState = {
       manualResults: [],
       events: [],
       // points,
-      eventPoints: [{ overall: round1Points }, points],
+      eventPoints: [
+        { overall: round1Points },
+        { overall: round2Points },
+        points
+      ],
       promotionRelegation: {
-        relegationZone: 8
+        relegationZone: 12
       }
       // cars: ["Peugeot 205 GTI"]
     }
