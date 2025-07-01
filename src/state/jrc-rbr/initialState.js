@@ -173,6 +173,7 @@ const initialState = {
         pointsShort,
         pointsNormal,
         pointsLong,
+        pointsNormal,
         pointsNormal
       ]
       // filterEntries: {
