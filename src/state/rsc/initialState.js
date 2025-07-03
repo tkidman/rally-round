@@ -22,16 +22,29 @@ const rallies = [
     locationFlag: "RC",
     numStages: 8
     // enduranceRoundMultiplier: 2
+  },
+  {
+    eventIds: [84879],
+    endTime: "2025-07-08 22:00",
+    locationName: "Final Round",
+    locationFlag: "RC",
+    numStages: 8
+    // enduranceRoundMultiplier: 2
   }
 ];
 
 const overall = [];
-for (let i = 15; i >= 1; i--) {
+for (let i = 11; i >= 1; i--) {
   overall.push(i);
 }
 const points = {
   overall
 };
+
+const round3Points = [];
+for (let i = 1; i <= 11; i++) {
+  round2Points.push(1);
+}
 
 const round2Points = [];
 for (let i = 1; i <= 15; i++) {
@@ -102,6 +115,7 @@ const initialState = {
       eventPoints: [
         { overall: round1Points },
         { overall: round2Points },
+        { overall: round3Points },
         points
       ],
       promotionRelegation: {
