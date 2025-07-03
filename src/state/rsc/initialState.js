@@ -43,7 +43,7 @@ const points = {
 
 const round3Points = [];
 for (let i = 1; i <= 11; i++) {
-  round2Points.push(1);
+  round3Points.push(1);
 }
 
 const round2Points = [];
