@@ -115,9 +115,9 @@ const initialState = {
       // filterEntries: {
       //   matchDivision: true
       // }
-      // promotionRelegation: {
-      //   relegationZone: 17
-      // }
+       promotionRelegation: {
+         relegationZone: 18
+       }
     },
     jrc2: {
       displayName: "JRC2",
@@ -142,10 +142,10 @@ const initialState = {
       // filterEntries: {
       //   matchDivision: true
       // }
-      // promotionRelegation: {
-      //   promotionZone: 19,
-      //   relegationZone: 19
-      // }
+       promotionRelegation: {
+         promotionZone: 22,
+         relegationZone: 19
+       }
     },
     jrc3: {
       displayName: "JRC3",
@@ -167,11 +167,11 @@ const initialState = {
         "Renault Clio Rally4"
       ],
       manualResults: []
-      // promotionRelegation: {
+       promotionRelegation: {
       //   // promotionDoubleZone: -,
-      //   promotionZone: 17
+         promotionZone: 23
       //   // relegationZone: -
-      // }
+       }
     }
   },
   historicalSeasonLinks: [
