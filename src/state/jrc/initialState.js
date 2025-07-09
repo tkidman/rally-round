@@ -111,13 +111,13 @@ const initialState = {
       ],
       events: [],
       points,
-      manualResults: []
+      manualResults: [],
       // filterEntries: {
       //   matchDivision: true
       // }
-       promotionRelegation: {
-         relegationZone: 18
-       }
+      promotionRelegation: {
+        relegationZone: 18
+      }
     },
     jrc2: {
       displayName: "JRC2",
@@ -138,14 +138,14 @@ const initialState = {
       //   "ŠKODA Fabia Rally2 Evo",
       //   "Volkswagen Polo GTI R5"
       // ],
-      manualResults: []
+      manualResults: [],
       // filterEntries: {
       //   matchDivision: true
       // }
-       promotionRelegation: {
-         promotionZone: 22,
-         relegationZone: 19
-       }
+      promotionRelegation: {
+        promotionZone: 22,
+        relegationZone: 19
+      }
     },
     jrc3: {
       displayName: "JRC3",
@@ -166,12 +166,12 @@ const initialState = {
         "Opel Corsa Rally4",
         "Renault Clio Rally4"
       ],
-      manualResults: []
-       promotionRelegation: {
-      //   // promotionDoubleZone: -,
-         promotionZone: 23
-      //   // relegationZone: -
-       }
+      manualResults: [],
+      promotionRelegation: {
+        //   // promotionDoubleZone: -,
+        promotionZone: 23
+        //   // relegationZone: -
+      }
     }
   },
   historicalSeasonLinks: [
