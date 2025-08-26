@@ -16,7 +16,8 @@ const wrcCarList = {
   "World Rally Cars 2017-2021": [
     "Ford Fiesta WRC",
     "Volkswagen Polo 2017",
-    "Citroën C3 WRC"
+    "Citroën C3 WRC",
+    "Hyundai i20 Coupe WRC"
   ],
   "World Rally Car: 2012-2016": [
     "Citroën DS3 WRC '12",

@@ -107,9 +107,9 @@ const initialState = {
   superRallyIsDnf: true,
   showSuperRallyColumn: true,
   divisions: {
-    wrc1973: {
-      divisionName: "wrc1973",
-      displayName: "WRC 1973",
+    wrc2019: {
+      divisionName: "wrc2019",
+      displayName: "WRC 2019",
       disableSameCarValidation: false,
       // enableSameCarClassValidation: true,
       maxDriversScoringPointsForTeam: 2,
@@ -117,22 +117,26 @@ const initialState = {
       wrc: [
         {
           clubId: "17",
-          championshipIds: ["9eSRXZB4hpe3GS9L"],
+          championshipIds: ["ZRuNz9Rui5Rfh3y4"],
           includeNextChampionships: true
         }
       ],
       manualResults: [],
       events: [],
-      points,
+      points
       // excludedCars: ["Builder Vehicle"],
-      cars: [
-        "Alpine Renault A110 1600 S",
-        "Hillman Avenger",
-        "Ford Escort RS 1600 MK1"
-      ]
+      // cars: [
+      //   "Alpine Renault A110 1600 S",
+      //   "Hillman Avenger",
+      //   "Ford Escort RS 1600 MK1"
+      // ]
     }
   },
   historicalSeasonLinks: [
+    {
+      name: "WRC 1973",
+      href: "/themed/themed-26"
+    },
     {
       name: "WRC 1999",
       href: "/themed/themed-25"
