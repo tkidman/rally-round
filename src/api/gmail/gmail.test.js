@@ -197,7 +197,7 @@ describe("Gmail API", () => {
 
       expect(mockGmail.users.messages.list).toHaveBeenCalledWith({
         userId: "me",
-        q: "is:unread from:test@example.com subject:important after:2024/01/01",
+        q: "is:unread from:test@example.com subject:important after:1704067200",
         maxResults: 10,
         labelIds: ["INBOX"]
       });

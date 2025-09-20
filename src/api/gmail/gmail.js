@@ -116,11 +116,8 @@ const getNewMessages = async (options = {}) => {
   }
 
   if (since) {
-    const sinceDate = since
-      .toISOString()
-      .split("T")[0]
-      .replace(/-/g, "/");
-    query += ` after:${sinceDate}`;
+    const sinceTimestamp = Math.floor(since.getTime() / 1000);
+    query += ` after:${sinceTimestamp}`;
   }
 
   debug(`Searching for new messages with query: ${query}`);
