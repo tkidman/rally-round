@@ -5,6 +5,7 @@ const validCreds = {};
 const debug = require("debug")("tkidman:rally-round:wrcAPI:getCreds");
 const axiosInstance = axios.create({});
 const racenetDomain = "https://web-api.racenet.com";
+const { handle2FA } = require("./gmail2fa");
 
 const delay = time => {
   return new Promise(function(resolve) {
@@ -37,7 +38,7 @@ const getCreds = async () => {
     debug("cached creds invalid, will regenerate");
   }
   const promise = new Promise((resolve, reject) => {
-    login(resolve);
+    login(resolve, reject);
   });
   const creds = await promise;
   validCreds.accessToken = creds.accessToken;
@@ -56,7 +57,7 @@ const navigateToLogin = async page => {
   }
 };
 
-const login = async resolve => {
+const login = async (resolve, reject) => {
   const username = process.env.RACENET_USERNAME;
   const password = process.env.RACENET_PASSWORD;
 
@@ -126,7 +127,8 @@ const login = async resolve => {
     debug("credentials retrieved, closing headless browser");
     await page.close();
     await browser.close();
-    throw new Error("failed to get to login page");
+    reject(new Error("failed to get to login page"));
+    return;
   }
 
   try {
@@ -141,15 +143,42 @@ const login = async resolve => {
     await page.click("#logInBtn");
     debug("password entered");
 
-    // Wait for the login process to complete
-    await page.waitForNavigation({ waitUntil: "networkidle2" });
-    await delay(4000);
-    debug("nav complete");
+    // Check if 2FA is required and handle it
+    try {
+      const twoFactorHandled = await handle2FA(page);
+      if (twoFactorHandled) {
+        debug("2FA was handled successfully");
+        // Wait for navigation after 2FA
+        debug("Waiting for navigation after 2FA...");
+        await page.waitForNavigation({ waitUntil: "networkidle2" });
+        await delay(4000);
+        debug("Navigation after 2FA complete");
+      } else {
+        debug("No 2FA required");
+        // Wait for normal navigation
+        debug("Waiting for normal navigation...");
+        await page.waitForNavigation({ waitUntil: "networkidle2" });
+        await delay(4000);
+        debug("Normal navigation complete");
+      }
+    } catch (twoFactorError) {
+      debug(`2FA handling failed: ${twoFactorError.message}`);
+      // Continue anyway - maybe 2FA wasn't actually required
+      debug("Waiting for navigation after 2FA error...");
+      try {
+        await page.waitForNavigation({ waitUntil: "networkidle2" });
+        await delay(4000);
+        debug("Navigation after 2FA error complete");
+      } catch (navError) {
+        debug(`Navigation error: ${navError.message}`);
+      }
+    }
   } catch (error) {
     await page.close();
     await browser.close();
     debug("An error occurred:", error);
-    throw error;
+    reject(error);
+    return;
   }
 };
 
