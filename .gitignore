@@ -1,6 +1,7 @@
 /hidden
 /.idea
 /node_modules
+src/state/editor/node_modules
 /creds.js
 /drivers.csv
 /src/state/brl/drivers.csv
@@ -18,6 +19,7 @@ src/visualisation/fantasy.html
 example.json
 
 *.html
+!src/state/editor/index.html
 
 *.mp4
 

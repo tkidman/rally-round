@@ -1,0 +1,461 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Initial State Configuration Schema",
+  "description": "Schema for validating initialState.js configuration files",
+  "type": "object",
+  "properties": {
+    "pointsForDNF": {
+      "type": "boolean",
+      "description": "Whether to award points for DNF (Did Not Finish)"
+    },
+    "websiteName": {
+      "type": "string",
+      "description": "Name of the website for routing and identification"
+    },
+    "subfolderName": {
+      "type": "string",
+      "description": "Subfolder name for URL routing"
+    },
+    "useStandingsForHome": {
+      "type": "boolean",
+      "description": "Whether to use standings for the home page"
+    },
+    "showLivePoints": {
+      "type": "boolean",
+      "description": "Whether to show live points during events"
+    },
+    "showLivePointsDaysRemaining": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Number of days to show live points after event end"
+    },
+    "hideCarColumnInStandings": {
+      "type": "boolean",
+      "description": "Whether to hide the car column in standings"
+    },
+    "showCarNameAsTextInResults": {
+      "type": "boolean",
+      "description": "Whether to show car name as text in results"
+    },
+    "showCarNameAsTextInStandings": {
+      "type": "boolean",
+      "description": "Whether to show car name as text in standings"
+    },
+    "nullTeamIsPrivateer": {
+      "type": "boolean",
+      "description": "Whether null teams should be treated as privateers"
+    },
+    "useCarAsTeam": {
+      "type": "boolean",
+      "description": "Whether to use car as team identifier"
+    },
+    "useCarClassAsTeam": {
+      "type": "boolean",
+      "description": "Whether to use car class as team identifier"
+    },
+    "useNationalityAsTeam": {
+      "type": "boolean",
+      "description": "Whether to use nationality as team identifier"
+    },
+    "disableOverall": {
+      "type": "boolean",
+      "description": "Whether to disable overall standings"
+    },
+    "teamPointsForPowerstage": {
+      "type": "boolean",
+      "description": "Whether teams get points for powerstage"
+    },
+    "dropLowestScoringRoundsNumber": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Number of lowest scoring rounds to drop"
+    },
+    "sortByDropRoundPoints": {
+      "type": "boolean",
+      "description": "Whether to sort by points after dropping rounds"
+    },
+    "usePercentageForPromotionRelegationZones": {
+      "type": "boolean",
+      "description": "Whether to use percentage for promotion/relegation zones"
+    },
+    "incorrectCarTimePenaltySeconds": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Time penalty in seconds for incorrect car"
+    },
+    "backgroundStyle": {
+      "type": "string",
+      "description": "CSS background style for the website"
+    },
+    "logo": {
+      "type": "string",
+      "description": "Logo filename for the website"
+    },
+    "siteTitlePrefix": {
+      "type": "string",
+      "description": "Prefix for the site title"
+    },
+    "superRallyIsDnf": {
+      "type": "boolean",
+      "description": "Whether super rally should be treated as DNF"
+    },
+    "showSuperRallyColumn": {
+      "type": "boolean",
+      "description": "Whether to show super rally column"
+    },
+    "hideStageTimesUntilEventEnd": {
+      "type": "boolean",
+      "description": "Whether to hide stage times until event ends"
+    },
+    "noSuperRallyPointsMultiplier": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Points multiplier for no super rally"
+    },
+    "afterDropRoundMessage": {
+      "type": "string",
+      "description": "Message to show after dropping rounds"
+    },
+    "showTeamNameTextColumn": {
+      "type": "boolean",
+      "description": "Whether to show team name as text column"
+    },
+    "hideTeamLogoColumn": {
+      "type": "boolean",
+      "description": "Whether to hide team logo column"
+    },
+    "enableDnsPenalty": {
+      "type": "boolean",
+      "description": "Whether to enable DNS penalty"
+    },
+    "dnsPenaltyFromFirstRound": {
+      "type": "boolean",
+      "description": "Whether DNS penalty applies from first round"
+    },
+    "numPointsForDebutant": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Number of points awarded to debutants"
+    },
+    "teamOverride": {
+      "type": "object",
+      "patternProperties": {
+        "^[a-zA-Z0-9_]+$": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Override team assignments for specific drivers"
+    },
+    "divisions": {
+      "type": "object",
+      "patternProperties": {
+        "^[a-zA-Z0-9_]+$": {
+          "$ref": "#/definitions/division"
+        }
+      },
+      "description": "Division configurations"
+    },
+    "historicalSeasonLinks": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/historicalSeasonLink"
+      },
+      "description": "Links to historical seasons"
+    }
+  },
+  "definitions": {
+    "division": {
+      "type": "object",
+      "properties": {
+        "divisionName": {
+          "type": "string",
+          "description": "Internal name of the division"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the division"
+        },
+        "disableSameCarValidation": {
+          "type": "boolean",
+          "description": "Whether to disable same car validation"
+        },
+        "enableSameCarClassValidation": {
+          "type": "boolean",
+          "description": "Whether to enable same car class validation"
+        },
+        "maxDriversScoringPointsForTeam": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Maximum number of drivers scoring points for team"
+        },
+        "wrc": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/wrcConfig"
+          },
+          "description": "WRC championship configurations"
+        },
+        "rbr": {
+          "type": "object",
+          "properties": {
+            "rallies": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/rally"
+              }
+            }
+          },
+          "description": "RBR rally configurations"
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/event"
+          },
+          "description": "Manual event configurations"
+        },
+        "points": {
+          "$ref": "#/definitions/points"
+        },
+        "eventPoints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/points"
+          },
+          "description": "Points configuration per event"
+        },
+        "manualResults": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/manualResult"
+          },
+          "description": "Manual results data"
+        },
+        "cars": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Allowed cars for this division"
+        },
+        "excludedCars": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Excluded cars for this division"
+        },
+        "filterEntries": {
+          "$ref": "#/definitions/filterEntries"
+        },
+        "promotionRelegation": {
+          "$ref": "#/definitions/promotionRelegation"
+        }
+      },
+      "required": ["divisionName"]
+    },
+    "wrcConfig": {
+      "type": "object",
+      "properties": {
+        "clubId": {
+          "type": "string",
+          "description": "WRC club ID"
+        },
+        "championshipIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Championship IDs to include"
+        },
+        "includeNextChampionships": {
+          "type": "boolean",
+          "description": "Whether to include next championships"
+        }
+      },
+      "required": ["clubId", "championshipIds"]
+    },
+    "rally": {
+      "type": "object",
+      "properties": {
+        "eventIds": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          },
+          "description": "Event IDs for this rally"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End time of the rally"
+        },
+        "locationName": {
+          "type": "string",
+          "description": "Name of the rally location"
+        },
+        "locationFlag": {
+          "type": "string",
+          "description": "Country flag code for the location"
+        },
+        "numStages": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Number of stages in the rally"
+        },
+        "enduranceRoundMultiplier": {
+          "type": "number",
+          "minimum": 1,
+          "description": "Points multiplier for endurance rounds"
+        }
+      },
+      "required": ["eventIds", "endTime", "locationName", "numStages"]
+    },
+    "event": {
+      "type": "object",
+      "properties": {
+        "eventId": {
+          "type": "string",
+          "description": "Event ID"
+        },
+        "challengeId": {
+          "type": "string",
+          "description": "Challenge ID"
+        },
+        "location": {
+          "type": "string",
+          "description": "Event location"
+        }
+      },
+      "required": ["eventId", "location"]
+    },
+    "points": {
+      "type": "object",
+      "properties": {
+        "powerStage": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "description": "Points for power stage positions"
+        },
+        "overall": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "description": "Points for overall positions"
+        },
+        "stage": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "description": "Points for stage positions"
+        }
+      }
+    },
+    "manualResult": {
+      "type": "object",
+      "properties": {
+        "eventIndex": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Index of the event"
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/result"
+          },
+          "description": "Manual results for this event"
+        }
+      },
+      "required": ["eventIndex", "results"]
+    },
+    "result": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Driver name"
+        },
+        "stageTime": {
+          "type": "string",
+          "pattern": "^\\d{2}:\\d{2}\\.\\d{3}$",
+          "description": "Stage time in MM:SS.mmm format"
+        },
+        "totalTime": {
+          "type": "string",
+          "pattern": "^\\d{1,2}:\\d{2}:\\d{2}\\.\\d{3}$",
+          "description": "Total time in H:MM:SS.mmm format"
+        }
+      },
+      "required": ["name"]
+    },
+    "filterEntries": {
+      "type": "object",
+      "properties": {
+        "matchDivision": {
+          "type": "boolean",
+          "description": "Whether to match division"
+        },
+        "removeDrivers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Drivers to remove from entries"
+        },
+        "allowedCars": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Cars allowed in this division"
+        }
+      }
+    },
+    "promotionRelegation": {
+      "type": "object",
+      "properties": {
+        "promotionZone": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Position above which drivers are promoted"
+        },
+        "relegationZone": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Position below which drivers are relegated"
+        },
+        "promotionDoubleZone": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Position for double promotion"
+        }
+      }
+    },
+    "historicalSeasonLink": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Display name of the historical season"
+        },
+        "href": {
+          "type": "string",
+          "pattern": "^/[a-zA-Z0-9_-]+$",
+          "description": "URL path to the historical season"
+        }
+      },
+      "required": ["name", "href"]
+    }
+  }
+}

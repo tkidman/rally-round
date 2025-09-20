@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Initial State Configuration Editor</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        #root {
+            min-height: 100vh;
+        }
+
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-size: 18px;
+            color: #6c757d;
+        }
+
+        /* EditorApp.css */
+        .editor-app {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+        }
+
+        .app-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e1e5e9;
+        }
+
+        .app-header h1 {
+            margin: 0;
+            color: #2c3e50;
+            font-size: 28px;
+        }
+
+        .refresh-button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+
+        .refresh-button:hover {
+            background-color: #0056b3;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 60px 20px;
+            color: #6c757d;
+        }
+
+        .loading h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .error-message {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 20px;
+            color: #721c24;
+        }
+
+        .error-message h4 {
+            margin: 0 0 10px 0;
+            color: #721c24;
+        }
+
+        .error-message p {
+            margin: 0 0 10px 0;
+        }
+
+        .error-message button {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .error-message button:hover {
+            background-color: #c82333;
+        }
+
+        .config-list h2 {
+            margin: 0 0 20px 0;
+            color: #2c3e50;
+            font-size: 22px;
+        }
+
+        .config-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .config-card {
+            background-color: white;
+            border: 1px solid #e1e5e9;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s;
+        }
+
+        .config-card:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .config-card.loaded {
+            border-left: 4px solid #28a745;
+        }
+
+        .config-card.not-loaded {
+            border-left: 4px solid #ffc107;
+            opacity: 0.7;
+        }
+
+        .config-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .config-header h3 {
+            margin: 0;
+            color: #495057;
+            font-size: 18px;
+            text-transform: capitalize;
+        }
+
+        .config-status {
+            font-size: 12px;
+            font-weight: 500;
+            padding: 4px 8px;
+            border-radius: 12px;
+        }
+
+        .config-card.loaded .config-status {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .config-card.not-loaded .config-status {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .config-info {
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #6c757d;
+        }
+
+        .config-info p {
+            margin: 5px 0;
+        }
+
+        .config-info strong {
+            color: #495057;
+        }
+
+        .config-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .edit-button,
+        .download-button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 500;
+            transition: background-color 0.2s;
+            flex: 1;
+        }
+
+        .edit-button {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .edit-button:hover:not(:disabled) {
+            background-color: #0056b3;
+        }
+
+        .edit-button:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
+        }
+
+        .download-button {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .download-button:hover {
+            background-color: #218838;
+        }
+
+        .help-section {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        .help-section h2 {
+            margin: 0 0 15px 0;
+            color: #2c3e50;
+            font-size: 20px;
+        }
+
+        .help-section ol {
+            margin: 0;
+            padding-left: 20px;
+            color: #495057;
+            line-height: 1.6;
+        }
+
+        .help-section li {
+            margin-bottom: 8px;
+        }
+
+        .help-section code {
+            background-color: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 13px;
+            color: #e83e8c;
+        }
+
+        /* InitialStateEditor.css */
+        .initial-state-editor {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+        }
+
+        .editor-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e1e5e9;
+        }
+
+        .editor-header h2 {
+            margin: 0;
+            color: #2c3e50;
+        }
+
+        .editor-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .save-button, .cancel-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+
+        .save-button {
+            background-color: #27ae60;
+            color: white;
+        }
+
+        .save-button:hover {
+            background-color: #229954;
+        }
+
+        .cancel-button {
+            background-color: #95a5a6;
+            color: white;
+        }
+
+        .cancel-button:hover {
+            background-color: #7f8c8d;
+        }
+
+        .error-messages {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 20px;
+            color: #721c24;
+        }
+
+        .error-messages h4 {
+            margin: 0 0 10px 0;
+            color: #721c24;
+        }
+
+        .error-messages ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .editor-tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #e1e5e9;
+        }
+
+        .editor-tabs button {
+            padding: 12px 24px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            color: #6c757d;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .editor-tabs button:hover {
+            color: #495057;
+            background-color: #f8f9fa;
+        }
+
+        .editor-tabs button.active {
+            color: #007bff;
+            border-bottom-color: #007bff;
+        }
+
+        .editor-content {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            min-height: 400px;
+        }
+
+        .general-fields {
+            display: grid;
+            grid-template-columns: 2fr 3fr;
+            gap: 10px 20px;
+            max-width: 800px;
+            align-items: center;
+        }
+
+        .general-fields .field-group {
+            display: contents;
+        }
+
+        .general-fields .field-group label {
+            font-weight: 500;
+            color: #495057;
+            font-size: 14px;
+            text-align: right;
+            padding-right: 10px;
+        }
+
+        .general-fields .field-group input,
+        .general-fields .field-group textarea {
+            padding: 8px 12px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+
+        .general-fields .field-group input:focus,
+        .general-fields .field-group textarea:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+        }
+
+        .general-fields .field-group input[type="checkbox"] {
+            width: auto;
+            margin-right: 8px;
+            justify-self: start;
+        }
+
+        .general-fields .field-group textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+
+        .field-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .field-group label {
+            font-weight: 500;
+            color: #495057;
+            font-size: 14px;
+        }
+
+        .field-group input,
+        .field-group textarea {
+            padding: 8px 12px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+
+        .field-group input:focus,
+        .field-group textarea:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+        }
+
+        .field-group input[type="checkbox"] {
+            width: auto;
+            margin-right: 8px;
+        }
+
+        .field-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .general-section,
+        .divisions-section,
+        .historical-links-section {
+            margin-bottom: 30px;
+        }
+
+        .general-section {
+            background-color: white;
+            border: 1px solid #e1e5e9;
+            border-radius: 6px;
+            padding: 20px;
+        }
+
+        .general-section h3,
+        .divisions-section h3,
+        .historical-links-section h3 {
+            margin: 0 0 20px 0;
+            color: #2c3e50;
+            font-size: 18px;
+        }
+
+        .division-group {
+            background-color: white;
+            border: 1px solid #e1e5e9;
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .division-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e1e5e9;
+        }
+
+        .division-group h4 {
+            margin: 0;
+            color: #495057;
+            font-size: 16px;
+        }
+
+        .division-fields {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .division-fields-column {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 10px 20px;
+            max-width: 900px;
+            align-items: center;
+        }
+
+        .division-fields-column .field-group {
+            display: contents;
+        }
+
+        .division-fields-column .field-group label {
+            font-weight: 500;
+            color: #495057;
+            font-size: 14px;
+            text-align: right;
+            padding-right: 10px;
+        }
+
+        .division-fields-column .field-group input,
+        .division-fields-column .field-group textarea {
+            padding: 8px 12px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+
+        .division-fields-column .field-group input:focus,
+        .division-fields-column .field-group textarea:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+        }
+
+        .division-fields-column .field-group input[type="checkbox"] {
+            width: auto;
+            margin-right: 8px;
+            justify-self: start;
+        }
+
+        .division-fields-column .field-group textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+
+        /* Nested fields within array fields and points config should use horizontal layout */
+        .array-field .field-group,
+        .points-config .field-group {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .array-field .field-group label,
+        .points-config .field-group label {
+            text-align: left;
+            padding-right: 0;
+            margin-bottom: 0;
+            min-width: 120px;
+            flex-shrink: 0;
+        }
+
+        .array-field .field-group input,
+        .points-config .field-group input {
+            flex: 1;
+        }
+
+        .link-group {
+            background-color: white;
+            border: 1px solid #e1e5e9;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            gap: 15px;
+            align-items: end;
+        }
+
+        .link-group .field-group {
+            flex: 1;
+        }
+
+        .add-button,
+        .remove-button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 500;
+            transition: background-color 0.2s;
+            white-space: nowrap;
+        }
+
+        .array-field {
+            border: 1px solid #e1e5e9;
+            border-radius: 4px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            margin-top: 10px;
+        }
+
+        .array-item {
+            background-color: white;
+            border: 1px solid #e1e5e9;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .array-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .points-config {
+            border: 1px solid #e1e5e9;
+            border-radius: 4px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            margin-top: 10px;
+        }
+
+        .promotion-relegation-config {
+            border: 1px solid #e1e5e9;
+            border-radius: 4px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            margin-top: 10px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .add-button {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .add-button:hover {
+            background-color: #0056b3;
+        }
+
+        .remove-button {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .remove-button:hover {
+            background-color: #c82333;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .editor-app {
+                padding: 10px;
+            }
+            
+            .app-header {
+                flex-direction: column;
+                gap: 15px;
+                align-items: stretch;
+            }
+            
+            .app-header h1 {
+                font-size: 24px;
+                text-align: center;
+            }
+            
+            .config-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .config-actions {
+                flex-direction: column;
+            }
+            
+            .edit-button,
+            .download-button {
+                flex: none;
+            }
+
+            .initial-state-editor {
+                padding: 10px;
+            }
+            
+            .editor-header {
+                flex-direction: column;
+                gap: 15px;
+                align-items: stretch;
+            }
+            
+            .editor-actions {
+                justify-content: center;
+            }
+            
+            .general-fields {
+                grid-template-columns: 1fr;
+                max-width: 100%;
+                gap: 5px 0;
+            }
+            
+            .general-fields .field-group label {
+                text-align: left;
+                padding-right: 0;
+                margin-bottom: 5px;
+            }
+            
+            .division-fields {
+                grid-template-columns: 1fr;
+            }
+            
+            .division-fields-column {
+                grid-template-columns: 1fr;
+                max-width: 100%;
+                gap: 5px 0;
+            }
+            
+            .division-fields-column .field-group label {
+                text-align: left;
+                padding-right: 0;
+                margin-bottom: 5px;
+            }
+            
+            .promotion-relegation-config {
+                grid-template-columns: 1fr;
+            }
+            
+            .division-header {
+                flex-direction: column;
+                gap: 10px;
+                align-items: stretch;
+            }
+            
+            .link-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .editor-tabs {
+                flex-wrap: wrap;
+            }
+            
+            .editor-tabs button {
+                flex: 1;
+                min-width: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <div class="loading">
+            Loading Initial State Configuration Editor...
+        </div>
+    </div>
+
+    <!-- React and ReactDOM from CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- Babel for JSX transformation -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Our React components - load in order -->
+    <script type="text/babel" src="/InitialStateEditor.jsx"></script>
+    <script type="text/babel" src="/EditorApp.jsx"></script>
+    
+    <!-- Initialize the React app -->
+    <script type="text/babel">
+        // Initialize the React app
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(React.createElement(EditorApp));
+    </script>
+</body>
+</html>
