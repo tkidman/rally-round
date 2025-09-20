@@ -105,19 +105,19 @@ const initialState = {
       wrc: [
         {
           clubId: "158",
-          championshipIds: ["43LLa9nFsdmoUZrgx"],
+          championshipIds: ["2AbP1zs1r53jDAGE7"],
           includeNextChampionships: true
         }
       ],
       events: [],
       points,
-      manualResults: [],
+      manualResults: []
       // filterEntries: {
       //   matchDivision: true
       // }
-      promotionRelegation: {
-        relegationZone: 18
-      }
+      // promotionRelegation: {
+      //   relegationZone: 18
+      // }
     },
     jrc2: {
       displayName: "JRC2",
@@ -126,7 +126,7 @@ const initialState = {
       wrc: [
         {
           clubId: "26",
-          championshipIds: ["m3f7yhm4MVEcYCE9"],
+          championshipIds: ["4EsHU6S5GHBSWwCom"],
           includeNextChampionships: true
         }
       ],
@@ -138,14 +138,14 @@ const initialState = {
       //   "ŠKODA Fabia Rally2 Evo",
       //   "Volkswagen Polo GTI R5"
       // ],
-      manualResults: [],
+      manualResults: []
       // filterEntries: {
       //   matchDivision: true
       // }
-      promotionRelegation: {
-        promotionZone: 22,
-        relegationZone: 19
-      }
+      // promotionRelegation: {
+      //   promotionZone: 22,
+      //   relegationZone: 19
+      // }
     },
     jrc3: {
       displayName: "JRC3",
@@ -154,27 +154,31 @@ const initialState = {
       wrc: [
         {
           clubId: "27",
-          championshipIds: ["2xeVoyF9WFanB5hoC"],
+          championshipIds: ["3LmowUZH5mHE37Rps"],
           includeNextChampionships: true
         }
       ],
       events: [],
       points,
-      cars: [
-        "Ford Fiesta MK8 Rally4",
-        "Peugeot 208 Rally4",
-        "Opel Corsa Rally4",
-        "Renault Clio Rally4"
-      ],
-      manualResults: [],
-      promotionRelegation: {
-        //   // promotionDoubleZone: -,
-        promotionZone: 23
-        //   // relegationZone: -
-      }
+      // cars: [
+      //   "Ford Fiesta MK8 Rally4",
+      //   "Peugeot 208 Rally4",
+      //   "Opel Corsa Rally4",
+      //   "Renault Clio Rally4"
+      // ],
+      manualResults: []
+      // promotionRelegation: {
+      //   // promotionDoubleZone: -,
+      //   promotionZone: 23
+      //   // relegationZone: -
+      // }
     }
   },
   historicalSeasonLinks: [
+    {
+      name: "JRC 17",
+      href: "/jrc-17"
+    },
     {
       name: "JRC 16",
       href: "/jrc-16"

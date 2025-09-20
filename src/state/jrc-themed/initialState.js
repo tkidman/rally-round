@@ -130,6 +130,31 @@ const initialState = {
       //   "Hillman Avenger",
       //   "Ford Escort RS 1600 MK1"
       // ]
+    },
+    wrc2019Constructors: {
+      divisionName: "wrc2019Constructors",
+      displayName: "WRC 2019 Constructors",
+      disableSameCarValidation: false,
+      // enableSameCarClassValidation: true,
+      maxDriversScoringPointsForTeam: 2,
+      // filterEntries: true,
+      wrc: [
+        {
+          clubId: "17",
+          championshipIds: ["ZRuNz9Rui5Rfh3y4"],
+          includeNextChampionships: true
+        }
+      ],
+      manualResults: [],
+      events: [],
+      points,
+      overrideTeam: { useCarAsTeam: true }
+      // excludedCars: ["Builder Vehicle"],
+      // cars: [
+      //   "Alpine Renault A110 1600 S",
+      //   "Hillman Avenger",
+      //   "Ford Escort RS 1600 MK1"
+      // ]
     }
   },
   historicalSeasonLinks: [

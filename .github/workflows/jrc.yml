@@ -14,30 +14,36 @@ jobs:
       DIRT_AWS_ACCESS_KEY: ${{ secrets.DIRT_AWS_ACCESS_KEY }}
       DIRT_AWS_SECRET_ACCESS_KEY: ${{ secrets.DIRT_AWS_SECRET_ACCESS_KEY }}
       GOOGLE_SHEETS_API_KEY: ${{ secrets.GOOGLE_SHEETS_API_KEY }}
+      GMAIL_CLIENT_ID: ${{ secrets.GMAIL_CLIENT_ID }}
+      GMAIL_CLIENT_SECRET: ${{ secrets.GMAIL_CLIENT_SECRET }}
+      GMAIL_REFRESH_TOKEN: ${{ secrets.GMAIL_REFRESH_TOKEN }}
       DEBUG: tkidman:*
     runs-on: ubuntu-latest
     timeout-minutes: 5
 
     steps:
       - uses: actions/checkout@v2
-      - name: Use Node.js 12.x
+      - name: Use Node.js 18.x
         uses: actions/setup-node@v1
         with:
-          node-version: 12.x
+          node-version: 18.x
       - name: npm install
         run: npm install
-      - name: checker
+      - name: jrc-themed
         if: always()
-        run: node --unhandled-rejections=strict ./checker.js
+        run: CLUB=jrc-themed node --unhandled-rejections=strict ./runner.js
+      - name: jrc
+        if: always()
+        run: CLUB=jrc node --unhandled-rejections=strict ./runner.js
+       # - name: checker
+      #   if: always()
+      #   run: node --unhandled-rejections=strict ./checker.js
 #      - name: jrc-rbr
 #        if: always()
 #        run: CLUB=jrc-rbr node --unhandled-rejections=strict ./runner.js
 #      - name: rsc
 #        if: always()
 #        run: CLUB=rsc node --unhandled-rejections=strict ./runner.js
-#      - name: jrc-themed
-#        if: always()
-#        run: CLUB=jrc-themed node --unhandled-rejections=strict ./runner.js
 #      - name: jrc-modern
 #        if: always()
 #        run: CLUB=jrc-modern node --unhandled-rejections=strict ./runner.js
@@ -47,9 +53,6 @@ jobs:
 #      - name: jrc-historic
 #        if: always()
 #        run: CLUB=jrc-historic node --unhandled-rejections=strict ./runner.js
-#      - name: jrc
-#        if: always()
-#        run: CLUB=jrc node --unhandled-rejections=strict ./runner.js
 #      - name: jrc-birthday
 #        if: always()
 #        run: CLUB=jrc-birthday node --unhandled-rejections=strict ./runner.js
