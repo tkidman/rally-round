@@ -19,7 +19,7 @@ const waitForSecurityCode = async (page, timeout = 60000) => {
       const messages = await getNewMessages({
         subject: "Your EA Security Code is:",
         maxResults: 5,
-        since: new Date(Date.now() - 2 * 60 * 1000), // Last 2 minutes
+        since: new Date(Date.now() - 2 * 60 * 1000) // Last 2 minutes
       });
 
       if (messages.length > 0) {
@@ -42,7 +42,7 @@ const waitForSecurityCode = async (page, timeout = 60000) => {
       }
 
       // Wait 5 seconds before next check
-      await new Promise((resolve) => setTimeout(resolve, 5000));
+      await new Promise(resolve => setTimeout(resolve, 5000));
 
       const elapsed = Date.now() - startTime;
       debug(
@@ -62,13 +62,13 @@ const waitForSecurityCode = async (page, timeout = 60000) => {
  * @param {Object} page - Puppeteer page object
  * @returns {Promise<boolean>} True if 2FA was handled successfully
  */
-const handle2FA = async (page) => {
+const handle2FA = async page => {
   try {
     debug("Checking for 2FA requirements...");
     // await page.waitForNavigation({ waitUntil: "networkidle2" });
     // Wait a bit for the page to fully load and any dynamic content to appear
     debug("Waiting for page to stabilize...");
-    await new Promise((resolve) => setTimeout(resolve, 3000));
+    await new Promise(resolve => setTimeout(resolve, 3000));
 
     // First, let's see what's on the page
     const currentUrl = page.url();
@@ -81,7 +81,7 @@ const handle2FA = async (page) => {
     if (twoFactorButton) {
       debug("Found #btnSendCode button!");
       const buttonText = await page.evaluate(
-        (el) => el.textContent.trim(),
+        el => el.textContent.trim(),
         twoFactorButton
       );
       debug(`Button text: "${buttonText}"`);
@@ -97,7 +97,7 @@ const handle2FA = async (page) => {
 
         for (const element of elements) {
           const text = await page.evaluate(
-            (el) => el.textContent.trim(),
+            el => el.textContent.trim(),
             element
           );
           if (
@@ -121,11 +121,11 @@ const handle2FA = async (page) => {
       debug(`Found ${allButtons.length} potential clickable elements`);
       for (let i = 0; i < Math.min(allButtons.length, 10); i++) {
         const text = await page.evaluate(
-          (el) => el.textContent.trim(),
+          el => el.textContent.trim(),
           allButtons[i]
         );
-        const tagName = await page.evaluate((el) => el.tagName, allButtons[i]);
-        const id = await page.evaluate((el) => el.id, allButtons[i]);
+        const tagName = await page.evaluate(el => el.tagName, allButtons[i]);
+        const id = await page.evaluate(el => el.id, allButtons[i]);
         debug(`  ${tagName}${id ? `#${id}` : ""}: "${text}"`);
       }
       return false;
@@ -134,7 +134,7 @@ const handle2FA = async (page) => {
     // Click the 2FA button
     debug("Clicking 2FA button...");
     await twoFactorButton.click();
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    await new Promise(resolve => setTimeout(resolve, 2000));
 
     // Wait for the security code input field to appear
     debug("Waiting for security code input field...");
@@ -146,7 +146,7 @@ const handle2FA = async (page) => {
       'input[id*="code"]',
       "#verificationCode",
       "#securityCode",
-      "#code",
+      "#code"
     ];
 
     let codeInput = null;
@@ -190,7 +190,7 @@ const handle2FA = async (page) => {
       'button:contains("Sign in")',
       "#submit",
       "#verify",
-      "#continue",
+      "#continue"
     ];
 
     let submitButton = null;
@@ -214,7 +214,7 @@ const handle2FA = async (page) => {
       const elements = await page.$$("button, a[role='button']");
       for (const element of elements) {
         const text = await page.evaluate(
-          (el) => el.textContent.trim().toLowerCase(),
+          el => el.textContent.trim().toLowerCase(),
           element
         );
         if (
@@ -233,7 +233,7 @@ const handle2FA = async (page) => {
     if (submitButton) {
       debug("Clicking submit button...");
       await submitButton.click();
-      await new Promise((resolve) => setTimeout(resolve, 3000));
+      await new Promise(resolve => setTimeout(resolve, 3000));
     }
 
     debug("2FA process completed successfully");
@@ -246,5 +246,5 @@ const handle2FA = async (page) => {
 
 module.exports = {
   waitForSecurityCode,
-  handle2FA,
+  handle2FA
 };

@@ -4,7 +4,7 @@ const {
   getUnreadCount,
   extractMessageContent,
   markAsRead,
-  markAsUnread,
+  markAsUnread
 } = require("./gmail");
 
 /**
@@ -27,7 +27,7 @@ async function checkForNewMessages() {
 
     // Get new messages with full details
     const newMessages = await getNewMessages({
-      maxResults: 5, // Limit to 5 most recent unread messages
+      maxResults: 5 // Limit to 5 most recent unread messages
     });
 
     console.log(`\nFound ${newMessages.length} new messages:`);
@@ -55,7 +55,7 @@ async function checkMessagesFromSpecificSender() {
     // Get messages from a specific sender
     const messages = await getNewMessages({
       from: "noreply@example.com",
-      maxResults: 10,
+      maxResults: 10
     });
 
     console.log(`Found ${messages.length} messages from noreply@example.com`);
@@ -84,7 +84,7 @@ async function checkMessagesWithSubject() {
     // Get messages with a specific subject
     const messages = await getNewMessages({
       subject: "urgent",
-      maxResults: 10,
+      maxResults: 10
     });
 
     console.log(`Found ${messages.length} messages with 'urgent' in subject`);
@@ -113,7 +113,7 @@ async function checkMessagesSinceDate() {
 
     const messages = await getNewMessages({
       since: yesterday,
-      maxResults: 10,
+      maxResults: 10
     });
 
     console.log(`Found ${messages.length} messages since yesterday`);
@@ -228,7 +228,7 @@ module.exports = {
   checkMessagesSinceDate,
   markMessagesAsRead,
   markMessagesAsUnread,
-  runExamples,
+  runExamples
 };
 
 // Run examples if this file is executed directly

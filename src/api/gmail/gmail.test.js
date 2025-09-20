@@ -6,7 +6,7 @@ const {
   markAsRead,
   markAsUnread,
   extractMessageContent,
-  getUnreadCount,
+  getUnreadCount
 } = require("./gmail");
 
 // Mock the googleapis module
@@ -14,19 +14,19 @@ jest.mock("googleapis", () => ({
   google: {
     auth: {
       OAuth2: jest.fn().mockImplementation(() => ({
-        setCredentials: jest.fn(),
-      })),
+        setCredentials: jest.fn()
+      }))
     },
     gmail: jest.fn().mockReturnValue({
       users: {
         messages: {
           list: jest.fn(),
           get: jest.fn(),
-          modify: jest.fn(),
-        },
-      },
-    }),
-  },
+          modify: jest.fn()
+        }
+      }
+    })
+  }
 }));
 
 const { google } = require("googleapis");
@@ -69,11 +69,11 @@ describe("Gmail API", () => {
           messages: {
             list: jest.fn().mockResolvedValue({
               data: {
-                messages: [{ id: "msg1" }, { id: "msg2" }],
-              },
-            }),
-          },
-        },
+                messages: [{ id: "msg1" }, { id: "msg2" }]
+              }
+            })
+          }
+        }
       };
 
       google.gmail.mockReturnValue(mockGmail);
@@ -85,7 +85,7 @@ describe("Gmail API", () => {
         userId: "me",
         q: "is:unread",
         maxResults: 10,
-        labelIds: ["INBOX"],
+        labelIds: ["INBOX"]
       });
     });
 
@@ -95,11 +95,11 @@ describe("Gmail API", () => {
           messages: {
             list: jest.fn().mockResolvedValue({
               data: {
-                messages: [{ id: "msg1" }],
-              },
-            }),
-          },
-        },
+                messages: [{ id: "msg1" }]
+              }
+            })
+          }
+        }
       };
 
       google.gmail.mockReturnValue(mockGmail);
@@ -107,7 +107,7 @@ describe("Gmail API", () => {
       const messages = await getMessages({
         query: "from:test@example.com",
         maxResults: 5,
-        labelIds: "SENT,INBOX",
+        labelIds: "SENT,INBOX"
       });
 
       expect(messages).toHaveLength(1);
@@ -115,7 +115,7 @@ describe("Gmail API", () => {
         userId: "me",
         q: "from:test@example.com",
         maxResults: 5,
-        labelIds: ["SENT", "INBOX"],
+        labelIds: ["SENT", "INBOX"]
       });
     });
   });
@@ -126,10 +126,10 @@ describe("Gmail API", () => {
         users: {
           messages: {
             get: jest.fn().mockResolvedValue({
-              data: { id: "msg1", snippet: "Test message" },
-            }),
-          },
-        },
+              data: { id: "msg1", snippet: "Test message" }
+            })
+          }
+        }
       };
 
       google.gmail.mockReturnValue(mockGmail);
@@ -140,7 +140,7 @@ describe("Gmail API", () => {
       expect(mockGmail.users.messages.get).toHaveBeenCalledWith({
         userId: "me",
         id: "msg1",
-        format: "full",
+        format: "full"
       });
     });
   });
@@ -152,19 +152,19 @@ describe("Gmail API", () => {
           messages: {
             list: jest.fn().mockResolvedValue({
               data: {
-                messages: [{ id: "msg1" }, { id: "msg2" }],
-              },
+                messages: [{ id: "msg1" }, { id: "msg2" }]
+              }
             }),
             get: jest
               .fn()
               .mockResolvedValueOnce({
-                data: { id: "msg1", snippet: "Message 1" },
+                data: { id: "msg1", snippet: "Message 1" }
               })
               .mockResolvedValueOnce({
-                data: { id: "msg2", snippet: "Message 2" },
-              }),
-          },
-        },
+                data: { id: "msg2", snippet: "Message 2" }
+              })
+          }
+        }
       };
 
       google.gmail.mockReturnValue(mockGmail);
@@ -181,9 +181,9 @@ describe("Gmail API", () => {
         users: {
           messages: {
             list: jest.fn().mockResolvedValue({ data: { messages: [] } }),
-            get: jest.fn(),
-          },
-        },
+            get: jest.fn()
+          }
+        }
       };
 
       google.gmail.mockReturnValue(mockGmail);
@@ -192,14 +192,14 @@ describe("Gmail API", () => {
       await getNewMessages({
         from: "test@example.com",
         subject: "important",
-        since: since,
+        since: since
       });
 
       expect(mockGmail.users.messages.list).toHaveBeenCalledWith({
         userId: "me",
         q: "is:unread from:test@example.com subject:important after:2024/01/01",
         maxResults: 10,
-        labelIds: ["INBOX"],
+        labelIds: ["INBOX"]
       });
     });
   });
@@ -210,10 +210,10 @@ describe("Gmail API", () => {
         users: {
           messages: {
             modify: jest.fn().mockResolvedValue({
-              data: { id: "msg1", labelIds: ["INBOX"] },
-            }),
-          },
-        },
+              data: { id: "msg1", labelIds: ["INBOX"] }
+            })
+          }
+        }
       };
 
       google.gmail.mockReturnValue(mockGmail);
@@ -225,8 +225,8 @@ describe("Gmail API", () => {
         userId: "me",
         id: "msg1",
         resource: {
-          removeLabelIds: ["UNREAD"],
-        },
+          removeLabelIds: ["UNREAD"]
+        }
       });
     });
   });
@@ -237,10 +237,10 @@ describe("Gmail API", () => {
         users: {
           messages: {
             modify: jest.fn().mockResolvedValue({
-              data: { id: "msg1", labelIds: ["INBOX", "UNREAD"] },
-            }),
-          },
-        },
+              data: { id: "msg1", labelIds: ["INBOX", "UNREAD"] }
+            })
+          }
+        }
       };
 
       google.gmail.mockReturnValue(mockGmail);
@@ -252,8 +252,8 @@ describe("Gmail API", () => {
         userId: "me",
         id: "msg1",
         resource: {
-          addLabelIds: ["UNREAD"],
-        },
+          addLabelIds: ["UNREAD"]
+        }
       });
     });
   });
@@ -267,13 +267,13 @@ describe("Gmail API", () => {
           headers: [
             { name: "Subject", value: "Test Subject" },
             { name: "From", value: "test@example.com" },
-            { name: "Date", value: "Mon, 1 Jan 2024 12:00:00 +0000" },
+            { name: "Date", value: "Mon, 1 Jan 2024 12:00:00 +0000" }
           ],
           body: {
-            data: Buffer.from("Test message content").toString("base64"),
+            data: Buffer.from("Test message content").toString("base64")
           },
-          mimeType: "text/plain",
-        },
+          mimeType: "text/plain"
+        }
       };
 
       const content = extractMessageContent(message);
@@ -285,7 +285,7 @@ describe("Gmail API", () => {
         date: "Mon, 1 Jan 2024 12:00:00 +0000",
         textContent: "Test message content",
         htmlContent: "",
-        snippet: "Test message snippet",
+        snippet: "Test message snippet"
       });
     });
 
@@ -297,23 +297,23 @@ describe("Gmail API", () => {
           headers: [
             { name: "Subject", value: "Test Subject" },
             { name: "From", value: "test@example.com" },
-            { name: "Date", value: "Mon, 1 Jan 2024 12:00:00 +0000" },
+            { name: "Date", value: "Mon, 1 Jan 2024 12:00:00 +0000" }
           ],
           parts: [
             {
               mimeType: "text/plain",
               body: {
-                data: Buffer.from("Plain text content").toString("base64"),
-              },
+                data: Buffer.from("Plain text content").toString("base64")
+              }
             },
             {
               mimeType: "text/html",
               body: {
-                data: Buffer.from("<p>HTML content</p>").toString("base64"),
-              },
-            },
-          ],
-        },
+                data: Buffer.from("<p>HTML content</p>").toString("base64")
+              }
+            }
+          ]
+        }
       };
 
       const content = extractMessageContent(message);
@@ -330,11 +330,11 @@ describe("Gmail API", () => {
           messages: {
             list: jest.fn().mockResolvedValue({
               data: {
-                messages: [{ id: "msg1" }, { id: "msg2" }, { id: "msg3" }],
-              },
-            }),
-          },
-        },
+                messages: [{ id: "msg1" }, { id: "msg2" }, { id: "msg3" }]
+              }
+            })
+          }
+        }
       };
 
       google.gmail.mockReturnValue(mockGmail);
@@ -346,7 +346,7 @@ describe("Gmail API", () => {
         userId: "me",
         q: "is:unread",
         labelIds: ["INBOX"],
-        maxResults: 1,
+        maxResults: 1
       });
     });
   });
