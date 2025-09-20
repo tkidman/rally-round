@@ -10,6 +10,9 @@ jobs:
       DIRT_AWS_ACCESS_KEY: ${{ secrets.DIRT_AWS_ACCESS_KEY }}
       DIRT_AWS_SECRET_ACCESS_KEY: ${{ secrets.DIRT_AWS_SECRET_ACCESS_KEY }}
       GOOGLE_SHEETS_API_KEY: ${{ secrets.GOOGLE_SHEETS_API_KEY }}
+      GMAIL_CLIENT_ID: ${{ secrets.GMAIL_CLIENT_ID }}
+      GMAIL_CLIENT_SECRET: ${{ secrets.GMAIL_CLIENT_SECRET }}
+      GMAIL_REFRESH_TOKEN: ${{ secrets.GMAIL_REFRESH_TOKEN }}
       DEBUG: tkidman:*
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -21,5 +24,6 @@ jobs:
         with:
           node-version: 12.x
       - run: npm install
-      - run: CLUB=jrc node --unhandled-rejections=strict ./runner.js
-#      - run: CLUB=jrc-themed node  --unhandled-rejections=strict ./runner.js
+      - run: CLUB=jrc-themed node  --unhandled-rejections=strict ./runner.js
+      # - run: CLUB=jrc node --unhandled-rejections=strict ./runner.js
+  
