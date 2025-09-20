@@ -18,7 +18,8 @@
     "prettier/prettier": "error",
     "import/first": 1,
     "import/prefer-default-export": 1,
-    "import/no-named-as-default": 0
+    "import/no-named-as-default": 0,
+    "no-console": "off"
   },
   "globals": {
     "process": true
