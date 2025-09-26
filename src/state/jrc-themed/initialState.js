@@ -93,7 +93,7 @@ const initialState = {
   hideCarColumnInStandings: false,
   showCarNameAsTextInResults: true,
   nullTeamIsPrivateer: true,
-  useCarAsTeam: true,
+  useCarAsTeam: false,
   // useCarClassAsTeam: false,
   disableOverall: true,
   // teamPointsForPowerstage: false,
