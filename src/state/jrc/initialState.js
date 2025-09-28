@@ -117,7 +117,7 @@ const initialState = {
       // }
       promotionRelegation: {
         promotionZone: 42,
-        relegationZone: 0
+      // relegationZone: -
       }
     },
     jrc2: {
