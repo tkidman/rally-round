@@ -116,8 +116,8 @@ const initialState = {
       //   matchDivision: true
       // }
       promotionRelegation: {
-        promotionZone: 42,
-      // relegationZone: -
+      //  promotionZone: -,
+        relegationZone: 60
       }
     },
     jrc2: {
@@ -144,8 +144,8 @@ const initialState = {
       //   matchDivision: true
       // }
       promotionRelegation: {
-        promotionZone: 30,
-        relegationZone: 12
+        promotionZone: 28,
+        relegationZone: 11
       }
     },
     jrc3: {
