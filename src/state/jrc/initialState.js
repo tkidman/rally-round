@@ -6,23 +6,18 @@ const points = {
   overall: [
     50,
     44,
-    41,
-    38,
-    35,
-    32,
-    30,
+    40,
+    37,
+    34,
+    31,
     28,
-    26,
-    24,
-    22,
-    20,
-    18,
+    25,
+    23,
+    21,
+    19,
     17,
-    16,
     15,
-    14,
     13,
-    12,
     11,
     10,
     9,
@@ -33,6 +28,11 @@ const points = {
     4,
     3,
     2,
+    1,
+    1,
+    1,
+    1,
+    1,
     1,
     1,
     1,
@@ -115,9 +115,10 @@ const initialState = {
       // filterEntries: {
       //   matchDivision: true
       // }
-      // promotionRelegation: {
-      //   relegationZone: 18
-      // }
+      promotionRelegation: {
+        promotionZone: 42,
+        relegationZone: 0
+      }
     },
     jrc2: {
       displayName: "JRC2",
@@ -142,10 +143,10 @@ const initialState = {
       // filterEntries: {
       //   matchDivision: true
       // }
-      // promotionRelegation: {
-      //   promotionZone: 22,
-      //   relegationZone: 19
-      // }
+      promotionRelegation: {
+        promotionZone: 30,
+        relegationZone: 12
+      }
     },
     jrc3: {
       displayName: "JRC3",
@@ -167,11 +168,11 @@ const initialState = {
       //   "Renault Clio Rally4"
       // ],
       manualResults: []
-      // promotionRelegation: {
-      //   // promotionDoubleZone: -,
-      //   promotionZone: 23
-      //   // relegationZone: -
-      // }
+      promotionRelegation: {
+        // promotionDoubleZone: -,
+        promotionZone: 24
+        // relegationZone: -
+      }
     }
   },
   historicalSeasonLinks: [
