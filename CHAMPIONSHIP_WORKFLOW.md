@@ -20,6 +20,11 @@ Done! 🎉 (runner.js automatically uploads to S3)
 
 Championships are stored in versioned folders (e.g., `oor-1/`, `oor-2/`). A redirect HTML file at the bucket root automatically sends visitors to the current championship.
 
+**How it works:**
+- The **first entry** in `historicalSeasonLinks` is the **current championship** (used for redirect and file uploads)
+- **Subsequent entries** are shown as historical links on your website
+- The first entry won't appear in the historical links section since it's the active championship
+
 **Benefits:**
 - Old championships remain accessible via direct URLs
 - Assets automatically copied from previous championship
@@ -86,7 +91,7 @@ Uploads a redirect HTML file to the bucket root that redirects to the championsh
    historicalSeasonLinks: [
      {
        name: "OOR Winter",
-       href: "/oor-1"
+       href: "/oor-1"  // First championship (current, no historical links yet)
      }
    ]
    ```
@@ -103,7 +108,7 @@ Uploads a redirect HTML file to the bucket root that redirects to the championsh
    node runner.js <credentials> oor
    ```
 
-Your website root now redirects to `oor-1/`.
+Your website root now redirects to `oor-1/`. Since this is the only championship, there won't be any historical links shown on the page yet.
 
 ### New Championship Starts (Recommended Workflow)
 
@@ -113,11 +118,11 @@ Your website root now redirects to `oor-1/`.
    historicalSeasonLinks: [
      {
        name: "OOR Summer",
-       href: "/oor-2"  // New championship at position 0
+       href: "/oor-2"  // New championship at position 0 (current, used for redirect)
      },
      {
        name: "OOR Winter",
-       href: "/oor-1"  // Previous championship at position 1
+       href: "/oor-1"  // Previous championship at position 1 (shows in historical links)
      }
    ]
    ```
@@ -140,8 +145,13 @@ Your website root now redirects to `oor-1/`.
    
    Runner.js automatically uploads to S3 (to the folder specified in your config)
 
-Done! Your website root now redirects to `oor-2/`, but `oor-1/` is still accessible at:
-`http://oor-results.s3-website-ap-southeast-2.amazonaws.com/oor-1/`
+Done! Your website root now redirects to `oor-2/`, and visitors will see:
+- **Current championship:** `oor-2/` (accessible via root redirect)
+- **Historical links on page:** Only "OOR Winter" (links to `oor-1/`)
+
+Both championships remain accessible via their direct URLs:
+- `http://oor-results.s3-website-ap-southeast-2.amazonaws.com/oor-1/`
+- `http://oor-results.s3-website-ap-southeast-2.amazonaws.com/oor-2/`
 
 ### Multiple Clubs/Championships
 

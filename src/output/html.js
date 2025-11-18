@@ -545,7 +545,9 @@ const addLinks = (links, name, type, displayName) => {
 };
 
 const addHistoricalLinks = links => {
-  links.historical = leagueRef.league.historicalSeasonLinks || [];
+  // Skip the first entry as it's the current championship (used for redirect)
+  const allLinks = leagueRef.league.historicalSeasonLinks || [];
+  links.historical = allLinks.slice(1);
 };
 
 const addSeriesLinks = links => {

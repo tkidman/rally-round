@@ -107,9 +107,9 @@ const initialState = {
   superRallyIsDnf: true,
   showSuperRallyColumn: true,
   divisions: {
-    wrc2019: {
-      divisionName: "wrc2019",
-      displayName: "WRC 2019",
+    wrc1986: {
+      divisionName: "wrc1986",
+      displayName: "WRC 1986",
       disableSameCarValidation: false,
       // enableSameCarClassValidation: true,
       maxDriversScoringPointsForTeam: 2,
@@ -117,11 +117,7 @@ const initialState = {
       wrc: [
         {
           clubId: "17",
-          championshipIds: [
-            "ZRuNz9Rui5Rfh3y4",
-            "331ZnPSYeXd3tMyyc",
-            "4BFeYtEK51qzML4Td"
-          ],
+          championshipIds: ["2QQbWs9V5TMBi4654", "592xoi1LPPB6wACEu"],
           includeNextChampionships: false
         }
       ],
@@ -135,9 +131,9 @@ const initialState = {
       //   "Ford Escort RS 1600 MK1"
       // ]
     },
-    wrc2019Constructors: {
-      divisionName: "wrc2019Constructors",
-      displayName: "WRC 2019 Constructors",
+    wrc1986Constructors: {
+      divisionName: "wrc1986Constructors",
+      displayName: "WRC 1986 Constructors",
       disableSameCarValidation: false,
       // enableSameCarClassValidation: true,
       maxDriversScoringPointsForTeam: 2,
@@ -145,11 +141,7 @@ const initialState = {
       wrc: [
         {
           clubId: "17",
-          championshipIds: [
-            "ZRuNz9Rui5Rfh3y4",
-            "331ZnPSYeXd3tMyyc",
-            "4BFeYtEK51qzML4Td"
-          ],
+          championshipIds: ["2QQbWs9V5TMBi4654", "592xoi1LPPB6wACEu"],
           includeNextChampionships: false
         }
       ],
@@ -166,6 +158,10 @@ const initialState = {
     }
   },
   historicalSeasonLinks: [
+    {
+      name: "WRC 1986",
+      href: "/themed/themed-28"
+    },
     {
       name: "WRC 2019",
       href: "/themed/themed-27"
