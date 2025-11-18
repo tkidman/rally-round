@@ -1221,9 +1221,19 @@ const calculateOverallResults = () => {
 
 const loadCache = async () => {
   if (process.env.DIRT_AWS_ACCESS_KEY && leagueRef.league.websiteName) {
+    // Extract championship folder from historicalSeasonLinks[0].href
+    let championshipFolder = null;
+    if (
+      leagueRef.league.historicalSeasonLinks &&
+      leagueRef.league.historicalSeasonLinks.length > 0
+    ) {
+      const href = leagueRef.league.historicalSeasonLinks[0].href;
+      championshipFolder = href.startsWith("/") ? href.slice(1) : href;
+    }
+
     const cacheFiles = await downloadCache(
       leagueRef.league.websiteName,
-      leagueRef.league.subfolderName
+      championshipFolder
     );
     cacheFiles.forEach(cacheFile => {
       const cacheFileName = cacheFile.key.slice(

@@ -17,10 +17,18 @@ const writeOutput = async () => {
   debug("begin write output");
   const { league } = leagueRef;
 
+  // Extract championship folder from historicalSeasonLinks[0].href
+  // e.g., "/oor-3" -> "oor-3" or "/themed/themed-7" -> "themed/themed-7"
+  let championshipFolder = null;
+  if (league.historicalSeasonLinks && league.historicalSeasonLinks.length > 0) {
+    const href = league.historicalSeasonLinks[0].href;
+    championshipFolder = href.startsWith("/") ? href.slice(1) : href;
+  }
+
   if (league.placement) {
     writePlacementOutput();
     if (process.env.DIRT_AWS_ACCESS_KEY && league.websiteName) {
-      await upload(league.websiteName, league.subfolderName);
+      await upload(league.websiteName, championshipFolder);
     }
     debug("only writing placements, returning");
     return true;
@@ -38,7 +46,7 @@ const writeOutput = async () => {
 
   writeJSON(league);
   if (process.env.DIRT_AWS_ACCESS_KEY && league.websiteName) {
-    await upload(league.websiteName, league.subfolderName);
+    await upload(league.websiteName, championshipFolder);
   }
   return true;
 };

@@ -117,8 +117,12 @@ const initialState = {
       wrc: [
         {
           clubId: "17",
-          championshipIds: ["ZRuNz9Rui5Rfh3y4"],
-          includeNextChampionships: true
+          championshipIds: [
+            "ZRuNz9Rui5Rfh3y4",
+            "331ZnPSYeXd3tMyyc",
+            "4BFeYtEK51qzML4Td"
+          ],
+          includeNextChampionships: false
         }
       ],
       manualResults: [],
@@ -141,8 +145,12 @@ const initialState = {
       wrc: [
         {
           clubId: "17",
-          championshipIds: ["ZRuNz9Rui5Rfh3y4"],
-          includeNextChampionships: true
+          championshipIds: [
+            "ZRuNz9Rui5Rfh3y4",
+            "331ZnPSYeXd3tMyyc",
+            "4BFeYtEK51qzML4Td"
+          ],
+          includeNextChampionships: false
         }
       ],
       manualResults: [],
@@ -158,6 +166,10 @@ const initialState = {
     }
   },
   historicalSeasonLinks: [
+    {
+      name: "WRC 2019",
+      href: "/themed/themed-27"
+    },
     {
       name: "WRC 1973",
       href: "/themed/themed-26"

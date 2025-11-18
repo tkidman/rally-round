@@ -54,6 +54,10 @@ const initialState = {
   },
   historicalSeasonLinks: [
     {
+      name: "OOR Autumn",
+      href: "/oor-3"
+    },
+    {
       name: "OOR Summer",
       href: "/subfolder/oor-2"
     },

@@ -75,11 +75,11 @@ const getObject = async (bucket, key) => {
   });
 };
 
-const uploadHTML = async (directory, bucket, subfolderName) => {
+const uploadHTML = async (directory, bucket, championshipFolder) => {
   const files = fs.readdirSync(directory);
   const htmlFiles = files.filter(file => file.endsWith(".html"));
   const promises = htmlFiles.map(file => {
-    const key = subfolderName ? `${subfolderName}/${file}` : file;
+    const key = championshipFolder ? `${championshipFolder}/${file}` : file;
     return uploadToS3({
       file: `${directory}/${file}`,
       key,
@@ -91,10 +91,10 @@ const uploadHTML = async (directory, bucket, subfolderName) => {
   debug(`uploaded ${htmlFiles.length} files to s3`);
 };
 
-const uploadCSS = async ({ bucket, subfolderName }) => {
+const uploadCSS = async ({ bucket, championshipFolder }) => {
   const file = "./assets/css/style.css";
-  const remoteCSSFolder = subfolderName
-    ? `${subfolderName}/assets/css`
+  const remoteCSSFolder = championshipFolder
+    ? `${championshipFolder}/assets/css`
     : "assets/css";
   const key = `${remoteCSSFolder}/style.css`;
   await uploadToS3({
@@ -109,15 +109,15 @@ const uploadCSS = async ({ bucket, subfolderName }) => {
 const uploadCache = async ({
   directory,
   bucket,
-  subfolderName,
+  championshipFolder,
   fileType,
   contentType
 }) => {
   const files = fs.readdirSync(directory);
   const cacheFiles = files.filter(file => file.endsWith(fileType));
   const promises = cacheFiles.map(file => {
-    const key = subfolderName
-      ? `${subfolderName}/cache/${file}`
+    const key = championshipFolder
+      ? `${championshipFolder}/cache/${file}`
       : `cache/${file}`;
     return uploadToS3({
       file: `${directory}/${file}`,
@@ -130,9 +130,9 @@ const uploadCache = async ({
   debug(`uploaded ${cacheFiles.length} cache files to s3`);
 };
 
-const uploadLogos = async (bucket, subfolderName, logoDir) => {
-  const remoteLogoFolder = subfolderName
-    ? `${subfolderName}/assets/${logoDir}`
+const uploadLogos = async (bucket, championshipFolder, logoDir) => {
+  const remoteLogoFolder = championshipFolder
+    ? `${championshipFolder}/assets/${logoDir}`
     : `assets/${logoDir}`;
   const remoteLogos = await listObjects(bucket, `${remoteLogoFolder}`);
   const remoteLogoNames = remoteLogos.Contents.map(s3File => {
@@ -145,7 +145,7 @@ const uploadLogos = async (bucket, subfolderName, logoDir) => {
   const missingLogos = difference(localLogos, remoteLogoNames);
 
   const promises = missingLogos.map(file => {
-    const key = subfolderName
+    const key = championshipFolder
       ? `${remoteLogoFolder}/${file}`
       : `assets/${logoDir}/${file}`;
     return uploadToS3({
@@ -159,15 +159,15 @@ const uploadLogos = async (bucket, subfolderName, logoDir) => {
   debug(`uploaded ${promises.length} ${logoDir} logo files to s3`);
 };
 
-const upload = async (bucket, subfolderName) => {
-  await uploadLogos(bucket, subfolderName, "teams");
-  await uploadLogos(bucket, subfolderName, "cars");
+const upload = async (bucket, championshipFolder) => {
+  await uploadLogos(bucket, championshipFolder, "teams");
+  await uploadLogos(bucket, championshipFolder, "cars");
 
-  await uploadHTML(`./${outputPath}/website`, bucket, subfolderName);
+  await uploadHTML(`./${outputPath}/website`, bucket, championshipFolder);
   await uploadCache({
     directory: `./${cachePath}`,
     bucket,
-    subfolderName,
+    championshipFolder,
     fileType: ".json",
     contentType: "application/json"
   });
@@ -175,12 +175,12 @@ const upload = async (bucket, subfolderName) => {
   await uploadCache({
     directory: `./${cachePath}`,
     bucket,
-    subfolderName,
+    championshipFolder,
     fileType: ".csv",
     contentType: "text/csv"
   });
 
-  await uploadCSS({ bucket, subfolderName });
+  await uploadCSS({ bucket, championshipFolder });
 };
 
 const downloadFiles = async (bucket, keys) => {
@@ -189,9 +189,11 @@ const downloadFiles = async (bucket, keys) => {
   return files;
 };
 
-const downloadCache = async (bucket, subfolderName) => {
+const downloadCache = async (bucket, championshipFolder) => {
   debug("downloading cache files from s3");
-  const cachePrefix = subfolderName ? `${subfolderName}/cache` : "cache";
+  const cachePrefix = championshipFolder
+    ? `${championshipFolder}/cache`
+    : "cache";
   const objects = await listObjects(bucket, cachePrefix);
   const cacheObjects = objects.Contents.filter(s3Object =>
     s3Object.Key.startsWith(cachePrefix)
