@@ -4,9 +4,14 @@ This document explains how to manage multiple championships using versioned fold
 
 ## Quick Start
 
-**Starting a new championship:**
+**Starting a new championship (with previous championship):**
 1. Edit `historicalSeasonLinks` in your config - add new championship at position 0
 2. Run: `npm run prepare-championship oor`
+3. Generate results: `node runner.js <credentials> oor`
+
+**Starting a new championship (from parent folder):**
+1. Edit `historicalSeasonLinks` in your config - add new championship at position 0
+2. Run: `npm run prepare-championship:parent oor`
 3. Generate results: `node runner.js <credentials> oor`
 
 Done! 🎉 (runner.js automatically uploads to S3)
@@ -42,9 +47,24 @@ npm run prepare-championship oor
 This command:
 1. Creates new championship folder (from `historicalSeasonLinks[0]`)
 2. Copies assets and error.html from previous championship (from `historicalSeasonLinks[1]`)
-3. Sets up redirect HTML at root
+3. Sets up redirect HTML
 
-**Perfect for:** Starting a new championship season with minimal effort.
+**Perfect for:** Starting a new championship when you have a previous championship to copy from.
+
+### Prepare Championship from Parent Folder
+Alternative approach that copies from parent/root instead of previous championship:
+```bash
+npm run prepare-championship:parent oor
+```
+This command:
+1. Creates new championship folder (from `historicalSeasonLinks[0]`)
+2. Copies assets/ and all HTML files from parent folder (root or `subfolderName`)
+3. Sets up redirect HTML
+
+**Perfect for:** 
+- First championship (no previous championship to copy from)
+- When your assets/templates are in the parent folder
+- Clubs with `subfolderName` where assets are at the subfolder level
 
 ### Set Redirect Only
 Just update the redirect without copying files:
@@ -71,10 +91,12 @@ Uploads a redirect HTML file to the bucket root that redirects to the championsh
    ]
    ```
 
-2. Prepare the championship (copies assets & sets redirect):
+2. Prepare the championship from parent folder (copies assets/HTML from root):
    ```bash
-   npm run prepare-championship oor
+   npm run prepare-championship:parent oor
    ```
+   
+   This copies from the bucket root (or `subfolderName` if set) into `oor-1/`.
 
 3. Generate and upload results:
    ```bash

@@ -12,7 +12,8 @@
     "config-editor": "cd src/state/editor && node server.js",
     "prepush": "npm run lint -- --fix && npm run test && npm run validate-configs",
     "set-redirect": "node setRedirectFromConfig.js",
-    "prepare-championship": "node prepareNewChampionship.js"
+    "prepare-championship": "node prepareNewChampionship.js",
+    "prepare-championship:parent": "node prepareChampionshipFromParent.js"
   },
   "repository": {
     "type": "git",
