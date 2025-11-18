@@ -99,6 +99,30 @@ const run = async () => {
     );
     console.log("");
 
+    // Check if new folder already exists
+    console.log(`🔍 Checking if ${newFolder}/ already exists...`);
+    const existingObjects = await listAllObjects(bucket, `${newFolder}/`);
+    if (existingObjects.length > 0) {
+      console.error(
+        `\n❌ Error: Championship folder ${newFolder}/ already exists in S3!`
+      );
+      console.error(
+        `   Found ${existingObjects.length} existing files in this folder.`
+      );
+      console.error(
+        `\nTo avoid overwriting existing data, this script will exit.`
+      );
+      console.error(`\nIf you want to replace this championship:`);
+      console.error(
+        `1. Delete the existing folder first (manually or via AWS CLI)`
+      );
+      console.error(
+        `2. Or use a different championship name in historicalSeasonLinks`
+      );
+      process.exit(1);
+    }
+    console.log(`   ✓ Folder does not exist, safe to proceed\n`);
+
     // Step 1: Copy assets folder from parent to new championship
     console.log(
       `1️⃣  Copying assets/ from ${parentFolder || "root"}/ to ${newFolder}/...`

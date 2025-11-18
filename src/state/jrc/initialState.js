@@ -177,6 +177,10 @@ const initialState = {
   },
   historicalSeasonLinks: [
     {
+      name: "JRC 18",
+      href: "/jrc-18"
+    },
+    {
       name: "JRC 17",
       href: "/jrc-17"
     },
