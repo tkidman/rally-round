@@ -5,12 +5,19 @@ const debug = require("debug")("tkidman:rally-round:awsAPI");
 const { outputPath, cachePath } = require("../../shared");
 const { difference } = require("lodash");
 
-const IAM_USER_KEY = process.env.DIRT_AWS_ACCESS_KEY;
-const IAM_USER_SECRET = process.env.DIRT_AWS_SECRET_ACCESS_KEY;
+const IAM_USER_KEY = process.env.DIRT_AWS_ACCESS_KEY
+  ? process.env.DIRT_AWS_ACCESS_KEY.trim()
+  : undefined;
+const IAM_USER_SECRET = process.env.DIRT_AWS_SECRET_ACCESS_KEY
+  ? process.env.DIRT_AWS_SECRET_ACCESS_KEY.trim()
+  : undefined;
+const AWS_REGION =
+  process.env.AWS_REGION || process.env.AWS_DEFAULT_REGION || "ap-southeast-2";
 
 const s3bucket = new AWS.S3({
   accessKeyId: IAM_USER_KEY,
-  secretAccessKey: IAM_USER_SECRET
+  secretAccessKey: IAM_USER_SECRET,
+  region: AWS_REGION
 });
 
 const uploadToS3 = ({ file, key, bucket, contentType }) => {
@@ -195,4 +202,144 @@ const downloadCache = async (bucket, subfolderName) => {
   return cacheFiles;
 };
 
-module.exports = { upload, downloadCache };
+const copyObject = async (bucket, sourceKey, destinationKey) => {
+  // CopySource must be URL-encoded
+  const encodedSourceKey = encodeURIComponent(sourceKey).replace(/%2F/g, "/");
+  const params = {
+    Bucket: bucket,
+    CopySource: `${bucket}/${encodedSourceKey}`,
+    Key: destinationKey
+  };
+
+  return new Promise((resolve, reject) => {
+    s3bucket.copyObject(params, (err, data) => {
+      if (err) {
+        return reject(err);
+      }
+      return resolve(data);
+    });
+  });
+};
+
+const listAllObjects = async (bucket, prefix) => {
+  let allObjects = [];
+  let continuationToken = null;
+
+  do {
+    const params = {
+      Bucket: bucket,
+      Prefix: prefix
+    };
+
+    if (continuationToken) {
+      params.ContinuationToken = continuationToken;
+    }
+
+    const result = await new Promise((resolve, reject) => {
+      s3bucket.listObjectsV2(params, (err, data) => {
+        if (err) {
+          return reject(err);
+        }
+        return resolve(data);
+      });
+    });
+
+    if (result.Contents) {
+      allObjects = allObjects.concat(result.Contents);
+    }
+
+    continuationToken = result.NextContinuationToken;
+  } while (continuationToken);
+
+  return allObjects;
+};
+
+const createRedirectHTML = (targetFolder, championshipName) => {
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirecting to ${championshipName || "Championship"}...</title>
+  <meta http-equiv="refresh" content="0; url=/${targetFolder}/">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+    .container {
+      text-align: center;
+    }
+    .spinner {
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top: 4px solid white;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 20px auto;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+  <script>
+    // Redirect to current championship
+    window.location.href = '/${targetFolder}/';
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="spinner"></div>
+    <p>Redirecting to ${championshipName || "championship"}...</p>
+    <p><a href="/${targetFolder}/" style="color: white;">Click here if not redirected automatically</a></p>
+  </div>
+</body>
+</html>`;
+};
+
+const uploadRedirectHTML = async (
+  bucket,
+  targetFolder,
+  championshipName,
+  subfolderName
+) => {
+  const redirectKey = subfolderName
+    ? `${subfolderName}/index.html`
+    : "index.html";
+  debug(`uploading redirect HTML to ${redirectKey}: -> ${targetFolder}`);
+
+  const htmlContent = createRedirectHTML(targetFolder, championshipName);
+
+  const params = {
+    Bucket: bucket,
+    Key: redirectKey,
+    Body: htmlContent,
+    ContentType: "text/html"
+  };
+
+  return new Promise((resolve, reject) => {
+    s3bucket.upload(params, (err, data) => {
+      if (err) {
+        return reject(err);
+      }
+      debug(`redirect HTML uploaded to ${redirectKey}`);
+      return resolve(data);
+    });
+  });
+};
+
+module.exports = {
+  upload,
+  downloadCache,
+  listAllObjects,
+  uploadRedirectHTML,
+  copyObject
+};

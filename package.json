@@ -10,7 +10,9 @@
     "lint": "eslint src/",
     "validate-configs": "node src/state/editor/validate.js",
     "config-editor": "cd src/state/editor && node server.js",
-    "prepush": "npm run lint -- --fix && npm run test && npm run validate-configs"
+    "prepush": "npm run lint -- --fix && npm run test && npm run validate-configs",
+    "set-redirect": "node setRedirectFromConfig.js",
+    "prepare-championship": "node prepareNewChampionship.js"
   },
   "repository": {
     "type": "git",

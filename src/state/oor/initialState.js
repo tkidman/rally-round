@@ -6,7 +6,7 @@ const points = {
 const initialState = {
   pointsForDNF: false,
   websiteName: "oor-results",
-  // subfolderName: "themed",
+  // subfolderName: "subfolder",
   useStandingsForHome: true,
   showLivePoints: true,
   showLivePointsDaysRemaining: 10,
@@ -52,6 +52,15 @@ const initialState = {
       // ]
     }
   },
-  historicalSeasonLinks: []
+  historicalSeasonLinks: [
+    {
+      name: "OOR Summer",
+      href: "/subfolder/oor-2"
+    },
+    {
+      name: "OOR Winter",
+      href: "/oor-1"
+    }
+  ]
 };
 module.exports = initialState;
