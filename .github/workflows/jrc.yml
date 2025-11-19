@@ -32,9 +32,9 @@ jobs:
       - name: jrc-themed
         if: always()
         run: CLUB=jrc-themed node --unhandled-rejections=strict ./runner.js
-      # - name: jrc
-      #   if: always()
-      #   run: CLUB=jrc node --unhandled-rejections=strict ./runner.js
+      - name: jrc-worldcup
+        if: always()
+        run: CLUB=jrc-worldcup node --unhandled-rejections=strict ./runner.js
       # - name: checker
       #   if: always()
       #   run: node --unhandled-rejections=strict ./checker.js

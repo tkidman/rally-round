@@ -177,6 +177,10 @@ const initialState = {
   },
   historicalSeasonLinks: [
     {
+      name: "World Cup 3",
+      href: "/world-cup-3"
+    },
+    {
       name: "JRC 18",
       href: "/jrc-18"
     },

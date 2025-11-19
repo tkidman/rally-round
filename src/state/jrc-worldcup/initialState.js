@@ -114,14 +114,19 @@ const initialState = {
       wrc: [
         {
           clubId: "20662",
-          championshipIds: ["5VogcUotJcMtwq1t1"],
+          championshipIds: ["u86n5B82sF47M1Ub"],
           includeNextChampionships: true
         }
       ],
       events: [],
       points,
-      manualResults: []
-      // cars: []
+      manualResults: [],
+      cars: [
+        "Ford Focus WRC '99",
+        "Mitsubishi Lancer Evolution VI",
+        "Peugeot 206 Rally",
+        "SUBARU Impreza 1998"
+      ]
     },
     worldCupJRCTeams: {
       divisionName: "worldCupJRCTeams",
@@ -135,20 +140,41 @@ const initialState = {
       wrc: [
         {
           clubId: "20662",
-          championshipIds: ["5VogcUotJcMtwq1t1"],
+          championshipIds: ["u86n5B82sF47M1Ub"],
           includeNextChampionships: true
         }
       ],
       events: [],
       points,
-      manualResults: []
-      // cars: []
+      manualResults: [],
+      cars: [
+        "Ford Focus WRC '99",
+        "Mitsubishi Lancer Evolution VI",
+        "Peugeot 206 Rally",
+        "SUBARU Impreza 1998"
+      ]
     }
   },
   historicalSeasonLinks: [
     {
-      name: "World Cup 1",
-      href: "/world-cup/world-cup-1"
+      name: "World Cup 3",
+      href: "/world-cup-3"
+    },
+    {
+      name: "JRC 18",
+      href: "/jrc-18"
+    },
+    {
+      name: "JRC 17",
+      href: "/jrc-17"
+    },
+    {
+      name: "JRC 16",
+      href: "/jrc-16"
+    },
+    {
+      name: "World Cup 2",
+      href: "/world-cup-2"
     },
     {
       name: "JRC 15",
@@ -157,6 +183,10 @@ const initialState = {
     {
       name: "JRC 14",
       href: "/jrc-14"
+    },
+    {
+      name: "World Cup 1",
+      href: "/world-cup"
     },
     {
       name: "JRC 13",
