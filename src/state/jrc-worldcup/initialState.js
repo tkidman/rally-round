@@ -125,7 +125,12 @@ const initialState = {
         "Ford Focus WRC '99",
         "Mitsubishi Lancer Evolution VI",
         "Peugeot 206 Rally",
-        "SUBARU Impreza 1998"
+        "SUBARU Impreza 1998",
+        "Ford Escort Mk 6 Maxi",
+        "Renault Maxi Mégane",
+        "SEAT Ibiza Kit Car",
+        "Vauxhall Astra Rally Car",
+        "Volkswagen Golf IV Kit Car"
       ]
     },
     worldCupJRCTeams: {
@@ -151,7 +156,12 @@ const initialState = {
         "Ford Focus WRC '99",
         "Mitsubishi Lancer Evolution VI",
         "Peugeot 206 Rally",
-        "SUBARU Impreza 1998"
+        "SUBARU Impreza 1998",
+        "Ford Escort Mk 6 Maxi",
+        "Renault Maxi Mégane",
+        "SEAT Ibiza Kit Car",
+        "Vauxhall Astra Rally Car",
+        "Volkswagen Golf IV Kit Car"
       ]
     }
   },
