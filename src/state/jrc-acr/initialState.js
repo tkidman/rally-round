@@ -8,11 +8,11 @@ const initialState = {
   hideCarColumnInStandings: true,
   showCarNameAsTextInResults: true,
   hideTeamLogoColumn: false,
-  nullTeamIsPrivateer: true,
+  // nullTeamIsPrivateer: true,
   // useCarAsTeam: false,
   // useCarClassAsTeam: true,
   disableOverall: true,
-  disableTeams: false,
+  disableTeams: true,
   teamPointsForPowerstage: false,
   backgroundStyle:
     "background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); background-attachment: fixed;",
