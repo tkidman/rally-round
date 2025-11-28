@@ -48,7 +48,7 @@ describe("fetchManual", () => {
               {
                 isDnfEntry: true,
                 name: "satchmo",
-                nationality: null,
+                nationality: "RX",
                 stageTime: "05:35.345",
                 totalTime: "01:05:59.999",
                 vehicleClass: "Ford Escort Mk II",
@@ -57,7 +57,7 @@ describe("fetchManual", () => {
               {
                 isDnfEntry: false,
                 name: "npiipo",
-                nationality: null,
+                nationality: "RX",
                 stageTime: "05:15.345",
                 totalTime: "01:06:59.999",
                 vehicleClass: "Ford Escort Mk II",
@@ -66,7 +66,8 @@ describe("fetchManual", () => {
             ]
           }
         ],
-        locationFlag: "AU"
+        locationFlag: "AU",
+        locationName: "Australia"
       },
       {
         endTime: "2019-10-02T07:00Z",
@@ -78,7 +79,7 @@ describe("fetchManual", () => {
               {
                 isDnfEntry: false,
                 name: "npiipo",
-                nationality: null,
+                nationality: "RX",
                 stageTime: "04:30:123",
                 totalTime: "55:55:123",
                 vehicleClass: "Ford Escort Mk II",
@@ -87,7 +88,8 @@ describe("fetchManual", () => {
             ]
           }
         ],
-        locationFlag: "FI"
+        locationFlag: "FI",
+        locationName: "Finland"
       }
     ]);
   });

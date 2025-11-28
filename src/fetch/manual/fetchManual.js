@@ -26,17 +26,25 @@ const populateManualEvents = resultRows => {
   resultRows.forEach(row => {
     const eventId = row.EventId;
     if (!eventsById[eventId]) {
+      const countryCode = row.EventCountry;
+      const country = getCountryForAnyCode(countryCode);
       eventsById[eventId] = {
         endTime: row.EventEndTime,
         eventId,
-        locationFlag: row.EventCountry,
+        locationFlag: countryCode,
+
+        locationName:
+          row.EventName ||
+          row.EventLocation ||
+          country.name ||
+          `Event ${eventId}`,
         leaderboardStages: [{ entries: [] }],
         eventStatus: moment(row.EventEndTime).isBefore(moment())
           ? eventStatuses.finished
           : null
       };
     }
-    let driver = leagueRef.getDriver(row.Driver);
+    let driver = leagueRef.getLeagueDriver(row.Driver);
     if (!driver) {
       debug(`unable to find driver details for ${row.Driver}, using defaults`);
       driver = {
@@ -49,11 +57,11 @@ const populateManualEvents = resultRows => {
     const entry = {
       name: row.Driver,
       isDnfEntry: !!row.DNF,
-      vehicleName: row.car || driver.car,
-      vehicleClass: row.car || driver.car,
-      nationality: driver.nationality,
-      stageTime: row.PSTime,
-      totalTime: row.TotalTime
+      vehicleName: row.Car || driver.car,
+      vehicleClass: row.Car || driver.car,
+      nationality: driver.nationality || "RX",
+      stageTime: row.PSTime || row.TotalTime || "00:00:00.000",
+      totalTime: row.TotalTime || "00:00:00.000"
     };
     eventsById[eventId].leaderboardStages[0].entries.push(entry);
   });

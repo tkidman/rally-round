@@ -1,0 +1,25 @@
+on: workflow_dispatch
+
+jobs:
+  publish-results:
+    env:
+      DIRT_USERNAME: ${{ secrets.DIRT_USERNAME }}
+      DIRT_PASSWORD: ${{ secrets.DIRT_PASSWORD }}
+      DIRT_AWS_ACCESS_KEY: ${{ secrets.DIRT_AWS_ACCESS_KEY }}
+      DIRT_AWS_SECRET_ACCESS_KEY: ${{ secrets.DIRT_AWS_SECRET_ACCESS_KEY }}
+      RACENET_USERNAME: ${{ secrets.RACENET_USERNAME }}
+      RACENET_PASSWORD: ${{ secrets.RACENET_PASSWORD }}
+      GOOGLE_SHEETS_API_KEY: ${{ secrets.GOOGLE_SHEETS_API_KEY }}
+      DEBUG: tkidman:*
+      CLUB: jrc-arc
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 18.x
+      - run: npm install
+      - run: node --unhandled-rejections=strict ./runner.js

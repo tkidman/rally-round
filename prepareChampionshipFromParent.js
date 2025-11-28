@@ -124,11 +124,19 @@ const run = async () => {
     console.log(`   ✓ Folder does not exist, safe to proceed\n`);
 
     // Step 1: Copy assets folder from parent to new championship
+    // First try parent folder assets, fall back to root assets if not found
     console.log(
       `1️⃣  Copying assets/ from ${parentFolder || "root"}/ to ${newFolder}/...`
     );
-    const assetsPrefix = parentFolder ? `${parentFolder}/assets/` : "assets/";
-    const assetsObjects = await listAllObjects(bucket, assetsPrefix);
+    let assetsPrefix = parentFolder ? `${parentFolder}/assets/` : "assets/";
+    let assetsObjects = await listAllObjects(bucket, assetsPrefix);
+    
+    // If no assets in parent folder, try root assets/
+    if (assetsObjects.length === 0 && parentFolder) {
+      console.log(`   ℹ️  No assets in ${assetsPrefix}, trying root assets/`);
+      assetsPrefix = "assets/";
+      assetsObjects = await listAllObjects(bucket, assetsPrefix);
+    }
 
     if (assetsObjects.length === 0) {
       console.log(

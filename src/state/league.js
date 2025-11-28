@@ -270,10 +270,11 @@ const init = async () => {
   leagueRef.getDriverInDivision = getDriverInDivision;
   const teamsFoundOnDrivers = some(Object.values(driversById), "teamId");
   leagueRef.hasTeams =
-    teamsFoundOnDrivers ||
-    league.useCarAsTeam ||
-    league.useCarClassAsTeam ||
-    league.useNationalityAsTeam;
+    !league.disableTeams &&
+    (teamsFoundOnDrivers ||
+      league.useCarAsTeam ||
+      league.useCarClassAsTeam ||
+      league.useNationalityAsTeam);
   leagueRef.hasCars = !!driverColumns.car;
   leagueRef.includeOverall =
     Object.keys(league.divisions).length > 1 && !league.disableOverall;
@@ -335,7 +336,18 @@ const getDriverInDivision = (name, divisionName) => {
   if (divisionName === "overall") {
     return getDriverInternal(league.overall.drivers, name);
   }
-  const { drivers: divisionDrivers } = league.divisions[divisionName];
+  const division = league.divisions[divisionName];
+  if (!division) {
+    debug(`Division ${divisionName} not found, falling back to league driver`);
+    return getLeagueDriver(name);
+  }
+  if (!division.drivers) {
+    debug(
+      `Division ${divisionName} has no drivers yet, falling back to league driver`
+    );
+    return getLeagueDriver(name);
+  }
+  const { drivers: divisionDrivers } = division;
   return getDriverInternal(divisionDrivers, name);
 };
 const getDriver = name => {

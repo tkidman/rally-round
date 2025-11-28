@@ -38,6 +38,9 @@ const resultTypes = {
 const dnfFactor = 100000000;
 
 const getDuration = durationString => {
+  if (!durationString) {
+    return moment.duration(0);
+  }
   if (durationString.split(":").length === 2) {
     return moment.duration(`00:${durationString}`);
   }
@@ -141,6 +144,10 @@ const getCountryForAnyCode = code => {
   );
 };
 const getCountryForDriver = driver => {
+  if (!driver.nationality) {
+    debug(`driver has no nationality: ${JSON.stringify(driver)}`);
+    return getCountryForAnyCode("RX"); // Default to unknown
+  }
   if (
     !countries[driver.nationality] &&
     !countriesByAlpha2Code[driver.nationality] &&
