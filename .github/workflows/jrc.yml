@@ -35,9 +35,9 @@ jobs:
       - name: jrc-worldcup
         if: always()
         run: CLUB=jrc-worldcup node --unhandled-rejections=strict ./runner.js
-      - name: jrc-arc
+      - name: jrc-acr
         if: always()
-        run: CLUB=jrc-arc node --unhandled-rejections=strict ./runner.js
+        run: CLUB=jrc-acr node --unhandled-rejections=strict ./runner.js
       # - name: checker
       #   if: always()
       #   run: node --unhandled-rejections=strict ./checker.js
