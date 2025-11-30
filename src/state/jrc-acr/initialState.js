@@ -20,7 +20,7 @@ const initialState = {
   siteTitlePrefix: "JRC ACRally",
   divisions: {
     jrcAcr: {
-      divisionName: "acrSeason1",
+      divisionName: "jrcAcr",
       displayName: "ACR Season 1",
       disableSameCarValidation: false,
       // enableSameCarClassValidation: true,
