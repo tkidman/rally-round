@@ -139,14 +139,11 @@ const handle2FA = async page => {
     // Wait for the security code input field to appear
     debug("Waiting for security code input field...");
     const codeInputSelectors = [
-      'input[type="text"]',
-      'input[placeholder*="code"]',
-      'input[placeholder*="Code"]',
-      'input[name*="code"]',
-      'input[id*="code"]',
+      "#twoFactorCode", // EA's specific ID
       "#verificationCode",
       "#securityCode",
-      "#code"
+      'input[id*="code"]',
+      'input[type="text"]'
     ];
 
     let codeInput = null;
@@ -170,10 +167,9 @@ const handle2FA = async page => {
     debug("Retrieving security code from Gmail...");
     const securityCode = await waitForSecurityCode(page);
 
-    // Enter the security code
+    // Enter the security code using keyboard events (works with focused input)
     debug(`Entering security code: ${securityCode}`);
-    await codeInput.click();
-    await codeInput.type(securityCode);
+    await page.keyboard.type(securityCode, { delay: 50 });
 
     // Look for submit button (both button and anchor elements)
     const submitSelectors = [
