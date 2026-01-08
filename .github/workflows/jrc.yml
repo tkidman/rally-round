@@ -29,9 +29,9 @@ jobs:
           node-version: 18.x
       - name: npm install
         run: npm install
-#      - name: jrc-themed
-#        if: always()
-#        run: CLUB=jrc-themed node --unhandled-rejections=strict ./runner.js
+      - name: jrc-themed
+        if: always()
+        run: CLUB=jrc-themed node --unhandled-rejections=strict ./runner.js
 #      - name: jrc-worldcup
 #        if: always()
 #        run: CLUB=jrc-worldcup node --unhandled-rejections=strict ./runner.js

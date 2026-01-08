@@ -107,9 +107,9 @@ const initialState = {
   superRallyIsDnf: true,
   showSuperRallyColumn: true,
   divisions: {
-    wrc1986: {
-      divisionName: "wrc1986",
-      displayName: "WRC 1986",
+    wrc2006: {
+      divisionName: "wrc2006",
+      displayName: "WRC 2006",
       disableSameCarValidation: false,
       // enableSameCarClassValidation: true,
       maxDriversScoringPointsForTeam: 2,
@@ -117,23 +117,19 @@ const initialState = {
       wrc: [
         {
           clubId: "17",
-          championshipIds: ["2QQbWs9V5TMBi4654", "592xoi1LPPB6wACEu"],
-          includeNextChampionships: false
+          championshipIds: ["4mso99b3TSkM9kemz"],
+          includeNextChampionships: true
         }
       ],
       manualResults: [],
       events: [],
-      points
+      points,
       // excludedCars: ["Builder Vehicle"],
-      // cars: [
-      //   "Alpine Renault A110 1600 S",
-      //   "Hillman Avenger",
-      //   "Ford Escort RS 1600 MK1"
-      // ]
+      cars: ["Citroën Xsara WRC", "Ford Focus RS Rally 2008", "ŠKODA Fabia WRC"]
     },
-    wrc1986Constructors: {
-      divisionName: "wrc1986Constructors",
-      displayName: "WRC 1986 Constructors",
+    wrc2006Constructors: {
+      divisionName: "wrc2006Constructors",
+      displayName: "WRC 2006 Constructors",
       disableSameCarValidation: false,
       // enableSameCarClassValidation: true,
       maxDriversScoringPointsForTeam: 2,
@@ -141,23 +137,23 @@ const initialState = {
       wrc: [
         {
           clubId: "17",
-          championshipIds: ["2QQbWs9V5TMBi4654", "592xoi1LPPB6wACEu"],
+          championshipIds: ["4mso99b3TSkM9kemz"],
           includeNextChampionships: false
         }
       ],
       manualResults: [],
       events: [],
       points,
-      overrideTeam: { useCarAsTeam: true }
+      overrideTeam: { useCarAsTeam: true },
       // excludedCars: ["Builder Vehicle"],
-      // cars: [
-      //   "Alpine Renault A110 1600 S",
-      //   "Hillman Avenger",
-      //   "Ford Escort RS 1600 MK1"
-      // ]
+      cars: ["Citroën Xsara WRC", "Ford Focus RS Rally 2008", "ŠKODA Fabia WRC"]
     }
   },
   historicalSeasonLinks: [
+    {
+      name: "WRC 2006",
+      href: "/themed/themed-29"
+    },
     {
       name: "WRC 1986",
       href: "/themed/themed-28"
