@@ -1,20 +1,20 @@
 <html lang="en">
 
 <head>
-	<link rel="stylesheet" type="text/css" href="./assets/css/style.css">
-	<link rel="stylesheet" type="text/css" href="./assets/css/animation.css">
-	<link rel="stylesheet" type="text/css" href="./assets/css/w3.css">
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<style>
-		.collapsed {
-			visibility: collapse;
-		}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <link rel="stylesheet" href="./assets/css/w3.css">
+  <link rel="stylesheet" href="./assets/css/style.css">
 
-		#container .w3-blue {
-			background-color: #5355bf !important;
-		}
-	</style>
-    <link rel="icon" href="./assets/{{logo}}">
+  <link rel="icon" href="./assets/{{logo}}">
+  <title>
+    {{siteTitlePrefix}} |
+    {{#if links.active.menu}}
+      {{links.active.menu}} {{links.active.link}}
+    {{else}}
+      Home
+    {{/if}}
+  </title>
 </head>
 
 <body style="{{this.backgroundStyle}}">
@@ -30,7 +30,7 @@
 
 
 
-	<div id="container">
+	<div class="container">
 		{{#each teams}}{{#with this}}
 		<div class="w3-container">
 			<div id="{{name}}Section" class="teamContainer w3-container{{#if @first}}{{else}} collapsed{{/if}}"

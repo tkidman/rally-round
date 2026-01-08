@@ -1,67 +1,55 @@
-<html lang="en">
-
-<head>
-    <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
-    <link rel="stylesheet" type="text/css" href="./assets/css/animation.css">
-    <link rel="stylesheet" type="text/css" href="./assets/css/w3.css">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link rel="icon" href="./assets/{{logo}}">
-</head>
-
-<body style="{{this.backgroundStyle}}">
-    {{{navigation}}}
-    <div id="container">
-        <div id="flexContainer">
-            <div class="flexBox">
-                <div style="margin-bottom: 1em;" class="w3-hide-medium w3-hide-small">
-                    <div class="logo" style="display:flex;">
-                        <img src="./assets/{{logo}}" />
-                        <h2 style="margin-left:1em;">{{title}} {{localization.driver_standings}}</h2>
-                    </div>
+<div class="container">
+    <div class="flexContainer">
+        <div class="flexBox">
+            <div style="margin-bottom: 1em;" class="hide-medium hide-small">
+                <div class="logo" style="display:flex;">
+                    <img src="./assets/{{logo}}" />
+                    <h2 style="margin-left:1em;">{{title}} {{localization.driver_standings}}</h2>
                 </div>
-
+            </div>
+            <div class="table-scroll-wrapper">
                 <table id="tableDrivers">
                     <thead>
                         <tr>
-                            <th>{{localization.pos}}</th>
-                            <th></th>
-                            <th>{{localization.nat}}</th>
-                            <th>{{localization.driver}}</th>
+                            <th class="th-pos">{{localization.pos}}</th>
+                            <th class="th-change"></th>
+                            <th class="th-nat">{{localization.nat}}</th>
+                            <th class="th-driver">{{localization.driver}}</th>
                             {{#if overall}}
-                                <th>{{localization.div}}</th>
+                                <th class="th-div">{{localization.div}}</th>
                             {{/if}}
                             {{#if showTeam}}
                                 {{#unless hideTeamLogoColumn}}
-                                    <th>{{localization.team}}</th>
+                                    <th class="th-team-logo">{{localization.team}}</th>
                                 {{/unless}}
                                 {{#if showTeamNameTextColumn}}
-                                    <th>{{localization.team_name}}</th>
+                                    <th class="th-team-name">{{localization.team_name}}</th>
                                 {{/if}}
                             {{/if}}
                             {{#if showTeam2LogoColumn}}
-                                <th>{{team2ColumnName}}</th>
+                                <th class="th-team2">{{team2ColumnName}}</th>
                             {{/if}}
                             {{#if showCar}}
-                                <th>{{localization.car}}</th>
+                                <th class="th-car">{{localization.car}}</th>
                             {{/if}}
 
                             {{#each headerLocations}}
-                            <th>
+                            <th class="th-location">
                                 <img src="./assets/country-flags/{{this.locationCode}}.png" alt="{{this.locationCode}}" title="{{this.locationCode}}"/>
                             </th>
 
                             {{/each}}
-                            <th>{{localization.points}}</th>
+                            <th class="th-points">{{localization.points}}</th>
                             {{#if showPointsAfterDropRounds}}
-                                <th>{{localization.adr}}</th>
+                                <th class="th-adr">{{localization.adr}}</th>
                             {{/if}}
                         </tr>
                     </thead>
                     <tbody>
                         {{#each rows}}
                         <tr style="background-color: {{this.colour}}">
-                            <td>{{this.standing.currentPosition}}</td>
-                            <td>
+                            <td class="td-pos">{{this.standing.currentPosition}}</td>
+                            <td class="td-change">
                                 {{#if this.positive}}
                                 <span class="positive"><i
                                         class="arrow up"></i>&nbsp;{{this.standing.positionChange}}</span>
@@ -74,69 +62,67 @@
                                         class="arrow down"></i>&nbsp;{{this.standing.positionChange}}</span>
                                 {{/if}}
                             </td>
-                            <td>
+                            <td class="td-nat">
                                 <img src="./assets/country-flags/{{this.country.code}}.png" style="max-width:1.5em; max-height:1.5em;" alt="{{this.country.code}}" title="{{this.country.code}}"/>
                             </td>
-                            <td class="text-left bold">{{this.driver.name}}</td>
+                            <td class="td-driver text-left bold">{{this.driver.name}}</td>
                             {{#if ../overall}}
-                                <td>{{this.divisionDisplayName}}</td>
+                                <td class="td-div">{{this.divisionDisplayName}}</td>
                             {{/if}}
                             {{#if ../showTeam}}
                                 {{#unless ../hideTeamLogoColumn}}
-                                    <td>
+                                    <td class="td-team-logo">
                                         <img src="{{this.teamLogo}}" style="max-width:2em; max-height:2em;" alt="{{this.driver.teamId}}" title="{{this.driver.teamId}}"/>
                                     </td>
                                 {{/unless}}
                                 {{#if ../showTeamNameTextColumn}}
-                                    <td class="text-left">{{this.driver.teamId}}</td>
+                                    <td class="td-team-name text-left">{{this.driver.teamId}}</td>
                                 {{/if}}
                             {{/if}}
                             {{#if ../showTeam2LogoColumn}}
-                                <td>
+                                <td class="td-team2">
                                     <img src="{{this.team2Logo}}" style="max-width:2em; max-height:2em;" alt="{{this.driver.team2Id}}" title="{{this.driver.team2Id}}"/>
                                 </td>
                             {{/if}}
                             {{#if ../showCar}}
                                 {{#if ../showCarName}}
-                                    <td class="text-left">
+                                    <td class="td-car-name text-left">
                                         {{this.driver.car}}
                                     </td>
                                 {{else}}
-                                    <td>
+                                    <td class="td-car">
                                         <img src="./assets/cars/{{this.car}}.png" style="max-width:2em; max-height:2em;" alt="{{this.car}}" title="{{this.car}}"/>
                                     </td>
                                 {{/if}}
                             {{/if}}
                             {{#each this.results}}{{#with this}}
-                            <td>
+                            <td class="td-result">
                                 {{pointsDisplay}}
                             </td>
                             {{/with}}{{/each}}
-                            <td class="bold">{{this.standing.totalPoints}}</td>
+                            <td class="td-points bold">{{this.standing.totalPoints}}</td>
                             {{#if ../showPointsAfterDropRounds}}
-                                <td class="bold">{{this.standing.totalPointsAfterDropRounds}}</td>
+                                <td class="td-adr bold">{{this.standing.totalPointsAfterDropRounds}}</td>
                             {{/if}}
                         </tr>
                         {{/each}}
                     </tbody>
 
                 </table>
-                <div style="margin:0 auto; text-align:center;">
-                    <p>{{localization.last_updated}}: {{lastUpdatedAt}}</p>
-                </div>
-                {{#if showPointsAfterDropRounds}}
-                    <div style="margin:0 auto; text-align:center;">
-                        <p>{{afterDropRoundMessage}}</p>
-                    </div>
-                {{/if}}
-                {{#if fullResultsLink}}
-                    <div style="margin:0 auto; text-align:center;">
-                        <a href="{{fullResultsLink}}" target="_none">{{localization.full_results}}</a>
-                    </div>
-                {{/if}}
             </div>
+            <div style="margin:0 auto; text-align:center;">
+                <p>{{localization.last_updated}}: {{lastUpdatedAt}}</p>
+            </div>
+            {{#if showPointsAfterDropRounds}}
+                <div style="margin:0 auto; text-align:center;">
+                    <p>{{afterDropRoundMessage}}</p>
+                </div>
+            {{/if}}
+            {{#if fullResultsLink}}
+                <div style="margin:0 auto; text-align:center;">
+                    <a href="{{fullResultsLink}}" target="_none">{{localization.full_results}}</a>
+                </div>
+            {{/if}}
         </div>
     </div>
-    {{{scripts}}}
-</body>
-</html>
+</div>

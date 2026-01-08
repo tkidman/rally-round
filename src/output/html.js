@@ -36,7 +36,7 @@ const colours = {
 };
 
 let compiledNavigation = null;
-let compiledScripts = null;
+let compiledLayout = null;
 
 const writeFantasyHTML = (fantasyResults, links) => {
   const data = processFantasyResults(fantasyResults);
@@ -137,14 +137,9 @@ const getNavigationHTML = (
   });
 };
 
-const getScriptsHTML = () => {
-  return compiledScripts({});
-};
-
 const writeHomeHTML = links => {
   const data = {
     navigation: getNavigationHTML("", "", links, null),
-    scripts: getScriptsHTML(),
     backgroundStyle: leagueRef.getBackgroundStyle(),
     logo: leagueRef.league.logo
   };
@@ -164,7 +159,6 @@ const writeHomeHTML = links => {
 const writeErrorHTML = links => {
   const data = {
     navigation: getNavigationHTML("", "", links, null),
-    scripts: getScriptsHTML(),
     backgroundStyle: leagueRef.getBackgroundStyle(),
     logo: leagueRef.league.logo
   };
@@ -191,25 +185,43 @@ const getLastUpdatedAt = () => {
 const writeStandingsHTML = (division, type, links) => {
   const data = transformForStandingsHTML(division, type);
   data.overall = division.divisionName === "overall";
+
   data.navigation = getNavigationHTML(
     division.divisionName,
     type,
     links,
     data.headerLocations
   );
-  data.scripts = getScriptsHTML();
   data.lastUpdatedAt = getLastUpdatedAt();
 
-  const standingsTemplateFile = `${templatePath}/${type}Standings.hbs`;
-  const _t = fs.readFileSync(standingsTemplateFile).toString();
+  const templateFile = `${templatePath}/${type}Standings.hbs`;
+  const src = fs.readFileSync(templateFile).toString();
+  const bodyTemplate = Handlebars.compile(src);
+  const bodyHtml = bodyTemplate(data);
 
-  const template = Handlebars.compile(_t);
-  const out = template(data);
+  const typeLabel =
+    type === "driver"
+      ? "Driver Standings"
+      : type === "team"
+      ? "Team Standings"
+      : "Standings";
+
+  const pageTitle = `${leagueRef.league.siteTitlePrefix} | ${data.title ||
+    division.divisionName} – ${typeLabel}`;
+
+  const out = compiledLayout({
+    body: bodyHtml,
+    pageTitle,
+    navigation: data.navigation,
+    backgroundStyle: data.backgroundStyle,
+    logo: leagueRef.league.logo
+  });
 
   fs.writeFileSync(
     `./${outputPath}/website/${division.divisionName}-${type}-standings.html`,
     out
   );
+
   if (
     !fs.existsSync(`./${outputPath}/website/index.html`) &&
     leagueRef.league.useStandingsForHome
@@ -500,18 +512,24 @@ const writeDriverResultsHTML = ({
     links,
     data.headerLocations
   );
-  data.scripts = getScriptsHTML();
+  data.links = links;
+  data.siteTitlePrefix = leagueRef.league.siteTitlePrefix;
   data.lastUpdatedAt = getLastUpdatedAt();
 
   const templateFile = `${templatePath}/eventResults.hbs`;
-  if (!fs.existsSync(templateFile)) {
-    debug("no standings html template found, returning");
-    return;
-  }
   const _t = fs.readFileSync(templateFile).toString();
+  const bodyTemplate = Handlebars.compile(_t);
+  const bodyHtml = bodyTemplate(data);
 
-  const template = Handlebars.compile(_t);
-  const out = template(data);
+  const pageTitle = `${leagueRef.league.siteTitlePrefix} | ${data.fullTitle ||
+    "Home"}`;
+  const out = compiledLayout({
+    body: bodyHtml,
+    pageTitle,
+    navigation: data.navigation,
+    backgroundStyle: data.backgroundStyle,
+    logo: leagueRef.league.logo
+  });
 
   fs.writeFileSync(
     `./${outputPath}/website/${getResultsFileName({
@@ -631,13 +649,13 @@ const writeHTMLOutputForDivision = (division, links) => {
 };
 
 const writeAllHTML = () => {
+  const layoutTemplateFile = `${templatePath}/layout.hbs`;
+  const layoutTemplate = fs.readFileSync(layoutTemplateFile).toString();
+  compiledLayout = Handlebars.compile(layoutTemplate);
+
   const navigationTemplateFile = `${templatePath}/navigation.hbs`;
   const navTemplate = fs.readFileSync(navigationTemplateFile).toString();
   compiledNavigation = Handlebars.compile(navTemplate);
-
-  const scriptsTemplateFile = `${templatePath}/scripts.hbs`;
-  const scriptsTemplate = fs.readFileSync(scriptsTemplateFile).toString();
-  compiledScripts = Handlebars.compile(scriptsTemplate);
 
   const links = getHtmlLinks();
   const league = leagueRef.league;

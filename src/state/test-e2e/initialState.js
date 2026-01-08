@@ -23,7 +23,10 @@ const initialState = {
   hideStageTimesUntilEventEnd: true,
   overrideLastUpdated: "last-updated-test-e2e",
   teamOverride: {},
-  historicalSeasonLinks: [{ name: "E2E Season 1", href: "/e2e-1" }],
+  historicalSeasonLinks: [
+    { name: "E2E Season 2", href: "/e2e-2" },
+    { name: "E2E Season 1", href: "/e2e-1" }
+  ],
   divisions: {
     "test-e2e": {
       divisionName: "test-e2e",

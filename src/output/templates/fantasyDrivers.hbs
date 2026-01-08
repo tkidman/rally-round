@@ -1,20 +1,29 @@
 <html lang="en">
 
 <head>
-	<link rel="stylesheet" type="text/css" href="./assets/css/style.css">
-	<link rel="stylesheet" type="text/css" href="./assets/css/animation.css">
-	<link rel="stylesheet" type="text/css" href="./assets/css/w3.css">
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link rel="icon" href="./assets/{{logo}}">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <link rel="stylesheet" href="./assets/css/w3.css">
+  <link rel="stylesheet" href="./assets/css/style.css">
+
+  <link rel="icon" href="./assets/{{logo}}">
+  <title>
+    {{siteTitlePrefix}} |
+    {{#if links.active.menu}}
+      {{links.active.menu}} {{links.active.link}}
+    {{else}}
+      Home
+    {{/if}}
+  </title>
 </head>
 
 <body style="{{this.backgroundStyle}}">
 	{{{navigation}}}
 
-	<div id="container">
-		<div id="flexContainer">
+	<div class="container">
+		<div class="flexContainer">
 			<div class="flexBox">
-				<div style="margin-bottom: 1em;" class="w3-hide-large w3-hide-medium w3-hide-small">
+				<div style="margin-bottom: 1em;" class="hide-large hide-medium hide-small">
 					<div class="logo" style="display:flex;">
 						<img src="./assets/fantasy.jpg" />
 						<h2 style="margin-left:1em;">{{localization.driver_standings}}</h2>
