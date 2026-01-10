@@ -526,7 +526,7 @@ tbody>tr:nth-child(odd) {
   --gray-border: darkgray;
   --success: green;
   --error: red;
-  
+
   /* Border radius */
   --radius: 12px;
   --radius-sm: 4px;
@@ -534,14 +534,14 @@ tbody>tr:nth-child(odd) {
   --radius-lg: 8px;
   --radius-xl: 10px;
   --radius-circle: 50%;
-  
+
   /* Z-index */
   --z-background: -1;
   --z-base: 1;
   --z-scroll: 10;
   --z-dropdown: 1000;
   --z-dropdown-overlay: 1001;
-  
+
   /* Spacing */
   --spacing-xs: 0.25em;
   --spacing-sm: 0.35em;
@@ -549,7 +549,7 @@ tbody>tr:nth-child(odd) {
   --spacing-lg: 0.6em;
   --spacing-xl: 0.75em;
   --spacing-2xl: 1em;
-  
+
   /* Sizes */
   --scrollbar-height: 12px;
   --scrollbar-width: 8px;
@@ -958,6 +958,7 @@ tbody>tr:nth-child(odd) {
 .flexBox {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+  min-height: 50vh;
 }
 
 /* Table scroll container - ensures proper scrolling on all devices */
@@ -971,14 +972,14 @@ tbody>tr:nth-child(odd) {
   transform: translateZ(0);
 }
 
-/* Fade indicator for horizontal scroll on touch devices */
+/* Fade indicator for horizontal scroll on touch devices - only when scrollable */
 @media (pointer: coarse) {
-  .table-scroll-wrapper {
+  .table-scroll-wrapper.is-scrollable {
     mask-image: linear-gradient(to right, black 75%, rgba(0, 0, 0, 0.8) 80%, rgba(0, 0, 0, 0.1) 97%, transparent 100%);
     -webkit-mask-image: linear-gradient(to right, black 75%, rgba(0, 0, 0, 0.8) 80%, rgba(0, 0, 0, 0.1) 97%, transparent 100%);
   }
 
-  .table-scroll-wrapper.scrolled-past-80 {
+  .table-scroll-wrapper.is-scrollable.scrolled-past-80 {
     mask-image: none;
     -webkit-mask-image: none;
   }
@@ -986,7 +987,7 @@ tbody>tr:nth-child(odd) {
 
 /* Top scrollbar indicator - visible on all screen sizes */
 .table-scroll-indicator {
-  display: block;
+  display: none;
   width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
@@ -1128,7 +1129,7 @@ tbody>tr:nth-child(odd) {
   th,
   td {
     padding: 0.3em 0.4em;
-    font-size: 0.5em;
+    font-size: 0.55em;
   }
 
   th {
@@ -1138,7 +1139,7 @@ tbody>tr:nth-child(odd) {
 
   .td-driver,
   .td-team-name {
-    min-width: 100px;
+    min-width: 80px;
     max-width: 130px;
   }
 

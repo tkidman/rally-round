@@ -13582,144 +13582,144 @@ exports[`e2e generates overall team standings 1`] = `
         <table id=\\"tableDrivers\\">
           <thead>
             <tr>
-              <th>Pos</th>
-              <th></th>
-              <th>Team Name</th>
-              <th>
+              <th class=\\"th-pos\\">Pos</th>
+              <th class=\\"th-change\\"></th>
+              <th class=\\"th-team-name\\">Team Name</th>
+              <th class=\\"th-location\\">
                 <img src=\\"./assets/country-flags/swe.png\\" alt=\\"swe\\" />
               </th>
-              <th>
+              <th class=\\"th-location\\">
                 <img src=\\"./assets/country-flags/est.png\\" alt=\\"est\\" />
               </th>
-              <th>Points</th>
+              <th class=\\"th-points\\">Points</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>1</td>
-              <td>
+              <td class=\\"td-pos\\">1</td>
+              <td class=\\"td-change\\">
                 <span class=\\"neutral\\">=</span>
               </td>
-              <td class=\\"text-left bold\\">CodeBros</td>
-              <td>
+              <td class=\\"td-team-name text-left bold\\">CodeBros</td>
+              <td class=\\"td-result\\">
                 128
               </td>
-              <td>
+              <td class=\\"td-result\\">
                 152
               </td>
-              <td class=\\"bold\\">280</td>
+              <td class=\\"td-points bold\\">280</td>
             </tr>
             <tr>
-              <td>2</td>
-              <td>
+              <td class=\\"td-pos\\">2</td>
+              <td class=\\"td-change\\">
                 <span class=\\"positive\\">
                   <i class=\\"arrow up\\"></i>&nbsp;1
                 </span>
               </td>
-              <td class=\\"text-left bold\\">Heat Seeking Geezers mk2</td>
-              <td>
+              <td class=\\"td-team-name text-left bold\\">Heat Seeking Geezers mk2</td>
+              <td class=\\"td-result\\">
                 63
               </td>
-              <td>
+              <td class=\\"td-result\\">
                 38
               </td>
-              <td class=\\"bold\\">101</td>
+              <td class=\\"td-points bold\\">101</td>
             </tr>
             <tr>
-              <td>3</td>
-              <td>
+              <td class=\\"td-pos\\">3</td>
+              <td class=\\"td-change\\">
                 <span class=\\"negative\\">
                   <i class=\\"arrow down\\"></i>&nbsp;-1
                 </span>
               </td>
-              <td class=\\"text-left bold\\">Rizla&#x27;s Suffering Club</td>
-              <td>
+              <td class=\\"td-team-name text-left bold\\">Rizla&#x27;s Suffering Club</td>
+              <td class=\\"td-result\\">
                 66
               </td>
-              <td>
+              <td class=\\"td-result\\">
                 0
               </td>
-              <td class=\\"bold\\">66</td>
+              <td class=\\"td-points bold\\">66</td>
             </tr>
             <tr>
-              <td>4</td>
-              <td>
+              <td class=\\"td-pos\\">4</td>
+              <td class=\\"td-change\\">
                 <span class=\\"positive\\">
                   <i class=\\"arrow up\\"></i>&nbsp;3
                 </span>
               </td>
-              <td class=\\"text-left bold\\">Flat Out Racing</td>
-              <td>
+              <td class=\\"td-team-name text-left bold\\">Flat Out Racing</td>
+              <td class=\\"td-result\\">
                 0
               </td>
-              <td>
+              <td class=\\"td-result\\">
                 61
               </td>
-              <td class=\\"bold\\">61</td>
+              <td class=\\"td-points bold\\">61</td>
             </tr>
             <tr>
-              <td>5</td>
-              <td>
+              <td class=\\"td-pos\\">5</td>
+              <td class=\\"td-change\\">
                 <span class=\\"negative\\">
                   <i class=\\"arrow down\\"></i>&nbsp;-1
                 </span>
               </td>
-              <td class=\\"text-left bold\\">All Beef Franks</td>
-              <td>
+              <td class=\\"td-team-name text-left bold\\">All Beef Franks</td>
+              <td class=\\"td-result\\">
                 34
               </td>
-              <td>
+              <td class=\\"td-result\\">
                 12
               </td>
-              <td class=\\"bold\\">46</td>
+              <td class=\\"td-points bold\\">46</td>
             </tr>
             <tr>
-              <td>6</td>
-              <td>
+              <td class=\\"td-pos\\">6</td>
+              <td class=\\"td-change\\">
                 <span class=\\"negative\\">
                   <i class=\\"arrow down\\"></i>&nbsp;-1
                 </span>
               </td>
-              <td class=\\"text-left bold\\">Kringel&#x27;s Coal Rental and Co.</td>
-              <td>
+              <td class=\\"td-team-name text-left bold\\">Kringel&#x27;s Coal Rental and Co.</td>
+              <td class=\\"td-result\\">
                 10
               </td>
-              <td>
+              <td class=\\"td-result\\">
                 30
               </td>
-              <td class=\\"bold\\">40</td>
+              <td class=\\"td-points bold\\">40</td>
             </tr>
             <tr>
-              <td>7</td>
-              <td>
+              <td class=\\"td-pos\\">7</td>
+              <td class=\\"td-change\\">
                 <span class=\\"negative\\">
                   <i class=\\"arrow down\\"></i>&nbsp;-1
                 </span>
               </td>
-              <td class=\\"text-left bold\\">No-recce</td>
-              <td>
+              <td class=\\"td-team-name text-left bold\\">No-recce</td>
+              <td class=\\"td-result\\">
                 6
               </td>
-              <td>
+              <td class=\\"td-result\\">
                 18
               </td>
-              <td class=\\"bold\\">24</td>
+              <td class=\\"td-points bold\\">24</td>
             </tr>
             <tr>
-              <td>8</td>
-              <td>
+              <td class=\\"td-pos\\">8</td>
+              <td class=\\"td-change\\">
                 <span class=\\"negative\\">
                   <i class=\\"arrow down\\"></i>&nbsp;-1
                 </span>
               </td>
-              <td class=\\"text-left bold\\">The stale poos</td>
-              <td>
+              <td class=\\"td-team-name text-left bold\\">The stale poos</td>
+              <td class=\\"td-result\\">
                 0
               </td>
-              <td>
+              <td class=\\"td-result\\">
                 6
               </td>
-              <td class=\\"bold\\">6</td>
+              <td class=\\"td-points bold\\">6</td>
             </tr>
           </tbody>
         </table>
@@ -14468,146 +14468,146 @@ exports[`e2e generates team standings 1`] = `
         <table id=\\"tableDrivers\\">
           <thead>
             <tr>
-              <th>Pos</th>
-              <th></th>
-              <th>Team Name</th>
-              <th>
+              <th class=\\"th-pos\\">Pos</th>
+              <th class=\\"th-change\\"></th>
+              <th class=\\"th-team-name\\">Team Name</th>
+              <th class=\\"th-location\\">
                 <img src=\\"./assets/country-flags/swe.png\\" alt=\\"swe\\" />
               </th>
-              <th>
+              <th class=\\"th-location\\">
                 <img src=\\"./assets/country-flags/est.png\\" alt=\\"est\\" />
               </th>
-              <th>Points</th>
+              <th class=\\"th-points\\">Points</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>1</td>
-              <td>
+              <td class=\\"td-pos\\">1</td>
+              <td class=\\"td-change\\">
                 <span class=\\"positive\\">
                   <i class=\\"arrow up\\"></i>&nbsp;1
                 </span>
               </td>
-              <td class=\\"text-left bold\\">Heat Seeking Geezers mk2</td>
-              <td>
+              <td class=\\"td-team-name text-left bold\\">Heat Seeking Geezers mk2</td>
+              <td class=\\"td-result\\">
                 63
               </td>
-              <td>
+              <td class=\\"td-result\\">
                 38
               </td>
-              <td class=\\"bold\\">101</td>
+              <td class=\\"td-points bold\\">101</td>
             </tr>
             <tr>
-              <td>2</td>
-              <td>
+              <td class=\\"td-pos\\">2</td>
+              <td class=\\"td-change\\">
                 <span class=\\"negative\\">
                   <i class=\\"arrow down\\"></i>&nbsp;-1
                 </span>
               </td>
-              <td class=\\"text-left bold\\">Rizla&#x27;s Suffering Club</td>
-              <td>
+              <td class=\\"td-team-name text-left bold\\">Rizla&#x27;s Suffering Club</td>
+              <td class=\\"td-result\\">
                 66
               </td>
-              <td>
+              <td class=\\"td-result\\">
                 0
               </td>
-              <td class=\\"bold\\">66</td>
+              <td class=\\"td-points bold\\">66</td>
             </tr>
             <tr>
-              <td>3</td>
-              <td>
+              <td class=\\"td-pos\\">3</td>
+              <td class=\\"td-change\\">
                 <span class=\\"positive\\">
                   <i class=\\"arrow up\\"></i>&nbsp;1
                 </span>
               </td>
-              <td class=\\"text-left bold\\">CodeBros</td>
-              <td>
+              <td class=\\"td-team-name text-left bold\\">CodeBros</td>
+              <td class=\\"td-result\\">
                 20
               </td>
-              <td>
+              <td class=\\"td-result\\">
                 44
               </td>
-              <td class=\\"bold\\">64</td>
+              <td class=\\"td-points bold\\">64</td>
             </tr>
             <tr>
-              <td>4</td>
-              <td>
+              <td class=\\"td-pos\\">4</td>
+              <td class=\\"td-change\\">
                 <span class=\\"positive\\">
                   <i class=\\"arrow up\\"></i>&nbsp;3
                 </span>
               </td>
-              <td class=\\"text-left bold\\">Flat Out Racing</td>
-              <td>
+              <td class=\\"td-team-name text-left bold\\">Flat Out Racing</td>
+              <td class=\\"td-result\\">
                 0
               </td>
-              <td>
+              <td class=\\"td-result\\">
                 61
               </td>
-              <td class=\\"bold\\">61</td>
+              <td class=\\"td-points bold\\">61</td>
             </tr>
             <tr>
-              <td>5</td>
-              <td>
+              <td class=\\"td-pos\\">5</td>
+              <td class=\\"td-change\\">
                 <span class=\\"negative\\">
                   <i class=\\"arrow down\\"></i>&nbsp;-2
                 </span>
               </td>
-              <td class=\\"text-left bold\\">All Beef Franks</td>
-              <td>
+              <td class=\\"td-team-name text-left bold\\">All Beef Franks</td>
+              <td class=\\"td-result\\">
                 34
               </td>
-              <td>
+              <td class=\\"td-result\\">
                 12
               </td>
-              <td class=\\"bold\\">46</td>
+              <td class=\\"td-points bold\\">46</td>
             </tr>
             <tr>
-              <td>6</td>
-              <td>
+              <td class=\\"td-pos\\">6</td>
+              <td class=\\"td-change\\">
                 <span class=\\"negative\\">
                   <i class=\\"arrow down\\"></i>&nbsp;-1
                 </span>
               </td>
-              <td class=\\"text-left bold\\">Kringel&#x27;s Coal Rental and Co.</td>
-              <td>
+              <td class=\\"td-team-name text-left bold\\">Kringel&#x27;s Coal Rental and Co.</td>
+              <td class=\\"td-result\\">
                 10
               </td>
-              <td>
+              <td class=\\"td-result\\">
                 30
               </td>
-              <td class=\\"bold\\">40</td>
+              <td class=\\"td-points bold\\">40</td>
             </tr>
             <tr>
-              <td>7</td>
-              <td>
+              <td class=\\"td-pos\\">7</td>
+              <td class=\\"td-change\\">
                 <span class=\\"negative\\">
                   <i class=\\"arrow down\\"></i>&nbsp;-1
                 </span>
               </td>
-              <td class=\\"text-left bold\\">No-recce</td>
-              <td>
+              <td class=\\"td-team-name text-left bold\\">No-recce</td>
+              <td class=\\"td-result\\">
                 6
               </td>
-              <td>
+              <td class=\\"td-result\\">
                 18
               </td>
-              <td class=\\"bold\\">24</td>
+              <td class=\\"td-points bold\\">24</td>
             </tr>
             <tr>
-              <td>8</td>
-              <td>
+              <td class=\\"td-pos\\">8</td>
+              <td class=\\"td-change\\">
                 <span class=\\"negative\\">
                   <i class=\\"arrow down\\"></i>&nbsp;-1
                 </span>
               </td>
-              <td class=\\"text-left bold\\">The stale poos</td>
-              <td>
+              <td class=\\"td-team-name text-left bold\\">The stale poos</td>
+              <td class=\\"td-result\\">
                 0
               </td>
-              <td>
+              <td class=\\"td-result\\">
                 6
               </td>
-              <td class=\\"bold\\">6</td>
+              <td class=\\"td-points bold\\">6</td>
             </tr>
           </tbody>
         </table>

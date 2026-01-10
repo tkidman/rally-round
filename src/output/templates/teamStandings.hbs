@@ -14,26 +14,26 @@
         <table id="tableDrivers">
           <thead>
             <tr>
-              <th>{{localization.pos}}</th>
-              <th></th>
+              <th class="th-pos">{{localization.pos}}</th>
+              <th class="th-change"></th>
               {{#unless hideTeamLogoColumn}}
-              <th></th>
+              <th class="th-team-logo"></th>
               {{/unless}}
-              <th>{{localization.team_name}}</th>
+              <th class="th-team-name">{{localization.team_name}}</th>
               {{#each headerLocations}}
-              <th>
+              <th class="th-location">
                 <img src="./assets/country-flags/{{this.locationCode}}.png" alt="{{this.locationCode}}" />
               </th>
               {{/each}}
-              <th>{{localization.points}}</th>
+              <th class="th-points">{{localization.points}}</th>
             </tr>
           </thead>
           <tbody>
             {{#each rows}}
             {{#with this}}
             <tr>
-              <td>{{standing.currentPosition}}</td>
-              <td>
+              <td class="td-pos">{{standing.currentPosition}}</td>
+              <td class="td-change">
                 {{#if positive}}
                 <span class="positive">
                   <i class="arrow up"></i>&nbsp;{{standing.positionChange}}
@@ -50,29 +50,29 @@
               </td>
               {{#if ../useNationalityAsTeam}}
               {{#unless ../hideTeamLogoColumn}}
-              <td>
+              <td class="td-team-logo">
                 <img src="./assets/country-flags/{{country.code}}.png" style="max-width:2em; max-height:2em;"
                   alt="{{country.code}}" />
               </td>
               {{/unless}}
-              <td class="text-left bold">{{country.name}}</td>
+              <td class="td-team-name text-left bold">{{country.name}}</td>
               {{else}}
               {{#unless ../hideTeamLogoColumn}}
-              <td>
+              <td class="td-team-logo">
                 <img src="{{teamLogo}}" style="max-width:2em; max-height:2em;" alt="{{standing.name}}"
                   title="{{standing.name}}" />
               </td>
               {{/unless}}
-              <td class="text-left bold">{{standing.name}}</td>
+              <td class="td-team-name text-left bold">{{standing.name}}</td>
               {{/if}}
               {{#each results}}
               {{#with this}}
-              <td>
+              <td class="td-result">
                 {{pointsDisplay}}
               </td>
               {{/with}}
               {{/each}}
-              <td class="bold">{{standing.totalPoints}}</td>
+              <td class="td-points bold">{{standing.totalPoints}}</td>
             </tr>
             {{/with}}
             {{/each}}
