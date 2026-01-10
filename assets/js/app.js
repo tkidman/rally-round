@@ -22,7 +22,6 @@ function toggleNav(navId) {
   if (!el) return;
 
   const willOpen = el.hidden === true;
-  // close both first (so only one drawer open at a time)
   closeNav("mobileNav");
   closeNav("seriesMobileNav");
 
@@ -30,7 +29,6 @@ function toggleNav(navId) {
   el.classList.toggle("isOpen", willOpen);
 }
 
-// When the user clicks on div, open the popup
 function openPopup(id) {
   var popup = document.getElementById(id);
   popup.classList.toggle("show");
@@ -39,17 +37,20 @@ function openPopup(id) {
 document.addEventListener("DOMContentLoaded", function() {
   const table = document.getElementById("tableDrivers");
   const headers = table.querySelectorAll("th");
-  let sortOrder = 1; // 1 for ascending, -1 for descending
+  let sortOrder = 1;
 
-  // Sort the first column in ascending order on page load
   sortTableByColumn(table, 0, 1);
   updateHeaderStyles(headers, headers[0], 1);
 
   headers.forEach((header, index) => {
-    header.addEventListener("click", () => {
+    header.addEventListener("click", (e) => {
+      // Don't sort if clicking on a link inside the header
+      if (e.target.closest('a')) {
+        return;
+      }
       sortTableByColumn(table, index, sortOrder);
       updateHeaderStyles(headers, header, sortOrder);
-      sortOrder *= -1; // Toggle sort order
+      sortOrder *= -1;
     });
   });
 
@@ -101,16 +102,115 @@ document.addEventListener("DOMContentLoaded", function() {
     sortedHeader.classList.add(order === 1 ? "sorted-asc" : "sorted-desc");
   }
 
-  // Initialize column filter
   initColumnFilter(table);
+  initTopScrollbar();
 });
 
-// Column Filter Functionality
+function initTopScrollbar() {
+  const tableWrapper = document.querySelector(".table-scroll-wrapper");
+  const scrollIndicator = document.getElementById("tableScrollIndicator");
+  
+  if (!tableWrapper || !scrollIndicator) return;
+
+  const table = document.getElementById("tableDrivers");
+  if (!table) return;
+
+  function updateScrollbarVisibility() {
+    const needsScroll = table.offsetWidth > tableWrapper.clientWidth;
+    const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
+    
+    // Don't show on touch devices - let CSS handle it
+    if (isTouchDevice) {
+      scrollIndicator.style.display = "none";
+      return;
+    }
+    
+    scrollIndicator.style.display = needsScroll ? "block" : "none";
+    
+    if (needsScroll) {
+      scrollIndicator.style.setProperty("--table-width", table.offsetWidth + "px");
+      // Force reflow to ensure scrollbar appears with absolutely positioned content
+      void scrollIndicator.offsetHeight;
+    }
+  }
+
+  requestAnimationFrame(() => {
+    updateScrollbarVisibility();
+    updateFadeIndicators();
+  });
+
+  // Sync scroll positions with throttling to prevent flickering
+  let isScrollingTable = false;
+  let isScrollingIndicator = false;
+  let scrollTimeout = null;
+  const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
+
+  function syncTableToIndicator() {
+    if (!isScrollingIndicator && scrollIndicator.style.display !== "none") {
+      isScrollingTable = true;
+      scrollIndicator.scrollLeft = tableWrapper.scrollLeft;
+      isScrollingTable = false;
+    }
+  }
+
+  function syncIndicatorToTable() {
+    if (!isScrollingTable) {
+      isScrollingIndicator = true;
+      tableWrapper.scrollLeft = scrollIndicator.scrollLeft;
+      isScrollingIndicator = false;
+    }
+  }
+
+  function updateFadeIndicators() {
+    if (!isTouchDevice) return;
+
+    const scrollLeft = tableWrapper.scrollLeft;
+    const scrollWidth = tableWrapper.scrollWidth;
+    const clientWidth = tableWrapper.clientWidth;
+    const maxScroll = scrollWidth - clientWidth;
+    const scrollPercent = maxScroll > 0 ? (scrollLeft / maxScroll) * 100 : 0;
+
+    // Remove mask when scrolled past 80%
+    tableWrapper.classList.toggle("scrolled-past-80", scrollPercent > 80);
+  }
+
+  // Combined scroll handler for better performance
+  function handleTableScroll() {
+    if (scrollTimeout) cancelAnimationFrame(scrollTimeout);
+    scrollTimeout = requestAnimationFrame(() => {
+      syncTableToIndicator();
+      if (isTouchDevice) {
+        updateFadeIndicators();
+      }
+    });
+  }
+
+  tableWrapper.addEventListener("scroll", handleTableScroll, { passive: true });
+
+  scrollIndicator.addEventListener("scroll", () => {
+    if (scrollTimeout) cancelAnimationFrame(scrollTimeout);
+    scrollTimeout = requestAnimationFrame(syncIndicatorToTable);
+  }, { passive: true   });
+
+  const resizeObserver = new ResizeObserver(() => {
+    updateScrollbarVisibility();
+    if (isTouchDevice) {
+      updateFadeIndicators();
+    }
+  });
+  
+  resizeObserver.observe(table);
+  resizeObserver.observe(tableWrapper);
+
+  if (isTouchDevice) {
+    updateFadeIndicators();
+  }
+}
+
 function initColumnFilter(table) {
   if (!table) return;
 
   const tableId = table.id || "tableDrivers";
-  // Make storage key page-specific by including the page pathname
   const pagePath =
     window.location.pathname.split("/").pop() || window.location.pathname;
   const storageKey = `columnFilter_${pagePath}_${tableId}`;
@@ -119,10 +219,8 @@ function initColumnFilter(table) {
 
   if (headers.length === 0) return;
 
-  // Get saved preferences or default to all visible
   let hiddenColumns = JSON.parse(localStorage.getItem(storageKey) || "[]");
 
-  // Create filter UI
   const filterContainer = document.createElement("div");
   filterContainer.className = "column-filter";
   filterContainer.innerHTML = `
@@ -138,16 +236,20 @@ function initColumnFilter(table) {
     </div>
   `;
 
-  // Insert before table wrapper or table
+  const scrollIndicator = document.getElementById("tableScrollIndicator");
   const tableWrapper =
     table.closest(".table-scroll-wrapper") || table.parentElement;
-  tableWrapper.parentElement.insertBefore(filterContainer, tableWrapper);
+  
+  if (scrollIndicator) {
+    scrollIndicator.parentElement.insertBefore(filterContainer, scrollIndicator);
+  } else {
+    tableWrapper.parentElement.insertBefore(filterContainer, tableWrapper);
+  }
 
   const filterBtn = filterContainer.querySelector(".column-filter__btn");
   const filterMenu = filterContainer.querySelector(".column-filter__menu");
   const filterItems = filterContainer.querySelector(".column-filter__items");
 
-  // Get column names and create filter items
   const columns = Array.from(headers).map((header, index) => {
     const text = header.textContent.trim();
     const img = header.querySelector("img");
@@ -173,7 +275,6 @@ function initColumnFilter(table) {
     };
   });
 
-  // Create filter checkboxes
   columns.forEach(col => {
     const item = document.createElement("div");
     item.className = "column-filter__item";
@@ -191,18 +292,15 @@ function initColumnFilter(table) {
     `;
     filterItems.appendChild(item);
 
-    // Apply initial visibility
     toggleColumn(col.index, !col.isHidden);
   });
 
-  // Toggle filter menu
   filterBtn.addEventListener("click", e => {
     e.stopPropagation();
     filterMenu.classList.toggle("is-open");
     filterBtn.classList.toggle("is-open");
   });
 
-  // Close menu when clicking outside
   document.addEventListener("click", e => {
     if (!filterContainer.contains(e.target)) {
       filterMenu.classList.remove("is-open");
@@ -210,7 +308,6 @@ function initColumnFilter(table) {
     }
   });
 
-  // Handle checkbox changes
   filterItems.addEventListener("change", e => {
     if (e.target.classList.contains("column-filter__checkbox")) {
       const columnIndex = parseInt(e.target.dataset.columnIndex);
@@ -220,7 +317,6 @@ function initColumnFilter(table) {
     }
   });
 
-  // Handle action buttons
   filterContainer
     .querySelectorAll(".column-filter__action-btn")
     .forEach(btn => {
@@ -236,26 +332,22 @@ function initColumnFilter(table) {
           });
           savePreferences();
         } else if (action === "close") {
-          // Just close the menu
           filterMenu.classList.remove("is-open");
           filterBtn.classList.remove("is-open");
         }
       });
     });
 
-  // Toggle column visibility
   function toggleColumn(index, isVisible) {
     const header = headers[index];
     if (!header) return;
 
-    // Toggle header
     if (isVisible) {
       header.classList.remove("hide-column");
     } else {
       header.classList.add("hide-column");
     }
 
-    // Toggle all cells in this column
     const rows = tbody.querySelectorAll("tr");
     rows.forEach(row => {
       const cell = row.children[index];
@@ -268,7 +360,6 @@ function initColumnFilter(table) {
       }
     });
 
-    // Update hidden columns array
     if (isVisible) {
       hiddenColumns = hiddenColumns.filter(idx => idx !== index);
     } else {
@@ -278,7 +369,6 @@ function initColumnFilter(table) {
     }
   }
 
-  // Save preferences to localStorage
   function savePreferences() {
     localStorage.setItem(storageKey, JSON.stringify(hiddenColumns));
   }

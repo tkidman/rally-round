@@ -1,76 +1,87 @@
 <div class="container">
-    <div class="flexContainer">
-        <div class="flexBox">
-            <div style="margin-bottom: 1em;" class="hide-medium hide-small">
-                <div class="logo" style="display:flex;">
-                    <img src="./assets/{{logo}}" />
-                    <h2 style="margin-left:1em;">{{title}} {{localization.team_standings}}</h2>
-                </div>
-            </div>
-
-            <div class="table-scroll-wrapper">
-            <table id="tableDrivers">
-                <thead>
-                    <tr>
-                        <th>{{localization.pos}}</th>
-                        <th></th>
-                        {{#unless hideTeamLogoColumn}}
-                            <th></th>
-                        {{/unless}}
-                        <th>{{localization.team_name}}</th>
-                        {{#each headerLocations}}
-                        <th><img src="./assets/country-flags/{{this.locationCode}}.png"  alt="{{this.locationCode}}"/></th>
-                        {{/each}}
-                        <th>{{localization.points}}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{#each rows}}{{#with this}}
-                    <tr>
-                        <td>{{standing.currentPosition}}</td>
-                        <td>
-                            {{#if positive}}
-                            <span class="positive"><i class="arrow up"></i>&nbsp;{{standing.positionChange}}</span>
-                            {{/if}}
-                            {{#if neutral}}
-                            <span class="neutral">=</span>
-                            {{/if}}
-                            {{#if negative}}
-                            <span class="negative"><i
-                                    class="arrow down"></i>&nbsp;{{standing.positionChange}}</span>
-                            {{/if}}
-                        </td>
-                        {{#if ../useNationalityAsTeam}}
-                            {{#unless ../hideTeamLogoColumn}}
-                                <td>
-                                    <img src="./assets/country-flags/{{country.code}}.png"
-                                        style="max-width:2em; max-height:2em;" alt="{{country.code}}"/>
-                                </td>
-                            {{/unless}}
-                            <td class="text-left bold">{{country.name}}</td>
-                        {{else}}
-                            {{#unless ../hideTeamLogoColumn}}
-                                <td>
-                                    <img src="{{teamLogo}}" style="max-width:2em; max-height:2em;"  alt="{{standing.name}}" title="{{standing.name}}"/>
-                                </td>
-                            {{/unless}}
-                            <td class="text-left bold">{{standing.name}}</td>
-                        {{/if}}
-                        {{#each results}}{{#with this}}
-                        <td>
-                            {{pointsDisplay}}
-                        </td>
-                        {{/with}}{{/each}}
-                        <td class="bold">{{standing.totalPoints}}</td>
-                    </tr>
-                    {{/with}}{{/each}}
-                </tbody>
-
-            </table>
-            </div>
-            <div style="margin:0 auto; text-align:center;">
-                <p>{{localization.last_updated}}: {{lastUpdatedAt}}</p>
-            </div>
+  <div class="flexContainer">
+    <div class="flexBox">
+      <div style="margin-bottom: 1em;" class="hide-medium hide-small">
+        <div class="logo" style="display:flex;">
+          <img src="./assets/{{logo}}" />
+          <h2 style="margin-left:1em;">{{title}} {{localization.team_standings}}</h2>
         </div>
+      </div>
+      <div class="table-scroll-indicator" id="tableScrollIndicator" aria-hidden="true">
+        <div class="table-scroll-indicator__content"></div>
+      </div>
+      <div class="table-scroll-wrapper">
+        <table id="tableDrivers">
+          <thead>
+            <tr>
+              <th>{{localization.pos}}</th>
+              <th></th>
+              {{#unless hideTeamLogoColumn}}
+              <th></th>
+              {{/unless}}
+              <th>{{localization.team_name}}</th>
+              {{#each headerLocations}}
+              <th>
+                <img src="./assets/country-flags/{{this.locationCode}}.png" alt="{{this.locationCode}}" />
+              </th>
+              {{/each}}
+              <th>{{localization.points}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each rows}}
+            {{#with this}}
+            <tr>
+              <td>{{standing.currentPosition}}</td>
+              <td>
+                {{#if positive}}
+                <span class="positive">
+                  <i class="arrow up"></i>&nbsp;{{standing.positionChange}}
+                </span>
+                {{/if}}
+                {{#if neutral}}
+                <span class="neutral">=</span>
+                {{/if}}
+                {{#if negative}}
+                <span class="negative">
+                  <i class="arrow down"></i>&nbsp;{{standing.positionChange}}
+                </span>
+                {{/if}}
+              </td>
+              {{#if ../useNationalityAsTeam}}
+              {{#unless ../hideTeamLogoColumn}}
+              <td>
+                <img src="./assets/country-flags/{{country.code}}.png" style="max-width:2em; max-height:2em;"
+                  alt="{{country.code}}" />
+              </td>
+              {{/unless}}
+              <td class="text-left bold">{{country.name}}</td>
+              {{else}}
+              {{#unless ../hideTeamLogoColumn}}
+              <td>
+                <img src="{{teamLogo}}" style="max-width:2em; max-height:2em;" alt="{{standing.name}}"
+                  title="{{standing.name}}" />
+              </td>
+              {{/unless}}
+              <td class="text-left bold">{{standing.name}}</td>
+              {{/if}}
+              {{#each results}}
+              {{#with this}}
+              <td>
+                {{pointsDisplay}}
+              </td>
+              {{/with}}
+              {{/each}}
+              <td class="bold">{{standing.totalPoints}}</td>
+            </tr>
+            {{/with}}
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+      <div style="margin:0 auto; text-align:center;">
+        <p>{{localization.last_updated}}: {{lastUpdatedAt}}</p>
+      </div>
     </div>
+  </div>
 </div>
