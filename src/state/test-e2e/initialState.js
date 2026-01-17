@@ -105,6 +105,11 @@ const initialState = {
       points: {
         powerStage: [5, 4, 3, 2, 1],
         overall: [30, 24, 19, 15, 12, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+      },
+      promotionRelegation: {
+        promotionDoubleZone: 1,
+        promotionZone: 3,
+        relegationZone: 3
       }
     }
   }

@@ -25,6 +25,31 @@ exports[`e2e generates driver leg results 1`] = `
 <head>
   <meta charset=\\"utf-8\\">
   <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1, viewport-fit=cover\\">
+    <script>
+    // Runs synchronously during HTML parsing - BEFORE first paint
+    (function() {
+      const getPageType = () => {
+        const pathname = window.location.pathname;
+        const filename = pathname.split(\\"/\\").pop() || pathname;
+        if (filename.includes(\\"-driver-results.html\\")) return \\"driver-results\\";
+        if (filename.includes(\\"-standings.html\\")) return \\"standings\\";
+        return pathname.replace(/\\\\//g, \\"_\\") || \\"root\\";
+      };
+      
+      const tableId = \\"tableDrivers\\";
+      const storageKey = \`columnFilter_\${getPageType()}_\${tableId}\`;
+      const hidden = JSON.parse(localStorage.getItem(storageKey) || \\"[]\\");
+      
+      if (hidden.length > 0) {
+        const css = hidden.map(idx => 
+          \`#\${tableId} thead th:nth-child(\${idx + 1}),
+           #\${tableId} tbody tr td:nth-child(\${idx + 1})\`
+        ).join(',') + '{ display: none !important; }';
+        
+        document.write(\`<style id=\\"filter-preload\\">\${css}</style>\`);
+      }
+    })();
+  </script>
   <link rel=\\"stylesheet\\" href=\\"./assets/css/style.css\\">
 
   <link rel=\\"icon\\" href=\\"./assets/rsc-guy.png\\">
@@ -175,7 +200,7 @@ exports[`e2e generates driver leg results 1`] = `
       class=\\"iconBtn navMobileOnly\\"
       aria-controls=\\"seriesMobileNav\\"
       aria-label=\\"Choose series\\"
-      onclick=\\"openSeriesMobileNav()\\"
+      onclick=\\"toggleControlledNav(this)\\"
     >
       <img class=\\"brand__img brand__img--mobile\\" src=\\"./assets/rsc-guy.png\\" alt=\\"Logo\\" />
     </button>
@@ -190,7 +215,7 @@ exports[`e2e generates driver leg results 1`] = `
       class=\\"iconBtn navMobileOnly\\"
       aria-controls=\\"mobileNav\\"
       aria-label=\\"Open menu\\"
-      onclick=\\"openMobileNav()\\"
+      onclick=\\"toggleControlledNav(this)\\"
     >
       <span class=\\"hamburger\\" aria-hidden=\\"true\\">☰</span>
     </button>
@@ -1456,6 +1481,18 @@ exports[`e2e generates driver leg results 1`] = `
 >>>>>>> 07ee8ce ( enhance table UX with scrollbar indicator and clickable location headers)
         </div>
       </div>
+      <div class=\\"column-filter\\">
+        <button class=\\"column-filter__btn\\" type=\\"button\\" aria-label=\\"Filter columns\\">
+          <span>Filter Columns</span>
+        </button>
+        <div class=\\"column-filter__menu\\">
+          <div class=\\"column-filter__items\\"></div>
+          <div class=\\"column-filter__actions\\">
+            <button class=\\"column-filter__action-btn\\" data-action=\\"show-all\\">Show All</button>
+            <button class=\\"column-filter__action-btn\\" data-action=\\"close\\">Close</button>
+          </div>
+        </div>
+      </div>
       <div class=\\"table-scroll-indicator\\" id=\\"tableScrollIndicator\\" aria-hidden=\\"true\\">
         <div class=\\"table-scroll-indicator__content\\"></div>
       </div>
@@ -2253,6 +2290,31 @@ exports[`e2e generates driver results 1`] = `
 <head>
   <meta charset=\\"utf-8\\">
   <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1, viewport-fit=cover\\">
+    <script>
+    // Runs synchronously during HTML parsing - BEFORE first paint
+    (function() {
+      const getPageType = () => {
+        const pathname = window.location.pathname;
+        const filename = pathname.split(\\"/\\").pop() || pathname;
+        if (filename.includes(\\"-driver-results.html\\")) return \\"driver-results\\";
+        if (filename.includes(\\"-standings.html\\")) return \\"standings\\";
+        return pathname.replace(/\\\\//g, \\"_\\") || \\"root\\";
+      };
+      
+      const tableId = \\"tableDrivers\\";
+      const storageKey = \`columnFilter_\${getPageType()}_\${tableId}\`;
+      const hidden = JSON.parse(localStorage.getItem(storageKey) || \\"[]\\");
+      
+      if (hidden.length > 0) {
+        const css = hidden.map(idx => 
+          \`#\${tableId} thead th:nth-child(\${idx + 1}),
+           #\${tableId} tbody tr td:nth-child(\${idx + 1})\`
+        ).join(',') + '{ display: none !important; }';
+        
+        document.write(\`<style id=\\"filter-preload\\">\${css}</style>\`);
+      }
+    })();
+  </script>
   <link rel=\\"stylesheet\\" href=\\"./assets/css/style.css\\">
 
   <link rel=\\"icon\\" href=\\"./assets/rsc-guy.png\\">
@@ -2403,7 +2465,7 @@ exports[`e2e generates driver results 1`] = `
       class=\\"iconBtn navMobileOnly\\"
       aria-controls=\\"seriesMobileNav\\"
       aria-label=\\"Choose series\\"
-      onclick=\\"openSeriesMobileNav()\\"
+      onclick=\\"toggleControlledNav(this)\\"
     >
       <img class=\\"brand__img brand__img--mobile\\" src=\\"./assets/rsc-guy.png\\" alt=\\"Logo\\" />
     </button>
@@ -2418,7 +2480,7 @@ exports[`e2e generates driver results 1`] = `
       class=\\"iconBtn navMobileOnly\\"
       aria-controls=\\"mobileNav\\"
       aria-label=\\"Open menu\\"
-      onclick=\\"openMobileNav()\\"
+      onclick=\\"toggleControlledNav(this)\\"
     >
       <span class=\\"hamburger\\" aria-hidden=\\"true\\">☰</span>
     </button>
@@ -4134,6 +4196,18 @@ exports[`e2e generates driver results 1`] = `
 >>>>>>> 07ee8ce ( enhance table UX with scrollbar indicator and clickable location headers)
         </div>
       </div>
+      <div class=\\"column-filter\\">
+        <button class=\\"column-filter__btn\\" type=\\"button\\" aria-label=\\"Filter columns\\">
+          <span>Filter Columns</span>
+        </button>
+        <div class=\\"column-filter__menu\\">
+          <div class=\\"column-filter__items\\"></div>
+          <div class=\\"column-filter__actions\\">
+            <button class=\\"column-filter__action-btn\\" data-action=\\"show-all\\">Show All</button>
+            <button class=\\"column-filter__action-btn\\" data-action=\\"close\\">Close</button>
+          </div>
+        </div>
+      </div>
       <div class=\\"table-scroll-indicator\\" id=\\"tableScrollIndicator\\" aria-hidden=\\"true\\">
         <div class=\\"table-scroll-indicator__content\\"></div>
       </div>
@@ -5162,6 +5236,31 @@ exports[`e2e generates driver standings 1`] = `
 <head>
   <meta charset=\\"utf-8\\">
   <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1, viewport-fit=cover\\">
+    <script>
+    // Runs synchronously during HTML parsing - BEFORE first paint
+    (function() {
+      const getPageType = () => {
+        const pathname = window.location.pathname;
+        const filename = pathname.split(\\"/\\").pop() || pathname;
+        if (filename.includes(\\"-driver-results.html\\")) return \\"driver-results\\";
+        if (filename.includes(\\"-standings.html\\")) return \\"standings\\";
+        return pathname.replace(/\\\\//g, \\"_\\") || \\"root\\";
+      };
+      
+      const tableId = \\"tableDrivers\\";
+      const storageKey = \`columnFilter_\${getPageType()}_\${tableId}\`;
+      const hidden = JSON.parse(localStorage.getItem(storageKey) || \\"[]\\");
+      
+      if (hidden.length > 0) {
+        const css = hidden.map(idx => 
+          \`#\${tableId} thead th:nth-child(\${idx + 1}),
+           #\${tableId} tbody tr td:nth-child(\${idx + 1})\`
+        ).join(',') + '{ display: none !important; }';
+        
+        document.write(\`<style id=\\"filter-preload\\">\${css}</style>\`);
+      }
+    })();
+  </script>
   <link rel=\\"stylesheet\\" href=\\"./assets/css/style.css\\">
 
   <link rel=\\"icon\\" href=\\"./assets/rsc-guy.png\\">
@@ -5316,7 +5415,7 @@ exports[`e2e generates driver standings 1`] = `
       class=\\"iconBtn navMobileOnly\\"
       aria-controls=\\"seriesMobileNav\\"
       aria-label=\\"Choose series\\"
-      onclick=\\"openSeriesMobileNav()\\"
+      onclick=\\"toggleControlledNav(this)\\"
     >
       <img class=\\"brand__img brand__img--mobile\\" src=\\"./assets/rsc-guy.png\\" alt=\\"Logo\\" />
     </button>
@@ -5331,7 +5430,7 @@ exports[`e2e generates driver standings 1`] = `
       class=\\"iconBtn navMobileOnly\\"
       aria-controls=\\"mobileNav\\"
       aria-label=\\"Open menu\\"
-      onclick=\\"openMobileNav()\\"
+      onclick=\\"toggleControlledNav(this)\\"
     >
       <span class=\\"hamburger\\" aria-hidden=\\"true\\">☰</span>
     </button>
@@ -6782,6 +6881,18 @@ exports[`e2e generates overall driver results 1`] = `
           <h2 style=\\"margin-left:1em;\\">Test E2E Driver Standings</h2>
         </div>
       </div>
+      <div class=\\"column-filter\\">
+        <button class=\\"column-filter__btn\\" type=\\"button\\" aria-label=\\"Filter columns\\">
+          <span>Filter Columns</span>
+        </button>
+        <div class=\\"column-filter__menu\\">
+          <div class=\\"column-filter__items\\"></div>
+          <div class=\\"column-filter__actions\\">
+            <button class=\\"column-filter__action-btn\\" data-action=\\"show-all\\">Show All</button>
+            <button class=\\"column-filter__action-btn\\" data-action=\\"close\\">Close</button>
+          </div>
+        </div>
+      </div>
       <div class=\\"table-scroll-indicator\\" id=\\"tableScrollIndicator\\" aria-hidden=\\"true\\">
         <div class=\\"table-scroll-indicator__content\\"></div>
       </div>
@@ -6811,7 +6922,7 @@ exports[`e2e generates overall driver results 1`] = `
             </tr>
           </thead>
           <tbody>
-            <tr style=\\"background-color: \\">
+            <tr>
               <td class=\\"td-pos\\">1</td>
               <td class=\\"td-change\\">
                 <span class=\\"neutral\\">=</span>
@@ -6831,7 +6942,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-points bold\\">104</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
+            <tr>
               <td class=\\"td-pos\\">2</td>
               <td class=\\"td-change\\">
                 <span class=\\"positive\\">
@@ -6853,7 +6964,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-points bold\\">93</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
+            <tr>
               <td class=\\"td-pos\\">3</td>
               <td class=\\"td-change\\">
                 <span class=\\"positive\\">
@@ -6875,7 +6986,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-points bold\\">61</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
+            <tr>
               <td class=\\"td-pos\\">4</td>
               <td class=\\"td-change\\">
                 <span class=\\"negative\\">
@@ -6897,7 +7008,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-points bold\\">52</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
+            <tr>
               <td class=\\"td-pos\\">5</td>
               <td class=\\"td-change\\">
                 <span class=\\"negative\\">
@@ -6919,7 +7030,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-points bold\\">48</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
+            <tr>
               <td class=\\"td-pos\\">6</td>
               <td class=\\"td-change\\">
                 <span class=\\"neutral\\">=</span>
@@ -6939,7 +7050,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-points bold\\">47</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
+            <tr>
               <td class=\\"td-pos\\">7</td>
               <td class=\\"td-change\\">
                 <span class=\\"negative\\">
@@ -6961,7 +7072,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-points bold\\">38</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
+            <tr>
               <td class=\\"td-pos\\">8</td>
               <td class=\\"td-change\\">
                 <span class=\\"positive\\">
@@ -6983,7 +7094,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-points bold\\">35</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
+            <tr>
               <td class=\\"td-pos\\">9</td>
               <td class=\\"td-change\\">
                 <span class=\\"positive\\">
@@ -7005,7 +7116,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-points bold\\">26</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
+            <tr>
               <td class=\\"td-pos\\">9</td>
               <td class=\\"td-change\\">
                 <span class=\\"negative\\">
@@ -7027,7 +7138,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-points bold\\">26</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
+            <tr>
               <td class=\\"td-pos\\">11</td>
               <td class=\\"td-change\\">
                 <span class=\\"positive\\">
@@ -7049,7 +7160,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-points bold\\">20</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
+            <tr>
               <td class=\\"td-pos\\">12</td>
               <td class=\\"td-change\\">
                 <span class=\\"negative\\">
@@ -7071,7 +7182,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-points bold\\">18</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
+            <tr>
               <td class=\\"td-pos\\">13</td>
               <td class=\\"td-change\\">
                 <span class=\\"positive\\">
@@ -7093,7 +7204,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-points bold\\">16</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
+            <tr>
               <td class=\\"td-pos\\">14</td>
               <td class=\\"td-change\\">
                 <span class=\\"negative\\">
@@ -7115,7 +7226,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-points bold\\">10</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
+            <tr>
               <td class=\\"td-pos\\">15</td>
               <td class=\\"td-change\\">
                 <span class=\\"negative\\">
@@ -7137,7 +7248,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-points bold\\">9</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
+            <tr>
               <td class=\\"td-pos\\">16</td>
               <td class=\\"td-change\\">
                 <span class=\\"neutral\\">=</span>
@@ -7157,7 +7268,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-points bold\\">8</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
+            <tr>
               <td class=\\"td-pos\\">17</td>
               <td class=\\"td-change\\">
                 <span class=\\"negative\\">
@@ -7179,7 +7290,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-points bold\\">6</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
+            <tr>
               <td class=\\"td-pos\\">18</td>
               <td class=\\"td-change\\">
                 <span class=\\"negative\\">
@@ -7201,7 +7312,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-points bold\\">4</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
+            <tr>
               <td class=\\"td-pos\\">19</td>
               <td class=\\"td-change\\">
                 <span class=\\"negative\\">
@@ -7223,7 +7334,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-points bold\\">2</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
+            <tr>
               <td class=\\"td-pos\\">19</td>
               <td class=\\"td-change\\">
                 <span class=\\"negative\\">
@@ -7245,7 +7356,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-points bold\\">2</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
+            <tr>
               <td class=\\"td-pos\\">21</td>
               <td class=\\"td-change\\">
                 <span class=\\"negative\\">
@@ -7267,7 +7378,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-points bold\\">0</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
+            <tr>
               <td class=\\"td-pos\\">21</td>
               <td class=\\"td-change\\">
                 <span class=\\"negative\\">
@@ -7289,7 +7400,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-points bold\\">0</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
+            <tr>
               <td class=\\"td-pos\\">21</td>
               <td class=\\"td-change\\">
                 <span class=\\"negative\\">
@@ -7311,7 +7422,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-points bold\\">0</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
+            <tr>
               <td class=\\"td-pos\\">21</td>
               <td class=\\"td-change\\">
                 <span class=\\"negative\\">
@@ -7333,7 +7444,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-points bold\\">0</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
+            <tr>
               <td class=\\"td-pos\\">21</td>
               <td class=\\"td-change\\">
                 <span class=\\"negative\\">
@@ -7355,7 +7466,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-points bold\\">0</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
+            <tr>
               <td class=\\"td-pos\\">21</td>
               <td class=\\"td-change\\">
                 <span class=\\"negative\\">
@@ -7377,7 +7488,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-points bold\\">0</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
+            <tr>
               <td class=\\"td-pos\\">21</td>
               <td class=\\"td-change\\">
                 <span class=\\"negative\\">
@@ -7399,7 +7510,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-points bold\\">0</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
+            <tr>
               <td class=\\"td-pos\\">21</td>
               <td class=\\"td-change\\">
                 <span class=\\"negative\\">
@@ -7421,7 +7532,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-points bold\\">0</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
+            <tr>
               <td class=\\"td-pos\\">21</td>
               <td class=\\"td-change\\">
                 <span class=\\"negative\\">
@@ -7443,7 +7554,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-points bold\\">0</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
+            <tr>
               <td class=\\"td-pos\\">21</td>
               <td class=\\"td-change\\">
                 <span class=\\"negative\\">
@@ -7490,6 +7601,31 @@ exports[`e2e generates overall driver results 1`] = `
 <head>
   <meta charset=\\"utf-8\\">
   <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1, viewport-fit=cover\\">
+    <script>
+    // Runs synchronously during HTML parsing - BEFORE first paint
+    (function() {
+      const getPageType = () => {
+        const pathname = window.location.pathname;
+        const filename = pathname.split(\\"/\\").pop() || pathname;
+        if (filename.includes(\\"-driver-results.html\\")) return \\"driver-results\\";
+        if (filename.includes(\\"-standings.html\\")) return \\"standings\\";
+        return pathname.replace(/\\\\//g, \\"_\\") || \\"root\\";
+      };
+      
+      const tableId = \\"tableDrivers\\";
+      const storageKey = \`columnFilter_\${getPageType()}_\${tableId}\`;
+      const hidden = JSON.parse(localStorage.getItem(storageKey) || \\"[]\\");
+      
+      if (hidden.length > 0) {
+        const css = hidden.map(idx => 
+          \`#\${tableId} thead th:nth-child(\${idx + 1}),
+           #\${tableId} tbody tr td:nth-child(\${idx + 1})\`
+        ).join(',') + '{ display: none !important; }';
+        
+        document.write(\`<style id=\\"filter-preload\\">\${css}</style>\`);
+      }
+    })();
+  </script>
   <link rel=\\"stylesheet\\" href=\\"./assets/css/style.css\\">
 
   <link rel=\\"icon\\" href=\\"./assets/rsc-guy.png\\">
@@ -7640,7 +7776,7 @@ exports[`e2e generates overall driver results 1`] = `
       class=\\"iconBtn navMobileOnly\\"
       aria-controls=\\"seriesMobileNav\\"
       aria-label=\\"Choose series\\"
-      onclick=\\"openSeriesMobileNav()\\"
+      onclick=\\"toggleControlledNav(this)\\"
     >
       <img class=\\"brand__img brand__img--mobile\\" src=\\"./assets/rsc-guy.png\\" alt=\\"Logo\\" />
     </button>
@@ -7655,7 +7791,7 @@ exports[`e2e generates overall driver results 1`] = `
       class=\\"iconBtn navMobileOnly\\"
       aria-controls=\\"mobileNav\\"
       aria-label=\\"Open menu\\"
-      onclick=\\"openMobileNav()\\"
+      onclick=\\"toggleControlledNav(this)\\"
     >
       <span class=\\"hamburger\\" aria-hidden=\\"true\\">☰</span>
     </button>
@@ -9392,6 +9528,18 @@ exports[`e2e generates overall driver results 1`] = `
 >>>>>>> 07ee8ce ( enhance table UX with scrollbar indicator and clickable location headers)
         </div>
       </div>
+      <div class=\\"column-filter\\">
+        <button class=\\"column-filter__btn\\" type=\\"button\\" aria-label=\\"Filter columns\\">
+          <span>Filter Columns</span>
+        </button>
+        <div class=\\"column-filter__menu\\">
+          <div class=\\"column-filter__items\\"></div>
+          <div class=\\"column-filter__actions\\">
+            <button class=\\"column-filter__action-btn\\" data-action=\\"show-all\\">Show All</button>
+            <button class=\\"column-filter__action-btn\\" data-action=\\"close\\">Close</button>
+          </div>
+        </div>
+      </div>
       <div class=\\"table-scroll-indicator\\" id=\\"tableScrollIndicator\\" aria-hidden=\\"true\\">
         <div class=\\"table-scroll-indicator__content\\"></div>
       </div>
@@ -9501,6 +9649,114 @@ exports[`e2e generates overall driver results 1`] = `
             <tr>
               <td class=\\"td-pos\\">4</td>
               <td class=\\"td-nat\\">
+                <img src=\\"./assets/country-flags/aus.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\"
+                  alt=\\"aus\\" title=\\"aus\\" />
+              </td>
+              <td class=\\"td-driver text-left bold\\">testdriver1</td>
+              <td class=\\"td-div\\">Test E2E2</td>
+              <td class=\\"td-team-name text-left\\">privateer</td>
+              <td class=\\"td-car\\">
+                <img src=\\"./assets/cars/ford.png\\" style=\\"max-width:2em; max-height:2em;\\" alt=\\"ford\\"
+                  title=\\"ford\\" />
+              </td>
+              <td class=\\"td-car-name text-left\\">
+                Ford Escort Mk II RS Grp4
+              </td>
+              <td class=\\"td-ps\\">00:00:39.952</td>
+              <td class=\\"td-diff\\">+00:00:00.858</td>
+              <td class=\\"td-total\\">00:33:33.039</td>
+              <td class=\\"td-diff\\">+00:00:36.028</td>
+              <td class=\\"td-sr\\">
+                0
+              </td>
+              <td class=\\"td-ps-points\\">3</td>
+              <td class=\\"td-points\\">38</td>
+              <td class=\\"td-total-points bold\\">41</td>
+            </tr>
+            <tr>
+              <td class=\\"td-pos\\">5</td>
+              <td class=\\"td-nat\\">
+                <img src=\\"./assets/country-flags/aus.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\"
+                  alt=\\"aus\\" title=\\"aus\\" />
+              </td>
+              <td class=\\"td-driver text-left bold\\">testdriver2</td>
+              <td class=\\"td-div\\">Test E2E2</td>
+              <td class=\\"td-team-name text-left\\">privateer</td>
+              <td class=\\"td-car\\">
+                <img src=\\"./assets/cars/porsche.png\\" style=\\"max-width:2em; max-height:2em;\\" alt=\\"porsche\\"
+                  title=\\"porsche\\" />
+              </td>
+              <td class=\\"td-car-name text-left\\">
+                Porsche 911 SC 3.0 Grp4
+              </td>
+              <td class=\\"td-ps\\">00:00:40.052</td>
+              <td class=\\"td-diff\\">+00:00:00.958</td>
+              <td class=\\"td-total\\">00:33:34.539</td>
+              <td class=\\"td-diff\\">+00:00:37.528</td>
+              <td class=\\"td-sr\\">
+                0
+              </td>
+              <td class=\\"td-ps-points\\">2</td>
+              <td class=\\"td-points\\">30</td>
+              <td class=\\"td-total-points bold\\">32</td>
+            </tr>
+            <tr>
+              <td class=\\"td-pos\\">6</td>
+              <td class=\\"td-nat\\">
+                <img src=\\"./assets/country-flags/aus.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\"
+                  alt=\\"aus\\" title=\\"aus\\" />
+              </td>
+              <td class=\\"td-driver text-left bold\\">testdriver3</td>
+              <td class=\\"td-div\\">Test E2E2</td>
+              <td class=\\"td-team-name text-left\\">privateer</td>
+              <td class=\\"td-car\\">
+                <img src=\\"./assets/cars/opel.png\\" style=\\"max-width:2em; max-height:2em;\\" alt=\\"opel\\"
+                  title=\\"opel\\" />
+              </td>
+              <td class=\\"td-car-name text-left\\">
+                Opel Ascona 400 Grp4
+              </td>
+              <td class=\\"td-ps\\">00:00:40.152</td>
+              <td class=\\"td-diff\\">+00:00:01.058</td>
+              <td class=\\"td-total\\">00:33:36.039</td>
+              <td class=\\"td-diff\\">+00:00:39.028</td>
+              <td class=\\"td-sr\\">
+                0
+              </td>
+              <td class=\\"td-ps-points\\">1</td>
+              <td class=\\"td-points\\">24</td>
+              <td class=\\"td-total-points bold\\">25</td>
+            </tr>
+            <tr>
+              <td class=\\"td-pos\\">7</td>
+              <td class=\\"td-nat\\">
+                <img src=\\"./assets/country-flags/aus.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\"
+                  alt=\\"aus\\" title=\\"aus\\" />
+              </td>
+              <td class=\\"td-driver text-left bold\\">testdriver4</td>
+              <td class=\\"td-div\\">Test E2E2</td>
+              <td class=\\"td-team-name text-left\\">privateer</td>
+              <td class=\\"td-car\\">
+                <img src=\\"./assets/cars/porsche.png\\" style=\\"max-width:2em; max-height:2em;\\" alt=\\"porsche\\"
+                  title=\\"porsche\\" />
+              </td>
+              <td class=\\"td-car-name text-left\\">
+                Porsche 911 SC 3.0 Grp4
+              </td>
+              <td class=\\"td-ps\\">00:00:40.252</td>
+              <td class=\\"td-diff\\">+00:00:01.158</td>
+              <td class=\\"td-total\\">00:33:37.539</td>
+              <td class=\\"td-diff\\">+00:00:40.528</td>
+              <td class=\\"td-sr\\">
+                0
+              </td>
+              <td class=\\"td-ps-points\\"></td>
+              <td class=\\"td-points\\">20</td>
+              <td class=\\"td-total-points bold\\">20</td>
+            </tr>
+            <tr>
+              <td class=\\"td-pos\\">8</td>
+              <td class=\\"td-nat\\">
                 <img src=\\"./assets/country-flags/fin.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\"
                   alt=\\"fin\\" title=\\"fin\\" />
               </td>
@@ -9526,7 +9782,115 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-total-points bold\\">54</td>
             </tr>
             <tr>
-              <td class=\\"td-pos\\">5</td>
+              <td class=\\"td-pos\\">9</td>
+              <td class=\\"td-nat\\">
+                <img src=\\"./assets/country-flags/aus.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\"
+                  alt=\\"aus\\" title=\\"aus\\" />
+              </td>
+              <td class=\\"td-driver text-left bold\\">testdriver5</td>
+              <td class=\\"td-div\\">Test E2E2</td>
+              <td class=\\"td-team-name text-left\\">privateer</td>
+              <td class=\\"td-car\\">
+                <img src=\\"./assets/cars/ford.png\\" style=\\"max-width:2em; max-height:2em;\\" alt=\\"ford\\"
+                  title=\\"ford\\" />
+              </td>
+              <td class=\\"td-car-name text-left\\">
+                Ford Escort Mk II RS Grp4
+              </td>
+              <td class=\\"td-ps\\">00:00:40.352</td>
+              <td class=\\"td-diff\\">+00:00:01.258</td>
+              <td class=\\"td-total\\">00:33:39.039</td>
+              <td class=\\"td-diff\\">+00:00:42.028</td>
+              <td class=\\"td-sr\\">
+                0
+              </td>
+              <td class=\\"td-ps-points\\"></td>
+              <td class=\\"td-points\\">18</td>
+              <td class=\\"td-total-points bold\\">18</td>
+            </tr>
+            <tr>
+              <td class=\\"td-pos\\">10</td>
+              <td class=\\"td-nat\\">
+                <img src=\\"./assets/country-flags/aus.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\"
+                  alt=\\"aus\\" title=\\"aus\\" />
+              </td>
+              <td class=\\"td-driver text-left bold\\">testdriver6</td>
+              <td class=\\"td-div\\">Test E2E2</td>
+              <td class=\\"td-team-name text-left\\">privateer</td>
+              <td class=\\"td-car\\">
+                <img src=\\"./assets/cars/porsche.png\\" style=\\"max-width:2em; max-height:2em;\\" alt=\\"porsche\\"
+                  title=\\"porsche\\" />
+              </td>
+              <td class=\\"td-car-name text-left\\">
+                Porsche 911 SC 3.0 Grp4
+              </td>
+              <td class=\\"td-ps\\">00:00:40.452</td>
+              <td class=\\"td-diff\\">+00:00:01.358</td>
+              <td class=\\"td-total\\">00:33:40.539</td>
+              <td class=\\"td-diff\\">+00:00:43.528</td>
+              <td class=\\"td-sr\\">
+                0
+              </td>
+              <td class=\\"td-ps-points\\"></td>
+              <td class=\\"td-points\\">16</td>
+              <td class=\\"td-total-points bold\\">16</td>
+            </tr>
+            <tr>
+              <td class=\\"td-pos\\">11</td>
+              <td class=\\"td-nat\\">
+                <img src=\\"./assets/country-flags/aus.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\"
+                  alt=\\"aus\\" title=\\"aus\\" />
+              </td>
+              <td class=\\"td-driver text-left bold\\">testdriver7</td>
+              <td class=\\"td-div\\">Test E2E2</td>
+              <td class=\\"td-team-name text-left\\">privateer</td>
+              <td class=\\"td-car\\">
+                <img src=\\"./assets/cars/opel.png\\" style=\\"max-width:2em; max-height:2em;\\" alt=\\"opel\\"
+                  title=\\"opel\\" />
+              </td>
+              <td class=\\"td-car-name text-left\\">
+                Opel Ascona 400 Grp4
+              </td>
+              <td class=\\"td-ps\\">00:00:40.552</td>
+              <td class=\\"td-diff\\">+00:00:01.458</td>
+              <td class=\\"td-total\\">00:33:42.039</td>
+              <td class=\\"td-diff\\">+00:00:45.028</td>
+              <td class=\\"td-sr\\">
+                0
+              </td>
+              <td class=\\"td-ps-points\\"></td>
+              <td class=\\"td-points\\">14</td>
+              <td class=\\"td-total-points bold\\">14</td>
+            </tr>
+            <tr>
+              <td class=\\"td-pos\\">12</td>
+              <td class=\\"td-nat\\">
+                <img src=\\"./assets/country-flags/aus.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\"
+                  alt=\\"aus\\" title=\\"aus\\" />
+              </td>
+              <td class=\\"td-driver text-left bold\\">testdriver8</td>
+              <td class=\\"td-div\\">Test E2E2</td>
+              <td class=\\"td-team-name text-left\\">privateer</td>
+              <td class=\\"td-car\\">
+                <img src=\\"./assets/cars/porsche.png\\" style=\\"max-width:2em; max-height:2em;\\" alt=\\"porsche\\"
+                  title=\\"porsche\\" />
+              </td>
+              <td class=\\"td-car-name text-left\\">
+                Porsche 911 SC 3.0 Grp4
+              </td>
+              <td class=\\"td-ps\\">00:00:40.652</td>
+              <td class=\\"td-diff\\">+00:00:01.558</td>
+              <td class=\\"td-total\\">00:33:43.539</td>
+              <td class=\\"td-diff\\">+00:00:46.528</td>
+              <td class=\\"td-sr\\">
+                0
+              </td>
+              <td class=\\"td-ps-points\\"></td>
+              <td class=\\"td-points\\">12</td>
+              <td class=\\"td-total-points bold\\">12</td>
+            </tr>
+            <tr>
+              <td class=\\"td-pos\\">13</td>
               <td class=\\"td-nat\\">
                 <img src=\\"./assets/country-flags/deu.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\"
                   alt=\\"deu\\" title=\\"deu\\" />
@@ -9553,7 +9917,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-total-points bold\\">38</td>
             </tr>
             <tr>
-              <td class=\\"td-pos\\">6</td>
+              <td class=\\"td-pos\\">14</td>
               <td class=\\"td-nat\\">
                 <img src=\\"./assets/country-flags/deu.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\"
                   alt=\\"deu\\" title=\\"deu\\" />
@@ -9580,7 +9944,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-total-points bold\\">32</td>
             </tr>
             <tr>
-              <td class=\\"td-pos\\">7</td>
+              <td class=\\"td-pos\\">15</td>
               <td class=\\"td-nat\\">
                 <img src=\\"./assets/country-flags/aus.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\"
                   alt=\\"aus\\" title=\\"aus\\" />
@@ -9607,7 +9971,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-total-points bold\\">27</td>
             </tr>
             <tr>
-              <td class=\\"td-pos\\">8</td>
+              <td class=\\"td-pos\\">16</td>
               <td class=\\"td-nat\\">
                 <img src=\\"./assets/country-flags/swe.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\"
                   alt=\\"swe\\" title=\\"swe\\" />
@@ -9634,7 +9998,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-total-points bold\\">20</td>
             </tr>
             <tr>
-              <td class=\\"td-pos\\">9</td>
+              <td class=\\"td-pos\\">17</td>
               <td class=\\"td-nat\\">
                 <img src=\\"./assets/country-flags/swe.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\"
                   alt=\\"swe\\" title=\\"swe\\" />
@@ -9661,7 +10025,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-total-points bold\\">19</td>
             </tr>
             <tr>
-              <td class=\\"td-pos\\">10</td>
+              <td class=\\"td-pos\\">18</td>
               <td class=\\"td-nat\\">
                 <img src=\\"./assets/country-flags/bra.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\"
                   alt=\\"bra\\" title=\\"bra\\" />
@@ -9688,7 +10052,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-total-points bold\\">16</td>
             </tr>
             <tr>
-              <td class=\\"td-pos\\">11</td>
+              <td class=\\"td-pos\\">19</td>
               <td class=\\"td-nat\\">
                 <img src=\\"./assets/country-flags/nor.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\"
                   alt=\\"nor\\" title=\\"nor\\" />
@@ -9715,7 +10079,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-total-points bold\\">14</td>
             </tr>
             <tr>
-              <td class=\\"td-pos\\">12</td>
+              <td class=\\"td-pos\\">20</td>
               <td class=\\"td-nat\\">
                 <img src=\\"./assets/country-flags/usa.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\"
                   alt=\\"usa\\" title=\\"usa\\" />
@@ -9742,7 +10106,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-total-points bold\\">16</td>
             </tr>
             <tr>
-              <td class=\\"td-pos\\">13</td>
+              <td class=\\"td-pos\\">21</td>
               <td class=\\"td-nat\\">
                 <img src=\\"./assets/country-flags/kor.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\"
                   alt=\\"kor\\" title=\\"kor\\" />
@@ -9769,7 +10133,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-total-points bold\\">10</td>
             </tr>
             <tr>
-              <td class=\\"td-pos\\">14</td>
+              <td class=\\"td-pos\\">22</td>
               <td class=\\"td-nat\\">
                 <img src=\\"./assets/country-flags/ita.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\"
                   alt=\\"ita\\" title=\\"ita\\" />
@@ -9796,7 +10160,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-total-points bold\\">8</td>
             </tr>
             <tr>
-              <td class=\\"td-pos\\">15</td>
+              <td class=\\"td-pos\\">23</td>
               <td class=\\"td-nat\\">
                 <img src=\\"./assets/country-flags/aus.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\"
                   alt=\\"aus\\" title=\\"aus\\" />
@@ -9823,7 +10187,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-total-points bold\\">6</td>
             </tr>
             <tr>
-              <td class=\\"td-pos\\">16</td>
+              <td class=\\"td-pos\\">24</td>
               <td class=\\"td-nat\\">
                 <img src=\\"./assets/country-flags/swe.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\"
                   alt=\\"swe\\" title=\\"swe\\" />
@@ -9850,7 +10214,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-total-points bold\\">4</td>
             </tr>
             <tr>
-              <td class=\\"td-pos\\">17</td>
+              <td class=\\"td-pos\\">25</td>
               <td class=\\"td-nat\\">
                 <img src=\\"./assets/country-flags/gbr.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\"
                   alt=\\"gbr\\" title=\\"gbr\\" />
@@ -9877,7 +10241,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-total-points bold\\">1</td>
             </tr>
             <tr>
-              <td class=\\"td-pos\\">18</td>
+              <td class=\\"td-pos\\">26</td>
               <td class=\\"td-nat\\">
                 <img src=\\"./assets/country-flags/swe.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\"
                   alt=\\"swe\\" title=\\"swe\\" />
@@ -9904,7 +10268,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-total-points bold\\">0</td>
             </tr>
             <tr>
-              <td class=\\"td-pos\\">19</td>
+              <td class=\\"td-pos\\">27</td>
               <td class=\\"td-nat\\">
                 <img src=\\"./assets/country-flags/esp.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\"
                   alt=\\"esp\\" title=\\"esp\\" />
@@ -9931,7 +10295,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-total-points bold\\">0</td>
             </tr>
             <tr>
-              <td class=\\"td-pos\\">20</td>
+              <td class=\\"td-pos\\">28</td>
               <td class=\\"td-nat\\">
                 <img src=\\"./assets/country-flags/hun.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\"
                   alt=\\"hun\\" title=\\"hun\\" />
@@ -9958,7 +10322,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-total-points bold\\">0</td>
             </tr>
             <tr>
-              <td class=\\"td-pos\\">21</td>
+              <td class=\\"td-pos\\">29</td>
               <td class=\\"td-nat\\">
                 <img src=\\"./assets/country-flags/est.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\"
                   alt=\\"est\\" title=\\"est\\" />
@@ -9985,7 +10349,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-total-points bold\\">0</td>
             </tr>
             <tr>
-              <td class=\\"td-pos\\">22</td>
+              <td class=\\"td-pos\\">30</td>
               <td class=\\"td-nat\\">
                 <img src=\\"./assets/country-flags/usa.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\"
                   alt=\\"usa\\" title=\\"usa\\" />
@@ -10012,7 +10376,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-total-points bold\\">0</td>
             </tr>
             <tr>
-              <td class=\\"td-pos\\">23</td>
+              <td class=\\"td-pos\\">31</td>
               <td class=\\"td-nat\\">
                 <img src=\\"./assets/country-flags/swe.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\"
                   alt=\\"swe\\" title=\\"swe\\" />
@@ -10039,7 +10403,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-total-points bold\\">0</td>
             </tr>
             <tr>
-              <td class=\\"td-pos\\">24</td>
+              <td class=\\"td-pos\\">32</td>
               <td class=\\"td-nat\\">
                 <img src=\\"./assets/country-flags/gbr.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\"
                   alt=\\"gbr\\" title=\\"gbr\\" />
@@ -10066,7 +10430,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-total-points bold\\">0</td>
             </tr>
             <tr>
-              <td class=\\"td-pos\\">25</td>
+              <td class=\\"td-pos\\">33</td>
               <td class=\\"td-nat\\">
                 <img src=\\"./assets/country-flags/esp.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\"
                   alt=\\"esp\\" title=\\"esp\\" />
@@ -10093,7 +10457,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-total-points bold\\">0</td>
             </tr>
             <tr>
-              <td class=\\"td-pos\\">26</td>
+              <td class=\\"td-pos\\">34</td>
               <td class=\\"td-nat\\">
                 <img src=\\"./assets/country-flags/deu.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\"
                   alt=\\"deu\\" title=\\"deu\\" />
@@ -10120,7 +10484,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-total-points bold\\">0</td>
             </tr>
             <tr>
-              <td class=\\"td-pos\\">27</td>
+              <td class=\\"td-pos\\">35</td>
               <td class=\\"td-nat\\">
                 <img src=\\"./assets/country-flags/bel.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\"
                   alt=\\"bel\\" title=\\"bel\\" />
@@ -10147,7 +10511,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-total-points bold\\">0</td>
             </tr>
             <tr>
-              <td class=\\"td-pos\\">28</td>
+              <td class=\\"td-pos\\">36</td>
               <td class=\\"td-nat\\">
                 <img src=\\"./assets/country-flags/est.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\"
                   alt=\\"est\\" title=\\"est\\" />
@@ -10174,7 +10538,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-total-points bold\\">0</td>
             </tr>
             <tr>
-              <td class=\\"td-pos\\">29</td>
+              <td class=\\"td-pos\\">37</td>
               <td class=\\"td-nat\\">
                 <img src=\\"./assets/country-flags/gbr.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\"
                   alt=\\"gbr\\" title=\\"gbr\\" />
@@ -10201,7 +10565,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-total-points bold\\">DNS</td>
             </tr>
             <tr>
-              <td class=\\"td-pos\\">30</td>
+              <td class=\\"td-pos\\">38</td>
               <td class=\\"td-nat\\">
                 <img src=\\"./assets/country-flags/row.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\"
                   alt=\\"row\\" title=\\"row\\" />
@@ -10228,7 +10592,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-total-points bold\\">DNF</td>
             </tr>
             <tr>
-              <td class=\\"td-pos\\">31</td>
+              <td class=\\"td-pos\\">39</td>
               <td class=\\"td-nat\\">
                 <img src=\\"./assets/country-flags/deu.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\"
                   alt=\\"deu\\" title=\\"deu\\" />
@@ -10255,7 +10619,7 @@ exports[`e2e generates overall driver results 1`] = `
               <td class=\\"td-total-points bold\\">DNF</td>
             </tr>
             <tr>
-              <td class=\\"td-pos\\">32</td>
+              <td class=\\"td-pos\\">40</td>
               <td class=\\"td-nat\\">
                 <img src=\\"./assets/country-flags/gbr.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\"
                   alt=\\"gbr\\" title=\\"gbr\\" />
@@ -10433,6 +10797,31 @@ exports[`e2e generates overall driver standings 1`] = `
 <head>
   <meta charset=\\"utf-8\\">
   <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1, viewport-fit=cover\\">
+    <script>
+    // Runs synchronously during HTML parsing - BEFORE first paint
+    (function() {
+      const getPageType = () => {
+        const pathname = window.location.pathname;
+        const filename = pathname.split(\\"/\\").pop() || pathname;
+        if (filename.includes(\\"-driver-results.html\\")) return \\"driver-results\\";
+        if (filename.includes(\\"-standings.html\\")) return \\"standings\\";
+        return pathname.replace(/\\\\//g, \\"_\\") || \\"root\\";
+      };
+      
+      const tableId = \\"tableDrivers\\";
+      const storageKey = \`columnFilter_\${getPageType()}_\${tableId}\`;
+      const hidden = JSON.parse(localStorage.getItem(storageKey) || \\"[]\\");
+      
+      if (hidden.length > 0) {
+        const css = hidden.map(idx => 
+          \`#\${tableId} thead th:nth-child(\${idx + 1}),
+           #\${tableId} tbody tr td:nth-child(\${idx + 1})\`
+        ).join(',') + '{ display: none !important; }';
+        
+        document.write(\`<style id=\\"filter-preload\\">\${css}</style>\`);
+      }
+    })();
+  </script>
   <link rel=\\"stylesheet\\" href=\\"./assets/css/style.css\\">
 
   <link rel=\\"icon\\" href=\\"./assets/rsc-guy.png\\">
@@ -10587,7 +10976,7 @@ exports[`e2e generates overall driver standings 1`] = `
       class=\\"iconBtn navMobileOnly\\"
       aria-controls=\\"seriesMobileNav\\"
       aria-label=\\"Choose series\\"
-      onclick=\\"openSeriesMobileNav()\\"
+      onclick=\\"toggleControlledNav(this)\\"
     >
       <img class=\\"brand__img brand__img--mobile\\" src=\\"./assets/rsc-guy.png\\" alt=\\"Logo\\" />
     </button>
@@ -10602,7 +10991,7 @@ exports[`e2e generates overall driver standings 1`] = `
       class=\\"iconBtn navMobileOnly\\"
       aria-controls=\\"mobileNav\\"
       aria-label=\\"Open menu\\"
-      onclick=\\"openMobileNav()\\"
+      onclick=\\"toggleControlledNav(this)\\"
     >
       <span class=\\"hamburger\\" aria-hidden=\\"true\\">☰</span>
     </button>
@@ -12200,6 +12589,18 @@ exports[`e2e generates overall team standings 1`] = `
           <h2 style=\\"margin-left:1em;\\">Overall Driver Standings</h2>
         </div>
       </div>
+      <div class=\\"column-filter\\">
+        <button class=\\"column-filter__btn\\" type=\\"button\\" aria-label=\\"Filter columns\\">
+          <span>Filter Columns</span>
+        </button>
+        <div class=\\"column-filter__menu\\">
+          <div class=\\"column-filter__items\\"></div>
+          <div class=\\"column-filter__actions\\">
+            <button class=\\"column-filter__action-btn\\" data-action=\\"show-all\\">Show All</button>
+            <button class=\\"column-filter__action-btn\\" data-action=\\"close\\">Close</button>
+          </div>
+        </div>
+      </div>
       <div class=\\"table-scroll-indicator\\" id=\\"tableScrollIndicator\\" aria-hidden=\\"true\\">
         <div class=\\"table-scroll-indicator__content\\"></div>
       </div>
@@ -12230,7 +12631,7 @@ exports[`e2e generates overall team standings 1`] = `
             </tr>
           </thead>
           <tbody>
-            <tr style=\\"background-color: \\">
+            <tr>
               <td class=\\"td-pos\\">1</td>
               <td class=\\"td-change\\">
                 <span class=\\"positive\\">
@@ -12253,7 +12654,7 @@ exports[`e2e generates overall team standings 1`] = `
               <td class=\\"td-points bold\\">130</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
+            <tr>
               <td class=\\"td-pos\\">2</td>
               <td class=\\"td-change\\">
                 <span class=\\"positive\\">
@@ -12276,7 +12677,7 @@ exports[`e2e generates overall team standings 1`] = `
               <td class=\\"td-points bold\\">104</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
+            <tr>
               <td class=\\"td-pos\\">2</td>
               <td class=\\"td-change\\">
                 <span class=\\"negative\\">
@@ -12299,11 +12700,11 @@ exports[`e2e generates overall team standings 1`] = `
               <td class=\\"td-points bold\\">104</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
+            <tr>
               <td class=\\"td-pos\\">4</td>
               <td class=\\"td-change\\">
                 <span class=\\"positive\\">
-                  <i class=\\"arrow up\\"></i>&nbsp;1
+                  <i class=\\"arrow up\\"></i>&nbsp;2
                 </span>
               </td>
               <td class=\\"td-nat\\">
@@ -12322,11 +12723,55 @@ exports[`e2e generates overall team standings 1`] = `
               <td class=\\"td-points bold\\">93</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
+            <tr>
               <td class=\\"td-pos\\">5</td>
               <td class=\\"td-change\\">
+                <span class=\\"neutral\\">=</span>
+              </td>
+              <td class=\\"td-nat\\">
+                <img src=\\"./assets/country-flags/aus.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\"
+                  alt=\\"aus\\" title=\\"aus\\" />
+              </td>
+              <td class=\\"td-driver text-left bold\\">testdriver1</td>
+              <td class=\\"td-div\\">Test E2E2</td>
+              <td class=\\"td-team-name text-left\\">privateer</td>
+              <td class=\\"td-result\\">
+                41
+              </td>
+              <td class=\\"td-result\\">
+                41
+              </td>
+              <td class=\\"td-points bold\\">82</td>
+              <td class=\\"td-adr bold\\">0</td>
+            </tr>
+            <tr>
+              <td class=\\"td-pos\\">6</td>
+              <td class=\\"td-change\\">
                 <span class=\\"positive\\">
-                  <i class=\\"arrow up\\"></i>&nbsp;13
+                  <i class=\\"arrow up\\"></i>&nbsp;1
+                </span>
+              </td>
+              <td class=\\"td-nat\\">
+                <img src=\\"./assets/country-flags/aus.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\"
+                  alt=\\"aus\\" title=\\"aus\\" />
+              </td>
+              <td class=\\"td-driver text-left bold\\">testdriver2</td>
+              <td class=\\"td-div\\">Test E2E2</td>
+              <td class=\\"td-team-name text-left\\">privateer</td>
+              <td class=\\"td-result\\">
+                32
+              </td>
+              <td class=\\"td-result\\">
+                32
+              </td>
+              <td class=\\"td-points bold\\">64</td>
+              <td class=\\"td-adr bold\\">0</td>
+            </tr>
+            <tr>
+              <td class=\\"td-pos\\">7</td>
+              <td class=\\"td-change\\">
+                <span class=\\"positive\\">
+                  <i class=\\"arrow up\\"></i>&nbsp;19
                 </span>
               </td>
               <td class=\\"td-nat\\">
@@ -12345,11 +12790,11 @@ exports[`e2e generates overall team standings 1`] = `
               <td class=\\"td-points bold\\">61</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
-              <td class=\\"td-pos\\">6</td>
+            <tr>
+              <td class=\\"td-pos\\">8</td>
               <td class=\\"td-change\\">
                 <span class=\\"negative\\">
-                  <i class=\\"arrow down\\"></i>&nbsp;-3
+                  <i class=\\"arrow down\\"></i>&nbsp;-5
                 </span>
               </td>
               <td class=\\"td-nat\\">
@@ -12368,11 +12813,32 @@ exports[`e2e generates overall team standings 1`] = `
               <td class=\\"td-points bold\\">52</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
-              <td class=\\"td-pos\\">7</td>
+            <tr>
+              <td class=\\"td-pos\\">9</td>
+              <td class=\\"td-change\\">
+                <span class=\\"neutral\\">=</span>
+              </td>
+              <td class=\\"td-nat\\">
+                <img src=\\"./assets/country-flags/aus.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\"
+                  alt=\\"aus\\" title=\\"aus\\" />
+              </td>
+              <td class=\\"td-driver text-left bold\\">testdriver3</td>
+              <td class=\\"td-div\\">Test E2E2</td>
+              <td class=\\"td-team-name text-left\\">privateer</td>
+              <td class=\\"td-result\\">
+                25
+              </td>
+              <td class=\\"td-result\\">
+                25
+              </td>
+              <td class=\\"td-points bold\\">50</td>
+              <td class=\\"td-adr bold\\">0</td>
+            </tr>
+            <tr>
+              <td class=\\"td-pos\\">10</td>
               <td class=\\"td-change\\">
                 <span class=\\"negative\\">
-                  <i class=\\"arrow down\\"></i>&nbsp;-1
+                  <i class=\\"arrow down\\"></i>&nbsp;-3
                 </span>
               </td>
               <td class=\\"td-nat\\">
@@ -12391,8 +12857,8 @@ exports[`e2e generates overall team standings 1`] = `
               <td class=\\"td-points bold\\">48</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
-              <td class=\\"td-pos\\">8</td>
+            <tr>
+              <td class=\\"td-pos\\">11</td>
               <td class=\\"td-change\\">
                 <span class=\\"neutral\\">=</span>
               </td>
@@ -12412,11 +12878,34 @@ exports[`e2e generates overall team standings 1`] = `
               <td class=\\"td-points bold\\">47</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
-              <td class=\\"td-pos\\">9</td>
+            <tr>
+              <td class=\\"td-pos\\">12</td>
               <td class=\\"td-change\\">
                 <span class=\\"negative\\">
-                  <i class=\\"arrow down\\"></i>&nbsp;-2
+                  <i class=\\"arrow down\\"></i>&nbsp;-1
+                </span>
+              </td>
+              <td class=\\"td-nat\\">
+                <img src=\\"./assets/country-flags/aus.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\"
+                  alt=\\"aus\\" title=\\"aus\\" />
+              </td>
+              <td class=\\"td-driver text-left bold\\">testdriver4</td>
+              <td class=\\"td-div\\">Test E2E2</td>
+              <td class=\\"td-team-name text-left\\">privateer</td>
+              <td class=\\"td-result\\">
+                20
+              </td>
+              <td class=\\"td-result\\">
+                20
+              </td>
+              <td class=\\"td-points bold\\">40</td>
+              <td class=\\"td-adr bold\\">0</td>
+            </tr>
+            <tr>
+              <td class=\\"td-pos\\">13</td>
+              <td class=\\"td-change\\">
+                <span class=\\"negative\\">
+                  <i class=\\"arrow down\\"></i>&nbsp;-3
                 </span>
               </td>
               <td class=\\"td-nat\\">
@@ -12435,11 +12924,34 @@ exports[`e2e generates overall team standings 1`] = `
               <td class=\\"td-points bold\\">38</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
-              <td class=\\"td-pos\\">10</td>
+            <tr>
+              <td class=\\"td-pos\\">14</td>
+              <td class=\\"td-change\\">
+                <span class=\\"negative\\">
+                  <i class=\\"arrow down\\"></i>&nbsp;-1
+                </span>
+              </td>
+              <td class=\\"td-nat\\">
+                <img src=\\"./assets/country-flags/aus.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\"
+                  alt=\\"aus\\" title=\\"aus\\" />
+              </td>
+              <td class=\\"td-driver text-left bold\\">testdriver5</td>
+              <td class=\\"td-div\\">Test E2E2</td>
+              <td class=\\"td-team-name text-left\\">privateer</td>
+              <td class=\\"td-result\\">
+                18
+              </td>
+              <td class=\\"td-result\\">
+                18
+              </td>
+              <td class=\\"td-points bold\\">36</td>
+              <td class=\\"td-adr bold\\">0</td>
+            </tr>
+            <tr>
+              <td class=\\"td-pos\\">15</td>
               <td class=\\"td-change\\">
                 <span class=\\"positive\\">
-                  <i class=\\"arrow up\\"></i>&nbsp;5
+                  <i class=\\"arrow up\\"></i>&nbsp;8
                 </span>
               </td>
               <td class=\\"td-nat\\">
@@ -12458,11 +12970,55 @@ exports[`e2e generates overall team standings 1`] = `
               <td class=\\"td-points bold\\">35</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
-              <td class=\\"td-pos\\">11</td>
+            <tr>
+              <td class=\\"td-pos\\">16</td>
+              <td class=\\"td-change\\">
+                <span class=\\"negative\\">
+                  <i class=\\"arrow down\\"></i>&nbsp;-1
+                </span>
+              </td>
+              <td class=\\"td-nat\\">
+                <img src=\\"./assets/country-flags/aus.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\"
+                  alt=\\"aus\\" title=\\"aus\\" />
+              </td>
+              <td class=\\"td-driver text-left bold\\">testdriver6</td>
+              <td class=\\"td-div\\">Test E2E2</td>
+              <td class=\\"td-team-name text-left\\">privateer</td>
+              <td class=\\"td-result\\">
+                16
+              </td>
+              <td class=\\"td-result\\">
+                16
+              </td>
+              <td class=\\"td-points bold\\">32</td>
+              <td class=\\"td-adr bold\\">0</td>
+            </tr>
+            <tr>
+              <td class=\\"td-pos\\">17</td>
+              <td class=\\"td-change\\">
+                <span class=\\"neutral\\">=</span>
+              </td>
+              <td class=\\"td-nat\\">
+                <img src=\\"./assets/country-flags/aus.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\"
+                  alt=\\"aus\\" title=\\"aus\\" />
+              </td>
+              <td class=\\"td-driver text-left bold\\">testdriver7</td>
+              <td class=\\"td-div\\">Test E2E2</td>
+              <td class=\\"td-team-name text-left\\">privateer</td>
+              <td class=\\"td-result\\">
+                14
+              </td>
+              <td class=\\"td-result\\">
+                14
+              </td>
+              <td class=\\"td-points bold\\">28</td>
+              <td class=\\"td-adr bold\\">0</td>
+            </tr>
+            <tr>
+              <td class=\\"td-pos\\">18</td>
               <td class=\\"td-change\\">
                 <span class=\\"positive\\">
-                  <i class=\\"arrow up\\"></i>&nbsp;1
+                  <i class=\\"arrow up\\"></i>&nbsp;2
                 </span>
               </td>
               <td class=\\"td-nat\\">
@@ -12481,11 +13037,11 @@ exports[`e2e generates overall team standings 1`] = `
               <td class=\\"td-points bold\\">26</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
-              <td class=\\"td-pos\\">11</td>
+            <tr>
+              <td class=\\"td-pos\\">18</td>
               <td class=\\"td-change\\">
                 <span class=\\"negative\\">
-                  <i class=\\"arrow down\\"></i>&nbsp;-1
+                  <i class=\\"arrow down\\"></i>&nbsp;-3
                 </span>
               </td>
               <td class=\\"td-nat\\">
@@ -12504,8 +13060,31 @@ exports[`e2e generates overall team standings 1`] = `
               <td class=\\"td-points bold\\">26</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
-              <td class=\\"td-pos\\">13</td>
+            <tr>
+              <td class=\\"td-pos\\">20</td>
+              <td class=\\"td-change\\">
+                <span class=\\"negative\\">
+                  <i class=\\"arrow down\\"></i>&nbsp;-2
+                </span>
+              </td>
+              <td class=\\"td-nat\\">
+                <img src=\\"./assets/country-flags/aus.png\\" style=\\"max-width:1.5em; max-height:1.5em;\\"
+                  alt=\\"aus\\" title=\\"aus\\" />
+              </td>
+              <td class=\\"td-driver text-left bold\\">testdriver8</td>
+              <td class=\\"td-div\\">Test E2E2</td>
+              <td class=\\"td-team-name text-left\\">privateer</td>
+              <td class=\\"td-result\\">
+                12
+              </td>
+              <td class=\\"td-result\\">
+                12
+              </td>
+              <td class=\\"td-points bold\\">24</td>
+              <td class=\\"td-adr bold\\">0</td>
+            </tr>
+            <tr>
+              <td class=\\"td-pos\\">21</td>
               <td class=\\"td-change\\">
                 <span class=\\"positive\\">
                   <i class=\\"arrow up\\"></i>&nbsp;5
@@ -12527,11 +13106,11 @@ exports[`e2e generates overall team standings 1`] = `
               <td class=\\"td-points bold\\">20</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
-              <td class=\\"td-pos\\">14</td>
+            <tr>
+              <td class=\\"td-pos\\">22</td>
               <td class=\\"td-change\\">
                 <span class=\\"negative\\">
-                  <i class=\\"arrow down\\"></i>&nbsp;-5
+                  <i class=\\"arrow down\\"></i>&nbsp;-9
                 </span>
               </td>
               <td class=\\"td-nat\\">
@@ -12550,8 +13129,8 @@ exports[`e2e generates overall team standings 1`] = `
               <td class=\\"td-points bold\\">18</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
-              <td class=\\"td-pos\\">15</td>
+            <tr>
+              <td class=\\"td-pos\\">23</td>
               <td class=\\"td-change\\">
                 <span class=\\"positive\\">
                   <i class=\\"arrow up\\"></i>&nbsp;3
@@ -12573,8 +13152,8 @@ exports[`e2e generates overall team standings 1`] = `
               <td class=\\"td-points bold\\">16</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
-              <td class=\\"td-pos\\">16</td>
+            <tr>
+              <td class=\\"td-pos\\">24</td>
               <td class=\\"td-change\\">
                 <span class=\\"negative\\">
                   <i class=\\"arrow down\\"></i>&nbsp;-5
@@ -12596,8 +13175,8 @@ exports[`e2e generates overall team standings 1`] = `
               <td class=\\"td-points bold\\">10</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
-              <td class=\\"td-pos\\">17</td>
+            <tr>
+              <td class=\\"td-pos\\">25</td>
               <td class=\\"td-change\\">
                 <span class=\\"negative\\">
                   <i class=\\"arrow down\\"></i>&nbsp;-4
@@ -12619,8 +13198,8 @@ exports[`e2e generates overall team standings 1`] = `
               <td class=\\"td-points bold\\">9</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
-              <td class=\\"td-pos\\">18</td>
+            <tr>
+              <td class=\\"td-pos\\">26</td>
               <td class=\\"td-change\\">
                 <span class=\\"neutral\\">=</span>
               </td>
@@ -12640,8 +13219,8 @@ exports[`e2e generates overall team standings 1`] = `
               <td class=\\"td-points bold\\">8</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
-              <td class=\\"td-pos\\">19</td>
+            <tr>
+              <td class=\\"td-pos\\">27</td>
               <td class=\\"td-change\\">
                 <span class=\\"negative\\">
                   <i class=\\"arrow down\\"></i>&nbsp;-1
@@ -12663,8 +13242,8 @@ exports[`e2e generates overall team standings 1`] = `
               <td class=\\"td-points bold\\">6</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
-              <td class=\\"td-pos\\">20</td>
+            <tr>
+              <td class=\\"td-pos\\">28</td>
               <td class=\\"td-change\\">
                 <span class=\\"negative\\">
                   <i class=\\"arrow down\\"></i>&nbsp;-6
@@ -12686,8 +13265,8 @@ exports[`e2e generates overall team standings 1`] = `
               <td class=\\"td-points bold\\">4</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
-              <td class=\\"td-pos\\">21</td>
+            <tr>
+              <td class=\\"td-pos\\">29</td>
               <td class=\\"td-change\\">
                 <span class=\\"negative\\">
                   <i class=\\"arrow down\\"></i>&nbsp;-4
@@ -12709,8 +13288,8 @@ exports[`e2e generates overall team standings 1`] = `
               <td class=\\"td-points bold\\">2</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
-              <td class=\\"td-pos\\">21</td>
+            <tr>
+              <td class=\\"td-pos\\">29</td>
               <td class=\\"td-change\\">
                 <span class=\\"negative\\">
                   <i class=\\"arrow down\\"></i>&nbsp;-5
@@ -12732,8 +13311,8 @@ exports[`e2e generates overall team standings 1`] = `
               <td class=\\"td-points bold\\">2</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
-              <td class=\\"td-pos\\">23</td>
+            <tr>
+              <td class=\\"td-pos\\">31</td>
               <td class=\\"td-change\\">
                 <span class=\\"negative\\">
                   <i class=\\"arrow down\\"></i>&nbsp;-5
@@ -12755,8 +13334,8 @@ exports[`e2e generates overall team standings 1`] = `
               <td class=\\"td-points bold\\">0</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
-              <td class=\\"td-pos\\">23</td>
+            <tr>
+              <td class=\\"td-pos\\">31</td>
               <td class=\\"td-change\\">
                 <span class=\\"negative\\">
                   <i class=\\"arrow down\\"></i>&nbsp;-5
@@ -12778,8 +13357,8 @@ exports[`e2e generates overall team standings 1`] = `
               <td class=\\"td-points bold\\">0</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
-              <td class=\\"td-pos\\">23</td>
+            <tr>
+              <td class=\\"td-pos\\">31</td>
               <td class=\\"td-change\\">
                 <span class=\\"negative\\">
                   <i class=\\"arrow down\\"></i>&nbsp;-5
@@ -12801,8 +13380,8 @@ exports[`e2e generates overall team standings 1`] = `
               <td class=\\"td-points bold\\">0</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
-              <td class=\\"td-pos\\">23</td>
+            <tr>
+              <td class=\\"td-pos\\">31</td>
               <td class=\\"td-change\\">
                 <span class=\\"negative\\">
                   <i class=\\"arrow down\\"></i>&nbsp;-5
@@ -12824,8 +13403,8 @@ exports[`e2e generates overall team standings 1`] = `
               <td class=\\"td-points bold\\">0</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
-              <td class=\\"td-pos\\">23</td>
+            <tr>
+              <td class=\\"td-pos\\">31</td>
               <td class=\\"td-change\\">
                 <span class=\\"negative\\">
                   <i class=\\"arrow down\\"></i>&nbsp;-5
@@ -12847,8 +13426,8 @@ exports[`e2e generates overall team standings 1`] = `
               <td class=\\"td-points bold\\">0</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
-              <td class=\\"td-pos\\">23</td>
+            <tr>
+              <td class=\\"td-pos\\">31</td>
               <td class=\\"td-change\\">
                 <span class=\\"negative\\">
                   <i class=\\"arrow down\\"></i>&nbsp;-5
@@ -12870,8 +13449,8 @@ exports[`e2e generates overall team standings 1`] = `
               <td class=\\"td-points bold\\">0</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
-              <td class=\\"td-pos\\">23</td>
+            <tr>
+              <td class=\\"td-pos\\">31</td>
               <td class=\\"td-change\\">
                 <span class=\\"negative\\">
                   <i class=\\"arrow down\\"></i>&nbsp;-5
@@ -12893,8 +13472,8 @@ exports[`e2e generates overall team standings 1`] = `
               <td class=\\"td-points bold\\">0</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
-              <td class=\\"td-pos\\">23</td>
+            <tr>
+              <td class=\\"td-pos\\">31</td>
               <td class=\\"td-change\\">
                 <span class=\\"negative\\">
                   <i class=\\"arrow down\\"></i>&nbsp;-5
@@ -12916,8 +13495,8 @@ exports[`e2e generates overall team standings 1`] = `
               <td class=\\"td-points bold\\">0</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
-              <td class=\\"td-pos\\">23</td>
+            <tr>
+              <td class=\\"td-pos\\">31</td>
               <td class=\\"td-change\\">
                 <span class=\\"negative\\">
                   <i class=\\"arrow down\\"></i>&nbsp;-5
@@ -12939,8 +13518,8 @@ exports[`e2e generates overall team standings 1`] = `
               <td class=\\"td-points bold\\">0</td>
               <td class=\\"td-adr bold\\">0</td>
             </tr>
-            <tr style=\\"background-color: \\">
-              <td class=\\"td-pos\\">23</td>
+            <tr>
+              <td class=\\"td-pos\\">31</td>
               <td class=\\"td-change\\">
                 <span class=\\"negative\\">
                   <i class=\\"arrow down\\"></i>&nbsp;-5
@@ -12987,6 +13566,31 @@ exports[`e2e generates overall team standings 1`] = `
 <head>
   <meta charset=\\"utf-8\\">
   <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1, viewport-fit=cover\\">
+    <script>
+    // Runs synchronously during HTML parsing - BEFORE first paint
+    (function() {
+      const getPageType = () => {
+        const pathname = window.location.pathname;
+        const filename = pathname.split(\\"/\\").pop() || pathname;
+        if (filename.includes(\\"-driver-results.html\\")) return \\"driver-results\\";
+        if (filename.includes(\\"-standings.html\\")) return \\"standings\\";
+        return pathname.replace(/\\\\//g, \\"_\\") || \\"root\\";
+      };
+      
+      const tableId = \\"tableDrivers\\";
+      const storageKey = \`columnFilter_\${getPageType()}_\${tableId}\`;
+      const hidden = JSON.parse(localStorage.getItem(storageKey) || \\"[]\\");
+      
+      if (hidden.length > 0) {
+        const css = hidden.map(idx => 
+          \`#\${tableId} thead th:nth-child(\${idx + 1}),
+           #\${tableId} tbody tr td:nth-child(\${idx + 1})\`
+        ).join(',') + '{ display: none !important; }';
+        
+        document.write(\`<style id=\\"filter-preload\\">\${css}</style>\`);
+      }
+    })();
+  </script>
   <link rel=\\"stylesheet\\" href=\\"./assets/css/style.css\\">
 
   <link rel=\\"icon\\" href=\\"./assets/rsc-guy.png\\">
@@ -13138,7 +13742,7 @@ exports[`e2e generates overall team standings 1`] = `
       class=\\"iconBtn navMobileOnly\\"
       aria-controls=\\"seriesMobileNav\\"
       aria-label=\\"Choose series\\"
-      onclick=\\"openSeriesMobileNav()\\"
+      onclick=\\"toggleControlledNav(this)\\"
     >
       <img class=\\"brand__img brand__img--mobile\\" src=\\"./assets/rsc-guy.png\\" alt=\\"Logo\\" />
     </button>
@@ -13153,7 +13757,7 @@ exports[`e2e generates overall team standings 1`] = `
       class=\\"iconBtn navMobileOnly\\"
       aria-controls=\\"mobileNav\\"
       aria-label=\\"Open menu\\"
-      onclick=\\"openMobileNav()\\"
+      onclick=\\"toggleControlledNav(this)\\"
     >
       <span class=\\"hamburger\\" aria-hidden=\\"true\\">☰</span>
     </button>
@@ -13575,6 +14179,18 @@ exports[`e2e generates overall team standings 1`] = `
 >>>>>>> 07ee8ce ( enhance table UX with scrollbar indicator and clickable location headers)
         </div>
       </div>
+      <div class=\\"column-filter\\">
+        <button class=\\"column-filter__btn\\" type=\\"button\\" aria-label=\\"Filter columns\\">
+          <span>Filter Columns</span>
+        </button>
+        <div class=\\"column-filter__menu\\">
+          <div class=\\"column-filter__items\\"></div>
+          <div class=\\"column-filter__actions\\">
+            <button class=\\"column-filter__action-btn\\" data-action=\\"show-all\\">Show All</button>
+            <button class=\\"column-filter__action-btn\\" data-action=\\"close\\">Close</button>
+          </div>
+        </div>
+      </div>
       <div class=\\"table-scroll-indicator\\" id=\\"tableScrollIndicator\\" aria-hidden=\\"true\\">
         <div class=\\"table-scroll-indicator__content\\"></div>
       </div>
@@ -13873,6 +14489,31 @@ exports[`e2e generates team standings 1`] = `
 <head>
   <meta charset=\\"utf-8\\">
   <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1, viewport-fit=cover\\">
+    <script>
+    // Runs synchronously during HTML parsing - BEFORE first paint
+    (function() {
+      const getPageType = () => {
+        const pathname = window.location.pathname;
+        const filename = pathname.split(\\"/\\").pop() || pathname;
+        if (filename.includes(\\"-driver-results.html\\")) return \\"driver-results\\";
+        if (filename.includes(\\"-standings.html\\")) return \\"standings\\";
+        return pathname.replace(/\\\\//g, \\"_\\") || \\"root\\";
+      };
+      
+      const tableId = \\"tableDrivers\\";
+      const storageKey = \`columnFilter_\${getPageType()}_\${tableId}\`;
+      const hidden = JSON.parse(localStorage.getItem(storageKey) || \\"[]\\");
+      
+      if (hidden.length > 0) {
+        const css = hidden.map(idx => 
+          \`#\${tableId} thead th:nth-child(\${idx + 1}),
+           #\${tableId} tbody tr td:nth-child(\${idx + 1})\`
+        ).join(',') + '{ display: none !important; }';
+        
+        document.write(\`<style id=\\"filter-preload\\">\${css}</style>\`);
+      }
+    })();
+  </script>
   <link rel=\\"stylesheet\\" href=\\"./assets/css/style.css\\">
 
   <link rel=\\"icon\\" href=\\"./assets/rsc-guy.png\\">
@@ -14024,7 +14665,7 @@ exports[`e2e generates team standings 1`] = `
       class=\\"iconBtn navMobileOnly\\"
       aria-controls=\\"seriesMobileNav\\"
       aria-label=\\"Choose series\\"
-      onclick=\\"openSeriesMobileNav()\\"
+      onclick=\\"toggleControlledNav(this)\\"
     >
       <img class=\\"brand__img brand__img--mobile\\" src=\\"./assets/rsc-guy.png\\" alt=\\"Logo\\" />
     </button>
@@ -14039,7 +14680,7 @@ exports[`e2e generates team standings 1`] = `
       class=\\"iconBtn navMobileOnly\\"
       aria-controls=\\"mobileNav\\"
       aria-label=\\"Open menu\\"
-      onclick=\\"openMobileNav()\\"
+      onclick=\\"toggleControlledNav(this)\\"
     >
       <span class=\\"hamburger\\" aria-hidden=\\"true\\">☰</span>
     </button>
@@ -14459,6 +15100,18 @@ exports[`e2e generates team standings 1`] = `
           <img src=\\"./assets/rsc-guy.png\\" />
           <h2 style=\\"margin-left:1em;\\">Test E2E Team Standings</h2>
 >>>>>>> 07ee8ce ( enhance table UX with scrollbar indicator and clickable location headers)
+        </div>
+      </div>
+      <div class=\\"column-filter\\">
+        <button class=\\"column-filter__btn\\" type=\\"button\\" aria-label=\\"Filter columns\\">
+          <span>Filter Columns</span>
+        </button>
+        <div class=\\"column-filter__menu\\">
+          <div class=\\"column-filter__items\\"></div>
+          <div class=\\"column-filter__actions\\">
+            <button class=\\"column-filter__action-btn\\" data-action=\\"show-all\\">Show All</button>
+            <button class=\\"column-filter__action-btn\\" data-action=\\"close\\">Close</button>
+          </div>
         </div>
       </div>
       <div class=\\"table-scroll-indicator\\" id=\\"tableScrollIndicator\\" aria-hidden=\\"true\\">

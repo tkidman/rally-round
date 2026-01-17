@@ -97,7 +97,7 @@
       class="iconBtn navMobileOnly"
       aria-controls="seriesMobileNav"
       aria-label="Choose series"
-      onclick="openSeriesMobileNav()"
+      onclick="toggleControlledNav(this)"
     >
       <img class="brand__img brand__img--mobile" src="./assets/{{logo}}" alt="Logo" />
     </button>
@@ -112,7 +112,7 @@
       class="iconBtn navMobileOnly"
       aria-controls="mobileNav"
       aria-label="Open menu"
-      onclick="openMobileNav()"
+      onclick="toggleControlledNav(this)"
     >
       <span class="hamburger" aria-hidden="true">☰</span>
     </button>

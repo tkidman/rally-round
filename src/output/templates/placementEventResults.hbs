@@ -7,7 +7,18 @@
                     <h2 style="margin-left:1em;">{{title}} {{location.countryName}} >{{localization.driver_results}}</h2>
                 </div>
             </div>
-
+            <div class="column-filter">
+                <button class="column-filter__btn" type="button" aria-label="Filter columns">
+                    <span>Filter Columns</span>
+                </button>
+                <div class="column-filter__menu">
+                    <div class="column-filter__items"></div>
+                    <div class="column-filter__actions">
+                        <button class="column-filter__action-btn" data-action="show-all">Show All</button>
+                        <button class="column-filter__action-btn" data-action="close">Close</button>
+                    </div>
+                </div>
+            </div>
             <div class="table-scroll-wrapper">
             <table id="tableDrivers">
                 <thead>

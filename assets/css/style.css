@@ -255,29 +255,9 @@ td {
   text-align: center;
 }
 
-/* Semantic table header/cell helpers for easier per-column styling */
-.th-pos,
-.td-pos {
-  width: 3.5em;
-}
-
-.th-nat,
-.td-nat {
-  width: 3.5em;
-}
-
 .th-driver,
 .td-driver {
   text-align: left;
-}
-
-.th-team-logo,
-.td-team-logo,
-.th-team2,
-.td-team2,
-.th-car,
-.td-car {
-  width: 3.5em;
 }
 
 .th-team-name,
@@ -297,11 +277,6 @@ td {
 .th-points,
 .td-points {
   text-align: center;
-}
-
-.th-leg,
-.td-leg {
-  width: 3em;
 }
 
 .th-stage-points,
@@ -761,6 +736,8 @@ tbody>tr:nth-child(odd) {
   top: calc(100% + 0.9em);
   left: 0;
   min-width: 160px;
+  max-height: 70vh;
+  overflow-y: auto;
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -769,6 +746,8 @@ tbody>tr:nth-child(odd) {
   display: none;
   z-index: var(--z-dropdown-overlay);
   pointer-events: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--white-3) rgba(255, 255, 255, 0.05);
 }
 
 .dropdown:hover .dropdown__menu,
@@ -776,14 +755,20 @@ tbody>tr:nth-child(odd) {
   display: block;
 }
 
-.dropdown__menu::before {
+.dropdown::after {
   content: "";
   position: absolute;
   left: -10px;
   right: -10px;
-  top: -0.9em;
+  top: 100%;
   height: 0.9em;
   pointer-events: auto;
+  z-index: var(--z-dropdown-overlay);
+  display: none;
+}
+
+.dropdown:hover::after {
+  display: block;
 }
 
 .dropdown__title {
@@ -1269,7 +1254,7 @@ tbody>tr:nth-child(odd) {
   max-height: 400px;
   overflow-y: auto;
   box-shadow: 0 10px 30px var(--black-35);
-  z-index: var(--z-dropdown);
+  z-index: 1;
   display: none;
 
   scrollbar-width: thin;

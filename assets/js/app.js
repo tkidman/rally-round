@@ -1,15 +1,5 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-undef */
-function openMobileNav() {
-  closeNav("seriesMobileNav");
-  toggleNav("mobileNav");
-}
-
-function openSeriesMobileNav() {
-  closeNav("mobileNav");
-  toggleNav("seriesMobileNav");
-}
-
+/* eslint-disable */
+const NAVS = ["mobileNav", "seriesMobileNav"];
 function closeNav(navId) {
   const el = document.getElementById(navId);
   if (!el) return;
@@ -17,16 +7,17 @@ function closeNav(navId) {
   el.classList.remove("isOpen");
 }
 
-function toggleNav(navId) {
-  const el = document.getElementById(navId);
-  if (!el) return;
+function toggleControlledNav(button) {
+  const navId = button.getAttribute("aria-controls");
+  const nav = document.getElementById(navId);
+  if (!nav) return;
 
-  const willOpen = el.hidden === true;
-  closeNav("mobileNav");
-  closeNav("seriesMobileNav");
+  const willOpen = nav.hidden === true;
 
-  el.hidden = !willOpen;
-  el.classList.toggle("isOpen", willOpen);
+  NAVS.forEach(closeNav);
+
+  nav.hidden = !willOpen;
+  nav.classList.toggle("isOpen", willOpen);
 }
 
 function openPopup(id) {
@@ -38,6 +29,9 @@ function openPopup(id) {
 document.addEventListener("DOMContentLoaded", function() {
   const table = document.getElementById("tableDrivers");
   if (!table) return;
+
+  // Apply column filters FIRST - before any other operations
+  initColumnFilter(table);
 
   const headers = table.querySelectorAll("th");
   if (headers.length === 0) return;
@@ -266,32 +260,26 @@ document.addEventListener("DOMContentLoaded", function() {
     );
   }
 
-  let currentSortedColumn = 0;
-  const initialHeader = headers[0];
-  let currentSortOrder = shouldDefaultToDescending(initialHeader) ? -1 : 1;
-
-  sortTableByColumn(table, 0, currentSortOrder);
-  updateHeaderStyles(headers, headers[0], currentSortOrder);
-
+  let currentSortedColumn = null;
+  let currentSortOrder = 1;
+  
   headers.forEach((header, index) => {
     header.addEventListener("click", e => {
       if (e.target.closest("a")) {
         return;
       }
-
+  
       if (index === currentSortedColumn) {
         currentSortOrder *= -1;
       } else {
         currentSortedColumn = index;
         currentSortOrder = shouldDefaultToDescending(header) ? -1 : 1;
       }
-
+  
       sortTableByColumn(table, index, currentSortOrder);
       updateHeaderStyles(headers, header, currentSortOrder);
     });
   });
-
-  initColumnFilter(table);
 
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
@@ -303,207 +291,248 @@ document.addEventListener("DOMContentLoaded", function() {
 function initTopScrollbar() {
   const tableWrapper = document.querySelector(".table-scroll-wrapper");
   const scrollIndicator = document.getElementById("tableScrollIndicator");
-
   if (!tableWrapper || !scrollIndicator) return;
 
   const table = document.getElementById("tableDrivers");
   if (!table) return;
 
-  function updateScrollbarVisibility() {
-    const needsScroll = table.offsetWidth > tableWrapper.clientWidth;
-    const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
+  const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
 
+  // Simple rAF scheduler to coalesce repeated calls
+  const raf = (() => {
+    let id = 0;
+    return fn => {
+      if (id) cancelAnimationFrame(id);
+      id = requestAnimationFrame(() => {
+        id = 0;
+        fn();
+      });
+    };
+  })();
+
+  function measure() {
+    const tableWidth = table.offsetWidth;
+    const wrapperWidth = tableWrapper.clientWidth;
+    const needsScroll = tableWidth > wrapperWidth;
+
+    return {
+      needsScroll,
+      tableWidth,
+      wrapperWidth,
+      scrollLeft: tableWrapper.scrollLeft,
+      scrollWidth: tableWrapper.scrollWidth,
+      clientWidth: tableWrapper.clientWidth
+    };
+  }
+
+  function updateScrollbarVisibility(m) {
     if (isTouchDevice) {
       scrollIndicator.style.display = "none";
       return;
     }
 
-    scrollIndicator.style.display = needsScroll ? "block" : "none";
+    scrollIndicator.style.display = m.needsScroll ? "block" : "none";
 
-    if (needsScroll) {
-      scrollIndicator.style.setProperty(
-        "--table-width",
-        table.offsetWidth + "px"
-      );
+    if (m.needsScroll) {
+      scrollIndicator.style.setProperty("--table-width", `${m.tableWidth}px`);
       void scrollIndicator.offsetHeight;
     }
   }
 
-  requestAnimationFrame(() => {
-    updateScrollbarVisibility();
-    updateFadeIndicators();
-  });
+  function updateFadeIndicators(m) {
+    if (!isTouchDevice) return;
 
-  let isScrollingTable = false;
-  let isScrollingIndicator = false;
-  let scrollTimeout = null;
-  const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
+    tableWrapper.classList.toggle("is-scrollable", m.needsScroll);
+
+    if (!m.needsScroll) {
+      tableWrapper.classList.remove("scrolled-past-80");
+      return;
+    }
+
+    const maxScroll = m.scrollWidth - m.clientWidth;
+    const scrollPercent = maxScroll > 0 ? (m.scrollLeft / maxScroll) * 100 : 0;
+    tableWrapper.classList.toggle("scrolled-past-80", scrollPercent > 80);
+  }
+
+  // Prevent scroll event ping-pong
+  let isSyncingFromIndicator = false;
+  let isSyncingFromTable = false;
 
   function syncTableToIndicator() {
-    if (!isScrollingIndicator && scrollIndicator.style.display !== "none") {
-      isScrollingTable = true;
-      scrollIndicator.scrollLeft = tableWrapper.scrollLeft;
-      isScrollingTable = false;
-    }
+    if (isSyncingFromIndicator || scrollIndicator.style.display === "none")
+      return;
+    isSyncingFromTable = true;
+    scrollIndicator.scrollLeft = tableWrapper.scrollLeft;
+    isSyncingFromTable = false;
   }
 
   function syncIndicatorToTable() {
-    if (!isScrollingTable) {
-      isScrollingIndicator = true;
-      tableWrapper.scrollLeft = scrollIndicator.scrollLeft;
-      isScrollingIndicator = false;
-    }
+    if (isSyncingFromTable) return;
+    isSyncingFromIndicator = true;
+    tableWrapper.scrollLeft = scrollIndicator.scrollLeft;
+    isSyncingFromIndicator = false;
   }
 
-  function updateFadeIndicators() {
-    if (!isTouchDevice) return;
-
-    const needsScroll = table.offsetWidth > tableWrapper.clientWidth;
-    tableWrapper.classList.toggle("is-scrollable", needsScroll);
-
-    if (needsScroll) {
-      const scrollLeft = tableWrapper.scrollLeft;
-      const scrollWidth = tableWrapper.scrollWidth;
-      const clientWidth = tableWrapper.clientWidth;
-      const maxScroll = scrollWidth - clientWidth;
-      const scrollPercent = maxScroll > 0 ? (scrollLeft / maxScroll) * 100 : 0;
-
-      tableWrapper.classList.toggle("scrolled-past-80", scrollPercent > 80);
-    } else {
-      tableWrapper.classList.remove("scrolled-past-80");
-    }
+  function updateAll() {
+    const m = measure();
+    updateScrollbarVisibility(m);
+    updateFadeIndicators(m);
+    syncTableToIndicator();
   }
 
-  function handleTableScroll() {
-    if (scrollTimeout) cancelAnimationFrame(scrollTimeout);
-    scrollTimeout = requestAnimationFrame(() => {
-      syncTableToIndicator();
-      if (isTouchDevice) {
-        updateFadeIndicators();
-      }
-    });
-  }
+  requestAnimationFrame(updateAll);
 
-  tableWrapper.addEventListener("scroll", handleTableScroll, { passive: true });
-
-  scrollIndicator.addEventListener(
+  tableWrapper.addEventListener(
     "scroll",
-    () => {
-      if (scrollTimeout) cancelAnimationFrame(scrollTimeout);
-      scrollTimeout = requestAnimationFrame(syncIndicatorToTable);
-    },
+    () =>
+      raf(() => {
+        syncTableToIndicator();
+        updateFadeIndicators(measure());
+      }),
     { passive: true }
   );
 
-  const resizeObserver = new ResizeObserver(() => {
-    updateScrollbarVisibility();
-    if (isTouchDevice) {
-      updateFadeIndicators();
-    }
+  scrollIndicator.addEventListener("scroll", () => raf(syncIndicatorToTable), {
+    passive: true
   });
 
+  const resizeObserver = new ResizeObserver(() => raf(updateAll));
   resizeObserver.observe(table);
   resizeObserver.observe(tableWrapper);
 
-  if (isTouchDevice) {
-    updateFadeIndicators();
-  }
+  if (isTouchDevice) updateFadeIndicators(measure());
 }
 
 function initColumnFilter(table) {
   if (!table) return;
 
   const tableId = table.id || "tableDrivers";
-  const pagePath =
-    window.location.pathname.split("/").pop() || window.location.pathname;
-  const storageKey = `columnFilter_${pagePath}_${tableId}`;
+
+  // Detect page type to share filter preferences across similar pages
+  const getPageType = () => {
+    const pathname = window.location.pathname;
+    const filename = pathname.split("/").pop() || pathname;
+    
+    if (filename.includes("-driver-results.html")) {
+      return "driver-results";
+    }
+    if (filename.includes("-standings.html")) {
+      return "standings";
+    }
+    return pathname.replace(/\//g, "_") || "root";
+  };
+
+  const storageKey = `columnFilter_${getPageType()}_${tableId}`;
   const headers = table.querySelectorAll("thead th");
   const tbody = table.querySelector("tbody");
 
-  if (headers.length === 0) return;
+  if (!headers.length) return;
 
-  let hiddenColumns = JSON.parse(localStorage.getItem(storageKey) || "[]");
-
-  const filterContainer = document.createElement("div");
-  filterContainer.className = "column-filter";
-  filterContainer.innerHTML = `
-    <button class="column-filter__btn" type="button" aria-label="Filter columns">
-      <span>Filter Columns</span>
-    </button>
-    <div class="column-filter__menu">
-      <div class="column-filter__items"></div>
-      <div class="column-filter__actions">
-        <button class="column-filter__action-btn" data-action="show-all">Show All</button>
-        <button class="column-filter__action-btn" data-action="close">Close</button>
-      </div>
-    </div>
-  `;
-
-  const scrollIndicator = document.getElementById("tableScrollIndicator");
-  const tableWrapper =
-    table.closest(".table-scroll-wrapper") || table.parentElement;
-
-  if (scrollIndicator) {
-    scrollIndicator.parentElement.insertBefore(
-      filterContainer,
-      scrollIndicator
+  // Load and sanitize: convert to Set and filter out invalid indices
+  let hiddenColumns;
+  try {
+    const stored = JSON.parse(localStorage.getItem(storageKey) || "[]");
+    hiddenColumns = new Set(
+      stored.filter(
+        idx => typeof idx === "number" && idx >= 0 && idx < headers.length
+      )
     );
-  } else {
-    tableWrapper.parentElement.insertBefore(filterContainer, tableWrapper);
+  } catch (e) {
+    hiddenColumns = new Set();
+  }
+
+  // Cache rows once for better performance
+  const rows = Array.from(tbody.querySelectorAll("tr"));
+
+  // Find the pre-rendered filter container
+  const tableWrapper = table.closest(".table-scroll-wrapper") || table.parentElement;
+  const filterContainer = tableWrapper.parentElement.querySelector(".column-filter");
+  
+  if (!filterContainer) {
+    console.warn("Column filter container not found in template");
+    return;
   }
 
   const filterBtn = filterContainer.querySelector(".column-filter__btn");
   const filterMenu = filterContainer.querySelector(".column-filter__menu");
   const filterItems = filterContainer.querySelector(".column-filter__items");
 
-  const columns = Array.from(headers).map((header, index) => {
+  const getColumnName = (header, index) => {
     const text = header.textContent.trim();
+    if (text) return text;
+
     const img = header.querySelector("img");
-    const link = header.querySelector("a");
+    const imgText = img?.alt || img?.title;
+    if (imgText) return imgText;
 
-    let columnName = text;
-    if (!columnName && img) {
-      columnName = img.alt || img.title || `Column ${index + 1}`;
-    }
-    if (!columnName && link) {
-      columnName = link.textContent.trim();
-    }
-    if (!columnName) {
-      columnName = `Column ${index + 1}`;
+    const linkText = header.querySelector("a")?.textContent.trim();
+    if (linkText) return linkText;
+
+    // Handle empty th-change header (position change indicator)
+    if (header.classList.contains("th-change")) {
+      return "Change";
     }
 
-    return {
-      index,
-      name: columnName,
-      header: header,
-      isHidden: hiddenColumns.includes(index)
-    };
-  });
+    return `Column ${index + 1}`;
+  };
 
-  columns.forEach(col => {
+  const toggleColumn = (index, isVisible) => {
+    const header = headers[index];
+    if (!header) return;
+
+    header.classList.toggle("hide-column", !isVisible);
+    rows.forEach(row => row.children[index]?.classList.toggle("hide-column", !isVisible));
+
+    isVisible ? hiddenColumns.delete(index) : hiddenColumns.add(index);
+  };
+
+  const savePreferences = () => {
+    try {
+      localStorage.setItem(storageKey, JSON.stringify([...hiddenColumns]));
+    } catch (e) {
+      // Silently fail if localStorage is unavailable
+    }
+  };
+
+  // Batch filter item creation using DocumentFragment
+  const fragment = document.createDocumentFragment();
+  headers.forEach((header, index) => {
+    const isVisible = !hiddenColumns.has(index);
+
     const item = document.createElement("div");
     item.className = "column-filter__item";
     item.innerHTML = `
       <input 
         type="checkbox" 
         class="column-filter__checkbox" 
-        id="col-${col.index}" 
-        data-column-index="${col.index}"
-        ${col.isHidden ? "" : "checked"}
+        id="col-${index}" 
+        data-column-index="${index}"
+        ${isVisible ? "checked" : ""}
       >
-      <label class="column-filter__label" for="col-${col.index}">
-        ${col.name || `Column ${col.index + 1}`}
+      <label class="column-filter__label" for="col-${index}">
+        ${getColumnName(header, index)}
       </label>
     `;
-    filterItems.appendChild(item);
-
-    toggleColumn(col.index, !col.isHidden);
+    fragment.appendChild(item);
   });
+  filterItems.appendChild(fragment);
+
+  // Apply all column visibility changes IMMEDIATELY (synchronously)
+  // This prevents FOUC - we want columns hidden before first paint
+  headers.forEach((header, index) => {
+    const isVisible = !hiddenColumns.has(index);
+    toggleColumn(index, isVisible);
+  });
+
+  const preloadStyle = document.getElementById('filter-preload');
+  if (preloadStyle) {
+    preloadStyle.remove();
+  }
 
   filterBtn.addEventListener("click", e => {
     e.stopPropagation();
-    filterMenu.classList.toggle("is-open");
-    filterBtn.classList.toggle("is-open");
+    const isOpen = filterMenu.classList.toggle("is-open");
+    filterBtn.classList.toggle("is-open", isOpen);
   });
 
   document.addEventListener("click", e => {
@@ -515,66 +544,24 @@ function initColumnFilter(table) {
 
   filterItems.addEventListener("change", e => {
     if (e.target.classList.contains("column-filter__checkbox")) {
-      const columnIndex = parseInt(e.target.dataset.columnIndex);
-      const isVisible = e.target.checked;
-      toggleColumn(columnIndex, isVisible);
+      toggleColumn(parseInt(e.target.dataset.columnIndex), e.target.checked);
       savePreferences();
     }
   });
 
-  filterContainer
-    .querySelectorAll(".column-filter__action-btn")
-    .forEach(btn => {
-      btn.addEventListener("click", e => {
-        const action = btn.dataset.action;
-        if (action === "show-all") {
-          columns.forEach((col, idx) => {
-            const checkbox = filterItems.querySelector(`#col-${idx}`);
-            if (checkbox) {
-              checkbox.checked = true;
-              toggleColumn(idx, true);
-            }
-          });
-          savePreferences();
-        } else if (action === "close") {
-          filterMenu.classList.remove("is-open");
-          filterBtn.classList.remove("is-open");
-        }
+  filterContainer.addEventListener("click", e => {
+    const btn = e.target.closest(".column-filter__action-btn");
+    if (!btn) return;
+
+    if (btn.dataset.action === "show-all") {
+      filterItems.querySelectorAll(".column-filter__checkbox").forEach((checkbox, idx) => {
+        checkbox.checked = true;
+        toggleColumn(idx, true);
       });
-    });
-
-  function toggleColumn(index, isVisible) {
-    const header = headers[index];
-    if (!header) return;
-
-    if (isVisible) {
-      header.classList.remove("hide-column");
-    } else {
-      header.classList.add("hide-column");
+      savePreferences();
+    } else if (btn.dataset.action === "close") {
+      filterMenu.classList.remove("is-open");
+      filterBtn.classList.remove("is-open");
     }
-
-    const rows = tbody.querySelectorAll("tr");
-    rows.forEach(row => {
-      const cell = row.children[index];
-      if (cell) {
-        if (isVisible) {
-          cell.classList.remove("hide-column");
-        } else {
-          cell.classList.add("hide-column");
-        }
-      }
-    });
-
-    if (isVisible) {
-      hiddenColumns = hiddenColumns.filter(idx => idx !== index);
-    } else {
-      if (!hiddenColumns.includes(index)) {
-        hiddenColumns.push(index);
-      }
-    }
-  }
-
-  function savePreferences() {
-    localStorage.setItem(storageKey, JSON.stringify(hiddenColumns));
-  }
+  });
 }

@@ -4,6 +4,31 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <script>
+    // Runs synchronously during HTML parsing - BEFORE first paint
+    (function() {
+      const getPageType = () => {
+        const pathname = window.location.pathname;
+        const filename = pathname.split("/").pop() || pathname;
+        if (filename.includes("-driver-results.html")) return "driver-results";
+        if (filename.includes("-standings.html")) return "standings";
+        return pathname.replace(/\//g, "_") || "root";
+      };
+      
+      const tableId = "tableDrivers";
+      const storageKey = `columnFilter_${getPageType()}_${tableId}`;
+      const hidden = JSON.parse(localStorage.getItem(storageKey) || "[]");
+      
+      if (hidden.length > 0) {
+        const css = hidden.map(idx => 
+          `#${tableId} thead th:nth-child(${idx + 1}),
+           #${tableId} tbody tr td:nth-child(${idx + 1})`
+        ).join(',') + '{ display: none !important; }';
+        
+        document.write(`<style id="filter-preload">${css}</style>`);
+      }
+    })();
+  </script>
   <link rel="stylesheet" href="./assets/css/style.css">
 
   <link rel="icon" href="./assets/{{logo}}">
