@@ -106,17 +106,9 @@ const fetchHtmlSuperRally = async ({ rallyId, saveCacheFile }) => {
       // Extract and split data within the <samp> tags
       const nameData = nameCell
         .find("samp")
-        .map((index, element) =>
-          $(element)
-            .text()
-            .trim()
-            .replace("/ ", "")
-        )
+        .map((index, element) => $(element).text().trim().replace("/ ", ""))
         .get();
-      const superRally = $(row)
-        .find(".rally_results_sr")
-        .text()
-        .trim();
+      const superRally = $(row).find(".rally_results_sr").text().trim();
 
       if (nameData.length > 0) {
         // Combine nameData elements into a single string with commas
@@ -148,12 +140,7 @@ const extractNationality = nameCell => {
 const extractStageNameCellData = (nameCell, $) => {
   const nameData = nameCell
     .find("samp")
-    .map((index, element) =>
-      $(element)
-        .text()
-        .trim()
-        .replace("/ ", "")
-    )
+    .map((index, element) => $(element).text().trim().replace("/ ", ""))
     .get();
   const driver = {
     name: nameData[0],
@@ -174,14 +161,8 @@ const extractStageTableData = ({ stageTable, eventFinished, $ }) => {
       const nameCell = $(psRow).find(".stage_results_name");
       const driver = extractStageNameCellData(nameCell, $);
       const timeCell = $(psRow).find(".stage_results_time");
-      const timeData = timeCell
-        .find("b")
-        .text()
-        .trim();
-      let diffFirst = $(psRow)
-        .find(".stage_results_diff_first")
-        .text()
-        .trim();
+      const timeData = timeCell.find("b").text().trim();
+      let diffFirst = $(psRow).find(".stage_results_diff_first").text().trim();
 
       if (!diffFirst.includes(":")) {
         diffFirst = `0:${diffFirst}`;

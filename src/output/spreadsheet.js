@@ -89,12 +89,8 @@ const transformForDriverStandingsSheets = events => {
   ];
   const lastEvent = events[events.length - 1];
   const rows = lastEvent.standings.driverStandings.map(standing => {
-    const {
-      resultsTotalPoints,
-      driver,
-      country,
-      carBrand
-    } = getDriverStandingData(standing, events);
+    const { resultsTotalPoints, driver, country, carBrand } =
+      getDriverStandingData(standing, events);
     const row = [
       standing.currentPosition,
       standing.positionChange,

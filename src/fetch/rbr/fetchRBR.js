@@ -119,9 +119,7 @@ const processFromHtml = ({ eventSuperRallies, stagesResults, event }) => {
 const fetchEventPartForId = async (rally, rallyId, useCsv) => {
   const rallyEndTime = moment.tz(rally.endTime, "CET");
   const eventFinished = rallyEndTime.isBefore(moment());
-  const saveCacheFile = moment(rallyEndTime)
-    .add(1, "hour")
-    .isBefore(moment());
+  const saveCacheFile = moment(rallyEndTime).add(1, "hour").isBefore(moment());
 
   let processedEvent;
   if (useCsv) {

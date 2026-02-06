@@ -33,10 +33,7 @@ describe("league", () => {
     test("returns true when days remaining is less than showLivePointsDaysRemaining", () => {
       leagueRef.league.showLivePoints = true;
       leagueRef.league.showLivePointsDaysRemaining = 3;
-      leagueRef.endTime = moment()
-        .utc()
-        .add(3, "days")
-        .toISOString();
+      leagueRef.endTime = moment().utc().add(3, "days").toISOString();
       expect(leagueRef.showLivePoints()).toBeTruthy();
 
       leagueRef.league.showLivePointsDaysRemaining = 4;
@@ -46,10 +43,7 @@ describe("league", () => {
     test("returns false when days remaining is greater than showLivePointsDaysRemaining", () => {
       leagueRef.league.showLivePoints = true;
       leagueRef.league.showLivePointsDaysRemaining = 2;
-      leagueRef.endTime = moment()
-        .utc()
-        .add(3, "days")
-        .toISOString();
+      leagueRef.endTime = moment().utc().add(3, "days").toISOString();
       expect(leagueRef.showLivePoints()).toBeFalsy();
     });
 

@@ -50,7 +50,7 @@ const listObjects = async (bucket, prefix) => {
   };
 
   return new Promise((resolve, reject) => {
-    return s3bucket.listObjects(params, function(err, data) {
+    return s3bucket.listObjects(params, function (err, data) {
       if (err) {
         return reject(err);
       }
@@ -66,7 +66,7 @@ const getObject = async (bucket, key) => {
   };
 
   return new Promise((resolve, reject) => {
-    return s3bucket.getObject(params, function(err, data) {
+    return s3bucket.getObject(params, function (err, data) {
       if (err) {
         return reject(err);
       }

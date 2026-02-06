@@ -18,19 +18,11 @@ results.forEach(result => {
 
   if (result.isValid) {
     validFiles++;
-    console.log(
-      `✅ ${result.filePath
-        .split("/")
-        .slice(-2)
-        .join("/")} - Valid`
-    );
+    console.log(`✅ ${result.filePath.split("/").slice(-2).join("/")} - Valid`);
   } else {
     invalidFiles++;
     console.log(
-      `❌ ${result.filePath
-        .split("/")
-        .slice(-2)
-        .join("/")} - Invalid`
+      `❌ ${result.filePath.split("/").slice(-2).join("/")} - Invalid`
     );
     console.log(formatValidationErrors(result.errors));
     console.log("");

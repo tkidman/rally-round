@@ -12,7 +12,7 @@ const racenetDomain = "https://web-api.racenet.com";
 const { handle2FA } = require("./gmail2fa");
 
 const delay = time => {
-  return new Promise(function(resolve) {
+  return new Promise(function (resolve) {
     setTimeout(resolve, time);
   });
 };

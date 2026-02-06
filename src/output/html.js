@@ -185,9 +185,7 @@ const getLastUpdatedAt = () => {
   if (leagueRef.league.overrideLastUpdated) {
     return leagueRef.league.overrideLastUpdated;
   }
-  return moment()
-    .utc()
-    .format();
+  return moment().utc().format();
 };
 
 const writeStandingsHTML = (division, type, links) => {
