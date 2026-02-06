@@ -8,7 +8,11 @@ const { getCreds } = require("./getCreds");
 
 const racenetDomain = "https://web-api.racenet.com";
 
-const axiosInstance = axios.create({});
+const axiosInstance = axios.create({
+  httpsAgent: new (require("https").Agent)({
+    rejectUnauthorized: false
+  })
+});
 
 const retry = async (requestParams, attempts = 1) => {
   let error;
@@ -21,7 +25,8 @@ const retry = async (requestParams, attempts = 1) => {
       debug(`error accessing racenet api, attempt ${i} : ${err.message}`);
     }
   }
-  debug(error);
+  // Log simplified error instead of full axios error object
+  debug(`Failed after ${attempts} attempts: ${error.message}`);
   throw error;
 };
 

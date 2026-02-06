@@ -3,7 +3,11 @@ const fs = require("fs");
 const axios = require("axios");
 const validCreds = {};
 const debug = require("debug")("tkidman:rally-round:wrcAPI:getCreds");
-const axiosInstance = axios.create({});
+const axiosInstance = axios.create({
+  httpsAgent: new (require("https").Agent)({
+    rejectUnauthorized: false
+  })
+});
 const racenetDomain = "https://web-api.racenet.com";
 const { handle2FA } = require("./gmail2fa");
 
@@ -63,13 +67,14 @@ const login = async (resolve, reject) => {
 
   // Launch Puppeteer and create a new page
   const browser = await puppeteer.launch({
-    headless: process.env.SHOW_BROWSER === "true" ? false : true,
+    headless: process.env.SHOW_BROWSER === "true" ? false : "new",
     args: [
       "--user-agent=Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.0 Safari/537.36",
       "--no-sandbox",
       "--disable-setuid-sandbox",
       "--disable-dev-shm-usage",
-      "--single-process"
+      "--single-process",
+      "--disable-gpu"
     ]
   });
   const page = await browser.newPage();
