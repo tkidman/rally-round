@@ -50,8 +50,8 @@ const writeFantasyHTML = (fantasyResults, links) => {
     navigation: team_nav
   };
 
-  var _d = fs.readFileSync(`${templatePath}/fantasyDrivers.hbs`).toString();
-  var driver_template = Handlebars.compile(_d);
+  const _d = fs.readFileSync(`${templatePath}/fantasyDrivers.hbs`).toString();
+  const driver_template = Handlebars.compile(_d);
   const driver_nav = getNavigationHTML("driver", "fantasy", links);
   const driverData = {
     drivers: data.drivers,
@@ -59,8 +59,8 @@ const writeFantasyHTML = (fantasyResults, links) => {
     prices: data.prices
   };
 
-  var _r = fs.readFileSync(`${templatePath}/fantasyRosters.hbs`).toString();
-  var rosters_template = Handlebars.compile(_r);
+  const _r = fs.readFileSync(`${templatePath}/fantasyRosters.hbs`).toString();
+  const rosters_template = Handlebars.compile(_r);
   const roster_nav = getNavigationHTML("rosters", "fantasy", links);
   const rosterData = {
     teams: data.teams,
@@ -106,7 +106,7 @@ const getStageColours = (stageTimes, benchmarks) => {
 };
 
 const timeToSeconds = time => {
-  let _t = time.split(":");
+  const _t = time.split(":");
   return _t[0] * 60 + parseFloat(_t[1].replace(",", "."));
 };
 
@@ -647,7 +647,7 @@ const writeAllHTML = () => {
     writeHomeHTML(links);
     writeErrorHTML(links);
   }
-  for (let divisionName of Object.keys(league.divisions)) {
+  for (const divisionName of Object.keys(league.divisions)) {
     const division = league.divisions[divisionName];
     writeHTMLOutputForDivision(division, links);
   }

@@ -154,7 +154,7 @@ const handle2FA = async page => {
           debug(`Found code input with selector: ${selector}`);
           break;
         }
-      } catch (e) {
+      } catch (_e) {
         // Continue to next selector
       }
     }
@@ -197,7 +197,7 @@ const handle2FA = async page => {
           debug(`Found submit button with selector: ${selector}`);
           break;
         }
-      } catch (e) {
+      } catch (_e) {
         // Continue to next selector
       }
     }

@@ -88,7 +88,7 @@ const fetchEvents = async ({ allRacenetEvents, getAllResults, clubId }) => {
     const leaderboardStages = [];
     for (let i = 0; i < racenetEvent.stages.length; i++) {
       if (getAllResults || i === 0 || i === racenetEvent.stages.length - 1) {
-        let racenetLeaderboard = await fetchLeaderboard({
+        const racenetLeaderboard = await fetchLeaderboard({
           clubId,
           leaderboardId: racenetEvent.stages[i].leaderboardID,
           cacheLeaderboard:
@@ -179,7 +179,7 @@ const appendEvents = ({ division, mergedEvents }) => {
 
 const fetchWRCEvents = async (division, divisionName, getAllResults) => {
   const mergedEvents = [];
-  for (let club of division.wrc) {
+  for (const club of division.wrc) {
     debug(`fetching event for club ${club.clubId}`);
     const events = await fetchEventsForClub({
       club,

@@ -169,7 +169,7 @@ const max = (a, b) => {
 const knapsack = (allowedRoundsWeight, roundWeights, points) => {
   const numRounds = points.length;
   let i, w;
-  let K = new Array(numRounds + 1);
+  const K = new Array(numRounds + 1);
 
   // Build table K[][] in bottom up manner
   for (i = 0; i <= numRounds; i++) {

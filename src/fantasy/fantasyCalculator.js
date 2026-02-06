@@ -2,10 +2,10 @@ const debug = require("debug")("tkidman:fantasy:fantasyCalculator");
 
 const { createDNFResult } = require("../shared");
 const { getDriversByDivision, leagueRef } = require("../state/league");
-let eventList = [];
+const eventList = [];
 
 function addDnsDrivers(driverResults, division) {
-  var lookupTable = driverResults.reduce((dict, result) => {
+  const lookupTable = driverResults.reduce((dict, result) => {
     dict[result.name] = true;
     return dict;
   }, {});
@@ -30,7 +30,7 @@ function addDnsDrivers(driverResults, division) {
 
 function removeDoubleCaptains(teams) {
   teams.forEach(team => {
-    let captains = [];
+    const captains = [];
     team.roster.forEach(week => {
       if (captains.indexOf(week.captain) > -1) {
         week.captain = "/";
@@ -42,9 +42,9 @@ function removeDoubleCaptains(teams) {
 function calculateTeamPoints(team, event, lookuptable) {
   team.roster.forEach(week => {
     if (week.location !== event.location) return;
-    var score = week.drivers.reduce((val, driver) => {
+    let score = week.drivers.reduce((val, driver) => {
       if (!driver) return val;
-      var driverPoints = lookuptable[driver];
+      let driverPoints = lookuptable[driver];
       if (driverPoints == undefined) {
         debug(
           `unable to find fantasy score for ${driver} for team ${team.name}`
@@ -80,7 +80,7 @@ function calculateBudget(team, event, previousEvent, prices) {
           count += parseFloat(prices[driver][event.location]);
         }
       });
-      let prev_budget = team.budget[team.budget.length - 1];
+      const prev_budget = team.budget[team.budget.length - 1];
       let budget = count < 10 ? 10 : count;
       budget = budget > 15 ? 15 : budget;
       if (budget - prev_budget > 1) {
@@ -94,7 +94,7 @@ function calculateBudget(team, event, previousEvent, prices) {
 function calculateBestBuys(event, lookuptable, fantasy) {
   const driverPrices = fantasy.drivers;
   const loc = event.location;
-  let out = [];
+  const out = [];
   Object.values(driverPrices).forEach(price => {
     out.push({
       name: price.driver,
@@ -123,7 +123,7 @@ function buildDriverStandings(driverStandings, lookuptable, event) {
 const calculateFantasyStandings = (event, previousEvent, league, division) => {
   if (!league.fantasy) return;
   eventList.push(event.location);
-  var teams = league.fantasy.teams;
+  const teams = league.fantasy.teams;
   teams.forEach(team =>
     calculateBudget(team, event, previousEvent, league.fantasy.drivers)
   );
@@ -132,13 +132,13 @@ const calculateFantasyStandings = (event, previousEvent, league, division) => {
 
   if (!previousEvent) removeDoubleCaptains(teams); //no need to run this multiple times
 
-  var driverResults = event.results.driverResults;
+  const driverResults = event.results.driverResults;
   addDnsDrivers(driverResults, division);
   league.fantasy.calculators.forEach(calculation =>
     calculation(driverResults, previousEvent)
   );
 
-  var lookuptable = driverResults.reduce((dict, driver) => {
+  const lookuptable = driverResults.reduce((dict, driver) => {
     dict[driver.name] = driver.fantasyPoints;
     return dict;
   }, {});
@@ -159,15 +159,15 @@ const calculateFantasyStandings = (event, previousEvent, league, division) => {
  */
 function processFantasyDrivers(driverStandings) {
   if (!driverStandings || Object.keys(driverStandings).length === 0) return [];
-  var drivers = Object.values(driverStandings);
-  var drivers_old = [...drivers];
+  const drivers = Object.values(driverStandings);
+  const drivers_old = [...drivers];
   drivers.sort((a, b) => b.total - a.total);
   drivers_old.sort((a, b) => b.previous - a.previous);
   const highestScore = drivers[0].total;
   drivers.forEach(driver => (driver.gap = highestScore - driver.total));
   for (let i = 0; i < drivers.length; i++) {
     const driver = drivers[i];
-    var prev = drivers_old.findIndex(_d => _d.name === driver.name);
+    const prev = drivers_old.findIndex(_d => _d.name === driver.name);
     driver.positive = false;
     driver.neutral = false;
     driver.negative = false;
@@ -185,11 +185,11 @@ function processFantasyDrivers(driverStandings) {
   return drivers;
 }
 function processFantasyTeams(teamStandings) {
-  var teams = Object.values(teamStandings).reduce((arr, team) => {
+  const teams = Object.values(teamStandings).reduce((arr, team) => {
     team.budget.forEach((budget, i) => {
       team.roster[i].budget = "฿" + budget;
     });
-    var out = {
+    const out = {
       name: team.name,
       points: team.points,
       previous: team.previous,
@@ -203,9 +203,9 @@ function processFantasyTeams(teamStandings) {
       captains: []
     };
     Object.values(team.roster).forEach(week => {
-      let points = week.points ? week.points : "";
+      const points = week.points ? week.points : "";
       if (week.drivers && week.drivers[0]) {
-        var lastRoster = [...week.drivers];
+        const lastRoster = [...week.drivers];
         out.lastRoster = JSON.stringify(lastRoster);
         out.captains.push(week.captain);
       }
@@ -215,7 +215,7 @@ function processFantasyTeams(teamStandings) {
     arr.push(out);
     return arr;
   }, []);
-  var teams_old = [...teams];
+  const teams_old = [...teams];
   teams.sort((a, b) => b.points - a.points);
   teams_old.sort((a, b) => b.previous - a.previous);
 
@@ -224,7 +224,7 @@ function processFantasyTeams(teamStandings) {
 
   for (let i = 0; i < teams.length; i++) {
     const team = teams[i];
-    var prev = teams_old.findIndex(_t => _t.name === team.name);
+    const prev = teams_old.findIndex(_t => _t.name === team.name);
     team.rank = i + 1;
     team.evolution = prev - i;
     if (team.evolution > 0) {
@@ -241,12 +241,12 @@ function processFantasyTeams(teamStandings) {
 }
 function processPriceList(prices) {
   return Object.values(prices).reduce((arr, driver) => {
-    let priceArr = [];
+    const priceArr = [];
     let prev = driver[eventList[0]];
     let notfirst = false;
     eventList.forEach(event => {
-      let pr = parseFloat(driver[event]);
-      let diff = pr - prev;
+      const pr = parseFloat(driver[event]);
+      const diff = pr - prev;
       priceArr.push({
         price: pr,
         evolution: diff,

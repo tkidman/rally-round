@@ -48,7 +48,7 @@ const getTeamStandingData = (standing, events) => {
 
 const getDriverData = (driverName, divisionName) => {
   const driver = leagueRef.getDriverInDivision(driverName, divisionName);
-  let country = getCountryForDriver(driver);
+  const country = getCountryForDriver(driver);
   const car = getCarByName(driver.car);
   let carBrand;
   if (!car) {

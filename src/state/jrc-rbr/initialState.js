@@ -50,7 +50,6 @@ const rallies = [
   }
 ];
 
-// eslint-disable-next-line no-unused-vars
 const pointsLong = {
   //powerStage: [5, 4, 3, 2, 1],
   overall: [
@@ -103,7 +102,6 @@ const pointsNormal = {
   ]
 };
 
-// eslint-disable-next-line no-unused-vars
 const pointsShort = {
   overall: [
     25,

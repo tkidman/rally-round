@@ -149,7 +149,7 @@ const fetchEventsFromKeys = async (eventKeys, getAllResults) => {
     const leaderboardStages = [];
     for (let i = 0; i <= key.lastStageId; i++) {
       if (getAllResults || i === 0 || i === key.lastStageId) {
-        let racenetLeaderboard = await fetchEventResults({
+        const racenetLeaderboard = await fetchEventResults({
           ...key,
           stageId: i
         });
@@ -215,7 +215,7 @@ const appendEvents = ({ division, mergedEvents }) => {
 
 const fetchDirt2Events = async (division, divisionName, getAllResults) => {
   const mergedEvents = [];
-  for (let club of division.clubs) {
+  for (const club of division.clubs) {
     debug(`fetching event for club ${club.clubId}`);
     if (!isNil(club.appendToEventIndex)) {
       throw new Error(

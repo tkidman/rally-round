@@ -8,7 +8,7 @@ const cheerio = require("cheerio");
 const loadFromCache = cacheFileName => {
   try {
     return fs.readFileSync(cacheFileName, "utf8");
-  } catch (err) {
+  } catch (_err) {
     debug("cache file not found, loading from API");
   }
   return null;

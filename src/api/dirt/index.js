@@ -57,7 +57,7 @@ const login = async resolve => {
         return;
       }
       debug("cached credentials are invalid, regenerating");
-    } catch (err) {
+    } catch (_err) {
       debug("cached credentials are invalid, regenerating");
     }
   }
@@ -210,7 +210,7 @@ const fetchRecentResults = async clubId => {
 const loadFromCache = cacheFileName => {
   try {
     return fs.readFileSync(cacheFileName, "utf8");
-  } catch (err) {
+  } catch (_err) {
     debug("cache file not found, loading from API");
   }
   return null;
@@ -232,7 +232,7 @@ const fetchEventResults = async ({
     return JSON.parse(cacheFile);
   }
 
-  let previousEntries = [];
+  const previousEntries = [];
   let allResponses;
   let page = 1;
   let pageCount = null;

@@ -36,7 +36,7 @@ const writeOutput = async () => {
 
   writeAllHTML();
 
-  for (let divisionName of Object.keys(league.divisions)) {
+  for (const divisionName of Object.keys(league.divisions)) {
     const division = league.divisions[divisionName];
     await writeOutputForDivision(division);
   }
