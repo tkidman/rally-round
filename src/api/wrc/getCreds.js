@@ -54,6 +54,19 @@ const navigateToLogin = async page => {
     const url =
       "https://accounts.ea.com/connect/auth?client_id=RACENET_1_JS_WEB_APP&response_type=code&redirect_uri=https://racenet.com/oauthCallback";
     await page.goto(url);
+    
+    // Check for SSL certificate warning and click proceed if present
+    try {
+      const proceedLink = await page.$("#proceed-link");
+      if (proceedLink) {
+        debug("SSL certificate warning detected, clicking proceed link");
+        await proceedLink.click();
+        await delay(2000);
+      }
+    } catch (_e) {
+      // No SSL warning, continue normally
+    }
+    
     return page.evaluate(() => document.title);
   } catch (err) {
     debug(err.message);
