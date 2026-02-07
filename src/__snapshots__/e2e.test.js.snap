@@ -26,6 +26,8 @@ exports[`e2e generates driver leg results 1`] = `
                 <img src="./assets/rsc-guy.png">
             </a>
             <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small w3-hide-medium">
+                <span class="w3-bar-item">---historical---</span>
+                    <a href="/e2e-1" class="w3-bar-item w3-button ">E2E Season 1</a>
             </div>
         </div>
 
@@ -74,6 +76,8 @@ exports[`e2e generates driver leg results 1`] = `
 	</div>
 
 	<div id="seriesMobileNav" class="w3-bar-block w3-black w3-hide w3-hide-large" style="overflow-y:scroll;max-height:95vh;">
+            <span class="w3-bar-item">---historical---</span>
+                <a href="/e2e-1" class="w3-bar-item w3-button ">E2E Season 1</a>
 	</div>
 
 	<div class="w3-bar w3-light-grey secondaryNav">
@@ -823,6 +827,8 @@ exports[`e2e generates driver results 1`] = `
                 <img src="./assets/rsc-guy.png">
             </a>
             <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small w3-hide-medium">
+                <span class="w3-bar-item">---historical---</span>
+                    <a href="/e2e-1" class="w3-bar-item w3-button ">E2E Season 1</a>
             </div>
         </div>
 
@@ -871,6 +877,8 @@ exports[`e2e generates driver results 1`] = `
 	</div>
 
 	<div id="seriesMobileNav" class="w3-bar-block w3-black w3-hide w3-hide-large" style="overflow-y:scroll;max-height:95vh;">
+            <span class="w3-bar-item">---historical---</span>
+                <a href="/e2e-1" class="w3-bar-item w3-button ">E2E Season 1</a>
 	</div>
 
 	<div class="w3-bar w3-light-grey secondaryNav">
@@ -1845,6 +1853,8 @@ exports[`e2e generates driver standings 1`] = `
                 <img src="./assets/rsc-guy.png">
             </a>
             <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small w3-hide-medium">
+                <span class="w3-bar-item">---historical---</span>
+                    <a href="/e2e-1" class="w3-bar-item w3-button ">E2E Season 1</a>
             </div>
         </div>
 
@@ -1893,6 +1903,8 @@ exports[`e2e generates driver standings 1`] = `
 	</div>
 
 	<div id="seriesMobileNav" class="w3-bar-block w3-black w3-hide w3-hide-large" style="overflow-y:scroll;max-height:95vh;">
+            <span class="w3-bar-item">---historical---</span>
+                <a href="/e2e-1" class="w3-bar-item w3-button ">E2E Season 1</a>
 	</div>
 
 	<div class="w3-bar w3-light-grey secondaryNav">
@@ -2765,6 +2777,8 @@ exports[`e2e generates overall driver results 1`] = `
                 <img src="./assets/rsc-guy.png">
             </a>
             <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small w3-hide-medium">
+                <span class="w3-bar-item">---historical---</span>
+                    <a href="/e2e-1" class="w3-bar-item w3-button ">E2E Season 1</a>
             </div>
         </div>
 
@@ -2813,6 +2827,8 @@ exports[`e2e generates overall driver results 1`] = `
 	</div>
 
 	<div id="seriesMobileNav" class="w3-bar-block w3-black w3-hide w3-hide-large" style="overflow-y:scroll;max-height:95vh;">
+            <span class="w3-bar-item">---historical---</span>
+                <a href="/e2e-1" class="w3-bar-item w3-button ">E2E Season 1</a>
 	</div>
 
 	<div class="w3-bar w3-light-grey secondaryNav">
@@ -3796,6 +3812,8 @@ exports[`e2e generates overall driver standings 1`] = `
                 <img src="./assets/rsc-guy.png">
             </a>
             <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small w3-hide-medium">
+                <span class="w3-bar-item">---historical---</span>
+                    <a href="/e2e-1" class="w3-bar-item w3-button ">E2E Season 1</a>
             </div>
         </div>
 
@@ -3844,6 +3862,8 @@ exports[`e2e generates overall driver standings 1`] = `
 	</div>
 
 	<div id="seriesMobileNav" class="w3-bar-block w3-black w3-hide w3-hide-large" style="overflow-y:scroll;max-height:95vh;">
+            <span class="w3-bar-item">---historical---</span>
+                <a href="/e2e-1" class="w3-bar-item w3-button ">E2E Season 1</a>
 	</div>
 
 	<div class="w3-bar w3-light-grey secondaryNav">
@@ -4796,6 +4816,8 @@ exports[`e2e generates overall team standings 1`] = `
                 <img src="./assets/rsc-guy.png">
             </a>
             <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small w3-hide-medium">
+                <span class="w3-bar-item">---historical---</span>
+                    <a href="/e2e-1" class="w3-bar-item w3-button ">E2E Season 1</a>
             </div>
         </div>
 
@@ -4844,6 +4866,8 @@ exports[`e2e generates overall team standings 1`] = `
 	</div>
 
 	<div id="seriesMobileNav" class="w3-bar-block w3-black w3-hide w3-hide-large" style="overflow-y:scroll;max-height:95vh;">
+            <span class="w3-bar-item">---historical---</span>
+                <a href="/e2e-1" class="w3-bar-item w3-button ">E2E Season 1</a>
 	</div>
 
 	<div class="w3-bar w3-light-grey secondaryNav">
@@ -5168,6 +5192,8 @@ exports[`e2e generates team standings 1`] = `
                 <img src="./assets/rsc-guy.png">
             </a>
             <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small w3-hide-medium">
+                <span class="w3-bar-item">---historical---</span>
+                    <a href="/e2e-1" class="w3-bar-item w3-button ">E2E Season 1</a>
             </div>
         </div>
 
@@ -5216,6 +5242,8 @@ exports[`e2e generates team standings 1`] = `
 	</div>
 
 	<div id="seriesMobileNav" class="w3-bar-block w3-black w3-hide w3-hide-large" style="overflow-y:scroll;max-height:95vh;">
+            <span class="w3-bar-item">---historical---</span>
+                <a href="/e2e-1" class="w3-bar-item w3-button ">E2E Season 1</a>
 	</div>
 
 	<div class="w3-bar w3-light-grey secondaryNav">

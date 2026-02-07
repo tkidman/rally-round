@@ -23,6 +23,10 @@ Where `<club>` is a folder name in `./src/state` eg: `brl`, `jrc-themed`, `jrc`,
 Output will be written to `./hidden/out`
 Cache files will be written to `./hidden/cache`
 
+## Starting a New Championship
+
+See [STARTING_NEW_CHAMPIONSHIP.md](STARTING_NEW_CHAMPIONSHIP.md) for a complete guide on starting a new championship season.
+
 ## Cache
 
 The tool keeps a file based cache of the API responses to speed things up on subsequent executions.  If you want to get fresh data, delete the 

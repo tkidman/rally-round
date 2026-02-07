@@ -6,7 +6,7 @@ const points = {
 const initialState = {
   pointsForDNF: false,
   websiteName: "oor-results",
-  // subfolderName: "subfolder",
+  subfolderName: "oor-4",
   useStandingsForHome: true,
   showLivePoints: true,
   showLivePointsDaysRemaining: 10,
@@ -38,7 +38,7 @@ const initialState = {
         {
           clubId: "1354",
           championshipIds: ["86pxu6Hu1N7hdnAa"],
-          includeNextChampionships: true
+          includeNextChampionships: false
         }
       ],
       manualResults: [],
@@ -53,6 +53,10 @@ const initialState = {
     }
   },
   historicalSeasonLinks: [
+    {
+      name: "OOR Mars",
+      href: "/oor-4/mars"
+    },
     {
       name: "OOR Autumn",
       href: "/oor-3"

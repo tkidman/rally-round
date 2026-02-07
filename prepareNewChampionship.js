@@ -4,65 +4,98 @@ require("dotenv").config();
 
 const {
   listAllObjects,
-  copyObject,
-  uploadRedirectHTML
+  copyObject
 } = require("./src/api/aws/s3");
+const AWS = require("aws-sdk");
 const debug = require("debug")("tkidman:rally-round:prepare-championship");
+
+const IAM_USER_KEY = process.env.DIRT_AWS_ACCESS_KEY
+  ? process.env.DIRT_AWS_ACCESS_KEY.trim()
+  : undefined;
+const IAM_USER_SECRET = process.env.DIRT_AWS_SECRET_ACCESS_KEY
+  ? process.env.DIRT_AWS_SECRET_ACCESS_KEY.trim()
+  : undefined;
+const AWS_REGION =
+  process.env.AWS_REGION || process.env.AWS_DEFAULT_REGION || "ap-southeast-2";
+
+const s3 = new AWS.S3({
+  accessKeyId: IAM_USER_KEY,
+  secretAccessKey: IAM_USER_SECRET,
+  region: AWS_REGION
+});
 
 const clubName = process.argv[2];
 
 if (!clubName) {
-  console.error("Error: club name required");
   console.log(`
-Usage: node prepareNewChampionship.js <clubName>
+Prepare New Championship
+========================
 
-Examples:
-  node prepareNewChampionship.js oor
-  node prepareNewChampionship.js jrc-themed
+This script helps you archive your current championship before starting a new one.
 
-This script:
-1. Reads historicalSeasonLinks from your config
-2. Creates a new championship folder (historicalSeasonLinks[0])
-3. Copies assets/ and error.html from previous championship (historicalSeasonLinks[1])
-4. Sets up redirect HTML at root
+Usage: npm run prepare-championship <clubName>
 
-After running this, upload your championship results to the new folder.
+Example: npm run prepare-championship oor
+
+What it does:
+1. Reads historicalSeasonLinks[0] from your config (the archive folder name)
+2. Copies HTML files and assets folder from league root/subfolder to the archive folder
+3. Deletes .html files (except error.html) and cache directory from league root/subfolder
+
+After running this:
+- Your current championship is archived and accessible at its historical link
+- The league root/subfolder is cleaned and ready for new championship files
+- Run 'node runner.js' to generate the new championship
+
+Prerequisites:
+- DIRT_AWS_ACCESS_KEY and DIRT_AWS_SECRET_ACCESS_KEY must be set
+- historicalSeasonLinks[0] should point to where you want to archive (e.g., "/oor-3")
 `);
   process.exit(1);
 }
 
-if (
-  !process.env.DIRT_AWS_ACCESS_KEY ||
-  !process.env.DIRT_AWS_SECRET_ACCESS_KEY
-) {
-  console.error("Error: AWS credentials not found.");
-  console.error(
-    "Please set DIRT_AWS_ACCESS_KEY and DIRT_AWS_SECRET_ACCESS_KEY environment variables."
-  );
-  process.exit(1);
-}
+const deleteObject = async (bucket, key) => {
+  const params = {
+    Bucket: bucket,
+    Key: key
+  };
 
-const run = async () => {
+  return new Promise((resolve, reject) => {
+    s3.deleteObject(params, (err, data) => {
+      if (err) {
+        return reject(err);
+      }
+      return resolve(data);
+    });
+  });
+};
+
+const main = async () => {
   try {
-    // Load the club's initial state
+    debug(`Loading config for ${clubName}`);
+
+    // Load the club's initialState
     const initialState = require(`./src/state/${clubName}/initialState.js`);
 
-    // Get bucket name from websiteName
-    const bucket = initialState.websiteName;
-    if (!bucket) {
+    // Validate environment
+    if (!IAM_USER_KEY || !IAM_USER_SECRET) {
+      console.error(`Error: AWS credentials not found`);
       console.error(
-        `Error: No websiteName found in ${clubName}/initialState.js`
+        `Set DIRT_AWS_ACCESS_KEY and DIRT_AWS_SECRET_ACCESS_KEY environment variables`
       );
+      process.exit(1);
+    }
+
+    if (!initialState.websiteName) {
+      console.error(`Error: websiteName not found in ${clubName}/initialState.js`);
       process.exit(1);
     }
 
     if (
       !initialState.historicalSeasonLinks ||
-      initialState.historicalSeasonLinks.length < 2
+      initialState.historicalSeasonLinks.length < 1
     ) {
-      console.error(
-        `Error: Need at least 2 entries in historicalSeasonLinks (current and previous)`
-      );
+      console.error(`Error: Need at least 1 entry in historicalSeasonLinks to archive to`);
       console.error(
         `Found: ${
           initialState.historicalSeasonLinks
@@ -73,131 +106,226 @@ const run = async () => {
       process.exit(1);
     }
 
-    const currentChampionship = initialState.historicalSeasonLinks[0];
-    const previousChampionship = initialState.historicalSeasonLinks[1];
+    const archiveTarget = initialState.historicalSeasonLinks[0];
 
-    if (!currentChampionship.href || !previousChampionship.href) {
-      console.error(`Error: Both championship entries must have href`);
+    if (!archiveTarget.href) {
+      console.error(`Error: historicalSeasonLinks[0] must have href`);
       process.exit(1);
     }
 
-    // Remove leading slash from hrefs
-    const newFolder = currentChampionship.href.replace(/^\//, "");
-    const oldFolder = previousChampionship.href.replace(/^\//, "");
-
-    const pathPrefix = initialState.subfolderName || "";
-
-    console.log(`Club: ${clubName}`);
-    console.log(`Bucket: ${bucket}`);
-    if (pathPrefix) {
-      console.log(`Subfolder: ${pathPrefix}/`);
+    const bucket = initialState.websiteName;
+    
+    // Determine source and archive locations from href
+    const archiveFolder = archiveTarget.href.startsWith("/")
+      ? archiveTarget.href.slice(1)
+      : archiveTarget.href;
+    
+    // If archive path has a parent folder (e.g., "oor-4/mars"), 
+    // use the parent as source, otherwise use subfolderName or root
+    let sourcePrefix = "";
+    if (archiveFolder.includes('/')) {
+      // Extract parent folder from archive path
+      const pathParts = archiveFolder.split('/');
+      sourcePrefix = pathParts.slice(0, -1).join('/') + '/';
+    } else if (initialState.subfolderName) {
+      // Use subfolderName if set and no parent in archive path
+      sourcePrefix = `${initialState.subfolderName}/`;
     }
-    console.log(
-      `New championship: ${currentChampionship.name} (${newFolder}/)`
-    );
-    console.log(
-      `Previous championship: ${previousChampionship.name} (${oldFolder}/)`
-    );
-    console.log("");
+    // Otherwise sourcePrefix stays empty (root)
+    
+    const archivePrefix = `${archiveFolder}/`;
 
-    // Check if new folder already exists
-    console.log(`🔍 Checking if ${newFolder}/ already exists...`);
-    const existingObjects = await listAllObjects(bucket, `${newFolder}/`);
+    console.log(`\n📦 Prepare New Championship for ${clubName}`);
+    console.log(`=====================================\n`);
+    console.log(`Bucket:           ${bucket}`);
+    console.log(`Source location:  ${sourcePrefix || "(root)"}`);
+    console.log(`Archive to:       ${archiveFolder}`);
+    console.log(`Archive name:     ${archiveTarget.name}\n`);
+
+    // Step 1: Check if archive folder already exists
+    console.log(`\n1️⃣  Checking if archive folder exists...`);
+    const existingObjects = await listAllObjects(bucket, archivePrefix);
     if (existingObjects.length > 0) {
       console.error(
-        `\n❌ Error: Championship folder ${newFolder}/ already exists in S3!`
+        `\n❌ Error: Archive folder '${archiveFolder}' already exists with ${existingObjects.length} files`
       );
+      console.error(`\nOptions:`);
+      console.error(`1. Delete the existing folder from S3`);
       console.error(
-        `   Found ${existingObjects.length} existing files in this folder.`
-      );
-      console.error(
-        `\nTo avoid overwriting existing data, this script will exit.`
-      );
-      console.error(`\nIf you want to replace this championship:`);
-      console.error(
-        `1. Delete the existing folder first (manually or via AWS CLI)`
-      );
-      console.error(
-        `2. Or use a different championship name in historicalSeasonLinks`
+        `2. Or use a different folder name in historicalSeasonLinks[0]`
       );
       process.exit(1);
     }
-    console.log(`   ✓ Folder does not exist, safe to proceed\n`);
+    console.log(`   ✓ Archive folder does not exist, safe to proceed`);
 
-    // Step 1: Copy assets folder from old to new
-    console.log(`1️⃣  Copying assets/ from ${oldFolder}/ to ${newFolder}/...`);
-    const assetsObjects = await listAllObjects(bucket, `${oldFolder}/assets/`);
+    // Step 2: Get files to archive (HTML files at root level and assets folder only)
+    console.log(`\n2️⃣  Getting files to archive...`);
+    const allObjects = await listAllObjects(bucket, sourcePrefix);
+    
+    // Filter to only HTML files at root level and assets folder
+    const sourceObjects = allObjects.filter(obj => {
+      const relativeKey = sourcePrefix
+        ? obj.Key.slice(sourcePrefix.length)
+        : obj.Key;
+      
+      // Include HTML files ONLY at root level (no slashes in path)
+      if (relativeKey.endsWith('.html') && !relativeKey.includes('/')) {
+        return true;
+      }
+      
+      // Include everything in assets/ folder
+      if (relativeKey.startsWith('assets/')) {
+        return true;
+      }
+      
+      return false;
+    });
 
-    if (assetsObjects.length === 0) {
-      console.log(
-        `   ⚠️  No assets found in ${oldFolder}/assets/ - skipping assets copy`
+    if (sourceObjects.length === 0) {
+      console.error(
+        `\n❌ Error: No HTML files or assets found at source location '${sourcePrefix || "(root)"}'`
       );
-    } else {
-      const assetsCopyPromises = assetsObjects.map(obj => {
-        const sourceKey = obj.Key;
-        const relativePath = sourceKey.replace(`${oldFolder}/`, "");
-        const destinationKey = `${newFolder}/${relativePath}`;
-        return copyObject(bucket, sourceKey, destinationKey);
-      });
-
-      await Promise.all(assetsCopyPromises);
-      console.log(`   ✓ Copied ${assetsObjects.length} asset files`);
+      console.error(`Make sure you have a current championship to archive`);
+      process.exit(1);
     }
 
-    // Step 2: Copy error.html if it exists
-    console.log(
-      `\n2️⃣  Copying error.html from ${oldFolder}/ to ${newFolder}/...`
-    );
-    try {
-      await copyObject(
-        bucket,
-        `${oldFolder}/error.html`,
-        `${newFolder}/error.html`
+    const htmlCount = sourceObjects.filter(obj => {
+      const relativeKey = sourcePrefix ? obj.Key.slice(sourcePrefix.length) : obj.Key;
+      return relativeKey.endsWith('.html') && !relativeKey.includes('/');
+    }).length;
+    const assetsCount = sourceObjects.filter(obj => {
+      const relativeKey = sourcePrefix ? obj.Key.slice(sourcePrefix.length) : obj.Key;
+      return relativeKey.startsWith('assets/');
+    }).length;
+    
+    console.log(`   ✓ Found ${htmlCount} HTML files at root level and ${assetsCount} asset files to archive`);
+
+    // Step 3: Copy all files to archive folder (in parallel batches)
+    console.log(`\n3️⃣  Copying files to archive folder...`);
+    const BATCH_SIZE = 20; // Copy 20 files at a time
+    let copyCount = 0;
+    
+    for (let i = 0; i < sourceObjects.length; i += BATCH_SIZE) {
+      const batch = sourceObjects.slice(i, i + BATCH_SIZE);
+      
+      await Promise.all(
+        batch.map(async obj => {
+          const sourceKey = obj.Key;
+          const relativeKey = sourcePrefix
+            ? sourceKey.slice(sourcePrefix.length)
+            : sourceKey;
+          const destinationKey = `${archivePrefix}${relativeKey}`;
+          
+          await copyObject(bucket, sourceKey, destinationKey);
+          copyCount++;
+        })
       );
-      console.log(`   ✓ Copied error.html`);
-    } catch (error) {
-      if (error.code === "NoSuchKey") {
-        console.log(`   ⚠️  No error.html found in ${oldFolder}/ - skipping`);
+      
+      process.stdout.write(`   Copied ${copyCount}/${sourceObjects.length} files...\r`);
+    }
+    console.log(`   ✓ Copied ${copyCount} files to '${archiveFolder}'                    `);
+
+    // Step 4: Show files to be deleted and get confirmation
+    console.log(`\n4️⃣  Preparing to delete files from source location...`);
+    const allSourceObjects = await listAllObjects(bucket, sourcePrefix);
+    
+    // Get HTML files to delete (except error.html, only at root level)
+    const htmlFiles = allSourceObjects.filter(obj => {
+      if (!obj.Key.endsWith(".html")) return false;
+      
+      const relativeKey = sourcePrefix
+        ? obj.Key.slice(sourcePrefix.length)
+        : obj.Key;
+      
+      if (relativeKey.includes('/')) return false;
+      if (relativeKey === "error.html") return false;
+      
+      return true;
+    });
+    
+    // Get cache files to delete
+    const cachePrefix = `${sourcePrefix}cache/`;
+    const cacheObjects = allSourceObjects.filter(obj => obj.Key.startsWith(cachePrefix));
+    
+    console.log(`\n   Files to be DELETED:`);
+    console.log(`   ${"=".repeat(50)}`);
+    
+    if (htmlFiles.length > 0) {
+      console.log(`\n   HTML files (${htmlFiles.length}):`);
+      htmlFiles.forEach(obj => {
+        console.log(`   - ${obj.Key}`);
+      });
+    }
+    
+    if (cacheObjects.length > 0) {
+      console.log(`\n   Cache files (${cacheObjects.length}):`);
+      if (cacheObjects.length <= 10) {
+        cacheObjects.forEach(obj => {
+          console.log(`   - ${obj.Key}`);
+        });
       } else {
-        throw error;
+        console.log(`   - ${cachePrefix}* (${cacheObjects.length} files)`);
       }
     }
+    
+    if (htmlFiles.length === 0 && cacheObjects.length === 0) {
+      console.log(`   (No files to delete)`);
+    }
+    
+    console.log(`\n   ${"=".repeat(50)}`);
+    console.log(`\n   ⚠️  These files will be PERMANENTLY DELETED from ${sourcePrefix || "(root)"}`);
+    
+    // Get user confirmation
+    const readline = require('readline');
+    const rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout
+    });
+    
+    const confirmed = await new Promise(resolve => {
+      rl.question('\n   Type "yes" to confirm deletion: ', answer => {
+        rl.close();
+        resolve(answer.toLowerCase().trim() === 'yes');
+      });
+    });
+    
+    if (!confirmed) {
+      console.log(`\n❌ Deletion cancelled. Files have been copied to archive but source files remain.`);
+      process.exit(0);
+    }
 
-    // Step 3: Set up redirect
-    const redirectPath = pathPrefix ? `${pathPrefix}/` : "";
-    console.log(
-      `\n3️⃣  Setting up redirect HTML at ${redirectPath || "root"}...`
-    );
-    await uploadRedirectHTML(
-      bucket,
-      newFolder,
-      currentChampionship.name,
-      pathPrefix
-    );
-    console.log(`   ✓ Redirect HTML uploaded`);
+    // Step 5: Delete .html files from source location (except error.html)
+    console.log(`\n5️⃣  Deleting .html files from source location...`);
+    let deleteCount = 0;
+    for (const obj of htmlFiles) {
+      await deleteObject(bucket, obj.Key);
+      deleteCount++;
+    }
+    console.log(`   ✓ Deleted ${deleteCount} .html files from root level (kept error.html)`);
 
-    console.log(`\n✨ Championship prepared successfully!`);
-    console.log(`\nNext steps:`);
-    console.log(
-      `1. Run your normal build process to generate championship results`
-    );
-    console.log(`2. Upload results with: npm run archive upload ${newFolder}`);
-    console.log(
-      `\nYour website will redirect: ${bucket}/${redirectPath} → ${bucket}/${newFolder}/`
-    );
-    console.log(
-      `Previous championship still accessible at: ${bucket}/${oldFolder}/`
-    );
+    // Step 6: Delete cache directory from source location
+    console.log(`\n6️⃣  Deleting cache directory from source location...`);
+    let cacheDeleteCount = 0;
+    for (const obj of cacheObjects) {
+      await deleteObject(bucket, obj.Key);
+      cacheDeleteCount++;
+    }
+    console.log(`   ✓ Deleted ${cacheDeleteCount} cache files`);
+
+    console.log(`\n✅ Championship archived successfully!\n`);
+    console.log(`Archive location: ${archivePrefix}`);
+    console.log(`Archive URL:      https://${bucket}.s3-website-${AWS_REGION}.amazonaws.com/${archiveFolder}/\n`);
+    console.log(`Next steps:`);
+    console.log(`1. Update your championship configuration (IDs, events, etc.)`);
+    console.log(`2. Run: node runner.js <credentials> ${clubName}`);
+    console.log(`3. Your new championship will be generated at the root/subfolder\n`);
   } catch (error) {
-    if (error.code === "MODULE_NOT_FOUND") {
-      console.error(`Error: Could not find club '${clubName}'`);
-      console.error(`Make sure ./src/state/${clubName}/initialState.js exists`);
-    } else {
-      console.error("Error:", error.message);
-      debug(error);
+    console.error(`\n❌ Error:`, error.message);
+    if (debug.enabled) {
+      console.error(error);
     }
     process.exit(1);
   }
 };
 
-run();
+main();

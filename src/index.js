@@ -1221,15 +1221,8 @@ const calculateOverallResults = () => {
 
 const loadCache = async () => {
   if (process.env.DIRT_AWS_ACCESS_KEY && leagueRef.league.websiteName) {
-    // Extract championship folder from historicalSeasonLinks[0].href
-    let championshipFolder = null;
-    if (
-      leagueRef.league.historicalSeasonLinks &&
-      leagueRef.league.historicalSeasonLinks.length > 0
-    ) {
-      const href = leagueRef.league.historicalSeasonLinks[0].href;
-      championshipFolder = href.startsWith("/") ? href.slice(1) : href;
-    }
+    // Use subfolderName if specified (for multi-club buckets), otherwise download from root
+    const championshipFolder = leagueRef.league.subfolderName || null;
 
     const cacheFiles = await downloadCache(
       leagueRef.league.websiteName,
