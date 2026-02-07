@@ -1,6 +1,6 @@
 const initialState = {
   pointsForDNF: false,
-  useStandingsForHome: true,
+  useStandingsForHome: false,
   showLivePoints: true,
   showLivePointsDaysRemaining: 9,
   noSuperRallyPointsMultiplier: 2,

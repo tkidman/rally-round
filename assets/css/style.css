@@ -32,6 +32,7 @@ h6 {
 
 h2 {
   font-size: 2rem;
+  color: black;
 }
 
 p {
@@ -57,7 +58,6 @@ button,
 input,
 select,
 textarea {
-  font-family: inherit;
   font: inherit;
 }
 
@@ -69,16 +69,32 @@ img {
    BASE / GLOBAL
    ========================= */
 
-.font-weight-bold {
-  font-weight: bold;
+/* Utility classes */
+.mb-1 {
+  margin-bottom: 1em;
 }
 
-.font-weight-medium {
-  font-weight: 500;
+.ml-1 {
+  margin-left: 1em;
 }
 
-.font-weight-normal {
-  font-weight: normal;
+.text-center {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.img-sm {
+  max-width: 1.5em;
+  max-height: 1.5em;
+}
+
+.img-md {
+  max-width: 2em;
+  max-height: 2em;
+}
+
+.d-flex {
+  display: flex;
 }
 
 /* Lists */
@@ -173,37 +189,55 @@ template {
   flex-wrap: wrap;
 }
 
-#particles-js {
-  /*display: none;*/
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: var(--z-background);
+/* Home */
+.home-layout {
+  display: flex;
+  gap: 5em;
   width: 100%;
-  height: 150%;
-  /*background-color: #e6f4ff;*/
-  background-image: url("");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: 50% 50%;
 }
 
-canvas {
-  display: block;
-  vertical-align: bottom;
+.home-main {
+  flex: 1 1 0;
+  min-width: 0;
 }
 
-#myVideo {
-  z-index: var(--z-background);
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  min-width: 130%;
-  min-height: 130%;
+
+.home-aside {
+  flex: 0 0 auto;
+  margin-top: 39px;
+  width: 12em;
+  padding: 1em;
+  border: 1px solid var(--gray-border);
+  border-radius: var(--radius-md);
+  background-color: var(--gray-light);
 }
 
-h2 {
-  color: black;
+.home-aside__title {
+  margin: 0 0 0.5em;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.home-aside__list {
+  margin: 0;
+  padding-left: 1.25em;
+}
+
+@media (max-width: 768px) {
+  .home-layout {
+    flex-direction: column;
+  }
+
+  .home-aside {
+    order: 10;
+    width: 100%;
+    margin-top: 0.5em;
+    padding-top: 1em;
+    border-top: 1px solid var(--gray-border);
+    border-left: none;
+    border-right: none;
+    border-radius: 0;
+  }
 }
 
 .text-left {
@@ -215,11 +249,11 @@ h2 {
 }
 
 .bold>small {
-  font-weight: initial;
+  font-weight: normal;
 }
 
 .logo {
-  display: inline-block;
+  display: flex;
 }
 
 .logo img {
@@ -228,21 +262,60 @@ h2 {
   border: 1px solid var(--gray-border);
 }
 
-.left {
-  float: left;
+/* Cards */
+.card {
+  border: 1px solid var(--gray-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
 }
 
-.right {
-  float: right;
+.card-header {
+  background-color: var(--primary);
+  color: var(--white);
+  padding: 0.75em 1em;
+}
+
+.card-header h4 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.card-body {
+  background-color: var(--gray-light);
+  padding: 1em;
+  height: 100%;
+}
+
+/* Top 3 drivers by division (home): division title + table, side by side (up to 3) */
+.top-drivers-by-division {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.top-drivers-division-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2em;
+}
+
+.top-drivers-division-grid > * {
+  flex: 1 1 calc((100% - 2em) / 3);
+}
+
+.top-drivers-division__title {
+  margin: 0 0 0.25em;
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.top-drivers-division .top-drivers-table {
+  margin: 0;
 }
 
 /* =========================
    TABLES
    ========================= */
-
-table {
-  border-collapse: collapse;
-}
 
 th {
   cursor: pointer;
@@ -282,23 +355,18 @@ td {
 .th-stage-points,
 .td-stage-points,
 .th-ps-points,
-.td-ps-points {
+.td-ps-points,
+.th-sr,
+.td-sr,
+.th-adr,
+.td-adr,
+.td-result {
   text-align: center;
 }
 
 .th-total-points,
 .td-total-points {
   font-weight: bold;
-}
-
-.th-sr,
-.td-sr {
-  text-align: center;
-}
-
-.th-adr,
-.td-adr {
-  text-align: center;
 }
 
 .th-location {
@@ -314,15 +382,7 @@ td {
   opacity: 0.8;
 }
 
-.td-result {
-  text-align: center;
-}
-
-th>img {
-  max-height: 1.5em;
-  margin: auto;
-}
-
+th>img,
 th>a>img {
   max-height: 1.5em;
   margin: auto;
@@ -846,7 +906,6 @@ tbody>tr:nth-child(odd) {
 /* Mobile drawers */
 .drawer {
   position: absolute;
-  top: 51%;
   left: 0;
   right: 0;
   background: var(--bg);
@@ -1256,7 +1315,6 @@ tbody>tr:nth-child(odd) {
   box-shadow: 0 10px 30px var(--black-35);
   z-index: 1;
   display: none;
-
   scrollbar-width: thin;
   scrollbar-color: var(--white-3) rgba(255, 255, 255, 0.05);
 }

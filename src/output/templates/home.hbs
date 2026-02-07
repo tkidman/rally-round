@@ -1,76 +1,148 @@
 <div class="container">
-    <div class="flexContainer">
-        <div class="flexBox" style="margin:5px;width: 60%; min-width: 700px;">
-            <div class="w3-card-4">
-
-                <header class="w3-container w3-blue">
-                    <h1>Welcome to JRC Season 11</h1>
-                </header>
-
-                <div class="w3-container w3-light-grey">
-                    <p>The season is underway - 7 rounds of rally action to determine the winning drivers and teams!</p>
-
-                </div>
-            </div>
-
-            <!--
-            <div class="w3-card-4">
-
-                <header class="w3-container w3-blue">
-                    <h1>Season 11 Calendar</h1>
-                </header>
-
-                <div class="w3-container w3-light-grey" style="font-weight: bold;">
-                    <img style="max-width:100%; margin:auto; display:block;" src="./assets/S10_calendar.png" />
-                </div>
-            </div>
-            -->
-
-            <div class="w3-card-4">
-
-                <header class="w3-container w3-blue">
-                    <h1>Other JRC events</h1>
-                </header>
-
-                <div class="w3-container w3-light-grey">
-                    <p><strong>Richard Burns Rally Season 1</strong></p>
-                    <p>Season 1 of JRC's new RBR championship is underway.</p>
-                    <p>See the RBR section of our discord for more info, and check the results in the links section</p>
-                </div>
-
-                <div class="w3-container w3-light-grey">
-                    <p><strong>Themed</strong></p>
-                    <p>The Peugeot Rally Challenge is underway and open to all.</p>
-                    <p>See the side series section of our discord for more info, and check the results in the links section</p>
-                </div>
-            </div>
-
+  <div class="flexContainer">
+    <div class="flexBox">
+      <div class="mb-1">
+        <div class="logo d-flex">
+          <img src="./assets/{{logo}}" />
+          <h2 class="ml-1">{{siteTitlePrefix}} Home</h2>
         </div>
-        <div class="flexBox" style="margin:5px;">
-            <h2>Rulebooks</h2>
-            <h3>Season 11</h3>
-            <ul>
-                <li><a
-                        href="https://cdn.discordapp.com/attachments/679708933434114093/939236744186966026/JRC_Season_11_Rulebook.pdf">Rulebook</a>
-                </li>
-            </ul>
-            <h2>Results links</h2>
-            <ul>
-                <li>
-                    <a href="./rbr/index.html">RBR Season 1</a>
-                </li>
-                <li>
-                    <a href="./themed/index.html">Themed</a>
-                </li>
-            </ul>
-
-            <h2>Other links</h2>
-            <ul>
-                <li>
-                    <a href="https://junior-rally-championship.fandom.com/wiki/Junior_Rally_Championship_Wiki">The Wiki</a>
-                </li>
-            </ul>
+      </div>
+      <div class="home-layout">
+        <main class="home-main">
+      {{#if activeEvents.length}}
+      <div class="mb-1">
+        <h3>Active Events</h3>
+        {{#each activeEvents}}
+        <div class="card mb-1">
+          <div class="card-header">
+            <h4>{{this.name}}</h4>
+          </div>
+          <div class="card-body">
+            <p><strong>{{this.division}}</strong> - {{this.location}}</p>
+            {{#if this.showingLivePoints}}
+            <p>Live points active</p>
+            {{/if}}
+          </div>
         </div>
+        {{/each}}
+      </div>
+      {{/if}}
 
+      {{#if rules}}
+      <div class="mb-1">
+        <h3>Championship Rules</h3>
+        <div class="card">
+          <div class="card-body">
+            {{#if rules.dropRounds}}
+            <p><strong>Drop Rounds:</strong> {{rules.dropRounds}} lowest scoring {{#if (eq rules.dropRounds 1)}}round{{else}}rounds{{/if}} dropped</p>
+            {{/if}}
+            {{#if rules.overallPointsTop5.length}}
+            <p><strong>Points (Top 5):</strong> {{#each rules.overallPointsTop5}}{{this}}{{#unless @last}}, {{/unless}}{{/each}}</p>
+            {{/if}}
+            {{#if rules.powerStagePoints.length}}
+            <p><strong>Power Stage Points:</strong> {{#each rules.powerStagePoints}}{{this}}{{#unless @last}}, {{/unless}}{{/each}}</p>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+      {{/if}}
+
+      {{#if divisionInfo.length}}
+      <div class="mb-1">
+        <h3>Division Car Regulations</h3>
+        {{#each divisionInfo}}
+        <div class="card mb-1">
+          <div class="card-header">
+            <h4>{{this.name}}</h4>
+          </div>
+          <div class="card-body">
+            {{#if this.cars}}
+            <p><strong>Allowed Cars:</strong></p>
+            <ul>
+              {{#each this.cars}}
+              <li>{{this}}</li>
+              {{/each}}
+            </ul>
+            {{/if}}
+            {{#if this.excludedCars}}
+            <p><strong>Banned Cars:</strong></p>
+            <ul>
+              {{#each this.excludedCars}}
+              <li>{{this}}</li>
+              {{/each}}
+            </ul>
+            {{/if}}
+          </div>
+        </div>
+        {{/each}}
+      </div>
+      {{/if}}
+
+        {{#if top3ByDivision.length}}
+        <div class="top-drivers-by-division mb-1">
+          <h3>Top 3 Drivers — by Division</h3>
+          <div class="top-drivers-division-grid">
+          {{#each top3ByDivision}}
+          <div class="top-drivers-division">
+            <h4 class="top-drivers-division__title">{{this.divisionName}}</h4>
+            <table class="top-drivers-table">
+              <thead>
+                <tr>
+                  <th class="th-pos">{{../localization.pos}}</th>
+                  <th class="th-change"></th>
+                  <th class="th-nat">{{../localization.nat}}</th>
+                  <th class="th-driver">{{../localization.driver}}</th>
+                  <th class="th-points">{{../localization.points}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {{#each this.top3}}
+                <tr{{#if this.colour}} style="background-color: {{this.colour}}"{{/if}}>
+                  <td class="td-pos">{{this.standing.currentPosition}}</td>
+                  <td class="td-change">
+                    {{#if this.positive}}
+                    <span class="positive">
+                      <i class="arrow up"></i>&nbsp;{{this.standing.positionChange}}
+                    </span>
+                    {{/if}}
+                    {{#if this.neutral}}
+                    <span class="neutral">=</span>
+                    {{/if}}
+                    {{#if this.negative}}
+                    <span class="negative">
+                      <i class="arrow down"></i>&nbsp;{{this.standing.positionChange}}
+                    </span>
+                    {{/if}}
+                  </td>
+                  <td class="td-nat">
+                    <img src="./assets/country-flags/{{this.country.code}}.png" class="img-sm"
+                      alt="{{this.country.code}}" title="{{this.country.code}}" />
+                  </td>
+                  <td class="td-driver text-left bold">{{this.driver.name}}</td>
+                  <td class="td-points bold">{{this.standing.totalPoints}}</td>
+                </tr>
+                {{/each}}
+              </tbody>
+            </table>
+          </div>
+          {{/each}}
+          </div>
+        </div>
+        {{/if}}
+        </main>
+        {{#if historicalSeasonLinks.length}}
+        <aside class="home-aside" aria-label="Previous seasons">
+          <h3 class="home-aside__title">Previous Seasons</h3>
+          <ul class="home-aside__list">
+            {{#each historicalSeasonLinks}}
+            {{#unless @first}}
+            <li><a href="{{this.href}}">{{this.name}}</a></li>
+            {{/unless}}
+            {{/each}}
+          </ul>
+        </aside>
+        {{/if}}
+      </div>
     </div>
+  </div>
 </div>

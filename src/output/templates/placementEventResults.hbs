@@ -1,10 +1,10 @@
 <div class="container">
     <div class="flexContainer">
         <div class="flexBox">
-            <div style="margin-bottom: 1em;" class="">
-                <div class="logo" style="display:flex;">
+            <div class="mb-1">
+                <div class="logo d-flex">
                     <img src="./assets/{{logo}}" />
-                    <h2 style="margin-left:1em;">{{title}} {{location.countryName}} >{{localization.driver_results}}</h2>
+                    <h2 class="ml-1">{{title}} {{location.countryName}} >{{localization.driver_results}}</h2>
                 </div>
             </div>
             <div class="column-filter">
@@ -40,7 +40,7 @@
                     <tr>
                         <td>{{this.position}}</td>
                         <td>
-                            <img src="./assets/country-flags/{{this.country.code}}.png" style="max-width:1.5em; max-height:1.5em;" />
+                            <img src="./assets/country-flags/{{this.country.code}}.png" class="img-sm" />
                         </td>
                         <td class="text-left bold">{{this.name}}</td>
 						<td>{{this.divisionDisplayName}}</td>
@@ -56,7 +56,7 @@
                 </tbody>
                 </table>
             </div>
-            <div style="margin:0 auto; text-align:center;">
+            <div class="text-center">
                 <p>{{localization.last_updated}}: {{lastUpdatedAt}}</p>
             </div>
         </div>

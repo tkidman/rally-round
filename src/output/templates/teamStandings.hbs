@@ -1,10 +1,10 @@
 <div class="container">
   <div class="flexContainer">
     <div class="flexBox">
-      <div style="margin-bottom: 1em;" class="hide-medium hide-small">
-        <div class="logo" style="display:flex;">
+      <div class="mb-1 hide-medium hide-small">
+        <div class="logo d-flex">
           <img src="./assets/{{logo}}" />
-          <h2 style="margin-left:1em;">{{title}} {{localization.team_standings}}</h2>
+          <h2 class="ml-1">{{title}} {{localization.team_standings}}</h2>
         </div>
       </div>
       <div class="column-filter">
@@ -63,7 +63,7 @@
               {{#if ../useNationalityAsTeam}}
               {{#unless ../hideTeamLogoColumn}}
               <td class="td-team-logo">
-                <img src="./assets/country-flags/{{country.code}}.png" style="max-width:2em; max-height:2em;"
+                <img src="./assets/country-flags/{{country.code}}.png" class="img-md"
                   alt="{{country.code}}" />
               </td>
               {{/unless}}
@@ -71,7 +71,7 @@
               {{else}}
               {{#unless ../hideTeamLogoColumn}}
               <td class="td-team-logo">
-                <img src="{{teamLogo}}" style="max-width:2em; max-height:2em;" alt="{{standing.name}}"
+                <img src="{{teamLogo}}" class="img-md" alt="{{standing.name}}"
                   title="{{standing.name}}" />
               </td>
               {{/unless}}
@@ -91,7 +91,7 @@
           </tbody>
         </table>
       </div>
-      <div style="margin:0 auto; text-align:center;">
+      <div class="text-center">
         <p>{{localization.last_updated}}: {{lastUpdatedAt}}</p>
       </div>
     </div>

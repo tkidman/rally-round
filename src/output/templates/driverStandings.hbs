@@ -1,10 +1,10 @@
 <div class="container">
   <div class="flexContainer">
     <div class="flexBox">
-      <div style="margin-bottom: 1em;" class="hide-medium hide-small">
-        <div class="logo" style="display:flex;">
+      <div class="mb-1 hide-medium hide-small">
+        <div class="logo d-flex">
           <img src="./assets/{{logo}}" />
-          <h2 style="margin-left:1em;">{{title}} {{localization.driver_standings}}</h2>
+          <h2 class="ml-1">{{title}} {{localization.driver_standings}}</h2>
         </div>
       </div>
       <div class="column-filter">
@@ -81,7 +81,7 @@
                 {{/if}}
               </td>
               <td class="td-nat">
-                <img src="./assets/country-flags/{{this.country.code}}.png" style="max-width:1.5em; max-height:1.5em;"
+                <img src="./assets/country-flags/{{this.country.code}}.png" class="img-sm"
                   alt="{{this.country.code}}" title="{{this.country.code}}" />
               </td>
               <td class="td-driver text-left bold">{{this.driver.name}}</td>
@@ -91,7 +91,7 @@
               {{#if ../showTeam}}
               {{#unless ../hideTeamLogoColumn}}
               <td class="td-team-logo">
-                <img src="{{this.teamLogo}}" style="max-width:2em; max-height:2em;" alt="{{this.driver.teamId}}"
+                <img src="{{this.teamLogo}}" class="img-md" alt="{{this.driver.teamId}}"
                   title="{{this.driver.teamId}}" />
               </td>
               {{/unless}}
@@ -101,7 +101,7 @@
               {{/if}}
               {{#if ../showTeam2LogoColumn}}
               <td class="td-team2">
-                <img src="{{this.team2Logo}}" style="max-width:2em; max-height:2em;" alt="{{this.driver.team2Id}}"
+                <img src="{{this.team2Logo}}" class="img-md" alt="{{this.driver.team2Id}}"
                   title="{{this.driver.team2Id}}" />
               </td>
               {{/if}}
@@ -112,7 +112,7 @@
               </td>
               {{else}}
               <td class="td-car">
-                <img src="./assets/cars/{{this.car}}.png" style="max-width:2em; max-height:2em;" alt="{{this.car}}"
+                <img src="./assets/cars/{{this.car}}.png" class="img-md" alt="{{this.car}}"
                   title="{{this.car}}" />
               </td>
               {{/if}}
@@ -133,16 +133,16 @@
           </tbody>
         </table>
       </div>
-      <div style="margin:0 auto; text-align:center;">
+      <div class="text-center">
         <p>{{localization.last_updated}}: {{lastUpdatedAt}}</p>
       </div>
       {{#if showPointsAfterDropRounds}}
-      <div style="margin:0 auto; text-align:center;">
+      <div class="text-center">
         <p>{{afterDropRoundMessage}}</p>
       </div>
       {{/if}}
       {{#if fullResultsLink}}
-      <div style="margin:0 auto; text-align:center;">
+      <div class="text-center">
         <a href="{{fullResultsLink}}" target="_none">{{localization.full_results}}</a>
       </div>
       {{/if}}

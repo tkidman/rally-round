@@ -35,6 +35,9 @@ const colours = {
   default: ""
 };
 
+// Register Handlebars helpers
+Handlebars.registerHelper("eq", (a, b) => a === b);
+
 let compiledNavigation = null;
 let compiledLayout = null;
 
@@ -138,20 +141,112 @@ const getNavigationHTML = (
 };
 
 const writeHomeHTML = links => {
-  const data = {
-    navigation: getNavigationHTML("", "", links, null),
-    backgroundStyle: leagueRef.getBackgroundStyle(),
-    logo: leagueRef.league.logo
+  const league = leagueRef.league;
+
+  // Get active events from all divisions
+  const activeEvents = [];
+  Object.entries(league.divisions || {}).forEach(([divisionName, division]) => {
+    if (division.events && division.events.length > 0) {
+      division.events.forEach(event => {
+        if (event.status === eventStatuses.active) {
+          activeEvents.push({
+            name: event.name,
+            location: (event.location && event.location.countryName) || "",
+            division: division.displayName || divisionName,
+            showingLivePoints: leagueRef.showLivePoints()
+          });
+        }
+      });
+    }
+  });
+
+  // Extract division car restrictions and rules
+  const divisionInfo = Object.entries(league.divisions || {})
+    .map(([divisionName, division]) => {
+      const info = {
+        name: division.displayName || divisionName,
+        cars: division.cars || null,
+        excludedCars: division.excludedCars || null
+      };
+      return info;
+    })
+    .filter(info => info.cars || info.excludedCars);
+
+  // Basic rules
+  const firstDivisionKey = Object.keys(league.divisions || {})[0];
+  const firstDivision =
+    firstDivisionKey && league.divisions
+      ? league.divisions[firstDivisionKey]
+      : null;
+
+  const rules = {
+    dropRounds: league.dropLowestScoringRoundsNumber || 0,
+    powerStagePoints:
+      (firstDivision &&
+        firstDivision.points &&
+        firstDivision.points.powerStage) ||
+      [],
+    overallPointsTop5:
+      (firstDivision &&
+        firstDivision.points &&
+        firstDivision.points.overall &&
+        firstDivision.points.overall.slice(0, 5)) ||
+      []
   };
+
+  const data = {
+    logo: league.logo,
+    siteTitlePrefix: league.siteTitlePrefix,
+    activeEvents,
+    divisionInfo,
+    rules,
+    // Top-3 drivers per division (tier)
+    top3ByDivision: Object.keys(league.divisions || {}).map(divName => {
+      const division = league.divisions[divName];
+      try {
+        const standingsData = transformForStandingsHTML(division, "driver");
+        const top3 = (standingsData.rows || []).slice(0, 3).map(row => ({
+          ...row,
+          hasTeamLogo: row.teamLogo && !row.teamLogo.includes("unknown.png")
+        }));
+        return {
+          divisionName: standingsData.title || divName,
+          divisionId: division.divisionName || divName,
+          top3
+        };
+      } catch (e) {
+        debug(`failed to compute top3 for division ${divName}: ${e}`);
+        return {
+          divisionName: division.displayName || divName,
+          divisionId: divName,
+          top3: []
+        };
+      }
+    }),
+    historicalSeasonLinks: league.historicalSeasonLinks || [],
+    showTeamNameTextColumn: league.showTeamNameTextColumn,
+    hideTeamLogoColumn: league.hideTeamLogoColumn,
+    localization: getLocalization()
+  };
+
   const homeTemplateFile = `${templatePath}/home.hbs`;
   if (!fs.existsSync(homeTemplateFile)) {
-    debug("no standings html template found, returning");
+    debug("no home html template found, returning");
     return;
   }
-  const _t = fs.readFileSync(homeTemplateFile).toString();
+  const src = fs.readFileSync(homeTemplateFile).toString();
+  const bodyTemplate = Handlebars.compile(src);
+  const bodyHtml = bodyTemplate(data);
 
-  const template = Handlebars.compile(_t);
-  const out = template(data);
+  const pageTitle = `${league.siteTitlePrefix} | Home`;
+
+  const out = compiledLayout({
+    body: bodyHtml,
+    pageTitle,
+    logo: league.logo,
+    backgroundStyle: leagueRef.getBackgroundStyle(),
+    navigation: getNavigationHTML("", "", links, null)
+  });
 
   fs.writeFileSync(`./${outputPath}/website/index.html`, out);
 };
@@ -203,11 +298,12 @@ const writeStandingsHTML = (division, type, links) => {
     type === "driver"
       ? "Driver Standings"
       : type === "team"
-      ? "Team Standings"
-      : "Standings";
+        ? "Team Standings"
+        : "Standings";
 
-  const pageTitle = `${leagueRef.league.siteTitlePrefix} | ${data.title ||
-    division.divisionName} – ${typeLabel}`;
+  const pageTitle = `${leagueRef.league.siteTitlePrefix} | ${
+    data.title || division.divisionName
+  } – ${typeLabel}`;
 
   const out = compiledLayout({
     body: bodyHtml,
@@ -521,8 +617,9 @@ const writeDriverResultsHTML = ({
   const bodyTemplate = Handlebars.compile(_t);
   const bodyHtml = bodyTemplate(data);
 
-  const pageTitle = `${leagueRef.league.siteTitlePrefix} | ${data.fullTitle ||
-    "Home"}`;
+  const pageTitle = `${leagueRef.league.siteTitlePrefix} | ${
+    data.fullTitle || "Home"
+  }`;
   const out = compiledLayout({
     body: bodyHtml,
     pageTitle,
