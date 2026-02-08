@@ -1,167 +1,169 @@
-<html lang="en">
-
-<head>
-    <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
-    <link rel="stylesheet" type="text/css" href="./assets/css/animation.css">
-    <link rel="stylesheet" type="text/css" href="./assets/css/w3.css">
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link rel="icon" href="./assets/{{logo}}">
-</head>
-
-<body style="{{this.backgroundStyle}}">
-{{{navigation}}}
-<div id="container">
-    <div id="flexContainer">
-        <div class="flexBox">
-            <div style="margin-bottom: 1em;" class="w3-hide-medium w3-hide-small">
-                <div class="logo" style="display:flex;">
-                    <img src="./assets/{{logo}}" />
-                    <h2 style="margin-left:1em;">{{fullTitle}}</h2>
-                </div>
-            </div>
-
-            <table id="tableDrivers">
-                <thead>
-                <tr>
-                    <th>{{localization.pos}}</th>
-                    <th>{{localization.nat}}</th>
-                    <th>{{localization.driver}}</th>
-                    {{#if overall}}
-                        <th>{{localization.div}}</th>
-                    {{/if}}
-                    {{#if showTeam}}
-                        {{#unless hideTeamLogoColumn}}
-                            <th>{{localization.team}}</th>
-                        {{/unless}}
-                        {{#if showTeamNameTextColumn}}
-                            <th>{{localization.team_name}}</th>
-                        {{/if}}
-                    {{/if}}
-                    {{#if showTeam2LogoColumn}}
-                        <th>{{team2ColumnName}}</th>
-                    {{/if}}
-                    {{#if showCar}}
-                        <th>{{localization.car}}</th>
-                        {{#if showCarName}}
-                            <th>{{localization.car_name}}</th>
-                        {{/if}}
-                    {{/if}}
-                    {{#if showPowerStage}}
-                        <th>{{localization.ps}}</th>
-                        <th>{{localization.diff}}</th>
-                    {{/if}}
-                    <th>{{localization.total}}</th>
-                    <th>{{localization.diff}}</th>
-                    {{#if showSuperRallyColumn}}
-                        <th>{{localization.sr}}</th>
-                    {{/if}}
-                    {{#if showLegPoints}}
-                        {{#each event.legs}}
-                            <th>
-                                <a href="{{this.legUrl}}">{{this.legColumnHeader}}</a>
-                            </th>
-                        {{/each}}
-                    {{/if}}
-                    {{#if showStagePoints}}
-                        <th>{{localization.stage_points}}</th>
-                    {{/if}}
-                    {{#if showPowerStagePoints}}
-                        <th>{{localization.ps}} {{localization.points}}</th>
-                    {{/if}}
-                    <th>{{localization.points}}</th>
-                    <th>{{localization.total_points}}</th>
-                </tr>
-                </thead>
-                <tbody>
-                {{#each rows}}
-                    <tr>
-                        <td>{{this.position}}</td>
-                        <td>
-                            <img src="./assets/country-flags/{{this.country.code}}.png" style="max-width:1.5em; max-height:1.5em;" alt="{{this.country.code}}" title="{{this.country.code}}"/>
-                        </td>
-                        <td class="text-left bold">{{this.driver.name}}</td>
-                        {{#if ../overall}}
-                            <td>{{this.divisionDisplayName}}</td>
-                        {{/if}}
-                        {{#if ../showTeam}}
-                            {{#unless ../hideTeamLogoColumn}}
-                                <td>
-                                    <img src="{{teamLogo}}" style="max-width:2em; max-height:2em;" alt="{{this.teamId}}" title="{{this.teamId}}"/>
-                                </td>
-                            {{/unless}}
-                            {{#if ../showTeamNameTextColumn}}
-                                <td class="text-left">{{this.teamId}}</td>
-                            {{/if}}
-                       {{/if}}
-                        {{#if ../showTeam2LogoColumn}}
-                            <td>
-                                <img src="{{this.team2Logo}}" style="max-width:2em; max-height:2em;" alt="{{this.driver.team2Id}}" title="{{this.driver.team2Id}}"/>
-                            </td>
-                        {{/if}}
-                        {{#if ../showCar}}
-                            <td>
-                                <img src="./assets/cars/{{this.car}}.png" style="max-width:2em; max-height:2em;" alt="{{this.car}}" title="{{this.car}}"/>
-                            </td>
-                            {{#if ../showCarName}}
-                                <td class="text-left">
-                                    {{this.entry.vehicleName}}
-                                </td>
-                            {{/if}}
-                        {{/if}}
-                        {{#if ../showPowerStage}}
-                            <td>{{this.stageTimeDisplay}}</td>
-                            <td>{{this.stageDiffDisplay}}</td>
-                        {{/if}}
-                        {{#if this.entry.extraInfo}}
-                        <td class="popup" onclick="openPopup('{{this.entry.name}}')">
-                            {{this.totalTimeDisplay}}
-                            <span class="popuptext" id="{{this.entry.name}}">{{this.entry.extraInfo}}</span>
-                        </td>
-                        {{else}}
-                        <td>{{this.totalTimeDisplay}}</td>
-                        {{/if}}
-                        <td>{{this.totalDiffDisplay}}</td>
-                        {{#if ../showSuperRallyColumn}}
-                            <td>
-                                {{this.entry.superRally}}
-                            </td>
-                        {{/if}}
-                        {{#if ../showLegPoints}}
-                            {{#each this.legPoints}}
-                                <td>{{this}}</td>
-                            {{/each}}
-                        {{/if}}
-                        {{#if ../showStagePoints}}
-                            <td>{{this.stagePoints}}</td>
-                        {{/if}}
-                        {{#if ../showPowerStagePoints}}
-                            <td>{{this.powerStagePoints}}</td>
-                        {{/if}}
-                        <td>{{this.overallPoints}}</td>
-                        <td class="bold">{{this.pointsDisplay}}</td>
-                    </tr>
-                {{/each}}
-                </tbody>
-
-            </table>
-            <div style="margin:0 auto; text-align:center;">
-                <p>{{localization.last_updated}}: {{lastUpdatedAt}}</p>
-            </div>
-            {{#if event.enduranceRoundMultiplier}}
-                <div style="margin:0 auto; text-align:center;">
-                    <p>{{localization.endurance_multiplied}} {{event.enduranceRoundMultiplier}}</p>
-                </div>
-            {{/if}}
-            {{#if fullResultsLink}}
-                <div style="margin:0 auto; text-align:center;">
-                    <a href="{{fullResultsLink}}" target="_none">{{localization.full_results}}</a>
-                </div>
-            {{/if}}
+<div class="container">
+  <div class="flexContainer">
+    <div class="flexBox">
+      <div class="mb-1 hide-medium hide-small">
+        <div class="logo d-flex">
+          <img src="./assets/{{logo}}" />
+          <h2 class="ml-1">{{fullTitle}}</h2>
         </div>
+      </div>
+      <div class="column-filter">
+        <button class="column-filter__btn" type="button" aria-label="Filter columns">
+          <span>Filter Columns</span>
+        </button>
+        <div class="column-filter__menu">
+          <div class="column-filter__items"></div>
+          <div class="column-filter__actions">
+            <button class="column-filter__action-btn" data-action="show-all">Show All</button>
+            <button class="column-filter__action-btn" data-action="close">Close</button>
+          </div>
+        </div>
+      </div>
+      <div class="table-scroll-indicator" id="tableScrollIndicator" aria-hidden="true">
+        <div class="table-scroll-indicator__content"></div>
+      </div>
+      <div class="table-scroll-wrapper">
+        <table id="tableDrivers">
+          <thead>
+            <tr>
+              <th class="th-pos">{{localization.pos}}</th>
+              <th class="th-nat">{{localization.nat}}</th>
+              <th class="th-driver">{{localization.driver}}</th>
+              {{#if overall}}
+              <th class="th-div">{{localization.div}}</th>
+              {{/if}}
+              {{#if showTeam}}
+              {{#unless hideTeamLogoColumn}}
+              <th class="th-team-logo">{{localization.team}}</th>
+              {{/unless}}
+              {{#if showTeamNameTextColumn}}
+              <th class="th-team-name">{{localization.team_name}}</th>
+              {{/if}}
+              {{/if}}
+              {{#if showTeam2LogoColumn}}
+              <th class="th-team2">{{team2ColumnName}}</th>
+              {{/if}}
+              {{#if showCar}}
+              <th class="th-car">{{localization.car}}</th>
+              {{#if showCarName}}
+              <th class="th-car-name">{{localization.car_name}}</th>
+              {{/if}}
+              {{/if}}
+              {{#if showPowerStage}}
+              <th class="th-ps">{{localization.ps}}</th>
+              <th class="th-diff">{{localization.diff}}</th>
+              {{/if}}
+              <th class="th-total">{{localization.total}}</th>
+              <th class="th-diff">{{localization.diff}}</th>
+              {{#if showSuperRallyColumn}}
+              <th class="th-sr">{{localization.sr}}</th>
+              {{/if}}
+              {{#if showLegPoints}}
+              {{#each event.legs}}
+              <th class="th-leg">
+                <a href="{{this.legUrl}}">{{this.legColumnHeader}}</a>
+              </th>
+              {{/each}}
+              {{/if}}
+              {{#if showStagePoints}}
+              <th class="th-stage-points">{{localization.stage_points}}</th>
+              {{/if}}
+              {{#if showPowerStagePoints}}
+              <th class="th-ps-points">{{localization.ps}} {{localization.points}}</th>
+              {{/if}}
+              <th class="th-points">{{localization.points}}</th>
+              <th class="th-total-points">{{localization.total_points}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each rows}}
+            <tr>
+              <td class="td-pos">{{this.position}}</td>
+              <td class="td-nat">
+                <img src="./assets/country-flags/{{this.country.code}}.png" class="img-sm"
+                  alt="{{this.country.code}}" title="{{this.country.code}}" />
+              </td>
+              <td class="td-driver text-left bold">{{this.driver.name}}</td>
+              {{#if ../overall}}
+              <td class="td-div">{{this.divisionDisplayName}}</td>
+              {{/if}}
+              {{#if ../showTeam}}
+              {{#unless ../hideTeamLogoColumn}}
+              <td class="td-team-logo">
+                <img src="{{teamLogo}}" class="img-md" alt="{{this.teamId}}"
+                  title="{{this.teamId}}" />
+              </td>
+              {{/unless}}
+              {{#if ../showTeamNameTextColumn}}
+              <td class="td-team-name text-left">{{this.teamId}}</td>
+              {{/if}}
+              {{/if}}
+              {{#if ../showTeam2LogoColumn}}
+              <td class="td-team2">
+                <img src="{{this.team2Logo}}" class="img-md" alt="{{this.driver.team2Id}}"
+                  title="{{this.driver.team2Id}}" />
+              </td>
+              {{/if}}
+              {{#if ../showCar}}
+              <td class="td-car">
+                <img src="./assets/cars/{{this.car}}.png" class="img-md" alt="{{this.car}}"
+                  title="{{this.car}}" />
+              </td>
+              {{#if ../showCarName}}
+              <td class="td-car-name text-left">
+                {{this.entry.vehicleName}}
+              </td>
+              {{/if}}
+              {{/if}}
+              {{#if ../showPowerStage}}
+              <td class="td-ps">{{this.stageTimeDisplay}}</td>
+              <td class="td-diff">{{this.stageDiffDisplay}}</td>
+              {{/if}}
+              {{#if this.entry.extraInfo}}
+              <td class="td-total popup" onclick="openPopup('{{this.entry.name}}')">
+                {{this.totalTimeDisplay}}
+                <span class="popuptext" id="{{this.entry.name}}">{{this.entry.extraInfo}}</span>
+              </td>
+              {{else}}
+              <td class="td-total">{{this.totalTimeDisplay}}</td>
+              {{/if}}
+              <td class="td-diff">{{this.totalDiffDisplay}}</td>
+              {{#if ../showSuperRallyColumn}}
+              <td class="td-sr">
+                {{this.entry.superRally}}
+              </td>
+              {{/if}}
+              {{#if ../showLegPoints}}
+              {{#each this.legPoints}}
+              <td class="td-leg">{{this}}</td>
+              {{/each}}
+              {{/if}}
+              {{#if ../showStagePoints}}
+              <td class="td-stage-points">{{this.stagePoints}}</td>
+              {{/if}}
+              {{#if ../showPowerStagePoints}}
+              <td class="td-ps-points">{{this.powerStagePoints}}</td>
+              {{/if}}
+              <td class="td-points">{{this.overallPoints}}</td>
+              <td class="td-total-points bold">{{this.pointsDisplay}}</td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+      <div class="text-center">
+        <p>{{localization.last_updated}}: {{lastUpdatedAt}}</p>
+      </div>
+      {{#if event.enduranceRoundMultiplier}}
+      <div class="text-center">
+        <p>{{localization.endurance_multiplied}} {{event.enduranceRoundMultiplier}}</p>
+      </div>
+      {{/if}}
+      {{#if fullResultsLink}}
+      <div class="text-center">
+        <a href="{{fullResultsLink}}" target="_none">{{localization.full_results}}</a>
+      </div>
+      {{/if}}
     </div>
+  </div>
 </div>
-
-{{{scripts}}}
-</body>
-
-</html>

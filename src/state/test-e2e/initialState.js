@@ -1,6 +1,6 @@
 const initialState = {
   pointsForDNF: false,
-  useStandingsForHome: true,
+  useStandingsForHome: false,
   showLivePoints: true,
   showLivePointsDaysRemaining: 9,
   noSuperRallyPointsMultiplier: 2,
@@ -23,7 +23,10 @@ const initialState = {
   hideStageTimesUntilEventEnd: true,
   overrideLastUpdated: "last-updated-test-e2e",
   teamOverride: {},
-  historicalSeasonLinks: [{ name: "E2E Season 1", href: "/e2e-1" }],
+  historicalSeasonLinks: [
+    { name: "E2E Season 2", href: "/e2e-2" },
+    { name: "E2E Season 1", href: "/e2e-1" }
+  ],
   divisions: {
     "test-e2e": {
       divisionName: "test-e2e",
@@ -102,6 +105,11 @@ const initialState = {
       points: {
         powerStage: [5, 4, 3, 2, 1],
         overall: [30, 24, 19, 15, 12, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+      },
+      promotionRelegation: {
+        promotionDoubleZone: 1,
+        promotionZone: 3,
+        relegationZone: 3
       }
     }
   }

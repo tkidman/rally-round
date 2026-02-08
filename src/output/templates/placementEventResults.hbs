@@ -1,26 +1,25 @@
-<html lang="en">
-
-<head>
-    <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
-    <link rel="stylesheet" type="text/css" href="./assets/css/animation.css">
-    <link rel="stylesheet" type="text/css" href="./assets/css/w3.css">
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link rel="icon" href="./assets/{{logo}}">
-
-</head>
-
-<body style="{{this.backgroundStyle}}">
-{{{navigation}}}
-<div id="container">
-    <div id="flexContainer">
+<div class="container">
+    <div class="flexContainer">
         <div class="flexBox">
-            <div style="margin-bottom: 1em;" class="">
-                <div class="logo" style="display:flex;">
+            <div class="mb-1">
+                <div class="logo d-flex">
                     <img src="./assets/{{logo}}" />
-                    <h2 style="margin-left:1em;">{{title}} {{location.countryName}} >{{localization.driver_results}}</h2>
+                    <h2 class="ml-1">{{title}} {{location.countryName}} >{{localization.driver_results}}</h2>
                 </div>
             </div>
-
+            <div class="column-filter">
+                <button class="column-filter__btn" type="button" aria-label="Filter columns">
+                    <span>Filter Columns</span>
+                </button>
+                <div class="column-filter__menu">
+                    <div class="column-filter__items"></div>
+                    <div class="column-filter__actions">
+                        <button class="column-filter__action-btn" data-action="show-all">Show All</button>
+                        <button class="column-filter__action-btn" data-action="close">Close</button>
+                    </div>
+                </div>
+            </div>
+            <div class="table-scroll-wrapper">
             <table id="tableDrivers">
                 <thead>
                 <tr>
@@ -41,7 +40,7 @@
                     <tr>
                         <td>{{this.position}}</td>
                         <td>
-                            <img src="./assets/country-flags/{{this.country.code}}.png" style="max-width:1.5em; max-height:1.5em;" />
+                            <img src="./assets/country-flags/{{this.country.code}}.png" class="img-sm" />
                         </td>
                         <td class="text-left bold">{{this.name}}</td>
 						<td>{{this.divisionDisplayName}}</td>
@@ -55,16 +54,11 @@
                     </tr>
                 {{/each}}
                 </tbody>
-
-            </table>
-            <div style="margin:0 auto; text-align:center;">
+                </table>
+            </div>
+            <div class="text-center">
                 <p>{{localization.last_updated}}: {{lastUpdatedAt}}</p>
             </div>
         </div>
     </div>
 </div>
-
-{{{scripts}}}
-</body>
-
-</html>

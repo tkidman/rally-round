@@ -1,174 +1,208 @@
-<head>
-	<title>
-		{{siteTitlePrefix}} |
-		{{#if links.active.menu}}
-			{{links.active.menu}} {{links.active.link}}
-        {{else}}
-			Home
-		{{/if}}
-	</title>
-</head>
-
-<div class="w3-top">
-	<div class="w3-bar w3-black" style="text-align:center;">
-        <div class="logo w3-dropdown-hover w3-hide-small w3-hide-medium" style="background-color: #0000">
-            <a href="/index.html">
-                <img src="./assets/{{logo}}">
-            </a>
-            <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small w3-hide-medium">
-            {{#if links.series}}
-                <span class="w3-bar-item">---{{localization.series}}---</span>
-                {{#each links.series}}
-                    <a href="{{href}}" class="w3-bar-item w3-button ">{{name}}</a>
-                {{/each}}
-            {{/if}}
-            {{#if links.historical}}
-                <span class="w3-bar-item">---{{localization.historical}}---</span>
-                {{#each links.historical}}
-                    <a href="{{href}}" class="w3-bar-item w3-button ">{{name}}</a>
-                {{/each}}
-            {{/if}}
-            </div>
-        </div>
-
-		{{#if links.driver}}
-		<div class="w3-dropdown-hover w3-hide-small w3-hide-medium">
-			<button class="w3-button">{{localization.driver_standings}}</button>
-			<div class="w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small w3-hide-medium">
-				{{#with links.driver}}
-				{{#each this}}
-				<a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">{{link}}</a>
-				{{/each}}
-				{{/with}}
-			</div>
-		</div>
-		{{/if}}
-
-		{{#if links.team}}
-		<div class="w3-dropdown-hover w3-hide-small w3-hide-medium">
-			<button class="w3-button">{{localization.team_standings}}</button>
-			<div class="w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small w3-hide-medium">
-				{{#with links.team}}
-				{{#each this}}
-				<a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">{{link}}</a>
-				{{/each}}
-				{{/with}}
-			</div>
-		</div>
-		{{/if}}
-
-		{{#if links.fantasy}}
-		<div class="w3-dropdown-hover w3-hide-small w3-hide-medium">
-			<button class="w3-button">Fantasy JRC</button>
-			<div class="w3-dropdown-content w3-bar-block w3-card-4 w3-hide-small">
-				{{#with links.fantasy}}
-				{{#each this}}
-				<a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">{{link}}</a>
-				{{/each}}
-				{{/with}}
-			</div>
-		</div>
-		{{/if}}
-
-		{{#if endTime}}
-		<div class="w3-bar-item w3-right w3-hide-small w3-hide-medium">
-			<div class="logo">
-				<img src="./assets/country-flags/{{activeCountry}}.png" style="max-height: 0.9em;border-radius: 0.3em;"/>
-			</div>
-			<span id="countdown2"></span>
-		</div>
-		{{/if}}
-
-        <!-- mobile stuff -->
-        <a href="javascript:void(0)" class="logo w3-left w3-hide-large" style="font-size:3em;" onclick="openSeriesMobileNav()">
-            <img src="./assets/{{logo}}" style="max-height: 1em;margin: 0.1em;border: 1px solid darkgray">
+<header class="siteHeader">
+  <div class="siteHeader__bar">
+    <div class="navLeft navDesktopOnly">
+      <div class="dropdown">
+        <a class="brand" href="/index.html" aria-label="Home">
+          <img class="brand__img" src="./assets/{{logo}}" alt="Logo" />
         </a>
 
-        <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large" style="font-size:3em;" onclick="openMobileNav()">&#9776;
-        </a>
-
-        <h3 class="w3-hide-large navTitle bold" style="display:block;">
-            {{links.active.menu}} - {{links.active.link}}
-            {{#if endTime}}<br><span id="countdown"></span>{{/if}}
-        </h3>
-
-	</div>
-
-	<div id="mobileNav" class="w3-bar-block w3-black w3-hide w3-hide-large" style="overflow-y:scroll;max-height:95vh;">
-		{{#with links.driver}}
-            {{#each this}}
-            <a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">{{../../localization.driver_standings}} - {{link}}</a>
-            {{/each}}
-		{{/with}}
-		{{#with links.team}}
-            {{#each this}}
-            <a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">{{../../localization.team_standings}} - {{link}}</a>
-            {{/each}}
-		{{/with}}
-		{{#with links.overall}}
-            {{#each this}}
-            <a href="{{href}}" class="w3-bar-item w3-button {{#if active}}active{{/if}}">{{../../localization.overall}} - {{link}}</a>
-            {{/each}}
-		{{/with}}
-	</div>
-
-	<div id="seriesMobileNav" class="w3-bar-block w3-black w3-hide w3-hide-large" style="overflow-y:scroll;max-height:95vh;">
-        {{#if links.series}}
-            <span class="w3-bar-item">---series---</span>
+        <div class="dropdown__menu" role="menu">
+          {{#if links.series}}
+            <div class="dropdown__title">— {{localization.series}} —</div>
             {{#each links.series}}
-                <a href="{{href}}" class="w3-bar-item w3-button ">{{name}}</a>
+              <a class="dropdown__item" href="{{href}}">{{name}}</a>
             {{/each}}
-        {{/if}}
-        {{#if links.historical}}
-            <span class="w3-bar-item">---historical---</span>
-            {{#each links.historical}}
-                <a href="{{href}}" class="w3-bar-item w3-button ">{{name}}</a>
-            {{/each}}
-        {{/if}}
-	</div>
+          {{/if}}
 
- 	{{#if secondary}}
-	<div class="w3-bar w3-light-grey secondaryNav">
-		{{#each secondary}}
-            <a href="./{{../links.active.name}}-{{this.eventId}}-driver-results.html" style="{{#if this.disableLink}}pointer-events: none;{{/if}}">
-                <img src="./assets/country-flags/{{this.locationCode}}.png" />
+          {{#if links.historical}}
+            <div class="dropdown__title">— {{localization.historical}} —</div>
+            {{#each links.historical}}
+              <a class="dropdown__item" href="{{href}}">{{name}}</a>
+            {{/each}}
+          {{/if}}
+        </div>
+      </div>
+    </div>
+
+<nav class="navMain navDesktopOnly" aria-label="Primary">
+  {{#if links.driver}}
+    <div class="navDrop" tabindex="0">
+      <button class="navBtn" type="button" aria-haspopup="true">
+        {{localization.driver_standings}}
+      </button>
+
+      <div class="navMenu">
+        {{#with links.driver}}
+          {{#each this}}
+            <a class="navLink {{#if active}}isActive{{/if}}" href="{{href}}">
+              {{link}}
             </a>
-		{{/each}}
-	</div>
-	{{/if}}
-</div>
+          {{/each}}
+        {{/with}}
+      </div>
+    </div>
+  {{/if}}
+
+  {{#if links.team}}
+    <div class="navDrop" tabindex="0">
+      <button class="navBtn" type="button" aria-haspopup="true">
+        {{localization.team_standings}}
+      </button>
+
+      <div class="navMenu">
+        {{#with links.team}}
+          {{#each this}}
+            <a class="navLink {{#if active}}isActive{{/if}}" href="{{href}}">
+              {{link}}
+            </a>
+          {{/each}}
+        {{/with}}
+      </div>
+    </div>
+  {{/if}}
+
+  {{#if links.fantasy}}
+    <div class="navDrop" tabindex="0">
+      <button class="navBtn" type="button" aria-haspopup="true">
+        Fantasy JRC
+      </button>
+
+      <div class="navMenu">
+        {{#with links.fantasy}}
+          {{#each this}}
+            <a class="navLink {{#if active}}isActive{{/if}}" href="{{href}}">
+              {{link}}
+            </a>
+          {{/each}}
+        {{/with}}
+      </div>
+    </div>
+  {{/if}}
+</nav>
+
+
+    {{#if endTime}}
+      <div class="navRight navDesktopOnly">
+        <img
+          class="flag"
+          src="./assets/country-flags/{{activeCountry}}.png"
+          alt="{{activeCountry}}"
+        />
+        <span id="countdown2" class="countdown"></span>
+      </div>
+    {{/if}}
+
+    <button
+      type="button"
+      class="iconBtn navMobileOnly"
+      aria-controls="seriesMobileNav"
+      aria-label="Choose series"
+      onclick="toggleControlledNav(this)"
+    >
+      <img class="brand__img brand__img--mobile" src="./assets/{{logo}}" alt="Logo" />
+    </button>
+
+    <div class="navTitle navMobileOnly">
+      <div class="navTitle__main">{{links.active.menu}} - {{links.active.link}}</div>
+      {{#if endTime}}<div id="countdown" class="countdown"></div>{{/if}}
+    </div>
+
+		<button
+      type="button"
+      class="iconBtn navMobileOnly"
+      aria-controls="mobileNav"
+      aria-label="Open menu"
+      onclick="toggleControlledNav(this)"
+    >
+      <span class="hamburger" aria-hidden="true">☰</span>
+    </button>
+  </div>
+
+  <div id="mobileNav" class="drawer" hidden>
+    <nav class="drawer__content" aria-label="Mobile menu">
+      {{#with links.driver}}
+        {{#each this}}
+          <a class="drawer__link {{#if active}}isActive{{/if}}" href="{{href}}">
+            {{../../localization.driver_standings}} - {{link}}
+          </a>
+        {{/each}}
+      {{/with}}
+
+      {{#with links.team}}
+        {{#each this}}
+          <a class="drawer__link {{#if active}}isActive{{/if}}" href="{{href}}">
+            {{../../localization.team_standings}} - {{link}}
+          </a>
+        {{/each}}
+      {{/with}}
+
+      {{#with links.overall}}
+        {{#each this}}
+          <a class="drawer__link {{#if active}}isActive{{/if}}" href="{{href}}">
+            {{../../localization.overall}} - {{link}}
+          </a>
+        {{/each}}
+      {{/with}}
+    </nav>
+  </div>
+
+  <div id="seriesMobileNav" class="drawer" hidden>
+    <div class="drawer__content">
+      {{#if links.series}}
+        <div class="drawer__title">— {{localization.series}} —</div>
+        {{#each links.series}}
+          <a class="drawer__link" href="{{href}}">{{name}}</a>
+        {{/each}}
+      {{/if}}
+
+      {{#if links.historical}}
+        <div class="drawer__title">— {{localization.historical}} —</div>
+        {{#each links.historical}}
+          <a class="drawer__link" href="{{href}}">{{name}}</a>
+        {{/each}}
+      {{/if}}
+    </div>
+  </div>
+
+  {{#if secondary}}
+    <div class="secondaryNav">
+      {{#each secondary}}
+        <a
+          class="secondaryNav__item"
+          href="./{{../links.active.name}}-{{this.eventId}}-driver-results.html"
+          style="{{#if this.disableLink}}pointer-events:none;opacity:.45;{{/if}}"
+        >
+          <img class="secondaryNav__flag" src="./assets/country-flags/{{this.locationCode}}.png" alt="{{this.locationCode}}" />
+        </a>
+      {{/each}}
+    </div>
+  {{/if}}
+</header>
+
 {{#if endTime}}
 <script>
-	// Set the date we're counting down to
-	var countDownDate = new Date("{{endTime}}").getTime();
+  var countDownDate = new Date("{{endTime}}").getTime();
+  var x = setInterval(function() {
+    var now = new Date().getTime();
+    var distance = countDownDate - now;
 
-	// Update the count down every 1 second
-	var x = setInterval(function() {
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-	// Get today's date and time
-	var now = new Date().getTime();
+    var text = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
 
-	// Find the distance between now and the count down date
-	var distance = countDownDate - now;
+    var c1 = document.getElementById("countdown");
+    var c2 = document.getElementById("countdown2");
+    if (c1) c1.innerHTML = text;
+    if (c2) c2.innerHTML = text;
 
-	// Time calculations for days, hours, minutes and seconds
-	var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-	var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-	var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-	var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-	// Output the result in an element with id="demo"
-	document.getElementById("countdown").innerHTML = days + "d " + hours + "h "
-	+ minutes + "m " + seconds + "s ";
-	document.getElementById("countdown2").innerHTML = days + "d " + hours + "h "
-	+ minutes + "m " + seconds + "s ";
-
-	// If the count down is over, write some text
-	if (distance < 0) {
-		clearInterval(x);
-		document.getElementById("countdown").innerHTML = "Event Ended";
-		document.getElementById("countdown2").innerHTML = "Event Ended";
-	}
-	}, 1000);
+    if (distance < 0) {
+      clearInterval(x);
+      if (c1) c1.innerHTML = "Event Ended";
+      if (c2) c2.innerHTML = "Event Ended";
+    }
+  }, 1000);
 </script>
 {{/if}}

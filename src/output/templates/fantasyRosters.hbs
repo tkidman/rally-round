@@ -1,20 +1,20 @@
 <html lang="en">
 
 <head>
-	<link rel="stylesheet" type="text/css" href="./assets/css/style.css">
-	<link rel="stylesheet" type="text/css" href="./assets/css/animation.css">
-	<link rel="stylesheet" type="text/css" href="./assets/css/w3.css">
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<style>
-		.collapsed {
-			visibility: collapse;
-		}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <link rel="stylesheet" href="./assets/css/w3.css">
+  <link rel="stylesheet" href="./assets/css/style.css">
 
-		#container .w3-blue {
-			background-color: #5355bf !important;
-		}
-	</style>
-    <link rel="icon" href="./assets/{{logo}}">
+  <link rel="icon" href="./assets/{{logo}}">
+  <title>
+    {{siteTitlePrefix}} |
+    {{#if links.active.menu}}
+      {{links.active.menu}} {{links.active.link}}
+    {{else}}
+      Home
+    {{/if}}
+  </title>
 </head>
 
 <body style="{{this.backgroundStyle}}">
@@ -30,7 +30,7 @@
 
 
 
-	<div id="container">
+	<div class="container">
 		{{#each teams}}{{#with this}}
 		<div class="w3-container">
 			<div id="{{name}}Section" class="teamContainer w3-container{{#if @first}}{{else}} collapsed{{/if}}"
@@ -41,29 +41,29 @@
 				<table>
 					<thead>
 						<tr>
-							<th>{{localization.location}}</th>
-							<th>💰</th>
-							<th>{{localization.captain}}</th>
-							<th>{{localization.driver}} 1</th>
-							<th>{{localization.driver}} 2</th>
-							<th>{{localization.driver}} 3</th>
-							<th>{{localization.points}}</th>
+							<th class="th-location">{{localization.location}}</th>
+							<th class="th-budget">💰</th>
+							<th class="th-captain">{{localization.captain}}</th>
+							<th class="th-driver">{{localization.driver}} 1</th>
+							<th class="th-driver">{{localization.driver}} 2</th>
+							<th class="th-driver">{{localization.driver}} 3</th>
+							<th class="th-points">{{localization.points}}</th>
 						</tr>
 					</thead>
 					<tbody>
 						{{#each roster}}{{#with this}}
 						<tr>
-							<td>{{location}}</td>
-							<td>{{budget}}</td>
-							<td>{{captain}}</td>
+							<td class="td-location">{{location}}</td>
+							<td class="td-budget">{{budget}}</td>
+							<td class="td-captain">{{captain}}</td>
 							{{#each drivers}}
-							<td>{{this}}</td>
+							<td class="td-driver">{{this}}</td>
 							{{else}}
-							<td></td>
-							<td></td>
-							<td></td>
+							<td class="td-driver"></td>
+							<td class="td-driver"></td>
+							<td class="td-driver"></td>
 							{{/each}}
-							<td>{{points}}</td>
+							<td class="td-points">{{points}}</td>
 						</tr>
 						{{/with}}{{/each}}
 					</tbody>
@@ -123,26 +123,42 @@
 			</div>
 
 			<div class="flexBox">
+				<div class="column-filter">
+					<button class="column-filter__btn" type="button" aria-label="Filter columns">
+						<span>Filter Columns</span>
+					</button>
+					<div class="column-filter__menu">
+						<div class="column-filter__items"></div>
+						<div class="column-filter__actions">
+							<button class="column-filter__action-btn" data-action="show-all">Show All</button>
+							<button class="column-filter__action-btn" data-action="close">Close</button>
+						</div>
+					</div>
+				</div>
+				<div class="table-scroll-indicator" id="tableScrollIndicator" aria-hidden="true">
+					<div class="table-scroll-indicator__content"></div>
+				</div>
+				<div class="table-scroll-wrapper">
 				<table id="tableDrivers">
 					<thead>
 						<tr>
-							<th>{{localization.driver}}</th>
-							<th><img src="./assets/country-flags/mco.png" /></th>
-							<th><img src="./assets/country-flags/swe.png" /></th>
-							<th><img src="./assets/country-flags/usa.png" /></th>
-                            <th><img src="./assets/country-flags/arg.png" /></th>
-                            <th><img src="./assets/country-flags/pol.png" /></th>
-                            <th><img src="./assets/country-flags/deu.png" /></th>
-                            <th><img src="./assets/country-flags/nzl.png" /></th>
-                            <th><img src="./assets/country-flags/aus.png" /></th> 
+							<th class="th-driver">{{localization.driver}}</th>
+							<th class="th-location"><img src="./assets/country-flags/mco.png" /></th>
+							<th class="th-location"><img src="./assets/country-flags/swe.png" /></th>
+							<th class="th-location"><img src="./assets/country-flags/usa.png" /></th>
+							<th class="th-location"><img src="./assets/country-flags/arg.png" /></th>
+							<th class="th-location"><img src="./assets/country-flags/pol.png" /></th>
+							<th class="th-location"><img src="./assets/country-flags/deu.png" /></th>
+							<th class="th-location"><img src="./assets/country-flags/nzl.png" /></th>
+							<th class="th-location"><img src="./assets/country-flags/aus.png" /></th> 
 						</tr>
 					</thead>
 					<tbody>
 						{{#each prices}}{{#with this}}
 						<tr>
-							<td class="text-left bold">{{driver}}</td>
+							<td class="td-driver text-left bold">{{driver}}</td>
 							{{#each prices}}{{#with this}}
-							<td style="text-align:left;">
+							<td class="td-price" style="text-align:left;">
 								£{{price}}
 								{{#if positive}}
 								<span class="positive">(<i class="arrow up"></i>&nbsp;{{evolution}})</span>
@@ -159,6 +175,7 @@
 						{{/with}}{{/each}}
 					</tbody>
 				</table>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -287,6 +304,7 @@
 		}
 
 	</script>
+	<script src="./assets/js/app.js" defer></script>
 </body>
 
 </html>

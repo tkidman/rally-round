@@ -15,66 +15,83 @@
 
 <body style="{{this.backgroundStyle}}">
 	{{{navigation}}}
-	<div id="container">
-		<div id="flexContainer">
+	<div class="container">
+		<div class="flexContainer">
 			<div class="flexBox">
-				<div style="margin-bottom: 1em;" class="w3-hide-large w3-hide-medium w3-hide-small">
-					<div class="logo" style="display:flex;">
-						<img src="./assets/fantasy.jpg" />
-						<h2 style="margin-left:1em;">{{localization.team_standings}}</h2>
+			<div class="mb-1 hide-large hide-medium hide-small">
+				<div class="logo d-flex">
+					<img src="./assets/fantasy.jpg" />
+					<h2 class="ml-1">{{localization.team_standings}}</h2>
+				</div>
+			</div>
+			<div class="column-filter">
+				<button class="column-filter__btn" type="button" aria-label="Filter columns">
+					<span>Filter Columns</span>
+				</button>
+				<div class="column-filter__menu">
+					<div class="column-filter__items"></div>
+					<div class="column-filter__actions">
+						<button class="column-filter__action-btn" data-action="show-all">Show All</button>
+						<button class="column-filter__action-btn" data-action="close">Close</button>
 					</div>
 				</div>
-				<table id="tableTeams">
-					<thead>
-						<tr>
-							<th></th>
-							<th></th>
-							<th>{{localization.team}}</th>
-							<th>💰</th>
-							<th><img src="./assets/country-flags/mco.png" /></th>
-							<th><img src="./assets/country-flags/swe.png" /></th>
-							<th><img src="./assets/country-flags/usa.png" /></th>
-                            <th><img src="./assets/country-flags/arg.png" /></th>
-                            <th><img src="./assets/country-flags/pol.png" /></th>
-                            <th><img src="./assets/country-flags/deu.png" /></th>
-                            <th><img src="./assets/country-flags/nzl.png" /></th>
-                            <th><img src="./assets/country-flags/aus.png" /></th>
-							<th>{{localization.points}}</th>
-							<th>{{localization.gap}}</th>
-						</tr>
-					</thead>
-					<tbody>
-						{{#each teams}}{{#with this}}
-						<tr>
-							<td>{{rank}}</td>
-							<td>
-								{{#if positive}}
-								<span class="positive"><i class="arrow up"></i>&nbsp;{{evolution}}</span>
-								{{/if}}
-								{{#if neutral}}
-								<span class="neutral">=</span>
-								{{/if}}
-								{{#if negative}}
-								<span class="negative"><i class="arrow down"></i>&nbsp;{{evolution}}</span>
-								{{/if}}
-							</td>
-							<td class="text-left bold">{{name}} <small>( {{drivers}} )</small></td>
-							<td>${{budget}}</td>
-							<td>{{[MONTE CARLO]}}</td>
-							<td>{{VÄRMLAND}}</td>
-							<td>{{[NEW ENGLAND]}}</td>
-							<td>{{[CATAMARCA PROVINCE]}}</td>
-							<td>{{[ŁĘCZNA COUNTY]}}</td>
-							<td>{{[BAUMHOLDER]}}</td>
-							<td>{{[HAWKES BAY]}}</td>
-							<td>{{[MONARO]}}</td>
-							<td class="bold">{{points}}</td>
-							<td>{{gap}}</td>
-						</tr>
-						{{/with}}{{/each}}
-					</tbody>
+			</div>
+			<div class="table-scroll-indicator" id="tableScrollIndicator" aria-hidden="true">
+				<div class="table-scroll-indicator__content"></div>
+			</div>
+			<div class="table-scroll-wrapper">
+			<table id="tableTeams">
+				<thead>
+					<tr>
+						<th class="th-pos"></th>
+						<th class="th-change"></th>
+						<th class="th-team-name">{{localization.team}}</th>
+						<th class="th-budget">💰</th>
+						<th class="th-location"><img src="./assets/country-flags/mco.png" /></th>
+						<th class="th-location"><img src="./assets/country-flags/swe.png" /></th>
+						<th class="th-location"><img src="./assets/country-flags/usa.png" /></th>
+						<th class="th-location"><img src="./assets/country-flags/arg.png" /></th>
+						<th class="th-location"><img src="./assets/country-flags/pol.png" /></th>
+						<th class="th-location"><img src="./assets/country-flags/deu.png" /></th>
+						<th class="th-location"><img src="./assets/country-flags/nzl.png" /></th>
+						<th class="th-location"><img src="./assets/country-flags/aus.png" /></th>
+						<th class="th-points">{{localization.points}}</th>
+						<th class="th-gap">{{localization.gap}}</th>
+					</tr>
+				</thead>
+				<tbody>
+					{{#each teams}}{{#with this}}
+					<tr>
+						<td class="td-pos">{{rank}}</td>
+						<td class="td-change">
+							{{#if positive}}
+							<span class="positive"><i class="arrow up"></i>&nbsp;{{evolution}}</span>
+							{{/if}}
+							{{#if neutral}}
+							<span class="neutral">=</span>
+							{{/if}}
+							{{#if negative}}
+							<span class="negative"><i class="arrow down"></i>&nbsp;{{evolution}}</span>
+							{{/if}}
+						</td>
+						<td class="td-team-name text-left bold">{{name}} <small>( {{drivers}} )</small></td>
+						<td class="td-budget">${{budget}}</td>
+						<td class="td-result">{{[MONTE CARLO]}}</td>
+						<td class="td-result">{{VÄRMLAND}}</td>
+						<td class="td-result">{{[NEW ENGLAND]}}</td>
+						<td class="td-result">{{[CATAMARCA PROVINCE]}}</td>
+						<td class="td-result">{{[ŁĘCZNA COUNTY]}}</td>
+						<td class="td-result">{{[BAUMHOLDER]}}</td>
+						<td class="td-result">{{[HAWKES BAY]}}</td>
+						<td class="td-result">{{[MONARO]}}</td>
+						<td class="td-points bold">{{points}}</td>
+						<td class="td-gap">{{gap}}</td>
+					</tr>
+					{{/with}}{{/each}}
+				</tbody>
 
-				</table>
+			</table>
+			</div>
 
 
 			</div>
@@ -84,19 +101,19 @@
 				<table id="bestBuys">
 					<thead>
 						<tr>
-							<th>{{localization.driver}}</th>
-							<th>{{localization.cost}}</th>
-							<th>{{localization.profit}}</th>
-							<th>{{localization.value}}</th>
+							<th class="th-driver">{{localization.driver}}</th>
+							<th class="th-cost">{{localization.cost}}</th>
+							<th class="th-profit">{{localization.profit}}</th>
+							<th class="th-value">{{localization.value}}</th>
 						</tr>
 					</thead>
 					<tbody>
 						{{#each bestBuy}}{{#with this}}
 						<tr>
-							<td class="text-left bold">{{name}}</td>
-							<td>{{cost}}</td>
-							<td>{{total}}</td>
-							<td class="bold">{{value}}</td>
+							<td class="td-driver text-left bold">{{name}}</td>
+							<td class="td-cost">{{cost}}</td>
+							<td class="td-profit">{{total}}</td>
+							<td class="td-value bold">{{value}}</td>
 						</tr>
 						{{/with}}{{/each}}
 					</tbody>
@@ -120,6 +137,7 @@
 			}
 		}
 	</script>
+	<script src="./assets/js/app.js" defer></script>
 </body>
 
 </html>
