@@ -106,6 +106,21 @@ const uploadCSS = async ({ bucket, championshipFolder }) => {
   debug(`uploaded style.css to s3`);
 };
 
+const uploadJS = async ({ bucket, championshipFolder }) => {
+  const file = "./assets/js/app.js";
+  const remoteJSFolder = championshipFolder
+    ? `${championshipFolder}/assets/js`
+    : "assets/js";
+  const key = `${remoteJSFolder}/app.js`;
+  await uploadToS3({
+    file,
+    key,
+    bucket,
+    contentType: "application/javascript"
+  });
+  debug(`uploaded app.js to s3`);
+};
+
 const uploadCache = async ({
   directory,
   bucket,
@@ -181,6 +196,7 @@ const upload = async (bucket, championshipFolder) => {
   });
 
   await uploadCSS({ bucket, championshipFolder });
+  await uploadJS({ bucket, championshipFolder });
 };
 
 const downloadFiles = async (bucket, keys) => {

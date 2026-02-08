@@ -29,3 +29,4 @@ src/state/jrc/new_fantasyTeams.json
 /clubs.json
 /clubs.csv
 .vscode/settings.json
+.playwright-mcp
