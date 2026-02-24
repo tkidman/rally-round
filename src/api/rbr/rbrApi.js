@@ -63,10 +63,9 @@ const loginWithPuppeteer = async () => {
   try {
     const page = await browser.newPage();
     debug("navigating to RSF login page");
-    await page.goto(
-      `${RSF_BASE_URL}/account2.php?centerbox=bejelentkezes2`,
-      { waitUntil: "networkidle2" }
-    );
+    await page.goto(`${RSF_BASE_URL}/account2.php?centerbox=bejelentkezes2`, {
+      waitUntil: "networkidle2"
+    });
 
     const usernameSelector = 'input[name="l_username"]';
     const passwordSelector = 'input[name="l_pass"]';
@@ -77,10 +76,13 @@ const loginWithPuppeteer = async () => {
 
     debug("submitting RSF login form");
     const loginButton = await page.evaluateHandle(() => {
-      const buttons = Array.from(document.querySelectorAll("button, input[type=submit]"));
-      return buttons.find(el =>
-        el.textContent.toLowerCase().includes("login") ||
-        (el.value && el.value.toLowerCase().includes("login"))
+      const buttons = Array.from(
+        document.querySelectorAll("button, input[type=submit]")
+      );
+      return buttons.find(
+        el =>
+          el.textContent.toLowerCase().includes("login") ||
+          (el.value && el.value.toLowerCase().includes("login"))
       );
     });
     await Promise.all([

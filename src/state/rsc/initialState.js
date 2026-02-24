@@ -87,9 +87,6 @@ const initialState = {
       points
       // cars: ["Peugeot 205 GTI"]
     }
-
   }
 };
 module.exports = initialState;
-
-
