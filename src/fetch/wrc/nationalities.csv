@@ -84,3 +84,92 @@ id,code,name
 86,bo,Bolivian
 87,pe,Peruvian
 88,zm,Zambian
+89,eur,Europe
+90,bb,Barbados
+93,ana,ANA
+94,kz,Kazakhstan
+95,sv,Salvadoran
+97,hn,Honduran
+99,ni,Nicaraguan
+100,pa,Panamanian
+101,sg,Singaporean
+102,zw,Zimbabwean
+103,lb,Lebanese
+104,ad,Andorran
+105,mg,Madagascar
+106,kp,North Korean
+107,np,Nepalese
+108,eg,Egyptian
+109,ir,Iranian
+110,iq,Iraqi
+111,li,Liechtensteiner
+112,md,Moldovan
+113,ma,Moroccan
+114,ph,Filipino
+115,ws,Sammarinese
+116,tt,Trinidadian and Tobagonian
+117,tn,Tunisian
+118,af,Afghan
+119,al,Albanian
+120,dz,Algerian
+121,ao,Angolan
+122,am,Armenian
+123,bd,Bangladeshi
+124,by,Belarusian
+125,bz,Belizean
+126,bj,Beninese
+127,ba,Bosnian
+128,bw,Motswana
+129,bn,Bruneian
+130,bf,Burkinabè
+131,bi,Burundian
+132,kh,Cambodian
+133,cv,Cape Verdean
+134,cf,Central African
+135,td,Chadian
+136,km,Comorian
+137,cu,Cuban
+138,do,Dominican Republic
+139,cg,Congolese
+140,gq,Equatorial Guinean
+141,er,Eritrean
+142,et,Ethiopia
+143,fj,Fijian
+144,ga,Gabonese
+145,gm,Gambian
+146,ge,Georgian
+147,gn,Guinean
+148,gw,Bissau-Guinean
+149,ht,Haitian
+150,xk,Kosovar
+151,kg,Kyrgyz
+152,la,Laos
+153,ls,Mosotho
+154,lr,Liberian
+155,ly,Libyan
+156,mw,Malawian
+157,ml,Malian
+158,mr,Mauritanian
+159,mn,Mongolian
+160,me,Montenegrin
+161,mz,Mozambican
+162,mm,Myanmar
+163,na,Namibian
+164,ng,Nigerien
+166,rw,Rwandan
+167,sn,Senegalese
+168,sl,Sierra Leonean
+169,so,Somali
+170,ss,South Sudanese
+171,lk,Sri Lankan
+172,sd,Sudanese
+173,sr,Surinamese
+174,sy,Syrian
+175,tj,Tajikistani
+176,tz,Tanzanian
+177,tg,Togolese
+178,to,Tongan
+179,tm,Turkmenistani
+180,ug,Ugandan
+181,uz,Uzbekistani
+182,vn,Vietnamese
