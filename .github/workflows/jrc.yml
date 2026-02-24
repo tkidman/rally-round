@@ -17,6 +17,8 @@ jobs:
       GMAIL_CLIENT_ID: ${{ secrets.GMAIL_CLIENT_ID }}
       GMAIL_CLIENT_SECRET: ${{ secrets.GMAIL_CLIENT_SECRET }}
       GMAIL_REFRESH_TOKEN: ${{ secrets.GMAIL_REFRESH_TOKEN }}
+      RSF_USERNAME: ${{ secrets.RSF_USERNAME }}
+      RSF_PASSWORD: ${{ secrets.RSF_PASSWORD }}
       DEBUG: tkidman:*
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -29,24 +31,24 @@ jobs:
           node-version: 20.x
       - name: npm install
         run: npm install
-      - name: jrc-themed
-        if: always()
-        run: CLUB=jrc-themed node --unhandled-rejections=strict ./runner.js
+      # - name: jrc-themed
+      #   if: always()
+      #   run: CLUB=jrc-themed node --unhandled-rejections=strict ./runner.js
 #      - name: jrc-worldcup
 #        if: always()
 #        run: CLUB=jrc-worldcup node --unhandled-rejections=strict ./runner.js
-      - name: jrc-acr
-        if: always()
-        run: CLUB=jrc-acr node --unhandled-rejections=strict ./runner.js
+      # - name: jrc-acr
+      #   if: always()
+      #   run: CLUB=jrc-acr node --unhandled-rejections=strict ./runner.js
       # - name: checker
       #   if: always()
       #   run: node --unhandled-rejections=strict ./checker.js
 #      - name: jrc-rbr
 #        if: always()
 #        run: CLUB=jrc-rbr node --unhandled-rejections=strict ./runner.js
-#      - name: rsc
-#        if: always()
-#        run: CLUB=rsc node --unhandled-rejections=strict ./runner.js
+      - name: rsc
+        if: always()
+        run: CLUB=rsc node --unhandled-rejections=strict ./runner.js
 #      - name: jrc-modern
 #        if: always()
 #        run: CLUB=jrc-modern node --unhandled-rejections=strict ./runner.js

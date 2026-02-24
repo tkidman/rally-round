@@ -1,90 +1,48 @@
 const rallies = [
   {
-    eventIds: [84045],
-    endTime: "2025-06-17 22:00",
-    locationName: "Round 1",
-    locationFlag: "RC",
-    numStages: 8
-    // enduranceRoundMultiplier: 2
-  },
-  {
-    eventIds: [84361],
-    endTime: "2025-06-24 22:00",
-    locationName: "Round 2",
-    locationFlag: "RC",
-    numStages: 9
-    // enduranceRoundMultiplier: 2
-  },
-  {
-    eventIds: [84654],
-    endTime: "2025-07-01 22:00",
-    locationName: "Round 3",
-    locationFlag: "RC",
-    numStages: 8
-    // enduranceRoundMultiplier: 2
-  },
-  {
-    eventIds: [84879],
-    endTime: "2025-07-08 22:00",
-    locationName: "Final Round",
-    locationFlag: "RC",
+    eventIds: [94754],
+    endTime: "2026-03-02 22:00",
+    locationName: "Rally Monte Carlo",
+    locationFlag: "MC",
     numStages: 8
     // enduranceRoundMultiplier: 2
   }
 ];
 
-const overall = [];
-for (let i = 11; i >= 1; i--) {
-  overall.push(i);
-}
 const points = {
-  overall
+  // overall: [20, 15, 12, 10, 8, 6, 4, 3, 2, 1]
+  overall: [20, 15, 12, 10, 8, 6, 4, 3, 2, 1]
 };
-
-const round3Points = [];
-for (let i = 1; i <= 11; i++) {
-  round3Points.push(1);
-}
-
-const round2Points = [];
-for (let i = 1; i <= 15; i++) {
-  round2Points.push(1);
-}
-
-const round1Points = [];
-for (let i = 1; i <= 19; i++) {
-  round1Points.push(1);
-}
 
 const initialState = {
   pointsForDNF: false,
   websiteName: "rsc-results",
   useStandingsForHome: true,
-  showLivePoints: true,
-  showLivePointsDaysRemaining: 6,
+  showLivePoints: false,
+  showLivePointsDaysRemaining: 4,
   // noSuperRallyPointsMultiplier: 2,
   // dropLowestScoringRoundsNumber: 2,
   // afterDropRoundMessage:
   //   "*After Dropped Rounds: total points after 2 lowest scoring rounds removed - endurance rounds count as 2",
   // sortByDropRoundPoints: true,
   showSuperRallyColumn: true,
-  hideCarColumnInStandings: true,
+  hideCarColumnInStandings: false,
   showCarNameAsTextInStandings: false,
-  showCarNameAsTextInResults: true,
+  showCarNameAsTextInResults: false,
   nullTeamIsPrivateer: true,
   useCarAsTeam: false,
   // useCarClassAsTeam: true,
-  showTeamNameTextColumn: false,
+  showTeamNameTextColumn: true,
   hideTeamLogoColumn: true,
   disableOverall: true,
   teamPointsForPowerstage: false,
   backgroundStyle:
     "background-image: linear-gradient(315deg, #ffffff 0%, #d7e1ec 74%); background-size: cover; background-repeat: no-repeat; background-attachment: fixed;",
   logo: "rsc-guy.png",
-  siteTitlePrefix: "RSC Don't Come Last",
+  siteTitlePrefix: "RSC Season 8",
   hideStageTimesUntilEventEnd: true,
-  usePercentageForPromotionRelegationZones: false,
   historicalSeasonLinks: [
+    { name: "Don't Come Last!", href: "/rsc-dont-come-last" },
     { name: "IRC 2011", href: "/rsc-irc-2011" },
     { name: "Season 7", href: "/rsc-7" },
     { name: "Audi vs Porsche", href: "/rsc-audi-vs-porsche" },
@@ -99,31 +57,39 @@ const initialState = {
     { name: "Season 4", href: "/rsc-4" }
   ],
   divisions: {
-    dontComeLast: {
-      divisionName: "dontComeLast",
-      displayName: "RSC Don't Come Last",
-      disableSameCarValidation: true,
+    rscSeason8: {
+      divisionName: "rscSeason8",
+      displayName: "RSC Season 8",
+      disableSameCarValidation: false,
       // enableSameCarClassValidation: true,
-      // maxDriversScoringPointsForTeam: 2,
+      maxDriversScoringPointsForTeam: 2,
       // filterEntries: { allowedCars: [] },
       rbr: {
         rallies
       },
       manualResults: [],
       events: [],
-      // points,
-      eventPoints: [
-        { overall: round1Points },
-        { overall: round2Points },
-        { overall: round3Points },
-        points
-      ],
-      promotionRelegation: {
-        relegationZone: 12
-      }
+      points
+      // cars: ["Peugeot 205 GTI"]
+    },
+    rscSeason8GolfCup: {
+      divisionName: "rscSeason8GolfCup",
+      displayName: "RSC Season 8 VW Golf Cup",
+      disableSameCarValidation: false,
+      // enableSameCarClassValidation: true,
+      maxDriversScoringPointsForTeam: 2,
+      filterEntries: { allowedCars: ["VW Golf II GTI 16V GrpA"] },
+      rbr: {
+        rallies
+      },
+      manualResults: [],
+      events: [],
+      points
       // cars: ["Peugeot 205 GTI"]
     }
+
   }
 };
-
 module.exports = initialState;
+
+

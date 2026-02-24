@@ -9,6 +9,7 @@ src/state/editor/node_modules
 /src/state/jrc/drivers.csv
 /cached-creds.json
 /tokens.json
+/rsf-creds.json
 .~lock.*
 image.png
 src/visualisation/1test.html
