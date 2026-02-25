@@ -3,7 +3,7 @@ const {
   teamId,
   car,
   name3,
-  country,
+  country
   // division
 } = require("../constants/driverFieldNames");
 
