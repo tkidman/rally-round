@@ -91,7 +91,6 @@ const initialState = {
     rscSeason8GolfCup: {
       divisionName: "rscSeason8GolfCup",
       displayName: "RSC Season 8 VW Golf Cup",
-
       hideTeamStandingsLink: true,
       disableSameCarValidation: false,
       // enableSameCarClassValidation: true,
