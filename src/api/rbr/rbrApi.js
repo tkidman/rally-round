@@ -309,7 +309,7 @@ const fetchHtmlStageResults = async ({
   const cacheFileName = `${cachePath}/${rallyId}_${stageNumber}_results.json`;
 
   if (runtimeCache[cacheFileName]) {
-    return runtimeCache[cacheFileName];
+    return runtimeCache[cacheFileName].map(entry => ({ ...entry }));
   }
 
   if (saveCacheFile) {
