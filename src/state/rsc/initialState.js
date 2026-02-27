@@ -72,9 +72,27 @@ const initialState = {
       points
       // cars: ["Peugeot 205 GTI"]
     },
+    rscSeason8Nations: {
+      divisionName: "rscSeason8Nations",
+      displayName: "RSC Season 8 Nations",
+      overrideTeam: {
+        useNationalityAsTeam: true
+      },
+      hideDriverStandingsLink: true,
+      disableSameCarValidation: false,
+      maxDriversScoringPointsForTeam: 2,
+      rbr: {
+        rallies
+      },
+      manualResults: [],
+      events: [],
+      points
+    },
     rscSeason8GolfCup: {
       divisionName: "rscSeason8GolfCup",
       displayName: "RSC Season 8 VW Golf Cup",
+
+      hideTeamStandingsLink: true,
       disableSameCarValidation: false,
       // enableSameCarClassValidation: true,
       // maxDriversScoringPointsForTeam: 2,

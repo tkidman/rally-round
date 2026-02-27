@@ -52,13 +52,18 @@
     "eslint-plugin-prettier": "^5.5.5",
     "husky": "^4.2.5",
     "jest": "^30.2.0",
+    "lint-staged": "^15.5.2",
     "prettier": "^3.8.1"
   },
   "husky": {
     "skipCI": false,
     "hooks": {
+      "pre-commit": "lint-staged",
       "pre-push": "CLUB=test npm run prepush"
     }
+  },
+  "lint-staged": {
+    "*.js": "eslint --fix"
   },
   "jest": {
     "testEnvironment": "node"

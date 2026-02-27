@@ -437,7 +437,9 @@ const transformForStandingsHTML = (division, type) => {
     backgroundStyle: leagueRef.getBackgroundStyle(),
     logo: leagueRef.league.logo,
     showTeamNameTextColumn: leagueRef.league.showTeamNameTextColumn,
-    hideTeamLogoColumn: leagueRef.league.hideTeamLogoColumn,
+    hideTeamLogoColumn:
+      leagueRef.league.hideTeamLogoColumn &&
+      !useNationalityAsTeam(leagueRef, division),
     localization: getLocalization(),
     team2ColumnName: leagueRef.league.team2ColumnName,
     showTeam2LogoColumn: !!leagueRef.league.team2ColumnName,
@@ -687,7 +689,7 @@ const getHtmlLinks = () => {
   const links = Object.values(league.divisions).reduce((links, division) => {
     const divisionName = division.divisionName;
     const displayName = division.displayName;
-    if (leagueRef.hasTeams) {
+    if (leagueRef.hasTeams && !division.hideTeamStandingsLink) {
       addLinks(links, divisionName, "team", displayName);
     }
     if (!division.hideDriverStandingsLink) {
