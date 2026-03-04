@@ -21,13 +21,13 @@ const initialState = {
   divisions: {
     jrcAcr: {
       divisionName: "jrcAcr",
-      displayName: "ACR Season 1",
+      displayName: "ACR Season 2",
       disableSameCarValidation: true,
       // enableSameCarClassValidation: true,
       // maxDriversScoringPointsForTeam: 2,
       // filterEntries: true,
       manual: {
-        sheetId: "16NMBpzuof5qpctJLhEckplwWj03SAZDDgSC06gpGWkg"
+        sheetId: "1hD1HV5mDAI70wRr0clcpnq3kDz3soNV9BWu55YrVfe8"
       },
       manualResults: [],
       events: [],
