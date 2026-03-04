@@ -6,6 +6,14 @@ const rallies = [
     locationFlag: "MC",
     numStages: 8
     // enduranceRoundMultiplier: 2
+  },
+  {
+    eventIds: [95305],
+    endTime: "2026-03-09 22:00",
+    locationName: "Rally Sweden",
+    locationFlag: "SE",
+    numStages: 8
+    // enduranceRoundMultiplier: 2
   }
 ];
 
