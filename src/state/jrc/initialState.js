@@ -45,20 +45,20 @@ const initialState = {
       wrc: [
         {
           clubId: "158",
-          championshipIds: ["2AbP1zs1r53jDAGE7"],
+          championshipIds: ["q1XaakXNRo32pCzw"],
           includeNextChampionships: true
         }
       ],
       events: [],
       points,
-      manualResults: [],
+      manualResults: []
       // filterEntries: {
       //   matchDivision: true
       // }
-      promotionRelegation: {
-        promotionZone: 40
-        //  relegationZone: -,
-      }
+      // promotionRelegation: {
+      //   promotionZone: 40
+      //   //  relegationZone: -,
+      // }
     },
     jrc2: {
       displayName: "JRC2",
@@ -67,26 +67,27 @@ const initialState = {
       wrc: [
         {
           clubId: "26",
-          championshipIds: ["4EsHU6S5GHBSWwCom"],
+          championshipIds: ["BVezVbJWxTQHh6v5"],
           includeNextChampionships: true
         }
       ],
       events: [],
       points,
-      // cars: [
-      //   "Ford Fiesta R5 MK7 Evo 2",
-      //   "Peugeot 208 T16 R5",
-      //   "ŠKODA Fabia Rally2 Evo",
-      //   "Volkswagen Polo GTI R5"
-      // ],
-      manualResults: [],
+      cars: [
+        "Citroën C3 Rally2",
+        "Ford Fiesta Rally2",
+        "Hyundai i20 N Rally2",
+        "ŠKODA Fabia Rally2 Evo",
+        "Volkswagen Polo GTI R5"
+      ],
+      manualResults: []
       // filterEntries: {
       //   matchDivision: true
       // }
-      promotionRelegation: {
-        promotionZone: 28,
-        relegationZone: 11
-      }
+      // promotionRelegation: {
+      //   promotionZone: 28,
+      //   relegationZone: 11
+      // }
     },
     jrc3: {
       displayName: "JRC3",
@@ -95,24 +96,19 @@ const initialState = {
       wrc: [
         {
           clubId: "27",
-          championshipIds: ["3LmowUZH5mHE37Rps"],
+          championshipIds: ["44W9Y9kLHpUE1TpkR"],
           includeNextChampionships: true
         }
       ],
       events: [],
       points,
-      // cars: [
-      //   "Ford Fiesta MK8 Rally4",
-      //   "Peugeot 208 Rally4",
-      //   "Opel Corsa Rally4",
-      //   "Renault Clio Rally4"
-      // ],
-      manualResults: [],
-      promotionRelegation: {
-        // promotionDoubleZone: -,
-        promotionZone: 24
-        // relegationZone: -
-      }
+      cars: ["Citroën C2 R2 Max", "Opel Adam R2", "Renault Twingo II"],
+      manualResults: []
+      // promotionRelegation: {
+      //   // promotionDoubleZone: -,
+      //   promotionZone: 24
+      //   // relegationZone: -
+      // }
     }
   },
   historicalSeasonLinks: [

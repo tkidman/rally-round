@@ -14,6 +14,14 @@ const rallies = [
     locationFlag: "SE",
     numStages: 8
     // enduranceRoundMultiplier: 2
+  },
+  {
+    eventIds: [95597],
+    endTime: "2026-03-16 22:00",
+    locationName: "Safari Rally",
+    locationFlag: "KE",
+    numStages: 8
+    // enduranceRoundMultiplier: 2
   }
 ];
 

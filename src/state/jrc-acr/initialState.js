@@ -21,7 +21,7 @@ const initialState = {
   divisions: {
     jrcAcr: {
       divisionName: "jrcAcr",
-      displayName: "ACR Season 2",
+      displayName: "ACR 0.3",
       disableSameCarValidation: true,
       // enableSameCarClassValidation: true,
       // maxDriversScoringPointsForTeam: 2,
@@ -45,7 +45,7 @@ const initialState = {
   },
   historicalSeasonLinks: [
     {
-      name: "ACR Season 1",
+      name: "ACR 0.1",
       href: "/acr/acr-1"
     }
   ]
