@@ -24,6 +24,6 @@ jobs:
         with:
           node-version: 20.x
       - run: npm install
-      - run: CLUB=jrc-themed node  --unhandled-rejections=strict ./runner.js
+      - run: CLUB=jrc node  --unhandled-rejections=strict ./runner.js
       # - run: CLUB=jrc node --unhandled-rejections=strict ./runner.js
   
