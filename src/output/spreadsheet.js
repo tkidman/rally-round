@@ -87,7 +87,11 @@ const transformForDriverStandingsSheets = events => {
     ...headerLocations,
     "Points"
   ];
-  const lastEvent = events[events.length - 1];
+  // Note: division.events only contains processed events (future events are in upcomingEvents)
+  const eventsWithStandings = events.filter(
+    e => e.standings && e.standings.driverStandings
+  );
+  const lastEvent = eventsWithStandings[eventsWithStandings.length - 1];
   const rows = lastEvent.standings.driverStandings.map(standing => {
     const { resultsTotalPoints, driver, country, carBrand } =
       getDriverStandingData(standing, events);
@@ -111,7 +115,11 @@ const transformForDriverStandingsSheets = events => {
 const transformForTeamStandingsSheets = events => {
   const headerLocations = getHeaderLocationCodes(events);
   const header = ["Pos", "'+/-", "Team", ...headerLocations, "Points"];
-  const lastEvent = events[events.length - 1];
+  // Note: division.events only contains processed events (future events are in upcomingEvents)
+  const eventsWithStandings = events.filter(
+    e => e.standings && e.standings.teamStandings
+  );
+  const lastEvent = eventsWithStandings[eventsWithStandings.length - 1];
   const rows = lastEvent.standings.teamStandings.map(standing => {
     const { resultsTotalPoints, team } = getTeamStandingData(standing, events);
     const row = [

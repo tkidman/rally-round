@@ -124,6 +124,15 @@
       "type": "boolean",
       "description": "Whether to hide team logo column"
     },
+    "showCarPerformance": {
+      "type": "boolean",
+      "description": "Whether to show car performance card on homepage (default: true)"
+    },
+    "theme": {
+      "type": "string",
+      "enum": ["dark", "red", "green", "orange"],
+      "description": "Color theme for the website (default: blue/purple if not set). Options: dark, red, green, orange"
+    },
     "enableDnsPenalty": {
       "type": "boolean",
       "description": "Whether to enable DNS penalty"

@@ -46,7 +46,7 @@ const getCarByName = carName => {
       debug(`Unable to find brand for car: ${carName}, setting to unknown`);
     }
     carsByName[lowerCarName] = {
-      brand: brand || "unknown",
+      brand: brand ? brand.toLowerCase() : "unknown",
       class: "unknown"
     };
   }

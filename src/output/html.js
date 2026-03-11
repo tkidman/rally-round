@@ -140,46 +140,47 @@ const getNavigationHTML = (
   });
 };
 
-const writeHomeHTML = links => {
-  const league = leagueRef.league;
-
-  // Get active events from all divisions
+// Helper functions for home page data aggregation
+const getActiveEvents = divisions => {
   const activeEvents = [];
-  Object.entries(league.divisions || {}).forEach(([divisionName, division]) => {
+  Object.entries(divisions || {}).forEach(([divisionName, division]) => {
     if (division.events && division.events.length > 0) {
-      division.events.forEach(event => {
-        if (event.status === eventStatuses.active) {
+      division.events.forEach((event, eventIndex) => {
+        if (event.eventStatus === eventStatuses.active) {
+          const eventLocation = getLocation(event);
           activeEvents.push({
-            name: event.name,
-            location: (event.location && event.location.countryName) || "",
+            name: event.name || event.locationName || eventLocation.countryName,
+            location: eventLocation.countryName || "",
             division: division.displayName || divisionName,
+            divisionId: division.divisionName || divisionName,
+            eventIndex: eventIndex,
             showingLivePoints: leagueRef.showLivePoints()
           });
         }
       });
     }
   });
+  return activeEvents;
+};
 
-  // Extract division car restrictions and rules
-  const divisionInfo = Object.entries(league.divisions || {})
-    .map(([divisionName, division]) => {
-      const info = {
-        name: division.displayName || divisionName,
-        cars: division.cars || null,
-        excludedCars: division.excludedCars || null
-      };
-      return info;
-    })
+const getDivisionInfo = divisions => {
+  return Object.entries(divisions || {})
+    .map(([divisionName, division]) => ({
+      name: division.displayName || divisionName,
+      cars: division.cars || null,
+      excludedCars: division.excludedCars || null
+    }))
     .filter(info => info.cars || info.excludedCars);
+};
 
-  // Basic rules
+const getRules = league => {
   const firstDivisionKey = Object.keys(league.divisions || {})[0];
   const firstDivision =
     firstDivisionKey && league.divisions
       ? league.divisions[firstDivisionKey]
       : null;
 
-  const rules = {
+  return {
     dropRounds: league.dropLowestScoringRoundsNumber || 0,
     powerStagePoints:
       (firstDivision &&
@@ -193,41 +194,354 @@ const writeHomeHTML = links => {
         firstDivision.points.overall.slice(0, 5)) ||
       []
   };
+};
 
-  const data = {
-    logo: league.logo,
-    siteTitlePrefix: league.siteTitlePrefix,
-    activeEvents,
-    divisionInfo,
-    rules,
-    // Top-3 drivers per division (tier)
-    top3ByDivision: Object.keys(league.divisions || {}).map(divName => {
-      const division = league.divisions[divName];
+const getTop3ByDivision = divisions => {
+  return Object.keys(divisions || {}).map(divName => {
+    const division = divisions[divName];
+    try {
+      const standingsData = transformForStandingsHTML(division, "driver");
+      const top3 = (standingsData.rows || []).slice(0, 3).map(row => ({
+        ...row,
+        hasTeamLogo: row.teamLogo && !row.teamLogo.includes("unknown.png")
+      }));
+      return {
+        divisionName: standingsData.title || divName,
+        divisionId: division.divisionName || divName,
+        top3
+      };
+    } catch (e) {
+      debug(`failed to compute top3 for division ${divName}: ${e}`);
+      return {
+        divisionName: division.displayName || divName,
+        divisionId: divName,
+        top3: []
+      };
+    }
+  });
+};
+
+const getLastCompletedEvents = divisions => {
+  const lastEventsByDivision = [];
+
+  Object.entries(divisions || {}).forEach(([divName, division]) => {
+    let mostRecentInDivision = null;
+    let mostRecentDate = null;
+    let mostRecentEventIndex = null;
+
+    (division.events || []).forEach((event, eventIndex) => {
+      if (event.eventStatus === eventStatuses.finished) {
+        const eventDate = event.startDate ? new Date(event.startDate) : null;
+        if (!mostRecentDate || (eventDate && eventDate > mostRecentDate)) {
+          mostRecentDate = eventDate;
+          mostRecentEventIndex = eventIndex;
+          const winner = event.results?.driverResults?.[0];
+          if (winner) {
+            const { driver, country } = getDriverData(winner.name, divName);
+            const eventLocation = getLocation(event);
+            mostRecentInDivision = {
+              name:
+                event.name || event.locationName || eventLocation.countryName,
+              location: eventLocation.countryName,
+              locationCode: eventLocation.countryCode,
+              divisionName: division.displayName || divName,
+              divisionId: division.divisionName || divName,
+              eventIndex: mostRecentEventIndex,
+              winner: driver.name,
+              winnerCountry: country.code,
+              margin:
+                event.results.driverResults[1]?.entry?.totalDiff || "Dominant",
+              totalEntries: event.results.driverResults.length
+            };
+          }
+        }
+      }
+    });
+
+    if (mostRecentInDivision) {
+      lastEventsByDivision.push(mostRecentInDivision);
+    }
+  });
+
+  return lastEventsByDivision;
+};
+
+const getChampionshipBattles = divisions => {
+  return Object.keys(divisions || {})
+    .map(divName => {
+      const division = divisions[divName];
       try {
         const standingsData = transformForStandingsHTML(division, "driver");
-        const top3 = (standingsData.rows || []).slice(0, 3).map(row => ({
-          ...row,
-          hasTeamLogo: row.teamLogo && !row.teamLogo.includes("unknown.png")
-        }));
+        const rows = standingsData.rows || [];
+        if (rows.length < 2) return null;
+
+        const leader = rows[0];
+        const secondPlace = rows[1];
+        const gap =
+          leader.standing.totalPoints - secondPlace.standing.totalPoints;
+
+        const completedEvents = (division.events || []).filter(
+          e => e.eventStatus === eventStatuses.finished
+        ).length;
+        const totalEvents =
+          (division.events || []).length +
+          (division.upcomingEvents?.length || 0);
+        const eventsRemaining = totalEvents - completedEvents;
+
+        const maxPointsPerEvent = division.points?.overall?.[0] || 25;
+        const totalPointsRemaining = eventsRemaining * maxPointsPerEvent;
+
         return {
           divisionName: standingsData.title || divName,
           divisionId: division.divisionName || divName,
-          top3
+          leader: leader.driver.name,
+          leaderCountry: leader.country.code,
+          leaderPoints: leader.standing.totalPoints,
+          secondPlace: secondPlace.driver.name,
+          secondPlaceCountry: secondPlace.country.code,
+          secondPlacePoints: secondPlace.standing.totalPoints,
+          gap,
+          eventsRemaining,
+          mathematicallyOpen: gap < totalPointsRemaining * 0.5,
+          tightBattle: gap < maxPointsPerEvent * 0.5
         };
       } catch (e) {
-        debug(`failed to compute top3 for division ${divName}: ${e}`);
-        return {
-          divisionName: division.displayName || divName,
-          divisionId: divName,
-          top3: []
-        };
+        debug(`championship battle for division ${divName}: ${e}`);
+        return null;
       }
-    }),
+    })
+    .filter(Boolean);
+};
+
+const getNextEvent = divisions => {
+  let nextEvent = null;
+
+  Object.entries(divisions || {}).forEach(([divName, division]) => {
+    const upcoming = division.upcomingEvents?.[0];
+
+    if (upcoming && !nextEvent) {
+      const upcomingLocation = getLocation(upcoming);
+
+      nextEvent = {
+        name:
+          upcoming.name ||
+          upcoming.locationName ||
+          upcomingLocation.countryName,
+        location: upcomingLocation.countryName || "",
+        locationCode: upcomingLocation.countryCode,
+        divisionName: division.displayName || divName,
+        divisionId: division.divisionName || divName,
+        startDate: upcoming.startDate
+          ? moment(upcoming.startDate).format("MMMM D, YYYY [at] h:mm A")
+          : null
+      };
+    }
+  });
+
+  return nextEvent;
+};
+
+const getCarStats = divisions => {
+  const carPerformance = {};
+
+  Object.entries(divisions || {}).forEach(([divName, division]) => {
+    division.events.forEach(event => {
+      if (
+        event.eventStatus === eventStatuses.finished &&
+        event.results?.driverResults
+      ) {
+        event.results.driverResults.forEach((result, index) => {
+          const carName = result.entry?.vehicleName;
+          if (!carName) return;
+
+          if (!carPerformance[carName]) {
+            carPerformance[carName] = {
+              wins: 0,
+              podiums: 0,
+              entries: 0,
+              totalPoints: 0
+            };
+          }
+
+          carPerformance[carName].entries++;
+          if (index === 0) carPerformance[carName].wins++;
+          if (index < 3) carPerformance[carName].podiums++;
+          carPerformance[carName].totalPoints += result.totalPoints || 0;
+        });
+      }
+    });
+  });
+
+  const sortedCars = Object.entries(carPerformance)
+    .map(([name, stats]) => ({
+      name,
+      ...stats,
+      avgPoints: (stats.totalPoints / stats.entries).toFixed(1),
+      winRate: ((stats.wins / stats.entries) * 100).toFixed(1)
+    }))
+    .sort((a, b) => b.wins - a.wins || b.avgPoints - a.avgPoints);
+
+  return {
+    mostWins: sortedCars[0] || null,
+    bestAverage: sortedCars.sort((a, b) => b.avgPoints - a.avgPoints)[0] || null
+  };
+};
+
+const getFormGuide = divisions => {
+  const hotDrivers = [];
+
+  Object.entries(divisions || {}).forEach(([divName, division]) => {
+    const driverForm = {};
+
+    const recentEvents = division.events
+      .filter(e => e.eventStatus === eventStatuses.finished)
+      .slice(-3);
+
+    recentEvents.forEach(event => {
+      event.results?.driverResults?.forEach((result, index) => {
+        const driverName = result.name;
+        if (!driverForm[driverName]) {
+          driverForm[driverName] = {
+            recentFinishes: [],
+            wins: 0,
+            podiums: 0
+          };
+        }
+
+        driverForm[driverName].recentFinishes.push(index + 1);
+        if (index === 0) driverForm[driverName].wins++;
+        if (index < 3) driverForm[driverName].podiums++;
+      });
+    });
+
+    Object.entries(driverForm)
+      .filter(([_, form]) => form.wins >= 2 || form.podiums >= 3)
+      .forEach(([name, form]) => {
+        const { driver, country } = getDriverData(name, divName);
+        hotDrivers.push({
+          name: driver.name,
+          country: country.code,
+          wins: form.wins,
+          podiums: form.podiums,
+          recentFinishes: form.recentFinishes,
+          divisionName: division.displayName || divName
+        });
+      });
+  });
+
+  return hotDrivers
+    .sort((a, b) => b.wins - a.wins || b.podiums - a.podiums)
+    .slice(0, 3);
+};
+
+const getSeasonStats = divisions => {
+  const divisionStats = [];
+
+  Object.entries(divisions || {}).forEach(([divName, division]) => {
+    let completedEvents = 0;
+    let totalEntries = 0;
+    let totalDNFs = 0;
+    let closestFinish = { margin: Infinity, event: null };
+
+    division.events.forEach(event => {
+      if (event.eventStatus === eventStatuses.finished) {
+        completedEvents++;
+        const results = event.results?.driverResults || [];
+        totalEntries += results.length;
+
+        const dnfs = results.filter(r => r.entry?.isDnfEntry).length;
+        totalDNFs += dnfs;
+
+        if (results.length >= 2 && results[1].entry?.totalDiff) {
+          try {
+            const margin = timeToSeconds(results[1].entry.totalDiff);
+            if (margin < closestFinish.margin) {
+              const { driver: winner } = getDriverData(
+                results[0].name,
+                divName
+              );
+              const { driver: secondPlace } = getDriverData(
+                results[1].name,
+                divName
+              );
+              const eventLocation = getLocation(event);
+              closestFinish = {
+                margin: results[1].entry.totalDiff,
+                event:
+                  event.name || event.locationName || eventLocation.countryName,
+                location: eventLocation.countryName,
+                winner: winner.name,
+                secondPlace: secondPlace.name
+              };
+            }
+          } catch (e) {
+            // Skip events with malformed totalDiff times
+            debug(`Could not parse totalDiff for closest finish: ${e.message}`);
+          }
+        }
+      }
+    });
+
+    const avgEntriesPerEvent =
+      completedEvents > 0 ? Math.round(totalEntries / completedEvents) : 0;
+    const dnfRate =
+      totalEntries > 0 ? ((totalDNFs / totalEntries) * 100).toFixed(1) : 0;
+
+    const totalEvents =
+      division.events.length + (division.upcomingEvents?.length || 0);
+
+    divisionStats.push({
+      divisionName: division.displayName || divName,
+      totalEvents,
+      completedEvents,
+      eventsRemaining: totalEvents - completedEvents,
+      avgEntriesPerEvent,
+      dnfRate,
+      closestFinish: closestFinish.event ? closestFinish : null
+    });
+  });
+
+  return divisionStats;
+};
+
+const transformForHomeHTML = league => {
+  return {
+    logo: league.logo,
+    siteTitlePrefix: league.siteTitlePrefix,
+    activeEvents: getActiveEvents(league.divisions),
+    endTime: leagueRef.endTime,
+    activeCountry: leagueRef.activeCountryCode,
+    divisionInfo: getDivisionInfo(league.divisions),
+    rules: getRules(league),
+    top3ByDivision: getTop3ByDivision(league.divisions),
     historicalSeasonLinks: league.historicalSeasonLinks || [],
     showTeamNameTextColumn: league.showTeamNameTextColumn,
     hideTeamLogoColumn: league.hideTeamLogoColumn,
-    localization: getLocalization()
+    showCarPerformance: league.showCarPerformance !== false, // default true
+    localization: getLocalization(),
+    lastCompletedEvents: getLastCompletedEvents(league.divisions),
+    championshipBattles: getChampionshipBattles(league.divisions),
+    nextEvent: getNextEvent(league.divisions),
+    carStats: getCarStats(league.divisions),
+    formGuide: getFormGuide(league.divisions),
+    seasonStats: getSeasonStats(league.divisions)
   };
+};
+
+const writeHomeHTML = links => {
+  const league = leagueRef.league;
+
+  // Add home link for navigation
+  links.home = [
+    {
+      name: "home",
+      link: league.siteTitlePrefix,
+      href: "./index.html",
+      active: false
+    }
+  ];
+
+  const data = transformForHomeHTML(league);
 
   const homeTemplateFile = `${templatePath}/home.hbs`;
   if (!fs.existsSync(homeTemplateFile)) {
@@ -244,8 +558,9 @@ const writeHomeHTML = links => {
     body: bodyHtml,
     pageTitle,
     logo: league.logo,
+    theme: league.theme,
     backgroundStyle: leagueRef.getBackgroundStyle(),
-    navigation: getNavigationHTML("", "", links, null)
+    navigation: getNavigationHTML("home", "home", links, null)
   });
 
   fs.writeFileSync(`./${outputPath}/website/index.html`, out);
@@ -310,7 +625,8 @@ const writeStandingsHTML = (division, type, links) => {
     pageTitle,
     navigation: data.navigation,
     backgroundStyle: data.backgroundStyle,
-    logo: leagueRef.league.logo
+    logo: leagueRef.league.logo,
+    theme: leagueRef.league.theme
   });
 
   fs.writeFileSync(
@@ -368,9 +684,18 @@ const getAfterDropRoundMessage = () => {
 const transformForStandingsHTML = (division, type) => {
   const events = division.events;
   const headerLocations = getHeaderLocations(events);
-  let lastEvent = events[events.length - 1];
-  if (leagueRef.endTime && !leagueRef.showLivePoints() && events.length > 1) {
-    lastEvent = events[events.length - 2];
+  // Note: division.events only contains processed events (future events are in upcomingEvents)
+  // but we still filter as a safety check for events without standings
+  const eventsWithStandings = events.filter(
+    e => e.standings && e.standings[`${type}Standings`]
+  );
+  let lastEvent = eventsWithStandings[eventsWithStandings.length - 1];
+  if (
+    leagueRef.endTime &&
+    !leagueRef.showLivePoints() &&
+    eventsWithStandings.length > 1
+  ) {
+    lastEvent = eventsWithStandings[eventsWithStandings.length - 2];
   }
   const lastEventStandings = lastEvent.standings[`${type}Standings`];
   const rows = lastEventStandings.map((standing, standingIndex) => {
@@ -627,7 +952,8 @@ const writeDriverResultsHTML = ({
     pageTitle,
     navigation: data.navigation,
     backgroundStyle: data.backgroundStyle,
-    logo: leagueRef.league.logo
+    logo: leagueRef.league.logo,
+    theme: leagueRef.league.theme
   });
 
   fs.writeFileSync(
@@ -758,7 +1084,7 @@ const writeAllHTML = () => {
 
   const links = getHtmlLinks();
   const league = leagueRef.league;
-  if (!league.subfolderName && !league.useStandingsForHome) {
+  if (!league.useStandingsForHome) {
     writeHomeHTML(links);
     writeErrorHTML(links);
   }

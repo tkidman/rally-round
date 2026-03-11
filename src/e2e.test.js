@@ -5,6 +5,7 @@ describe("e2e", () => {
   beforeAll(async () => {
     process.env.CLUB = "test-e2e";
     process.env.KEEP_LOCAL_CACHE = true;
+    process.env.USE_RBR_FIXTURE_CACHE = "true";
     const { processAllDivisions } = require("./index");
     const { checkOutputDirs } = require("./output/output");
     const { cachePath } = require("./shared");
@@ -76,5 +77,8 @@ describe("e2e", () => {
     expect(standings).toMatchSnapshot();
   });
 
-  afterAll(() => delete process.env.CLUB);
+  afterAll(() => {
+    delete process.env.CLUB;
+    delete process.env.USE_RBR_FIXTURE_CACHE;
+  });
 });

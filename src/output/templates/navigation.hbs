@@ -2,7 +2,7 @@
   <div class="siteHeader__bar">
     <div class="navLeft navDesktopOnly">
       <div class="dropdown">
-        <a class="brand" href="/index.html" aria-label="Home">
+        <a class="brand" href="./index.html" aria-label="Home">
           <img class="brand__img" src="./assets/{{logo}}" alt="Logo" />
         </a>
 
@@ -103,7 +103,13 @@
     </button>
 
     <div class="navTitle navMobileOnly">
-      <div class="navTitle__main">{{links.active.menu}} - {{links.active.link}}</div>
+      {{#if links.active}}
+        {{#if (eq links.active.menu "home")}}
+          <div class="navTitle__main">{{links.active.link}}</div>
+        {{else}}
+          <div class="navTitle__main">{{links.active.menu}} - {{links.active.link}}</div>
+        {{/if}}
+      {{/if}}
       {{#if endTime}}<div id="countdown" class="countdown"></div>{{/if}}
     </div>
 
@@ -195,13 +201,16 @@
 
     var c1 = document.getElementById("countdown");
     var c2 = document.getElementById("countdown2");
+    var c3 = document.getElementById("homeCountdown");
     if (c1) c1.innerHTML = text;
     if (c2) c2.innerHTML = text;
+    if (c3) c3.innerHTML = text;
 
     if (distance < 0) {
       clearInterval(x);
       if (c1) c1.innerHTML = "Event Ended";
       if (c2) c2.innerHTML = "Event Ended";
+      if (c3) c3.innerHTML = "Event Ended";
     }
   }, 1000);
 </script>

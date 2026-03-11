@@ -4,60 +4,249 @@
       <div class="mb-1">
         <div class="logo d-flex">
           <img src="./assets/{{logo}}" />
-          <h2 class="ml-1">{{siteTitlePrefix}} Home</h2>
+          <h2 class="ml-1">{{siteTitlePrefix}} {{localization.home}}</h2>
         </div>
       </div>
       <div class="home-layout">
         <main class="home-main">
       {{#if activeEvents.length}}
-      <div class="mb-1">
-        <h3>Active Events</h3>
-        {{#each activeEvents}}
-        <div class="card mb-1">
-          <div class="card-header">
-            <h4>{{this.name}}</h4>
+      <div class="home-hero card mb-1">
+        <div class="card-header">
+          <h3>🏁 {{localization.current_event}} {{activeEvents.0.name}}</h3>
+        </div>
+        <div class="card-body">
+          <p><strong>{{activeEvents.0.division}}</strong> - {{activeEvents.0.location}}</p>
+          {{#if endTime}}
+          <div class="home-hero__live mb-1">
+            <img class="flag" src="./assets/country-flags/{{activeCountry}}.png" alt="{{activeCountry}}" />
+            <span id="homeCountdown" class="countdown"></span>
           </div>
-          <div class="card-body">
-            <p><strong>{{this.division}}</strong> - {{this.location}}</p>
-            {{#if this.showingLivePoints}}
-            <p>Live points active</p>
+          {{/if}}
+          <div class="home-actions">
+            <a href="./{{activeEvents.0.divisionId}}-{{activeEvents.0.eventIndex}}-driver-results.html" class="home-btn home-btn--primary">
+              {{localization.view_results}}
+            </a>
+            <a href="./{{activeEvents.0.divisionId}}-driver-standings.html" class="home-btn">
+              {{localization.view_standings}}
+            </a>
+          </div>
+        </div>
+      </div>
+      {{else}}
+      <div class="home-hero card mb-1">
+        <div class="card-header">
+          <h3>{{localization.championship_in_progress}}</h3>
+        </div>
+        <div class="card-body">
+          <p>{{localization.no_events_active}}</p>
+          <div class="home-actions">
+            {{#if top3ByDivision.0.divisionId}}
+            <a href="./{{top3ByDivision.0.divisionId}}-driver-standings.html" class="home-btn home-btn--primary">
+              {{localization.view_standings}}
+            </a>
             {{/if}}
           </div>
         </div>
-        {{/each}}
+      </div>
+      {{/if}}
+
+      {{#if nextEvent}}
+      <div class="card mb-1 next-event-card">
+        <div class="card-header">
+          <h3>📅 {{localization.next_event}} {{nextEvent.name}}</h3>
+        </div>
+        <div class="card-body">
+          <p>
+            <img src="./assets/country-flags/{{nextEvent.locationCode}}.png" class="img-sm" alt="{{nextEvent.locationCode}}" />
+            <strong>{{nextEvent.divisionName}}</strong> - {{nextEvent.location}}
+          </p>
+          {{#if nextEvent.startDate}}
+          <p>{{localization.starts}} {{nextEvent.startDate}}</p>
+          {{/if}}
+        </div>
+      </div>
+      {{/if}}
+
+      <div class="home-cards-grid">
+      {{#if lastCompletedEvents.length}}
+      <div class="card card--full-bg mb-1">
+        <div class="card-header">
+          <h3>🏆 {{localization.last_event_winners}}</h3>
+        </div>
+        <div class="card-body">
+          {{#each lastCompletedEvents}}
+          <div class="last-event-division">
+            <div class="last-event-header">
+              <h4>{{this.divisionName}} - {{this.name}}</h4>
+              <span class="text-muted">{{this.location}}</span>
+            </div>
+            <div class="winner-info">
+              <img src="./assets/country-flags/{{this.winnerCountry}}.png" class="img-sm" alt="{{this.winnerCountry}}" />
+              <strong>{{this.winner}}</strong>
+              <span class="winner-margin">{{../localization.won_by}} {{this.margin}}</span>
+            </div>
+            <div class="last-event-meta">
+              <span class="text-muted">{{this.totalEntries}} {{../localization.entries}}</span>
+              <a href="./{{this.divisionId}}-{{this.eventIndex}}-driver-results.html" class="home-btn-inline">{{../localization.view_results}}</a>
+            </div>
+          </div>
+          {{#unless @last}}<hr class="last-event-separator">{{/unless}}
+          {{/each}}
+        </div>
+      </div>
+      {{/if}}
+
+      {{#if championshipBattles.length}}
+      <div class="card card--full-bg mb-1">
+        <div class="card-header">
+          <h3>⚔️ {{localization.championship_battles}}</h3>
+        </div>
+        <div class="card-body">
+          {{#each championshipBattles}}
+          <div class="battle-item {{#if this.tightBattle}}tight-battle{{/if}}">
+            <h4>{{this.divisionName}}</h4>
+            <div class="battle-leaders">
+              <div class="battle-driver">
+                <img src="./assets/country-flags/{{this.leaderCountry}}.png" class="img-sm" alt="{{this.leaderCountry}}" />
+                <strong>{{this.leader}}</strong>
+                <span class="points">{{this.leaderPoints}} {{../localization.pts}}</span>
+              </div>
+              <div class="battle-gap">
+                <span class="gap-value">{{this.gap}} {{../localization.pt_gap}}</span>
+                {{#if this.tightBattle}}
+                <span class="gap-status tight">{{../localization.tight}}</span>
+                {{else if this.mathematicallyOpen}}
+                <span class="gap-status">{{../localization.still_open}}</span>
+                {{else}}
+                <span class="gap-status comfortable">{{../localization.comfortable_lead}}</span>
+                {{/if}}
+              </div>
+              <div class="battle-driver">
+                <img src="./assets/country-flags/{{this.secondPlaceCountry}}.png" class="img-sm" alt="{{this.secondPlaceCountry}}" />
+                {{this.secondPlace}}
+                <span class="points">{{this.secondPlacePoints}} {{../localization.pts}}</span>
+              </div>
+            </div>
+            <p class="battle-remaining">{{this.eventsRemaining}} {{../localization.events_remaining}}</p>
+            <a href="./{{this.divisionId}}-driver-standings.html" class="home-btn-inline">{{../localization.view_standings}}</a>
+          </div>
+          {{#unless @last}}<hr class="last-event-separator">{{/unless}}
+          {{/each}}
+        </div>
+      </div>
+      {{/if}}
+      </div>
+
+      {{#if formGuide.length}}
+      <div class="card mb-1">
+        <div class="card-header">
+          <h3>🔥 {{localization.hot_streaks}}</h3>
+        </div>
+        <div class="card-body">
+          {{#each formGuide}}
+          <div class="form-guide-item">
+            <div class="form-guide-driver">
+              <img src="./assets/country-flags/{{this.country}}.png" class="img-sm" alt="{{this.country}}" />
+              <strong>{{this.name}}</strong>
+              <span class="division-badge">{{this.divisionName}}</span>
+            </div>
+            <div class="form-guide-stats">
+              <span>{{this.wins}} {{../localization.wins}} • {{this.podiums}} {{../localization.podiums}} {{../localization.in_last_3_events}}</span>
+            </div>
+            <div class="form-guide-recent">
+              {{../localization.recent_finishes}} {{#each this.recentFinishes}}{{this}}{{#unless @last}}, {{/unless}}{{/each}}
+            </div>
+          </div>
+          {{#unless @last}}<hr class="last-event-separator">{{/unless}}
+          {{/each}}
+        </div>
+      </div>
+      {{/if}}
+
+      {{#if showCarPerformance}}
+      {{#if carStats}}
+      <div class="card mb-1">
+        <div class="card-header">
+          <h3>🏎️ {{localization.car_performance}}</h3>
+        </div>
+        <div class="card-body">
+          {{#if carStats.mostWins}}
+          <div class="car-stat-item">
+            <h4>{{localization.most_wins}}</h4>
+            <p><strong>{{carStats.mostWins.name}}</strong></p>
+            <p>{{carStats.mostWins.wins}} {{localization.wins}} • {{carStats.mostWins.podiums}} {{localization.podiums}} • {{carStats.mostWins.winRate}}% {{localization.win_rate}}</p>
+          </div>
+          {{/if}}
+          {{#if carStats.bestAverage}}
+          <div class="car-stat-item">
+            <h4>{{localization.best_average_performance}}</h4>
+            <p><strong>{{carStats.bestAverage.name}}</strong></p>
+            <p>{{carStats.bestAverage.avgPoints}} {{localization.avg_points}} • {{carStats.bestAverage.entries}} {{localization.entries}}</p>
+          </div>
+          {{/if}}
+        </div>
+      </div>
+      {{/if}}
+      {{/if}}
+
+      {{#if seasonStats.length}}
+      <div class="card mb-1">
+        <div class="card-header">
+          <h3>📊 {{localization.season_statistics}}</h3>
+        </div>
+        <div class="card-body">
+          {{#each seasonStats}}
+          <div class="season-stats-division">
+            <h4>{{this.divisionName}}</h4>
+            <div class="season-stats-grid">
+              <div class="stat-item">
+                <span class="stat-label">{{../localization.events_completed}}</span>
+                <span class="stat-value">{{this.completedEvents}} / {{this.totalEvents}}</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-label">{{../localization.avg_entries_per_event}}</span>
+                <span class="stat-value">{{this.avgEntriesPerEvent}}</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-label">{{../localization.dnf_rate}}</span>
+                <span class="stat-value">{{this.dnfRate}}%</span>
+              </div>
+              {{#if this.closestFinish}}
+              <div class="stat-item stat-highlight">
+                <span class="stat-label">{{../localization.closest_finish}}</span>
+                <span class="stat-value">{{this.closestFinish.margin}}</span>
+                <span class="stat-detail">{{this.closestFinish.winner}} {{../localization.vs}} {{this.closestFinish.secondPlace}} • {{this.closestFinish.event}}</span>
+              </div>
+              {{/if}}
+            </div>
+          </div>
+          {{#unless @last}}<hr class="last-event-separator">{{/unless}}
+          {{/each}}
+        </div>
       </div>
       {{/if}}
 
       {{#if rules}}
-      <div class="mb-1">
-        <h3>Championship Rules</h3>
-        <div class="card">
-          <div class="card-body">
-            {{#if rules.dropRounds}}
-            <p><strong>Drop Rounds:</strong> {{rules.dropRounds}} lowest scoring {{#if (eq rules.dropRounds 1)}}round{{else}}rounds{{/if}} dropped</p>
-            {{/if}}
-            {{#if rules.overallPointsTop5.length}}
-            <p><strong>Points (Top 5):</strong> {{#each rules.overallPointsTop5}}{{this}}{{#unless @last}}, {{/unless}}{{/each}}</p>
-            {{/if}}
-            {{#if rules.powerStagePoints.length}}
-            <p><strong>Power Stage Points:</strong> {{#each rules.powerStagePoints}}{{this}}{{#unless @last}}, {{/unless}}{{/each}}</p>
-            {{/if}}
-          </div>
+      <div class="card mb-1">
+        <div class="card-header">
+          <h3>{{localization.championship_rules}}</h3>
         </div>
-      </div>
-      {{/if}}
-
-      {{#if divisionInfo.length}}
-      <div class="mb-1">
-        <h3>Division Car Regulations</h3>
-        {{#each divisionInfo}}
-        <div class="card mb-1">
-          <div class="card-header">
-            <h4>{{this.name}}</h4>
-          </div>
-          <div class="card-body">
+        <div class="card-body">
+          {{#if rules.dropRounds}}
+          <p><strong>{{localization.drop_rounds}}</strong> {{rules.dropRounds}} {{#if (eq rules.dropRounds 1)}}{{localization.drop_rounds_singular_text}}{{else}}{{localization.drop_rounds_plural_text}}{{/if}}</p>
+          {{/if}}
+          {{#if rules.overallPointsTop5.length}}
+          <p><strong>{{localization.points_top_5}}</strong> {{#each rules.overallPointsTop5}}{{this}}{{#unless @last}}, {{/unless}}{{/each}}</p>
+          {{/if}}
+          {{#if rules.powerStagePoints.length}}
+          <p><strong>{{localization.power_stage_points}}</strong> {{#each rules.powerStagePoints}}{{this}}{{#unless @last}}, {{/unless}}{{/each}}</p>
+          {{/if}}
+          {{#if divisionInfo.length}}
+          {{#each divisionInfo}}
+          <div class="home-rules__division">
+            <p><strong>{{this.name}}</strong></p>
             {{#if this.cars}}
-            <p><strong>Allowed Cars:</strong></p>
+            <p><strong>{{../localization.allowed_cars}}</strong></p>
             <ul>
               {{#each this.cars}}
               <li>{{this}}</li>
@@ -65,7 +254,7 @@
             </ul>
             {{/if}}
             {{#if this.excludedCars}}
-            <p><strong>Banned Cars:</strong></p>
+            <p><strong>{{../localization.banned_cars}}</strong></p>
             <ul>
               {{#each this.excludedCars}}
               <li>{{this}}</li>
@@ -73,75 +262,59 @@
             </ul>
             {{/if}}
           </div>
+          {{/each}}
+          {{/if}}
         </div>
-        {{/each}}
       </div>
       {{/if}}
 
         {{#if top3ByDivision.length}}
         <div class="top-drivers-by-division mb-1">
-          <h3>Top 3 Drivers — by Division</h3>
+          <h3>{{localization.top_3_drivers_by_division}}</h3>
           <div class="top-drivers-division-grid">
           {{#each top3ByDivision}}
-          <div class="top-drivers-division">
-            <h4 class="top-drivers-division__title">{{this.divisionName}}</h4>
-            <table class="top-drivers-table">
-              <thead>
-                <tr>
-                  <th class="th-pos">{{../localization.pos}}</th>
-                  <th class="th-change"></th>
-                  <th class="th-nat">{{../localization.nat}}</th>
-                  <th class="th-driver">{{../localization.driver}}</th>
-                  <th class="th-points">{{../localization.points}}</th>
-                </tr>
-              </thead>
-              <tbody>
-                {{#each this.top3}}
-                <tr{{#if this.colour}} style="background-color: {{this.colour}}"{{/if}}>
-                  <td class="td-pos">{{this.standing.currentPosition}}</td>
-                  <td class="td-change">
-                    {{#if this.positive}}
-                    <span class="positive">
-                      <i class="arrow up"></i>&nbsp;{{this.standing.positionChange}}
-                    </span>
-                    {{/if}}
-                    {{#if this.neutral}}
-                    <span class="neutral">=</span>
-                    {{/if}}
-                    {{#if this.negative}}
-                    <span class="negative">
-                      <i class="arrow down"></i>&nbsp;{{this.standing.positionChange}}
-                    </span>
-                    {{/if}}
-                  </td>
-                  <td class="td-nat">
-                    <img src="./assets/country-flags/{{this.country.code}}.png" class="img-sm"
-                      alt="{{this.country.code}}" title="{{this.country.code}}" />
-                  </td>
-                  <td class="td-driver text-left bold">{{this.driver.name}}</td>
-                  <td class="td-points bold">{{this.standing.totalPoints}}</td>
-                </tr>
-                {{/each}}
-              </tbody>
-            </table>
+          <div class="card">
+            <div class="card-header">
+              <h3>{{this.divisionName}}</h3>
+            </div>
+            <div class="card-body">
+              <table class="top-drivers-table">
+                <tbody>
+                  {{#each this.top3}}
+                  <tr{{#if this.colour}} style="background-color: {{this.colour}}"{{/if}}>
+                    <td class="td-pos">{{this.standing.currentPosition}}</td>
+                    <td class="td-change">
+                      {{#if this.positive}}
+                      <span class="positive">
+                        <i class="arrow up"></i>&nbsp;{{this.standing.positionChange}}
+                      </span>
+                      {{/if}}
+                      {{#if this.neutral}}
+                      <span class="neutral">=</span>
+                      {{/if}}
+                      {{#if this.negative}}
+                      <span class="negative">
+                        <i class="arrow down"></i>&nbsp;{{this.standing.positionChange}}
+                      </span>
+                      {{/if}}
+                    </td>
+                    <td class="td-nat">
+                      <img src="./assets/country-flags/{{this.country.code}}.png" class="img-sm"
+                        alt="{{this.country.code}}" title="{{this.country.code}}" />
+                    </td>
+                    <td class="td-driver text-left bold">{{this.driver.name}}</td>
+                    <td class="td-points bold">{{this.standing.totalPoints}}</td>
+                  </tr>
+                  {{/each}}
+                </tbody>
+              </table>
+            </div>
           </div>
           {{/each}}
           </div>
         </div>
         {{/if}}
         </main>
-        {{#if historicalSeasonLinks.length}}
-        <aside class="home-aside" aria-label="Previous seasons">
-          <h3 class="home-aside__title">Previous Seasons</h3>
-          <ul class="home-aside__list">
-            {{#each historicalSeasonLinks}}
-            {{#unless @first}}
-            <li><a href="{{this.href}}">{{this.name}}</a></li>
-            {{/unless}}
-            {{/each}}
-          </ul>
-        </aside>
-        {{/if}}
       </div>
     </div>
   </div>

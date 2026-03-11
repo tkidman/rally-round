@@ -192,8 +192,8 @@ template {
 /* Home */
 .home-layout {
   display: flex;
-  gap: 5em;
   width: 100%;
+  min-width: 40vw;
 }
 
 .home-main {
@@ -201,42 +201,27 @@ template {
   min-width: 0;
 }
 
-
-.home-aside {
-  flex: 0 0 auto;
-  margin-top: 39px;
-  width: 12em;
-  padding: 1em;
-  border: 1px solid var(--gray-border);
-  border-radius: var(--radius-md);
-  background-color: var(--gray-light);
+/* Last Event Winners + Championship Battles side by side on larger screens */
+.home-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-bottom: 0.25rem;
 }
 
-.home-aside__title {
-  margin: 0 0 0.5em;
-  font-size: 1rem;
-  font-weight: 600;
-}
+@media (min-width: 900px) {
+  .home-cards-grid {
+    grid-template-columns: 1fr 1fr;
+  }
 
-.home-aside__list {
-  margin: 0;
-  padding-left: 1.25em;
+  .home-cards-grid>*:only-child {
+    grid-column: 1 / -1;
+  }
 }
 
 @media (max-width: 768px) {
   .home-layout {
     flex-direction: column;
-  }
-
-  .home-aside {
-    order: 10;
-    width: 100%;
-    margin-top: 0.5em;
-    padding-top: 1em;
-    border-top: 1px solid var(--gray-border);
-    border-left: none;
-    border-right: none;
-    border-radius: 0;
   }
 }
 
@@ -264,26 +249,34 @@ template {
 
 /* Cards */
 .card {
-  border: 1px solid var(--gray-border);
   border-radius: var(--radius-md);
   overflow: hidden;
 }
 
 .card-header {
   background-color: var(--primary);
-  color: var(--white);
+  color: var(--primary-fg);
   padding: 0.75em 1em;
 }
 
+.card-header h3,
 .card-header h4 {
   margin: 0;
   font-size: 1.25rem;
 }
 
 .card-body {
-  background-color: var(--gray-light);
+  background-color: var(--white);
   padding: 1em;
-  height: 100%;
+}
+
+/* Card with background on the card so it fills the whole area (header stays primary) */
+.card--full-bg {
+  background-color: var(--white);
+}
+
+.card--full-bg .card-body {
+  background: none;
 }
 
 /* Top 3 drivers by division (home): division title + table, side by side (up to 3) */
@@ -299,18 +292,25 @@ template {
   gap: 2em;
 }
 
-.top-drivers-division-grid > * {
+.top-drivers-division-grid>* {
   flex: 1 1 calc((100% - 2em) / 3);
 }
 
-.top-drivers-division__title {
-  margin: 0 0 0.25em;
-  font-size: 1.125rem;
-  font-weight: 600;
+.top-drivers-division-grid .card-body {
+  padding: 0;
 }
 
-.top-drivers-division .top-drivers-table {
+.top-drivers-division-grid .top-drivers-table {
   margin: 0;
+  width: 100%;
+}
+
+.top-drivers-division-grid .top-drivers-table td:first-child {
+  padding-left: 1em;
+}
+
+.top-drivers-division-grid .top-drivers-table td:last-child {
+  padding-right: 1em;
 }
 
 /* =========================
@@ -390,7 +390,7 @@ th>a>img {
 
 thead>tr {
   background-color: var(--primary);
-  color: var(--white);
+  color: var(--primary-fg);
 }
 
 tbody>tr:nth-child(even) {
@@ -541,6 +541,7 @@ tbody>tr:nth-child(odd) {
   --primary-light-2: rgba(83, 85, 191, 0.3);
   --primary-light-3: rgba(83, 85, 191, 0.4);
   --primary-light-4: rgba(83, 85, 191, 0.5);
+  --primary-fg: #ffffff;
   --white: #ffffff;
   --white-95: rgba(255, 255, 255, 0.95);
   --white-25: rgba(255, 255, 255, 0.25);
@@ -588,6 +589,54 @@ tbody>tr:nth-child(odd) {
   /* Sizes */
   --scrollbar-height: 12px;
   --scrollbar-width: 8px;
+}
+
+/* =========================
+   THEME VARIANTS
+   ========================= */
+
+/* Dark theme - Blue Grey with white text */
+.theme-dark {
+  --primary: #263238;
+  --primary-dark: #1a1f23;
+  --primary-light: rgba(38, 50, 56, 0.2);
+  --primary-light-2: rgba(38, 50, 56, 0.3);
+  --primary-light-3: rgba(38, 50, 56, 0.4);
+  --primary-light-4: rgba(38, 50, 56, 0.5);
+  --primary-fg: #ffffff;
+}
+
+/* Red theme - Material Red 800 with white text */
+.theme-red {
+  --primary: #c62828;
+  --primary-dark: #b71c1c;
+  --primary-light: rgba(198, 40, 40, 0.2);
+  --primary-light-2: rgba(198, 40, 40, 0.3);
+  --primary-light-3: rgba(198, 40, 40, 0.4);
+  --primary-light-4: rgba(198, 40, 40, 0.5);
+  --primary-fg: #ffffff;
+}
+
+/* Green theme - Material Green 800 with white text */
+.theme-green {
+  --primary: #2e7d32;
+  --primary-dark: #1b5e20;
+  --primary-light: rgba(46, 125, 50, 0.2);
+  --primary-light-2: rgba(46, 125, 50, 0.3);
+  --primary-light-3: rgba(46, 125, 50, 0.4);
+  --primary-light-4: rgba(46, 125, 50, 0.5);
+  --primary-fg: #ffffff;
+}
+
+/* Orange theme - Material Orange 800 with white text */
+.theme-orange {
+  --primary: #ef6c00;
+  --primary-dark: #e65100;
+  --primary-light: rgba(239, 108, 0, 0.2);
+  --primary-light-2: rgba(239, 108, 0, 0.3);
+  --primary-light-3: rgba(239, 108, 0, 0.4);
+  --primary-light-4: rgba(239, 108, 0, 0.5);
+  --primary-fg: #ffffff;
 }
 
 .siteHeader {
@@ -689,7 +738,7 @@ tbody>tr:nth-child(odd) {
 .navDrop:hover .navBtn,
 .navDrop:focus-within .navBtn {
   background: var(--primary-light);
-  color: var(--white);
+  color: var(--primary-fg);
   border-color: var(--primary-light-3);
 }
 
@@ -773,7 +822,7 @@ tbody>tr:nth-child(odd) {
 .navLink.isActive,
 .navLink.active {
   background: var(--primary-light);
-  color: var(--white);
+  color: var(--primary-fg);
   font-weight: 600;
   border-left: 3px solid var(--primary);
   padding-left: calc(var(--spacing-xl) - 3px);
@@ -1002,7 +1051,7 @@ tbody>tr:nth-child(odd) {
 .flexBox {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  min-height: 50vh;
+  min-height: 60vh;
 }
 
 /* Table scroll container - ensures proper scrolling on all devices */
@@ -1422,5 +1471,348 @@ td.hide-column {
     right: 0;
     width: 100%;
     max-width: 100%;
+  }
+}
+
+/* =========================
+   HOME PAGE
+   ========================= */
+
+/* Hero section */
+.home-hero .card-header {
+  background: var(--primary);
+  color: var(--primary-fg);
+}
+
+/* Live event countdown in hero (flag + time remaining, same as nav) */
+.home-hero__live {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.5em 0;
+}
+
+.home-hero__live .flag {
+  max-height: 25px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgb(0 0 0 / 0.2);
+}
+
+.home-hero__live .countdown {
+  color: black;
+}
+
+/* Action buttons */
+.home-actions {
+  display: flex;
+  gap: 0.75em;
+  margin-top: 1em;
+  flex-wrap: wrap;
+}
+
+.home-btn {
+  display: inline-block;
+  padding: 0.5em 1em;
+  background: var(--white);
+  color: var(--primary);
+  text-decoration: none;
+  border-radius: var(--radius-lg);
+  font-weight: 600;
+  font-size: 0.9em;
+  transition: all 0.2s ease;
+  text-align: center;
+  border: 2px solid var(--primary);
+}
+
+.home-btn:hover {
+  background: var(--primary);
+  color: var(--primary-fg);
+  box-shadow: 0 2px 6px var(--black-2);
+}
+
+.home-btn--primary {
+  background: var(--primary);
+  color: var(--primary-fg);
+}
+
+.home-btn--primary:hover {
+  background: var(--primary-dark);
+  border-color: var(--primary-dark);
+}
+
+.home-live-badge {
+  color: var(--error);
+  font-weight: 600;
+  margin: 0.5em 0;
+}
+
+/* Division car lists inside Championship Rules card */
+.home-rules__division {
+  margin-top: 1em;
+  padding-top: 1em;
+  border-top: 1px solid var(--border);
+}
+
+.home-rules__division:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+/* Last Event Recap */
+.last-event-division {
+  padding: 0.75rem 0;
+}
+
+.last-event-header {
+  margin-bottom: 0.5rem;
+}
+
+.last-event-header h4 {
+  margin: 0 0 0.25rem 0;
+  font-size: 1rem;
+  color: var(--text);
+}
+
+.last-event-separator {
+  margin: 0.75rem 0;
+  border: none;
+  border-top: 1px solid var(--border);
+}
+
+.winner-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.winner-margin {
+  color: #6c757d;
+  font-size: 0.95rem;
+  font-weight: normal;
+}
+
+.last-event-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.home-btn-inline {
+  display: inline-block;
+  padding: 0.4rem 0.8rem;
+  background: var(--white);
+  color: var(--primary);
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+  border: 1px solid var(--primary);
+}
+
+.home-btn-inline:hover {
+  background: var(--primary);
+  color: var(--primary-fg);
+}
+
+/* Championship Battle Tracker */
+.battle-item {
+  padding: 0.75rem 0;
+}
+
+.battle-item h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+  color: var(--text);
+}
+
+.battle-leaders {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+}
+
+.battle-driver {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+}
+
+.battle-driver .points {
+  color: var(--text-muted, #6c757d);
+  font-size: 0.9rem;
+}
+
+.battle-gap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.gap-value {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.gap-status {
+  font-size: 0.8rem;
+  color: var(--text-muted, #6c757d);
+}
+
+.gap-status.tight {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.gap-status.comfortable {
+  color: var(--text-muted, #6c757d);
+}
+
+.battle-remaining {
+  margin: 0 0 1rem 0;
+  font-size: 0.9rem;
+  color: var(--text-muted, #6c757d);
+}
+
+.battle-item.tight-battle .battle-gap .gap-value {
+  color: var(--primary);
+}
+
+/* Next Event Preview */
+.next-event-card .card-body p {
+  margin: 0.5rem 0;
+}
+
+/* Car Performance Stats */
+.car-stat-item {
+  padding: 1rem 0;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.car-stat-item:last-child {
+  border-bottom: none;
+}
+
+.car-stat-item h4 {
+  margin-bottom: 0.5rem;
+  color: #495057;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+}
+
+.car-stat-item p {
+  margin: 0.25rem 0;
+}
+
+/* Form Guide */
+.form-guide-item {
+  padding: 1rem 0;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.form-guide-item:last-child {
+  border-bottom: none;
+}
+
+.form-guide-driver {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.division-badge {
+  background-color: #e9ecef;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.8rem;
+  color: #495057;
+}
+
+.form-guide-stats {
+  color: #6c757d;
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
+}
+
+.form-guide-recent {
+  color: #868e96;
+  font-size: 0.85rem;
+}
+
+/* Season Stats */
+.season-stats-division {
+  padding: 0.75rem 0;
+}
+
+.season-stats-division h4 {
+  margin: 0 0 1rem 0;
+  font-size: 1rem;
+  color: var(--text);
+}
+
+.season-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: #6c757d;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--text);
+}
+
+.stat-highlight {
+  grid-column: 1 / -1;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 4px;
+}
+
+.stat-detail {
+  font-size: 0.9rem;
+  color: #6c757d;
+  margin-top: 0.25rem;
+}
+
+.text-muted {
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .home-actions {
+    flex-direction: column;
+  }
+
+  .home-btn {
+    width: 100%;
+  }
+
+  .season-stats-grid {
+    grid-template-columns: 1fr;
   }
 }

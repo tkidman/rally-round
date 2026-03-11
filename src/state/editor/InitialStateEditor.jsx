@@ -37,6 +37,13 @@ const InitialStateEditor = ({ initialState, onSave, onCancel }) => {
     { key: 'afterDropRoundMessage', type: 'textarea', label: 'After Drop Round Message' },
     { key: 'showTeamNameTextColumn', type: 'boolean', label: 'Show Team Name Text Column' },
     { key: 'hideTeamLogoColumn', type: 'boolean', label: 'Hide Team Logo Column' },
+    { key: 'showCarPerformance', type: 'boolean', label: 'Show Car Performance on Homepage' },
+    { key: 'theme', type: 'select', label: 'Color Theme', defaultLabel: 'Blue/Purple (Default)', options: [
+      { value: 'dark', label: 'Dark' },
+      { value: 'red', label: 'Red' },
+      { value: 'green', label: 'Green' },
+      { value: 'orange', label: 'Orange' }
+    ]},
     { key: 'enableDnsPenalty', type: 'boolean', label: 'Enable DNS Penalty' },
     { key: 'dnsPenaltyFromFirstRound', type: 'boolean', label: 'DNS Penalty from First Round' },
     { key: 'numPointsForDebutant', type: 'number', label: 'Points for Debutant' }
@@ -117,6 +124,24 @@ const InitialStateEditor = ({ initialState, onSave, onCancel }) => {
               onChange={(e) => handleFieldChange(field.key, e.target.value)}
               rows={4}
             />
+          </div>
+        )
+
+      case 'select':
+        return (
+          <div key={field.key} className="field-group">
+            <label>{field.label}</label>
+            <select
+              value={value}
+              onChange={(e) => handleFieldChange(field.key, e.target.value || undefined)}
+            >
+              <option value="">{field.defaultLabel || 'Default'}</option>
+              {field.options.map(option => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
           </div>
         )
 
