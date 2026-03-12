@@ -17,7 +17,6 @@ const locations = require("../../state/constants/locations.json");
 const { last, slice, reverse, map, keyBy, indexOf, uniqBy } = require("lodash");
 const { readFileSync } = require("fs");
 const Papa = require("papaparse");
-const moment = require("moment");
 
 const wrcEventStatuses = {
   0: eventStatuses.future,
@@ -69,11 +68,13 @@ const fetchEventsForClub = async ({
   const allRacenetEvents = [];
   for (const championshipId of championshipIds) {
     const championship = await fetchChampionship(championshipId);
-    const pastOrCurrentEvents = championship.events.filter(event => {
-      return moment(event.absoluteOpenDate) < moment();
-    });
-    allRacenetEvents.push(...pastOrCurrentEvents);
+    // Include all events (past, current, and future) so next event can be shown
+    debug(
+      `Championship ${championshipId} has ${championship.events.length} events`
+    );
+    allRacenetEvents.push(...championship.events);
   }
+  debug(`Total events across all championships: ${allRacenetEvents.length}`);
   const events = await fetchEvents({
     allRacenetEvents,
     getAllResults,
@@ -86,35 +87,41 @@ const fetchEvents = async ({ allRacenetEvents, getAllResults, clubId }) => {
   const events = [];
   for (const racenetEvent of allRacenetEvents) {
     const leaderboardStages = [];
-    for (let i = 0; i < racenetEvent.stages.length; i++) {
-      if (getAllResults || i === 0 || i === racenetEvent.stages.length - 1) {
-        const racenetLeaderboard = await fetchLeaderboard({
-          clubId,
-          leaderboardId: racenetEvent.stages[i].leaderboardID,
-          cacheLeaderboard:
-            wrcEventStatuses[racenetEvent.status] === eventStatuses.finished
-        });
-        const uniqueEntries = uniqBy(racenetLeaderboard.entries, "ssid");
-        const convertedResults = map(uniqueEntries, entry => {
-          const commonResult = {
-            name: entry.displayName,
-            isDnfEntry: false,
-            vehicleName: entry.vehicle,
-            nationality: getCountryCodeFromNationalityId(entry.nationalityID),
-            stageTime: entry.time.substring(0, 12),
-            totalTime: entry.timeAccumulated.substring(0, 12),
-            superRally: entry.time === entry.timePenalty ? 1 : null
-          };
-          return commonResult;
-        });
-        const leaderboardStage = { entries: convertedResults };
-        leaderboardStages.push(leaderboardStage);
+    // Only fetch leaderboards for non-future events (active or finished)
+    const shouldFetchLeaderboard =
+      wrcEventStatuses[racenetEvent.status] !== eventStatuses.future;
+    if (shouldFetchLeaderboard) {
+      for (let i = 0; i < racenetEvent.stages.length; i++) {
+        if (getAllResults || i === 0 || i === racenetEvent.stages.length - 1) {
+          const racenetLeaderboard = await fetchLeaderboard({
+            clubId,
+            leaderboardId: racenetEvent.stages[i].leaderboardID,
+            cacheLeaderboard:
+              wrcEventStatuses[racenetEvent.status] === eventStatuses.finished
+          });
+          const uniqueEntries = uniqBy(racenetLeaderboard.entries, "ssid");
+          const convertedResults = map(uniqueEntries, entry => {
+            const commonResult = {
+              name: entry.displayName,
+              isDnfEntry: false,
+              vehicleName: entry.vehicle,
+              nationality: getCountryCodeFromNationalityId(entry.nationalityID),
+              stageTime: entry.time.substring(0, 12),
+              totalTime: entry.timeAccumulated.substring(0, 12),
+              superRally: entry.time === entry.timePenalty ? 1 : null
+            };
+            return commonResult;
+          });
+          const leaderboardStage = { entries: convertedResults };
+          leaderboardStages.push(leaderboardStage);
+        }
       }
     }
     events.push({
       location: racenetEvent.eventSettings.location,
       eventStatus: wrcEventStatuses[racenetEvent.status],
-      leaderboardStages
+      leaderboardStages,
+      startDate: racenetEvent.absoluteOpenDate
     });
     if (wrcEventStatuses[racenetEvent.status] === eventStatuses.active) {
       leagueRef.endTime = racenetEvent.absoluteCloseDate;

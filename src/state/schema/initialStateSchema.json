@@ -195,6 +195,10 @@
           "type": "boolean",
           "description": "Whether to enable same car class validation"
         },
+        "excludeFromCarPerformance": {
+          "type": "boolean",
+          "description": "Whether to exclude this division from homepage car performance stats"
+        },
         "maxDriversScoringPointsForTeam": {
           "type": "integer",
           "minimum": 1,

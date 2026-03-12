@@ -241,7 +241,19 @@ const InitialStateEditor = ({ initialState, onSave, onCancel }) => {
                   })}
                 />
               </div>
-              
+
+              <div className="field-group">
+                <label>Exclude From Car Performance</label>
+                <input
+                  type="checkbox"
+                  checked={!!divisions[divisionKey].excludeFromCarPerformance}
+                  onChange={(e) => handleObjectFieldChange('divisions', divisionKey, {
+                    ...divisions[divisionKey],
+                    excludeFromCarPerformance: e.target.checked
+                  })}
+                />
+              </div>
+
               {/* WRC Configuration */}
               <div className="field-group">
                 <label>WRC Championships</label>

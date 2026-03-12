@@ -2240,21 +2240,36 @@ exports[`e2e generates driver standings 1`] = `
         <main class="home-main">
       <div class="home-hero card mb-1">
         <div class="card-header">
-          <h3>🏁 Current Event: Rally Finland</h3>
+          <h3>🏁 Current Events</h3>
         </div>
         <div class="card-body">
-          <p><strong>Test E2E</strong> - Rally Finland</p>
+          <div class="current-event-item">
+            <p><strong>Test E2E</strong> - Rally Finland</p>
+            <div class="home-actions">
+              <a href="./test-e2e-2-driver-results.html" class="home-btn home-btn--primary">
+                View Results
+              </a>
+              <a href="./test-e2e-driver-standings.html" class="home-btn">
+                View Standings
+              </a>
+            </div>
+          </div>
+          <hr class="last-event-separator">
+          <div class="current-event-item">
+            <p><strong>Test E2E2</strong> - Rally Finland</p>
+            <div class="home-actions">
+              <a href="./test-e2e2-2-driver-results.html" class="home-btn home-btn--primary">
+                View Results
+              </a>
+              <a href="./test-e2e2-driver-standings.html" class="home-btn">
+                View Standings
+              </a>
+            </div>
+          </div>
+          <hr class="last-event-separator">
           <div class="home-hero__live mb-1">
             <img class="flag" src="./assets/country-flags/fin.png" alt="fin" />
             <span id="homeCountdown" class="countdown"></span>
-          </div>
-          <div class="home-actions">
-            <a href="./test-e2e-2-driver-results.html" class="home-btn home-btn--primary">
-              View Results
-            </a>
-            <a href="./test-e2e-driver-standings.html" class="home-btn">
-              View Standings
-            </a>
           </div>
         </div>
       </div>

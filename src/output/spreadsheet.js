@@ -63,6 +63,10 @@ const isGoogleSheetsEnabled = sheetId => {
   return sheetId && process.env.DIRT_SHEETS_CLIENT_SECRET && !disabled;
 };
 
+const getEventsWithStandings = (events, type) => {
+  return events.filter(e => e.standings && e.standings[`${type}Standings`]);
+};
+
 const writeDriverResultsSheet = async (event, division) => {
   const rows = transformForDriverResultsSheet(event);
   const { countryCode } = getLocationCountryCode(event);
@@ -75,6 +79,10 @@ const writeDriverResultsSheet = async (event, division) => {
 };
 
 const transformForDriverStandingsSheets = events => {
+  const eventsWithStandings = getEventsWithStandings(events, "driver");
+  if (eventsWithStandings.length === 0) {
+    return null;
+  }
   const headerLocations = getHeaderLocationCodes(events);
   const header = [
     "Pos",
@@ -87,10 +95,6 @@ const transformForDriverStandingsSheets = events => {
     ...headerLocations,
     "Points"
   ];
-  // Note: division.events only contains processed events (future events are in upcomingEvents)
-  const eventsWithStandings = events.filter(
-    e => e.standings && e.standings.driverStandings
-  );
   const lastEvent = eventsWithStandings[eventsWithStandings.length - 1];
   const rows = lastEvent.standings.driverStandings.map(standing => {
     const { resultsTotalPoints, driver, country, carBrand } =
@@ -113,12 +117,12 @@ const transformForDriverStandingsSheets = events => {
 };
 
 const transformForTeamStandingsSheets = events => {
+  const eventsWithStandings = getEventsWithStandings(events, "team");
+  if (eventsWithStandings.length === 0) {
+    return null;
+  }
   const headerLocations = getHeaderLocationCodes(events);
   const header = ["Pos", "'+/-", "Team", ...headerLocations, "Points"];
-  // Note: division.events only contains processed events (future events are in upcomingEvents)
-  const eventsWithStandings = events.filter(
-    e => e.standings && e.standings.teamStandings
-  );
   const lastEvent = eventsWithStandings[eventsWithStandings.length - 1];
   const rows = lastEvent.standings.teamStandings.map(standing => {
     const { resultsTotalPoints, team } = getTeamStandingData(standing, events);
@@ -145,20 +149,31 @@ const writeStandingsSheet = async division => {
   const standingsSheetId = leagueRef.league.standingsOutputSheetId;
   const driverRows = transformForDriverStandingsSheets(division.events);
   const teamRows = transformForTeamStandingsSheets(division.events);
-  if (isGoogleSheetsEnabled(standingsSheetId)) {
-    await updateResultsSheet(
-      driverRows,
-      standingsSheetId,
-      `${divisionName} Driver Standings`
-    );
-    await updateResultsSheet(
-      teamRows,
-      standingsSheetId,
-      `${divisionName} Team Standings`
-    );
+  if (!driverRows && !teamRows) {
+    return;
   }
-  writeCsv(driverRows, `${divisionName}-driverStandings.csv`);
-  writeCsv(teamRows, `${divisionName}-teamStandings.csv`);
+  if (isGoogleSheetsEnabled(standingsSheetId)) {
+    if (driverRows) {
+      await updateResultsSheet(
+        driverRows,
+        standingsSheetId,
+        `${divisionName} Driver Standings`
+      );
+    }
+    if (teamRows) {
+      await updateResultsSheet(
+        teamRows,
+        standingsSheetId,
+        `${divisionName} Team Standings`
+      );
+    }
+  }
+  if (driverRows) {
+    writeCsv(driverRows, `${divisionName}-driverStandings.csv`);
+  }
+  if (teamRows) {
+    writeCsv(teamRows, `${divisionName}-teamStandings.csv`);
+  }
 };
 
 const writeSheetsForDivision = async division => {

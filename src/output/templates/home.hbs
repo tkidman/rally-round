@@ -12,30 +12,35 @@
       {{#if activeEvents.length}}
       <div class="home-hero card mb-1">
         <div class="card-header">
-          <h3>🏁 {{localization.current_event}} {{activeEvents.0.name}}</h3>
+          <h3>🏁 {{localization.current_events}}</h3>
         </div>
         <div class="card-body">
-          <p><strong>{{activeEvents.0.division}}</strong> - {{activeEvents.0.location}}</p>
+          {{#each activeEvents}}
+          <div class="current-event-item">
+            <p><strong>{{this.division}}</strong> - {{this.name}}{{#if this.location}}{{#unless (eq this.location this.name)}} ({{this.location}}){{/unless}}{{/if}}</p>
+            <div class="home-actions">
+              <a href="./{{this.divisionId}}-{{this.eventIndex}}-driver-results.html" class="home-btn home-btn--primary">
+                {{../localization.view_results}}
+              </a>
+              <a href="./{{this.divisionId}}-driver-standings.html" class="home-btn">
+                {{../localization.view_standings}}
+              </a>
+            </div>
+          </div>
+          <hr class="last-event-separator">
+          {{/each}}
           {{#if endTime}}
           <div class="home-hero__live mb-1">
             <img class="flag" src="./assets/country-flags/{{activeCountry}}.png" alt="{{activeCountry}}" />
             <span id="homeCountdown" class="countdown"></span>
           </div>
           {{/if}}
-          <div class="home-actions">
-            <a href="./{{activeEvents.0.divisionId}}-{{activeEvents.0.eventIndex}}-driver-results.html" class="home-btn home-btn--primary">
-              {{localization.view_results}}
-            </a>
-            <a href="./{{activeEvents.0.divisionId}}-driver-standings.html" class="home-btn">
-              {{localization.view_standings}}
-            </a>
-          </div>
         </div>
       </div>
       {{else}}
       <div class="home-hero card mb-1">
         <div class="card-header">
-          <h3>{{localization.championship_in_progress}}</h3>
+          <h3>🏁 {{localization.current_events}}</h3>
         </div>
         <div class="card-body">
           <p>{{localization.no_events_active}}</p>

@@ -43,7 +43,7 @@ const localization = {
     manual_result_applied: "Manual result applied",
     // Home page
     home: "Home",
-    current_event: "Current Event:",
+    current_events: "Current Events",
     view_results: "View Results",
     view_standings: "View Standings",
     championship_in_progress: "Championship in Progress",
@@ -130,7 +130,7 @@ const localization = {
     leg: "Etapp",
     // Home page
     home: "Hem",
-    current_event: "Nuvarande tävling:",
+    current_events: "Nuvarande tävlingar",
     view_results: "Visa resultat",
     view_standings: "Visa ställning",
     championship_in_progress: "Mästerskap pågår",

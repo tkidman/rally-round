@@ -141,25 +141,32 @@ const getNavigationHTML = (
 };
 
 // Helper functions for home page data aggregation
+const getHomeDivisions = divisions => {
+  return Object.fromEntries(
+    Object.entries(divisions || {}).filter(
+      ([, division]) => !division.hideDriverStandingsLink
+    )
+  );
+};
+
 const getActiveEvents = divisions => {
   const activeEvents = [];
+
   Object.entries(divisions || {}).forEach(([divisionName, division]) => {
-    if (division.events && division.events.length > 0) {
-      division.events.forEach((event, eventIndex) => {
-        if (event.eventStatus === eventStatuses.active) {
-          const eventLocation = getLocation(event);
-          activeEvents.push({
-            name: event.name || event.locationName || eventLocation.countryName,
-            location: eventLocation.countryName || "",
-            division: division.displayName || divisionName,
-            divisionId: division.divisionName || divisionName,
-            eventIndex: eventIndex,
-            showingLivePoints: leagueRef.showLivePoints()
-          });
-        }
-      });
-    }
+    (division.events || []).forEach((event, eventIndex) => {
+      if (event.eventStatus === eventStatuses.active) {
+        const eventLocation = getLocation(event);
+        activeEvents.push({
+          name: event.name || event.locationName || eventLocation.countryName,
+          location: eventLocation.countryName || "",
+          division: division.displayName || divisionName,
+          divisionId: division.divisionName || divisionName,
+          eventIndex
+        });
+      }
+    });
   });
+
   return activeEvents;
 };
 
@@ -173,12 +180,10 @@ const getDivisionInfo = divisions => {
     .filter(info => info.cars || info.excludedCars);
 };
 
-const getRules = league => {
-  const firstDivisionKey = Object.keys(league.divisions || {})[0];
+const getRules = (league, divisions) => {
+  const firstDivisionKey = Object.keys(divisions || {})[0];
   const firstDivision =
-    firstDivisionKey && league.divisions
-      ? league.divisions[firstDivisionKey]
-      : null;
+    firstDivisionKey && divisions ? divisions[firstDivisionKey] : null;
 
   return {
     dropRounds: league.dropLowestScoringRoundsNumber || 0,
@@ -345,6 +350,9 @@ const getCarStats = divisions => {
   const carPerformance = {};
 
   Object.entries(divisions || {}).forEach(([divName, division]) => {
+    if (division.excludeFromCarPerformance) {
+      return;
+    }
     division.events.forEach(event => {
       if (
         event.eventStatus === eventStatuses.finished &&
@@ -380,6 +388,10 @@ const getCarStats = divisions => {
       winRate: ((stats.wins / stats.entries) * 100).toFixed(1)
     }))
     .sort((a, b) => b.wins - a.wins || b.avgPoints - a.avgPoints);
+
+  if (sortedCars.length === 0) {
+    return null;
+  }
 
   return {
     mostWins: sortedCars[0] || null,
@@ -505,26 +517,28 @@ const getSeasonStats = divisions => {
 };
 
 const transformForHomeHTML = league => {
+  const homeDivisions = getHomeDivisions(league.divisions);
+
   return {
     logo: league.logo,
     siteTitlePrefix: league.siteTitlePrefix,
-    activeEvents: getActiveEvents(league.divisions),
+    activeEvents: getActiveEvents(homeDivisions),
     endTime: leagueRef.endTime,
     activeCountry: leagueRef.activeCountryCode,
-    divisionInfo: getDivisionInfo(league.divisions),
-    rules: getRules(league),
-    top3ByDivision: getTop3ByDivision(league.divisions),
+    divisionInfo: getDivisionInfo(homeDivisions),
+    rules: getRules(league, homeDivisions),
+    top3ByDivision: getTop3ByDivision(homeDivisions),
     historicalSeasonLinks: league.historicalSeasonLinks || [],
     showTeamNameTextColumn: league.showTeamNameTextColumn,
     hideTeamLogoColumn: league.hideTeamLogoColumn,
     showCarPerformance: league.showCarPerformance !== false, // default true
     localization: getLocalization(),
-    lastCompletedEvents: getLastCompletedEvents(league.divisions),
-    championshipBattles: getChampionshipBattles(league.divisions),
-    nextEvent: getNextEvent(league.divisions),
-    carStats: getCarStats(league.divisions),
-    formGuide: getFormGuide(league.divisions),
-    seasonStats: getSeasonStats(league.divisions)
+    lastCompletedEvents: getLastCompletedEvents(homeDivisions),
+    championshipBattles: getChampionshipBattles(homeDivisions),
+    nextEvent: getNextEvent(homeDivisions),
+    carStats: getCarStats(homeDivisions),
+    formGuide: getFormGuide(homeDivisions),
+    seasonStats: getSeasonStats(homeDivisions)
   };
 };
 
@@ -593,6 +607,10 @@ const getLastUpdatedAt = () => {
 };
 
 const writeStandingsHTML = (division, type, links) => {
+  if (getEventsWithStandings(division.events, type).length === 0) {
+    debug(`no ${type} standings found for ${division.divisionName}, skipping`);
+    return;
+  }
   const data = transformForStandingsHTML(division, type);
   data.overall = division.divisionName === "overall";
 
@@ -681,14 +699,21 @@ const getAfterDropRoundMessage = () => {
   return "*After Drop Round: total points after lowest scoring round removed";
 };
 
+const getEventsWithStandings = (events, type) => {
+  return events.filter(e => e.standings && e.standings[`${type}Standings`]);
+};
+
 const transformForStandingsHTML = (division, type) => {
   const events = division.events;
   const headerLocations = getHeaderLocations(events);
   // Note: division.events only contains processed events (future events are in upcomingEvents)
   // but we still filter as a safety check for events without standings
-  const eventsWithStandings = events.filter(
-    e => e.standings && e.standings[`${type}Standings`]
-  );
+  const eventsWithStandings = getEventsWithStandings(events, type);
+  if (eventsWithStandings.length === 0) {
+    throw new Error(
+      `no ${type} standings available for ${division.divisionName}`
+    );
+  }
   let lastEvent = eventsWithStandings[eventsWithStandings.length - 1];
   if (
     leagueRef.endTime &&
@@ -1094,6 +1119,10 @@ const writeAllHTML = () => {
   }
   if (league.overall) {
     writeHTMLOutputForDivision(league.overall, links);
+  }
+  if (!fs.existsSync(`./${outputPath}/website/index.html`)) {
+    writeHomeHTML(links);
+    writeErrorHTML(links);
   }
   if (league.fantasy) {
     writeFantasyHTML(league.fantasy, links);

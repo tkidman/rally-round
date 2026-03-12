@@ -97,23 +97,34 @@ const getEventKeysFromRecentResults = ({
   const eventKeys = divisionChampionships.reduce((events, championship) => {
     const eventResultKeys = championship.events.reduce(
       (eventResultKeys, event) => {
-        if (
+        const isActiveOrFinished =
           event.eventStatus === eventStatuses.active ||
-          event.eventStatus === eventStatuses.finished
-        ) {
-          const lastStageIds = getLastStageIds({
-            challengeId: event.id,
-            championshipId: championship.id,
-            recentResults
-          });
-          eventResultKeys.push({
+          event.eventStatus === eventStatuses.finished;
+        const isFutureEvent =
+          event.eventStatus === "Next" || event.eventStatus === "None";
+
+        if (isActiveOrFinished || isFutureEvent) {
+          const eventKey = {
             eventId: event.id,
             location: event.locationName,
             divisionName: divisionName,
-            eventStatus: event.eventStatus,
-            ...lastStageIds,
+            eventStatus: isFutureEvent
+              ? eventStatuses.future
+              : event.eventStatus,
             racenetChampionship: championship
-          });
+          };
+
+          // Only fetch stage IDs for active/finished events (future events have no results yet)
+          if (isActiveOrFinished) {
+            const lastStageIds = getLastStageIds({
+              challengeId: event.id,
+              championshipId: championship.id,
+              recentResults
+            });
+            Object.assign(eventKey, lastStageIds);
+          }
+
+          eventResultKeys.push(eventKey);
         }
         return eventResultKeys;
       },
@@ -147,15 +158,20 @@ const fetchEventsFromKeys = async (eventKeys, getAllResults) => {
   const events = [];
   for (const key of eventKeys) {
     const leaderboardStages = [];
-    for (let i = 0; i <= key.lastStageId; i++) {
-      if (getAllResults || i === 0 || i === key.lastStageId) {
-        const racenetLeaderboard = await fetchEventResults({
-          ...key,
-          stageId: i
-        });
-        leaderboardStages.push(racenetLeaderboard);
+
+    // Only fetch results for active/finished events (future events have no results yet)
+    if (key.lastStageId !== undefined) {
+      for (let i = 0; i <= key.lastStageId; i++) {
+        if (getAllResults || i === 0 || i === key.lastStageId) {
+          const racenetLeaderboard = await fetchEventResults({
+            ...key,
+            stageId: i
+          });
+          leaderboardStages.push(racenetLeaderboard);
+        }
       }
     }
+
     events.push({
       ...key,
       leaderboardStages
