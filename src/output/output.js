@@ -5,6 +5,7 @@ const { outputPath, hiddenPath, cachePath } = require("../shared");
 const { leagueRef } = require("../state/league");
 const copydir = require("copy-dir");
 const { upload } = require("../api/aws/s3");
+const runGitHubOperations = require("../api/github/github");
 const { writeSheetsForDivision } = require("./spreadsheet");
 const { writeAllHTML } = require("./html");
 const { writePlacementOutput } = require("./html");
@@ -25,6 +26,9 @@ const writeOutput = async () => {
     if (process.env.DIRT_AWS_ACCESS_KEY && league.websiteName) {
       await upload(league.websiteName, championshipFolder);
     }
+    if (process.env.GH_TOKEN && process.env.GH_OWNER && league.websiteName) {
+      await runGitHubOperations();
+    }
     debug("only writing placements, returning");
     return true;
   }
@@ -42,6 +46,9 @@ const writeOutput = async () => {
   writeJSON(league);
   if (process.env.DIRT_AWS_ACCESS_KEY && league.websiteName) {
     await upload(league.websiteName, championshipFolder);
+  }
+  if (process.env.GH_TOKEN && process.env.GH_OWNER && league.websiteName) {
+    await runGitHubOperations();
   }
   return true;
 };
