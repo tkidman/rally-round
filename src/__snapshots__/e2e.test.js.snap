@@ -43,7 +43,7 @@ exports[`e2e generates driver leg results 1`] = `
   <div class="siteHeader__bar">
     <div class="navLeft navDesktopOnly">
       <div class="dropdown">
-        <a class="brand" href="/index.html" aria-label="Home">
+        <a class="brand" href="./index.html" aria-label="Home">
           <img class="brand__img" src="./assets/rsc-guy.png" alt="Logo" />
         </a>
 
@@ -96,6 +96,14 @@ exports[`e2e generates driver leg results 1`] = `
 </nav>
 
 
+      <div class="navRight navDesktopOnly">
+        <img
+          class="flag"
+          src="./assets/country-flags/fin.png"
+          alt="fin"
+        />
+        <span id="countdown2" class="countdown"></span>
+      </div>
 
     <button
       type="button"
@@ -108,8 +116,8 @@ exports[`e2e generates driver leg results 1`] = `
     </button>
 
     <div class="navTitle navMobileOnly">
-      <div class="navTitle__main">driver - Test E2E</div>
-      
+          <div class="navTitle__main">driver - Test E2E</div>
+      <div id="countdown" class="countdown"></div>
     </div>
 
 		<button
@@ -172,9 +180,44 @@ exports[`e2e generates driver leg results 1`] = `
         >
           <img class="secondaryNav__flag" src="./assets/country-flags/est.png" alt="est" />
         </a>
+        <a
+          class="secondaryNav__item"
+          href="./test-e2e-2-driver-results.html"
+          style=""
+        >
+          <img class="secondaryNav__flag" src="./assets/country-flags/fin.png" alt="fin" />
+        </a>
     </div>
 </header>
 
+<script>
+  var countDownDate = new Date("2030-12-31T22:59:00.000Z").getTime();
+  var x = setInterval(function() {
+    var now = new Date().getTime();
+    var distance = countDownDate - now;
+
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    var text = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+    var c1 = document.getElementById("countdown");
+    var c2 = document.getElementById("countdown2");
+    var c3 = document.getElementById("homeCountdown");
+    if (c1) c1.innerHTML = text;
+    if (c2) c2.innerHTML = text;
+    if (c3) c3.innerHTML = text;
+
+    if (distance < 0) {
+      clearInterval(x);
+      if (c1) c1.innerHTML = "Event Ended";
+      if (c2) c2.innerHTML = "Event Ended";
+      if (c3) c3.innerHTML = "Event Ended";
+    }
+  }, 1000);
+</script>
 
   <div class="container">
   <div class="flexContainer">
@@ -900,7 +943,7 @@ exports[`e2e generates driver results 1`] = `
   <div class="siteHeader__bar">
     <div class="navLeft navDesktopOnly">
       <div class="dropdown">
-        <a class="brand" href="/index.html" aria-label="Home">
+        <a class="brand" href="./index.html" aria-label="Home">
           <img class="brand__img" src="./assets/rsc-guy.png" alt="Logo" />
         </a>
 
@@ -953,6 +996,14 @@ exports[`e2e generates driver results 1`] = `
 </nav>
 
 
+      <div class="navRight navDesktopOnly">
+        <img
+          class="flag"
+          src="./assets/country-flags/fin.png"
+          alt="fin"
+        />
+        <span id="countdown2" class="countdown"></span>
+      </div>
 
     <button
       type="button"
@@ -965,8 +1016,8 @@ exports[`e2e generates driver results 1`] = `
     </button>
 
     <div class="navTitle navMobileOnly">
-      <div class="navTitle__main">driver - Test E2E</div>
-      
+          <div class="navTitle__main">driver - Test E2E</div>
+      <div id="countdown" class="countdown"></div>
     </div>
 
 		<button
@@ -1029,9 +1080,44 @@ exports[`e2e generates driver results 1`] = `
         >
           <img class="secondaryNav__flag" src="./assets/country-flags/est.png" alt="est" />
         </a>
+        <a
+          class="secondaryNav__item"
+          href="./test-e2e-2-driver-results.html"
+          style=""
+        >
+          <img class="secondaryNav__flag" src="./assets/country-flags/fin.png" alt="fin" />
+        </a>
     </div>
 </header>
 
+<script>
+  var countDownDate = new Date("2030-12-31T22:59:00.000Z").getTime();
+  var x = setInterval(function() {
+    var now = new Date().getTime();
+    var distance = countDownDate - now;
+
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    var text = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+    var c1 = document.getElementById("countdown");
+    var c2 = document.getElementById("countdown2");
+    var c3 = document.getElementById("homeCountdown");
+    if (c1) c1.innerHTML = text;
+    if (c2) c2.innerHTML = text;
+    if (c3) c3.innerHTML = text;
+
+    if (distance < 0) {
+      clearInterval(x);
+      if (c1) c1.innerHTML = "Event Ended";
+      if (c2) c2.innerHTML = "Event Ended";
+      if (c3) c3.innerHTML = "Event Ended";
+    }
+  }, 1000);
+</script>
 
   <div class="container">
   <div class="flexContainer">
@@ -1988,7 +2074,7 @@ exports[`e2e generates driver standings 1`] = `
   <div class="siteHeader__bar">
     <div class="navLeft navDesktopOnly">
       <div class="dropdown">
-        <a class="brand" href="/index.html" aria-label="Home">
+        <a class="brand" href="./index.html" aria-label="Home">
           <img class="brand__img" src="./assets/rsc-guy.png" alt="Logo" />
         </a>
 
@@ -2041,6 +2127,14 @@ exports[`e2e generates driver standings 1`] = `
 </nav>
 
 
+      <div class="navRight navDesktopOnly">
+        <img
+          class="flag"
+          src="./assets/country-flags/fin.png"
+          alt="fin"
+        />
+        <span id="countdown2" class="countdown"></span>
+      </div>
 
     <button
       type="button"
@@ -2053,8 +2147,8 @@ exports[`e2e generates driver standings 1`] = `
     </button>
 
     <div class="navTitle navMobileOnly">
-      <div class="navTitle__main"> - </div>
-      
+          <div class="navTitle__main">TEST-E2E</div>
+      <div id="countdown" class="countdown"></div>
     </div>
 
 		<button
@@ -2104,6 +2198,34 @@ exports[`e2e generates driver standings 1`] = `
 
 </header>
 
+<script>
+  var countDownDate = new Date("2030-12-31T22:59:00.000Z").getTime();
+  var x = setInterval(function() {
+    var now = new Date().getTime();
+    var distance = countDownDate - now;
+
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    var text = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+    var c1 = document.getElementById("countdown");
+    var c2 = document.getElementById("countdown2");
+    var c3 = document.getElementById("homeCountdown");
+    if (c1) c1.innerHTML = text;
+    if (c2) c2.innerHTML = text;
+    if (c3) c3.innerHTML = text;
+
+    if (distance < 0) {
+      clearInterval(x);
+      if (c1) c1.innerHTML = "Event Ended";
+      if (c2) c2.innerHTML = "Event Ended";
+      if (c3) c3.innerHTML = "Event Ended";
+    }
+  }, 1000);
+</script>
 
   <div class="container">
   <div class="flexContainer">
@@ -2116,139 +2238,358 @@ exports[`e2e generates driver standings 1`] = `
       </div>
       <div class="home-layout">
         <main class="home-main">
-
-      <div class="mb-1">
-        <h3>Championship Rules</h3>
-        <div class="card">
-          <div class="card-body">
-            <p><strong>Drop Rounds:</strong> 2 lowest scoring rounds dropped</p>
-            <p><strong>Points (Top 5):</strong> 30, 24, 19, 15, 12</p>
-            <p><strong>Power Stage Points:</strong> 5, 4, 3, 2, 1</p>
+      <div class="home-hero card mb-1">
+        <div class="card-header">
+          <h3>🏁 Current Events</h3>
+        </div>
+        <div class="card-body">
+          <div class="current-event-item">
+            <p><strong>Test E2E</strong> - Rally Finland</p>
+            <div class="home-actions">
+              <a href="./test-e2e-2-driver-results.html" class="home-btn home-btn--primary">
+                View Results
+              </a>
+              <a href="./test-e2e-driver-standings.html" class="home-btn">
+                View Standings
+              </a>
+            </div>
+          </div>
+          <hr class="last-event-separator">
+          <div class="current-event-item">
+            <p><strong>Test E2E2</strong> - Rally Finland</p>
+            <div class="home-actions">
+              <a href="./test-e2e2-2-driver-results.html" class="home-btn home-btn--primary">
+                View Results
+              </a>
+              <a href="./test-e2e2-driver-standings.html" class="home-btn">
+                View Standings
+              </a>
+            </div>
+          </div>
+          <hr class="last-event-separator">
+          <div class="home-hero__live mb-1">
+            <img class="flag" src="./assets/country-flags/fin.png" alt="fin" />
+            <span id="homeCountdown" class="countdown"></span>
           </div>
         </div>
       </div>
 
+      <div class="card mb-1 next-event-card">
+        <div class="card-header">
+          <h3>📅 Next Event: Rally Sweden</h3>
+        </div>
+        <div class="card-body">
+          <p>
+            <img src="./assets/country-flags/swe.png" class="img-sm" alt="swe" />
+            <strong>Test E2E</strong> - Rally Sweden
+          </p>
+          <p>Starts: January 1, 2031 at 12:00 AM</p>
+        </div>
+      </div>
+
+      <div class="home-cards-grid">
+      <div class="card card--full-bg mb-1">
+        <div class="card-header">
+          <h3>🏆 Last Event Winners</h3>
+        </div>
+        <div class="card-body">
+          <div class="last-event-division">
+            <div class="last-event-header">
+              <h4>Test E2E - Rally Nonko</h4>
+              <span class="text-muted">Rally Nonko</span>
+            </div>
+            <div class="winner-info">
+              <img src="./assets/country-flags/est.png" class="img-sm" alt="est" />
+              <strong>ninko</strong>
+              <span class="winner-margin">won by +00:00:07.905</span>
+            </div>
+            <div class="last-event-meta">
+              <span class="text-muted">30 entries</span>
+              <a href="./test-e2e-1-driver-results.html" class="home-btn-inline">View Results</a>
+            </div>
+          </div>
+          <hr class="last-event-separator">
+          <div class="last-event-division">
+            <div class="last-event-header">
+              <h4>Test E2E2 - Rally Nonko</h4>
+              <span class="text-muted">Rally Nonko</span>
+            </div>
+            <div class="winner-info">
+              <img src="./assets/country-flags/aus.png" class="img-sm" alt="aus" />
+              <strong>woosh</strong>
+              <span class="winner-margin">won by +00:00:32.028</span>
+            </div>
+            <div class="last-event-meta">
+              <span class="text-muted">10 entries</span>
+              <a href="./test-e2e2-1-driver-results.html" class="home-btn-inline">View Results</a>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+
+      <div class="card card--full-bg mb-1">
+        <div class="card-header">
+          <h3>⚔️ Championship Battles</h3>
+        </div>
+        <div class="card-body">
+          <div class="battle-item tight-battle">
+            <h4>Test E2E</h4>
+            <div class="battle-leaders">
+              <div class="battle-driver">
+                <img src="./assets/country-flags/deu.png" class="img-sm" alt="deu" />
+                <strong>Hawk24</strong>
+                <span class="points">104 pts</span>
+              </div>
+              <div class="battle-gap">
+                <span class="gap-value">11 pt gap</span>
+                <span class="gap-status tight">Tight!</span>
+              </div>
+              <div class="battle-driver">
+                <img src="./assets/country-flags/fin.png" class="img-sm" alt="fin" />
+                QazRa
+                <span class="points">93 pts</span>
+              </div>
+            </div>
+            <p class="battle-remaining">2 events remaining</p>
+            <a href="./test-e2e-driver-standings.html" class="home-btn-inline">View Standings</a>
+          </div>
+          <hr class="last-event-separator">
+          <div class="battle-item ">
+            <h4>Test E2E2</h4>
+            <div class="battle-leaders">
+              <div class="battle-driver">
+                <img src="./assets/country-flags/aus.png" class="img-sm" alt="aus" />
+                <strong>woosh</strong>
+                <span class="points">130 pts</span>
+              </div>
+              <div class="battle-gap">
+                <span class="gap-value">26 pt gap</span>
+                <span class="gap-status">Still Open</span>
+              </div>
+              <div class="battle-driver">
+                <img src="./assets/country-flags/aus.png" class="img-sm" alt="aus" />
+                winstall
+                <span class="points">104 pts</span>
+              </div>
+            </div>
+            <p class="battle-remaining">2 events remaining</p>
+            <a href="./test-e2e2-driver-standings.html" class="home-btn-inline">View Standings</a>
+          </div>
+          
+        </div>
+      </div>
+      </div>
+
+      <div class="card mb-1">
+        <div class="card-header">
+          <h3>🔥 Hot Streaks</h3>
+        </div>
+        <div class="card-body">
+          <div class="form-guide-item">
+            <div class="form-guide-driver">
+              <img src="./assets/country-flags/aus.png" class="img-sm" alt="aus" />
+              <strong>woosh</strong>
+              <span class="division-badge">Test E2E2</span>
+            </div>
+            <div class="form-guide-stats">
+              <span>2 wins • 2 podiums in last 3 events</span>
+            </div>
+            <div class="form-guide-recent">
+              Recent finishes: 1, 1
+            </div>
+          </div>
+          
+        </div>
+      </div>
+
+      <div class="card mb-1">
+        <div class="card-header">
+          <h3>🏎️ Car Performance</h3>
+        </div>
+        <div class="card-body">
+          <div class="car-stat-item">
+            <h4>Most Wins</h4>
+            <p><strong>Porsche 911 SC 3.0 Grp4</strong></p>
+            <p>2 wins • 4 podiums • 16.7% win rate</p>
+          </div>
+          <div class="car-stat-item">
+            <h4>Best Average Performance</h4>
+            <p><strong>Porsche 911 SC 3.0 Grp4</strong></p>
+            <p>32.3 avg points • 12 entries</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-1">
+        <div class="card-header">
+          <h3>📊 Season Statistics</h3>
+        </div>
+        <div class="card-body">
+          <div class="season-stats-division">
+            <h4>Test E2E</h4>
+            <div class="season-stats-grid">
+              <div class="stat-item">
+                <span class="stat-label">Events Completed</span>
+                <span class="stat-value">2 / 4</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-label">Avg. Entries per Event</span>
+                <span class="stat-value">30</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-label">DNF Rate</span>
+                <span class="stat-value">16.7%</span>
+              </div>
+              <div class="stat-item stat-highlight">
+                <span class="stat-label">Closest Finish</span>
+                <span class="stat-value">+00:00:14.861</span>
+                <span class="stat-detail">Hawk24 vs THELC Matt • Rally Grundstrom</span>
+              </div>
+            </div>
+          </div>
+          <hr class="last-event-separator">
+          <div class="season-stats-division">
+            <h4>Test E2E2</h4>
+            <div class="season-stats-grid">
+              <div class="stat-item">
+                <span class="stat-label">Events Completed</span>
+                <span class="stat-value">2 / 4</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-label">Avg. Entries per Event</span>
+                <span class="stat-value">10</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-label">DNF Rate</span>
+                <span class="stat-value">0.0%</span>
+              </div>
+              <div class="stat-item stat-highlight">
+                <span class="stat-label">Closest Finish</span>
+                <span class="stat-value">+00:00:29.867</span>
+                <span class="stat-detail">woosh vs winstall • Rally Grundstrom</span>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+
+      <div class="card mb-1">
+        <div class="card-header">
+          <h3>Championship Rules</h3>
+        </div>
+        <div class="card-body">
+          <p><strong>Drop Rounds:</strong> 2 lowest scoring rounds dropped</p>
+          <p><strong>Points (Top 5):</strong> 30, 24, 19, 15, 12</p>
+          <p><strong>Power Stage Points:</strong> 5, 4, 3, 2, 1</p>
+        </div>
+      </div>
 
         <div class="top-drivers-by-division mb-1">
           <h3>Top 3 Drivers — by Division</h3>
           <div class="top-drivers-division-grid">
-          <div class="top-drivers-division">
-            <h4 class="top-drivers-division__title">Test E2E</h4>
-            <table class="top-drivers-table">
-              <thead>
-                <tr>
-                  <th class="th-pos">Pos</th>
-                  <th class="th-change"></th>
-                  <th class="th-nat">Nat</th>
-                  <th class="th-driver">Driver</th>
-                  <th class="th-points">Points</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="td-pos">1</td>
-                  <td class="td-change">
-                    <span class="neutral">=</span>
-                  </td>
-                  <td class="td-nat">
-                    <img src="./assets/country-flags/deu.png" class="img-sm"
-                      alt="deu" title="deu" />
-                  </td>
-                  <td class="td-driver text-left bold">Hawk24</td>
-                  <td class="td-points bold">104</td>
-                </tr>
-                <tr>
-                  <td class="td-pos">2</td>
-                  <td class="td-change">
-                    <span class="positive">
-                      <i class="arrow up"></i>&nbsp;1
-                    </span>
-                  </td>
-                  <td class="td-nat">
-                    <img src="./assets/country-flags/fin.png" class="img-sm"
-                      alt="fin" title="fin" />
-                  </td>
-                  <td class="td-driver text-left bold">QazRa</td>
-                  <td class="td-points bold">93</td>
-                </tr>
-                <tr>
-                  <td class="td-pos">3</td>
-                  <td class="td-change">
-                    <span class="positive">
-                      <i class="arrow up"></i>&nbsp;13
-                    </span>
-                  </td>
-                  <td class="td-nat">
-                    <img src="./assets/country-flags/est.png" class="img-sm"
-                      alt="est" title="est" />
-                  </td>
-                  <td class="td-driver text-left bold">ninko</td>
-                  <td class="td-points bold">61</td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="card">
+            <div class="card-header">
+              <h3>Test E2E</h3>
+            </div>
+            <div class="card-body">
+              <table class="top-drivers-table">
+                <tbody>
+                  <tr>
+                    <td class="td-pos">1</td>
+                    <td class="td-change">
+                      <span class="neutral">=</span>
+                    </td>
+                    <td class="td-nat">
+                      <img src="./assets/country-flags/deu.png" class="img-sm"
+                        alt="deu" title="deu" />
+                    </td>
+                    <td class="td-driver text-left bold">Hawk24</td>
+                    <td class="td-points bold">104</td>
+                  </tr>
+                  <tr>
+                    <td class="td-pos">2</td>
+                    <td class="td-change">
+                      <span class="positive">
+                        <i class="arrow up"></i>&nbsp;1
+                      </span>
+                    </td>
+                    <td class="td-nat">
+                      <img src="./assets/country-flags/fin.png" class="img-sm"
+                        alt="fin" title="fin" />
+                    </td>
+                    <td class="td-driver text-left bold">QazRa</td>
+                    <td class="td-points bold">93</td>
+                  </tr>
+                  <tr>
+                    <td class="td-pos">3</td>
+                    <td class="td-change">
+                      <span class="positive">
+                        <i class="arrow up"></i>&nbsp;13
+                      </span>
+                    </td>
+                    <td class="td-nat">
+                      <img src="./assets/country-flags/est.png" class="img-sm"
+                        alt="est" title="est" />
+                    </td>
+                    <td class="td-driver text-left bold">ninko</td>
+                    <td class="td-points bold">61</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
-          <div class="top-drivers-division">
-            <h4 class="top-drivers-division__title">Test E2E2</h4>
-            <table class="top-drivers-table">
-              <thead>
-                <tr>
-                  <th class="th-pos">Pos</th>
-                  <th class="th-change"></th>
-                  <th class="th-nat">Nat</th>
-                  <th class="th-driver">Driver</th>
-                  <th class="th-points">Points</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr style="background-color: #ffd74e">
-                  <td class="td-pos">1</td>
-                  <td class="td-change">
-                    <span class="neutral">=</span>
-                  </td>
-                  <td class="td-nat">
-                    <img src="./assets/country-flags/aus.png" class="img-sm"
-                      alt="aus" title="aus" />
-                  </td>
-                  <td class="td-driver text-left bold">woosh</td>
-                  <td class="td-points bold">130</td>
-                </tr>
-                <tr style="background-color: #ccffc8">
-                  <td class="td-pos">2</td>
-                  <td class="td-change">
-                    <span class="neutral">=</span>
-                  </td>
-                  <td class="td-nat">
-                    <img src="./assets/country-flags/aus.png" class="img-sm"
-                      alt="aus" title="aus" />
-                  </td>
-                  <td class="td-driver text-left bold">winstall</td>
-                  <td class="td-points bold">104</td>
-                </tr>
-                <tr style="background-color: #ccffc8">
-                  <td class="td-pos">3</td>
-                  <td class="td-change">
-                    <span class="neutral">=</span>
-                  </td>
-                  <td class="td-nat">
-                    <img src="./assets/country-flags/aus.png" class="img-sm"
-                      alt="aus" title="aus" />
-                  </td>
-                  <td class="td-driver text-left bold">testdriver1</td>
-                  <td class="td-points bold">82</td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="card">
+            <div class="card-header">
+              <h3>Test E2E2</h3>
+            </div>
+            <div class="card-body">
+              <table class="top-drivers-table">
+                <tbody>
+                  <tr style="background-color: #ffd74e">
+                    <td class="td-pos">1</td>
+                    <td class="td-change">
+                      <span class="neutral">=</span>
+                    </td>
+                    <td class="td-nat">
+                      <img src="./assets/country-flags/aus.png" class="img-sm"
+                        alt="aus" title="aus" />
+                    </td>
+                    <td class="td-driver text-left bold">woosh</td>
+                    <td class="td-points bold">130</td>
+                  </tr>
+                  <tr style="background-color: #ccffc8">
+                    <td class="td-pos">2</td>
+                    <td class="td-change">
+                      <span class="neutral">=</span>
+                    </td>
+                    <td class="td-nat">
+                      <img src="./assets/country-flags/aus.png" class="img-sm"
+                        alt="aus" title="aus" />
+                    </td>
+                    <td class="td-driver text-left bold">winstall</td>
+                    <td class="td-points bold">104</td>
+                  </tr>
+                  <tr style="background-color: #ccffc8">
+                    <td class="td-pos">3</td>
+                    <td class="td-change">
+                      <span class="neutral">=</span>
+                    </td>
+                    <td class="td-nat">
+                      <img src="./assets/country-flags/aus.png" class="img-sm"
+                        alt="aus" title="aus" />
+                    </td>
+                    <td class="td-driver text-left bold">testdriver1</td>
+                    <td class="td-points bold">82</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
           </div>
         </div>
         </main>
-        <aside class="home-aside" aria-label="Previous seasons">
-          <h3 class="home-aside__title">Previous Seasons</h3>
-          <ul class="home-aside__list">
-            <li><a href="/e2e-1">E2E Season 1</a></li>
-          </ul>
-        </aside>
       </div>
     </div>
   </div>
@@ -2303,7 +2644,7 @@ exports[`e2e generates overall driver results 1`] = `
   <div class="siteHeader__bar">
     <div class="navLeft navDesktopOnly">
       <div class="dropdown">
-        <a class="brand" href="/index.html" aria-label="Home">
+        <a class="brand" href="./index.html" aria-label="Home">
           <img class="brand__img" src="./assets/rsc-guy.png" alt="Logo" />
         </a>
 
@@ -2356,6 +2697,14 @@ exports[`e2e generates overall driver results 1`] = `
 </nav>
 
 
+      <div class="navRight navDesktopOnly">
+        <img
+          class="flag"
+          src="./assets/country-flags/fin.png"
+          alt="fin"
+        />
+        <span id="countdown2" class="countdown"></span>
+      </div>
 
     <button
       type="button"
@@ -2368,8 +2717,8 @@ exports[`e2e generates overall driver results 1`] = `
     </button>
 
     <div class="navTitle navMobileOnly">
-      <div class="navTitle__main">driver - Overall</div>
-      
+          <div class="navTitle__main">driver - Overall</div>
+      <div id="countdown" class="countdown"></div>
     </div>
 
 		<button
@@ -2432,9 +2781,44 @@ exports[`e2e generates overall driver results 1`] = `
         >
           <img class="secondaryNav__flag" src="./assets/country-flags/est.png" alt="est" />
         </a>
+        <a
+          class="secondaryNav__item"
+          href="./overall-2-driver-results.html"
+          style=""
+        >
+          <img class="secondaryNav__flag" src="./assets/country-flags/fin.png" alt="fin" />
+        </a>
     </div>
 </header>
 
+<script>
+  var countDownDate = new Date("2030-12-31T22:59:00.000Z").getTime();
+  var x = setInterval(function() {
+    var now = new Date().getTime();
+    var distance = countDownDate - now;
+
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    var text = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+    var c1 = document.getElementById("countdown");
+    var c2 = document.getElementById("countdown2");
+    var c3 = document.getElementById("homeCountdown");
+    if (c1) c1.innerHTML = text;
+    if (c2) c2.innerHTML = text;
+    if (c3) c3.innerHTML = text;
+
+    if (distance < 0) {
+      clearInterval(x);
+      if (c1) c1.innerHTML = "Event Ended";
+      if (c2) c2.innerHTML = "Event Ended";
+      if (c3) c3.innerHTML = "Event Ended";
+    }
+  }, 1000);
+</script>
 
   <div class="container">
   <div class="flexContainer">
@@ -3620,7 +4004,7 @@ exports[`e2e generates overall driver standings 1`] = `
   <div class="siteHeader__bar">
     <div class="navLeft navDesktopOnly">
       <div class="dropdown">
-        <a class="brand" href="/index.html" aria-label="Home">
+        <a class="brand" href="./index.html" aria-label="Home">
           <img class="brand__img" src="./assets/rsc-guy.png" alt="Logo" />
         </a>
 
@@ -3673,6 +4057,14 @@ exports[`e2e generates overall driver standings 1`] = `
 </nav>
 
 
+      <div class="navRight navDesktopOnly">
+        <img
+          class="flag"
+          src="./assets/country-flags/fin.png"
+          alt="fin"
+        />
+        <span id="countdown2" class="countdown"></span>
+      </div>
 
     <button
       type="button"
@@ -3685,8 +4077,8 @@ exports[`e2e generates overall driver standings 1`] = `
     </button>
 
     <div class="navTitle navMobileOnly">
-      <div class="navTitle__main">driver - Overall</div>
-      
+          <div class="navTitle__main">driver - Overall</div>
+      <div id="countdown" class="countdown"></div>
     </div>
 
 		<button
@@ -3749,9 +4141,44 @@ exports[`e2e generates overall driver standings 1`] = `
         >
           <img class="secondaryNav__flag" src="./assets/country-flags/est.png" alt="est" />
         </a>
+        <a
+          class="secondaryNav__item"
+          href="./overall-2-driver-results.html"
+          style=""
+        >
+          <img class="secondaryNav__flag" src="./assets/country-flags/fin.png" alt="fin" />
+        </a>
     </div>
 </header>
 
+<script>
+  var countDownDate = new Date("2030-12-31T22:59:00.000Z").getTime();
+  var x = setInterval(function() {
+    var now = new Date().getTime();
+    var distance = countDownDate - now;
+
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    var text = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+    var c1 = document.getElementById("countdown");
+    var c2 = document.getElementById("countdown2");
+    var c3 = document.getElementById("homeCountdown");
+    if (c1) c1.innerHTML = text;
+    if (c2) c2.innerHTML = text;
+    if (c3) c3.innerHTML = text;
+
+    if (distance < 0) {
+      clearInterval(x);
+      if (c1) c1.innerHTML = "Event Ended";
+      if (c2) c2.innerHTML = "Event Ended";
+      if (c3) c3.innerHTML = "Event Ended";
+    }
+  }, 1000);
+</script>
 
   <div class="container">
   <div class="flexContainer">
@@ -3798,6 +4225,11 @@ exports[`e2e generates overall driver standings 1`] = `
                     <img src="./assets/country-flags/est.png" alt="est" title="est"/>
                   </a>
                 </th>
+                <th class="th-location">
+                  <a href="./overall-2-driver-results.html" style="">
+                    <img src="./assets/country-flags/fin.png" alt="fin" title="fin"/>
+                  </a>
+                </th>
               <th class="th-points">Points</th>
               <th class="th-adr">ADR*</th>
             </tr>
@@ -3823,6 +4255,9 @@ exports[`e2e generates overall driver standings 1`] = `
               <td class="td-result">
                 65
               </td>
+              <td class="td-result">
+                
+              </td>
               <td class="td-points bold">130</td>
               <td class="td-adr bold">0</td>
             </tr>
@@ -3845,6 +4280,9 @@ exports[`e2e generates overall driver standings 1`] = `
               </td>
               <td class="td-result">
                 52
+              </td>
+              <td class="td-result">
+                
               </td>
               <td class="td-points bold">104</td>
               <td class="td-adr bold">0</td>
@@ -3869,6 +4307,9 @@ exports[`e2e generates overall driver standings 1`] = `
               <td class="td-result">
                 38
               </td>
+              <td class="td-result">
+                
+              </td>
               <td class="td-points bold">104</td>
               <td class="td-adr bold">0</td>
             </tr>
@@ -3892,6 +4333,9 @@ exports[`e2e generates overall driver standings 1`] = `
               <td class="td-result">
                 54
               </td>
+              <td class="td-result">
+                
+              </td>
               <td class="td-points bold">93</td>
               <td class="td-adr bold">0</td>
             </tr>
@@ -3912,6 +4356,9 @@ exports[`e2e generates overall driver standings 1`] = `
               </td>
               <td class="td-result">
                 41
+              </td>
+              <td class="td-result">
+                
               </td>
               <td class="td-points bold">82</td>
               <td class="td-adr bold">0</td>
@@ -3936,6 +4383,9 @@ exports[`e2e generates overall driver standings 1`] = `
               <td class="td-result">
                 32
               </td>
+              <td class="td-result">
+                
+              </td>
               <td class="td-points bold">64</td>
               <td class="td-adr bold">0</td>
             </tr>
@@ -3958,6 +4408,9 @@ exports[`e2e generates overall driver standings 1`] = `
               </td>
               <td class="td-result">
                 61
+              </td>
+              <td class="td-result">
+                
               </td>
               <td class="td-points bold">61</td>
               <td class="td-adr bold">0</td>
@@ -3982,6 +4435,9 @@ exports[`e2e generates overall driver standings 1`] = `
               <td class="td-result">
                 0
               </td>
+              <td class="td-result">
+                
+              </td>
               <td class="td-points bold">52</td>
               <td class="td-adr bold">0</td>
             </tr>
@@ -4002,6 +4458,9 @@ exports[`e2e generates overall driver standings 1`] = `
               </td>
               <td class="td-result">
                 25
+              </td>
+              <td class="td-result">
+                
               </td>
               <td class="td-points bold">50</td>
               <td class="td-adr bold">0</td>
@@ -4026,6 +4485,9 @@ exports[`e2e generates overall driver standings 1`] = `
               <td class="td-result">
                 16
               </td>
+              <td class="td-result">
+                
+              </td>
               <td class="td-points bold">48</td>
               <td class="td-adr bold">0</td>
             </tr>
@@ -4046,6 +4508,9 @@ exports[`e2e generates overall driver standings 1`] = `
               </td>
               <td class="td-result">
                 27
+              </td>
+              <td class="td-result">
+                
               </td>
               <td class="td-points bold">47</td>
               <td class="td-adr bold">0</td>
@@ -4070,6 +4535,9 @@ exports[`e2e generates overall driver standings 1`] = `
               <td class="td-result">
                 20
               </td>
+              <td class="td-result">
+                
+              </td>
               <td class="td-points bold">40</td>
               <td class="td-adr bold">0</td>
             </tr>
@@ -4092,6 +4560,9 @@ exports[`e2e generates overall driver standings 1`] = `
               </td>
               <td class="td-result">
                 14
+              </td>
+              <td class="td-result">
+                
               </td>
               <td class="td-points bold">38</td>
               <td class="td-adr bold">0</td>
@@ -4116,6 +4587,9 @@ exports[`e2e generates overall driver standings 1`] = `
               <td class="td-result">
                 18
               </td>
+              <td class="td-result">
+                
+              </td>
               <td class="td-points bold">36</td>
               <td class="td-adr bold">0</td>
             </tr>
@@ -4138,6 +4612,9 @@ exports[`e2e generates overall driver standings 1`] = `
               </td>
               <td class="td-result">
                 32
+              </td>
+              <td class="td-result">
+                
               </td>
               <td class="td-points bold">35</td>
               <td class="td-adr bold">0</td>
@@ -4162,6 +4639,9 @@ exports[`e2e generates overall driver standings 1`] = `
               <td class="td-result">
                 16
               </td>
+              <td class="td-result">
+                
+              </td>
               <td class="td-points bold">32</td>
               <td class="td-adr bold">0</td>
             </tr>
@@ -4182,6 +4662,9 @@ exports[`e2e generates overall driver standings 1`] = `
               </td>
               <td class="td-result">
                 14
+              </td>
+              <td class="td-result">
+                
               </td>
               <td class="td-points bold">28</td>
               <td class="td-adr bold">0</td>
@@ -4206,6 +4689,9 @@ exports[`e2e generates overall driver standings 1`] = `
               <td class="td-result">
                 19
               </td>
+              <td class="td-result">
+                
+              </td>
               <td class="td-points bold">26</td>
               <td class="td-adr bold">0</td>
             </tr>
@@ -4228,6 +4714,9 @@ exports[`e2e generates overall driver standings 1`] = `
               </td>
               <td class="td-result">
                 10
+              </td>
+              <td class="td-result">
+                
               </td>
               <td class="td-points bold">26</td>
               <td class="td-adr bold">0</td>
@@ -4252,6 +4741,9 @@ exports[`e2e generates overall driver standings 1`] = `
               <td class="td-result">
                 12
               </td>
+              <td class="td-result">
+                
+              </td>
               <td class="td-points bold">24</td>
               <td class="td-adr bold">0</td>
             </tr>
@@ -4274,6 +4766,9 @@ exports[`e2e generates overall driver standings 1`] = `
               </td>
               <td class="td-result">
                 20
+              </td>
+              <td class="td-result">
+                
               </td>
               <td class="td-points bold">20</td>
               <td class="td-adr bold">0</td>
@@ -4298,6 +4793,9 @@ exports[`e2e generates overall driver standings 1`] = `
               <td class="td-result">
                 DNS
               </td>
+              <td class="td-result">
+                
+              </td>
               <td class="td-points bold">18</td>
               <td class="td-adr bold">0</td>
             </tr>
@@ -4320,6 +4818,9 @@ exports[`e2e generates overall driver standings 1`] = `
               </td>
               <td class="td-result">
                 16
+              </td>
+              <td class="td-result">
+                
               </td>
               <td class="td-points bold">16</td>
               <td class="td-adr bold">0</td>
@@ -4344,6 +4845,9 @@ exports[`e2e generates overall driver standings 1`] = `
               <td class="td-result">
                 DNF
               </td>
+              <td class="td-result">
+                
+              </td>
               <td class="td-points bold">10</td>
               <td class="td-adr bold">0</td>
             </tr>
@@ -4367,6 +4871,9 @@ exports[`e2e generates overall driver standings 1`] = `
               <td class="td-result">
                 4
               </td>
+              <td class="td-result">
+                
+              </td>
               <td class="td-points bold">9</td>
               <td class="td-adr bold">0</td>
             </tr>
@@ -4387,6 +4894,9 @@ exports[`e2e generates overall driver standings 1`] = `
               </td>
               <td class="td-result">
                 8
+              </td>
+              <td class="td-result">
+                
               </td>
               <td class="td-points bold">8</td>
               <td class="td-adr bold">0</td>
@@ -4411,6 +4921,9 @@ exports[`e2e generates overall driver standings 1`] = `
               <td class="td-result">
                 6
               </td>
+              <td class="td-result">
+                
+              </td>
               <td class="td-points bold">6</td>
               <td class="td-adr bold">0</td>
             </tr>
@@ -4433,6 +4946,9 @@ exports[`e2e generates overall driver standings 1`] = `
               </td>
               <td class="td-result">
                 0
+              </td>
+              <td class="td-result">
+                
               </td>
               <td class="td-points bold">4</td>
               <td class="td-adr bold">0</td>
@@ -4457,6 +4973,9 @@ exports[`e2e generates overall driver standings 1`] = `
               <td class="td-result">
                 1
               </td>
+              <td class="td-result">
+                
+              </td>
               <td class="td-points bold">2</td>
               <td class="td-adr bold">0</td>
             </tr>
@@ -4479,6 +4998,9 @@ exports[`e2e generates overall driver standings 1`] = `
               </td>
               <td class="td-result">
                 0
+              </td>
+              <td class="td-result">
+                
               </td>
               <td class="td-points bold">2</td>
               <td class="td-adr bold">0</td>
@@ -4503,6 +5025,9 @@ exports[`e2e generates overall driver standings 1`] = `
               <td class="td-result">
                 0
               </td>
+              <td class="td-result">
+                
+              </td>
               <td class="td-points bold">0</td>
               <td class="td-adr bold">0</td>
             </tr>
@@ -4525,6 +5050,9 @@ exports[`e2e generates overall driver standings 1`] = `
               </td>
               <td class="td-result">
                 0
+              </td>
+              <td class="td-result">
+                
               </td>
               <td class="td-points bold">0</td>
               <td class="td-adr bold">0</td>
@@ -4549,6 +5077,9 @@ exports[`e2e generates overall driver standings 1`] = `
               <td class="td-result">
                 0
               </td>
+              <td class="td-result">
+                
+              </td>
               <td class="td-points bold">0</td>
               <td class="td-adr bold">0</td>
             </tr>
@@ -4571,6 +5102,9 @@ exports[`e2e generates overall driver standings 1`] = `
               </td>
               <td class="td-result">
                 0
+              </td>
+              <td class="td-result">
+                
               </td>
               <td class="td-points bold">0</td>
               <td class="td-adr bold">0</td>
@@ -4595,6 +5129,9 @@ exports[`e2e generates overall driver standings 1`] = `
               <td class="td-result">
                 0
               </td>
+              <td class="td-result">
+                
+              </td>
               <td class="td-points bold">0</td>
               <td class="td-adr bold">0</td>
             </tr>
@@ -4617,6 +5154,9 @@ exports[`e2e generates overall driver standings 1`] = `
               </td>
               <td class="td-result">
                 0
+              </td>
+              <td class="td-result">
+                
               </td>
               <td class="td-points bold">0</td>
               <td class="td-adr bold">0</td>
@@ -4641,6 +5181,9 @@ exports[`e2e generates overall driver standings 1`] = `
               <td class="td-result">
                 0
               </td>
+              <td class="td-result">
+                
+              </td>
               <td class="td-points bold">0</td>
               <td class="td-adr bold">0</td>
             </tr>
@@ -4663,6 +5206,9 @@ exports[`e2e generates overall driver standings 1`] = `
               </td>
               <td class="td-result">
                 0
+              </td>
+              <td class="td-result">
+                
               </td>
               <td class="td-points bold">0</td>
               <td class="td-adr bold">0</td>
@@ -4687,6 +5233,9 @@ exports[`e2e generates overall driver standings 1`] = `
               <td class="td-result">
                 DNF
               </td>
+              <td class="td-result">
+                
+              </td>
               <td class="td-points bold">0</td>
               <td class="td-adr bold">0</td>
             </tr>
@@ -4709,6 +5258,9 @@ exports[`e2e generates overall driver standings 1`] = `
               </td>
               <td class="td-result">
                 DNS
+              </td>
+              <td class="td-result">
+                
               </td>
               <td class="td-points bold">0</td>
               <td class="td-adr bold">0</td>
@@ -4774,7 +5326,7 @@ exports[`e2e generates overall team standings 1`] = `
   <div class="siteHeader__bar">
     <div class="navLeft navDesktopOnly">
       <div class="dropdown">
-        <a class="brand" href="/index.html" aria-label="Home">
+        <a class="brand" href="./index.html" aria-label="Home">
           <img class="brand__img" src="./assets/rsc-guy.png" alt="Logo" />
         </a>
 
@@ -4827,6 +5379,14 @@ exports[`e2e generates overall team standings 1`] = `
 </nav>
 
 
+      <div class="navRight navDesktopOnly">
+        <img
+          class="flag"
+          src="./assets/country-flags/fin.png"
+          alt="fin"
+        />
+        <span id="countdown2" class="countdown"></span>
+      </div>
 
     <button
       type="button"
@@ -4839,8 +5399,8 @@ exports[`e2e generates overall team standings 1`] = `
     </button>
 
     <div class="navTitle navMobileOnly">
-      <div class="navTitle__main">team - Overall</div>
-      
+          <div class="navTitle__main">team - Overall</div>
+      <div id="countdown" class="countdown"></div>
     </div>
 
 		<button
@@ -4903,9 +5463,44 @@ exports[`e2e generates overall team standings 1`] = `
         >
           <img class="secondaryNav__flag" src="./assets/country-flags/est.png" alt="est" />
         </a>
+        <a
+          class="secondaryNav__item"
+          href="./overall-2-driver-results.html"
+          style=""
+        >
+          <img class="secondaryNav__flag" src="./assets/country-flags/fin.png" alt="fin" />
+        </a>
     </div>
 </header>
 
+<script>
+  var countDownDate = new Date("2030-12-31T22:59:00.000Z").getTime();
+  var x = setInterval(function() {
+    var now = new Date().getTime();
+    var distance = countDownDate - now;
+
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    var text = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+    var c1 = document.getElementById("countdown");
+    var c2 = document.getElementById("countdown2");
+    var c3 = document.getElementById("homeCountdown");
+    if (c1) c1.innerHTML = text;
+    if (c2) c2.innerHTML = text;
+    if (c3) c3.innerHTML = text;
+
+    if (distance < 0) {
+      clearInterval(x);
+      if (c1) c1.innerHTML = "Event Ended";
+      if (c2) c2.innerHTML = "Event Ended";
+      if (c3) c3.innerHTML = "Event Ended";
+    }
+  }, 1000);
+</script>
 
   <div class="container">
   <div class="flexContainer">
@@ -4944,6 +5539,9 @@ exports[`e2e generates overall team standings 1`] = `
               <th class="th-location">
                 <img src="./assets/country-flags/est.png" alt="est" />
               </th>
+              <th class="th-location">
+                <img src="./assets/country-flags/fin.png" alt="fin" />
+              </th>
               <th class="th-points">Points</th>
             </tr>
           </thead>
@@ -4959,6 +5557,9 @@ exports[`e2e generates overall team standings 1`] = `
               </td>
               <td class="td-result">
                 152
+              </td>
+              <td class="td-result">
+                
               </td>
               <td class="td-points bold">280</td>
             </tr>
@@ -4976,6 +5577,9 @@ exports[`e2e generates overall team standings 1`] = `
               <td class="td-result">
                 38
               </td>
+              <td class="td-result">
+                
+              </td>
               <td class="td-points bold">101</td>
             </tr>
             <tr>
@@ -4991,6 +5595,9 @@ exports[`e2e generates overall team standings 1`] = `
               </td>
               <td class="td-result">
                 0
+              </td>
+              <td class="td-result">
+                
               </td>
               <td class="td-points bold">66</td>
             </tr>
@@ -5008,6 +5615,9 @@ exports[`e2e generates overall team standings 1`] = `
               <td class="td-result">
                 61
               </td>
+              <td class="td-result">
+                
+              </td>
               <td class="td-points bold">61</td>
             </tr>
             <tr>
@@ -5023,6 +5633,9 @@ exports[`e2e generates overall team standings 1`] = `
               </td>
               <td class="td-result">
                 12
+              </td>
+              <td class="td-result">
+                
               </td>
               <td class="td-points bold">46</td>
             </tr>
@@ -5040,6 +5653,9 @@ exports[`e2e generates overall team standings 1`] = `
               <td class="td-result">
                 30
               </td>
+              <td class="td-result">
+                
+              </td>
               <td class="td-points bold">40</td>
             </tr>
             <tr>
@@ -5056,6 +5672,9 @@ exports[`e2e generates overall team standings 1`] = `
               <td class="td-result">
                 18
               </td>
+              <td class="td-result">
+                
+              </td>
               <td class="td-points bold">24</td>
             </tr>
             <tr>
@@ -5071,6 +5690,9 @@ exports[`e2e generates overall team standings 1`] = `
               </td>
               <td class="td-result">
                 6
+              </td>
+              <td class="td-result">
+                
               </td>
               <td class="td-points bold">6</td>
             </tr>
@@ -5132,7 +5754,7 @@ exports[`e2e generates team standings 1`] = `
   <div class="siteHeader__bar">
     <div class="navLeft navDesktopOnly">
       <div class="dropdown">
-        <a class="brand" href="/index.html" aria-label="Home">
+        <a class="brand" href="./index.html" aria-label="Home">
           <img class="brand__img" src="./assets/rsc-guy.png" alt="Logo" />
         </a>
 
@@ -5185,6 +5807,14 @@ exports[`e2e generates team standings 1`] = `
 </nav>
 
 
+      <div class="navRight navDesktopOnly">
+        <img
+          class="flag"
+          src="./assets/country-flags/fin.png"
+          alt="fin"
+        />
+        <span id="countdown2" class="countdown"></span>
+      </div>
 
     <button
       type="button"
@@ -5197,8 +5827,8 @@ exports[`e2e generates team standings 1`] = `
     </button>
 
     <div class="navTitle navMobileOnly">
-      <div class="navTitle__main">team - Test E2E</div>
-      
+          <div class="navTitle__main">team - Test E2E</div>
+      <div id="countdown" class="countdown"></div>
     </div>
 
 		<button
@@ -5261,9 +5891,44 @@ exports[`e2e generates team standings 1`] = `
         >
           <img class="secondaryNav__flag" src="./assets/country-flags/est.png" alt="est" />
         </a>
+        <a
+          class="secondaryNav__item"
+          href="./test-e2e-2-driver-results.html"
+          style=""
+        >
+          <img class="secondaryNav__flag" src="./assets/country-flags/fin.png" alt="fin" />
+        </a>
     </div>
 </header>
 
+<script>
+  var countDownDate = new Date("2030-12-31T22:59:00.000Z").getTime();
+  var x = setInterval(function() {
+    var now = new Date().getTime();
+    var distance = countDownDate - now;
+
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    var text = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+    var c1 = document.getElementById("countdown");
+    var c2 = document.getElementById("countdown2");
+    var c3 = document.getElementById("homeCountdown");
+    if (c1) c1.innerHTML = text;
+    if (c2) c2.innerHTML = text;
+    if (c3) c3.innerHTML = text;
+
+    if (distance < 0) {
+      clearInterval(x);
+      if (c1) c1.innerHTML = "Event Ended";
+      if (c2) c2.innerHTML = "Event Ended";
+      if (c3) c3.innerHTML = "Event Ended";
+    }
+  }, 1000);
+</script>
 
   <div class="container">
   <div class="flexContainer">
@@ -5302,6 +5967,9 @@ exports[`e2e generates team standings 1`] = `
               <th class="th-location">
                 <img src="./assets/country-flags/est.png" alt="est" />
               </th>
+              <th class="th-location">
+                <img src="./assets/country-flags/fin.png" alt="fin" />
+              </th>
               <th class="th-points">Points</th>
             </tr>
           </thead>
@@ -5320,6 +5988,9 @@ exports[`e2e generates team standings 1`] = `
               <td class="td-result">
                 38
               </td>
+              <td class="td-result">
+                
+              </td>
               <td class="td-points bold">101</td>
             </tr>
             <tr>
@@ -5335,6 +6006,9 @@ exports[`e2e generates team standings 1`] = `
               </td>
               <td class="td-result">
                 0
+              </td>
+              <td class="td-result">
+                
               </td>
               <td class="td-points bold">66</td>
             </tr>
@@ -5352,6 +6026,9 @@ exports[`e2e generates team standings 1`] = `
               <td class="td-result">
                 44
               </td>
+              <td class="td-result">
+                
+              </td>
               <td class="td-points bold">64</td>
             </tr>
             <tr>
@@ -5367,6 +6044,9 @@ exports[`e2e generates team standings 1`] = `
               </td>
               <td class="td-result">
                 61
+              </td>
+              <td class="td-result">
+                
               </td>
               <td class="td-points bold">61</td>
             </tr>
@@ -5384,6 +6064,9 @@ exports[`e2e generates team standings 1`] = `
               <td class="td-result">
                 12
               </td>
+              <td class="td-result">
+                
+              </td>
               <td class="td-points bold">46</td>
             </tr>
             <tr>
@@ -5399,6 +6082,9 @@ exports[`e2e generates team standings 1`] = `
               </td>
               <td class="td-result">
                 30
+              </td>
+              <td class="td-result">
+                
               </td>
               <td class="td-points bold">40</td>
             </tr>
@@ -5416,6 +6102,9 @@ exports[`e2e generates team standings 1`] = `
               <td class="td-result">
                 18
               </td>
+              <td class="td-result">
+                
+              </td>
               <td class="td-points bold">24</td>
             </tr>
             <tr>
@@ -5431,6 +6120,9 @@ exports[`e2e generates team standings 1`] = `
               </td>
               <td class="td-result">
                 6
+              </td>
+              <td class="td-result">
+                
               </td>
               <td class="td-points bold">6</td>
             </tr>

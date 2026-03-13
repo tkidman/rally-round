@@ -1250,12 +1250,39 @@ const processAllDivisions = async () => {
         leagueRef.league.getAllResults ||
         // TODO should probably loop through all eventPoints here to check
         (division.points && division.points.stage);
-      division.events = await fetchEvents(
+      const allFetchedEvents = await fetchEvents(
         division,
         divisionName,
         getAllResults
       );
-      division.events.forEach(event => (event.divisionName = divisionName));
+
+      // Split into processed events (active/finished) and upcoming events (future)
+      const processedEvents = [];
+      const upcomingEvents = [];
+
+      allFetchedEvents.forEach(event => {
+        event.divisionName = divisionName;
+
+        // Check if event is in the future:
+        // - WRC events have eventStatus === eventStatuses.future
+        // - RBR events without eventStatus but with future startDate
+        const moment = require("moment");
+        const isFutureEvent =
+          event.eventStatus === eventStatuses.future ||
+          (!event.eventStatus &&
+            event.startDate &&
+            moment(event.startDate).isAfter(moment()));
+
+        if (isFutureEvent) {
+          upcomingEvents.push(event);
+        } else {
+          processedEvents.push(event);
+        }
+      });
+
+      division.events = processedEvents;
+      division.upcomingEvents = upcomingEvents;
+
       processEvents(division.events, divisionName);
     }
     if (leagueRef.includeOverall) {

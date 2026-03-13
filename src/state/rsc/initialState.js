@@ -33,7 +33,7 @@ const points = {
 const initialState = {
   pointsForDNF: false,
   websiteName: "rsc-results",
-  useStandingsForHome: true,
+  useStandingsForHome: false,
   showLivePoints: true,
   showLivePointsDaysRemaining: 4,
   // noSuperRallyPointsMultiplier: 2,
@@ -109,6 +109,7 @@ const initialState = {
       displayName: "RSC Season 8 VW Golf Cup",
       hideTeamStandingsLink: true,
       disableSameCarValidation: false,
+      excludeFromCarPerformance: true,
       // enableSameCarClassValidation: true,
       // maxDriversScoringPointsForTeam: 2,
       filterEntries: { allowedCars: ["VW Golf II GTI 16V GrpA"] },

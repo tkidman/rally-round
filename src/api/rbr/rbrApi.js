@@ -130,7 +130,8 @@ const getCreds = async () => {
 
 const fetchCsvResults = async (rallyId, eventFinished) => {
   const cacheFileName = `${cachePath}/${rallyId}.csv`;
-  if (eventFinished) {
+  const useCache = eventFinished || process.env.USE_RBR_FIXTURE_CACHE;
+  if (useCache) {
     const cacheFile = loadFromCache(cacheFileName);
 
     if (cacheFile) {
@@ -156,7 +157,8 @@ const fetchCsvStandings = async (rallyId, eventFinished) => {
     throw new Error("invalid rally id, aborting");
   }
   const cacheFileName = `${cachePath}/${rallyId}_standings.csv`;
-  if (eventFinished) {
+  const useCache = eventFinished || process.env.USE_RBR_FIXTURE_CACHE;
+  if (useCache) {
     const cacheFile = loadFromCache(cacheFileName);
 
     if (cacheFile) {

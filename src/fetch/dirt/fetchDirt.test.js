@@ -93,6 +93,58 @@ describe("fetchDirt", () => {
           id: "65933",
           name: "Blueline H-Class Championship"
         }
+      },
+      {
+        divisionName: "pro",
+        eventId: "65934",
+        eventStatus: "Future",
+        location: "aus",
+        racenetChampionship: {
+          events: [
+            {
+              countryId: "ePoland",
+              countryName: "POLAND",
+              entryWindow: {
+                close: "2020-05-11T09:00:00Z",
+                end: "2020-05-11T09:00:00Z",
+                open: "2020-05-04T19:15:00Z",
+                start: "2020-05-04T19:15:00Z"
+              },
+              eventStatus: "Finished",
+              eventTime: "",
+              firstStageConditions: "eMiddayDry",
+              firstStageRouteId: "ePolandRally02Route5",
+              hasParticipated: false,
+              id: "65933",
+              isDlc: true,
+              locationId: "ePoland",
+              locationName: "ŁĘCZNA COUNTY",
+              vehicleClass: "eRallyUpTo20004wdCaps"
+            },
+            {
+              countryId: "aus",
+              countryName: "aus",
+              entryWindow: {
+                close: "2020-05-11T09:00:00Z",
+                end: "2020-05-11T09:00:00Z",
+                open: "2020-05-04T19:15:00Z",
+                start: "2020-05-04T19:15:00Z"
+              },
+              eventStatus: "Next",
+              eventTime: "",
+              firstStageConditions: "eMiddayDry",
+              firstStageRouteId: "eAusRally02Route5",
+              hasParticipated: false,
+              id: "65934",
+              isDlc: true,
+              locationId: "aus",
+              locationName: "aus",
+              vehicleClass: "eRallyUpTo20004wdCaps"
+            }
+          ],
+          id: "65933",
+          name: "Blueline H-Class Championship"
+        }
       }
     ]);
   });
@@ -119,6 +171,12 @@ describe("fetchDirt", () => {
         eventStatus: "Finished",
         lastStageId: 4,
         location: "ŁĘCZNA COUNTY"
+      },
+      {
+        divisionName: "pro",
+        eventId: "65934",
+        eventStatus: "Future",
+        location: "aus"
       },
       {
         challengeId: "67014",

@@ -56,6 +56,29 @@ const initialState = {
               { startIndex: 0, endIndex: 3 },
               { startIndex: 4, endIndex: 7 }
             ]
+          },
+          {
+            eventId: 47619,
+            endTime: "2030-12-31 23:59",
+            locationName: "Rally Finland",
+            locationFlag: "FI",
+            numStages: 8,
+            legs: [
+              { startIndex: 0, endIndex: 3 },
+              { startIndex: 4, endIndex: 7 }
+            ]
+          },
+          {
+            eventId: 47620,
+            locationName: "Rally Sweden",
+            locationFlag: "SE",
+            startDate: "2031-01-01 00:00",
+            endTime: "2031-01-31 23:59",
+            numStages: 8,
+            legs: [
+              { startIndex: 0, endIndex: 3 },
+              { startIndex: 4, endIndex: 7 }
+            ]
           }
         ]
       },
@@ -97,6 +120,21 @@ const initialState = {
             endTime: "2022-10-10 12:00",
             locationName: "Rally Nonko",
             locationFlag: "EE",
+            numStages: 8
+          },
+          {
+            eventId: 47618,
+            endTime: "2030-12-31 23:59",
+            locationName: "Rally Finland",
+            locationFlag: "FI",
+            numStages: 8
+          },
+          {
+            eventId: 47621,
+            locationName: "Rally Sweden",
+            locationFlag: "SE",
+            startDate: "2031-01-01 00:00",
+            endTime: "2031-01-31 23:59",
             numStages: 8
           }
         ]

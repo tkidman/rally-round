@@ -28,7 +28,7 @@ const getHeaderLocationCodes = events => {
 };
 const getDriverStandingData = (standing, events) => {
   const results = getAllResults(standing.name, events, "driver");
-  const resultsTotalPoints = results.map(result => result.totalPoints);
+  const resultsTotalPoints = results.map(result => result?.totalPoints || 0);
   return {
     results,
     resultsTotalPoints,
@@ -38,7 +38,7 @@ const getDriverStandingData = (standing, events) => {
 
 const getTeamStandingData = (standing, events) => {
   const results = getAllResults(standing.name, events, "team");
-  const resultsTotalPoints = results.map(result => result.totalPoints);
+  const resultsTotalPoints = results.map(result => result?.totalPoints || 0);
   return {
     results,
     resultsTotalPoints,
