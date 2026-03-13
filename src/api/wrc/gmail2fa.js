@@ -1,5 +1,62 @@
+const readline = require("readline");
 const { getNewMessages, extractMessageContent } = require("../gmail/gmail");
 const debug = require("debug")("tkidman:rally-round:wrcAPI:gmail2fa");
+
+/** Gmail API env vars required for automatic 2FA code retrieval */
+const GMAIL_ENV_VARS = [
+  "GMAIL_CLIENT_ID",
+  "GMAIL_CLIENT_SECRET",
+  "GMAIL_REFRESH_TOKEN"
+];
+
+/**
+ * Returns true if Gmail API is configured (all required env vars set).
+ * When false, 2FA will fall back to manual code entry in the terminal.
+ */
+const isGmailConfigured = () => GMAIL_ENV_VARS.every(key => process.env[key]);
+
+/**
+ * Prompts the user to enter the 6-digit EA security code in the terminal.
+ * Use when Gmail API is not set up.
+ * Ctrl+C (SIGINT) cancels the prompt, closes readline, and rejects so callers can clean up (e.g. close browser).
+ * @returns {Promise<string>} The 6-digit security code
+ */
+const promptSecurityCodeFromTerminal = () => {
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+  });
+  return new Promise((resolve, reject) => {
+    let settled = false;
+    const finish = (fn, arg) => {
+      if (settled) return;
+      settled = true;
+      process.removeListener("SIGINT", onSigint);
+      rl.close();
+      fn(arg);
+    };
+
+    const onSigint = () => {
+      finish(reject, new Error("2FA cancelled by user (SIGINT)"));
+      // Exit so the process aborts cleanly; Puppeteer browser is a child process and will be cleaned up
+      process.exit(130);
+    };
+    process.on("SIGINT", onSigint);
+
+    const ask = () => {
+      rl.question("Enter 6-digit EA security code from email: ", answer => {
+        const code = answer.trim().replace(/\s/g, "");
+        if (/^\d{6}$/.test(code)) {
+          finish(resolve, code);
+        } else {
+          console.error("Invalid: code must be exactly 6 digits.");
+          ask();
+        }
+      });
+    };
+    ask();
+  });
+};
 
 /**
  * Waits for and retrieves the EA security code from Gmail
@@ -163,9 +220,17 @@ const handle2FA = async page => {
       throw new Error("Security code input field not found");
     }
 
-    // Get the security code from Gmail
-    debug("Retrieving security code from Gmail...");
-    const securityCode = await waitForSecurityCode(page);
+    // Get the security code: Gmail API if configured, otherwise prompt in terminal
+    let securityCode;
+    if (isGmailConfigured()) {
+      debug("Retrieving security code from Gmail...");
+      securityCode = await waitForSecurityCode(page);
+    } else {
+      console.log(
+        "Gmail API not configured. Check your email for the EA security code."
+      );
+      securityCode = await promptSecurityCodeFromTerminal();
+    }
 
     // Enter the security code using keyboard events (works with focused input)
     debug(`Entering security code: ${securityCode}`);
@@ -242,5 +307,7 @@ const handle2FA = async page => {
 
 module.exports = {
   waitForSecurityCode,
-  handle2FA
+  handle2FA,
+  isGmailConfigured,
+  promptSecurityCodeFromTerminal
 };
