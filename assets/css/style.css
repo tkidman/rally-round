@@ -249,6 +249,7 @@ template {
 
 /* Cards */
 .card {
+  border: 1px solid var(--black-1);
   border-radius: var(--radius-md);
   overflow: hidden;
 }
