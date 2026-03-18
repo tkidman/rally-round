@@ -22,6 +22,14 @@ const rallies = [
     locationFlag: "KE",
     numStages: 8
     // enduranceRoundMultiplier: 2
+  },
+  {
+    eventIds: [95918],
+    endTime: "2026-03-23 22:00",
+    locationName: "Rally of the 1000 Lakes",
+    locationFlag: "FI",
+    numStages: 8
+    // enduranceRoundMultiplier: 2
   }
 ];
 
