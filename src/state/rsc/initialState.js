@@ -30,6 +30,14 @@ const rallies = [
     locationFlag: "FI",
     numStages: 8
     // enduranceRoundMultiplier: 2
+  },
+  {
+    eventIds: [96251],
+    endTime: "2026-03-30 22:00",
+    locationName: "Rally Sanremo",
+    locationFlag: "IT",
+    numStages: 8
+    // enduranceRoundMultiplier: 2
   }
 ];
 
