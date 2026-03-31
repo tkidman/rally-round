@@ -38,6 +38,14 @@ const rallies = [
     locationFlag: "IT",
     numStages: 8
     // enduranceRoundMultiplier: 2
+  },
+  {
+    eventIds: [96601],
+    endTime: "2026-04-06 23:00",
+    locationName: "Lombard RAC Rally",
+    locationFlag: "GB",
+    numStages: 8
+    // enduranceRoundMultiplier: 2
   }
 ];
 
