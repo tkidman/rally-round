@@ -1,3 +1,4 @@
+const crypto = require("crypto");
 const fs = require("fs");
 const path = require("path");
 const axios = require("axios");
@@ -53,6 +54,34 @@ const getExistingLogos = async (
     // If tree doesn't exist or path not found, return empty array
     if (error.response?.status === 404) {
       return [];
+    }
+    throw error;
+  }
+};
+
+const getGitBlobSha = content =>
+  crypto
+    .createHash("sha1")
+    .update(`blob ${content.length}\0`)
+    .update(content)
+    .digest("hex");
+
+const getExistingBlobShas = async (owner, repo, treeSha, folder, headers) => {
+  try {
+    const treeResponse = await axios.get(
+      `https://api.github.com/repos/${owner}/${repo}/git/trees/${treeSha}?recursive=1`,
+      { headers }
+    );
+    return Object.fromEntries(
+      treeResponse.data.tree
+        .filter(
+          item => item.type === "blob" && item.path.startsWith(`${folder}/`)
+        )
+        .map(item => [item.path.slice(folder.length + 1), item.sha])
+    );
+  } catch (error) {
+    if (error.response?.status === 404) {
+      return {};
     }
     throw error;
   }
@@ -205,7 +234,7 @@ const runGitHubOperations = async () => {
       debug("Uploaded JS file as blob");
     }
 
-    // 4. Font files - binary, so base64 like the logos; identical content dedupes by sha.
+    // 4. Font files - only upload new or changed ones
     const fontDir = path.resolve(
       __dirname,
       "..",
@@ -215,21 +244,36 @@ const runGitHubOperations = async () => {
       "fonts"
     );
     if (fs.existsSync(fontDir)) {
+      const fontFolder = `${clubFolder}/assets/fonts`;
+      const existingFonts = await getExistingBlobShas(
+        owner,
+        repo,
+        latestTreeSha,
+        fontFolder,
+        headers
+      );
       const fontFiles = fs
         .readdirSync(fontDir)
         .filter(file => /\.(woff2?|ttf)$/i.test(file));
 
+      let uploadedFonts = 0;
       for (const file of fontFiles) {
         const content = fs.readFileSync(path.join(fontDir, file));
+        if (existingFonts[file] === getGitBlobSha(content)) {
+          continue;
+        }
         const blobSha = await createBlob(content.toString("base64"), "base64");
         tree.push({
-          path: `${clubFolder}/assets/fonts/${file}`,
+          path: `${fontFolder}/${file}`,
           mode: "100644",
           type: "blob",
           sha: blobSha
         });
+        uploadedFonts++;
       }
-      debug(`Uploaded ${fontFiles.length} font files as blobs`);
+      debug(
+        `Uploaded ${uploadedFonts} new or changed font files as blobs (${fontFiles.length} local)`
+      );
     }
 
     // 5. Logo files (teams and cars) - only upload new ones
