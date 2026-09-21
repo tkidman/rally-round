@@ -130,8 +130,8 @@
     },
     "theme": {
       "type": "string",
-      "enum": ["dark", "red", "green", "orange"],
-      "description": "Color theme for the website (default: blue/purple if not set). Options: dark, red, green, orange"
+      "enum": ["amber", "dark", "red", "orange", "green", "blue", "violet"],
+      "description": "Accent color for the website (default: violet if not set). Options: violet, amber, red, orange, green, blue. \"dark\" is kept as an alias for amber"
     },
     "enableDnsPenalty": {
       "type": "boolean",
@@ -190,6 +190,11 @@
         "disableSameCarValidation": {
           "type": "boolean",
           "description": "Whether to disable same car validation"
+        },
+        "plannedRounds": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Total rounds the season will have; rounds not yet created are shown as upcoming placeholders"
         },
         "enableSameCarClassValidation": {
           "type": "boolean",

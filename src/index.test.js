@@ -3,6 +3,7 @@ const {
   sortResults,
   calculateEventStandings,
   calculateTotalPointsAfterDropRounds,
+  calculateDropRounds,
   getPromotionRelegationZoneNumber
 } = require("./index");
 const leaderboard = require("./__fixtures__/leaderboard");
@@ -630,7 +631,7 @@ describe("calculates event results", () => {
       expect(points).toEqual(35);
     });
 
-    it("works with only 1 event", () => {
+    it("drops nothing while every round run would be dropped", () => {
       const events = [
         {
           enduranceRoundMultiplier: 2
@@ -647,7 +648,43 @@ describe("calculates event results", () => {
         showLivePoints: false,
         resultType: resultTypes.driver
       });
-      expect(points).toEqual(0);
+      expect(points).toEqual(4);
+    });
+
+    it("drops nothing when the rounds run exactly equal the drop rounds", () => {
+      const events = [{}, {}, {}];
+      const allResultsForName = [{ totalPoints: 20 }, { totalPoints: 8 }];
+      const totalPoints = 28;
+      const result = calculateDropRounds({
+        allResultsForName,
+        totalPoints,
+        dropRounds: 2,
+        events,
+        showLivePoints: false,
+        resultType: resultTypes.driver
+      });
+      expect(result.totalPointsAfterDropRounds).toEqual(28);
+      expect(result.droppedRoundIndexes).toEqual([]);
+    });
+
+    it("starts dropping as soon as one round survives", () => {
+      const events = [{}, {}, {}];
+      const allResultsForName = [
+        { totalPoints: 20 },
+        { totalPoints: 8 },
+        { totalPoints: 15 }
+      ];
+      const totalPoints = 43;
+      const result = calculateDropRounds({
+        allResultsForName,
+        totalPoints,
+        dropRounds: 2,
+        events,
+        showLivePoints: false,
+        resultType: resultTypes.driver
+      });
+      expect(result.totalPointsAfterDropRounds).toEqual(20);
+      expect(result.droppedRoundIndexes).toEqual([1, 2]);
     });
 
     it("works with live points and DNS result as only result", () => {

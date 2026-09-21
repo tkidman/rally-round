@@ -1,29 +1,24 @@
 <div class="container">
   <div class="flexContainer">
     <div class="flexBox">
-      <div class="mb-1 hide-medium hide-small">
-        <div class="logo d-flex">
-          <img src="./assets/{{logo}}" />
-          <h2 class="ml-1">{{title}} {{localization.driver_standings}}</h2>
+      <div class="page-heading">
+        <div class="page-heading__titles">
+          <div class="page-heading__eyebrow">
+            {{siteTitlePrefix}}{{#if pageContext}} · {{pageContext}}{{/if}}{{#if seasonProgress}} · {{seasonProgress}}{{/if}}
+          </div>
+          <h1 class="page-heading__title">{{standingsTitle}}</h1>
         </div>
       </div>
-      <div class="column-filter">
-        <button class="column-filter__btn" type="button" aria-label="Filter columns">
-          <span>Filter Columns</span>
-        </button>
-        <div class="column-filter__menu">
-          <div class="column-filter__items"></div>
-          <div class="column-filter__actions">
-            <button class="column-filter__action-btn" data-action="show-all">Show All</button>
-            <button class="column-filter__action-btn" data-action="close">Close</button>
-          </div>
-        </div>
+      {{{eventNav}}}
+      <div class="column-chips" role="group" aria-label="Filter columns">
+        <span class="column-chips__label" aria-hidden="true">Filter Columns</span>
+        <div class="column-chips__items"></div>
       </div>
       <div class="table-scroll-indicator" id="tableScrollIndicator" aria-hidden="true">
         <div class="table-scroll-indicator__content"></div>
       </div>
       <div class="table-scroll-wrapper">
-        <table id="tableDrivers">
+        <table id="tableDrivers" class="driver-standings-table">
           <thead>
             <tr>
               <th class="th-pos">{{localization.pos}}</th>
@@ -44,26 +39,24 @@
               {{#if showTeam2LogoColumn}}
               <th class="th-team2">{{team2ColumnName}}</th>
               {{/if}}
-              {{#if showCar}}
-              <th class="th-car">{{localization.car}}</th>
-              {{/if}}
 
               {{#each headerLocations}}
                 <th class="th-location">
-                  <a href="./{{../divisionName}}-{{this.eventId}}-driver-results.html" style="{{#if this.disableLink}}pointer-events: none;{{/if}}">
-                    <img src="./assets/country-flags/{{this.locationCode}}.png" alt="{{this.locationCode}}" title="{{this.locationCode}}"/>
+                  <a href="./{{../divisionName}}-{{this.eventId}}-driver-results.html" title="{{this.locationCode}} - R{{this.round}}" style="{{#if this.disableLink}}pointer-events: none;{{/if}}">
+                    <img class="th-location__flag" src="./assets/country-flags/{{this.locationCode}}.png"
+                      alt="{{this.locationCode}} R{{this.round}}" />
                   </a>
                 </th>
               {{/each}}
               <th class="th-points">{{localization.points}}</th>
               {{#if showPointsAfterDropRounds}}
-              <th class="th-adr">{{localization.adr}}</th>
+              <th class="th-adr" title="{{afterDropRoundMessage}}">{{localization.adr}}</th>
               {{/if}}
             </tr>
           </thead>
           <tbody>
             {{#each rows}}
-            <tr{{#if this.colour}} style="background-color: {{this.colour}}"{{/if}}>
+            <tr{{#if this.zone}} class="{{this.zone}}"{{/if}}>
               <td class="td-pos">{{this.standing.currentPosition}}</td>
               <td class="td-change">
                 {{#if this.positive}}
@@ -84,7 +77,16 @@
                 <img src="./assets/country-flags/{{this.country.code}}.png" class="img-sm"
                   alt="{{this.country.code}}" title="{{this.country.code}}" />
               </td>
-              <td class="td-driver text-left bold">{{this.driver.name}}</td>
+              <td class="td-driver text-left bold">
+                <span class="td-driver__name">{{this.driver.name}}</span>
+                {{#if ../showCar}}
+                <span class="td-driver__car">
+                  <img class="td-driver__car-logo" src="./assets/cars/{{this.car}}.png" alt="{{this.car}}"
+                    title="{{this.car}}" />
+                  {{#if ../showCarName}}<span class="td-driver__car-name">{{this.driver.car}}</span>{{/if}}
+                </span>
+                {{/if}}
+              </td>
               {{#if ../overall}}
               <td class="td-div">{{this.divisionDisplayName}}</td>
               {{/if}}
@@ -105,21 +107,9 @@
                   title="{{this.driver.team2Id}}" />
               </td>
               {{/if}}
-              {{#if ../showCar}}
-              {{#if ../showCarName}}
-              <td class="td-car-name text-left">
-                {{this.driver.car}}
-              </td>
-              {{else}}
-              <td class="td-car">
-                <img src="./assets/cars/{{this.car}}.png" class="img-md" alt="{{this.car}}"
-                  title="{{this.car}}" />
-              </td>
-              {{/if}}
-              {{/if}}
               {{#each this.results}}
               {{#with this}}
-              <td class="td-result">
+              <td class="td-result {{resultClass pointsDisplay}}{{#if isBest}} is-best{{/if}}{{#if isDropped}} is-dropped{{/if}}"{{#if isDropped}} title="{{droppedTitle}}"{{/if}}>
                 {{pointsDisplay}}
               </td>
               {{/with}}

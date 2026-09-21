@@ -7,7 +7,7 @@
     "test": "jest",
     "test-e2e": "jest e2e.test.js",
     "test:update-snapshots": "jest -u",
-    "lint": "eslint src/",
+    "lint": "eslint src/ assets/js/",
     "validate-configs": "node src/state/editor/validate.js",
     "config-editor": "cd src/state/editor && node server.js",
     "prepush": "npm run lint && npm run test",
@@ -63,7 +63,8 @@
     }
   },
   "lint-staged": {
-    "*.js": "npm run lint -- --fix"
+    "*.js": "npm run lint -- --fix",
+    "*.css": "prettier --write"
   },
   "jest": {
     "testEnvironment": "node"

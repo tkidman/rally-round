@@ -13,6 +13,8 @@ const getHeaderLocations = events => {
   const headerLocations = events.reduce((headerLocations, event, index) => {
     headerLocations.push({
       eventId: index,
+      // Round number as shown in the standings header ("R1"), 1-based.
+      round: index + 1,
       locationCode: getLocationCountryCode(event),
       disableLink:
         leagueRef.league.aggregateDriverResultsInOverall &&

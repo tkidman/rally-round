@@ -1,29 +1,61 @@
 <div class="container">
   <div class="flexContainer">
     <div class="flexBox">
-      <div class="mb-1 hide-medium hide-small">
-        <div class="logo d-flex">
-          <img src="./assets/{{logo}}" />
-          <h2 class="ml-1">{{fullTitle}}</h2>
+      <div class="page-heading">
+        <div class="page-heading__titles">
+          <div class="page-heading__eyebrow">
+            {{siteTitlePrefix}}{{#if pageContext}} · {{pageContext}}{{/if}} · R{{roundNumber}} {{localization.of}} {{totalRounds}}
+          </div>
+          <h1 class="page-heading__title">{{resultsTitle}}</h1>
+        </div>
+        <div class="page-heading__navigation" aria-label="Event navigation">
+          {{#if previousEventHref}}
+          <a class="page-heading__nav-button" href="{{previousEventHref}}">← {{localization.previous}}</a>
+          {{/if}}
+          {{#if nextEventHref}}
+          <a class="page-heading__nav-button" href="{{nextEventHref}}">{{localization.next}} →</a>
+          {{/if}}
         </div>
       </div>
-      <div class="column-filter">
-        <button class="column-filter__btn" type="button" aria-label="Filter columns">
-          <span>Filter Columns</span>
-        </button>
-        <div class="column-filter__menu">
-          <div class="column-filter__items"></div>
-          <div class="column-filter__actions">
-            <button class="column-filter__action-btn" data-action="show-all">Show All</button>
-            <button class="column-filter__action-btn" data-action="close">Close</button>
+      {{{eventNav}}}
+      {{#if podium.length}}
+      <div class="podium">
+        {{#each podium}}
+        <div class="podium__item podium__item--{{this.position}}">
+          <div class="podium__top">
+            <span class="podium__pos">{{this.position}}</span>
+            <span class="podium__points">{{this.pointsDisplay}} {{../localization.pts}}</span>
+          </div>
+          <div class="podium__name">
+            <img src="./assets/country-flags/{{this.country.code}}.png" class="img-sm" alt="{{this.country.code}}" />
+            <span>{{this.driver.name}}</span>
+          </div>
+          {{#if ../showCarName}}
+          <div class="podium__car">
+            {{#if this.car}}
+            <img class="podium__car-logo" src="./assets/cars/{{this.car}}.png" alt="{{this.car}}"
+              title="{{this.car}}" />
+            {{/if}}
+            <span>{{this.entry.vehicleName}}</span>
+          </div>
+          {{/if}}
+          <div class="podium__times">
+            <span class="podium__total">{{this.totalTimeDisplay}}</span>
+            <span class="podium__gap">{{#if @first}}{{../localization.leader}}{{else}}{{this.totalDiffDisplay}}{{/if}}</span>
           </div>
         </div>
+        {{/each}}
+      </div>
+      {{/if}}
+      <div class="column-chips" role="group" aria-label="Filter columns">
+        <span class="column-chips__label" aria-hidden="true">Filter Columns</span>
+        <div class="column-chips__items"></div>
       </div>
       <div class="table-scroll-indicator" id="tableScrollIndicator" aria-hidden="true">
         <div class="table-scroll-indicator__content"></div>
       </div>
       <div class="table-scroll-wrapper">
-        <table id="tableDrivers">
+        <table id="tableDrivers" class="event-results-table">
           <thead>
             <tr>
               <th class="th-pos">{{localization.pos}}</th>
@@ -43,12 +75,6 @@
               {{#if showTeam2LogoColumn}}
               <th class="th-team2">{{team2ColumnName}}</th>
               {{/if}}
-              {{#if showCar}}
-              <th class="th-car">{{localization.car}}</th>
-              {{#if showCarName}}
-              <th class="th-car-name">{{localization.car_name}}</th>
-              {{/if}}
-              {{/if}}
               {{#if showPowerStage}}
               <th class="th-ps">{{localization.ps}}</th>
               <th class="th-diff">{{localization.diff}}</th>
@@ -66,13 +92,13 @@
               {{/each}}
               {{/if}}
               {{#if showStagePoints}}
-              <th class="th-stage-points">{{localization.stage_points}}</th>
+              <th class="th-stage-points th-abbr" data-short="{{localization.stage_points_short}}"><span class="th-abbr__full">{{localization.stage_points}}</span></th>
               {{/if}}
               {{#if showPowerStagePoints}}
-              <th class="th-ps-points">{{localization.ps}} {{localization.points}}</th>
+              <th class="th-ps-points th-abbr" data-short="{{localization.ps}} {{localization.points_short}}"><span class="th-abbr__full">{{localization.ps}} {{localization.points}}</span></th>
               {{/if}}
-              <th class="th-points">{{localization.points}}</th>
-              <th class="th-total-points">{{localization.total_points}}</th>
+              <th class="th-points th-abbr" data-short="{{localization.points_short}}"><span class="th-abbr__full">{{localization.points}}</span></th>
+              <th class="th-total-points th-abbr" data-short="{{localization.total_points_short}}"><span class="th-abbr__full">{{localization.total_points}}</span></th>
             </tr>
           </thead>
           <tbody>
@@ -83,7 +109,18 @@
                 <img src="./assets/country-flags/{{this.country.code}}.png" class="img-sm"
                   alt="{{this.country.code}}" title="{{this.country.code}}" />
               </td>
-              <td class="td-driver text-left bold">{{this.driver.name}}</td>
+              <td class="td-driver text-left bold">
+                <span class="td-driver__name">{{this.driver.name}}</span>
+                {{#if ../showCar}}
+                {{#if this.car}}
+                <span class="td-driver__car">
+                  <img class="td-driver__car-logo" src="./assets/cars/{{this.car}}.png" alt="{{this.car}}"
+                    title="{{this.car}}" />
+                  {{#if ../showCarName}}<span class="td-driver__car-name">{{this.entry.vehicleName}}</span>{{/if}}
+                </span>
+                {{/if}}
+                {{/if}}
+              </td>
               {{#if ../overall}}
               <td class="td-div">{{this.divisionDisplayName}}</td>
               {{/if}}
@@ -103,17 +140,6 @@
                 <img src="{{this.team2Logo}}" class="img-md" alt="{{this.driver.team2Id}}"
                   title="{{this.driver.team2Id}}" />
               </td>
-              {{/if}}
-              {{#if ../showCar}}
-              <td class="td-car">
-                <img src="./assets/cars/{{this.car}}.png" class="img-md" alt="{{this.car}}"
-                  title="{{this.car}}" />
-              </td>
-              {{#if ../showCarName}}
-              <td class="td-car-name text-left">
-                {{this.entry.vehicleName}}
-              </td>
-              {{/if}}
               {{/if}}
               {{#if ../showPowerStage}}
               <td class="td-ps">{{this.stageTimeDisplay}}</td>

@@ -1,4 +1,4 @@
-/* eslint-disable */
+/* exported toggleControlledNav, openPopup */
 const NAVS = ["mobileNav", "seriesMobileNav"];
 function closeNav(navId) {
   const el = document.getElementById(navId);
@@ -26,7 +26,32 @@ function openPopup(id) {
   popup.classList.toggle("show");
 }
 
-document.addEventListener("DOMContentLoaded", function() {
+// Scroll the current event's flag into view, or the latest on non-results pages.
+function scrollSecondaryNavToCurrent() {
+  const nav = document.querySelector(".secondaryNav");
+  if (!nav || nav.scrollWidth <= nav.clientWidth) return;
+
+  const items = Array.from(nav.querySelectorAll(".secondaryNav__item"));
+  const page = window.location.pathname.split("/").pop();
+  let target = items.find(item => item.getAttribute("href") === "./" + page);
+  if (target) {
+    target.setAttribute("aria-current", "page");
+  } else {
+    const enabled = items.filter(item => !item.style.pointerEvents);
+    target = enabled[enabled.length - 1];
+  }
+  if (!target) return;
+
+  // scroll only the nav row horizontally (scrollIntoView would also scroll the page)
+  const navRect = nav.getBoundingClientRect();
+  const targetRect = target.getBoundingClientRect();
+  nav.scrollLeft +=
+    targetRect.left - navRect.left - (navRect.width - targetRect.width) / 2;
+}
+
+window.addEventListener("load", scrollSecondaryNavToCurrent);
+
+document.addEventListener("DOMContentLoaded", function () {
   const table = document.getElementById("tableDrivers");
   if (!table) return;
 
@@ -262,20 +287,20 @@ document.addEventListener("DOMContentLoaded", function() {
 
   let currentSortedColumn = null;
   let currentSortOrder = 1;
-  
+
   headers.forEach((header, index) => {
     header.addEventListener("click", e => {
       if (e.target.closest("a")) {
         return;
       }
-  
+
       if (index === currentSortedColumn) {
         currentSortOrder *= -1;
       } else {
         currentSortedColumn = index;
         currentSortOrder = shouldDefaultToDescending(header) ? -1 : 1;
       }
-  
+
       sortTableByColumn(table, index, currentSortOrder);
       updateHeaderStyles(headers, header, currentSortOrder);
     });
@@ -406,13 +431,10 @@ function initTopScrollbar() {
 function initColumnFilter(table) {
   if (!table) return;
 
-  const tableId = table.id || "tableDrivers";
-
-  // Detect page type to share filter preferences across similar pages
   const getPageType = () => {
     const pathname = window.location.pathname;
     const filename = pathname.split("/").pop() || pathname;
-    
+
     if (filename.includes("-driver-results.html")) {
       return "driver-results";
     }
@@ -422,40 +444,28 @@ function initColumnFilter(table) {
     return pathname.replace(/\//g, "_") || "root";
   };
 
-  const storageKey = `columnFilter_${getPageType()}_${tableId}`;
   const headers = table.querySelectorAll("thead th");
   const tbody = table.querySelector("tbody");
 
   if (!headers.length) return;
 
-  // Load and sanitize: convert to Set and filter out invalid indices
-  let hiddenColumns;
-  try {
-    const stored = JSON.parse(localStorage.getItem(storageKey) || "[]");
-    hiddenColumns = new Set(
-      stored.filter(
-        idx => typeof idx === "number" && idx >= 0 && idx < headers.length
-      )
-    );
-  } catch (e) {
-    hiddenColumns = new Set();
-  }
+  const hiddenColumns = new Set();
 
   // Cache rows once for better performance
   const rows = Array.from(tbody.querySelectorAll("tr"));
 
   // Find the pre-rendered filter container
-  const tableWrapper = table.closest(".table-scroll-wrapper") || table.parentElement;
-  const filterContainer = tableWrapper.parentElement.querySelector(".column-filter");
-  
+  const tableWrapper =
+    table.closest(".table-scroll-wrapper") || table.parentElement;
+  const filterContainer =
+    tableWrapper.parentElement.querySelector(".column-chips");
+
   if (!filterContainer) {
     console.warn("Column filter container not found in template");
     return;
   }
 
-  const filterBtn = filterContainer.querySelector(".column-filter__btn");
-  const filterMenu = filterContainer.querySelector(".column-filter__menu");
-  const filterItems = filterContainer.querySelector(".column-filter__items");
+  const filterItems = filterContainer.querySelector(".column-chips__items");
 
   const getColumnName = (header, index) => {
     const text = header.textContent.trim();
@@ -481,87 +491,113 @@ function initColumnFilter(table) {
     if (!header) return;
 
     header.classList.toggle("hide-column", !isVisible);
-    rows.forEach(row => row.children[index]?.classList.toggle("hide-column", !isVisible));
+    rows.forEach(row =>
+      row.children[index]?.classList.toggle("hide-column", !isVisible)
+    );
 
     isVisible ? hiddenColumns.delete(index) : hiddenColumns.add(index);
   };
 
-  const savePreferences = () => {
-    try {
-      localStorage.setItem(storageKey, JSON.stringify([...hiddenColumns]));
-    } catch (e) {
-      // Silently fail if localStorage is unavailable
-    }
+  // One chip toggles every column belonging to an idea. Labels come from the headers.
+  const GROUPS = {
+    "driver-results": [
+      { key: "ps", classes: ["th-ps"] },
+      { key: "diff", classes: ["th-diff"] },
+      { key: "sr", classes: ["th-sr"] },
+      {
+        key: "points-detail",
+        label: "Points detail",
+        // Total points always stays: it is the answer the page exists to give.
+        classes: ["th-ps-points", "th-stage-points", "th-leg", "th-points"]
+      }
+    ],
+    standings: [
+      { key: "nat", classes: ["th-nat"] },
+      { key: "change", label: "Change", classes: ["th-change"] },
+      { key: "points", classes: ["th-points"] }
+    ]
   };
 
-  // Batch filter item creation using DocumentFragment
-  const fragment = document.createDocumentFragment();
-  headers.forEach((header, index) => {
-    const isVisible = !hiddenColumns.has(index);
+  const headerList = Array.from(headers);
+  const groups = (GROUPS[getPageType()] || [])
+    .map(group => {
+      const indices = headerList
+        .map((header, index) =>
+          group.classes.some(cls => header.classList.contains(cls)) ? index : -1
+        )
+        .filter(index => index >= 0);
+      return { ...group, indices };
+    })
+    .filter(group => group.indices.length > 0)
+    .map(group => ({
+      ...group,
+      label: group.label || getColumnName(headerList[group.indices[0]], 0)
+    }));
 
-    const item = document.createElement("div");
-    item.className = "column-filter__item";
-    item.innerHTML = `
-      <input 
-        type="checkbox" 
-        class="column-filter__checkbox" 
-        id="col-${index}" 
-        data-column-index="${index}"
-        ${isVisible ? "checked" : ""}
-      >
-      <label class="column-filter__label" for="col-${index}">
-        ${getColumnName(header, index)}
-      </label>
-    `;
-    fragment.appendChild(item);
+  // Car logo and model live in the driver cell, so they toggle by class not column index.
+  const hasCar = !!table.querySelector(".td-driver__car");
+  let carHidden = false;
+
+  const applyCar = () => {
+    table.classList.toggle("hide-car", carHidden);
+  };
+
+  const isGroupVisible = group =>
+    group.indices.some(index => !hiddenColumns.has(index));
+
+  const renderChips = () => {
+    filterItems.textContent = "";
+    const fragment = document.createDocumentFragment();
+
+    groups.forEach(group => {
+      const chip = document.createElement("button");
+      chip.type = "button";
+      chip.className = "column-chip";
+      chip.dataset.group = group.key;
+      chip.textContent = group.label;
+      chip.setAttribute("aria-pressed", String(isGroupVisible(group)));
+      chip.classList.toggle("is-off", !isGroupVisible(group));
+      fragment.appendChild(chip);
+    });
+
+    if (hasCar) {
+      const chip = document.createElement("button");
+      chip.type = "button";
+      chip.className = "column-chip";
+      chip.dataset.group = "car";
+      chip.textContent = "Car";
+      chip.setAttribute("aria-pressed", String(!carHidden));
+      chip.classList.toggle("is-off", carHidden);
+      fragment.appendChild(chip);
+    }
+
+    filterItems.appendChild(fragment);
+  };
+
+  filterItems.addEventListener("click", e => {
+    const chip = e.target.closest(".column-chip");
+    if (!chip) return;
+
+    if (chip.dataset.group === "car") {
+      carHidden = !carHidden;
+      applyCar();
+      renderChips();
+      return;
+    }
+
+    const group = groups.find(g => g.key === chip.dataset.group);
+    if (!group) return;
+
+    const makeVisible = !isGroupVisible(group);
+    group.indices.forEach(index => toggleColumn(index, makeVisible));
+    renderChips();
   });
-  filterItems.appendChild(fragment);
 
-  // Apply all column visibility changes IMMEDIATELY (synchronously)
-  // This prevents FOUC - we want columns hidden before first paint
-  headers.forEach((header, index) => {
-    const isVisible = !hiddenColumns.has(index);
-    toggleColumn(index, isVisible);
-  });
-
-  const preloadStyle = document.getElementById('filter-preload');
-  if (preloadStyle) {
-    preloadStyle.remove();
+  if (!groups.length && !hasCar) {
+    filterContainer.remove();
+    return;
   }
 
-  filterBtn.addEventListener("click", e => {
-    e.stopPropagation();
-    const isOpen = filterMenu.classList.toggle("is-open");
-    filterBtn.classList.toggle("is-open", isOpen);
-  });
-
-  document.addEventListener("click", e => {
-    if (!filterContainer.contains(e.target)) {
-      filterMenu.classList.remove("is-open");
-      filterBtn.classList.remove("is-open");
-    }
-  });
-
-  filterItems.addEventListener("change", e => {
-    if (e.target.classList.contains("column-filter__checkbox")) {
-      toggleColumn(parseInt(e.target.dataset.columnIndex), e.target.checked);
-      savePreferences();
-    }
-  });
-
-  filterContainer.addEventListener("click", e => {
-    const btn = e.target.closest(".column-filter__action-btn");
-    if (!btn) return;
-
-    if (btn.dataset.action === "show-all") {
-      filterItems.querySelectorAll(".column-filter__checkbox").forEach((checkbox, idx) => {
-        checkbox.checked = true;
-        toggleColumn(idx, true);
-      });
-      savePreferences();
-    } else if (btn.dataset.action === "close") {
-      filterMenu.classList.remove("is-open");
-      filterBtn.classList.remove("is-open");
-    }
-  });
+  renderChips();
+  applyCar();
 }

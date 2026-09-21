@@ -84,6 +84,18 @@ module.exports = [
     }
   },
 
+  {
+    files: ["assets/js/**/*.js"],
+    languageOptions: {
+      sourceType: "script",
+      globals: {
+        requestAnimationFrame: "readonly",
+        cancelAnimationFrame: "readonly",
+        ResizeObserver: "readonly"
+      }
+    }
+  },
+
   // Prettier config (must be last to override other configs)
   prettier
 ];

@@ -7,17 +7,9 @@
                     <h2 class="ml-1">{{title}} {{location.countryName}} >{{localization.driver_results}}</h2>
                 </div>
             </div>
-            <div class="column-filter">
-                <button class="column-filter__btn" type="button" aria-label="Filter columns">
-                    <span>Filter Columns</span>
-                </button>
-                <div class="column-filter__menu">
-                    <div class="column-filter__items"></div>
-                    <div class="column-filter__actions">
-                        <button class="column-filter__action-btn" data-action="show-all">Show All</button>
-                        <button class="column-filter__action-btn" data-action="close">Close</button>
-                    </div>
-                </div>
+            <div class="column-chips" role="group" aria-label="Filter columns">
+                <span class="column-chips__label" aria-hidden="true">Filter Columns</span>
+                <div class="column-chips__items"></div>
             </div>
             <div class="table-scroll-wrapper">
             <table id="tableDrivers">
@@ -45,7 +37,7 @@
                         <td class="text-left bold">{{this.name}}</td>
 						<td>{{this.divisionDisplayName}}</td>
 						{{#each stageTimes}}
-							<td style="background-color: {{this.colour}}">{{this.time}}</td>
+							<td class="td-stage-time{{#if this.band}} {{this.band}}{{/if}}">{{this.time}}</td>
 							{{else}}
 							<td>0</td><td>0</td><td>0</td><td>0</td>
 						{{/each}}

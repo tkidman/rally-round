@@ -2,6 +2,7 @@ const { downloadCache } = require("./api/aws/s3");
 const {
   orderResultsBy,
   knapsack,
+  knapsackDroppedIndexes,
   getDuration,
   getSummedTotalTimeStrings,
   useNationalityAsTeam,
@@ -721,7 +722,8 @@ const recalculateTotalTime = ({ stages }) => {
   }
 };
 
-const calculateTotalPointsAfterDropRounds = ({
+// Indexes line up with the events array so the table strikes the right column.
+const calculateDropRounds = ({
   allResultsForName,
   totalPoints,
   events,
@@ -741,16 +743,34 @@ const calculateTotalPointsAfterDropRounds = ({
     const roundWeights = events
       .map(event => event.enduranceRoundMultiplier || 1)
       .slice(0, points.length);
-    const allowedRoundsWeight = Math.max(sum(roundWeights) - dropRounds, 0);
+    const roundsWeight = sum(roundWeights);
+    // Drops only start once a round would survive them, else the whole field reads 0.
+    if (roundsWeight <= dropRounds) {
+      return {
+        totalPointsAfterDropRounds: totalPoints,
+        droppedRoundIndexes: []
+      };
+    }
+    const allowedRoundsWeight = roundsWeight - dropRounds;
     const pointsAfterDropRounds = knapsack(
       allowedRoundsWeight,
       roundWeights,
       points
     );
-    return pointsAfterDropRounds;
+    return {
+      totalPointsAfterDropRounds: pointsAfterDropRounds,
+      droppedRoundIndexes: knapsackDroppedIndexes(
+        allowedRoundsWeight,
+        roundWeights,
+        points
+      )
+    };
   }
-  return totalPoints;
+  return { totalPointsAfterDropRounds: totalPoints, droppedRoundIndexes: [] };
 };
+
+const calculateTotalPointsAfterDropRounds = args =>
+  calculateDropRounds(args).totalPointsAfterDropRounds;
 
 const isDnsPenalty = allResultsForDriver => {
   const firstStartedEventIndex = allResultsForDriver.findIndex(
@@ -870,7 +890,7 @@ const calculateStandings = ({
       allResultsForName,
       nameResult => nameResult.totalPoints
     );
-    standing.totalPointsAfterDropRounds = calculateTotalPointsAfterDropRounds({
+    const dropRoundsResult = calculateDropRounds({
       allResultsForName,
       totalPoints: standing.totalPoints,
       events: [...(previousEvents || []), currentEvent],
@@ -878,6 +898,9 @@ const calculateStandings = ({
       showLivePoints: leagueRef.showLivePoints(),
       resultType
     });
+    standing.totalPointsAfterDropRounds =
+      dropRoundsResult.totalPointsAfterDropRounds;
+    standing.droppedRoundIndexes = dropRoundsResult.droppedRoundIndexes;
     if (previousStandings) {
       const previousStanding = previousStandings.find(
         standing => standing.name === result.name
@@ -1237,6 +1260,15 @@ const loadCache = async () => {
   }
 };
 
+const getPlaceholderRounds = (plannedRounds, knownRounds) =>
+  Array.from(
+    { length: Math.max(0, (plannedRounds || 0) - knownRounds) },
+    () => ({
+      isPlaceholder: true,
+      eventStatus: eventStatuses.future
+    })
+  );
+
 const processAllDivisions = async () => {
   try {
     checkOutputDirs();
@@ -1281,7 +1313,13 @@ const processAllDivisions = async () => {
       });
 
       division.events = processedEvents;
-      division.upcomingEvents = upcomingEvents;
+      division.upcomingEvents = [
+        ...upcomingEvents,
+        ...getPlaceholderRounds(
+          division.plannedRounds,
+          processedEvents.length + upcomingEvents.length
+        )
+      ];
 
       processEvents(division.events, divisionName);
     }
@@ -1308,5 +1346,6 @@ module.exports = {
   calculatePromotionRelegation,
   calculatePromotionRelegations,
   calculateTotalPointsAfterDropRounds,
+  calculateDropRounds,
   getPromotionRelegationZoneNumber
 };

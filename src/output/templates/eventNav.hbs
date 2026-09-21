@@ -1,0 +1,18 @@
+{{!-- Event pills. Rendered inside the page body, under the heading, so the
+     event you are looking at reads as part of the page rather than as part
+     of the site chrome. --}}
+{{#if secondary}}
+    <div class="secondaryNav">
+      {{#each secondary}}
+        <a
+          class="secondaryNav__item{{#if this.active}} secondaryNav__item--active{{/if}}"
+          href="./{{../links.active.name}}-{{this.eventId}}-driver-results.html"
+          style="{{#if this.disableLink}}pointer-events:none;opacity:.45;{{/if}}"
+          title="{{this.locationCode}} - R{{this.round}}"
+        >
+          <img class="secondaryNav__flag" src="./assets/country-flags/{{this.locationCode}}.png" alt="" />
+          <span class="secondaryNav__code">{{this.locationCode}}</span>
+        </a>
+      {{/each}}
+    </div>
+  {{/if}}
