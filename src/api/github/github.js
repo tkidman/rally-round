@@ -333,7 +333,7 @@ const runGitHubOperations = async () => {
     await addLogos("cars");
     await addLogos("country-flags");
 
-    // 5. Club logo (only the one used by this club)
+    // 6. Club logo (only the one used by this club)
     const clubLogoFilename = leagueRef.league.logo;
     if (clubLogoFilename) {
       const clubLogoPath = path.resolve(

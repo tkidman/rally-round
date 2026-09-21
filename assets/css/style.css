@@ -1973,30 +1973,6 @@ tbody > tr.is-zone-penalty .td-pos {
   cursor: pointer;
 }
 
-.column-filter__actions {
-  border-top: 1px solid var(--border);
-  padding-top: var(--spacing-md);
-  margin-top: var(--spacing-md);
-  display: flex;
-  gap: var(--spacing-md);
-}
-
-.column-filter__action-btn {
-  flex: 1;
-  background: transparent;
-  border: 1px solid var(--border);
-  color: var(--fg);
-  padding: 0.4em var(--spacing-xl);
-  border-radius: var(--radius-md);
-  cursor: pointer;
-  font-size: 0.85em;
-  transition: background 0.2s;
-}
-
-.column-filter__action-btn:hover {
-  background: var(--hover);
-}
-
 th.hide-column,
 td.hide-column {
   display: none !important;
@@ -3223,10 +3199,6 @@ a.round-card:focus-visible {
 
 .column-filter__btn::after {
   content: none;
-}
-
-.column-filter__actions {
-  display: none;
 }
 
 .column-filter__menu {

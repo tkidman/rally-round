@@ -1295,7 +1295,9 @@ const processAllDivisions = async () => {
       allFetchedEvents.forEach(event => {
         event.divisionName = divisionName;
 
-        // Future: WRC sets eventStatus; RBR has no status but a future startDate.
+        // Check if event is in the future:
+        // - WRC events have eventStatus === eventStatuses.future
+        // - RBR events without eventStatus but with future startDate
         const moment = require("moment");
         const isFutureEvent =
           event.eventStatus === eventStatuses.future ||

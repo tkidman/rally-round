@@ -89,7 +89,6 @@ module.exports = [
     languageOptions: {
       sourceType: "script",
       globals: {
-        localStorage: "readonly",
         requestAnimationFrame: "readonly",
         cancelAnimationFrame: "readonly",
         ResizeObserver: "readonly"

@@ -28,6 +28,7 @@ const { allLeagues } = require("../state/allLeagues");
 const { isEmpty, isNil } = require("lodash");
 // const { eventStatuses } = require("../shared");
 
+// Register Handlebars helpers
 Handlebars.registerHelper("eq", (a, b) => a === b);
 
 // Done here, not in processing, so it also applies to an already-processed league.
