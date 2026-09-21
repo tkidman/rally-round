@@ -28,6 +28,14 @@
 }
 
 @font-face {
+  font-family: "Barlow";
+  src: url("../fonts/Barlow-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: "Barlow Condensed";
   src: url("../fonts/BarlowCondensed-Bold.woff2") format("woff2");
   font-weight: 700;
@@ -54,6 +62,7 @@ body {
   color: var(--text);
   background-color: var(--surface-0);
   background-image: none !important;
+  font-synthesis-weight: none;
 }
 
 h1,
@@ -2988,7 +2997,7 @@ a.round-card:focus-visible {
   align-items: center;
   gap: 0.5em;
   margin-top: 0.6em;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 1.1rem;
   white-space: nowrap;
   overflow: hidden;
