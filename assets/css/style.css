@@ -2090,7 +2090,7 @@ td.hide-column {
     display: flex;
     flex: 1;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
   }
 
   .home-duo__main > .home-card,

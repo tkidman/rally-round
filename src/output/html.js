@@ -481,48 +481,43 @@ const getTop3ByDivision = divisions => {
 };
 
 const getLastCompletedEvents = divisions => {
-  const lastEventsByDivision = [];
+  const divisionEntries = Object.entries(divisions || {});
+  const eventsPerDivision = divisionEntries.length === 1 ? 3 : 1;
 
-  Object.entries(divisions || {}).forEach(([divName, division]) => {
-    let mostRecentInDivision = null;
-    let mostRecentDate = null;
-    let mostRecentEventIndex = null;
-
-    (division.events || []).forEach((event, eventIndex) => {
-      if (event.eventStatus === eventStatuses.finished) {
-        const eventDate = event.startDate ? new Date(event.startDate) : null;
-        if (!mostRecentDate || (eventDate && eventDate > mostRecentDate)) {
-          mostRecentDate = eventDate;
-          mostRecentEventIndex = eventIndex;
-          const winner = event.results?.driverResults?.[0];
-          if (winner) {
-            const { driver, country } = getDriverData(winner.name, divName);
-            const eventLocation = getLocation(event);
-            mostRecentInDivision = {
-              name:
-                event.name || event.locationName || eventLocation.countryName,
-              location: eventLocation.countryName,
-              locationCode: eventLocation.countryCode,
-              divisionName: division.displayName || divName,
-              divisionId: division.divisionName || divName,
-              eventIndex: mostRecentEventIndex,
-              winner: driver.name,
-              winnerCountry: country.code,
-              margin:
-                event.results.driverResults[1]?.entry?.totalDiff || "Dominant",
-              totalEntries: event.results.driverResults.length
-            };
-          }
-        }
-      }
-    });
-
-    if (mostRecentInDivision) {
-      lastEventsByDivision.push(mostRecentInDivision);
-    }
-  });
-
-  return lastEventsByDivision;
+  return divisionEntries.flatMap(([divName, division]) =>
+    (division.events || [])
+      .map((event, eventIndex) => ({ event, eventIndex }))
+      .filter(
+        ({ event }) =>
+          event.eventStatus === eventStatuses.finished &&
+          event.results?.driverResults?.[0]
+      )
+      .sort(
+        (a, b) =>
+          (b.event.startDate ? new Date(b.event.startDate) : 0) -
+            (a.event.startDate ? new Date(a.event.startDate) : 0) ||
+          b.eventIndex - a.eventIndex
+      )
+      .slice(0, eventsPerDivision)
+      .map(({ event, eventIndex }) => {
+        const winner = event.results.driverResults[0];
+        const { driver, country } = getDriverData(winner.name, divName);
+        const eventLocation = getLocation(event);
+        return {
+          name: event.name || event.locationName || eventLocation.countryName,
+          location: eventLocation.countryName,
+          locationCode: eventLocation.countryCode,
+          divisionName: division.displayName || divName,
+          divisionId: division.divisionName || divName,
+          eventIndex,
+          winner: driver.name,
+          winnerCountry: country.code,
+          margin:
+            event.results.driverResults[1]?.entry?.totalDiff || "Dominant",
+          totalEntries: event.results.driverResults.length
+        };
+      })
+  );
 };
 
 const getChampionshipBattles = divisions => {
@@ -1551,6 +1546,7 @@ module.exports = {
   // tests
   getStandingZone,
   useDropRoundPoints,
+  getLastCompletedEvents,
   compactStageTime,
   compactTimeDiff
 };

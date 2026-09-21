@@ -1,5 +1,6 @@
 const {
   useDropRoundPoints,
+  getLastCompletedEvents,
   compactStageTime,
   compactTimeDiff
 } = require("./html");
@@ -81,5 +82,60 @@ describe("compact timing displays", () => {
     expect(compactTimeDiff("--")).toBe("--");
     expect(compactTimeDiff("N/A")).toBe("N/A");
     expect(compactTimeDiff(undefined)).toBeUndefined();
+  });
+});
+
+describe("getLastCompletedEvents", () => {
+  const finished = (locationName, startDate, winner = "Driver A") => ({
+    eventStatus: "Finished",
+    locationName,
+    locationFlag: "FI",
+    startDate,
+    results: { driverResults: [{ name: winner }, { name: "Driver B" }] }
+  });
+  const division = (divisionName, events) => ({
+    divisionName,
+    displayName: divisionName,
+    events
+  });
+
+  beforeEach(() => {
+    leagueRef.getDriverInDivision = name => ({ name, nationality: "SE" });
+  });
+
+  test("lists the three latest finished events, newest first, for a single division", () => {
+    const events = [
+      finished("Poland", "2026-06-22"),
+      finished("Sweden", "2026-07-06"),
+      finished("Croatia", "2026-07-13"),
+      finished("Finland", "2026-09-11"),
+      { eventStatus: "Active", locationName: "Chile", startDate: "2026-09-18" }
+    ];
+    const rows = getLastCompletedEvents({ pro: division("pro", events) });
+    expect(rows.map(row => row.name)).toEqual(["Finland", "Croatia", "Sweden"]);
+    expect(rows.map(row => row.eventIndex)).toEqual([3, 2, 1]);
+  });
+
+  test("lists only the latest finished event per division when there are several", () => {
+    const rows = getLastCompletedEvents({
+      pro: division("pro", [
+        finished("Poland", "2026-06-22"),
+        finished("Sweden", "2026-07-06")
+      ]),
+      am: division("am", [finished("Poland", "2026-06-22")])
+    });
+    expect(rows.map(row => [row.divisionId, row.name])).toEqual([
+      ["pro", "Sweden"],
+      ["am", "Poland"]
+    ]);
+  });
+
+  test("skips finished events without a winner", () => {
+    const noWinner = { ...finished("Finland", "2026-09-11") };
+    noWinner.results = { driverResults: [] };
+    const rows = getLastCompletedEvents({
+      pro: division("pro", [finished("Sweden", "2026-07-06"), noWinner])
+    });
+    expect(rows.map(row => row.name)).toEqual(["Sweden"]);
   });
 });
