@@ -368,7 +368,7 @@ const buildRoundGroup = ([divName, division]) => {
   };
 };
 
-// Divisions on identical schedules share one calendar, taken from overall.
+// Divisions on identical schedules share one calendar, linked to overall.
 const roundSignature = rounds =>
   JSON.stringify(
     rounds.map(round => [
@@ -389,9 +389,19 @@ const collapseSharedCalendar = groups => {
     return groups;
   }
 
-  const overallGroup = buildRoundGroup(["overall", overall]);
-  if (roundSignature(overallGroup.rounds) !== signature) return groups;
-  return [{ ...overallGroup, divisionName: null }];
+  const overallRounds = buildRoundGroup(["overall", overall]).rounds;
+  return [
+    {
+      divisionName: null,
+      divisionId: "overall",
+      rounds: groups[0].rounds.map((round, index) => {
+        const overallRound = overallRounds[index];
+        return round.href && overallRound
+          ? { ...round, winner: overallRound.winner, href: overallRound.href }
+          : round;
+      })
+    }
+  ];
 };
 
 const getRoundCards = divisions =>
@@ -1587,6 +1597,7 @@ module.exports = {
   getLastCompletedEvents,
   getDivisionPanels,
   getHeroForHome,
+  getRoundCards,
   compactStageTime,
   compactTimeDiff
 };

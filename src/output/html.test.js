@@ -3,6 +3,7 @@ const {
   getLastCompletedEvents,
   getDivisionPanels,
   getHeroForHome,
+  getRoundCards,
   compactStageTime,
   compactTimeDiff
 } = require("./html");
@@ -218,5 +219,70 @@ describe("getHeroForHome", () => {
         sharedCalendar: true
       })
     ).toMatchObject({ divisionName: null, hasMeta: true, resultsHref: null });
+  });
+});
+
+describe("getRoundCards", () => {
+  const finished = (name, winner) => ({
+    eventStatus: "Finished",
+    name,
+    locationName: "Finland",
+    locationFlag: "FI",
+    results: { driverResults: [{ name: winner }] }
+  });
+  const division = (divisionName, winner) => ({
+    divisionName,
+    displayName: divisionName,
+    events: [finished("Secto Rally Finland", winner)],
+    upcomingEvents: [
+      { name: "Rally Sweden", locationFlag: "SE", startDate: "2031-01-01" }
+    ]
+  });
+
+  beforeEach(() => {
+    leagueRef.getDriverInDivision = name => ({ name, nationality: "SE" });
+    leagueRef.league = {
+      overall: {
+        divisionName: "overall",
+        events: [{ ...finished(undefined, "Overall Winner"), name: undefined }]
+      }
+    };
+  });
+
+  test("merges identical division calendars even though overall lacks upcoming rounds and names", () => {
+    const groups = getRoundCards({
+      pro: division("pro", "Pro Winner"),
+      am: division("am", "Am Winner")
+    });
+    expect(groups).toHaveLength(1);
+    expect(groups[0].divisionName).toBeNull();
+    expect(
+      groups[0].rounds.map(round => [round.name, round.winner, round.href])
+    ).toEqual([
+      [
+        "Secto Rally Finland",
+        "Overall Winner",
+        "./overall-0-driver-results.html"
+      ],
+      ["Rally Sweden", null, null]
+    ]);
+  });
+
+  test("keeps separate calendars when the divisions differ", () => {
+    const am = division("am", "Am Winner");
+    am.upcomingEvents[0].name = "Rally Poland";
+    expect(
+      getRoundCards({ pro: division("pro", "Pro Winner"), am })
+    ).toHaveLength(2);
+  });
+
+  test("keeps separate calendars when there is no overall", () => {
+    leagueRef.league = {};
+    expect(
+      getRoundCards({
+        pro: division("pro", "Pro Winner"),
+        am: division("am", "Am Winner")
+      })
+    ).toHaveLength(2);
   });
 });

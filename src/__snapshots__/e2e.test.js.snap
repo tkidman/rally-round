@@ -2506,18 +2506,9 @@ exports[`e2e generates driver standings 1`] = `
       <h1 class="home-hero__title">
         <span class="home-hero__title-line"><img class="home-hero__title-flag" src="./assets/country-flags/fin.png" alt="fin" />Rally Finland</span>
       </h1>
-      <div class="home-hero__meta">
-        <span>Test E2E</span>
-      </div>
       <div class="home-hero__actions">
-        <a class="home-btn home-btn--primary" href="./test-e2e-2-driver-results.html">View Results</a>
-        <a class="home-btn" href="./test-e2e-driver-standings.html">View Standings</a>
-      </div>
-      <div class="home-hero__also">
-        <span class="home-hero__also-label">Also running</span>
-        <a class="home-hero__also-item" href="./test-e2e2-2-driver-results.html">
-          Test E2E2 · Rally Finland
-        </a>
+        <a class="home-btn home-btn--primary" href="./overall-2-driver-results.html">View Results</a>
+        <a class="home-btn" href="./overall-driver-standings.html">View Standings</a>
       </div>
     </div>
     <div class="home-clock">
@@ -2708,52 +2699,11 @@ exports[`e2e generates driver standings 1`] = `
     <header class="home-card__head">
       <h2 class="home-card__title">
         Calendar
-        <span class="home-card__title-note">Test E2E</span>
+        
       </h2>
     </header>
     <div class="rounds-grid">
-      <a class="round-card round-card--done" href="./test-e2e-0-driver-results.html">
-        <div class="round-card__top">
-          <span class="round-card__round">R1</span>
-          <span class="round-card__badge">Done</span>
-        </div>
-        <div class="round-card__name">Rally Grundstrom</div>
-        <div class="round-card__winner">Winner: Hawk24</div>
-      </a>
-      <a class="round-card round-card--done" href="./test-e2e-1-driver-results.html">
-        <div class="round-card__top">
-          <span class="round-card__round">R2</span>
-          <span class="round-card__badge">Done</span>
-        </div>
-        <div class="round-card__name">Rally Nonko</div>
-        <div class="round-card__winner">Winner: ninko</div>
-      </a>
-      <a class="round-card round-card--live" href="./test-e2e-2-driver-results.html">
-        <div class="round-card__top">
-          <span class="round-card__round">R3</span>
-          <span class="round-card__badge">Live</span>
-        </div>
-        <div class="round-card__name">Rally Finland</div>
-      </a>
-      <a class="round-card round-card--upcoming">
-        <div class="round-card__top">
-          <span class="round-card__round">R4</span>
-          <span class="round-card__badge">To come</span>
-        </div>
-        <div class="round-card__name">Rally Sweden</div>
-        <div class="round-card__date">Jan 1, 2031</div>
-              </a>
-    </div>
-  </section>
-  <section class="home-card">
-    <header class="home-card__head">
-      <h2 class="home-card__title">
-        Calendar
-        <span class="home-card__title-note">Test E2E2</span>
-      </h2>
-    </header>
-    <div class="rounds-grid">
-      <a class="round-card round-card--done" href="./test-e2e2-0-driver-results.html">
+      <a class="round-card round-card--done" href="./overall-0-driver-results.html">
         <div class="round-card__top">
           <span class="round-card__round">R1</span>
           <span class="round-card__badge">Done</span>
@@ -2761,7 +2711,7 @@ exports[`e2e generates driver standings 1`] = `
         <div class="round-card__name">Rally Grundstrom</div>
         <div class="round-card__winner">Winner: woosh</div>
       </a>
-      <a class="round-card round-card--done" href="./test-e2e2-1-driver-results.html">
+      <a class="round-card round-card--done" href="./overall-1-driver-results.html">
         <div class="round-card__top">
           <span class="round-card__round">R2</span>
           <span class="round-card__badge">Done</span>
@@ -2769,7 +2719,7 @@ exports[`e2e generates driver standings 1`] = `
         <div class="round-card__name">Rally Nonko</div>
         <div class="round-card__winner">Winner: woosh</div>
       </a>
-      <a class="round-card round-card--live" href="./test-e2e2-2-driver-results.html">
+      <a class="round-card round-card--live" href="./overall-2-driver-results.html">
         <div class="round-card__top">
           <span class="round-card__round">R3</span>
           <span class="round-card__badge">Live</span>
