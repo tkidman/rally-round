@@ -1,4 +1,4 @@
-/* eslint-disable */
+/* exported toggleControlledNav, openPopup */
 const NAVS = ["mobileNav", "seriesMobileNav"];
 function closeNav(navId) {
   const el = document.getElementById(navId);
@@ -51,7 +51,7 @@ function scrollSecondaryNavToCurrent() {
 
 window.addEventListener("load", scrollSecondaryNavToCurrent);
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   const table = document.getElementById("tableDrivers");
   if (!table) return;
 
@@ -285,20 +285,20 @@ document.addEventListener("DOMContentLoaded", function() {
 
   let currentSortedColumn = null;
   let currentSortOrder = 1;
-  
+
   headers.forEach((header, index) => {
     header.addEventListener("click", e => {
       if (e.target.closest("a")) {
         return;
       }
-  
+
       if (index === currentSortedColumn) {
         currentSortOrder *= -1;
       } else {
         currentSortedColumn = index;
         currentSortOrder = shouldDefaultToDescending(header) ? -1 : 1;
       }
-  
+
       sortTableByColumn(table, index, currentSortOrder);
       updateHeaderStyles(headers, header, currentSortOrder);
     });
@@ -435,7 +435,7 @@ function initColumnFilter(table) {
   const getPageType = () => {
     const pathname = window.location.pathname;
     const filename = pathname.split("/").pop() || pathname;
-    
+
     if (filename.includes("-driver-results.html")) {
       return "driver-results";
     }
@@ -468,9 +468,11 @@ function initColumnFilter(table) {
   const rows = Array.from(tbody.querySelectorAll("tr"));
 
   // Find the pre-rendered filter container
-  const tableWrapper = table.closest(".table-scroll-wrapper") || table.parentElement;
-  const filterContainer = tableWrapper.parentElement.querySelector(".column-filter");
-  
+  const tableWrapper =
+    table.closest(".table-scroll-wrapper") || table.parentElement;
+  const filterContainer =
+    tableWrapper.parentElement.querySelector(".column-filter");
+
   if (!filterContainer) {
     console.warn("Column filter container not found in template");
     return;
@@ -504,7 +506,9 @@ function initColumnFilter(table) {
     if (!header) return;
 
     header.classList.toggle("hide-column", !isVisible);
-    rows.forEach(row => row.children[index]?.classList.toggle("hide-column", !isVisible));
+    rows.forEach(row =>
+      row.children[index]?.classList.toggle("hide-column", !isVisible)
+    );
 
     isVisible ? hiddenColumns.delete(index) : hiddenColumns.add(index);
   };
@@ -542,9 +546,7 @@ function initColumnFilter(table) {
     .map(group => {
       const indices = headerList
         .map((header, index) =>
-          group.classes.some(cls => header.classList.contains(cls))
-            ? index
-            : -1
+          group.classes.some(cls => header.classList.contains(cls)) ? index : -1
         )
         .filter(index => index >= 0);
       return { ...group, indices };
@@ -629,7 +631,7 @@ function initColumnFilter(table) {
   renderChips();
   applyCar();
 
-  const preloadStyle = document.getElementById('filter-preload');
+  const preloadStyle = document.getElementById("filter-preload");
   if (preloadStyle) {
     preloadStyle.remove();
   }
@@ -659,10 +661,12 @@ function initColumnFilter(table) {
     if (!btn) return;
 
     if (btn.dataset.action === "show-all") {
-      filterItems.querySelectorAll(".column-filter__checkbox").forEach((checkbox, idx) => {
-        checkbox.checked = true;
-        toggleColumn(idx, true);
-      });
+      filterItems
+        .querySelectorAll(".column-filter__checkbox")
+        .forEach((checkbox, idx) => {
+          checkbox.checked = true;
+          toggleColumn(idx, true);
+        });
       savePreferences();
     } else if (btn.dataset.action === "close") {
       filterMenu.classList.remove("is-open");
