@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"{{#if theme}} class="theme-{{theme}}"{{/if}}>
 
 <head>
   <meta charset="utf-8">
@@ -35,7 +35,7 @@
   <title>{{pageTitle}}</title>
 </head>
 
-<body{{#if theme}} class="theme-{{theme}}"{{/if}}>
+<body>
   {{{navigation}}}
   {{{body}}}
   <script src="./assets/js/app.js" defer></script>
