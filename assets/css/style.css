@@ -2212,6 +2212,7 @@ td.hide-column {
 }
 
 .home-hero--next .home-hero__eyebrow,
+.home-hero--latest .home-hero__eyebrow,
 .home-hero--complete .home-hero__eyebrow {
   color: var(--text-dimmer);
 }

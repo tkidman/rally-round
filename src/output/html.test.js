@@ -2,6 +2,7 @@ const {
   useDropRoundPoints,
   getLastCompletedEvents,
   getDivisionPanels,
+  getHomeHero,
   getHeroForHome,
   getRoundCards,
   compactStageTime,
@@ -284,5 +285,51 @@ describe("getRoundCards", () => {
         am: division("am", "Am Winner")
       })
     ).toHaveLength(2);
+  });
+});
+
+describe("planned placeholder rounds", () => {
+  const placeholder = { isPlaceholder: true, eventStatus: "Future" };
+  const division = () => ({
+    divisionName: "pro",
+    displayName: "Pro",
+    events: [
+      {
+        eventStatus: "Finished",
+        name: "Secto Rally Finland",
+        locationName: "Finland",
+        locationFlag: "FI",
+        results: { driverResults: [{ name: "Winner" }] }
+      }
+    ],
+    upcomingEvents: [placeholder, placeholder, placeholder]
+  });
+
+  beforeEach(() => {
+    leagueRef.getDriverInDivision = name => ({ name, nationality: "SE" });
+    leagueRef.league = {};
+  });
+
+  test("hero shows the latest result instead of a placeholder or season complete", () => {
+    expect(getHomeHero({ pro: division() })).toMatchObject({
+      state: "latest",
+      statusLabel: "Latest result",
+      title: "Secto Rally Finland",
+      roundNumber: 1,
+      totalRounds: 4,
+      resultsHref: "./pro-0-driver-results.html"
+    });
+  });
+
+  test("calendar lists placeholders as rounds to be announced", () => {
+    const [group] = getRoundCards({ pro: division() });
+    expect(
+      group.rounds.map(round => [round.round, round.name, round.state])
+    ).toEqual([
+      [1, "Secto Rally Finland", "done"],
+      [2, "To be announced", "upcoming"],
+      [3, "To be announced", "upcoming"],
+      [4, "To be announced", "upcoming"]
+    ]);
   });
 });

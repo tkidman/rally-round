@@ -1260,6 +1260,15 @@ const loadCache = async () => {
   }
 };
 
+const getPlaceholderRounds = (plannedRounds, knownRounds) =>
+  Array.from(
+    { length: Math.max(0, (plannedRounds || 0) - knownRounds) },
+    () => ({
+      isPlaceholder: true,
+      eventStatus: eventStatuses.future
+    })
+  );
+
 const processAllDivisions = async () => {
   try {
     checkOutputDirs();
@@ -1302,7 +1311,13 @@ const processAllDivisions = async () => {
       });
 
       division.events = processedEvents;
-      division.upcomingEvents = upcomingEvents;
+      division.upcomingEvents = [
+        ...upcomingEvents,
+        ...getPlaceholderRounds(
+          division.plannedRounds,
+          processedEvents.length + upcomingEvents.length
+        )
+      ];
 
       processEvents(division.events, divisionName);
     }

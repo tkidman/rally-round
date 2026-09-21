@@ -237,6 +237,7 @@ const getHomeHero = divisions => {
     const statusLabels = {
       live: localization.live_now,
       next: localization.up_next,
+      latest: localization.latest_result,
       complete: localization.season_complete
     };
 
@@ -289,7 +290,7 @@ const getHomeHero = divisions => {
 
   for (const [divName, division] of entries) {
     const upcoming = (division.upcomingEvents || [])[0];
-    if (upcoming) {
+    if (upcoming && !upcoming.isPlaceholder) {
       return buildHero(
         divName,
         division,
@@ -309,7 +310,7 @@ const getHomeHero = divisions => {
           division,
           events[index],
           index + 1,
-          "complete"
+          (division.upcomingEvents || []).length ? "latest" : "complete"
         );
       }
     }
@@ -348,7 +349,9 @@ const buildRoundGroup = ([divName, division]) => {
     const location = getLocation(event) || {};
     return {
       round: (division.events || []).length + index + 1,
-      name: event.name || event.locationName || location.countryName,
+      name: event.isPlaceholder
+        ? localization.round_tba
+        : event.name || event.locationName || location.countryName,
       locationCode: location.countryCode,
       state: "upcoming",
       statusLabel: localization.round_upcoming,
@@ -601,7 +604,7 @@ const getNextEvent = divisions => {
   Object.entries(divisions || {}).forEach(([divName, division]) => {
     const upcoming = division.upcomingEvents?.[0];
 
-    if (upcoming && !nextEvent) {
+    if (upcoming && !upcoming.isPlaceholder && !nextEvent) {
       const upcomingLocation = getLocation(upcoming);
 
       nextEvent = {
@@ -1596,6 +1599,7 @@ module.exports = {
   useDropRoundPoints,
   getLastCompletedEvents,
   getDivisionPanels,
+  getHomeHero,
   getHeroForHome,
   getRoundCards,
   compactStageTime,

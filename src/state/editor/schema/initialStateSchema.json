@@ -191,6 +191,11 @@
           "type": "boolean",
           "description": "Whether to disable same car validation"
         },
+        "plannedRounds": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Total rounds the season will have; rounds not yet created are shown as upcoming placeholders"
+        },
         "enableSameCarClassValidation": {
           "type": "boolean",
           "description": "Whether to enable same car class validation"
