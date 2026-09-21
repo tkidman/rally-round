@@ -2271,9 +2271,12 @@ td.hide-column {
   font-size: var(--text-sm);
 }
 
-.home-hero__flag {
-  max-height: 18px;
-  border-radius: 2px;
+.home-hero__title-flag {
+  height: 0.7em;
+  width: auto;
+  margin-right: 0.25em;
+  vertical-align: baseline;
+  border-radius: 3px;
   border: 1px solid var(--black-2);
 }
 

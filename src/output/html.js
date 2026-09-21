@@ -809,9 +809,35 @@ const getDivisionPanels = (battles, seasons) =>
     }))
     .filter(panel => panel.battle);
 
+const getHeroForHome = (hero, { multipleDivisions, sharedCalendar }) => {
+  if (!hero) return hero;
+  if (sharedCalendar) {
+    return {
+      ...hero,
+      divisionName: null,
+      hasMeta: !!hero.startDate,
+      resultsHref:
+        hero.resultsHref &&
+        `./overall-${hero.roundNumber - 1}-driver-results.html`,
+      standingsHref: "./overall-driver-standings.html"
+    };
+  }
+  const divisionName = multipleDivisions ? hero.divisionName : null;
+  return { ...hero, divisionName, hasMeta: !!(divisionName || hero.startDate) };
+};
+
 const transformForHomeHTML = league => {
   const homeDivisions = getHomeDivisions(league.divisions);
-  const hero = getHomeHero(homeDivisions);
+  const multipleDivisions = Object.keys(homeDivisions).length > 1;
+  const roundGroups = getRoundCards(homeDivisions);
+  const sharedCalendar =
+    multipleDivisions &&
+    roundGroups.length === 1 &&
+    !roundGroups[0].divisionName;
+  const hero = getHeroForHome(getHomeHero(homeDivisions), {
+    multipleDivisions,
+    sharedCalendar
+  });
   const activeEvents = getActiveEvents(homeDivisions);
   const championshipBattles = getChampionshipBattles(homeDivisions);
   const seasonStats = getSeasonStats(homeDivisions);
@@ -822,15 +848,17 @@ const transformForHomeHTML = league => {
     hero,
     activeEvents,
     // The hero takes the first active event; the rest are listed under it.
-    otherActiveEvents: hero
-      ? activeEvents.filter(
-          event =>
-            event.divisionId !== hero.divisionId ||
-            event.eventIndex !== hero.roundNumber - 1
-        )
-      : activeEvents,
-    multipleDivisions: Object.keys(homeDivisions).length > 1,
-    roundGroups: getRoundCards(homeDivisions),
+    otherActiveEvents: sharedCalendar
+      ? []
+      : hero
+        ? activeEvents.filter(
+            event =>
+              event.divisionId !== hero.divisionId ||
+              event.eventIndex !== hero.roundNumber - 1
+          )
+        : activeEvents,
+    multipleDivisions,
+    roundGroups,
     endTime: leagueRef.endTime,
     activeCountry: leagueRef.activeCountryCode,
     divisionInfo: getDivisionInfo(homeDivisions),
@@ -1558,6 +1586,7 @@ module.exports = {
   useDropRoundPoints,
   getLastCompletedEvents,
   getDivisionPanels,
+  getHeroForHome,
   compactStageTime,
   compactTimeDiff
 };

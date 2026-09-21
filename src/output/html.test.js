@@ -2,6 +2,7 @@ const {
   useDropRoundPoints,
   getLastCompletedEvents,
   getDivisionPanels,
+  getHeroForHome,
   compactStageTime,
   compactTimeDiff
 } = require("./html");
@@ -166,5 +167,56 @@ describe("getDivisionPanels", () => {
       ["a", "a"],
       ["c", "c"]
     ]);
+  });
+});
+
+describe("getHeroForHome", () => {
+  const hero = (fields = {}) => ({
+    divisionId: "pro",
+    divisionName: "Pro",
+    roundNumber: 3,
+    startDate: null,
+    resultsHref: "./pro-2-driver-results.html",
+    standingsHref: "./pro-driver-standings.html",
+    ...fields
+  });
+
+  test("points a shared calendar's hero at overall and drops the division", () => {
+    expect(
+      getHeroForHome(hero(), { multipleDivisions: true, sharedCalendar: true })
+    ).toMatchObject({
+      divisionName: null,
+      hasMeta: false,
+      resultsHref: "./overall-2-driver-results.html",
+      standingsHref: "./overall-driver-standings.html"
+    });
+  });
+
+  test("keeps the division when divisions run different calendars", () => {
+    expect(
+      getHeroForHome(hero(), { multipleDivisions: true, sharedCalendar: false })
+    ).toMatchObject({
+      divisionName: "Pro",
+      hasMeta: true,
+      resultsHref: "./pro-2-driver-results.html"
+    });
+  });
+
+  test("drops the division name for a single division", () => {
+    expect(
+      getHeroForHome(hero(), {
+        multipleDivisions: false,
+        sharedCalendar: false
+      })
+    ).toMatchObject({ divisionName: null, hasMeta: false });
+  });
+
+  test("keeps the meta line for an upcoming round's start date", () => {
+    expect(
+      getHeroForHome(hero({ startDate: "June 22, 2026", resultsHref: null }), {
+        multipleDivisions: true,
+        sharedCalendar: true
+      })
+    ).toMatchObject({ divisionName: null, hasMeta: true, resultsHref: null });
   });
 });

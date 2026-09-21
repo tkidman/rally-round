@@ -7,21 +7,24 @@
         <span>{{hero.statusLabel}} · {{localization.round}} {{hero.roundNumber}} {{localization.of}} {{hero.totalRounds}}</span>
       </div>
       <h1 class="home-hero__title">
-        <span class="home-hero__title-line">{{hero.title}}</span>
+        <span class="home-hero__title-line">{{#if hero.locationCode}}<img class="home-hero__title-flag" src="./assets/country-flags/{{hero.locationCode}}.png" alt="{{hero.locationCode}}" />{{/if}}{{hero.title}}</span>
         {{#if hero.subtitle}}
         <span class="home-hero__title-line home-hero__title-line--muted">{{hero.subtitle}}</span>
         {{/if}}
       </h1>
+      {{#if hero.hasMeta}}
       <div class="home-hero__meta">
-        {{#if hero.locationCode}}
-        <img class="home-hero__flag" src="./assets/country-flags/{{hero.locationCode}}.png" alt="{{hero.locationCode}}" />
-        {{/if}}
+        {{#if hero.divisionName}}
         <span>{{hero.divisionName}}</span>
         {{#if hero.startDate}}
         <span class="home-hero__meta-sep" aria-hidden="true">·</span>
+        {{/if}}
+        {{/if}}
+        {{#if hero.startDate}}
         <span>{{localization.starts}} {{hero.startDate}}</span>
         {{/if}}
       </div>
+      {{/if}}
       <div class="home-hero__actions">
         {{#if hero.resultsHref}}
         <a class="home-btn home-btn--primary" href="{{hero.resultsHref}}">{{localization.view_results}}</a>

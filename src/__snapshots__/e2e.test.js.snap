@@ -2495,10 +2495,9 @@ exports[`e2e generates driver standings 1`] = `
         <span>Live now · round 3 of 4</span>
       </div>
       <h1 class="home-hero__title">
-        <span class="home-hero__title-line">Rally Finland</span>
+        <span class="home-hero__title-line"><img class="home-hero__title-flag" src="./assets/country-flags/fin.png" alt="fin" />Rally Finland</span>
       </h1>
       <div class="home-hero__meta">
-        <img class="home-hero__flag" src="./assets/country-flags/fin.png" alt="fin" />
         <span>Test E2E</span>
       </div>
       <div class="home-hero__actions">
