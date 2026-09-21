@@ -18,27 +18,35 @@ const {
   eventStatuses,
   getDuration,
   formatDuration,
-  useNationalityAsTeam
+  useNationalityAsTeam,
+  DNF_STAGE_TIME,
+  MAX_TOTAL_TIME
 } = require("../shared");
 const { processFantasyResults } = require("../fantasy/fantasyCalculator");
 const { getLocalization } = require("./localization");
 const { allLeagues } = require("../state/allLeagues");
 const { isEmpty, isNil } = require("lodash");
 // const { eventStatuses } = require("../shared");
-const resultColours = ["#76FF6A", "#faff5d", "#ffe300", "#ff5858"];
 
-const colours = {
-  red: "#ffb4b4",
-  green: "#ccffc8",
-  gold: "#ffd74e",
-  grey: "#dcdcdc",
-  default: ""
-};
-
-// Register Handlebars helpers
 Handlebars.registerHelper("eq", (a, b) => a === b);
 
+// Done here, not in processing, so it also applies to an already-processed league.
+Handlebars.registerHelper("resultClass", value => {
+  if (value === null || value === undefined || value === "") {
+    return "is-empty";
+  }
+  const text = String(value).toUpperCase();
+  if (text === "DNF" || text === "DQ" || text === "DSQ") {
+    return "is-dnf";
+  }
+  if (text === "DNS") {
+    return "is-dns";
+  }
+  return "is-score";
+});
+
 let compiledNavigation = null;
+let compiledEventNav = null;
 let compiledLayout = null;
 
 const writeFantasyHTML = (fantasyResults, links) => {
@@ -87,18 +95,21 @@ const writeFantasyHTML = (fantasyResults, links) => {
   );
 };
 
-const getStageColours = (stageTimes, benchmarks) => {
+// Placement events grade each stage time against a division's benchmark
+// times: beat the first and you are in the top band, miss them all and you
+// are in the last. The band is emitted as a class rather than a hex colour so
+// the stylesheet can render it legibly - the old inline fills were built for
+// a white table.
+const getStageBenchmarkBands = (stageTimes, benchmarks) => {
   if (!stageTimes) return undefined;
   const out = [];
-  const defaultColour = benchmarks ? "#ff5858" : "";
-  // const defaultColour = "";
   for (let i = 0; i < stageTimes.length; i++) {
     const time = timeToSeconds(stageTimes[i]);
-    const obj = { time: stageTimes[i], colour: defaultColour };
+    const obj = { time: stageTimes[i], band: benchmarks ? "is-band-4" : null };
     if (benchmarks) {
       for (let j = 0; j < benchmarks[i].length; j++) {
         if (time < timeToSeconds(benchmarks[i][j])) {
-          obj.colour = resultColours[j];
+          obj.band = `is-band-${j + 1}`;
           break;
         }
       }
@@ -113,12 +124,19 @@ const timeToSeconds = time => {
   return _t[0] * 60 + parseFloat(_t[1].replace(",", "."));
 };
 
-const getNavigationHTML = (
-  currentPage,
-  currentMenu,
-  links,
-  headerLocations
-) => {
+const getEventNavHTML = (links, headerLocations, currentEventIndex) => {
+  if (!headerLocations || headerLocations.length === 0) return "";
+  return compiledEventNav({
+    links,
+    // Copied, not mutated: the standings table shares this array.
+    secondary: headerLocations.map(location => ({
+      ...location,
+      active: location.eventId === currentEventIndex
+    }))
+  });
+};
+
+const getNavigationHTML = (currentPage, currentMenu, links, currentView) => {
   Object.keys(links).forEach(menu => {
     if (menu === "active") return;
     links[menu].forEach(link => {
@@ -129,9 +147,42 @@ const getNavigationHTML = (
       }
     });
   });
+  const resultsLinks = (links.driver || [])
+    .map(link => {
+      // overall hangs off the league, not leagueRef.divisions.
+      const division =
+        link.name === "overall"
+          ? leagueRef.league.overall
+          : leagueRef.divisions[link.name];
+      if (!division || !division.events || division.events.length === 0) {
+        return null;
+      }
+      return {
+        ...link,
+        href: `./${getResultsFileName({
+          divisionName: division.divisionName,
+          eventIndex: division.events.length - 1
+        })}`
+      };
+    })
+    .filter(Boolean);
+  const activeView =
+    currentView || (currentPage === "home" ? "home" : "standings");
+
   return compiledNavigation({
     links,
-    secondary: headerLocations,
+    resultsLinks,
+    hasMultipleResults: resultsLinks.length > 1,
+    hasMultipleDriverStandings: (links.driver || []).length > 1,
+    hasMultipleTeamStandings: (links.team || []).length > 1,
+    homeActive: activeView === "home",
+    resultsActive: activeView === "results",
+    driverStandingsActive:
+      activeView === "standings" && currentMenu === "driver",
+    teamStandingsActive: activeView === "standings" && currentMenu === "team",
+    primaryResultsHref: resultsLinks[0]?.href,
+    primaryDriverHref: links.driver?.[0]?.href,
+    primaryTeamHref: links.team?.[0]?.href,
     endTime: leagueRef.endTime,
     activeCountry: leagueRef.activeCountryCode,
     logo: leagueRef.league.logo,
@@ -170,6 +221,186 @@ const getActiveEvents = divisions => {
   return activeEvents;
 };
 
+const getTotalRounds = division =>
+  (division.events || []).length + (division.upcomingEvents || []).length;
+
+// Live event first, then the next on the calendar, then the round that ended the season.
+const getHomeHero = divisions => {
+  const localization = getLocalization();
+  const entries = Object.entries(divisions || {});
+
+  const buildHero = (divName, division, event, round, state) => {
+    const location = getLocation(event) || {};
+    const name = event.name || event.locationName || location.countryName;
+    const divisionId = division.divisionName || divName;
+    const isUpcoming = state === "next";
+    const statusLabels = {
+      live: localization.live_now,
+      next: localization.up_next,
+      complete: localization.season_complete
+    };
+
+    return {
+      state,
+      live: state === "live",
+      statusLabel: statusLabels[state],
+      divisionId,
+      title: name,
+      subtitle:
+        location.countryName && location.countryName !== name
+          ? location.countryName
+          : null,
+      locationCode: location.countryCode,
+      divisionName: division.displayName || divName,
+      roundNumber: round,
+      totalRounds: getTotalRounds(division),
+      startDate:
+        isUpcoming && event.startDate
+          ? moment(event.startDate).format("MMMM D, YYYY [at] h:mm A")
+          : null,
+      resultsHref: isUpcoming
+        ? null
+        : `./${divisionId}-${round - 1}-driver-results.html`,
+      standingsHref: `./${divisionId}-driver-standings.html`
+    };
+  };
+
+  const findEvent = status => {
+    for (const [divName, division] of entries) {
+      const events = division.events || [];
+      const index = events.findIndex(event => event.eventStatus === status);
+      if (index !== -1) {
+        return { divName, division, event: events[index], round: index + 1 };
+      }
+    }
+    return null;
+  };
+
+  const live = findEvent(eventStatuses.active);
+  if (live) {
+    return buildHero(
+      live.divName,
+      live.division,
+      live.event,
+      live.round,
+      "live"
+    );
+  }
+
+  for (const [divName, division] of entries) {
+    const upcoming = (division.upcomingEvents || [])[0];
+    if (upcoming) {
+      return buildHero(
+        divName,
+        division,
+        upcoming,
+        (division.events || []).length + 1,
+        "next"
+      );
+    }
+  }
+
+  for (const [divName, division] of entries) {
+    const events = division.events || [];
+    for (let index = events.length - 1; index >= 0; index--) {
+      if (events[index].eventStatus === eventStatuses.finished) {
+        return buildHero(
+          divName,
+          division,
+          events[index],
+          index + 1,
+          "complete"
+        );
+      }
+    }
+  }
+
+  return null;
+};
+
+const buildRoundGroup = ([divName, division]) => {
+  const localization = getLocalization();
+  const divisionId = division.divisionName || divName;
+
+  const processed = (division.events || []).map((event, eventIndex) => {
+    const location = getLocation(event) || {};
+    const finished = event.eventStatus === eventStatuses.finished;
+    const winnerName = event.results?.driverResults?.[0]?.name;
+    let winner = null;
+    if (finished && winnerName) {
+      winner = getDriverData(winnerName, divName).driver.name;
+    }
+
+    return {
+      round: eventIndex + 1,
+      name: event.name || event.locationName || location.countryName,
+      locationCode: location.countryCode,
+      state: finished ? "done" : "live",
+      statusLabel: finished
+        ? localization.round_finished
+        : localization.round_live,
+      winner,
+      href: `./${divisionId}-${eventIndex}-driver-results.html`
+    };
+  });
+
+  const upcoming = (division.upcomingEvents || []).map((event, index) => {
+    const location = getLocation(event) || {};
+    return {
+      round: (division.events || []).length + index + 1,
+      name: event.name || event.locationName || location.countryName,
+      locationCode: location.countryCode,
+      state: "upcoming",
+      statusLabel: localization.round_upcoming,
+      winner: null,
+      // No winner yet, so the card carries the date instead.
+      startDate: event.startDate
+        ? moment(event.startDate).format("MMM D, YYYY")
+        : null,
+      href: null
+    };
+  });
+
+  return {
+    divisionName: division.displayName || divName,
+    divisionId,
+    rounds: [...processed, ...upcoming]
+  };
+};
+
+// Divisions on identical schedules share one calendar, taken from overall.
+const roundSignature = rounds =>
+  JSON.stringify(
+    rounds.map(round => [
+      round.round,
+      round.name,
+      round.locationCode,
+      round.state,
+      round.startDate || null
+    ])
+  );
+
+const collapseSharedCalendar = groups => {
+  const overall = leagueRef.league.overall;
+  if (groups.length < 2 || !overall) return groups;
+
+  const signature = roundSignature(groups[0].rounds);
+  if (groups.some(group => roundSignature(group.rounds) !== signature)) {
+    return groups;
+  }
+
+  const overallGroup = buildRoundGroup(["overall", overall]);
+  if (roundSignature(overallGroup.rounds) !== signature) return groups;
+  return [{ ...overallGroup, divisionName: null }];
+};
+
+const getRoundCards = divisions =>
+  collapseSharedCalendar(
+    Object.entries(divisions || {})
+      .map(buildRoundGroup)
+      .filter(group => group.rounds.length > 0)
+  );
+
 const getDivisionInfo = divisions => {
   return Object.entries(divisions || {})
     .map(([divisionName, division]) => ({
@@ -201,13 +432,36 @@ const getRules = (league, divisions) => {
   };
 };
 
+// ADR is 0 for everyone until more rounds are run than are dropped.
+const useDropRoundPoints = division => {
+  const { league } = leagueRef;
+  const dropRounds = league.dropLowestScoringRoundsNumber || 0;
+  if (!dropRounds || !league.sortByDropRoundPoints) {
+    return false;
+  }
+  const standingsEvents = getStandingsEvents(
+    getEventsWithStandings(division.events || [], "driver")
+  );
+  const roundsWeight = standingsEvents.reduce(
+    (total, event) => total + (event.enduranceRoundMultiplier || 1),
+    0
+  );
+  return roundsWeight > dropRounds;
+};
+
+const getRankingPoints = (standing, dropRoundPoints) =>
+  dropRoundPoints ? standing.totalPointsAfterDropRounds : standing.totalPoints;
+
 const getTop3ByDivision = divisions => {
   return Object.keys(divisions || {}).map(divName => {
     const division = divisions[divName];
     try {
       const standingsData = transformForStandingsHTML(division, "driver");
+      const dropRoundPoints = useDropRoundPoints(division);
       const top3 = (standingsData.rows || []).slice(0, 3).map(row => ({
         ...row,
+        points: getRankingPoints(row.standing, dropRoundPoints),
+        dropRoundPoints,
         hasTeamLogo: row.teamLogo && !row.teamLogo.includes("unknown.png")
       }));
       return {
@@ -282,8 +536,13 @@ const getChampionshipBattles = divisions => {
 
         const leader = rows[0];
         const secondPlace = rows[1];
-        const gap =
-          leader.standing.totalPoints - secondPlace.standing.totalPoints;
+        const dropRoundPoints = useDropRoundPoints(division);
+        const leaderPoints = getRankingPoints(leader.standing, dropRoundPoints);
+        const secondPlacePoints = getRankingPoints(
+          secondPlace.standing,
+          dropRoundPoints
+        );
+        const gap = leaderPoints - secondPlacePoints;
 
         const completedEvents = (division.events || []).filter(
           e => e.eventStatus === eventStatuses.finished
@@ -294,6 +553,7 @@ const getChampionshipBattles = divisions => {
         const eventsRemaining = totalEvents - completedEvents;
 
         const maxPointsPerEvent = division.points?.overall?.[0] || 25;
+        const maxPowerStagePoints = division.points?.powerStage?.[0] || 0;
         const totalPointsRemaining = eventsRemaining * maxPointsPerEvent;
 
         return {
@@ -301,11 +561,23 @@ const getChampionshipBattles = divisions => {
           divisionId: division.divisionName || divName,
           leader: leader.driver.name,
           leaderCountry: leader.country.code,
-          leaderPoints: leader.standing.totalPoints,
+          leaderPoints,
           secondPlace: secondPlace.driver.name,
           secondPlaceCountry: secondPlace.country.code,
-          secondPlacePoints: secondPlace.standing.totalPoints,
+          secondPlacePoints,
+          dropRoundPoints,
           gap,
+          // The trailing bar is a share of the leader's, not of an absolute scale.
+          secondPlaceBarPercent:
+            leaderPoints > 0
+              ? Math.max(
+                  0,
+                  Math.round((secondPlacePoints / leaderPoints) * 100)
+                )
+              : 0,
+          maxPointsPerEvent,
+          maxPowerStagePoints,
+          totalPointsRemaining,
           eventsRemaining,
           mathematicallyOpen: gap < totalPointsRemaining * 0.5,
           tightBattle: gap < maxPointsPerEvent * 0.5
@@ -454,14 +726,28 @@ const getSeasonStats = divisions => {
     let totalEntries = 0;
     let totalDNFs = 0;
     let closestFinish = { margin: Infinity, event: null };
+    const drivers = new Set();
+    const winners = new Set();
+
+    (division.events || []).forEach(event => {
+      (event.results?.driverResults || []).forEach(result =>
+        drivers.add(result.name)
+      );
+    });
 
     division.events.forEach(event => {
       if (event.eventStatus === eventStatuses.finished) {
         completedEvents++;
         const results = event.results?.driverResults || [];
         totalEntries += results.length;
+        if (results[0]) {
+          winners.add(results[0].name);
+        }
 
-        const dnfs = results.filter(r => r.entry?.isDnfEntry).length;
+        // A non-starter is flagged isDnfEntry too, so DNS rows are excluded here.
+        const dnfs = results.filter(
+          r => r.entry?.isDnfEntry && !r.entry?.isDnsEntry
+        ).length;
         totalDNFs += dnfs;
 
         if (results.length >= 2 && results[1].entry?.totalDiff) {
@@ -504,9 +790,13 @@ const getSeasonStats = divisions => {
 
     divisionStats.push({
       divisionName: division.displayName || divName,
+      divisionId: division.divisionName || divName,
       totalEvents,
       completedEvents,
       eventsRemaining: totalEvents - completedEvents,
+      driverCount: drivers.size,
+      uniqueWinners: winners.size,
+      totalDnfs: totalDNFs,
       avgEntriesPerEvent,
       dnfRate,
       closestFinish: closestFinish.event ? closestFinish : null
@@ -518,11 +808,24 @@ const getSeasonStats = divisions => {
 
 const transformForHomeHTML = league => {
   const homeDivisions = getHomeDivisions(league.divisions);
+  const hero = getHomeHero(homeDivisions);
+  const activeEvents = getActiveEvents(homeDivisions);
 
   return {
     logo: league.logo,
     siteTitlePrefix: league.siteTitlePrefix,
-    activeEvents: getActiveEvents(homeDivisions),
+    hero,
+    activeEvents,
+    // The hero takes the first active event; the rest are listed under it.
+    otherActiveEvents: hero
+      ? activeEvents.filter(
+          event =>
+            event.divisionId !== hero.divisionId ||
+            event.eventIndex !== hero.roundNumber - 1
+        )
+      : activeEvents,
+    multipleDivisions: Object.keys(homeDivisions).length > 1,
+    roundGroups: getRoundCards(homeDivisions),
     endTime: leagueRef.endTime,
     activeCountry: leagueRef.activeCountryCode,
     divisionInfo: getDivisionInfo(homeDivisions),
@@ -606,6 +909,18 @@ const getLastUpdatedAt = () => {
   return moment().utc().format();
 };
 
+// A live round is deliberately not counted as run: its points are still moving.
+const getSeasonProgress = (division, localization) => {
+  const totalRounds = getTotalRounds(division);
+  if (!totalRounds) return null;
+  const roundsRun = (division.events || []).filter(
+    event => event.eventStatus === eventStatuses.finished
+  ).length;
+  const roundLabel =
+    roundsRun === 1 ? localization.round_run : localization.rounds_run_plural;
+  return `${roundsRun} ${localization.of} ${totalRounds} ${roundLabel}`;
+};
+
 const writeStandingsHTML = (division, type, links) => {
   if (getEventsWithStandings(division.events, type).length === 0) {
     debug(`no ${type} standings found for ${division.divisionName}, skipping`);
@@ -614,13 +929,19 @@ const writeStandingsHTML = (division, type, links) => {
   const data = transformForStandingsHTML(division, type);
   data.overall = division.divisionName === "overall";
 
-  data.navigation = getNavigationHTML(
-    division.divisionName,
-    type,
-    links,
-    data.headerLocations
-  );
+  data.navigation = getNavigationHTML(division.divisionName, type, links);
+  data.eventNav = getEventNavHTML(links, data.headerLocations);
   data.lastUpdatedAt = getLastUpdatedAt();
+
+  data.siteTitlePrefix = leagueRef.league.siteTitlePrefix;
+  if (data.title.toLowerCase() !== data.siteTitlePrefix.toLowerCase()) {
+    data.pageContext = data.title;
+  }
+  data.standingsTitle =
+    type === "team"
+      ? data.localization.team_standings
+      : data.localization.driver_standings;
+  data.seasonProgress = getSeasonProgress(division, data.localization);
 
   const templateFile = `${templatePath}/${type}Standings.hbs`;
   const src = fs.readFileSync(templateFile).toString();
@@ -660,20 +981,21 @@ const writeStandingsHTML = (division, type, links) => {
   }
 };
 
-const getStandingColour = standing => {
+// Zones are a class, not an inline colour: the stylesheet owns how they look.
+const getStandingZone = standing => {
   if (standing.dnsPenalty) {
-    return colours.grey;
+    return "is-zone-penalty";
   }
   if (standing.promotionRelegation === 2) {
-    return colours.gold;
+    return "is-zone-promotion-double";
   }
   if (standing.promotionRelegation === 1) {
-    return colours.green;
+    return "is-zone-promotion";
   }
   if (standing.promotionRelegation === -1) {
-    return colours.red;
+    return "is-zone-relegation";
   }
-  return colours.default;
+  return null;
 };
 
 const getTeamLogo = teamId => {
@@ -703,6 +1025,18 @@ const getEventsWithStandings = (events, type) => {
   return events.filter(e => e.standings && e.standings[`${type}Standings`]);
 };
 
+// The active event is left out unless live points are shown.
+const getStandingsEvents = eventsWithStandings => {
+  if (
+    leagueRef.endTime &&
+    !leagueRef.showLivePoints() &&
+    eventsWithStandings.length > 1
+  ) {
+    return eventsWithStandings.slice(0, -1);
+  }
+  return eventsWithStandings;
+};
+
 const transformForStandingsHTML = (division, type) => {
   const events = division.events;
   const headerLocations = getHeaderLocations(events);
@@ -714,14 +1048,7 @@ const transformForStandingsHTML = (division, type) => {
       `no ${type} standings available for ${division.divisionName}`
     );
   }
-  let lastEvent = eventsWithStandings[eventsWithStandings.length - 1];
-  if (
-    leagueRef.endTime &&
-    !leagueRef.showLivePoints() &&
-    eventsWithStandings.length > 1
-  ) {
-    lastEvent = eventsWithStandings[eventsWithStandings.length - 2];
-  }
+  const lastEvent = getStandingsEvents(eventsWithStandings).at(-1);
   const lastEventStandings = lastEvent.standings[`${type}Standings`];
   const rows = lastEventStandings.map((standing, standingIndex) => {
     const movement = {
@@ -730,20 +1057,41 @@ const transformForStandingsHTML = (division, type) => {
       negative: standing.positionChange < 0
     };
 
-    const results = getAllResults(standing.name, events, type);
+    const rawResults = getAllResults(standing.name, events, type);
+
+    // Copied, not mutated: these results are shared with the results pages and JSON dump.
+    const bestScore = Math.max(
+      ...rawResults.map(result =>
+        result && typeof result.pointsDisplay === "number"
+          ? result.pointsDisplay
+          : -1
+      )
+    );
+    const droppedRoundIndexes = standing.droppedRoundIndexes || [];
+    const results = rawResults.map((result, index) => {
+      if (!result) {
+        return result;
+      }
+      const isDropped = droppedRoundIndexes.includes(index);
+      return {
+        ...result,
+        isBest: bestScore > 0 && result.pointsDisplay === bestScore,
+        isDropped,
+        droppedTitle: isDropped ? getLocalization().dropped : undefined
+      };
+    });
 
     // can be null for team overall
     const standingDivision = leagueRef.divisions[standing.divisionName];
     const divisionDisplayName =
       standingDivision &&
       (standingDivision.displayName || standingDivision.divisionName);
-    const colour = getStandingColour(standing);
     const row = {
       results,
       standing,
       ...movement,
       divisionDisplayName,
-      colour
+      zone: getStandingZone(standing)
     };
     if (type === "driver") {
       const { driver, country, carBrand } = getDriverData(
@@ -802,6 +1150,37 @@ const hasPoints = (pointsField, rows) => {
 };
 
 const hiddenTimeDisplay = "--";
+
+// DNF_STAGE_TIME and MAX_TOTAL_TIME are sort keys, not times, so they show a marker.
+// Not used for DNS: a driver without a time may still start a live event.
+const noTimeDisplay = "—";
+
+// Durations, not clock times: drop a zero hour but keep real ones.
+const compactStageTime = value => {
+  if (typeof value !== "string") return value;
+  const match = value.match(/^(\d+):(\d{2}:\d{2}(?:\.\d+)?)$/);
+  if (!match) return value;
+  const [, hours, remainder] = match;
+  return Number(hours) === 0 ? remainder : `${Number(hours)}:${remainder}`;
+};
+
+// Gaps read most quickly in motorsport notation when leading zero units are
+// omitted: +1.952, +2:06.986, +1:02:06.986. Non-time markers pass through.
+const compactTimeDiff = value => {
+  if (typeof value !== "string") return value;
+  const match = value.match(/^([+-]?)(\d+):(\d{2}):(\d{2}(?:\.\d+)?)$/);
+  if (!match) return value;
+
+  const [, sign, hours, minutes, seconds] = match;
+  if (Number(hours) > 0) {
+    return `${sign}${Number(hours)}:${minutes}:${seconds}`;
+  }
+  if (Number(minutes) > 0) {
+    return `${sign}${Number(minutes)}:${seconds}`;
+  }
+  return `${sign}${seconds.replace(/^0(?=\d)/, "")}`;
+};
+
 const getStageTimeDisplay = (result, event) => {
   if (event.hideTimesUntilEventEnd) {
     return hiddenTimeDisplay;
@@ -812,7 +1191,10 @@ const getStageTimeDisplay = (result, event) => {
   ) {
     return hiddenTimeDisplay;
   }
-  return formatDuration(getDuration(result.entry.stageTime));
+  if (result.entry.stageTime === DNF_STAGE_TIME) {
+    return noTimeDisplay;
+  }
+  return compactStageTime(formatDuration(getDuration(result.entry.stageTime)));
 };
 
 const getStageDiffDisplay = (result, event) => {
@@ -825,7 +1207,7 @@ const getStageDiffDisplay = (result, event) => {
   ) {
     return hiddenTimeDisplay;
   }
-  return result.entry.stageDiff;
+  return compactTimeDiff(result.entry.stageDiff);
 };
 
 const getTotalTimeDisplay = (result, event) => {
@@ -838,6 +1220,9 @@ const getTotalTimeDisplay = (result, event) => {
     leagueRef.league.isRallySprint
   ) {
     return hiddenTimeDisplay;
+  }
+  if (result.entry.totalTime === MAX_TOTAL_TIME) {
+    return noTimeDisplay;
   }
   return formatDuration(getDuration(result.entry.totalTime));
 };
@@ -852,7 +1237,7 @@ const getTotalDiffDisplay = (result, event) => {
   ) {
     return hiddenTimeDisplay;
   }
-  return result.entry.totalDiff;
+  return compactTimeDiff(result.entry.totalDiff);
 };
 
 const getFullResultsLink = (division, event) => {
@@ -871,12 +1256,9 @@ const transformForDriverResultsHTML = (event, division, legIndex) => {
   const headerLocations = getHeaderLocations(events);
   const rows = event.results.driverResults.map((result, index) => {
     const resultDivision = leagueRef.divisions[result.divisionName];
-    const { driver, country, carBrand } = getDriverData(
-      result.name,
-      divisionName
-    );
+    const { driver, country } = getDriverData(result.name, divisionName);
     if (leagueRef.league.placement)
-      result.stageTimes = getStageColours(
+      result.stageTimes = getStageBenchmarkBands(
         result.stageTimes,
         division.benchmarks
       );
@@ -884,7 +1266,8 @@ const transformForDriverResultsHTML = (event, division, legIndex) => {
     return {
       ...result,
       position: index + 1,
-      car: entryCar ? entryCar.brand : carBrand,
+      // Only the car recorded for this event; a DNS placeholder has no vehicleName.
+      car: entryCar ? entryCar.brand : undefined,
       driver,
       teamLogo: getTeamLogo(driver.teamId),
       team2Logo: getTeamLogo(driver.team2Id),
@@ -897,9 +1280,15 @@ const transformForDriverResultsHTML = (event, division, legIndex) => {
       totalDiffDisplay: getTotalDiffDisplay(result, event)
     };
   });
+  // Filtered on entry flags, not position: a retired driver still holds a position.
+  const podium = rows
+    .filter(row => !row.entry.isDnfEntry && !row.entry.isDnsEntry)
+    .slice(0, 3);
+
   const data = {
     headerLocations,
     rows,
+    podium,
     title: division.displayName || divisionName,
     showTeam: leagueRef.hasTeams && !useNationalityAsTeam(leagueRef, division),
     showTeamNameTextColumn: leagueRef.league.showTeamNameTextColumn,
@@ -958,11 +1347,35 @@ const writeDriverResultsHTML = ({
     division.divisionName,
     "driver",
     links,
-    data.headerLocations
+    "results"
   );
+  data.eventNav = getEventNavHTML(links, data.headerLocations, eventIndex);
   data.links = links;
   data.siteTitlePrefix = leagueRef.league.siteTitlePrefix;
   data.lastUpdatedAt = getLastUpdatedAt();
+  if (data.title.toLowerCase() !== data.siteTitlePrefix.toLowerCase()) {
+    data.pageContext = data.title;
+  }
+  data.roundNumber = eventIndex + 1;
+  data.totalRounds =
+    division.events.length + (division.upcomingEvents || []).length;
+  data.resultsTitle = `${data.location.countryName} ${
+    isNil(legIndex) ? "" : `${data.localization.leg} ${legIndex + 1} `
+  }${data.localization.driver_results}`;
+  if (eventIndex > 0) {
+    data.previousEventHref = `./${getResultsFileName({
+      divisionName: division.divisionName,
+      eventIndex: eventIndex - 1,
+      legIndex
+    })}`;
+  }
+  if (eventIndex < division.events.length - 1) {
+    data.nextEventHref = `./${getResultsFileName({
+      divisionName: division.divisionName,
+      eventIndex: eventIndex + 1,
+      legIndex
+    })}`;
+  }
 
   const templateFile = `${templatePath}/eventResults.hbs`;
   const _t = fs.readFileSync(templateFile).toString();
@@ -1107,6 +1520,10 @@ const writeAllHTML = () => {
   const navTemplate = fs.readFileSync(navigationTemplateFile).toString();
   compiledNavigation = Handlebars.compile(navTemplate);
 
+  const eventNavTemplateFile = `${templatePath}/eventNav.hbs`;
+  const eventNavTemplate = fs.readFileSync(eventNavTemplateFile).toString();
+  compiledEventNav = Handlebars.compile(eventNavTemplate);
+
   const links = getHtmlLinks();
   const league = leagueRef.league;
   if (!league.useStandingsForHome) {
@@ -1131,7 +1548,9 @@ const writeAllHTML = () => {
 
 module.exports = {
   writeAllHTML,
-  colours,
   // tests
-  getStandingColour
+  getStandingZone,
+  useDropRoundPoints,
+  compactStageTime,
+  compactTimeDiff
 };

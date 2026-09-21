@@ -26,6 +26,31 @@ function openPopup(id) {
   popup.classList.toggle("show");
 }
 
+// Scroll the current event's flag into view, or the latest on non-results pages.
+function scrollSecondaryNavToCurrent() {
+  const nav = document.querySelector(".secondaryNav");
+  if (!nav || nav.scrollWidth <= nav.clientWidth) return;
+
+  const items = Array.from(nav.querySelectorAll(".secondaryNav__item"));
+  const page = window.location.pathname.split("/").pop();
+  let target = items.find(item => item.getAttribute("href") === "./" + page);
+  if (target) {
+    target.setAttribute("aria-current", "page");
+  } else {
+    const enabled = items.filter(item => !item.style.pointerEvents);
+    target = enabled[enabled.length - 1];
+  }
+  if (!target) return;
+
+  // scroll only the nav row horizontally (scrollIntoView would also scroll the page)
+  const navRect = nav.getBoundingClientRect();
+  const targetRect = target.getBoundingClientRect();
+  nav.scrollLeft +=
+    targetRect.left - navRect.left - (navRect.width - targetRect.width) / 2;
+}
+
+window.addEventListener("load", scrollSecondaryNavToCurrent);
+
 document.addEventListener("DOMContentLoaded", function() {
   const table = document.getElementById("tableDrivers");
   if (!table) return;
@@ -225,8 +250,6 @@ document.addEventListener("DOMContentLoaded", function() {
           );
           if (timeSort !== null) return timeSort;
         }
-        // Fallback to string comparison for non-numeric, non-time columns
-        // or when secondary time sorting is unavailable
         if (cellA === "" && cellB === "") return 0;
         return (
           cellA.localeCompare(cellB, undefined, {
@@ -494,35 +517,117 @@ function initColumnFilter(table) {
     }
   };
 
-  // Batch filter item creation using DocumentFragment
-  const fragment = document.createDocumentFragment();
-  headers.forEach((header, index) => {
-    const isVisible = !hiddenColumns.has(index);
+  // One chip toggles every column belonging to an idea. Labels come from the headers.
+  const GROUPS = {
+    "driver-results": [
+      { key: "ps", classes: ["th-ps"] },
+      { key: "diff", classes: ["th-diff"] },
+      { key: "sr", classes: ["th-sr"] },
+      {
+        key: "points-detail",
+        label: "Points detail",
+        // Total points always stays: it is the answer the page exists to give.
+        classes: ["th-ps-points", "th-stage-points", "th-leg", "th-points"]
+      }
+    ],
+    standings: [
+      { key: "nat", classes: ["th-nat"] },
+      { key: "change", label: "Change", classes: ["th-change"] },
+      { key: "points", classes: ["th-points"] }
+    ]
+  };
 
-    const item = document.createElement("div");
-    item.className = "column-filter__item";
-    item.innerHTML = `
-      <input 
-        type="checkbox" 
-        class="column-filter__checkbox" 
-        id="col-${index}" 
-        data-column-index="${index}"
-        ${isVisible ? "checked" : ""}
-      >
-      <label class="column-filter__label" for="col-${index}">
-        ${getColumnName(header, index)}
-      </label>
-    `;
-    fragment.appendChild(item);
-  });
-  filterItems.appendChild(fragment);
+  const headerList = Array.from(headers);
+  const groups = (GROUPS[getPageType()] || [])
+    .map(group => {
+      const indices = headerList
+        .map((header, index) =>
+          group.classes.some(cls => header.classList.contains(cls))
+            ? index
+            : -1
+        )
+        .filter(index => index >= 0);
+      return { ...group, indices };
+    })
+    .filter(group => group.indices.length > 0)
+    .map(group => ({
+      ...group,
+      label: group.label || getColumnName(headerList[group.indices[0]], 0)
+    }));
 
-  // Apply all column visibility changes IMMEDIATELY (synchronously)
-  // This prevents FOUC - we want columns hidden before first paint
-  headers.forEach((header, index) => {
-    const isVisible = !hiddenColumns.has(index);
-    toggleColumn(index, isVisible);
+  // Car logo and model live in the driver cell, so they toggle by class not column index.
+  const carStorageKey = `${storageKey}_car`;
+  const hasCar = !!table.querySelector(".td-driver__car");
+  let carHidden = false;
+  try {
+    carHidden = localStorage.getItem(carStorageKey) === "hidden";
+  } catch (e) {
+    carHidden = false;
+  }
+
+  const applyCar = () => {
+    table.classList.toggle("hide-car", carHidden);
+  };
+
+  const isGroupVisible = group =>
+    group.indices.some(index => !hiddenColumns.has(index));
+
+  const renderChips = () => {
+    filterItems.textContent = "";
+    const fragment = document.createDocumentFragment();
+
+    groups.forEach(group => {
+      const chip = document.createElement("button");
+      chip.type = "button";
+      chip.className = "column-chip";
+      chip.dataset.group = group.key;
+      chip.textContent = group.label;
+      chip.setAttribute("aria-pressed", String(isGroupVisible(group)));
+      chip.classList.toggle("is-off", !isGroupVisible(group));
+      fragment.appendChild(chip);
+    });
+
+    if (hasCar) {
+      const chip = document.createElement("button");
+      chip.type = "button";
+      chip.className = "column-chip";
+      chip.dataset.group = "car";
+      chip.textContent = "Car";
+      chip.setAttribute("aria-pressed", String(!carHidden));
+      chip.classList.toggle("is-off", carHidden);
+      fragment.appendChild(chip);
+    }
+
+    filterItems.appendChild(fragment);
+  };
+
+  filterItems.addEventListener("click", e => {
+    const chip = e.target.closest(".column-chip");
+    if (!chip) return;
+
+    if (chip.dataset.group === "car") {
+      carHidden = !carHidden;
+      applyCar();
+      try {
+        localStorage.setItem(carStorageKey, carHidden ? "hidden" : "shown");
+      } catch (err) {
+        // Silently fail if localStorage is unavailable
+      }
+      renderChips();
+      return;
+    }
+
+    const group = groups.find(g => g.key === chip.dataset.group);
+    if (!group) return;
+
+    const makeVisible = !isGroupVisible(group);
+    group.indices.forEach(index => toggleColumn(index, makeVisible));
+    savePreferences();
+    renderChips();
   });
+
+  renderChips();
+  applyCar();
 
   const preloadStyle = document.getElementById('filter-preload');
   if (preloadStyle) {

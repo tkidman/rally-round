@@ -4,6 +4,7 @@
       <div class="dropdown">
         <a class="brand" href="./index.html" aria-label="Home">
           <img class="brand__img" src="./assets/{{logo}}" alt="Logo" />
+          <span class="brand__name">{{siteTitlePrefix}}</span>
         </a>
 
         <div class="dropdown__menu" role="menu">
@@ -25,16 +26,31 @@
     </div>
 
 <nav class="navMain navDesktopOnly" aria-label="Primary">
+  <a class="navBtn navBtn--link{{#if homeActive}} isActive{{/if}}" href="./index.html">
+    {{localization.home}}
+  </a>
+  {{#if primaryResultsHref}}
+    <div{{#if hasMultipleResults}} class="navDrop" tabindex="0"{{/if}}>
+      <a class="navBtn navBtn--link{{#if resultsActive}} isActive{{/if}}" href="{{primaryResultsHref}}">
+        {{localization.driver_results}}
+      </a>
+      <div class="navMenu">
+        {{#each resultsLinks}}
+          <a class="navLink{{#if ../resultsActive}}{{#if active}} isActive{{/if}}{{/if}}" href="{{href}}">{{link}}</a>
+        {{/each}}
+      </div>
+    </div>
+  {{/if}}
   {{#if links.driver}}
-    <div class="navDrop" tabindex="0">
-      <button class="navBtn" type="button" aria-haspopup="true">
+    <div{{#if hasMultipleDriverStandings}} class="navDrop" tabindex="0"{{/if}}>
+      <a class="navBtn navBtn--link{{#if driverStandingsActive}} isActive{{/if}}" href="{{primaryDriverHref}}">
         {{localization.driver_standings}}
-      </button>
+      </a>
 
       <div class="navMenu">
         {{#with links.driver}}
           {{#each this}}
-            <a class="navLink {{#if active}}isActive{{/if}}" href="{{href}}">
+            <a class="navLink{{#if ../../driverStandingsActive}}{{#if active}} isActive{{/if}}{{/if}}" href="{{href}}">
               {{link}}
             </a>
           {{/each}}
@@ -44,15 +60,15 @@
   {{/if}}
 
   {{#if links.team}}
-    <div class="navDrop" tabindex="0">
-      <button class="navBtn" type="button" aria-haspopup="true">
+    <div{{#if hasMultipleTeamStandings}} class="navDrop" tabindex="0"{{/if}}>
+      <a class="navBtn navBtn--link{{#if teamStandingsActive}} isActive{{/if}}" href="{{primaryTeamHref}}">
         {{localization.team_standings}}
-      </button>
+      </a>
 
       <div class="navMenu">
         {{#with links.team}}
           {{#each this}}
-            <a class="navLink {{#if active}}isActive{{/if}}" href="{{href}}">
+            <a class="navLink{{#if ../../teamStandingsActive}}{{#if active}} isActive{{/if}}{{/if}}" href="{{href}}">
               {{link}}
             </a>
           {{/each}}
@@ -83,11 +99,7 @@
 
     {{#if endTime}}
       <div class="navRight navDesktopOnly">
-        <img
-          class="flag"
-          src="./assets/country-flags/{{activeCountry}}.png"
-          alt="{{activeCountry}}"
-        />
+        <span class="countdown__dot" aria-hidden="true"></span>
         <span id="countdown2" class="countdown"></span>
       </div>
     {{/if}}
@@ -103,14 +115,7 @@
     </button>
 
     <div class="navTitle navMobileOnly">
-      {{#if links.active}}
-        {{#if (eq links.active.menu "home")}}
-          <div class="navTitle__main">{{links.active.link}}</div>
-        {{else}}
-          <div class="navTitle__main">{{links.active.menu}} - {{links.active.link}}</div>
-        {{/if}}
-      {{/if}}
-      {{#if endTime}}<div id="countdown" class="countdown"></div>{{/if}}
+      <div class="navTitle__main">{{siteTitlePrefix}}</div>
     </div>
 
 		<button
@@ -126,9 +131,17 @@
 
   <div id="mobileNav" class="drawer" hidden>
     <nav class="drawer__content" aria-label="Mobile menu">
+      <a class="drawer__link{{#if homeActive}} isActive{{/if}}" href="./index.html">
+        {{localization.home}}
+      </a>
+      {{#each resultsLinks}}
+        <a class="drawer__link{{#if ../resultsActive}}{{#if active}} isActive{{/if}}{{/if}}" href="{{href}}">
+          {{../localization.driver_results}} - {{link}}
+        </a>
+      {{/each}}
       {{#with links.driver}}
         {{#each this}}
-          <a class="drawer__link {{#if active}}isActive{{/if}}" href="{{href}}">
+          <a class="drawer__link{{#if ../../driverStandingsActive}}{{#if active}} isActive{{/if}}{{/if}}" href="{{href}}">
             {{../../localization.driver_standings}} - {{link}}
           </a>
         {{/each}}
@@ -136,7 +149,7 @@
 
       {{#with links.team}}
         {{#each this}}
-          <a class="drawer__link {{#if active}}isActive{{/if}}" href="{{href}}">
+          <a class="drawer__link{{#if ../../teamStandingsActive}}{{#if active}} isActive{{/if}}{{/if}}" href="{{href}}">
             {{../../localization.team_standings}} - {{link}}
           </a>
         {{/each}}
@@ -170,25 +183,12 @@
     </div>
   </div>
 
-  {{#if secondary}}
-    <div class="secondaryNav">
-      {{#each secondary}}
-        <a
-          class="secondaryNav__item"
-          href="./{{../links.active.name}}-{{this.eventId}}-driver-results.html"
-          style="{{#if this.disableLink}}pointer-events:none;opacity:.45;{{/if}}"
-        >
-          <img class="secondaryNav__flag" src="./assets/country-flags/{{this.locationCode}}.png" alt="{{this.locationCode}}" />
-        </a>
-      {{/each}}
-    </div>
-  {{/if}}
 </header>
 
 {{#if endTime}}
 <script>
   var countDownDate = new Date("{{endTime}}").getTime();
-  var x = setInterval(function() {
+  var updateCountdown = function() {
     var now = new Date().getTime();
     var distance = countDownDate - now;
 
@@ -201,17 +201,46 @@
 
     var c1 = document.getElementById("countdown");
     var c2 = document.getElementById("countdown2");
-    var c3 = document.getElementById("homeCountdown");
-    if (c1) c1.innerHTML = text;
-    if (c2) c2.innerHTML = text;
-    if (c3) c3.innerHTML = text;
+
+    // The homepage hero splits the same countdown into labelled units.
+    var clockUnits = {
+      homeClockDays: days,
+      homeClockHours: hours,
+      homeClockMinutes: minutes,
+      homeClockSeconds: seconds
+    };
+    var setClock = function(ended) {
+      Object.keys(clockUnits).forEach(function(id) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        var value = ended ? 0 : clockUnits[id];
+        el.innerHTML = id === "homeClockDays" ? value : ("0" + value).slice(-2);
+      });
+      var label = document.getElementById("homeClockLabel");
+      if (label && ended) label.innerHTML = "{{localization.event_ended}}";
+    };
 
     if (distance < 0) {
       clearInterval(x);
       if (c1) c1.innerHTML = "Event Ended";
       if (c2) c2.innerHTML = "Event Ended";
-      if (c3) c3.innerHTML = "Event Ended";
+      setClock(true);
+      return false;
     }
-  }, 1000);
+    if (c1) c1.innerHTML = text;
+    if (c2) c2.innerHTML = text;
+    setClock(false);
+    return true;
+  };
+  var x;
+  if (updateCountdown()) x = setInterval(updateCountdown, 1000);
+  // This runs in the head, before the homepage hero exists, so the split
+  // clock is filled again as soon as the body has parsed rather than
+  // showing placeholders until the first tick.
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", function() {
+      updateCountdown();
+    });
+  }
 </script>
 {{/if}}

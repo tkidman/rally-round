@@ -1,10 +1,12 @@
 <div class="container">
   <div class="flexContainer">
     <div class="flexBox">
-      <div class="mb-1 hide-medium hide-small">
-        <div class="logo d-flex">
-          <img src="./assets/{{logo}}" />
-          <h2 class="ml-1">{{title}} {{localization.team_standings}}</h2>
+      <div class="page-heading">
+        <div class="page-heading__titles">
+          <div class="page-heading__eyebrow">
+            {{siteTitlePrefix}}{{#if pageContext}} · {{pageContext}}{{/if}}{{#if seasonProgress}} · {{seasonProgress}}{{/if}}
+          </div>
+          <h1 class="page-heading__title">{{standingsTitle}}</h1>
         </div>
       </div>
       <div class="column-filter">
@@ -23,7 +25,7 @@
         <div class="table-scroll-indicator__content"></div>
       </div>
       <div class="table-scroll-wrapper">
-        <table id="tableDrivers">
+        <table id="tableDrivers" class="team-standings-table">
           <thead>
             <tr>
               <th class="th-pos">{{localization.pos}}</th>

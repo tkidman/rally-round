@@ -205,7 +205,34 @@ const runGitHubOperations = async () => {
       debug("Uploaded JS file as blob");
     }
 
-    // 4. Logo files (teams and cars) - only upload new ones
+    // 4. Font files - binary, so base64 like the logos; identical content dedupes by sha.
+    const fontDir = path.resolve(
+      __dirname,
+      "..",
+      "..",
+      "..",
+      "assets",
+      "fonts"
+    );
+    if (fs.existsSync(fontDir)) {
+      const fontFiles = fs
+        .readdirSync(fontDir)
+        .filter(file => /\.(woff2?|ttf)$/i.test(file));
+
+      for (const file of fontFiles) {
+        const content = fs.readFileSync(path.join(fontDir, file));
+        const blobSha = await createBlob(content.toString("base64"), "base64");
+        tree.push({
+          path: `${clubFolder}/assets/fonts/${file}`,
+          mode: "100644",
+          type: "blob",
+          sha: blobSha
+        });
+      }
+      debug(`Uploaded ${fontFiles.length} font files as blobs`);
+    }
+
+    // 5. Logo files (teams and cars) - only upload new ones
     const addLogos = async logoType => {
       const logoDir = path.resolve(
         __dirname,
