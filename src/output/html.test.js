@@ -1,6 +1,7 @@
 const {
   useDropRoundPoints,
   getLastCompletedEvents,
+  getDivisionPanels,
   compactStageTime,
   compactTimeDiff
 } = require("./html");
@@ -137,5 +138,37 @@ describe("getLastCompletedEvents", () => {
       pro: division("pro", [finished("Sweden", "2026-07-06"), noWinner])
     });
     expect(rows.map(row => row.name)).toEqual(["Sweden"]);
+  });
+});
+
+describe("getDivisionPanels", () => {
+  test("pairs each season with its own division's battle", () => {
+    const panels = getDivisionPanels(
+      [{ divisionId: "b" }, { divisionId: "a" }],
+      [{ divisionId: "a" }, { divisionId: "b" }]
+    );
+    expect(
+      panels.map(({ battle, season }) => [battle.divisionId, season.divisionId])
+    ).toEqual([
+      ["a", "a"],
+      ["b", "b"]
+    ]);
+  });
+
+  test("keeps a season without a battle in its own place", () => {
+    const panels = getDivisionPanels(
+      [{ divisionId: "a" }, { divisionId: "c" }],
+      [{ divisionId: "a" }, { divisionId: "b" }, { divisionId: "c" }]
+    );
+    expect(
+      panels.map(({ battle, season }) => [
+        battle && battle.divisionId,
+        season.divisionId
+      ])
+    ).toEqual([
+      ["a", "a"],
+      [null, "b"],
+      ["c", "c"]
+    ]);
   });
 });

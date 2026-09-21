@@ -2536,169 +2536,164 @@ exports[`e2e generates driver standings 1`] = `
   </section>
 
   <div class="home-duo">
-    <div class="home-duo__main">
-      <section class="home-card battle battle--tight">
-        <header class="home-card__head">
-          <h2 class="home-card__title">
-            Championship Battles
-            <span class="home-card__title-note">Test E2E</span>
-          </h2>
-          <span class="home-card__meta">
-            2 events remaining · 30 pts + 5 PS max per round
-          </span>
-        </header>
-        <div class="battle__grid">
-          <div class="battle__side">
-            <div class="battle__driver">
-              <img src="./assets/country-flags/deu.png" class="img-sm" alt="deu" />
-              <span class="battle__name">Hawk24</span>
-            </div>
-            <div class="battle__points">
-              104
-              <span class="battle__points-unit">pts</span>
-            </div>
-            <div class="battle__bar"><span class="battle__bar-fill" style="width: 100%"></span></div>
+    <section class="home-card home-duo__battle battle battle--tight">
+      <header class="home-card__head">
+        <h2 class="home-card__title">
+          Championship Battles
+          <span class="home-card__title-note">Test E2E</span>
+        </h2>
+        <span class="home-card__meta">
+          2 events remaining · 30 pts + 5 PS max per round
+        </span>
+      </header>
+      <div class="battle__grid">
+        <div class="battle__side">
+          <div class="battle__driver">
+            <img src="./assets/country-flags/deu.png" class="img-sm" alt="deu" />
+            <span class="battle__name">Hawk24</span>
           </div>
-          <div class="battle__gap">
-            <div class="battle__gap-value">+11</div>
-            <div class="battle__gap-label">pt gap</div>
-            <span class="battle__badge battle__badge--tight">Tight!</span>
+          <div class="battle__points">
+            104
+            <span class="battle__points-unit">pts</span>
           </div>
-          <div class="battle__side battle__side--right">
-            <div class="battle__driver">
-              <img src="./assets/country-flags/fin.png" class="img-sm" alt="fin" />
-              <span class="battle__name">QazRa</span>
-            </div>
-            <div class="battle__points">
-              93
-              <span class="battle__points-unit">pts</span>
-            </div>
-            <div class="battle__bar"><span class="battle__bar-fill battle__bar-fill--second" style="width: 89%"></span></div>
-          </div>
+          <div class="battle__bar"><span class="battle__bar-fill" style="width: 100%"></span></div>
         </div>
-        <footer class="battle__foot">
-          <span>60 points still available</span>
-          <a class="home-link" href="./test-e2e-driver-standings.html">View Standings →</a>
-        </footer>
-      </section>
-      <section class="home-card battle">
-        <header class="home-card__head">
-          <h2 class="home-card__title">
-            Championship Battles
-            <span class="home-card__title-note">Test E2E2</span>
-          </h2>
-          <span class="home-card__meta">
-            2 events remaining · 30 pts + 5 PS max per round
-          </span>
-        </header>
-        <div class="battle__grid">
-          <div class="battle__side">
-            <div class="battle__driver">
-              <img src="./assets/country-flags/aus.png" class="img-sm" alt="aus" />
-              <span class="battle__name">woosh</span>
-            </div>
-            <div class="battle__points">
-              130
-              <span class="battle__points-unit">pts</span>
-            </div>
-            <div class="battle__bar"><span class="battle__bar-fill" style="width: 100%"></span></div>
-          </div>
-          <div class="battle__gap">
-            <div class="battle__gap-value">+26</div>
-            <div class="battle__gap-label">pt gap</div>
-            <span class="battle__badge">Still Open</span>
-          </div>
-          <div class="battle__side battle__side--right">
-            <div class="battle__driver">
-              <img src="./assets/country-flags/aus.png" class="img-sm" alt="aus" />
-              <span class="battle__name">winstall</span>
-            </div>
-            <div class="battle__points">
-              104
-              <span class="battle__points-unit">pts</span>
-            </div>
-            <div class="battle__bar"><span class="battle__bar-fill battle__bar-fill--second" style="width: 80%"></span></div>
-          </div>
+        <div class="battle__gap">
+          <div class="battle__gap-value">+11</div>
+          <div class="battle__gap-label">pt gap</div>
+          <span class="battle__badge battle__badge--tight">Tight!</span>
         </div>
-        <footer class="battle__foot">
-          <span>60 points still available</span>
-          <a class="home-link" href="./test-e2e2-driver-standings.html">View Standings →</a>
-        </footer>
-      </section>
-    </div>
-
-    <div class="home-duo__aside">
-      <section class="home-card">
-        <header class="home-card__head">
-          <h2 class="home-card__title">
-            Season
-            <span class="home-card__title-note">Test E2E</span>
-          </h2>
-        </header>
-        <dl class="stat-list">
-          <div class="stat-row">
-            <dt>Rounds run</dt>
-            <dd>2 / 4</dd>
+        <div class="battle__side battle__side--right">
+          <div class="battle__driver">
+            <img src="./assets/country-flags/fin.png" class="img-sm" alt="fin" />
+            <span class="battle__name">QazRa</span>
           </div>
-          <div class="stat-row">
-            <dt>Drivers</dt>
-            <dd>30</dd>
+          <div class="battle__points">
+            93
+            <span class="battle__points-unit">pts</span>
           </div>
-          <div class="stat-row">
-            <dt>Different winners</dt>
-            <dd>2</dd>
-          </div>
-          <div class="stat-row">
-            <dt>DNFs</dt>
-            <dd>7</dd>
-          </div>
-          <div class="stat-row">
-            <dt>Avg. Entries per Event</dt>
-            <dd>30</dd>
-          </div>
-        </dl>
-        <div class="stat-note">
-          <span class="stat-note__label">Closest Finish</span>
-          <span class="stat-note__value">+00:00:14.861</span>
-          <span class="stat-note__detail">Hawk24 vs THELC Matt · Rally Grundstrom</span>
+          <div class="battle__bar"><span class="battle__bar-fill battle__bar-fill--second" style="width: 89%"></span></div>
         </div>
-      </section>
-      <section class="home-card">
-        <header class="home-card__head">
-          <h2 class="home-card__title">
-            Season
-            <span class="home-card__title-note">Test E2E2</span>
-          </h2>
-        </header>
-        <dl class="stat-list">
-          <div class="stat-row">
-            <dt>Rounds run</dt>
-            <dd>2 / 4</dd>
-          </div>
-          <div class="stat-row">
-            <dt>Drivers</dt>
-            <dd>10</dd>
-          </div>
-          <div class="stat-row">
-            <dt>Different winners</dt>
-            <dd>1</dd>
-          </div>
-          <div class="stat-row">
-            <dt>DNFs</dt>
-            <dd>0</dd>
-          </div>
-          <div class="stat-row">
-            <dt>Avg. Entries per Event</dt>
-            <dd>10</dd>
-          </div>
-        </dl>
-        <div class="stat-note">
-          <span class="stat-note__label">Closest Finish</span>
-          <span class="stat-note__value">+00:00:29.867</span>
-          <span class="stat-note__detail">woosh vs winstall · Rally Grundstrom</span>
+      </div>
+      <footer class="battle__foot">
+        <span>60 points still available</span>
+        <a class="home-link" href="./test-e2e-driver-standings.html">View Standings →</a>
+      </footer>
+    </section>
+    <section class="home-card home-duo__season">
+      <header class="home-card__head">
+        <h2 class="home-card__title">
+          Season
+          <span class="home-card__title-note">Test E2E</span>
+        </h2>
+      </header>
+      <dl class="stat-list">
+        <div class="stat-row">
+          <dt>Rounds run</dt>
+          <dd>2 / 4</dd>
         </div>
-      </section>
-    </div>
+        <div class="stat-row">
+          <dt>Drivers</dt>
+          <dd>30</dd>
+        </div>
+        <div class="stat-row">
+          <dt>Different winners</dt>
+          <dd>2</dd>
+        </div>
+        <div class="stat-row">
+          <dt>DNFs</dt>
+          <dd>7</dd>
+        </div>
+        <div class="stat-row">
+          <dt>Avg. Entries per Event</dt>
+          <dd>30</dd>
+        </div>
+      </dl>
+      <div class="stat-note">
+        <span class="stat-note__label">Closest Finish</span>
+        <span class="stat-note__value">+00:00:14.861</span>
+        <span class="stat-note__detail">Hawk24 vs THELC Matt · Rally Grundstrom</span>
+      </div>
+    </section>
+    <section class="home-card home-duo__battle battle">
+      <header class="home-card__head">
+        <h2 class="home-card__title">
+          Championship Battles
+          <span class="home-card__title-note">Test E2E2</span>
+        </h2>
+        <span class="home-card__meta">
+          2 events remaining · 30 pts + 5 PS max per round
+        </span>
+      </header>
+      <div class="battle__grid">
+        <div class="battle__side">
+          <div class="battle__driver">
+            <img src="./assets/country-flags/aus.png" class="img-sm" alt="aus" />
+            <span class="battle__name">woosh</span>
+          </div>
+          <div class="battle__points">
+            130
+            <span class="battle__points-unit">pts</span>
+          </div>
+          <div class="battle__bar"><span class="battle__bar-fill" style="width: 100%"></span></div>
+        </div>
+        <div class="battle__gap">
+          <div class="battle__gap-value">+26</div>
+          <div class="battle__gap-label">pt gap</div>
+          <span class="battle__badge">Still Open</span>
+        </div>
+        <div class="battle__side battle__side--right">
+          <div class="battle__driver">
+            <img src="./assets/country-flags/aus.png" class="img-sm" alt="aus" />
+            <span class="battle__name">winstall</span>
+          </div>
+          <div class="battle__points">
+            104
+            <span class="battle__points-unit">pts</span>
+          </div>
+          <div class="battle__bar"><span class="battle__bar-fill battle__bar-fill--second" style="width: 80%"></span></div>
+        </div>
+      </div>
+      <footer class="battle__foot">
+        <span>60 points still available</span>
+        <a class="home-link" href="./test-e2e2-driver-standings.html">View Standings →</a>
+      </footer>
+    </section>
+    <section class="home-card home-duo__season">
+      <header class="home-card__head">
+        <h2 class="home-card__title">
+          Season
+          <span class="home-card__title-note">Test E2E2</span>
+        </h2>
+      </header>
+      <dl class="stat-list">
+        <div class="stat-row">
+          <dt>Rounds run</dt>
+          <dd>2 / 4</dd>
+        </div>
+        <div class="stat-row">
+          <dt>Drivers</dt>
+          <dd>10</dd>
+        </div>
+        <div class="stat-row">
+          <dt>Different winners</dt>
+          <dd>1</dd>
+        </div>
+        <div class="stat-row">
+          <dt>DNFs</dt>
+          <dd>0</dd>
+        </div>
+        <div class="stat-row">
+          <dt>Avg. Entries per Event</dt>
+          <dd>10</dd>
+        </div>
+      </dl>
+      <div class="stat-note">
+        <span class="stat-note__label">Closest Finish</span>
+        <span class="stat-note__value">+00:00:29.867</span>
+        <span class="stat-note__detail">woosh vs winstall · Rally Grundstrom</span>
+      </div>
+    </section>
   </div>
 
   <section class="home-card">

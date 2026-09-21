@@ -801,10 +801,19 @@ const getSeasonStats = divisions => {
   return divisionStats;
 };
 
+const getDivisionPanels = (battles, seasons) =>
+  seasons.map(season => ({
+    battle:
+      battles.find(battle => battle.divisionId === season.divisionId) || null,
+    season
+  }));
+
 const transformForHomeHTML = league => {
   const homeDivisions = getHomeDivisions(league.divisions);
   const hero = getHomeHero(homeDivisions);
   const activeEvents = getActiveEvents(homeDivisions);
+  const championshipBattles = getChampionshipBattles(homeDivisions);
+  const seasonStats = getSeasonStats(homeDivisions);
 
   return {
     logo: league.logo,
@@ -832,11 +841,11 @@ const transformForHomeHTML = league => {
     showCarPerformance: league.showCarPerformance !== false, // default true
     localization: getLocalization(),
     lastCompletedEvents: getLastCompletedEvents(homeDivisions),
-    championshipBattles: getChampionshipBattles(homeDivisions),
+    championshipBattles,
     nextEvent: getNextEvent(homeDivisions),
     carStats: getCarStats(homeDivisions),
     formGuide: getFormGuide(homeDivisions),
-    seasonStats: getSeasonStats(homeDivisions)
+    divisionPanels: getDivisionPanels(championshipBattles, seasonStats)
   };
 };
 
@@ -1547,6 +1556,7 @@ module.exports = {
   getStandingZone,
   useDropRoundPoints,
   getLastCompletedEvents,
+  getDivisionPanels,
   compactStageTime,
   compactTimeDiff
 };

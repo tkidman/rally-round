@@ -2059,12 +2059,8 @@ td.hide-column {
   display: none;
 }
 
-.home-duo__main,
-.home-duo__aside {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  min-width: 0;
+.home-duo__season {
+  order: 1;
 }
 
 @media (min-width: 900px) {
@@ -2142,19 +2138,26 @@ td.hide-column {
     border-top: 0;
   }
 
-  .home-duo__main > .home-card,
-  .home-duo__aside > .home-card {
+  .home-duo > .home-card {
     display: flex;
-    flex: 1;
     flex-direction: column;
   }
 
-  .home-duo__main .battle__grid {
+  .home-duo__battle {
+    grid-column: 1;
+  }
+
+  .home-duo__season {
+    grid-column: 2;
+    order: 0;
+  }
+
+  .home-duo__battle .battle__grid {
     flex: 1;
     align-content: center;
   }
 
-  .home-duo__aside .stat-list {
+  .home-duo__season .stat-list {
     flex: 1;
     align-content: space-between;
   }
