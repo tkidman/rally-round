@@ -2104,7 +2104,7 @@ td.hide-column {
   .home-card:has(.recap:nth-child(4)) .home-card__body {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: 2.5rem;
+    column-gap: 4rem;
     row-gap: 1rem;
     align-content: start;
   }
