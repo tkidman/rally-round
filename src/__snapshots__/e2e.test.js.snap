@@ -32,6 +32,9 @@ exports[`e2e generates driver leg results 1`] = `
       }
     })();
   </script>
+  <link rel="preload" href="./assets/fonts/BarlowCondensed-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="./assets/fonts/BarlowCondensed-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="./assets/fonts/Barlow-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="./assets/css/style.css">
 
   <link rel="icon" href="./assets/rsc-guy.png">
@@ -1052,6 +1055,9 @@ exports[`e2e generates driver results 1`] = `
       }
     })();
   </script>
+  <link rel="preload" href="./assets/fonts/BarlowCondensed-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="./assets/fonts/BarlowCondensed-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="./assets/fonts/Barlow-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="./assets/css/style.css">
 
   <link rel="icon" href="./assets/rsc-guy.png">
@@ -2273,6 +2279,9 @@ exports[`e2e generates driver standings 1`] = `
       }
     })();
   </script>
+  <link rel="preload" href="./assets/fonts/BarlowCondensed-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="./assets/fonts/BarlowCondensed-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="./assets/fonts/Barlow-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="./assets/css/style.css">
 
   <link rel="icon" href="./assets/rsc-guy.png">
@@ -3022,6 +3031,9 @@ exports[`e2e generates overall driver results 1`] = `
       }
     })();
   </script>
+  <link rel="preload" href="./assets/fonts/BarlowCondensed-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="./assets/fonts/BarlowCondensed-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="./assets/fonts/Barlow-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="./assets/css/style.css">
 
   <link rel="icon" href="./assets/rsc-guy.png">
@@ -4483,6 +4495,9 @@ exports[`e2e generates overall driver standings 1`] = `
       }
     })();
   </script>
+  <link rel="preload" href="./assets/fonts/BarlowCondensed-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="./assets/fonts/BarlowCondensed-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="./assets/fonts/Barlow-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="./assets/css/style.css">
 
   <link rel="icon" href="./assets/rsc-guy.png">
@@ -5948,6 +5963,9 @@ exports[`e2e generates overall team standings 1`] = `
       }
     })();
   </script>
+  <link rel="preload" href="./assets/fonts/BarlowCondensed-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="./assets/fonts/BarlowCondensed-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="./assets/fonts/Barlow-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="./assets/css/style.css">
 
   <link rel="icon" href="./assets/rsc-guy.png">
@@ -6405,6 +6423,9 @@ exports[`e2e generates team standings 1`] = `
       }
     })();
   </script>
+  <link rel="preload" href="./assets/fonts/BarlowCondensed-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="./assets/fonts/BarlowCondensed-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="./assets/fonts/Barlow-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="./assets/css/style.css">
 
   <link rel="icon" href="./assets/rsc-guy.png">
