@@ -2846,7 +2846,7 @@ exports[`e2e generates driver standings 1`] = `
     </section>
   </div>
 
-  <div class="home-grid-2">
+  <div class="home-grid-2 home-grid-2--paired">
     <section class="home-card home-card--table">
       <header class="home-card__head">
         <h2 class="home-card__title">
