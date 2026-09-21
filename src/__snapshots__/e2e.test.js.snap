@@ -327,13 +327,9 @@ exports[`e2e generates driver leg results 1`] = `
           </div>
         </div>
       </div>
-      <div class="column-filter">
-        <button class="column-filter__btn" type="button" aria-label="Filter columns">
-          <span>Filter Columns</span>
-        </button>
-        <div class="column-filter__menu">
-          <div class="column-filter__items"></div>
-        </div>
+      <div class="column-chips" role="group" aria-label="Filter columns">
+        <span class="column-chips__label" aria-hidden="true">Filter Columns</span>
+        <div class="column-chips__items"></div>
       </div>
       <div class="table-scroll-indicator" id="tableScrollIndicator" aria-hidden="true">
         <div class="table-scroll-indicator__content"></div>
@@ -1321,13 +1317,9 @@ exports[`e2e generates driver results 1`] = `
           </div>
         </div>
       </div>
-      <div class="column-filter">
-        <button class="column-filter__btn" type="button" aria-label="Filter columns">
-          <span>Filter Columns</span>
-        </button>
-        <div class="column-filter__menu">
-          <div class="column-filter__items"></div>
-        </div>
+      <div class="column-chips" role="group" aria-label="Filter columns">
+        <span class="column-chips__label" aria-hidden="true">Filter Columns</span>
+        <div class="column-chips__items"></div>
       </div>
       <div class="table-scroll-indicator" id="tableScrollIndicator" aria-hidden="true">
         <div class="table-scroll-indicator__content"></div>
@@ -3194,13 +3186,9 @@ exports[`e2e generates overall driver results 1`] = `
           </div>
         </div>
       </div>
-      <div class="column-filter">
-        <button class="column-filter__btn" type="button" aria-label="Filter columns">
-          <span>Filter Columns</span>
-        </button>
-        <div class="column-filter__menu">
-          <div class="column-filter__items"></div>
-        </div>
+      <div class="column-chips" role="group" aria-label="Filter columns">
+        <span class="column-chips__label" aria-hidden="true">Filter Columns</span>
+        <div class="column-chips__items"></div>
       </div>
       <div class="table-scroll-indicator" id="tableScrollIndicator" aria-hidden="true">
         <div class="table-scroll-indicator__content"></div>
@@ -4566,13 +4554,9 @@ exports[`e2e generates overall driver standings 1`] = `
         </a>
     </div>
 
-      <div class="column-filter">
-        <button class="column-filter__btn" type="button" aria-label="Filter columns">
-          <span>Filter Columns</span>
-        </button>
-        <div class="column-filter__menu">
-          <div class="column-filter__items"></div>
-        </div>
+      <div class="column-chips" role="group" aria-label="Filter columns">
+        <span class="column-chips__label" aria-hidden="true">Filter Columns</span>
+        <div class="column-chips__items"></div>
       </div>
       <div class="table-scroll-indicator" id="tableScrollIndicator" aria-hidden="true">
         <div class="table-scroll-indicator__content"></div>
@@ -5975,13 +5959,9 @@ exports[`e2e generates overall team standings 1`] = `
           <h1 class="page-heading__title">Team Standings</h1>
         </div>
       </div>
-      <div class="column-filter">
-        <button class="column-filter__btn" type="button" aria-label="Filter columns">
-          <span>Filter Columns</span>
-        </button>
-        <div class="column-filter__menu">
-          <div class="column-filter__items"></div>
-        </div>
+      <div class="column-chips" role="group" aria-label="Filter columns">
+        <span class="column-chips__label" aria-hidden="true">Filter Columns</span>
+        <div class="column-chips__items"></div>
       </div>
       <div class="table-scroll-indicator" id="tableScrollIndicator" aria-hidden="true">
         <div class="table-scroll-indicator__content"></div>
@@ -6406,13 +6386,9 @@ exports[`e2e generates team standings 1`] = `
           <h1 class="page-heading__title">Team Standings</h1>
         </div>
       </div>
-      <div class="column-filter">
-        <button class="column-filter__btn" type="button" aria-label="Filter columns">
-          <span>Filter Columns</span>
-        </button>
-        <div class="column-filter__menu">
-          <div class="column-filter__items"></div>
-        </div>
+      <div class="column-chips" role="group" aria-label="Filter columns">
+        <span class="column-chips__label" aria-hidden="true">Filter Columns</span>
+        <div class="column-chips__items"></div>
       </div>
       <div class="table-scroll-indicator" id="tableScrollIndicator" aria-hidden="true">
         <div class="table-scroll-indicator__content"></div>

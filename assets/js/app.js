@@ -458,14 +458,14 @@ function initColumnFilter(table) {
   const tableWrapper =
     table.closest(".table-scroll-wrapper") || table.parentElement;
   const filterContainer =
-    tableWrapper.parentElement.querySelector(".column-filter");
+    tableWrapper.parentElement.querySelector(".column-chips");
 
   if (!filterContainer) {
     console.warn("Column filter container not found in template");
     return;
   }
 
-  const filterItems = filterContainer.querySelector(".column-filter__items");
+  const filterItems = filterContainer.querySelector(".column-chips__items");
 
   const getColumnName = (header, index) => {
     const text = header.textContent.trim();
@@ -592,6 +592,11 @@ function initColumnFilter(table) {
     group.indices.forEach(index => toggleColumn(index, makeVisible));
     renderChips();
   });
+
+  if (!groups.length && !hasCar) {
+    filterContainer.remove();
+    return;
+  }
 
   renderChips();
   applyCar();
