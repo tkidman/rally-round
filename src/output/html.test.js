@@ -155,19 +155,15 @@ describe("getDivisionPanels", () => {
     ]);
   });
 
-  test("keeps a season without a battle in its own place", () => {
+  test("drops the season of a division without a battle", () => {
     const panels = getDivisionPanels(
       [{ divisionId: "a" }, { divisionId: "c" }],
       [{ divisionId: "a" }, { divisionId: "b" }, { divisionId: "c" }]
     );
     expect(
-      panels.map(({ battle, season }) => [
-        battle && battle.divisionId,
-        season.divisionId
-      ])
+      panels.map(({ battle, season }) => [battle.divisionId, season.divisionId])
     ).toEqual([
       ["a", "a"],
-      [null, "b"],
       ["c", "c"]
     ]);
   });

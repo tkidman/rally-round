@@ -802,11 +802,12 @@ const getSeasonStats = divisions => {
 };
 
 const getDivisionPanels = (battles, seasons) =>
-  seasons.map(season => ({
-    battle:
-      battles.find(battle => battle.divisionId === season.divisionId) || null,
-    season
-  }));
+  seasons
+    .map(season => ({
+      battle: battles.find(battle => battle.divisionId === season.divisionId),
+      season
+    }))
+    .filter(panel => panel.battle);
 
 const transformForHomeHTML = league => {
   const homeDivisions = getHomeDivisions(league.divisions);
