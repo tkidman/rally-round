@@ -131,7 +131,7 @@
     "theme": {
       "type": "string",
       "enum": ["amber", "dark", "red", "orange", "green", "blue", "violet"],
-      "description": "Accent color for the website (default: amber if not set). Options: amber, red, orange, green, blue, violet. \"dark\" is kept as an alias for amber"
+      "description": "Accent color for the website (default: violet if not set). Options: violet, amber, red, orange, green, blue. \"dark\" is kept as an alias for amber"
     },
     "enableDnsPenalty": {
       "type": "boolean",

@@ -849,8 +849,8 @@ tbody > tr.is-zone-penalty .td-pos {
      presets below). OKLCH is perceptually uniform, which is what keeps every
      hue equally legible on the dark ground - plain hex ramps do not.
      ========================= */
-  --accent-h: 75; /* amber; at this hue --accent resolves to #FFB020 */
-  --accent-c: 0.165;
+  --accent-h: 278; /* violet; at this hue --accent resolves to #ACB7FF */
+  --accent-c: 0.15;
 
   --accent: oklch(0.813 var(--accent-c) var(--accent-h));
   --accent-bright: oklch(0.862 calc(var(--accent-c) * 0.85) var(--accent-h));
@@ -982,14 +982,16 @@ tbody > tr.is-zone-penalty .td-pos {
    THEME VARIANTS
    ========================= */
 
-/* Amber - the default. */
+/* Amber. */
 .theme-dark,
 .theme-amber {
   --accent-h: 75;
+  --accent-c: 0.165;
 }
 
 .theme-red {
   --accent-h: 27;
+  --accent-c: 0.165;
 }
 
 /* Measured from #2e7d32. */
@@ -1001,9 +1003,10 @@ tbody > tr.is-zone-penalty .td-pos {
 /* Measured from #ef6c00. */
 .theme-orange {
   --accent-h: 48;
+  --accent-c: 0.165;
 }
 
-/* Measured from #5355bf - the old default for JRC/OOR/BRL. */
+/* The default. Measured from #5355bf, the JRC/OOR/BRL colour. */
 .theme-violet {
   --accent-h: 278;
   --accent-c: 0.15;
